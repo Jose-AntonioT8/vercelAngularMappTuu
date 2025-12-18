@@ -1,0 +1,8 @@
+<section class="fixed bottom-0 left-0 w-full z-[1000] shadow-[0_-3px_10px_rgba(0,0,0,0.2)] bg-[#5675AC] h-[70px] flex items-center justify-around">
+    <a *ngFor="let item of navItems"
+        [routerLink]="item.route"
+        routerLinkActive="bg-white/10 rounded"
+        class="flex flex-col items-center justify-center flex-grow text-[#f0f0f0] transition-colors duration-200 p-1.5 hover:bg-white/10 rounded">
+        <img [src]="item.iconURL" alt="{{item.icon}} icon" class="w-[26px] h-[26px] block"/>
+    </a>
+</section>

@@ -1,0 +1,41 @@
+<form class="w-full max-h-[calc(100vh-150px)] overflow-y-auto bg-[#CFE8FF] rounded-2xl shadow-lg p-5 md:p-6 flex flex-col">
+  
+  <div class="mb-5">
+    <h2 class="text-center text-xl md:text-2xl font-bold mb-5">{{ 'common.filters' | translate }}</h2>
+  </div>
+  
+  <div class="mb-6">
+    <h3 class="text-base font-bold mb-2.5">{{ 'plans.filterActivitiesLabel' | translate }}</h3>
+    
+    <div>
+      <select [(ngModel)]="activity" 
+              name="activityTypeInput" 
+              (change)="emitCurrentFilterState()" 
+              class="w-full p-2.5 rounded-xl border border-gray-300 transition-all duration-200 focus:border-blue-500 focus:outline-none">
+        
+        <option [ngValue]="null">{{ 'plans.filterAllActivities' | translate }}</option>
+        
+        <option *ngFor="let name of activitiesName" [value]="name">{{ name }}</option>
+
+      </select>
+    </div>
+  </div>
+
+  
+  
+  <div class="mb-6">
+    <h3 class="text-base font-bold mb-2.5">{{ 'plans.filterRatingLabel' | translate }} ({{ ratingMin }})</h3>
+    <div>
+      <input type="range" 
+             [(ngModel)]="ratingMin" 
+             name="ratingMinInput" 
+             (change)="emitCurrentFilterState()" 
+             min="0" 
+             max="5" 
+             step="1" 
+             class="w-full cursor-pointer">
+    </div>
+  </div>
+  <button type="button" (click)="resetFilters()" class="mt-auto w-full p-3 bg-[#62C6FF] text-white border-none rounded-xl cursor-pointer text-base transition-all duration-200 hover:bg-[#4eb1eb]">{{ 'plans.clear' | translate }}</button>
+
+</form>

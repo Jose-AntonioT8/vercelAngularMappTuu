@@ -1,0 +1,55 @@
+<header class="sticky top-0 z-50">
+    <app-header></app-header>
+</header>
+
+<div class="bg-white border-b shadow-sm">
+    <div class="px-4 py-3 flex items-center justify-center">
+        <div class="flex items-center bg-gray-100 rounded-full px-4 py-2 w-full sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl transition-shadow focus-within:ring-2 focus-within:ring-blue-200 shadow-md">
+            <img src="assets/icons/header/search.svg" alt="Search" class="w-4 h-4 opacity-50 mr-2"/>
+            <input type="search" 
+                   [placeholder]="'plans.searchPlaceholder' | translate"
+                   class="bg-transparent border-none outline-none w-full text-sm text-gray-700 placeholder-gray-400">
+        </div>
+    </div>
+</div>
+
+<section class="pb-5 block xl:grid xl:grid-cols-[20%_80%] xl:items-start w-full min-h-[80vh] relative">
+    <button 
+        (click)="toggleFilter()"
+        class="xl:hidden fixed top-20 right-4 z-40 bg-[#5675AC] text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2 hover:bg-[#4a6399] transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+        </svg>
+        {{ 'plans.filters' | translate }}
+    </button>
+    
+    <div class="xl:hidden fixed inset-0 bg-black/50 z-30 transition-opacity" 
+         [class.opacity-0]="!isFilterOpen"
+         [class.pointer-events-none]="!isFilterOpen"
+         [class.opacity-100]="isFilterOpen"
+         (click)="closeFilter()"></div>
+    
+    <div class="hidden xl:block"></div>
+    
+    <section class="p-2.5 xl:p-6 xl:px-8 w-full">
+        <app-list-plans></app-list-plans>
+    </section>
+    
+    <div class="fixed xl:fixed xl:top-[130px] xl:left-0 left-0 top-0 h-full xl:h-[calc(100vh-130px)] w-80 xl:w-[20%] max-h-screen xl:max-h-none overflow-y-auto z-40 xl:z-auto transform xl:translate-x-0 transition-transform duration-300 ease-in-out"
+         [class.-translate-x-full]="!isFilterOpen"
+         [class.translate-x-0]="isFilterOpen"
+         (click)="$event.stopPropagation()">
+        <div class="xl:hidden flex justify-between items-center p-4 border-b bg-[#CFE8FF]">
+            <h2 class="text-xl font-bold">{{ 'plans.filters' | translate }}</h2>
+            <button (click)="closeFilter()" class="text-gray-600 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="xl:px-4 xl:py-2">
+            <app-filter-plans></app-filter-plans>
+        </div>
+    </div>
+</section>
+

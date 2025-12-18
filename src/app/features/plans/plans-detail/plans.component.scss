@@ -1,0 +1,68 @@
+$mobile-breakpoint: 768px;
+$filter-width-pc: 20%; // El filtro ocupará el 20%
+$list-width-pc: 80%;  // La lista ocupará el 80%
+
+/* --- Estilos Generales --- */
+
+.scape-activities {
+  padding-top: 75px;
+  padding-bottom: 90px; /* Espacio para el footer fijo (70px altura + 20px margen) */
+    /* Por defecto, los elementos se apilan (Móvil) */
+    display: block; 
+    width: 100%;
+    min-height: 80vh; /* Asegura que la sección principal tenga algo de altura */
+}
+
+/* --- Estilos del Filtro (Solo para su componente) --- */
+/*
+  Nota: Las clases filter-sidebar y activity-list-content se usan 
+  como selectores en el grid del contenedor, pero también pueden tener 
+  sus propios estilos.
+*/
+
+
+/* ------------------------------------ */
+/* RESPONSIVIDAD PC (>= 768px)          */
+/* ------------------------------------ */
+
+@media (min-width: $mobile-breakpoint) {
+    
+    .scape-activities {
+        /* ESTO ES LO QUE CREA EL DISEÑO DE DOS COLUMNAS */
+        display: grid;
+        
+        /* Define las dos columnas: 30% para el filtro, 70% para la lista */
+        grid-template-columns: $filter-width-pc $list-width-pc; 
+        
+        /* Alinea los items al inicio, importante si tienen diferentes alturas */
+        align-items: start; 
+    }
+
+    /* Aseguramos que el filtro se mantenga en la pantalla al hacer scroll */
+    .filter-sidebar {
+        position: sticky; 
+        top: 0; /* Ajusta este valor si el header es fijo y alto */
+        height: 100vh;
+        overflow-y: auto;
+    }
+    
+    .activity-list-content {
+        padding: 20px 30px; 
+    }
+}
+
+
+/* ------------------------------------ */
+/* RESPONSIVIDAD MÓVIL (<= 767px)       */
+/* ------------------------------------ */
+
+@media (max-width: ($mobile-breakpoint - 1px)) {
+    /* Ocultamos el filtro lateral en móvil, ya que se mostrará como un modal */
+    .filter-sidebar {
+        display: none; 
+    }
+    
+    .activity-list-content {
+        padding: 10px;
+    }
+}

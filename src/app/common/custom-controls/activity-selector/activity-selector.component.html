@@ -1,0 +1,39 @@
+<div class="activity-selector-container">
+  <label *ngIf="label" class="block text-sm font-medium text-blue-900 mb-1">
+    {{ label }}
+  </label>
+  <div 
+    class="border border-gray-300 rounded-lg bg-white overflow-y-auto max-h-48"
+    [class.opacity-50]="disabled"
+  >
+    <div
+      *ngFor="let item of items"
+      class="flex items-center p-2 hover:bg-gray-100 cursor-pointer transition-colors"
+      [class.cursor-not-allowed]="disabled"
+      (click)="toggleSelection(item.name)"
+    >
+      <input
+        type="checkbox"
+        [id]="'item-' + item.id"
+        [checked]="isSelected(item.name)"
+        [disabled]="disabled"
+        class="mr-2 cursor-pointer"
+        (click)="$event.stopPropagation()"
+        (change)="toggleSelection(item.name)"
+      />
+      <label 
+        [for]="'item-' + item.id" 
+        class="text-gray-700 flex-grow cursor-pointer"
+        [class.cursor-not-allowed]="disabled"
+      >
+        {{ item.name }}
+      </label>
+    </div>
+    <div *ngIf="items.length === 0" class="p-4 text-center text-gray-400 text-sm">
+      No hay elementos disponibles
+    </div>
+  </div>
+  <span *ngIf="errorMessage && touched" class="text-red-500 text-sm mt-1 block">
+    {{ errorMessage }}
+  </span>
+</div>

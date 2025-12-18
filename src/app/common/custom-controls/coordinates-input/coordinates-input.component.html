@@ -1,0 +1,57 @@
+<div class="coordinates-input-container">
+  <label *ngIf="label" class="block text-sm font-medium text-blue-900 mb-2">
+    {{ label }}
+  </label>
+  
+  <div class="grid grid-cols-2 gap-4">
+    <!-- Latitud -->
+    <div>
+      <label class="block text-xs text-gray-600 mb-1">Latitud</label>
+      <input 
+        type="number"
+        step="any"
+        [value]="latitude"
+        [disabled]="disabled"
+        placeholder="-90 a 90"
+        (input)="onLatitudeChange($event)"
+        (blur)="onBlur()"
+        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+      />
+    </div>
+    
+    <!-- Longitud -->
+    <div>
+      <label class="block text-xs text-gray-600 mb-1">Longitud</label>
+      <input 
+        type="number"
+        step="any"
+        [value]="longitude"
+        [disabled]="disabled"
+        placeholder="-180 a 180"
+        (input)="onLongitudeChange($event)"
+        (blur)="onBlur()"
+        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+      />
+    </div>
+  </div>
+  
+  <!-- Mapa -->
+  <div *ngIf="showMap && mapUrl" class="mt-4 rounded-lg overflow-hidden border border-gray-300">
+    <iframe 
+      [src]="mapUrl"
+      width="100%"
+      height="200"
+      frameborder="0"
+      style="border:0"
+      allowfullscreen
+    ></iframe>
+  </div>
+  
+  <div *ngIf="showMap && !mapUrl && (latitude || longitude)" class="mt-4 p-4 bg-gray-100 rounded-lg text-center text-sm text-gray-500">
+    Ingresa coordenadas válidas para ver el mapa
+  </div>
+  
+  <span *ngIf="errorMessage && touched" class="text-red-500 text-sm mt-1 block">
+    {{ errorMessage }}
+  </span>
+</div>

@@ -1,0 +1,72 @@
+<section 
+    appTilt3D 
+    [tiltMaxX]="8" 
+    [tiltMaxY]="8" 
+    [tiltScale]="1.02"
+    [glareEnabled]="true"
+    class="group relative rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden w-full cursor-pointer min-h-[280px]">
+    <button
+    class="block w-full h-full text-left relative"
+    (click)="redirectToDetail()">
+    
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200">
+        <img 
+            [src]="activity.imageURL" 
+            alt="{{activity.name}} Image" 
+            class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
+            onerror="this.src='assets/images/placeholder.jpg';"/>
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80"></div>
+    </div>
+    
+    <div class="relative h-full flex flex-col justify-between p-5 text-white z-10 min-h-[280px]">
+        
+        <div class="flex items-start justify-between">
+            
+            <div class="flex items-center gap-1 bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full">
+                <div class="flex items-center gap-0.5">
+                    <ng-container *ngFor="let starIndex of getStarsArray(); let i = index">
+                        <svg *ngIf="getStarState(i) === 'full'" class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                        </svg>
+                        <div *ngIf="getStarState(i) === 'half'" class="relative w-4 h-4">
+                            <svg class="absolute inset-0 w-4 h-4 text-gray-300 fill-current" viewBox="0 0 20 20">
+                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                            </svg>
+                            <svg class="absolute inset-0 w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20" style="clip-path: inset(0 50% 0 0);">
+                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                            </svg>
+                        </div>
+                        <svg *ngIf="getStarState(i) === 'empty'" class="w-4 h-4 text-gray-300 fill-current" viewBox="0 0 20 20">
+                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                        </svg>
+                    </ng-container>
+                </div>
+                <span class="text-sm font-bold ml-1">{{ activity.rating }}</span>
+            </div>
+            
+            <div 
+                *ngIf="activityColor"
+                class="w-8 h-8 rounded-full border-2 border-white shadow-lg flex-shrink-0" 
+                [style.background-color]="activityColor">
+            </div>
+
+        </div>
+        
+        <div>
+            <h3 class="text-xl font-bold mb-2 line-clamp-2 drop-shadow-lg">
+                {{ activity.name }}
+            </h3>
+            
+            <div class="flex items-center gap-2 text-sm font-medium">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <span>{{ location || '...' }}</span>
+            </div>
+        </div>
+    </div>
+    
+    </button>
+</section>

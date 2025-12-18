@@ -1,0 +1,79 @@
+{
+  "projectName": "MappTuu Translation System",
+  "version": "1.0.0",
+  "supportedLanguages": [
+    {
+      "code": "es",
+      "name": "Español",
+      "flag": "🇪🇸",
+      "nativeName": "Español",
+      "enabled": true
+    },
+    {
+      "code": "en",
+      "name": "English",
+      "flag": "🇬🇧",
+      "nativeName": "English",
+      "enabled": true
+    }
+  ],
+  "defaultLanguage": "es",
+  "translationModules": [
+    "common",
+    "header",
+    "footer",
+    "landing",
+    "auth",
+    "profile",
+    "dashboard",
+    "activities",
+    "activityTypes",
+    "plans",
+    "maps",
+    "messages"
+  ],
+  "files": {
+    "serviceFile": "src/app/core/services/translation.service.ts",
+    "componentFile": "src/app/common/language-selector/language-selector.component.ts",
+    "pipeFile": "src/app/core/pipes/translate.pipe.ts",
+    "translationES": "src/assets/i18n/es.json",
+    "translationEN": "src/assets/i18n/en.json"
+  },
+  "localStorage": {
+    "key": "appLanguage",
+    "defaultValue": "es"
+  },
+  "components": {
+    "LanguageSelector": {
+      "selector": "app-language-selector",
+      "location": "header",
+      "position": "top-right",
+      "standalone": true
+    }
+  },
+  "pipes": {
+    "Translate": {
+      "name": "translate",
+      "usage": "{{ 'key' | translate }}",
+      "standalone": true
+    }
+  },
+  "usage": {
+    "inTemplate": [
+      "{{ 'common.appName' | translate }}",
+      "{{ 'landing.title' | translate }}",
+      "[placeholder]=\"'landing.searchPlaceholder' | translate\""
+    ],
+    "inComponent": [
+      "this.translationService.get('key')",
+      "this.translationService.setLanguage('en')",
+      "this.translationService.toggleLanguage()"
+    ]
+  },
+  "documentation": {
+    "quickStart": "QUICKSTART.md",
+    "detailedGuide": "TRANSLATION_GUIDE.md",
+    "migrationExample": "MIGRATION_EXAMPLE.md",
+    "readme": "README_TRANSLATION.md"
+  }
+}

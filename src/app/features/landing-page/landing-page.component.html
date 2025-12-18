@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Reset básico para asegurar altura completa */
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+      
+      .input-shadow {
+        box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+      }
+
+      /* Botón estilo 3D */
+      .btn-3d {
+        box-shadow: 0 6px 0 rgb(173, 173, 173), 0 8px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.1s;
+      }
+      .btn-3d:active {
+        box-shadow: 0 2px 0 rgb(173, 173, 173), 0 4px 10px rgba(0, 0, 0, 0.2);
+        transform: translateY(4px);
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <div
+        class="min-h-screen w-full bg-cover bg-center text-white font-['Inter'] relative flex flex-col"
+        style="
+          background-image: url('/assets/icons/fondorealista.jpeg');
+          background-attachment: fixed;
+        "
+      >
+        <div class="absolute inset-0 bg-black/10 z-0"></div>
+
+        <header class="relative z-50 w-full p-4 flex justify-between items-center">
+          
+          <div class="flex items-center space-x-2 text-base font-bold bg-white px-3 py-1.5 rounded-full shadow-lg">
+            <img
+              src="/assets/logo/logo.png"
+              alt="Logo"
+              class="w-8 h-8 md:w-10 md:h-10 object-contain"
+            />
+            <span class="text-gray-900 text-sm md:text-base">MappTuu</span>
+          </div>
+
+          <div class="flex items-center gap-4 relative">
+            
+            <div class="relative z-50">
+              <app-language-selector></app-language-selector>
+            </div>
+
+            @if(!isAuthenticated()){
+              <a
+                href="login"
+                [routerLink]="['/login']"
+                aria-label="redirect to login"
+                class="text-gray-900 bg-white p-2 rounded-full shadow-lg hover:opacity-80 transition-opacity flex items-center justify-center relative z-40"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-gray-900">
+                  <path d="M13 2C10.2386 2 8 4.23858 8 7C8 7.55228 8.44772 8 9 8C9.55228 8 10 7.55228 10 7C10 5.34315 11.3431 4 13 4H17C18.6569 4 20 5.34315 20 7V17C20 18.6569 18.6569 20 17 20H13C11.3431 20 10 18.6569 10 17C10 16.4477 9.55228 16 9 16C8.44772 16 8 16.4477 8 17C8 19.7614 10.2386 22 13 22H17C19.7614 22 22 19.7614 22 17V7C22 4.23858 19.7614 2 17 2H13Z" fill="currentColor"/>
+                  <path d="M3 11C2.44772 11 2 11.4477 2 12C2 12.5523 2.44772 13 3 13H11.2821C11.1931 13.1098 11.1078 13.2163 11.0271 13.318C10.7816 13.6277 10.5738 13.8996 10.427 14.0945C10.3536 14.1921 10.2952 14.2705 10.255 14.3251L10.2084 14.3884L10.1959 14.4055L10.1915 14.4115C10.1914 14.4116 10.191 14.4122 11 15L10.1915 14.4115C9.86687 14.8583 9.96541 15.4844 10.4122 15.809C10.859 16.1336 11.4843 16.0346 11.809 15.5879L11.8118 15.584L11.822 15.57L11.8638 15.5132C11.9007 15.4632 11.9553 15.3897 12.0247 15.2975C12.1637 15.113 12.3612 14.8546 12.5942 14.5606C13.0655 13.9663 13.6623 13.2519 14.2071 12.7071L14.9142 12L14.2071 11.2929C13.6623 10.7481 13.0655 10.0337 12.5942 9.43937C12.3612 9.14542 12.1637 8.88702 12.0247 8.7025C11.9553 8.61033 11.9007 8.53682 11.8638 8.48679L11.822 8.43002L11.8118 8.41602L11.8095 8.41281C11.4848 7.96606 10.859 7.86637 10.4122 8.19098C9.96541 8.51561 9.86636 9.14098 10.191 9.58778L11 9C10.191 9.58778 10.1909 9.58773 10.191 9.58778L10.1925 9.58985L10.1959 9.59454L10.2084 9.61162L10.255 9.67492C10.2952 9.72946 10.3536 9.80795 10.427 9.90549C10.5738 10.1004 10.7816 10.3723 11.0271 10.682C11.1078 10.7837 11.1931 10.8902 11.2821 11H3Z" fill="currentColor"/>
+                </svg>
+              </a>
+            } @else {
+              <a
+                [routerLink]="['/profile']"
+                aria-label="redirect to profile"
+                class="text-gray-900 bg-white p-2 rounded-full shadow-lg hover:opacity-80 transition-opacity flex items-center justify-center relative z-40"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </a>
+            }
+          </div>
+        </header>
+
+        <div class="relative z-10 flex flex-grow flex-col items-center justify-center px-4 py-12 w-full">
+          
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-wider mb-8 drop-shadow-lg text-center max-w-2xl">
+            {{ 'landing.title' | translate }}
+          </h1>
+
+          <div class="relative w-full sm:w-4/5 max-w-md mb-12 group">
+            <input
+              type="text"
+              [placeholder]="(isAuthenticated() ? 'landing.searchButton' : 'landing.searchButtonToLogin') | translate"
+              class="w-full py-4 pl-12 pr-4 text-gray-800 rounded-full shadow-2xl bg-white/90 focus:outline-none focus:ring-4 focus:ring-white/50 transition duration-300 placeholder-gray-500"
+              style="backdrop-filter: blur(5px)"
+            />
+            <svg
+              class="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-500 group-focus-within:text-blue-500 transition-colors"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+
+          <div class="space-y-6 w-full sm:w-4/5 max-w-xs flex flex-col items-center">
+            
+            <button
+              (click)="handleLoginActivities()"
+              class="w-full py-4 text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"
+            >
+              @if(isAuthenticated()){
+                {{ 'landing.activitiesButton' | translate }}
+              } @else {
+                {{ 'landing.loginButton' | translate }}
+              }
+            </button>
+
+            @if(isAuthenticated()){
+              <button
+                (click)="redirectoToPlans()"
+                class="w-full py-4 text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"
+              >
+                {{ 'landing.plansButton' | translate }}
+              </button>
+            }
+
+            @if(isadmin()){
+              <button
+                (click)="readirectToDashboard()"
+                class="w-full py-4 text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"
+              >
+                {{ 'landing.administrateMappTuu' | translate }}
+              </button>
+            }
+
+            <!-- Botón About visible para todos -->
+            <a
+              routerLink="/about"
+              class="w-full py-4 text-lg font-bold rounded-full text-white bg-gradient-to-r from-brand-primary to-brand-secondary btn-3d focus:outline-none text-center flex items-center justify-center gap-2"
+              style="box-shadow: 0 6px 0 rgb(50, 100, 150), 0 8px 15px rgba(0, 0, 0, 0.3);"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              {{ 'landing.aboutUs' | translate }}
+            </a>
+          </div>
+        </div>
+        
+        <div class="h-4 w-full"></div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,182 @@
+<header class="flex justify-between items-center px-4 lg:px-8 py-3 bg-gradient-to-r from-brand-primary to-brand-secondary shadow-lg w-full sticky top-0 z-50 h-[70px]">
+    
+    <!-- Logo -->
+    <a routerLink="/landingPage" 
+       class="flex items-center gap-2.5 hover:opacity-80 transition-opacity flex-shrink-0 group">
+        <img src="assets/logo/logo.png" [attr.alt]="'common.appName' | translate" class="h-11 w-auto group-hover:scale-105 transition-transform"/>
+        <span class="font-bold text-xl text-white tracking-tight hidden sm:block">
+            {{ 'common.appName' | translate }}
+        </span>
+    </a>
+
+    <!-- Navegación principal (Desktop) -->
+    <nav class="hidden lg:flex items-center bg-white/10 backdrop-blur-sm rounded-full px-2 py-1.5 gap-1">
+        <a routerLink="/landingPage" 
+           routerLinkActive="!bg-white !text-brand-primary shadow-md"
+           [routerLinkActiveOptions]="{exact: true}"
+           class="flex items-center gap-2 px-4 py-2 rounded-full text-white/80 hover:bg-white/20 hover:text-white transition-all duration-200 text-sm font-medium">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+            {{ 'header.home' | translate }}
+        </a>
+        <a [routerLink]="exploreRoute" 
+           [ngClass]="isOnMapView ? 'bg-white text-brand-primary shadow-md' : 'text-white/80 hover:bg-white/20 hover:text-white'"
+           class="flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium">
+            @if (!isOnMapView) {
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                </svg>
+            } @else {
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                </svg>
+            }
+            {{ exploreLabel | translate }}
+        </a>
+        <a routerLink="/about" 
+           routerLinkActive="!bg-white !text-brand-primary shadow-md"
+           class="flex items-center gap-2 px-4 py-2 rounded-full text-white/80 hover:bg-white/20 hover:text-white transition-all duration-200 text-sm font-medium">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            {{ 'header.aboutUs' | translate }}
+        </a>
+        <a routerLink="/contact" 
+           routerLinkActive="!bg-white !text-brand-primary shadow-md"
+           class="flex items-center gap-2 px-4 py-2 rounded-full text-white/80 hover:bg-white/20 hover:text-white transition-all duration-200 text-sm font-medium">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            {{ 'header.contact' | translate }}
+        </a>
+    </nav>
+
+    <!-- Sección derecha -->
+    <div class="flex items-center gap-3">
+        
+        <!-- Selector de idioma -->
+        <div class="relative z-50 hidden sm:block">
+            <app-language-selector></app-language-selector>
+        </div>
+
+        <!-- Menú hamburguesa (Mobile) -->
+        <button (click)="toggleMobileMenu()" 
+                class="lg:hidden p-2.5 rounded-xl bg-white/20 hover:bg-white/30 transition-all duration-200 flex items-center justify-center">
+            @if (!isMobileMenuOpen) {
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            } @else {
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            }
+        </button>
+      
+        <!-- Perfil -->
+        <a routerLink="/profile"
+           class="p-2.5 rounded-xl bg-white/20 hover:bg-white/30 transition-all duration-200 flex items-center justify-center group">
+            <svg class="w-5 h-5 text-white group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+        </a>
+    </div>
+    
+</header>
+
+<!-- Menú móvil desplegable -->
+@if (isMobileMenuOpen) {
+<div class="lg:hidden fixed inset-x-0 top-[70px] bg-white shadow-2xl z-40 border-t border-gray-100 animate-slideDown rounded-b-2xl mx-2">
+    <nav class="flex flex-col p-3 gap-1">
+        
+        <!-- Links principales -->
+        <a routerLink="/landingPage" 
+           (click)="closeMobileMenu()"
+           routerLinkActive="!bg-brand-primary !text-white"
+           [routerLinkActiveOptions]="{exact: true}"
+           class="px-4 py-3.5 rounded-xl text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all duration-200 text-base font-medium flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-brand-primary/10 flex items-center justify-center">
+                <svg class="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-semibold">{{ 'header.home' | translate }}</span>
+                <span class="text-xs text-gray-500">Página principal</span>
+            </div>
+        </a>
+
+        <a [routerLink]="exploreRoute" 
+           (click)="closeMobileMenu()"
+           [ngClass]="isOnMapView ? 'bg-brand-primary text-white' : 'text-gray-700 bg-gray-50 hover:bg-gray-100'"
+           class="px-4 py-3.5 rounded-xl transition-all duration-200 text-base font-medium flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center"
+                 [ngClass]="isOnMapView ? 'bg-white/20' : 'bg-green-100'">
+                @if (!isOnMapView) {
+                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                    </svg>
+                } @else {
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                    </svg>
+                }
+            </div>
+            <div class="flex flex-col">
+                <span class="font-semibold">{{ exploreLabel | translate }}</span>
+                @if (!isOnMapView) {
+                    <span class="text-xs text-gray-500">Mapa y actividades</span>
+                } @else {
+                    <span class="text-xs text-white/70">Ver lista de actividades</span>
+                }
+            </div>
+        </a>
+
+        <a routerLink="/about" 
+           (click)="closeMobileMenu()"
+           routerLinkActive="!bg-brand-primary !text-white"
+           class="px-4 py-3.5 rounded-xl text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all duration-200 text-base font-medium flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-semibold">{{ 'header.aboutUs' | translate }}</span>
+                <span class="text-xs text-gray-500">Conoce MappTuu</span>
+            </div>
+        </a>
+
+        <a routerLink="/contact" 
+           (click)="closeMobileMenu()"
+           routerLinkActive="!bg-brand-primary !text-white"
+           class="px-4 py-3.5 rounded-xl text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all duration-200 text-base font-medium flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
+                <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-semibold">{{ 'header.contact' | translate }}</span>
+                <span class="text-xs text-gray-500">Escríbenos</span>
+            </div>
+        </a>
+
+        <!-- Separador -->
+        <div class="h-px bg-gray-200 my-2"></div>
+
+        <!-- Selector de idioma en móvil -->
+        <div class="px-4 py-2 flex items-center justify-between">
+            <span class="text-sm text-gray-500 font-medium">{{ 'common.language' | translate }}</span>
+            <app-language-selector></app-language-selector>
+        </div>
+
+    </nav>
+</div>
+
+<!-- Overlay para cerrar menú móvil -->
+<div (click)="closeMobileMenu()"
+     class="lg:hidden fixed inset-0 top-[70px] bg-black/30 z-30 backdrop-blur-sm">
+</div>
+}

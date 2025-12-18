@@ -1,0 +1,18 @@
+<div class="flex flex-col h-screen w-full overflow-hidden bg-gray-100">
+
+  <header class="sticky top-0 z-50">
+    <app-header></app-header>
+  </header>
+
+  <main class="flex-1 w-full relative z-0">
+    <div class="absolute inset-0 w-full h-full">
+      <app-activity-map 
+        class="block w-full h-full"
+        [points]="mapPoints"
+        [center]="[40.416, -3.703]"
+        [zoom]="6">
+      </app-activity-map>
+    </div>
+  </main>
+
+</div>

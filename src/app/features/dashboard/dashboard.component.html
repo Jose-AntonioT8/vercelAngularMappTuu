@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Fix para altura completa */
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+
+      /* Estilos reutilizables para los botones 3D */
+      .btn-3d {
+        box-shadow: 0 6px 0 rgb(173, 173, 173), 0 8px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.1s;
+      }
+      .btn-3d:active {
+        box-shadow: 0 2px 0 rgb(173, 173, 173), 0 4px 10px rgba(0, 0, 0, 0.2);
+        transform: translateY(4px);
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <div
+        class="min-h-screen w-full bg-cover bg-center text-white font-['Inter'] relative flex flex-col"
+        style="
+          background-image: url('/assets/icons/fondorealista.jpeg');
+          background-attachment: fixed;
+        "
+      >
+        <div class="absolute inset-0 bg-black/10 z-0"></div>
+
+        <header class="absolute top-4 left-4 right-4 flex justify-between items-center z-50">
+          
+          <div class="flex items-center space-x-2 text-base font-bold bg-white px-3 py-1.5 rounded-full shadow-lg">
+            <img
+              src="/assets/logo/logo.png"
+              alt="Logo"
+              class="w-10 h-10 md:w-14 md:h-14 object-contain"
+            />
+            <span class="text-gray-900">MappTuu</span>
+          </div>
+
+          <div class="flex items-center gap-3 relative z-50">
+            <div class="relative z-50">
+              <app-language-selector></app-language-selector>
+            </div>
+
+            <a
+              [routerLink]="['/profile']"
+              aria-label="redirect to profile"
+              class="text-gray-900 bg-white p-2 rounded-full shadow-lg hover:opacity-80 transition-opacity flex items-center justify-center"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-user"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </a>
+          </div>
+        </header>
+
+        <div class="relative z-10 flex flex-grow flex-col items-center justify-center pt-24 pb-10 px-4 w-full">
+          
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-wider mb-8 drop-shadow-lg text-center max-w-4xl">
+            {{ 'dashboard.title' | translate }}
+          </h1>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl">
+            
+            <div class="bg-black/40 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-white/10">
+              <h2 class="text-xl md:text-2xl font-bold mb-6 text-center border-b-2 border-white/50 pb-3 drop-shadow-md">
+                {{ 'dashboard.activities' | translate }}
+              </h2>
+              <div class="space-y-4">
+                <button
+                  (click)="createActivities()"
+                  class="w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"
+                >
+                  {{ 'dashboard.createActivities' | translate }}
+                </button>
+                <button
+                  (click)="viewAcctivities()"
+                  class="w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"
+                >
+                  {{ 'dashboard.viewActivities' | translate }}
+                </button>
+              </div>
+            </div>
+
+            <div class="bg-black/40 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-white/10">
+              <h2 class="text-xl md:text-2xl font-bold mb-6 text-center border-b-2 border-white/50 pb-3 drop-shadow-md">
+                {{ 'dashboard.activityTypes' | translate }}
+              </h2>
+              <div class="space-y-4">
+                <button
+                  (click)="createActivitiesTypes()"
+                  class="w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"
+                >
+                  {{ 'dashboard.createActivityTypes' | translate }}
+                </button>
+                <button
+                  (click)="viewActivitiesTypes()"
+                  class="w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"
+                >
+                  {{ 'dashboard.viewActivityTypes' | translate }}
+                </button>
+              </div>
+            </div>
+
+            <div class="bg-black/40 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-white/10">
+              <h2 class="text-xl md:text-2xl font-bold mb-6 text-center border-b-2 border-white/50 pb-3 drop-shadow-md">
+                {{ 'dashboard.plans' | translate }}
+              </h2>
+              <div class="space-y-4">
+                <button
+                  (click)="createPlans()"
+                  class="w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"
+                >
+                  {{ 'dashboard.createPlans' | translate }}
+                </button>
+                <button
+                  (click)="viewPlans()"
+                  class="w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"
+                >
+                  {{ 'dashboard.viewPlans' | translate }}
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="h-8 w-full"></div>
+      </div>
+    </main>
+  </body>
+</html>

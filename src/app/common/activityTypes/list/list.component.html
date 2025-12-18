@@ -1,0 +1,13 @@
+<ng-container *ngIf="{ list: activityTypes$ | async } as vm">
+  
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
+      <app-card 
+        *ngFor="let activityType of vm.list" 
+        [activityType]="activityType"> </app-card>
+    </section>
+  
+    <div *ngIf="vm.list?.length === 0" class="text-center py-8">
+      <p class="text-gray-600">{{ 'activityTypes.noTypes' | translate }}</p>
+    </div>
+  
+  </ng-container>
