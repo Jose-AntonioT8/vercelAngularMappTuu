@@ -26,6 +26,7 @@ export class LoginComponent {
   isLoading = false;
   showPassword = false;
   emailAddress: string = '';
+  showResetModal = false;
   formLogin;
 
   constructor(
@@ -54,7 +55,7 @@ export class LoginComponent {
     this.emailAddress = this.formLogin.controls.email.value;
     sendPasswordResetEmail(this.auth, this.emailAddress)
       .then(() => {
-        console.log('Correo de restablecimiento enviado exitosamente.');
+        this.showResetModal = true;
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -65,6 +66,10 @@ export class LoginComponent {
           errorMessage
         );
       });
+  }
+
+  closeResetModal(): void {
+    this.showResetModal = false;
   }
 
   getError(control: string): string {

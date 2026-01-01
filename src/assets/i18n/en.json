@@ -58,7 +58,9 @@
       "passwordPattern": "Must include uppercase, lowercase, number and symbol",
       "emailRequired": "Email is required",
       "loginSuccess": "Welcome! Redirecting...",
-      "loginError": "Invalid email or password"
+      "loginError": "Invalid email or password",
+      "restorePaswword": "Reset Password",
+      "modalRestore": "Password reset email sent. Please check your inbox and your spam folder."
     },
     "signup": {
       "title": "Create your account",
@@ -311,8 +313,8 @@
     "planViewer": "Plan viewer",
     "viewer": "Plan viewer",
     "save": "Save",
-    "activities": "Activities"
-    ,"public": "Public plan",
+    "activities": "Activities",
+    "public": "Public plan",
     "private": "Private plan",
     "uploadedOn": "Uploaded on",
     "notFound": "Plan not found",

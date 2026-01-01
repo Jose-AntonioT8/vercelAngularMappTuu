@@ -56,7 +56,9 @@
       "passwordPattern": "Debe incluir mayúscula, minúscula, número y símbolo",
       "emailRequired": "El correo es requerido",
       "loginSuccess": "¡Bienvenido! Redirigiendo...",
-      "loginError": "Usuario o contraseña incorrectos"
+      "loginError": "Usuario o contraseña incorrectos",
+      "restorePaswword": "Restablecer contraseña",
+      "modalRestore": "Correo para cambiar contraseña enviado. Si no aparece, mira su carpeta de spam."
     },
     "signup": {
       "title": "Crea tu cuenta",
@@ -233,14 +235,14 @@
     "activityViewer": "Visor de actividades",
     "viewer": "Visor de actividades",
     "save": "Guardar",
-    "rating": "Calificación"
-    ,"filterTitle": "Filtros"
-    ,"filterTypeLabel": "Tipo de actividad"
-    ,"filterAllTypes": "Todos los tipos"
-    ,"filterLocationLabel": "Ubicación"
-    ,"filterLocationPlaceholder": "Ej., Málaga, Granada..."
-    ,"filterRatingLabel": "Valoración"
-    ,"clear": "Limpiar"
+    "rating": "Calificación",
+    "filterTitle": "Filtros",
+    "filterTypeLabel": "Tipo de actividad",
+    "filterAllTypes": "Todos los tipos",
+    "filterLocationLabel": "Ubicación",
+    "filterLocationPlaceholder": "Ej., Málaga, Granada...",
+    "filterRatingLabel": "Valoración",
+    "clear": "Limpiar"
   },
   "activityTypes": {
     "title": "Tipos de Actividades",
@@ -308,8 +310,8 @@
     "planViewer": "Visor de planes",
     "viewer": "Visor de planes",
     "save": "Guardar",
-    "activities": "Actividades"
-    ,"public": "Plan público",
+    "activities": "Actividades",
+    "public": "Plan público",
     "private": "Plan privado",
     "uploadedOn": "Subido el",
     "notFound": "Plan no encontrado",
