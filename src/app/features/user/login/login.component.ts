@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
@@ -24,6 +25,7 @@ export class LoginComponent {
   success = '';
   isLoading = false;
   showPassword = false;
+  emailAddress: string = '';
   formLogin;
 
   constructor(
@@ -31,8 +33,7 @@ export class LoginComponent {
     private authService: AuthService,
     private route: Router,
     private translation: TranslationService,
-    private auth = getAuth(),
-    private emailAddress: string
+    private auth: Auth = getAuth()
   ) {
     this.formLogin = this.formSvc.group({
       email: ['', [Validators.required, Validators.email]],
