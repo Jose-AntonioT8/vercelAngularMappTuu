@@ -167,7 +167,8 @@
     "accountStatus": "Estado de cuenta",
     "verified": "Verificada",
     "achievements": "Logros",
-    "recentActivity": "Actividad reciente"
+    "recentActivity": "Actividad reciente",
+    "changePassword": "Cambiar contraseña"
   },
   "dashboard": {
     "title": "Gestionar MappTuu",

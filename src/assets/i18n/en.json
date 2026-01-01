@@ -169,7 +169,8 @@
     "accountStatus": "Account status",
     "verified": "Verified",
     "achievements": "Achievements",
-    "recentActivity": "Recent activity"
+    "recentActivity": "Recent activity",
+    "changePassword": "Change password"
   },
   "dashboard": {
     "title": "Manage MappTuu",
