@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../core/services/auth.service';
+import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { TranslatePipe } from '../../../core/pipes/translate.pipe';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
+import { TranslatePipe } from '../../../core/pipes/translate.pipe';
+import { AuthService } from '../../../core/services/auth.service';
 import { TranslationService } from '../../../core/services/translation.service';
-
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -15,7 +15,7 @@ import { TranslationService } from '../../../core/services/translation.service';
     ReactiveFormsModule,
     TranslatePipe,
     LanguageSelectorComponent,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './login.component.html',
 })
@@ -30,17 +30,40 @@ export class LoginComponent {
     private formSvc: FormBuilder,
     private authService: AuthService,
     private route: Router,
-    private translation: TranslationService
+    private translation: TranslationService,
+    private auth = getAuth(),
+    private emailAddress: string
   ) {
     this.formLogin = this.formSvc.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      rememberMe: [false]
+      rememberMe: [false],
     });
   }
 
   togglePassword(): void {
     this.showPassword = !this.showPassword;
+  }
+
+  sendPasswordReset(): void {
+    if (!this.formLogin.controls.email.value) {
+      this.error = this.translation.instant('auth.login.emailRequired');
+      return;
+    }
+    this.emailAddress = this.formLogin.controls.email.value;
+    sendPasswordResetEmail(this.auth, this.emailAddress)
+      .then(() => {
+        console.log('Correo de restablecimiento enviado exitosamente.');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(
+          'Error al enviar el correo de restablecimiento:',
+          errorCode,
+          errorMessage
+        );
+      });
   }
 
   getError(control: string): string {
@@ -92,7 +115,8 @@ export class LoginComponent {
       case 'auth/cancelled-popup-request':
         break;
       case 'auth/account-exists-with-different-credential':
-        this.error = 'Ya existe una cuenta con este email usando otro método de inicio de sesión.';
+        this.error =
+          'Ya existe una cuenta con este email usando otro método de inicio de sesión.';
         break;
       case 'auth/popup-blocked':
         this.error = 'El popup fue bloqueado. Permite popups para este sitio.';
@@ -104,7 +128,7 @@ export class LoginComponent {
 
   async onLogin(): Promise<void> {
     if (this.formLogin.invalid || this.isLoading) return;
-    
+
     this.error = '';
     this.success = '';
     this.isLoading = true;
@@ -114,17 +138,16 @@ export class LoginComponent {
         this.formLogin.controls.email.value!,
         this.formLogin.controls.password.value!
       );
-      
+
       this.success = this.translation.instant('auth.login.loginSuccess');
-      
+
       // Delay navigation for success animation
       setTimeout(() => {
         this.route.navigate(['/landingPage']);
-      }, 1000);
-      
+      }, 500);
     } catch (err: any) {
       this.isLoading = false;
-      
+
       switch (err.code) {
         case 'auth/user-not-found':
         case 'auth/invalid-credential':
