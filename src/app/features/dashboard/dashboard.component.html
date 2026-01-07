@@ -37,16 +37,19 @@
 
         <header class="absolute top-4 left-4 right-4 flex justify-between items-center z-50">
           
-          <div class="flex items-center space-x-2 text-base font-bold bg-white px-3 py-1.5 rounded-full shadow-lg">
+          <a 
+            [routerLink]="['/landingPage']" 
+            class="flex items-center space-x-2 text-base font-bold bg-white px-3 py-1.5 rounded-full shadow-lg hover:opacity-80 transition-opacity cursor-pointer"
+          >
             <img
               src="/assets/logo/logo.png"
               alt="Logo"
               class="w-10 h-10 md:w-14 md:h-14 object-contain"
             />
             <span class="text-gray-900">MappTuu</span>
-          </div>
+          </a>
 
-          <div class="flex items-center gap-3 relative z-50">
+          <div class="flex items-center gap-4 relative z-50">
             <div class="relative z-50">
               <app-language-selector></app-language-selector>
             </div>
