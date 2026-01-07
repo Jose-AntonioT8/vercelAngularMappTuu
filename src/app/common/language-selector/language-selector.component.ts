@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
     <div class="relative language-selector-container">
       <button
         (click)="toggleDropdown()"
-        class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors bg-white text-gray-900 font-medium"
+        class="flex items-center gap-2 px-3 py-2 rounded-full shadow-lg hover:opacity-80 transition-opacity bg-white text-gray-900 font-medium"
         [attr.aria-label]="'Current language: ' + currentLanguage"
         aria-haspopup="true"
         [attr.aria-expanded]="isDropdownOpen"
