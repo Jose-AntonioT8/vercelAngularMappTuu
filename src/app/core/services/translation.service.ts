@@ -9,7 +9,7 @@ export class TranslationService {
   public currentLanguage$: Observable<string>;
 
   private translations: { [key: string]: any } = {};
-  private supportedLanguages = ['es', 'en'];
+  private supportedLanguages = ['es', 'en', 'de'];
 
   constructor() {
     const savedLanguage = localStorage.getItem('appLanguage') || 'es';
@@ -71,7 +71,8 @@ export class TranslationService {
 
   toggleLanguage(): void {
     const currentLang = this.getCurrentLanguage();
-    const nextLang = currentLang === 'es' ? 'en' : 'es';
+    const idx = this.supportedLanguages.indexOf(currentLang);
+    const nextLang = this.supportedLanguages[(idx + 1) % this.supportedLanguages.length];
     this.setLanguage(nextLang);
   }
 }

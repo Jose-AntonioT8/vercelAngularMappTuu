@@ -15,6 +15,13 @@
       "flag": "🇬🇧",
       "nativeName": "English",
       "enabled": true
+    },
+    {
+      "code": "de",
+      "name": "German",
+      "flag": "🇩🇪",
+      "nativeName": "Deutsch",
+      "enabled": true
     }
   ],
   "defaultLanguage": "es",
@@ -37,7 +44,8 @@
     "componentFile": "src/app/common/language-selector/language-selector.component.ts",
     "pipeFile": "src/app/core/pipes/translate.pipe.ts",
     "translationES": "src/assets/i18n/es.json",
-    "translationEN": "src/assets/i18n/en.json"
+    "translationEN": "src/assets/i18n/en.json",
+    "translationDE": "src/assets/i18n/de.json"
   },
   "localStorage": {
     "key": "appLanguage",

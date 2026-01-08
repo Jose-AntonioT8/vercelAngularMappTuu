@@ -106,7 +106,8 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   getLanguageFlagByCode(lang: string): string {
     const flags: { [key: string]: string } = {
       'es': '🇪🇸',
-      'en': '🇬🇧'
+      'en': '🇬🇧',
+      'de': '🇩🇪'
     };
     return flags[lang] || '🌐';
   }
@@ -118,7 +119,8 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   getLanguageLabelByCode(lang: string): string {
     const labels: { [key: string]: string } = {
       'es': 'Español',
-      'en': 'English'
+      'en': 'English',
+      'de': 'Deutsch'
     };
     return labels[lang] || lang.toUpperCase();
   }
