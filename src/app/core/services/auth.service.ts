@@ -11,14 +11,12 @@ import {
   GithubAuthProvider,
   signInWithPopup
 } from '@angular/fire/auth';
-import { Firestore, clearIndexedDbPersistence } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private auth = inject(Auth);
-  private firestore = inject(Firestore);
   private ngZone = inject(NgZone);
   private userSubject = new BehaviorSubject<User | null>(null);
   user$ = this.userSubject.asObservable();
@@ -76,13 +74,8 @@ export class AuthService {
     } catch (e) {
       console.error('Error limpiando CacheStorage', e);
     }
-    try {
-      await clearIndexedDbPersistence(this.firestore);
-    } catch (e) {
-      console.error('Error limpiando caché de Firestore', e);
-    }
     this.userSubject.next(null);
-    this.router.navigate(['/login']);
+    location.reload();
   }
 //para el guards
   isAuthenticated(): boolean {
