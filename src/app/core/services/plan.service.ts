@@ -9,7 +9,8 @@ import {
   DocumentData,
   Unsubscribe 
 } from '@angular/fire/firestore'; 
-import { Firestore as FirestoreType, collection as col, onSnapshot as onSnap, doc as docRef, getFirestore } from 'firebase/firestore'; 
+import { Firestore as FirestoreType, collection as col, onSnapshot as onSnap, doc as docRef, getFirestore, query, where, and, or } from 'firebase/firestore'; 
+import { AuthService } from './auth.service';
 
 
 import { BehaviorSubject, Observable, from, map } from 'rxjs';
@@ -27,7 +28,7 @@ export class PlanService {
    private plans = new BehaviorSubject<Plan[]>([]);
    public plans$ = this.plans.asObservable();
   
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
  
 
   createPlan(planData: any, token: any): Observable<any> {
@@ -50,17 +51,25 @@ export class PlanService {
       }
   
       // Usamos 'this.db' que ya está listo gracias a app.config
+      const uid = this.authService.currentUser?.uid || null;
+      const baseCol = col(this.db, this.collectionName);
+
+      // Query Firestore según autenticación: público o público + privados propios
+      const q = uid
+        ? query(
+            baseCol,
+            or(
+              where('visibility', '==', true),
+              and(where('visibility', '==', false), where('ownerId', '==', uid))
+            )
+          )
+        : query(baseCol, where('visibility', '==', true));
+
       this.unsubscribeListener = onSnap(
-        col(this.db, this.collectionName),
+        q,
         (snapshot: QuerySnapshot<DocumentData>) => {
           this.ngZone.run(() => {
-          const plans = snapshot.docs.map(d => {
-            const data = d.data();
-            return {
-              id: d.id,
-              ...data,
-            } as Plan;
-          });
+          const plans = snapshot.docs.map(d => ({ id: d.id, ...d.data() })) as Plan[];
           this.plans.next(plans);
           });
         },

@@ -5,7 +5,7 @@ export interface Plan {
   imgRef: string;
   ownerId: string;
   rating: number;
-  visibility: true;
+  visibility: boolean;
   description: string,
 }
 
