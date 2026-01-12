@@ -60,6 +60,41 @@ export class AuthService {
  //no esta implementado el logout en la interfaz pero lo agrego para tenerlo listo
   async logout() {
     await signOut(this.auth);
+    try {
+      localStorage.clear();
+      sessionStorage.clear();
+    } catch (e) {
+      console.error('Error limpiando storage', e);
+    }
+    try {
+      if (typeof caches !== 'undefined') {
+        const names = await caches.keys();
+        await Promise.all(names.map((n) => caches.delete(n)));
+      }
+    } catch (e) {
+      console.error('Error limpiando CacheStorage', e);
+    }
+    try {
+      const anyIDB: any = indexedDB as any;
+      if (typeof indexedDB !== 'undefined' && anyIDB?.databases) {
+        const dbs = await anyIDB.databases();
+        await Promise.all(
+          dbs.map((db: any) =>
+            db?.name
+              ? new Promise<void>((resolve) => {
+                  const req = indexedDB.deleteDatabase(db.name);
+                  req.onsuccess = () => resolve();
+                  req.onerror = () => resolve();
+                  req.onblocked = () => resolve();
+                })
+              : Promise.resolve()
+          )
+        );
+      }
+    } catch (e) {
+      console.error('Error limpiando IndexedDB', e);
+    }
+    this.userSubject.next(null);
     this.router.navigate(['/login']);
   }
 //para el guards
