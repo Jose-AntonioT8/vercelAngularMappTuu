@@ -250,9 +250,11 @@
     "clear": "Zurücksetzen",
     "review": "Bewertung schreiben",
     "writeReview": "Schreibe eine Bewertung",
+    "editReview": "Meine Bewertung bearbeiten",
     "comment": "Kommentar",
     "commentPlaceholder": "Teile dein Erlebnis mit dieser Aktivität...",
-    "submit": "Absenden"
+    "submit": "Absenden",
+    "update": "Aktualisieren"
   },
   "activityTypes": {
     "title": "Aktivitätstypen",

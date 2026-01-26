@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { Activity } from '../../../common/models/activity.model';
+import { Activity, Review } from '../../../common/models/activity.model';
 import { CommonModule } from '@angular/common';
 import { ActivityService } from '../../../core/services/activity.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,7 +10,7 @@ import * as L from 'leaflet';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { PricePipe } from '../../../core/pipes/price.pipe';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
-import { ReviewModalComponent, Review } from './review-modal/review-modal.component';
+import { ReviewModalComponent } from './review-modal/review-modal.component';
 
 
 @Component({
@@ -28,13 +28,14 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
   private marker?: L.Marker;
   mapInitialized = false;
   isReviewModalOpen = false;
+  userReview: Review | null = null;
 
   private activityService = inject(ActivityService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private mapService = inject(mapsService);
   private cdr = inject(ChangeDetectorRef);
-  private authService = inject(AuthService);
+  public authService = inject(AuthService);
 
   ngOnInit() {
     const idUrl = this.route.snapshot.paramMap.get('id');
@@ -42,7 +43,17 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
       this.activity = data;
       this.activityDescription = (data as any).description;
       
+      console.log('🎯 Actividad cargada:', {
+        id: data.id,
+        name: data.name,
+        rating: data.rating,
+        reviews: (data as any).reviews
+      });
+      
       if (this.activity) {
+        // Buscar si el usuario actual tiene una reseña para esta actividad
+        this.loadUserReview();
+        
         this.mapService.getAddress(
           parseFloat(this.activity.latitude), 
           parseFloat(this.activity.longitude)
@@ -56,7 +67,38 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
         }, 300);
       }
     });
+  }
+
+  /**
+   * Carga la reseña del usuario actual para esta actividad
+   */
+  private loadUserReview(): void {
+    const user = this.authService.currentUser;
+    if (!user || !this.activity) {
+      console.log('❌ No se puede cargar reseña - Usuario o actividad no disponible');
+      return;
+    }
+
+    // Buscar en las reseñas de la actividad si existe una del usuario actual
+    const reviews = this.activity.reviews || [];
+    console.log('🔍 Buscando reseña del usuario', user.uid, 'en', reviews.length, 'reseñas');
+    console.log('📋 Reviews array completo:', JSON.stringify(reviews, null, 2));
     
+    const userReview = reviews.find((review: Review) => review.userId === user.uid);
+    
+    if (userReview) {
+      this.userReview = {
+        id: userReview.id,
+        rating: userReview.rating || 0,
+        comment: userReview.comment || '',
+        userId: userReview.userId
+      };
+      console.log('✅ Reseña del usuario encontrada:', this.userReview);
+    } else {
+      this.userReview = null;
+      console.log('ℹ️ El usuario no tiene reseña para esta actividad');
+      console.log('👤 userId buscado:', user.uid);
+    }
   }
 
   ngAfterViewInit() {
@@ -264,20 +306,47 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
       if (!user) throw new Error('No autenticado');
 
       user.getIdToken().then(token => {
+        const isUpdate = !!review.id; // Si tiene id, es una actualización
+        
         const ratingData = {
           rating: review.rating,
           comment: review.comment,
-          userId: user.uid
+          userId: user.uid,
+          id: review.id,
+          isUpdate: isUpdate,
+          previousRating: isUpdate ? this.userReview?.rating : undefined
         };
+
+        console.log('📤 Enviando reseña:', {
+          isUpdate,
+          newRating: review.rating,
+          previousRating: this.userReview?.rating,
+          userId: user.uid,
+          activityId: this.activity!.id
+        });
 
         this.activityService.rateActivity(this.activity!.id, ratingData, token).subscribe({
           next: (res) => {
             console.log('✅ Reseña guardada con éxito:', res);
-            // Actualizar la puntuación en la vista
-            if (res && res.rating) {
-              this.activity!.rating = res.rating;
-              this.cdr.detectChanges();
+            
+            // Actualizar la actividad completa con los datos del backend
+            if (res && res.activity) {
+              // El backend devuelve el objeto activity completo dentro de res.activity
+              this.activity = {
+                ...this.activity!,
+                rating: res.activity.rating,
+                numRatings: res.activity.numRatings,
+                reviews: res.activity.reviews || []
+              };
+              
+              console.log('🔄 Actividad actualizada con reviews:', this.activity.reviews);
+              
+              // Recargar la reseña del usuario desde el array actualizado
+              this.loadUserReview();
             }
+            
+            // Forzar detección de cambios
+            this.cdr.detectChanges();
           },
           error: (err) => {
             console.error('❌ Error al guardar la reseña:', err);

@@ -20,6 +20,8 @@
     <app-review-modal 
         [isOpen]="isReviewModalOpen"
         [activityId]="activity?.id"
+        [userId]="authService.currentUser?.uid || ''"
+        [existingReview]="userReview"
         (onClose)="closeReviewModal()"
         (onSubmit)="handleReviewSubmit($event)">
     </app-review-modal>

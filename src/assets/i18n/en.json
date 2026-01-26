@@ -250,9 +250,11 @@
     "clear": "Clear",
     "review": "Write Review",
     "writeReview": "Write a Review",
+    "editReview": "Edit my review",
     "comment": "Comment",
     "commentPlaceholder": "Share your experience with this activity...",
-    "submit": "Submit"
+    "submit": "Submit",
+    "update": "Update"
   },
   "activityTypes": {
     "title": "Activity Types",
