@@ -7,4 +7,5 @@ export interface Activity {
   longitude: string;
   latitude: string;
   rating: number;
+  numRatings: number;
 }

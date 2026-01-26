@@ -8,7 +8,9 @@
     "logout": "Abmelden",
     "language": "Sprache",
     "loading": "Wird geladen...",
-    "noData": "Keine Daten verfügbar"
+    "noData": "Keine Daten verfügbar",
+    "cancel": "Abbrechen",
+    "stars": "Sterne"
   },
   "header": {
     "loginButton": "Anmelden",
@@ -245,7 +247,12 @@
     "filterLocationLabel": "Ort",
     "filterLocationPlaceholder": "z. B. Málaga, Granada...",
     "filterRatingLabel": "Bewertung",
-    "clear": "Zurücksetzen"
+    "clear": "Zurücksetzen",
+    "review": "Bewertung schreiben",
+    "writeReview": "Schreibe eine Bewertung",
+    "comment": "Kommentar",
+    "commentPlaceholder": "Teile dein Erlebnis mit dieser Aktivität...",
+    "submit": "Absenden"
   },
   "activityTypes": {
     "title": "Aktivitätstypen",

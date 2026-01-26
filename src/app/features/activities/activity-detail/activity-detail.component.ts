@@ -4,17 +4,19 @@ import { CommonModule } from '@angular/common';
 import { ActivityService } from '../../../core/services/activity.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { mapsService } from '../../../core/services/maps.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { OptionsComponent } from '../../../common/options/options/options.component';
 import * as L from 'leaflet';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { PricePipe } from '../../../core/pipes/price.pipe';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
+import { ReviewModalComponent, Review } from './review-modal/review-modal.component';
 
 
 @Component({
   selector: 'app-activity-detail',
   standalone: true,
-  imports: [CommonModule, OptionsComponent, TranslatePipe, PricePipe, LanguageSelectorComponent],
+  imports: [CommonModule, OptionsComponent, TranslatePipe, PricePipe, LanguageSelectorComponent, ReviewModalComponent],
   templateUrl: './activity-detail.component.html',
   styleUrl: './activity-detail.component.scss'
 })
@@ -25,12 +27,14 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
   private map?: L.Map;
   private marker?: L.Marker;
   mapInitialized = false;
+  isReviewModalOpen = false;
 
   private activityService = inject(ActivityService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private mapService = inject(mapsService);
   private cdr = inject(ChangeDetectorRef);
+  private authService = inject(AuthService);
 
   ngOnInit() {
     const idUrl = this.route.snapshot.paramMap.get('id');
@@ -242,5 +246,46 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
 
   get activityPrice(): number | null {
     return (this.activity as any)?.price ?? null;
+  }
+
+  openReviewModal() {
+    this.isReviewModalOpen = true;
+  }
+
+  closeReviewModal() {
+    this.isReviewModalOpen = false;
+  }
+
+  handleReviewSubmit(review: Review) {
+    if (!this.activity) return;
+
+    try {
+      const user = this.authService.currentUser;
+      if (!user) throw new Error('No autenticado');
+
+      user.getIdToken().then(token => {
+        const ratingData = {
+          rating: review.rating,
+          comment: review.comment,
+          userId: user.uid
+        };
+
+        this.activityService.rateActivity(this.activity!.id, ratingData, token).subscribe({
+          next: (res) => {
+            console.log('✅ Reseña guardada con éxito:', res);
+            // Actualizar la puntuación en la vista
+            if (res && res.rating) {
+              this.activity!.rating = res.rating;
+              this.cdr.detectChanges();
+            }
+          },
+          error: (err) => {
+            console.error('❌ Error al guardar la reseña:', err);
+          }
+        });
+      });
+    } catch (err: any) {
+      console.error('Error de autenticación:', err);
+    }
   }
 }
