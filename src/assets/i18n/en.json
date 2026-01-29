@@ -8,7 +8,9 @@
     "logout": "Logout",
     "language": "Language",
     "loading": "Loading...",
-    "noData": "No data available"
+    "noData": "No data available",
+    "cancel": "Cancel",
+    "stars": "stars"
   },
   "header": {
     "loginButton": "Sign In",
@@ -245,7 +247,14 @@
     "filterLocationLabel": "Location",
     "filterLocationPlaceholder": "e.g., Málaga, Granada...",
     "filterRatingLabel": "Rating",
-    "clear": "Clear"
+    "clear": "Clear",
+    "review": "Write Review",
+    "writeReview": "Write a Review",
+    "editReview": "Edit my review",
+    "comment": "Comment",
+    "commentPlaceholder": "Share your experience with this activity...",
+    "submit": "Submit",
+    "update": "Update"
   },
   "activityTypes": {
     "title": "Activity Types",

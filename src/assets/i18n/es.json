@@ -6,7 +6,9 @@
     "back": "Volver atrás",
     "profile": "Perfil",
     "logout": "Cerrar sesión",
-    "language": "Idioma"
+    "language": "Idioma",
+    "cancel": "Cancelar",
+    "stars": "estrellas"
   },
   "header": {
     "loginButton": "Iniciar sesión",
@@ -243,7 +245,14 @@
     "filterLocationLabel": "Ubicación",
     "filterLocationPlaceholder": "Ej., Málaga, Granada...",
     "filterRatingLabel": "Valoración",
-    "clear": "Limpiar"
+    "clear": "Limpiar",
+    "review": "Escribir reseña",
+    "writeReview": "Escribir una reseña",
+    "editReview": "Editar mi reseña",
+    "comment": "Comentario",
+    "commentPlaceholder": "Comparte tu experiencia con esta actividad...",
+    "submit": "Enviar",
+    "update": "Actualizar"
   },
   "activityTypes": {
     "title": "Tipos de Actividades",

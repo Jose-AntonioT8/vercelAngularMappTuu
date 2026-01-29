@@ -40,6 +40,10 @@ private db: FirestoreType = inject(Firestore);
     return this.http.post(this.url, activityData, { headers: { Authorization: `Bearer ${token}` } });
   }
 
+  rateActivity(id:string, activityData:any, token:any): Observable<any>{
+    return this.http.patch(`${this.url}/${id}/rating`, activityData, { headers: { Authorization: `Bearer ${token}` } });
+  }
+
 
   updateActivity(id: string, activityData: any, token: any): Observable<any> {
     return this.http.patch(`${this.url}/${id}`, activityData, { headers: { Authorization: `Bearer ${token}` } });

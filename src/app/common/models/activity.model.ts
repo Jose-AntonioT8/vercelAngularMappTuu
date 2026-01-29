@@ -1,3 +1,10 @@
+export interface Review {
+  id?: string;
+  userId: string;
+  rating: number;
+  comment: string;
+}
+
 export interface Activity {
   id: string;
   name: string;
@@ -7,4 +14,6 @@ export interface Activity {
   longitude: string;
   latitude: string;
   rating: number;
+  numRatings: number;
+  reviews?: Review[];
 }
