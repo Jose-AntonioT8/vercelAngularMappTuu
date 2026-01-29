@@ -4,6 +4,7 @@ export interface Plan {
   activitiesIds: string[];
   imgRef: string;
   ownerId: string;
+  createdAt?: Date;
   rating: number;
   visibility: boolean;
   description: string;
@@ -16,4 +17,5 @@ export interface Review {
   userId: string;
   rating: number;
   comment: string;
+  createdAt?: Date;
 }

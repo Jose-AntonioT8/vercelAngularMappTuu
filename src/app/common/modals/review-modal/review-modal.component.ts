@@ -1,15 +1,29 @@
-import { Component, Input, Output, EventEmitter, inject, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TranslatePipe } from '../../../../core/pipes/translate.pipe';
-import { Review } from '../../../../common/models/activity.model';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { TranslatePipe } from '../../../core/pipes/translate.pipe';
+import { Review } from '../../models/activity.model';
 
 @Component({
   selector: 'app-review-modal',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './review-modal.component.html',
-  styleUrl: './review-modal.component.scss'
+  styleUrl: './review-modal.component.scss',
 })
 export class ReviewModalComponent implements OnInit, OnChanges {
   @Input() isOpen = false;
@@ -31,7 +45,7 @@ export class ReviewModalComponent implements OnInit, OnChanges {
   constructor() {
     this.formReview = this.formBuilder.group({
       rating: [0, [Validators.required, Validators.min(1), Validators.max(5)]],
-      comment: ['', [Validators.maxLength(500)]]
+      comment: ['', [Validators.maxLength(500)]],
     });
   }
 
@@ -51,21 +65,28 @@ export class ReviewModalComponent implements OnInit, OnChanges {
   private loadReview() {
     // Si existe una reseña anterior, cargar sus valores
     console.log('📝 Cargando reseña existente:', this.existingReview);
-    
-    if (this.existingReview && this.existingReview.rating && this.existingReview.rating > 0) {
+
+    if (
+      this.existingReview &&
+      this.existingReview.rating &&
+      this.existingReview.rating > 0
+    ) {
       this.isEditMode = true;
       this.formReview.patchValue({
         rating: this.existingReview.rating,
-        comment: this.existingReview.comment || ''
+        comment: this.existingReview.comment || '',
       });
       this.error = '';
       this.success = '';
-      console.log('✅ Modo edición activado con rating:', this.existingReview.rating);
+      console.log(
+        '✅ Modo edición activado con rating:',
+        this.existingReview.rating
+      );
     } else {
       this.isEditMode = false;
       this.formReview.patchValue({
         rating: 0,
-        comment: ''
+        comment: '',
       });
       this.error = '';
       this.success = '';
@@ -94,12 +115,14 @@ export class ReviewModalComponent implements OnInit, OnChanges {
       rating: this.formReview.get('rating')?.value,
       comment: this.formReview.get('comment')?.value || '',
       userId: this.userId,
-      id: this.existingReview?.id
+      id: this.existingReview?.id,
     };
 
     this.onSubmit.emit(review);
-    this.success = this.isEditMode ? 'Reseña actualizada con éxito' : 'Reseña guardada con éxito';
-    
+    this.success = this.isEditMode
+      ? 'Reseña actualizada con éxito'
+      : 'Reseña guardada con éxito';
+
     setTimeout(() => {
       this.closeModal();
     }, 1000);
@@ -118,7 +141,9 @@ export class ReviewModalComponent implements OnInit, OnChanges {
   }
 
   getStarState(index: number, useHover = false): 'full' | 'empty' {
-    const currentRating = useHover ? this.hoverRating : this.formReview.get('rating')?.value || 0;
+    const currentRating = useHover
+      ? this.hoverRating
+      : this.formReview.get('rating')?.value || 0;
     return currentRating >= index + 1 ? 'full' : 'empty';
   }
 

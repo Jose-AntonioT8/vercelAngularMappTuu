@@ -12,6 +12,15 @@
     "cancel": "Abbrechen",
     "stars": "Sterne"
   },
+  "reviews": {
+    "title": "Aktivitätsbewertungen",
+    "noReviews": "Keine Bewertungen verfügbar",
+    "loading": "Bewertungen werden geladen...",
+    "error": "Fehler beim Laden der Bewertungen",
+    "noComment": "Kein Kommentar",
+    "by": "Von: ",
+    "date": "Datum: "
+  },
   "header": {
     "loginButton": "Anmelden",
     "home": "Startseite",
@@ -197,7 +206,7 @@
     "title": "Aktivitäten",
     "searchPlaceholder": "Aktivitäten, Pläne suchen...",
     "create": "Aktivität erstellen",
-    "update": "Aktivität bearbeiten",
+    "viewReviews": "Bewertungen anzeigen",
     "name": "Name",
     "namePlaceholder": "Name der Aktivität",
     "description": "Beschreibung",
@@ -218,7 +227,6 @@
     "noActivities": "Keine Aktivitäten verfügbar",
     "loading": "Aktivitäten werden geladen...",
     "error": "Fehler beim Laden der Aktivitäten",
-    "submit": "Speichern",
     "cancel": "Abbrechen",
     "delete": "Löschen",
     "deleteConfirm": "Möchtest du diese Aktivität wirklich löschen?",
@@ -289,6 +297,7 @@
     "clear": "Zurücksetzen"
   },
   "plans": {
+    "viewReviews": "Bewertungen anzeigen",
     "title": "Pläne",
     "searchPlaceholder": "Pläne, Aktivitäten suchen...",
     "name": "Name",
@@ -349,6 +358,7 @@
     "loading": "Wird geladen...",
     "noResults": "Keine Ergebnisse",
     "required": "Dieses Feld ist erforderlich",
-    "invalid": "Ungültiges Format"
+    "invalid": "Ungültiges Format",
+    "tryAgain": "Bitte versuchen Sie es noch einmal"
   }
 }

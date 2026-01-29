@@ -10,6 +10,15 @@
     "cancel": "Cancelar",
     "stars": "estrellas"
   },
+  "reviews": {
+    "title": "Reseñas de la actividad",
+    "noReviews": "No hay reseñas disponibles",
+    "loading": "Cargando reseñas...",
+    "error": "Error al cargar las reseñas",
+    "noComment": "Sin comentario",
+    "by": "Por: ",
+    "date": "Fecha: "
+  },
   "header": {
     "loginButton": "Iniciar sesión",
     "home": "Inicio",
@@ -192,6 +201,7 @@
     "viewPlans": "Ver planes"
   },
   "activities": {
+    "viewReviews": "Ver reseñas",
     "title": "Actividades",
     "searchPlaceholder": "Buscar Actividades, planes...",
     "create": "Crear Actividad",
@@ -250,9 +260,7 @@
     "writeReview": "Escribir una reseña",
     "editReview": "Editar mi reseña",
     "comment": "Comentario",
-    "commentPlaceholder": "Comparte tu experiencia con esta actividad...",
-    "submit": "Enviar",
-    "update": "Actualizar"
+    "commentPlaceholder": "Comparte tu experiencia con esta actividad..."
   },
   "activityTypes": {
     "title": "Tipos de Actividades",
@@ -286,6 +294,7 @@
     "clear": "Limpiar"
   },
   "plans": {
+    "viewReviews": "Ver reseñas",
     "title": "Planes",
     "searchPlaceholder": "Buscar Planes, actividades...",
     "createTitle": "Creación de plan",
@@ -346,6 +355,7 @@
     "loading": "Cargando...",
     "noResults": "No hay resultados",
     "required": "Este campo es requerido",
-    "invalid": "El formato es inválido"
+    "invalid": "El formato es inválido",
+    "tryAgain": "Por favor, inténtalo de nuevo"
   }
 }

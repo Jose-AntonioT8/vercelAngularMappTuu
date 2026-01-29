@@ -12,6 +12,15 @@
     "cancel": "Cancel",
     "stars": "stars"
   },
+  "reviews": {
+    "title": "Activity Reviews",
+    "noReviews": "No reviews available",
+    "loading": "Loading reviews...",
+    "error": "Error loading reviews",
+    "noComment": "No comment",
+    "by": "By: ",
+    "date": "Date: "
+  },
   "header": {
     "loginButton": "Sign In",
     "home": "Home",
@@ -197,7 +206,7 @@
     "title": "Activities",
     "searchPlaceholder": "Search Activities, plans...",
     "create": "Create Activity",
-    "update": "Edit Activity",
+    "viewReviews": "View reviews",
     "name": "Name",
     "namePlaceholder": "Activity name",
     "description": "Description",
@@ -253,7 +262,6 @@
     "editReview": "Edit my review",
     "comment": "Comment",
     "commentPlaceholder": "Share your experience with this activity...",
-    "submit": "Submit",
     "update": "Update"
   },
   "activityTypes": {
@@ -289,6 +297,7 @@
     "clear": "Clear"
   },
   "plans": {
+    "viewReviews": "View reviews",
     "title": "Plans",
     "searchPlaceholder": "Search Plans, activities...",
     "name": "Name",
@@ -349,6 +358,7 @@
     "loading": "Loading...",
     "noResults": "No results",
     "required": "This field is required",
-    "invalid": "Invalid format"
+    "invalid": "Invalid format",
+    "tryAgain": "Please, try again"
   }
 }

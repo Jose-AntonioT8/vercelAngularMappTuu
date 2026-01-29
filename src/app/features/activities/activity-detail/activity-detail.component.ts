@@ -1,26 +1,42 @@
-import { Component, inject, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { Activity, Review } from '../../../common/models/activity.model';
 import { CommonModule } from '@angular/common';
-import { ActivityService } from '../../../core/services/activity.service';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnDestroy,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { mapsService } from '../../../core/services/maps.service';
-import { AuthService } from '../../../core/services/auth.service';
-import { OptionsComponent } from '../../../common/options/options/options.component';
 import * as L from 'leaflet';
-import { TranslatePipe } from '../../../core/pipes/translate.pipe';
-import { PricePipe } from '../../../core/pipes/price.pipe';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
-import { ReviewModalComponent } from './review-modal/review-modal.component';
-
+import { ReviewModalComponent } from '../../../common/modals/review-modal/review-modal.component';
+import { ReviewsListModalComponent } from '../../../common/modals/reviews-list-modal/reviews-list-modal'; // Ajusta ruta
+import { Activity, Review } from '../../../common/models/activity.model';
+import { OptionsComponent } from '../../../common/options/options/options.component';
+import { PricePipe } from '../../../core/pipes/price.pipe';
+import { TranslatePipe } from '../../../core/pipes/translate.pipe';
+import { ActivityService } from '../../../core/services/activity.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { mapsService } from '../../../core/services/maps.service';
 
 @Component({
   selector: 'app-activity-detail',
   standalone: true,
-  imports: [CommonModule, OptionsComponent, TranslatePipe, PricePipe, LanguageSelectorComponent, ReviewModalComponent],
+  imports: [
+    CommonModule,
+    OptionsComponent,
+    TranslatePipe,
+    PricePipe,
+    LanguageSelectorComponent,
+    ReviewModalComponent,
+    ReviewsListModalComponent,
+  ],
   templateUrl: './activity-detail.component.html',
-  styleUrl: './activity-detail.component.scss'
+  styleUrl: './activity-detail.component.scss',
 })
 export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
+  isReviewsListModalOpen = false;
+
   activity?: Activity;
   location?: string;
   activityDescription?: string;
@@ -39,28 +55,30 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
 
   ngOnInit() {
     const idUrl = this.route.snapshot.paramMap.get('id');
-    this.activityService.getActivityId(idUrl!).subscribe(data => {
+    this.activityService.getActivityId(idUrl!).subscribe((data) => {
       this.activity = data;
       this.activityDescription = (data as any).description;
-      
+
       console.log('🎯 Actividad cargada:', {
         id: data.id,
         name: data.name,
         rating: data.rating,
-        reviews: (data as any).reviews
+        reviews: (data as any).reviews,
       });
-      
+
       if (this.activity) {
         // Buscar si el usuario actual tiene una reseña para esta actividad
         this.loadUserReview();
-        
-        this.mapService.getAddress(
-          parseFloat(this.activity.latitude), 
-          parseFloat(this.activity.longitude)
-        ).subscribe(address => {
-          this.location = address;
-        });
-        
+
+        this.mapService
+          .getAddress(
+            parseFloat(this.activity.latitude),
+            parseFloat(this.activity.longitude)
+          )
+          .subscribe((address) => {
+            this.location = address;
+          });
+
         // Inicializar el mapa después de que la actividad esté cargada
         setTimeout(() => {
           this.initMap();
@@ -68,30 +86,46 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
       }
     });
   }
+  openReviewsListModal() {
+    this.isReviewsListModalOpen = true;
+  }
 
+  closeReviewsListModal() {
+    this.isReviewsListModalOpen = false;
+  }
   /**
    * Carga la reseña del usuario actual para esta actividad
    */
   private loadUserReview(): void {
     const user = this.authService.currentUser;
     if (!user || !this.activity) {
-      console.log('❌ No se puede cargar reseña - Usuario o actividad no disponible');
+      console.log(
+        '❌ No se puede cargar reseña - Usuario o actividad no disponible'
+      );
       return;
     }
 
     // Buscar en las reseñas de la actividad si existe una del usuario actual
     const reviews = this.activity.reviews || [];
-    console.log('🔍 Buscando reseña del usuario', user.uid, 'en', reviews.length, 'reseñas');
+    console.log(
+      '🔍 Buscando reseña del usuario',
+      user.uid,
+      'en',
+      reviews.length,
+      'reseñas'
+    );
     console.log('📋 Reviews array completo:', JSON.stringify(reviews, null, 2));
-    
-    const userReview = reviews.find((review: Review) => review.userId === user.uid);
-    
+
+    const userReview = reviews.find(
+      (review: Review) => review.userId === user.uid
+    );
+
     if (userReview) {
       this.userReview = {
         id: userReview.id,
         rating: userReview.rating || 0,
         comment: userReview.comment || '',
-        userId: userReview.userId
+        userId: userReview.userId,
       };
       console.log('✅ Reseña del usuario encontrada:', this.userReview);
     } else {
@@ -119,16 +153,16 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
    */
   private initMap(): void {
     if (!this.activity || this.mapInitialized) return;
-    
+
     const lat = parseFloat(this.activity.latitude);
     const lon = parseFloat(this.activity.longitude);
-    
+
     // Validar coordenadas
     if (isNaN(lat) || isNaN(lon)) {
       console.warn('Coordenadas inválidas para el mapa');
       return;
     }
-    
+
     // Esperar a que el div del mapa exista en el DOM
     setTimeout(() => {
       const mapElement = document.getElementById('activity-map');
@@ -136,7 +170,7 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
         console.warn('Elemento del mapa no encontrado');
         return;
       }
-      
+
       // Crear el mapa de Leaflet
       this.map = L.map('activity-map', {
         center: [lat, lon],
@@ -145,45 +179,49 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
         dragging: true,
         touchZoom: true,
         doubleClickZoom: true,
-        scrollWheelZoom: true
+        scrollWheelZoom: true,
       });
-      
+
       // Agregar capa de tiles de OpenStreetMap
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors',
-        maxZoom: 19
+        maxZoom: 19,
       }).addTo(this.map);
-      
+
       // Crear icono rojo personalizado para el marcador
       const redIcon = L.icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconUrl:
+          'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+        shadowUrl:
+          'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
         iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
-        shadowSize: [41, 41]
+        shadowSize: [41, 41],
       });
-      
+
       // Agregar marcador en la ubicación
       this.marker = L.marker([lat, lon], { icon: redIcon }).addTo(this.map);
-      
+
       // Agregar popup al marcador con información
-      const popupContent = `<b>${this.activity?.name || 'Actividad'}</b><br>${this.location || 'Ubicación'}`;
+      const popupContent = `<b>${this.activity?.name || 'Actividad'}</b><br>${
+        this.location || 'Ubicación'
+      }`;
       this.marker.bindPopup(popupContent).openPopup();
-      
+
       // Hacer el mapa clickeable para abrir Google Maps
       this.map.on('click', () => {
         window.open(`https://www.google.com/maps?q=${lat},${lon}`, '_blank');
       });
-      
+
       // También hacer clickeable el marcador
       this.marker.on('click', () => {
         window.open(`https://www.google.com/maps?q=${lat},${lon}`, '_blank');
       });
-      
+
       this.mapInitialized = true;
       this.cdr.detectChanges();
-      
+
       // Ajustar el tamaño del mapa después de cargar
       setTimeout(() => {
         this.map?.invalidateSize();
@@ -195,48 +233,22 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
     this.router.navigate(['/activitiesList']);
   }
 
-  getFormattedDate(): string {
-    if (!this.activity) return '';
-    
-    const createdAt = (this.activity as any).createdAt;
-    
-    // Si no hay fecha, usar la fecha actual
-    if (!createdAt) {
-      return new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-    }
-    
-    // Intentar parsear la fecha
-    let date: Date;
-    
-    // Si es un número (timestamp)
-    if (typeof createdAt === 'number') {
-      date = new Date(createdAt);
-    } 
-    // Si es un string
-    else if (typeof createdAt === 'string') {
-      date = new Date(createdAt);
-    } 
-    // Si ya es un objeto Date
-    else if (createdAt instanceof Date) {
-      date = createdAt;
-    } 
-    else {
-      // Si no se puede parsear, usar fecha actual
-      return new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-    }
-    
-    // Verificar si la fecha es válida
-    if (isNaN(date.getTime())) {
-      return new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-    }
-    
-    return date.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  getFormattedDate(firebaseTimestamp: any): string {
+    // Convierte el Timestamp de Firebase a un objeto Date de JavaScript.
+    // Esto puede causar una pérdida de precisión a milisegundos.
+    const date = firebaseTimestamp.toDate();
+
+    // Obtiene el día, mes y año.
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses son base 0 en JavaScript
+    const year = date.getFullYear();
+
+    // Retorna la fecha formateada.
+    return `${day}/${month}/${year}`;
   }
-
-
   /**
    * Verifica si hay coordenadas válidas para mostrar el mapa.
-   * 
+   *
    * @returns true si hay coordenadas válidas, false en caso contrario
    */
   hasValidCoordinates(): boolean {
@@ -248,29 +260,32 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
 
   openGoogleMaps() {
     if (!this.activity) return;
-    window.open(`https://www.google.com/maps?q=${this.activity.latitude},${this.activity.longitude}`, '_blank');
+    window.open(
+      `https://www.google.com/maps?q=${this.activity.latitude},${this.activity.longitude}`,
+      '_blank'
+    );
   }
 
   /**
    * Obtiene el estado de cada estrella según la puntuación.
-   * 
+   *
    * @param index - Índice de la estrella (0-4, correspondiente a estrellas 1-5)
    * @returns 'full' si la estrella está completamente llena, 'half' si está a la mitad, 'empty' si está vacía
    */
   getStarState(index: number): 'full' | 'half' | 'empty' {
     if (!this.activity) return 'empty';
-    
+
     const rating = this.activity.rating;
     const starValue = index + 1; // 1, 2, 3, 4, 5
-    
+
     // Si la puntuación es mayor o igual al valor de la estrella, está llena
     if (rating >= starValue) {
       return 'full';
-    } 
+    }
     // Si la puntuación es mayor o igual a (valor - 0.5), está a la mitad
     else if (rating >= starValue - 0.5) {
       return 'half';
-    } 
+    }
     // Si no, está vacía
     else {
       return 'empty';
@@ -279,7 +294,7 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
 
   /**
    * Crea un array con los índices de las 5 estrellas.
-   * 
+   *
    * @returns Array [0, 1, 2, 3, 4] para iterar sobre las 5 estrellas
    */
   getStarsArray(): number[] {
@@ -305,16 +320,16 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
       const user = this.authService.currentUser;
       if (!user) throw new Error('No autenticado');
 
-      user.getIdToken().then(token => {
+      user.getIdToken().then((token) => {
         const isUpdate = !!review.id; // Si tiene id, es una actualización
-        
+
         const ratingData = {
           rating: review.rating,
           comment: review.comment,
           userId: user.uid,
           id: review.id,
           isUpdate: isUpdate,
-          previousRating: isUpdate ? this.userReview?.rating : undefined
+          previousRating: isUpdate ? this.userReview?.rating : undefined,
         };
 
         console.log('📤 Enviando reseña:', {
@@ -322,36 +337,41 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
           newRating: review.rating,
           previousRating: this.userReview?.rating,
           userId: user.uid,
-          activityId: this.activity!.id
+          activityId: this.activity!.id,
         });
 
-        this.activityService.rateActivity(this.activity!.id, ratingData, token).subscribe({
-          next: (res) => {
-            console.log('✅ Reseña guardada con éxito:', res);
-            
-            // Actualizar la actividad completa con los datos del backend
-            if (res && res.activity) {
-              // El backend devuelve el objeto activity completo dentro de res.activity
-              this.activity = {
-                ...this.activity!,
-                rating: res.activity.rating,
-                numRatings: res.activity.numRatings,
-                reviews: res.activity.reviews || []
-              };
-              
-              console.log('🔄 Actividad actualizada con reviews:', this.activity.reviews);
-              
-              // Recargar la reseña del usuario desde el array actualizado
-              this.loadUserReview();
-            }
-            
-            // Forzar detección de cambios
-            this.cdr.detectChanges();
-          },
-          error: (err) => {
-            console.error('❌ Error al guardar la reseña:', err);
-          }
-        });
+        this.activityService
+          .rateActivity(this.activity!.id, ratingData, token)
+          .subscribe({
+            next: (res) => {
+              console.log('✅ Reseña guardada con éxito:', res);
+
+              // Actualizar la actividad completa con los datos del backend
+              if (res && res.activity) {
+                // El backend devuelve el objeto activity completo dentro de res.activity
+                this.activity = {
+                  ...this.activity!,
+                  rating: res.activity.rating,
+                  numRatings: res.activity.numRatings,
+                  reviews: res.activity.reviews || [],
+                };
+
+                console.log(
+                  '🔄 Actividad actualizada con reviews:',
+                  this.activity.reviews
+                );
+
+                // Recargar la reseña del usuario desde el array actualizado
+                this.loadUserReview();
+              }
+
+              // Forzar detección de cambios
+              this.cdr.detectChanges();
+            },
+            error: (err) => {
+              console.error('❌ Error al guardar la reseña:', err);
+            },
+          });
       });
     } catch (err: any) {
       console.error('Error de autenticación:', err);

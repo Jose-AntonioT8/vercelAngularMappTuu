@@ -4,6 +4,8 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
+import { ReviewModalComponent } from '../../../common/modals/review-modal/review-modal.component';
+import { ReviewsListModalComponent } from '../../../common/modals/reviews-list-modal/reviews-list-modal'; // Ajusta ruta
 import { Activity, Review } from '../../../common/models/activity.model';
 import { Plan } from '../../../common/models/plan.model';
 import { OptionsPlansComponent } from '../../../common/options/options-plans/options-plans.component';
@@ -11,7 +13,6 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { PlanService } from '../../../core/services/plan.service';
-import { ReviewModalComponent } from '../../activities/activity-detail/review-modal/review-modal.component';
 
 @Component({
   selector: 'app-plans',
@@ -23,6 +24,7 @@ import { ReviewModalComponent } from '../../activities/activity-detail/review-mo
     TranslatePipe,
     LanguageSelectorComponent,
     ReviewModalComponent,
+    ReviewsListModalComponent,
   ],
   templateUrl: './plans.component.html',
   styleUrl: './plans.component.scss',
@@ -34,7 +36,7 @@ export class PlansComponent implements OnInit {
   isReviewModalOpen = false;
   userReview: Review | null = null;
   private cdr = inject(ChangeDetectorRef);
-
+  isReviewsListModalOpen = false;
   private activityService = inject(ActivityService);
   private planService = inject(PlanService);
   private route = inject(ActivatedRoute);
@@ -79,62 +81,29 @@ export class PlansComponent implements OnInit {
       },
     });
   }
+  openReviewsListModal() {
+    this.isReviewsListModalOpen = true;
+  }
 
+  closeReviewsListModal() {
+    this.isReviewsListModalOpen = false;
+  }
   goBack() {
     this.router.navigate(['/plansList']);
   }
 
-  getFormattedDate(): string {
-    if (!this.plan) return '';
+  getFormattedDate(firebaseTimestamp: any): string {
+    // Convierte el Timestamp de Firebase a un objeto Date de JavaScript.
+    // Esto puede causar una pérdida de precisión a milisegundos.
+    const date = firebaseTimestamp.toDate();
 
-    const createdAt = (this.plan as any).createdAt;
+    // Obtiene el día, mes y año.
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses son base 0 en JavaScript
+    const year = date.getFullYear();
 
-    // Si no hay fecha, usar la fecha actual
-    if (!createdAt) {
-      return new Date().toLocaleDateString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-      });
-    }
-
-    // Intentar parsear la fecha
-    let date: Date;
-
-    // Si es un número (timestamp)
-    if (typeof createdAt === 'number') {
-      date = new Date(createdAt);
-    }
-    // Si es un string
-    else if (typeof createdAt === 'string') {
-      date = new Date(createdAt);
-    }
-    // Si ya es un objeto Date
-    else if (createdAt instanceof Date) {
-      date = createdAt;
-    } else {
-      // Si no se puede parsear, usar fecha actual
-      return new Date().toLocaleDateString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-      });
-    }
-
-    // Verificar si la fecha es válida
-    if (isNaN(date.getTime())) {
-      return new Date().toLocaleDateString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-      });
-    }
-
-    return date.toLocaleDateString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    });
+    // Retorna la fecha formateada.
+    return `${day}/${month}/${year}`;
   }
 
   /**
