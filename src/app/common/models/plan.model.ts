@@ -6,6 +6,14 @@ export interface Plan {
   ownerId: string;
   rating: number;
   visibility: boolean;
-  description: string,
+  description: string;
+  numRatings: number;
+  reviews?: Review[];
 }
 
+export interface Review {
+  id?: string;
+  userId: string;
+  rating: number;
+  comment: string;
+}

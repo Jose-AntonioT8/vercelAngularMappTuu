@@ -1,30 +1,45 @@
-import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Plan } from '../../../common/models/plan.model';
-import { CommonModule } from '@angular/common';
-import { PlanService } from '../../../core/services/plan.service';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { OptionsPlansComponent } from '../../../common/options/options-plans/options-plans.component';
-import { ActivityService } from '../../../core/services/activity.service';
-import { Activity } from '../../../common/models/activity.model';
-import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
+import { Activity, Review } from '../../../common/models/activity.model';
+import { Plan } from '../../../common/models/plan.model';
+import { OptionsPlansComponent } from '../../../common/options/options-plans/options-plans.component';
+import { TranslatePipe } from '../../../core/pipes/translate.pipe';
+import { ActivityService } from '../../../core/services/activity.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { PlanService } from '../../../core/services/plan.service';
+import { ReviewModalComponent } from '../../activities/activity-detail/review-modal/review-modal.component';
+
 @Component({
   selector: 'app-plans',
   standalone: true,
-  imports: [CommonModule, RouterModule, OptionsPlansComponent, TranslatePipe, LanguageSelectorComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    OptionsPlansComponent,
+    TranslatePipe,
+    LanguageSelectorComponent,
+    ReviewModalComponent,
+  ],
   templateUrl: './plans.component.html',
-  styleUrl: './plans.component.scss'
+  styleUrl: './plans.component.scss',
 })
-export class PlansComponent {
+export class PlansComponent implements OnInit {
   plan?: Plan;
   planDescription?: string;
   activities: Activity[] = [];
+  isReviewModalOpen = false;
+  userReview: Review | null = null;
+  private cdr = inject(ChangeDetectorRef);
+
   private activityService = inject(ActivityService);
   private planService = inject(PlanService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  public authService = inject(AuthService);
 
   ngOnInit() {
     const idUrl = this.route.snapshot.paramMap.get('id');
@@ -37,9 +52,9 @@ export class PlansComponent {
         if (ids.length > 0) {
           this.activities = []; // limpiar antes
           forkJoin(
-            ids.map(id =>
+            ids.map((id) =>
               this.activityService.getActivityId(id).pipe(
-                catchError(err => {
+                catchError((err) => {
                   console.warn(`Actividad ${id} no encontrada`, err);
                   return of(null);
                 })
@@ -47,17 +62,21 @@ export class PlansComponent {
             )
           ).subscribe({
             next: (results) => {
-              this.activities = (results.filter(r => r !== null) as Activity[]);
+              this.activities = results.filter((r) => r !== null) as Activity[];
             },
             error: (err) => {
               console.error('Error cargando actividades del plan', err);
-            }
+            },
           });
+        }
+
+        if (this.plan) {
+          this.loadUserReview();
         }
       },
       error: (err) => {
         console.error('Error cargando plan', err);
-      }
+      },
     });
   }
 
@@ -67,65 +86,77 @@ export class PlansComponent {
 
   getFormattedDate(): string {
     if (!this.plan) return '';
-    
+
     const createdAt = (this.plan as any).createdAt;
-    
+
     // Si no hay fecha, usar la fecha actual
     if (!createdAt) {
-      return new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      return new Date().toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      });
     }
-    
+
     // Intentar parsear la fecha
     let date: Date;
-    
+
     // Si es un número (timestamp)
     if (typeof createdAt === 'number') {
       date = new Date(createdAt);
-    } 
+    }
     // Si es un string
     else if (typeof createdAt === 'string') {
       date = new Date(createdAt);
-    } 
+    }
     // Si ya es un objeto Date
     else if (createdAt instanceof Date) {
       date = createdAt;
-    } 
-    else {
+    } else {
       // Si no se puede parsear, usar fecha actual
-      return new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      return new Date().toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      });
     }
-    
+
     // Verificar si la fecha es válida
     if (isNaN(date.getTime())) {
-      return new Date().toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      return new Date().toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      });
     }
-    
-    return date.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+    return date.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
   }
-
-
-
 
   /**
    * Obtiene el estado de cada estrella según la puntuación.
-   * 
+   *
    * @param index - Índice de la estrella (0-4, correspondiente a estrellas 1-5)
    * @returns 'full' si la estrella está completamente llena, 'half' si está a la mitad, 'empty' si está vacía
    */
   getStarState(index: number): 'full' | 'half' | 'empty' {
     if (!this.plan) return 'empty';
-    
+
     const rating = this.plan.rating;
     const starValue = index + 1; // 1, 2, 3, 4, 5
-    
+
     // Si la puntuación es mayor o igual al valor de la estrella, está llena
     if (rating >= starValue) {
       return 'full';
-    } 
+    }
     // Si la puntuación es mayor o igual a (valor - 0.5), está a la mitad
     else if (rating >= starValue - 0.5) {
       return 'half';
-    } 
+    }
     // Si no, está vacía
     else {
       return 'empty';
@@ -134,10 +165,118 @@ export class PlansComponent {
 
   /**
    * Crea un array con los índices de las 5 estrellas.
-   * 
+   *
    * @returns Array [0, 1, 2, 3, 4] para iterar sobre las 5 estrellas
    */
   getStarsArray(): number[] {
     return [0, 1, 2, 3, 4];
+  }
+
+  /**
+   * Carga la reseña del usuario actual para este plan
+   */
+  private loadUserReview(): void {
+    const user = this.authService.currentUser;
+    if (!user || !this.plan) {
+      console.log(
+        '❌ No se puede cargar reseña - Usuario o plan no disponible'
+      );
+      return;
+    }
+
+    // Buscar en las reseñas del plan si existe una del usuario actual
+    const reviews = this.plan.reviews || [];
+    console.log(
+      '🔍 Buscando reseña del usuario',
+      user.uid,
+      'en',
+      reviews.length,
+      'reseñas'
+    );
+
+    const userReview = reviews.find(
+      (review: Review) => review.userId === user.uid
+    );
+
+    if (userReview) {
+      this.userReview = {
+        id: userReview.id,
+        rating: userReview.rating || 0,
+        comment: userReview.comment || '',
+        userId: userReview.userId,
+      };
+      console.log('✅ Reseña del usuario encontrada:', this.userReview);
+    } else {
+      this.userReview = null;
+      console.log('ℹ️ El usuario no tiene reseña para este plan');
+    }
+  }
+
+  openReviewModal() {
+    this.isReviewModalOpen = true;
+  }
+
+  closeReviewModal() {
+    this.isReviewModalOpen = false;
+  }
+
+  handleReviewSubmit(review: Review) {
+    if (!this.plan) return;
+
+    try {
+      const user = this.authService.currentUser;
+      if (!user) throw new Error('No autenticado');
+
+      user.getIdToken().then((token) => {
+        const isUpdate = !!review.id;
+
+        const ratingData = {
+          rating: review.rating,
+          comment: review.comment,
+          userId: user.uid,
+          id: review.id,
+          isUpdate: isUpdate,
+          previousRating: isUpdate ? this.userReview?.rating : undefined,
+        };
+
+        console.log('📤 Enviando reseña:', {
+          isUpdate,
+          newRating: review.rating,
+          previousRating: this.userReview?.rating,
+          userId: user.uid,
+          planId: this.plan!.id,
+        });
+
+        this.planService.ratePlan(this.plan!.id, ratingData, token).subscribe({
+          next: (res) => {
+            console.log('✅ Reseña guardada con éxito:', res);
+
+            // Actualizar el plan completo con los datos del backend
+            if (res && res.plan) {
+              this.plan = {
+                ...this.plan!,
+                rating: res.plan.rating,
+                numRatings: res.plan.numRatings,
+                reviews: res.plan.reviews,
+              };
+
+              console.log(
+                '🔄 Plan actualizado con reviews:',
+                this.plan.reviews
+              );
+
+              // Recargar la reseña del usuario desde el array actualizado
+              this.loadUserReview();
+            }
+            this.cdr.detectChanges();
+          },
+          error: (err) => {
+            console.error('❌ Error al guardar la reseña:', err);
+          },
+        });
+      });
+    } catch (err: any) {
+      console.error('Error de autenticación:', err);
+    }
   }
 }
