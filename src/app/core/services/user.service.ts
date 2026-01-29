@@ -31,6 +31,7 @@ export class UserService {
     token: string
   ): Observable<any> {
     const body = { createdActivities: [activityId] }; // Envolver el ID en un array con la clave correcta
+    console.log(body);
     return this.http.patch(`${this.url}/${id}/createdActivities`, body, {
       headers: { Authorization: `Bearer ${token}` },
     });
