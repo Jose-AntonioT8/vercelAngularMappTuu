@@ -1,17 +1,23 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../core/services/auth.service';
+import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { matchPasswordValidator } from '../../../core/validators/match-password.validator';
-import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
+import { TranslatePipe } from '../../../core/pipes/translate.pipe';
+import { AuthService } from '../../../core/services/auth.service';
 import { TranslationService } from '../../../core/services/translation.service';
-
+import { UserService } from '../../../core/services/user.service';
+import { matchPasswordValidator } from '../../../core/validators/match-password.validator';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe, LanguageSelectorComponent, RouterLink],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TranslatePipe,
+    LanguageSelectorComponent,
+    RouterLink,
+  ],
   templateUrl: './sign-up.component.html',
 })
 export class SignupComponent {
@@ -26,41 +32,50 @@ export class SignupComponent {
     private formSvc: FormBuilder,
     private auth: AuthService,
     private route: Router,
-    private translation: TranslationService
+    private translation: TranslationService,
+    private userService: UserService
   ) {
-    this.formSignup = this.formSvc.group({
-      email: ['', [Validators.required, Validators.email]],
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/)
-      ]],
-      repeatpassword: ['', [Validators.required]],
-      acceptTerms: [false, [Validators.requiredTrue]],
-      newsletter: [false]
-    }, {
-      validators: matchPasswordValidator('password', 'repeatpassword')
-    });
+    this.formSignup = this.formSvc.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        name: ['', [Validators.required, Validators.minLength(3)]],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.pattern(
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/
+            ),
+          ],
+        ],
+        repeatpassword: ['', [Validators.required]],
+        acceptTerms: [false, [Validators.requiredTrue]],
+        newsletter: [false],
+      },
+      {
+        validators: matchPasswordValidator('password', 'repeatpassword'),
+      }
+    );
   }
 
   get passwordStrength(): 'weak' | 'medium' | 'strong' {
     const password = this.formSignup.controls.password.value || '';
-    
+
     if (password.length < 6) return 'weak';
-    
+
     let score = 0;
-    
+
     // Length check
     if (password.length >= 8) score++;
     if (password.length >= 12) score++;
-    
+
     // Character variety
     if (/[a-z]/.test(password)) score++;
     if (/[A-Z]/.test(password)) score++;
     if (/[0-9]/.test(password)) score++;
     if (/[\W_]/.test(password)) score++;
-    
+
     if (score <= 3) return 'weak';
     if (score <= 5) return 'medium';
     return 'strong';
@@ -149,7 +164,7 @@ export class SignupComponent {
 
   async onSignup(): Promise<void> {
     if (this.formSignup.invalid || this.isLoading) return;
-    
+
     this.error = '';
     this.success = '';
     this.isLoading = true;
@@ -159,17 +174,23 @@ export class SignupComponent {
         this.formSignup.controls.email.value!,
         this.formSignup.controls.password.value!
       );
-      
+
       this.success = this.translation.instant('auth.signup.signupSuccess');
-      
+
+      this.userService.createUser({
+        id: this.auth.currentUser?.uid,
+        email: this.formSignup.controls.email.value!,
+        name: this.formSignup.controls.name.value!,
+        createdAt: new Date(),
+      });
+
       // Delay navigation for success animation
       setTimeout(() => {
         this.route.navigate(['/landingPage']);
       }, 1500);
-      
     } catch (err: any) {
       this.isLoading = false;
-      
+
       switch (err.code) {
         case 'auth/email-already-in-use':
           this.error = this.translation.instant('auth.signup.emailInUse');
