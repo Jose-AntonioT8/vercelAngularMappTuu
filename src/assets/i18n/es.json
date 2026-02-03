@@ -294,6 +294,7 @@
     "clear": "Limpiar"
   },
   "plans": {
+    "review": "Escribir reseña",
     "viewReviews": "Ver reseñas",
     "title": "Planes",
     "searchPlaceholder": "Buscar Planes, actividades...",

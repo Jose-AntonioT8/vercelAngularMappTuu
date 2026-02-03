@@ -13,7 +13,7 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { PlanService } from '../../../core/services/plan.service';
-
+import { UserService } from '../../../core/services/user.service';
 @Component({
   selector: 'app-plans',
   standalone: true,
@@ -30,6 +30,8 @@ import { PlanService } from '../../../core/services/plan.service';
   styleUrl: './plans.component.scss',
 })
 export class PlansComponent implements OnInit {
+  constructor(private userService: UserService, private auth: AuthService) {}
+
   plan?: Plan;
   planDescription?: string;
   activities: Activity[] = [];
@@ -90,6 +92,14 @@ export class PlansComponent implements OnInit {
   }
   goBack() {
     this.router.navigate(['/plansList']);
+  }
+  async savePlan() {
+    const user = this.auth.currentUser;
+    const token = await user!.getIdToken();
+    console.log(this.plan!.id);
+    console.log(token);
+    console.log(user!.uid);
+    this.userService.savePlan(user!.uid, this.plan!.id, token).subscribe();
   }
 
   getFormattedDate(firebaseTimestamp: any): string {

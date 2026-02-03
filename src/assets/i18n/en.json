@@ -297,6 +297,7 @@
     "clear": "Clear"
   },
   "plans": {
+    "review": "Writte review",
     "viewReviews": "View reviews",
     "title": "Plans",
     "searchPlaceholder": "Search Plans, activities...",

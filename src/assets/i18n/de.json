@@ -297,6 +297,7 @@
     "clear": "Zurücksetzen"
   },
   "plans": {
+    "review": "Rezension schreiben",
     "viewReviews": "Bewertungen anzeigen",
     "title": "Pläne",
     "searchPlaceholder": "Pläne, Aktivitäten suchen...",
