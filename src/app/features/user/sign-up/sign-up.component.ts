@@ -177,12 +177,31 @@ export class SignupComponent {
 
       this.success = this.translation.instant('auth.signup.signupSuccess');
 
-      this.userService.createUser({
-        id: this.auth.currentUser?.uid,
-        email: this.formSignup.controls.email.value!,
-        name: this.formSignup.controls.name.value!,
-        createdAt: new Date(),
-      });
+      const token = await this.auth.currentUser!.getIdToken();
+      console.log(token);
+
+      this.userService
+        .createUser(
+          {
+            id: this.auth.currentUser?.uid,
+            email: this.formSignup.controls.email.value!,
+            name: this.formSignup.controls.name.value!,
+            createdAt: new Date(),
+          },
+          token
+        )
+        .subscribe({
+          next: (res) => {
+            this.success = 'Plan creado con éxito';
+            setTimeout(() => {
+              this.route.navigate(['/plansList']);
+            }, 1000);
+          },
+          error: (err) => {
+            console.error('create error', err);
+            this.error = 'Error al crear el plan.';
+          },
+        });
 
       // Delay navigation for success animation
       setTimeout(() => {

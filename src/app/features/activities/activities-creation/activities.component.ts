@@ -199,12 +199,8 @@ export class ActivitiesCreationComponent {
       this.activityService.createActivity(activityData, token).subscribe({
         next: (res) => {
           console.log(res.id);
-          console.log(this.auth.currentUser!.uid);
-          this.userServicce.createActivity(
-            this.auth.currentUser!.uid,
-            res.id,
-            token
-          );
+          console.log(user.uid);
+          this.userServicce.createActivity(user.uid, res.id, token);
           this.success = 'Actividad creada con éxito';
           setTimeout(() => {
             this.route.navigate(['/activitiesList']);

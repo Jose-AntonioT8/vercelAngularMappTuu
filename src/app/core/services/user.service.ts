@@ -9,20 +9,28 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  createUser(userData: any): Observable<any> {
-    return this.http.post(this.url, userData);
+  createUser(userData: any, token: any): Observable<any> {
+    return this.http.post(this.url, userData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   }
 
-  getUsers(): Observable<any> {
-    return this.http.get(this.url);
+  getUsers(token: any): Observable<any> {
+    return this.http.get(this.url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   }
 
-  updateUser(id: string, userData: any): Observable<any> {
-    return this.http.patch(`${this.url}/${id}`, userData);
+  updateUser(id: string, userData: any, token: any): Observable<any> {
+    return this.http.patch(`${this.url}/${id}`, userData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   }
 
-  deleteUser(id: string): Observable<any> {
-    return this.http.delete(`${this.url}/${id}`);
+  deleteUser(id: string, token: any): Observable<any> {
+    return this.http.delete(`${this.url}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   }
 
   createActivity(

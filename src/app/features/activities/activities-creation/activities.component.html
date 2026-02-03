@@ -1,190 +1,375 @@
-<header class="bg-brand-primary px-4 flex justify-between items-center h-16 sticky top-0 z-50 shadow-md">
-  
+<header
+  class="bg-brand-primary px-4 flex justify-between items-center h-16 sticky top-0 z-50 shadow-md"
+>
   <div class="flex items-center gap-4">
-    <a routerLink="/dashboard" aria-label="Volver atrás" class="text-white hover:text-gray-200 transition-colors">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-8 h-8">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h17.5"/>
+    <a
+      routerLink="/activitiesList"
+      aria-label="Volver atrás"
+      class="text-white hover:text-gray-200 transition-colors"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2.5"
+        stroke="currentColor"
+        class="w-8 h-8"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h17.5"
+        />
       </svg>
     </a>
-    <div class="text-white font-semibold text-lg">{{ 'activities.createTitle' | translate }}</div>
+    <div class="text-white font-semibold text-lg">
+      {{ "activities.createTitle" | translate }}
+    </div>
   </div>
 
   <div class="relative z-50">
     <app-language-selector></app-language-selector>
   </div>
-
 </header>
 
-<main class="flex-grow flex justify-center items-start pt-10 px-4 pb-10 min-h-screen bg-gradient-to-br from-slate-200 via-slate-300/50 to-brand-muted/30">
-  
-  <div class="bg-white w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden border border-slate-300 ring-1 ring-black/10">
-    
-    <form [formGroup]="formActivityCreation" (submit)="onCreate()" class="flex flex-col">
-      
+<main
+  class="flex-grow flex justify-center items-start pt-10 px-4 pb-10 min-h-screen bg-gradient-to-br from-slate-200 via-slate-300/50 to-brand-muted/30"
+>
+  <div
+    class="bg-white w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden border border-slate-300 ring-1 ring-black/10"
+  >
+    <form
+      [formGroup]="formActivityCreation"
+      (submit)="onCreate()"
+      class="flex flex-col"
+    >
       <div class="grid grid-cols-1 lg:grid-cols-5 h-full">
-        
-        <div class="lg:col-span-2 relative min-h-[350px] lg:min-h-full group overflow-hidden bg-slate-100 p-4 lg:p-5">
-          <div (click)="triggerFileInput()" 
-               class="w-full h-full rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 bg-white cursor-pointer relative">
-            <img [src]="currentImage || 'https://via.placeholder.com/600x800?text=No+Image'" 
-                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                 alt="Activity Preview"
-                 onerror="this.src='https://via.placeholder.com/600x800?text=Invalid+URL'">
-            
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-              <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+        <div
+          class="lg:col-span-2 relative min-h-[350px] lg:min-h-full group overflow-hidden bg-slate-100 p-4 lg:p-5"
+        >
+          <div
+            (click)="triggerFileInput()"
+            class="w-full h-full rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 bg-white cursor-pointer relative"
+          >
+            <img
+              [src]="
+                currentImage ||
+                'https://via.placeholder.com/600x800?text=No+Image'
+              "
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              alt="Activity Preview"
+              onerror="this.src='https://via.placeholder.com/600x800?text=Invalid+URL'"
+            />
+
+            <div
+              class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center"
+            >
+              <div
+                class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-12 w-12 mx-auto mb-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
                 </svg>
-                <p class="text-sm font-medium">{{ 'activities.uploadImage' | translate }}</p>
-              </div>
-            </div>
-          </div>
-          
-          <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" class="hidden">
-          
-          @if(isUploading) {
-            <div class="absolute bottom-6 left-6 right-6 lg:bottom-7 lg:left-7 lg:right-7 z-10">
-              <div class="bg-white/90 backdrop-blur-md p-3 rounded-2xl border border-white/40 shadow-lg">
-                <p class="text-xs text-blue-600 flex items-center justify-center gap-2">
-                  <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  {{ 'messages.loading' | translate }}...
+                <p class="text-sm font-medium">
+                  {{ "activities.uploadImage" | translate }}
                 </p>
               </div>
             </div>
+          </div>
+
+          <input
+            #fileInput
+            type="file"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+            class="hidden"
+          />
+
+          @if(isUploading) {
+          <div
+            class="absolute bottom-6 left-6 right-6 lg:bottom-7 lg:left-7 lg:right-7 z-10"
+          >
+            <div
+              class="bg-white/90 backdrop-blur-md p-3 rounded-2xl border border-white/40 shadow-lg"
+            >
+              <p
+                class="text-xs text-blue-600 flex items-center justify-center gap-2"
+              >
+                <svg
+                  class="animate-spin h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"
+                  ></circle>
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+                {{ "messages.loading" | translate }}...
+              </p>
+            </div>
+          </div>
           }
         </div>
 
         <div class="lg:col-span-3 p-6 md:p-10 flex flex-col gap-8">
-          
           <div class="relative group">
-            <label class="absolute -top-2.5 left-3 bg-white px-2 text-xs font-bold uppercase tracking-wider" style="color: #5675AC;">{{ 'activities.activityName' | translate }}</label>
-            <input type="text" formControlName="name" 
-                   class="w-full bg-white border-2 border-slate-100 rounded-xl px-4 py-4 text-xl font-bold text-slate-800 placeholder-slate-300 focus:outline-none focus:ring-4 transition-all"
-                   style="border-color: transparent; outline: none;" 
-                   [style.borderColor]="'#e2e8f0'"
-                   onfocus="this.style.borderColor='#5675AC'; this.style.boxShadow='0 0 0 4px rgba(86, 117, 172, 0.1)'"
-                   onblur="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none'"
-                   [placeholder]="'activities.activityNamePlaceholder' | translate">
+            <label
+              class="absolute -top-2.5 left-3 bg-white px-2 text-xs font-bold uppercase tracking-wider"
+              style="color: #5675ac"
+              >{{ "activities.activityName" | translate }}</label
+            >
+            <input
+              type="text"
+              formControlName="name"
+              class="w-full bg-white border-2 border-slate-100 rounded-xl px-4 py-4 text-xl font-bold text-slate-800 placeholder-slate-300 focus:outline-none focus:ring-4 transition-all"
+              style="border-color: transparent; outline: none"
+              [style.borderColor]="'#e2e8f0'"
+              onfocus="this.style.borderColor='#5675AC'; this.style.boxShadow='0 0 0 4px rgba(86, 117, 172, 0.1)'"
+              onblur="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none'"
+              [placeholder]="'activities.activityNamePlaceholder' | translate"
+            />
           </div>
 
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-bold text-brand-primary uppercase tracking-wider mb-2 ml-1">{{ 'activities.category' | translate }}</label>
+              <label
+                class="block text-xs font-bold text-brand-primary uppercase tracking-wider mb-2 ml-1"
+                >{{ "activities.category" | translate }}</label
+              >
               <div class="relative">
-                <select formControlName="activityType" 
-                        class="appearance-none w-full bg-slate-50 border border-slate-200 text-slate-700 font-medium rounded-xl px-4 py-3 pr-10 focus:outline-none focus:bg-white transition-colors cursor-pointer"
-                        onfocus="this.style.borderColor='#5675AC'"
-                        onblur="this.style.borderColor='#e2e8f0'">
-                    <option *ngFor="let name of activityTypesName" [value]="name">{{ name }}</option>
+                <select
+                  formControlName="activityType"
+                  class="appearance-none w-full bg-slate-50 border border-slate-200 text-slate-700 font-medium rounded-xl px-4 py-3 pr-10 focus:outline-none focus:bg-white transition-colors cursor-pointer"
+                  onfocus="this.style.borderColor='#5675AC'"
+                  onblur="this.style.borderColor='#e2e8f0'"
+                >
+                  <option *ngFor="let name of activityTypesName" [value]="name">
+                    {{ name }}
+                  </option>
                 </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                    <path fill-rule="evenodd" d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z" clip-rule="evenodd" />
+                <div
+                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    class="w-5 h-5"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                      clip-rule="evenodd"
+                    />
                   </svg>
                 </div>
               </div>
             </div>
 
             <div>
-              <label class="block text-xs font-bold text-brand-primary uppercase tracking-wider mb-2 ml-1">{{ 'activities.price' | translate }}</label>
+              <label
+                class="block text-xs font-bold text-brand-primary uppercase tracking-wider mb-2 ml-1"
+                >{{ "activities.price" | translate }}</label
+              >
               <div class="relative">
-                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">€</span>
-                <input type="number" formControlName="price" 
-                       class="w-full bg-slate-50 border border-slate-200 text-slate-700 font-medium rounded-xl pl-8 pr-4 py-3 focus:outline-none focus:bg-white transition-colors"
-                       onfocus="this.style.borderColor='#5675AC'"
-                       onblur="this.style.borderColor='#e2e8f0'"
-                       [placeholder]="'activities.pricePlaceholder' | translate"
-                       min="0"
-                       step="0.01">
+                <span
+                  class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium"
+                  >€</span
+                >
+                <input
+                  type="number"
+                  formControlName="price"
+                  class="w-full bg-slate-50 border border-slate-200 text-slate-700 font-medium rounded-xl pl-8 pr-4 py-3 focus:outline-none focus:bg-white transition-colors"
+                  onfocus="this.style.borderColor='#5675AC'"
+                  onblur="this.style.borderColor='#e2e8f0'"
+                  [placeholder]="'activities.pricePlaceholder' | translate"
+                  min="0"
+                  step="0.01"
+                />
               </div>
             </div>
           </div>
 
           <div class="bg-slate-50 rounded-2xl p-1 border border-slate-100">
             <div class="p-3 pb-0 flex items-center gap-2 mb-3">
-               <div class="p-1.5 rounded-lg text-white" style="background-color: #5675AC;">
-                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                   <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                 </svg>
-               </div>
-               <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">{{ 'activities.location' | translate }}</span>
+              <div
+                class="p-1.5 rounded-lg text-white"
+                style="background-color: #5675ac"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </div>
+              <span
+                class="text-xs font-bold text-brand-primary uppercase tracking-wider"
+                >{{ "activities.location" | translate }}</span
+              >
             </div>
 
             <div class="grid grid-cols-2 gap-4 px-3 mb-3">
-                <div>
-                    <input type="text" formControlName="latitude" [placeholder]="'activities.latitude' | translate" 
-                           class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono text-slate-600 focus:outline-none transition-colors"
-                           onfocus="this.style.borderColor='#5675AC'"
-                           onblur="this.style.borderColor='#e2e8f0'">
-                </div>
-                <div>
-                    <input type="text" formControlName="longitude" [placeholder]="'activities.longitude' | translate" 
-                           class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono text-slate-600 focus:outline-none transition-colors"
-                           onfocus="this.style.borderColor='#5675AC'"
-                           onblur="this.style.borderColor='#e2e8f0'">
-                </div>
+              <div>
+                <input
+                  type="text"
+                  formControlName="latitude"
+                  [placeholder]="'activities.latitude' | translate"
+                  class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono text-slate-600 focus:outline-none transition-colors"
+                  onfocus="this.style.borderColor='#5675AC'"
+                  onblur="this.style.borderColor='#e2e8f0'"
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  formControlName="longitude"
+                  [placeholder]="'activities.longitude' | translate"
+                  class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono text-slate-600 focus:outline-none transition-colors"
+                  onfocus="this.style.borderColor='#5675AC'"
+                  onblur="this.style.borderColor='#e2e8f0'"
+                />
+              </div>
             </div>
 
-            <div class="relative h-48 rounded-xl overflow-hidden border border-white shadow-sm mx-1 mb-1 bg-slate-200">
-                <app-map-preview 
-                     [latitude]="mapLatitude"
-                     [longitude]="mapLongitude"
-                     [interactive]="true"
-                     markerColor="#5675AC"
-                     (coordinatesChange)="onMapCoordinatesChange($event)">
-                </app-map-preview>
+            <div
+              class="relative h-48 rounded-xl overflow-hidden border border-white shadow-sm mx-1 mb-1 bg-slate-200"
+            >
+              <app-map-preview
+                [latitude]="mapLatitude"
+                [longitude]="mapLongitude"
+                [interactive]="true"
+                markerColor="#5675AC"
+                (coordinatesChange)="onMapCoordinatesChange($event)"
+              >
+              </app-map-preview>
             </div>
-            <p class="text-[10px] text-slate-400 text-center mt-1 mx-1">{{ 'activities.clickMapToSetLocation' | translate }}</p>
+            <p class="text-[10px] text-slate-400 text-center mt-1 mx-1">
+              {{ "activities.clickMapToSetLocation" | translate }}
+            </p>
           </div>
         </div>
       </div>
 
       <div class="px-6 md:px-10 py-8 bg-slate-50/50 border-t border-slate-100">
-        
         <div class="mb-8">
-            <label class="block text-xs font-bold text-brand-primary uppercase tracking-wider mb-3 ml-1">{{ 'activities.aboutThisActivity' | translate }}</label>
-            <textarea formControlName="description" rows="4" 
-                      class="w-full bg-white border border-slate-200 rounded-2xl p-5 text-slate-700 leading-relaxed outline-none resize-none transition-all shadow-sm"
-                      onfocus="this.style.borderColor='#5675AC'; this.style.boxShadow='0 0 0 4px rgba(86, 117, 172, 0.1)'"
-                      onblur="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none'"
-                      [placeholder]="'activities.describeTheExperience' | translate"></textarea>
+          <label
+            class="block text-xs font-bold text-brand-primary uppercase tracking-wider mb-3 ml-1"
+            >{{ "activities.aboutThisActivity" | translate }}</label
+          >
+          <textarea
+            formControlName="description"
+            rows="4"
+            class="w-full bg-white border border-slate-200 rounded-2xl p-5 text-slate-700 leading-relaxed outline-none resize-none transition-all shadow-sm"
+            onfocus="this.style.borderColor='#5675AC'; this.style.boxShadow='0 0 0 4px rgba(86, 117, 172, 0.1)'"
+            onblur="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none'"
+            [placeholder]="'activities.describeTheExperience' | translate"
+          ></textarea>
         </div>
 
-        <button type="submit" 
-                [disabled]="formActivityCreation.invalid || isUploading"
-                class="group w-full relative text-white font-bold py-4 rounded-xl text-lg shadow-xl transition-all transform hover:-translate-y-0.5 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none overflow-hidden"
-                style="background-color: #5675AC; box-shadow: 0 10px 15px -3px rgba(86, 117, 172, 0.3);">
-          
-          <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
-          
+        <button
+          type="submit"
+          [disabled]="formActivityCreation.invalid || isUploading"
+          class="group w-full relative text-white font-bold py-4 rounded-xl text-lg shadow-xl transition-all transform hover:-translate-y-0.5 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none overflow-hidden"
+          style="
+            background-color: #5675ac;
+            box-shadow: 0 10px 15px -3px rgba(86, 117, 172, 0.3);
+          "
+        >
+          <div
+            class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"
+          ></div>
+
           <span class="flex items-center justify-center gap-2 relative z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                clip-rule="evenodd"
+              />
             </svg>
             @if(isUploading) {
-              {{ 'messages.loading' | translate }}...
-            } @else {
-              {{ 'activities.create' | translate }}
+            {{ "messages.loading" | translate }}... } @else {
+            {{ "activities.create" | translate }}
             }
           </span>
         </button>
-        
-        <div *ngIf="error" class="mt-4 p-3 bg-red-50 text-red-600 text-sm font-medium rounded-lg text-center border border-red-100 flex items-center justify-center gap-2 animate-pulse">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>
-            {{ error }}
-        </div>
-        <div *ngIf="success" class="mt-4 p-3 bg-green-50 text-green-700 text-sm font-medium rounded-lg text-center border border-green-100 flex items-center justify-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
-            {{ success }}
-        </div>
 
+        <div
+          *ngIf="error"
+          class="mt-4 p-3 bg-red-50 text-red-600 text-sm font-medium rounded-lg text-center border border-red-100 flex items-center justify-center gap-2 animate-pulse"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-4 h-4"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          {{ error }}
+        </div>
+        <div
+          *ngIf="success"
+          class="mt-4 p-3 bg-green-50 text-green-700 text-sm font-medium rounded-lg text-center border border-green-100 flex items-center justify-center gap-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-4 h-4"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          {{ success }}
+        </div>
       </div>
-
     </form>
   </div>
 </main>
