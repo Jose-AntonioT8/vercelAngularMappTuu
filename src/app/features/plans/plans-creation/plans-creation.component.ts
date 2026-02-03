@@ -1,25 +1,31 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../../core/services/auth.service';
-import { PlanService } from '../../../core/services/plan.service';
-import { ActivityService } from '../../../core/services/activity.service';
+import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 import { Activity } from '../../../common/models/activity.model';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
+import { ActivityService } from '../../../core/services/activity.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { FirebaseMediaService } from '../../../core/services/firebase-media.service';
-import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
-
+import { PlanService } from '../../../core/services/plan.service';
+import { UserService } from '../../../core/services/user.service';
 @Component({
   selector: 'app-plans-creation',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, TranslatePipe, LanguageSelectorComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    TranslatePipe,
+    LanguageSelectorComponent,
+  ],
   templateUrl: './plans-creation.component.html',
-  styleUrl: './plans-creation.component.scss'
+  styleUrl: './plans-creation.component.scss',
 })
 export class PlansCreationComponent implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
-  
+
   error = '';
   success = '';
   formPlanCreation;
@@ -31,6 +37,7 @@ export class PlansCreationComponent implements OnInit {
   isUploading = false;
 
   constructor(
+    private userService: UserService,
     private formSvc: FormBuilder,
     private route: Router,
     private auth: AuthService,
@@ -45,7 +52,7 @@ export class PlansCreationComponent implements OnInit {
       // Control para el selector múltiple, inicializado con un ARRAY vacío
       activitiesIds: [[] as string[]],
       imgRef: [''],
-      visibility: [true]
+      visibility: [true],
     });
   }
 
@@ -66,7 +73,9 @@ export class PlansCreationComponent implements OnInit {
   }
 
   get currentImage(): string {
-    return this.imagePreview || this.formPlanCreation.get('imgRef')?.value || '';
+    return (
+      this.imagePreview || this.formPlanCreation.get('imgRef')?.value || ''
+    );
   }
 
   onFileSelected(event: Event): void {
@@ -92,11 +101,14 @@ export class PlansCreationComponent implements OnInit {
   }
 
   async uploadImage(): Promise<string | null> {
-    if (!this.selectedFile) return this.formPlanCreation.get('imgRef')?.value || null;
+    if (!this.selectedFile)
+      return this.formPlanCreation.get('imgRef')?.value || null;
     this.isUploading = true;
     this.error = '';
     try {
-      const blob = new Blob([this.selectedFile], { type: this.selectedFile.type });
+      const blob = new Blob([this.selectedFile], {
+        type: this.selectedFile.type,
+      });
       const urls = await this.mediaService.upload(blob, 'plans').toPromise();
       if (urls && urls.length > 0) {
         this.isUploading = false;
@@ -111,10 +123,11 @@ export class PlansCreationComponent implements OnInit {
   }
 
   getSelectedCount(): number {
-    const selected: string[] = this.formPlanCreation.get('activitiesIds')?.value || [];
+    const selected: string[] =
+      this.formPlanCreation.get('activitiesIds')?.value || [];
     return selected.length;
   }
-  
+
   // --- Lógica del Selector de Actividades Mejorado ---
 
   /**
@@ -123,7 +136,8 @@ export class PlansCreationComponent implements OnInit {
    * @returns true si la actividad está seleccionada, false en caso contrario.
    */
   isSelected(activityName: string): boolean {
-    const selectedNames: string[] = this.formPlanCreation.get('activitiesIds')?.value || [];
+    const selectedNames: string[] =
+      this.formPlanCreation.get('activitiesIds')?.value || [];
     return selectedNames.includes(activityName);
   }
 
@@ -133,21 +147,24 @@ export class PlansCreationComponent implements OnInit {
    */
   toggleActivitySelection(activityName: string): void {
     // Obtener los nombres seleccionados actualmente (será un array de strings)
-    const currentSelectedNames: string[] = this.formPlanCreation.get('activitiesIds')?.value || [];
+    const currentSelectedNames: string[] =
+      this.formPlanCreation.get('activitiesIds')?.value || [];
     let updatedSelectedNames: string[] = [];
 
     if (currentSelectedNames.includes(activityName)) {
       // Deseleccionar: filtrar el nombre de la actividad del array
-      updatedSelectedNames = currentSelectedNames.filter((name) => name !== activityName);
+      updatedSelectedNames = currentSelectedNames.filter(
+        (name) => name !== activityName
+      );
     } else {
       // Seleccionar: añadir el nombre de la actividad al array
       updatedSelectedNames = [...currentSelectedNames, activityName];
     }
-    
+
     // Actualizar el valor del control 'activitiesIds'
     this.formPlanCreation.get('activitiesIds')?.setValue(updatedSelectedNames);
   }
-  
+
   // --- Lógica de Envío del Formulario ---
 
   async onCreate() {
@@ -156,7 +173,8 @@ export class PlansCreationComponent implements OnInit {
       return;
     }
 
-    const selectedActivityNames: string[] = this.formPlanCreation.value.activitiesIds || [];
+    const selectedActivityNames: string[] =
+      this.formPlanCreation.value.activitiesIds || [];
     const selectedActivityIds: string[] = this.activities
       .filter((act: Activity) => selectedActivityNames.includes(act.name))
       .map((act: Activity) => act.id);
@@ -166,24 +184,26 @@ export class PlansCreationComponent implements OnInit {
       this.error = 'Debes iniciar sesión para crear un plan.';
       return;
     }
-    const token = await user.getIdToken();
 
     const imageUrl = await this.uploadImage();
 
     const planData = {
       name: this.formPlanCreation.value.name,
       description: this.formPlanCreation.value.description,
-      activitiesIds: selectedActivityIds, 
+      activitiesIds: selectedActivityIds,
       visibility: this.formPlanCreation.value.visibility,
       imgRef: imageUrl || '',
       createdAt: Date.now(),
-      ownerId: token,
+      ownerId: this.auth.currentUser,
       rating: 0,
     };
 
     try {
+      const token = await user.getIdToken();
+
       this.planService.createPlan(planData, token).subscribe({
         next: (res) => {
+          this.userService.createPlan(user.uid, res.id, token).subscribe();
           this.success = 'Plan creado con éxito';
           setTimeout(() => {
             this.route.navigate(['/plansList']);
@@ -192,7 +212,7 @@ export class PlansCreationComponent implements OnInit {
         error: (err) => {
           console.error('create error', err);
           this.error = 'Error al crear el plan.';
-        }
+        },
       });
     } catch (err) {
       console.error('Error al crear plan:', err);
@@ -206,7 +226,7 @@ export class PlansCreationComponent implements OnInit {
     this.route.navigate(['/landingPage']);
     this.auth.logout();
   }
-  
+
   getError(control: string) {
     switch (control) {
       case 'name':
@@ -236,7 +256,7 @@ export class PlansCreationComponent implements OnInit {
           ).includes('required')
         )
           return 'Público o privado';
-        break
+        break;
 
       case 'activitiesIds':
         if (
@@ -246,14 +266,14 @@ export class PlansCreationComponent implements OnInit {
           ).includes('required')
         )
           return 'Selecciona una actividad valida o ninguno';
-        break
-    
+        break;
+
       case 'imageRef':
         if (
           this.formPlanCreation.controls.imgRef.errors != null &&
-          Object.keys(
-            this.formPlanCreation.controls.imgRef.errors
-          ).includes('required')
+          Object.keys(this.formPlanCreation.controls.imgRef.errors).includes(
+            'required'
+          )
         )
           return 'La referencia de la imagen es requerida';
         break;

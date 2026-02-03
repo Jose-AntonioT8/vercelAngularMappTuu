@@ -49,7 +49,7 @@ export class ActivitiesCreationComponent {
   constructor(
     private formSvc: FormBuilder,
     private route: Router,
-    private userServicce: UserService,
+    private userService: UserService,
     private auth: AuthService,
     private activityService: ActivityService,
     private ActivityTypeService: ActivityTypeService,
@@ -198,9 +198,7 @@ export class ActivitiesCreationComponent {
 
       this.activityService.createActivity(activityData, token).subscribe({
         next: (res) => {
-          console.log(res.id);
-          console.log(user.uid);
-          this.userServicce.createActivity(user.uid, res.id, token);
+          this.userService.createActivity(user.uid, res.id, token).subscribe();
           this.success = 'Actividad creada con éxito';
           setTimeout(() => {
             this.route.navigate(['/activitiesList']);
