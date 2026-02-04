@@ -95,11 +95,15 @@ export class PlansComponent implements OnInit {
   }
   async savePlan() {
     const user = this.auth.currentUser;
-    const token = await user!.getIdToken();
+    if (!user) {
+      console.error('Usuario no autenticado');
+      return;
+    }
+    const token = await user.getIdToken();
     console.log(this.plan!.id);
     console.log(token);
-    console.log(user!.uid);
-    this.userService.savePlan(user!.uid, this.plan!.id, token).subscribe();
+    console.log(user.uid);
+    this.userService.savePlan(user.uid, this.plan!.id, token).subscribe();
   }
 
   getFormattedDate(firebaseTimestamp: any): string {

@@ -18,7 +18,7 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { mapsService } from '../../../core/services/maps.service';
-
+import { UserService } from '../../../core/services/user.service';
 @Component({
   selector: 'app-activity-detail',
   standalone: true,
@@ -35,6 +35,7 @@ import { mapsService } from '../../../core/services/maps.service';
   styleUrl: './activity-detail.component.scss',
 })
 export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
+  constructor(private userService: UserService, private auth: AuthService) {}
   isReviewsListModalOpen = false;
 
   activity?: Activity;
@@ -311,6 +312,21 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
 
   closeReviewModal() {
     this.isReviewModalOpen = false;
+  }
+
+  async saveActivity() {
+    const user = this.auth.currentUser;
+    if (!user) {
+      console.error('Usuario no autenticado');
+      return;
+    }
+    const token = await user.getIdToken();
+    console.log(this.activity!.id);
+    console.log(token);
+    console.log(user.uid);
+    this.userService
+      .saveActivity(user.uid, this.activity!.id, token)
+      .subscribe();
   }
 
   handleReviewSubmit(review: Review) {
