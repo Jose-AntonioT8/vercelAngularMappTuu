@@ -1,5 +1,6 @@
 export interface User {
   email: string;
+  id: string;
   name: string;
   createdAt: Date;
   savedActivities?: string[]; // IDs de actividades guardadas por el usuario

@@ -164,7 +164,13 @@
             </button>
             <button
               (click)="savePlan()"
-              class="flex items-center gap-2 text-slate-600 hover:text-red-500 transition-all mb-6 group w-fit px-4 py-2 rounded-full hover:bg-red-50 border border-transparent hover:border-red-100"
+              [disabled]="isPlanSaved"
+              class="flex items-center gap-2 px-4 py-2 rounded-full"
+              [ngClass]="{
+                'bg-red-50 text-red-500 border-red-100': isPlanSaved,
+                'hover:bg-red-50 text-gray-600 hover:text-red-500 border-transparent hover:border-red-100':
+                  !isPlanSaved
+              }"
             >
               <svg
                 class="w-6 h-6 group-hover:scale-110 transition-transform"

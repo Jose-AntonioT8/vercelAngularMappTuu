@@ -31,7 +31,7 @@ import { UserService } from '../../../core/services/user.service';
 })
 export class PlansComponent implements OnInit {
   constructor(private userService: UserService, private auth: AuthService) {}
-
+  isPlanSaved = false;
   plan?: Plan;
   planDescription?: string;
   activities: Activity[] = [];
@@ -76,6 +76,7 @@ export class PlansComponent implements OnInit {
 
         if (this.plan) {
           this.loadUserReview();
+          this.checkIfPlanSaved(); // Verificar si el plan ya está guardado
         }
       },
       error: (err) => {
@@ -83,6 +84,28 @@ export class PlansComponent implements OnInit {
       },
     });
   }
+
+  private async checkIfPlanSaved(): Promise<void> {
+    const user = this.authService.currentUser;
+    if (!user || !this.plan) return;
+
+    try {
+      const planId = this.plan.id;
+      this.userService.getUserId(user.uid).subscribe({
+        next: (userData) => {
+          this.isPlanSaved = userData.savedPlans?.includes(planId) ?? false;
+        },
+        error: (err) => {
+          console.error('Error al verificar si el plan está guardado', err);
+          this.isPlanSaved = false;
+        },
+      });
+    } catch (error) {
+      console.error('Error al obtener el token', error);
+      this.isPlanSaved = false;
+    }
+  }
+
   openReviewsListModal() {
     this.isReviewsListModalOpen = true;
   }
@@ -94,6 +117,8 @@ export class PlansComponent implements OnInit {
     this.router.navigate(['/plansList']);
   }
   async savePlan() {
+    if (this.isPlanSaved) return; // Evitar guardar si ya está guardado
+
     const user = this.auth.currentUser;
     if (!user) {
       console.error('Usuario no autenticado');

@@ -37,7 +37,7 @@ import { UserService } from '../../../core/services/user.service';
 export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
   constructor(private userService: UserService, private auth: AuthService) {}
   isReviewsListModalOpen = false;
-
+  isActivitySaved = false;
   activity?: Activity;
   location?: string;
   activityDescription?: string;
@@ -70,6 +70,7 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
       if (this.activity) {
         // Buscar si el usuario actual tiene una reseña para esta actividad
         this.loadUserReview();
+        this.checkIfActivitySaved();
 
         this.mapService
           .getAddress(
@@ -87,6 +88,32 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
       }
     });
   }
+
+  private async checkIfActivitySaved(): Promise<void> {
+    const user = this.authService.currentUser;
+    if (!user || !this.activity) return;
+    console.log(user.uid);
+    try {
+      const activityId = this.activity.id;
+      this.userService.getUserId(user.uid).subscribe({
+        next: (userData) => {
+          this.isActivitySaved =
+            userData.savedActivities?.includes(activityId) ?? false;
+        },
+        error: (err) => {
+          console.error(
+            'Error al verificar si la actividad está guardada:',
+            err
+          );
+          this.isActivitySaved = false;
+        },
+      });
+    } catch (error) {
+      console.error('Error al obtener el token:', error);
+      this.isActivitySaved = false;
+    }
+  }
+
   openReviewsListModal() {
     this.isReviewsListModalOpen = true;
   }
@@ -315,6 +342,8 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
   }
 
   async saveActivity() {
+    if (this.isActivitySaved) return; // Evitar guardar si ya está guardada
+
     const user = this.auth.currentUser;
     if (!user) {
       console.error('Usuario no autenticado');

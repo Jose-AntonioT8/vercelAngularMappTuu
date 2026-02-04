@@ -193,7 +193,13 @@
               </button>
               <button
                 (click)="saveActivity()"
-                class="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-red-50 text-gray-600 hover:text-red-500 transition-all font-medium border border-transparent hover:border-red-100"
+                [disabled]="isActivitySaved"
+                class="flex items-center gap-2 px-4 py-2 rounded-full"
+                [ngClass]="{
+                  'bg-red-50 text-red-500 border-red-100': isActivitySaved,
+                  'hover:bg-red-50 text-gray-600 hover:text-red-500 border-transparent hover:border-red-100':
+                    !isActivitySaved
+                }"
               >
                 <svg
                   class="w-6 h-6"
