@@ -1,33 +1,39 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './features/user/login/login.component';
-import { SignupComponent } from './features/user/sign-up/sign-up.component';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
-import {authGuard} from './core/guards/auth.guards';
-import {adminGuard} from './core/guards/admin.guards';
-import {guestGuard} from './core/guards/guest.guards';
-import { PlansUpdateComponent } from './features/plans/plans-update/plans-update.component';
-
-import { LandingPageComponent } from './features/landing-page/landing-page.component';
-import { ListActivitiesComponent } from './features/activities/list-activities/list-activities.component';
+import { adminGuard } from './core/guards/admin.guards';
+import { authGuard } from './core/guards/auth.guards';
+import { guestGuard } from './core/guards/guest.guards';
 import { ActivitiesCreationComponent } from './features/activities/activities-creation/activities.component';
-import { PlansComponent } from './features/plans/plans-detail/plans.component';
-import { ProfileComponent } from './features/user/profile/profile.component';
 import { ActivityDetailComponent } from './features/activities/activity-detail/activity-detail.component';
-import { ActivitiesUpdateComponent} from './features/activities/activity-update/activity-update.component'
-import { ActivityTypesDetailComponent } from './features/activity-type/activity-types-detail/activity-types-detail.component';
-import { ActivityTypesUpdateComponent } from './features/activity-type/activity-types-update/activity-types-update.component';
+import { ActivitiesUpdateComponent } from './features/activities/activity-update/activity-update.component';
+import { CreatedActivitiesComponent } from './features/activities/created-activities/created-activities.component';
+import { ListActivitiesComponent } from './features/activities/list-activities/list-activities.component';
+import { SavedActivitiesComponent } from './features/activities/saved-activities/saved-activities.component';
 import { ActivityTypesCreationComponent } from './features/activity-type/activity-types-creation/activity-types-creation.component';
+import { ActivityTypesDetailComponent } from './features/activity-type/activity-types-detail/activity-types-detail.component';
 import { ActivityTypesListComponent } from './features/activity-type/activity-types-list/activity-types-list.component';
+import { ActivityTypesUpdateComponent } from './features/activity-type/activity-types-update/activity-types-update.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { LandingPageComponent } from './features/landing-page/landing-page.component';
+import { MapsComponent } from './features/maps/maps.component';
+import { CreatedPlansComponent } from './features/plans/created-plans/created-plans.component';
 import { PlansCreationComponent } from './features/plans/plans-creation/plans-creation.component';
+import { PlansComponent } from './features/plans/plans-detail/plans.component';
 import { PlansListComponent } from './features/plans/plans-list/plans-list.component';
-import { MapsComponent} from './features/maps/maps.component'
-
-
+import { PlansUpdateComponent } from './features/plans/plans-update/plans-update.component';
+import { SavedPlansComponent } from './features/plans/saved-plans/saved-plans.component';
+import { LoginComponent } from './features/user/login/login.component';
+import { ProfileComponent } from './features/user/profile/profile.component';
+import { SignupComponent } from './features/user/sign-up/sign-up.component';
+// prettier-ignore
 export const routes: Routes = [
+  {path: 'createdPlans', component: CreatedPlansComponent, canActivate: [authGuard]},
+  {path: 'savedPlans', component: SavedPlansComponent, canActivate: [authGuard]},
+  {path: 'savedActivities', component: SavedActivitiesComponent, canActivate: [authGuard]},
   {path : 'maps', component: MapsComponent},
   {path : 'updatePlan/:id', component: PlansUpdateComponent, canActivate: [authGuard]},
   {path : 'landingPage', component: LandingPageComponent},
   { path: 'activitiesList', component: ListActivitiesComponent},
+  { path: 'createdActivities', component: CreatedActivitiesComponent},
   { path: 'activityDetail/:id', component: ActivityDetailComponent},
   { path: 'updateActivity/:id', component: ActivitiesUpdateComponent},
   { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
