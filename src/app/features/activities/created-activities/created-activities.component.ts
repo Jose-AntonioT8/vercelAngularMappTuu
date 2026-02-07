@@ -5,6 +5,7 @@ import { Observable, combineLatest, of } from 'rxjs';
 import { CardComponent } from '../../../common/activities/card/card.component';
 import { FilterComponent } from '../../../common/activities/filter/filter.component';
 import { HeaderComponent } from '../../../common/header/header.component';
+import { Activity } from '../../../common/models/activity.model';
 import { ActivityType } from '../../../common/models/activityType.models';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
@@ -30,7 +31,7 @@ export class CreatedActivitiesComponent implements OnInit {
   private activityService = inject(ActivityService);
   private activityTypeService = inject(ActivityTypeService);
   private authService = inject(AuthService);
-  activities$ = this.activityService.activities$;
+  activities$ = of<Activity[]>([]);
   activityTypes$!: Observable<ActivityType[]>;
 
   constructor(private route: Router) {}

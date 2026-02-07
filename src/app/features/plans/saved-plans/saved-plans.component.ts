@@ -5,6 +5,7 @@ import { Observable, combineLatest, of } from 'rxjs';
 import { HeaderComponent } from '../../../common/header/header.component';
 import { Activity } from '../../../common/models/activity.model';
 import { ActivityType } from '../../../common/models/activityType.models';
+import { Plan } from '../../../common/models/plan.model';
 import { CardPlansComponent } from '../../../common/plans/card-plans/card-plans.component';
 import { FilterPlansComponent } from '../../../common/plans/filter-plans/filter-plans.component';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
@@ -32,7 +33,7 @@ export class SavedPlansComponent implements OnInit {
   private planService = inject(PlanService);
   private activityTypeService = inject(ActivityTypeService);
   private authService = inject(AuthService);
-  plans$ = this.planService.plans$;
+  plans$ = of<Plan[]>([]);
   activityTypes$!: Observable<ActivityType[]>;
   private activityService = inject(ActivityService);
   activity$!: Observable<Activity[]>;
