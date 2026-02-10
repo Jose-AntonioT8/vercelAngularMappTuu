@@ -1,0 +1,24 @@
+# robots.txt para Angular CSR en Producción
+# Permitir todos los bots
+User-agent: *
+Allow: /
+
+# Ubicación del sitemap
+Sitemap: https://vercel-angular-mapp-tuu.vercel.app/sitemap.xml
+
+# Bloquear rutas específicas (ajusta según tus necesidades)
+# Disallow: /admin
+# Disallow: /api/
+# Disallow: /private/
+
+# Bloquear parámetros de query específicos (opcional)
+# Disallow: /*?print=
+# Disallow: /*?sort=
+
+# Permitir assets estáticos
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.jpg$
+Allow: /*.png$
+Allow: /*.svg$
+
