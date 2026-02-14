@@ -4,13 +4,13 @@
   "framework": "angular",
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "destination": "/index.html"
     }
   ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "headers": [
         {
           "key": "Content-Security-Policy",
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "source": "/assets/(.*)",
+      "source": "/assets/:path*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -60,7 +60,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(js|css|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|ico|webp))",
+      "source": "/:path*.:ext(js|css|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|ico|webp)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "source": "/(.*\\.html)",
+      "source": "/:path*.:ext(html)",
       "headers": [
         {
           "key": "Cache-Control",
