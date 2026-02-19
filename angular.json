@@ -73,10 +73,16 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mapTuu:build:production"
+              "buildTarget": "mapTuu:build:production",
+              "headers": {
+      "Content-Security-Policy": "script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com"
+    }
             },
             "development": {
-              "buildTarget": "mapTuu:build:development"
+              "buildTarget": "mapTuu:build:development",
+              "headers": {
+      "Content-Security-Policy": "script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com"
+    }
             }
           },
           "defaultConfiguration": "development"
