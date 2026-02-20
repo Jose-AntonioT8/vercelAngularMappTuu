@@ -1,10 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Activity } from '../../models/activity.model';
+import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { TranslatePipe } from '../../../core/pipes/translate.pipe';
-import { CommonModule } from '@angular/common';
+import { Activity } from '../../models/activity.model';
 
 
 
@@ -56,6 +56,7 @@ export class OptionsComponent {
       const user = this.auth.currentUser;
       if (!user) throw new Error('No autenticado');
       const token = await user.getIdToken();
+      console.log(token);
       this.activityService.deleteActivity(this.activity!!.id, token).subscribe({
         next: () => {
           console.log("Actividad eliminada con éxito");
