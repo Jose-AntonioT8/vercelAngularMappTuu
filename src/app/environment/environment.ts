@@ -3,7 +3,7 @@
 export const environment = {
     production: true,
     CLOUD_NAME: "dnre5bukm",
-    UPLOAD_PRESET: "7004f86e-ac8d-433e-a2c4-a1aa726f4b95",
+    UPLOAD_PRESET: "MappTuu",
     firebase: {
     apiKey: "AIzaSyC0iCkAwrhlSZ5C5-g01ZbTbupV_3Kh9ew",
     authDomain: "maptuu-e0f68.firebaseapp.com",
