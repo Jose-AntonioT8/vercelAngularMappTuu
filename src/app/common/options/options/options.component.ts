@@ -56,7 +56,6 @@ export class OptionsComponent {
       const user = this.auth.currentUser;
       if (!user) throw new Error('No autenticado');
       const token = await user.getIdToken();
-      console.log(token);
       this.activityService.deleteActivity(this.activity!!.id, token).subscribe({
         next: () => {
           console.log("Actividad eliminada con éxito");
