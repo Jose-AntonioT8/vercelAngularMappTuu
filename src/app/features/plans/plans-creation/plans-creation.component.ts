@@ -7,7 +7,7 @@ import { Activity } from '../../../common/models/activity.model';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Claudinary } from '../../../core/services/firebase-media.service';
+import { CloudinaryService } from '../../../core/services/firebase-media.service';
 import { PlanService } from '../../../core/services/plan.service';
 import { UserService } from '../../../core/services/user.service';
 @Component({
@@ -43,7 +43,7 @@ export class PlansCreationComponent implements OnInit {
     private auth: AuthService,
     private planService: PlanService,
     private activityService: ActivityService,
-    private mediaService: Claudinary
+    private mediaService: CloudinaryService
   ) {
     // Inicialización del FormGroup en el constructor
     this.formPlanCreation = this.formSvc.group({

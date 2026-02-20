@@ -1,16 +1,15 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../../core/services/auth.service';
-import { ActivityService } from '../../../core/services/activity.service';
-import { RouterModule } from '@angular/router';
-import { ActivityTypeService } from '../../../core/services/activitytype.service';
-import { ActivityType } from '../../../common/models/activityType.models';
-import { FirebaseMediaService } from '../../../core/services/firebase-media.service';
-import { TranslatePipe } from '../../../core/pipes/translate.pipe';
-import { MapPreviewComponent } from '../../../common/maps/map-preview.component';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
+import { MapPreviewComponent } from '../../../common/maps/map-preview.component';
+import { ActivityType } from '../../../common/models/activityType.models';
+import { TranslatePipe } from '../../../core/pipes/translate.pipe';
+import { ActivityService } from '../../../core/services/activity.service';
+import { ActivityTypeService } from '../../../core/services/activitytype.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { CloudinaryService } from '../../../core/services/firebase-media.service';
 
 @Component({
   standalone: true,
@@ -37,7 +36,7 @@ export class ActivitiesUpdateComponent {
     private auth: AuthService,
     private activityService: ActivityService,
     private ActivityTypeService: ActivityTypeService,
-    private mediaService: FirebaseMediaService
+    private mediaService: CloudinaryService
   ) {
     this.formActivityUpdate = this.formSvc.group({
       name: ['', [Validators.required]],

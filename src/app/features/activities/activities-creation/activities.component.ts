@@ -14,7 +14,7 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
 import { ActivityTypeService } from '../../../core/services/activitytype.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { Claudinary } from '../../../core/services/firebase-media.service';
+import { CloudinaryService } from '../../../core/services/firebase-media.service';
 import { UserService } from '../../../core/services/user.service';
 @Component({
   standalone: true,
@@ -53,7 +53,7 @@ export class ActivitiesCreationComponent {
     private auth: AuthService,
     private activityService: ActivityService,
     private ActivityTypeService: ActivityTypeService,
-    private mediaService: Claudinary
+    private mediaService: CloudinaryService
   ) {
     this.formActivityCreation = this.formSvc.group({
       name: ['', [Validators.required]],

@@ -6,7 +6,7 @@ import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { DefaultAvatarDirective } from '../../../core/directives/default-avatar.directive';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { AuthService } from '../../../core/services/auth.service';
-import { Claudinary } from '../../../core/services/firebase-media.service';
+import { CloudinaryService } from '../../../core/services/firebase-media.service';
 import { TranslationService } from '../../../core/services/translation.service';
 @Component({
   selector: 'app-profile',
@@ -103,7 +103,7 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private location: Location,
     private translationService: TranslationService,
-    private mediaService: Claudinary
+    private mediaService: CloudinaryService
   ) {}
 
   async sendPasswordReset(): Promise<void> {
@@ -155,7 +155,7 @@ export class ProfileComponent implements OnInit {
       console.log('⬆️ Iniciando subida...');
 
       this.mediaService.upload(file, 'avatars').subscribe({
-        next: async (urls) => {
+        next: async (urls: any) => {
           console.log('✅ URLs recibidas:', urls);
           if (urls && urls.length > 0) {
             await this.authService.updateUserPhoto(urls[0]);
@@ -164,7 +164,7 @@ export class ProfileComponent implements OnInit {
           }
           this.isUploadingAvatar = false;
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error('❌ Error en upload:', err);
           this.avatarPreview = null;
           this.isUploadingAvatar = false;
