@@ -6,7 +6,7 @@ import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { DefaultAvatarDirective } from '../../../core/directives/default-avatar.directive';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { AuthService } from '../../../core/services/auth.service';
-import { FirebaseMediaService } from '../../../core/services/firebase-media.service';
+import { Claudinary } from '../../../core/services/firebase-media.service';
 import { TranslationService } from '../../../core/services/translation.service';
 @Component({
   selector: 'app-profile',
@@ -103,7 +103,7 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private location: Location,
     private translationService: TranslationService,
-    private mediaService: FirebaseMediaService
+    private mediaService: Claudinary
   ) {}
 
   async sendPasswordReset(): Promise<void> {
