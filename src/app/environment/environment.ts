@@ -4,6 +4,7 @@ export const environment = {
     production: true,
     CLOUD_NAME: "dnre5bukm",
     UPLOAD_PRESET: "MappTuu",
+    CLOUDINARY_API_KEY: "653478338367121",
     firebase: {
     apiKey: "AIzaSyC0iCkAwrhlSZ5C5-g01ZbTbupV_3Kh9ew",
     authDomain: "maptuu-e0f68.firebaseapp.com",

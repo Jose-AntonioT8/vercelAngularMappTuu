@@ -20,9 +20,10 @@ export class CloudinaryService {
 
       const formData = new FormData();
       formData.append('file', blob);
-      formData.append('upload_preset', "default-preset");
+      formData.append('upload_preset', this.UPLOAD_PRESET);
       formData.append('folder', folder);
       formData.append('context', `uploaded-by=${user.uid}|uploaded-at=${new Date().toISOString()}`);
+      formData.append('api_key', environment.CLOUDINARY_API_KEY); // Necesitas agregar esto
 
       fetch(`https://api.cloudinary.com/v1_1/${this.CLOUD_NAME}/image/upload`, {
         method: 'POST',
