@@ -2,8 +2,8 @@
 
 export const environment = {
     production: true,
-    CLOUD_NAME: (window as any)['NG_APP_CLOUD_NAME'] || '',
-    UPLOAD_PRESET: (window as any)['NG_APP_UPLOAD_PRESET'] || '',
+    CLOUD_NAME: "dnre5bukm",
+    UPLOAD_PRESET: "7004f86e-ac8d-433e-a2c4-a1aa726f4b95",
     firebase: {
     apiKey: "AIzaSyC0iCkAwrhlSZ5C5-g01ZbTbupV_3Kh9ew",
     authDomain: "maptuu-e0f68.firebaseapp.com",
