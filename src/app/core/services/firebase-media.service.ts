@@ -20,7 +20,7 @@ export class CloudinaryService {
 
       const formData = new FormData();
       formData.append('file', blob);
-      formData.append('upload_preset', this.UPLOAD_PRESET);
+      formData.append('upload_preset', "default-preset");
       formData.append('folder', folder);
       formData.append('context', `uploaded-by=${user.uid}|uploaded-at=${new Date().toISOString()}`);
 
