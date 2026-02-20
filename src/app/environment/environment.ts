@@ -1,7 +1,7 @@
 
 
 export const environment = {
-    production: true,
+    production: false,
     CLOUD_NAME: (window as any)['NG_APP_CLOUDINARY_CLOUD_NAME'] || '',
     UPLOAD_PRESET: (window as any)['NG_APP_UPLOAD_PRESET'] || '',
     firebase: {
