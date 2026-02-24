@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { finalize } from 'rxjs';
+import { catchError, finalize, of } from 'rxjs';
 import { HeaderComponent } from '../../../common/header/header.component';
 import { IaAssistantService } from '../services/ia-assistant.service';
 
@@ -27,21 +28,44 @@ export class IaComponent {
 
     this.isLoading = true;
     this.errorMessage = '';
+    this.answer = '';
 
     this.iaAssistantService
       .ask(this.question)
       .pipe(
+        catchError((error: HttpErrorResponse | Error) => {
+          if (error instanceof HttpErrorResponse) {
+            switch (error.status) {
+              case 404:
+                this.errorMessage = `❌ 404: Modelo/endpoint no encontrado. Verifica NG_APP_IA_MODEL (ej: meta-llama/llama-3.1-8b-instruct:free) en vars. entorno.`;
+                break;
+              case 401:
+                this.errorMessage = `❌ 401: API key inválida. Revisa tu NG_APP_IA_API_KEY en variables de entorno de Vercel/local.`;
+                break;
+              case 429:
+                this.errorMessage = `❌ 429: Límite de rate limit alcanzado. Espera un momento e intenta de nuevo.`;
+                break;
+              case 500:
+                this.errorMessage = `❌ 500: Error del servidor OpenRouter. Intenta en unos momentos.`;
+                break;
+              default:
+                this.errorMessage = `❌ Error HTTP ${error.status}: ${error.message}`;
+            }
+          } else {
+            this.errorMessage = `❌ Error: ${error.message || 'No se pudo conectar con la IA.'}`;
+          }
+          return of('');
+        }),
         finalize(() => {
           this.isLoading = false;
         }),
       )
       .subscribe({
         next: (response) => {
-          this.answer = response;
-        },
-        error: () => {
-          this.errorMessage =
-            'No se pudo consultar la IA en este momento. Revisa configuración y conexión.';
+          if (response && response.trim()) {
+            this.answer = response;
+            this.errorMessage = '';
+          }
         },
       });
   }

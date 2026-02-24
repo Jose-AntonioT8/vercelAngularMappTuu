@@ -45,17 +45,27 @@ export class IaAssistantService {
       );
     }
 
-    if (!environment.ia.model) {
+    const model = environment.ia.model?.trim();
+    const apiKey = environment.ia.apiKey?.trim();
+
+    if (!model || model === '') {
       return of(
-        'El modelo de IA no está configurado. Deja definido NG_APP_IA_MODEL en tu entorno runtime.',
+        '❌ Modelo IA no configurado. Define NG_APP_IA_MODEL (ej: meta-llama/llama-3.1-8b-instruct:free) en variables de entorno.',
       );
     }
 
-    if (!environment.ia.apiKey) {
+    if (!apiKey || apiKey === '') {
       return of(
-        'Falta la API key de IA. Define NG_APP_IA_API_KEY en tu entorno runtime.',
+        '❌ API key no configurada. Define NG_APP_IA_API_KEY en variables de entorno (obtén gratis en openrouter.ai).',
       );
     }
+
+    console.log(
+      '[IA] Llamando OpenRouter con modelo:',
+      model,
+      'URL:',
+      environment.ia.apiUrl,
+    );
 
     return from(this.getFirebaseData()).pipe(
       switchMap((firebaseData) => {
@@ -79,13 +89,13 @@ export class IaAssistantService {
           .post<IaChatResponse>(
             environment.ia.apiUrl,
             {
-              model: environment.ia.model,
+              model: model,
               messages,
               temperature: 0.2,
             },
             {
               headers: new HttpHeaders({
-                Authorization: `Bearer ${environment.ia.apiKey}`,
+                Authorization: `Bearer ${apiKey}`,
                 'Content-Type': 'application/json',
               }),
             },
@@ -98,6 +108,7 @@ export class IaAssistantService {
                 'No he podido generar una respuesta con los datos disponibles.'
               );
             }),
+            switchMap((result) => of(result)),
           );
       }),
     );
