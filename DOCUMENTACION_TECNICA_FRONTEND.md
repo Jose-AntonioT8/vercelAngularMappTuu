@@ -23,7 +23,7 @@
 - **Buscar y filtrar actividades** por diferentes criterios
 - **Crear y gestionar planes de viaje** personalizados
 - **Visualizar detalles** de actividades (horarios, precios, contacto, etc.)
-- **Gestionar perfiles de usuario** con autenticación
+- **Gestionar perfiles de usuario** con autenticación.
 
 ### Objetivo Principal
 
@@ -177,7 +177,7 @@ src/app/
 - **Inline Style Language**: SCSS
 - **Source Maps**: Habilitados en desarrollo
 - **Optimization**: Deshabilitada en desarrollo, habilitada en producción
-- **Budgets**: 
+- **Budgets**:
   - Initial: 500kB warning / 1MB error
   - Component Styles: 4kB warning / 8kB error
 
@@ -191,45 +191,47 @@ El sistema de rutas utiliza **Functional Guards** (nuevo en Angular 19) y **Comp
 
 ### Rutas Públicas (Sin Autenticación)
 
-| Ruta | Componente | Descripción |
-|------|------------|-------------|
-| `/` | Redirect | Redirige a `/landingPage` |
-| `/landingPage` | `LandingPageComponent` | Página de inicio pública |
-| `/login` | `LoginComponent` | Inicio de sesión |
-| `/signup` | `SignupComponent` | Registro de usuarios |
-| `/activitiesList` | `ListActivitiesComponent` | Lista pública de actividades |
-| `/activityDetail/:id` | `ActivityDetailComponent` | Detalle de actividad |
-| `/maps` | `MapsComponent` | Vista de mapa con actividades |
+| Ruta                  | Componente                | Descripción                   |
+| --------------------- | ------------------------- | ----------------------------- |
+| `/`                   | Redirect                  | Redirige a `/landingPage`     |
+| `/landingPage`        | `LandingPageComponent`    | Página de inicio pública      |
+| `/login`              | `LoginComponent`          | Inicio de sesión              |
+| `/signup`             | `SignupComponent`         | Registro de usuarios          |
+| `/activitiesList`     | `ListActivitiesComponent` | Lista pública de actividades  |
+| `/activityDetail/:id` | `ActivityDetailComponent` | Detalle de actividad          |
+| `/maps`               | `MapsComponent`           | Vista de mapa con actividades |
 
 ### Rutas Protegidas (Requieren Autenticación - `authGuard`)
 
-| Ruta | Componente | Guard | Descripción |
-|------|------------|-------|-------------|
-| `/activitiesCreation` | `ActivitiesCreationComponent` | `authGuard` | Crear nueva actividad |
-| `/updateActivity/:id` | `ActivitiesUpdateComponent` | `authGuard` | Editar actividad existente |
-| `/planDetail/:id` | `PlansComponent` | `authGuard` | Detalle de plan de viaje |
-| `/profile` | `ProfileComponent` | `authGuard` | Perfil de usuario |
-| `/plansCreation` | `PlansCreationComponent` | `authGuard` | Crear nuevo plan |
-| `/plansList` | `PlansListComponent` | `authGuard` | Lista de planes del usuario |
+| Ruta                  | Componente                    | Guard       | Descripción                 |
+| --------------------- | ----------------------------- | ----------- | --------------------------- |
+| `/activitiesCreation` | `ActivitiesCreationComponent` | `authGuard` | Crear nueva actividad       |
+| `/updateActivity/:id` | `ActivitiesUpdateComponent`   | `authGuard` | Editar actividad existente  |
+| `/planDetail/:id`     | `PlansComponent`              | `authGuard` | Detalle de plan de viaje    |
+| `/profile`            | `ProfileComponent`            | `authGuard` | Perfil de usuario           |
+| `/plansCreation`      | `PlansCreationComponent`      | `authGuard` | Crear nuevo plan            |
+| `/plansList`          | `PlansListComponent`          | `authGuard` | Lista de planes del usuario |
 
 ### Rutas de Administración (Requieren Admin - `adminGuard`)
 
-| Ruta | Componente | Guard | Descripción |
-|------|------------|-------|-------------|
-| `/dashboard` | `DashboardComponent` | `adminGuard` | Panel de administración |
-| `/activityTypesCreation` | `ActivityTypesCreationComponent` | `adminGuard` | Crear tipo de actividad |
-| `/activityTypesList` | `ActivityTypesListComponent` | `adminGuard` | Lista de tipos de actividades |
+| Ruta                     | Componente                       | Guard        | Descripción                   |
+| ------------------------ | -------------------------------- | ------------ | ----------------------------- |
+| `/dashboard`             | `DashboardComponent`             | `adminGuard` | Panel de administración       |
+| `/activityTypesCreation` | `ActivityTypesCreationComponent` | `adminGuard` | Crear tipo de actividad       |
+| `/activityTypesList`     | `ActivityTypesListComponent`     | `adminGuard` | Lista de tipos de actividades |
 
 ### Guards Implementados
 
 #### 1. `authGuard`
+
 - **Ubicación**: `core/guards/auth.guards.ts`
 - **Función**: Verifica que el usuario esté autenticado
-- **Comportamiento**: 
+- **Comportamiento**:
   - Si está autenticado → permite acceso
   - Si no está autenticado → redirige a `/landingPage`
 
 #### 2. `adminGuard`
+
 - **Ubicación**: `core/guards/admin.guards.ts`
 - **Función**: Verifica que el usuario sea administrador
 - **Comportamiento**:
@@ -263,17 +265,20 @@ La aplicación utiliza **Servicios con BehaviorSubjects** (patrón Observable) p
 #### 1. `AuthService` (`core/services/auth.service.ts`)
 
 **Responsabilidades**:
+
 - Autenticación con Firebase Auth
 - Gestión del estado del usuario actual
 - Verificación de roles (admin)
 
 **Estado**:
+
 ```typescript
 private userSubject = new BehaviorSubject<User | null>(null);
 user$ = this.userSubject.asObservable();
 ```
 
 **Métodos Clave**:
+
 - `login(email, password)`: Inicio de sesión
 - `register(email, password)`: Registro
 - `logout()`: Cerrar sesión
@@ -284,22 +289,26 @@ user$ = this.userSubject.asObservable();
 #### 2. `ActivityService` (`core/services/activity.service.ts`)
 
 **Responsabilidades**:
+
 - CRUD de actividades
 - Sincronización en tiempo real con Firestore
 - Gestión de estado de actividades
 
 **Estado**:
+
 ```typescript
 private _activities = new BehaviorSubject<ActivityDetail[]>([]);
 public activities$ = this._activities.asObservable();
 ```
 
 **Características**:
+
 - **Firestore Real-time**: Usa `onSnapshot` para actualizaciones automáticas
 - **HTTP REST**: Operaciones CRUD hacia backend (`http://localhost:3000/api/activities`)
 - **Híbrido**: Lectura desde Firestore, escritura hacia REST API
 
 **Métodos**:
+
 - `getActivities()`: Observable con lista completa (Firestore)
 - `getActivityId(id)`: Obtener actividad específica (Firestore)
 - `createActivity(data, token)`: Crear (REST API)
@@ -309,6 +318,7 @@ public activities$ = this._activities.asObservable();
 #### 3. `PlanService` (`core/services/plan.service.ts`)
 
 **Patrón Similar a ActivityService**:
+
 - Firestore para lectura en tiempo real
 - REST API para escritura
 - BehaviorSubject para estado reactivo
@@ -316,10 +326,12 @@ public activities$ = this._activities.asObservable();
 #### 4. `mapsService` (`core/services/maps.service.ts`)
 
 **Responsabilidades**:
+
 - Geocodificación inversa (coordenadas → dirección)
 - Integración con API externa (BigDataCloud)
 
 **API Externa**:
+
 - `https://api.bigdatacloud.net/data/reverse-geocode-client`
 - Parámetros: `latitude`, `longitude`, `localityLanguage=es`
 
@@ -329,7 +341,7 @@ public activities$ = this._activities.asObservable();
 
 La aplicación utiliza un **patrón híbrido**:
 
-1. **Firestore (Firebase)**: 
+1. **Firestore (Firebase)**:
    - Lectura de datos en tiempo real
    - Sincronización automática
    - Sin necesidad de polling
@@ -348,16 +360,17 @@ La aplicación utiliza un **patrón híbrido**:
 
 #### Servicios REST
 
-| Servicio | Endpoint Base | Operaciones |
-|----------|---------------|-------------|
-| `ActivityService` | `/activities` | POST, PATCH, DELETE |
-| `PlanService` | `/plans` | POST, PATCH, DELETE |
-| `UserService` | `/users` | POST, GET, PATCH, DELETE |
-| `ActivityTypeService` | `/activity-types` (inferido) | CRUD completo |
+| Servicio              | Endpoint Base                | Operaciones              |
+| --------------------- | ---------------------------- | ------------------------ |
+| `ActivityService`     | `/activities`                | POST, PATCH, DELETE      |
+| `PlanService`         | `/plans`                     | POST, PATCH, DELETE      |
+| `UserService`         | `/users`                     | POST, GET, PATCH, DELETE |
+| `ActivityTypeService` | `/activity-types` (inferido) | CRUD completo            |
 
 ### Modelos de Datos
 
 #### `Activity` / `ActivityDetail`
+
 ```typescript
 interface Activity {
   id: string;
@@ -373,13 +386,14 @@ interface Activity {
 interface ActivityDetail extends Activity {
   description: string;
   price: number;
-  openingHours: { day: string, hours: string }[];
+  openingHours: { day: string; hours: string }[];
   contactEmail: string;
   highlights: string[];
 }
 ```
 
 #### `Plan`
+
 ```typescript
 interface Plan {
   id: string;
@@ -394,6 +408,7 @@ interface Plan {
 ```
 
 #### `ActivityType`
+
 ```typescript
 interface ActivityType {
   id: string;
@@ -410,6 +425,7 @@ interface ActivityType {
 ### Componentes Standalone
 
 Todos los componentes son **Standalone**, lo que significa:
+
 - No dependen de NgModules
 - Declaran sus propias dependencias con `imports: []`
 - Mejor tree-shaking y optimización de bundle
@@ -419,17 +435,20 @@ Todos los componentes son **Standalone**, lo que significa:
 #### 1. **Gestión de Actividades** (`features/activities/`)
 
 **Componentes**:
+
 - `ListActivitiesComponent`: Lista con filtros responsive
 - `ActivitiesCreationComponent`: Formulario de creación
 - `ActivityDetailComponent`: Vista detallada de actividad
 - `ActivitiesUpdateComponent`: Formulario de edición
 
 **Componentes Compartidos**:
+
 - `CardComponent`: Tarjeta de actividad reutilizable
 - `FilterComponent`: Sistema de filtros
 - `ListComponent`: Lista de actividades
 
 **Características**:
+
 - Filtros responsive (se abre/cierra en móvil)
 - Integración con mapa para visualización geográfica
 - Sistema de favoritos
@@ -441,6 +460,7 @@ Todos los componentes son **Standalone**, lo que significa:
 **Tecnología**: Leaflet.js
 
 **Características**:
+
 - Mapas interactivos con marcadores
 - Geocodificación inversa (coordenadas → dirección)
 - Capas de mapas:
@@ -453,6 +473,7 @@ Todos los componentes son **Standalone**, lo que significa:
 - Responsive y compatible con SSR (Platform Browser check)
 
 **Props del Componente**:
+
 ```typescript
 @Input() points: MapMarkerData[]  // Array de marcadores
 @Input() center: [number, number]  // Centro del mapa
@@ -462,11 +483,13 @@ Todos los componentes son **Standalone**, lo que significa:
 #### 3. **Gestión de Planes** (`features/plans/`)
 
 **Componentes**:
+
 - `PlansListComponent`: Lista de planes del usuario
 - `PlansCreationComponent`: Crear nuevo plan
 - `PlansComponent`: Detalle de plan
 
 **Características**:
+
 - Asociación de múltiples actividades a un plan
 - Sistema de visibilidad (público/privado)
 - Rating de planes
@@ -474,16 +497,19 @@ Todos los componentes son **Standalone**, lo que significa:
 #### 4. **Autenticación y Usuarios** (`features/user/`)
 
 **Componentes**:
+
 - `LoginComponent`: Inicio de sesión con Firebase
 - `SignupComponent`: Registro con validación
 - `ProfileComponent`: Perfil de usuario
 
 **Validación**:
+
 - `matchPasswordValidator`: Validador personalizado para confirmar contraseña
 
 #### 5. **Dashboard de Administración** (`features/dashboard/`)
 
 **Funcionalidades**:
+
 - Acceso restringido a administradores
 - Navegación rápida a:
   - Crear/Ver Actividades
@@ -494,29 +520,32 @@ Todos los componentes son **Standalone**, lo que significa:
 #### 6. **Componentes Compartidos** (`common/`)
 
 **Header** (`common/header/`):
+
 - Navegación contextual
 - Detección de ruta actual
 - Iconos dinámicos según ruta
 
 **Footer** (`common/footer/`):
+
 - Navegación secundaria
 - Acceso rápido a secciones
 
 **Cards y Lists**:
+
 - Componentes reutilizables para actividades y planes
 - Diseño consistente con Tailwind CSS
 
 ### Patrones de Diseño Utilizados
 
-1. **Container/Presentational**: 
+1. **Container/Presentational**:
    - Features como contenedores
    - Common components como presentacionales
 
-2. **Service Layer**: 
+2. **Service Layer**:
    - Lógica de negocio en servicios
    - Componentes solo para presentación
 
-3. **Observable Pattern**: 
+3. **Observable Pattern**:
    - Estado reactivo con RxJS
    - Suscripciones para actualizaciones en tiempo real
 
@@ -536,8 +565,8 @@ export const environment = {
     storageBucket: "maptuu-e0f68.firebasestorage.app",
     messagingSenderId: "894446902771",
     appId: "1:894446902771:web:59914a0a4c8ab97b218686",
-    measurementId: "G-PJC4K4MV6P"
-  }
+    measurementId: "G-PJC4K4MV6P",
+  },
 };
 ```
 
@@ -550,22 +579,24 @@ export const environment = {
 
 2. **API URL** (`common/models/apiurl.model.ts`):
    ```typescript
-   const apiUrl = 'http://localhost:3000/api';
+   const apiUrl = "http://localhost:3000/api";
    ```
+
    - **Nota**: Hardcodeado, no usa `environment.ts`
    - **Recomendación**: Mover a `environment.ts` para diferentes entornos
 
 ### Configuración de Firebase en `app.config.ts`
 
 ```typescript
-provideFirebaseApp(() => initializeApp(environment.firebase))
-provideAuth(() => getAuth())
-provideFirestore(() => getFirestore())
+provideFirebaseApp(() => initializeApp(environment.firebase));
+provideAuth(() => getAuth());
+provideFirestore(() => getFirestore());
 ```
 
 ### Configuración de TypeScript
 
 **`tsconfig.json`**:
+
 - **Target**: ES2022
 - **Module**: ES2022
 - **Strict Mode**: Habilitado
@@ -577,6 +608,7 @@ provideFirestore(() => getFirestore())
 ### Configuración de Tailwind
 
 **`tailwind.config.js`**:
+
 - Content: `./src/**/*.{html,ts}`
 - Tema extendido (sin personalizaciones adicionales)
 - Sin plugins adicionales
@@ -584,6 +616,7 @@ provideFirestore(() => getFirestore())
 ### Entornos Disponibles
 
 Actualmente solo existe `environment.ts` (desarrollo). **No se encontró**:
+
 - `environment.prod.ts`
 - `environment.staging.ts`
 
@@ -621,48 +654,58 @@ Actualmente solo existe `environment.ts` (desarrollo). **No se encontró**:
 ### Áreas de Mejora y Pendientes 🔄
 
 #### 1. **Gestión de Entornos**
+
 - ❌ Falta `environment.prod.ts`
 - ❌ API URL hardcodeada (debería estar en environment)
 - ⚠️ Credenciales de Firebase expuestas en código
 
 #### 2. **Interceptores HTTP**
+
 - ❌ No hay interceptor para agregar token automáticamente
 - ⚠️ Token se pasa manualmente en cada petición
 - **Impacto**: Código repetitivo, riesgo de olvidar token
 
 #### 3. **Manejo de Errores**
+
 - ⚠️ No se encontró servicio global de manejo de errores
 - ⚠️ Errores HTTP no se manejan centralizadamente
 - **Recomendación**: Implementar interceptor de errores
 
 #### 4. **Loading States**
+
 - ⚠️ No hay indicadores de carga globales
 - **Recomendación**: Implementar servicio de loading state
 
 #### 5. **Logout en UI**
+
 - ⚠️ Comentario en código: "no está implementado el logout en la interfaz pero lo agrego para tenerlo listo"
 - ✅ Método `logout()` existe en servicio
 - **Estado**: Funcional pero posiblemente no visible en UI
 
 #### 6. **Validación de Formularios**
+
 - ✅ Validador personalizado para contraseñas
 - ⚠️ No se verificó validación completa de formularios
 - **Recomendación**: Revisar validaciones en componentes de creación
 
 #### 7. **Testing**
+
 - ⚠️ Archivos `.spec.ts` presentes pero no se verificó cobertura
 - **Recomendación**: Ejecutar tests y verificar cobertura
 
 #### 8. **Optimización de Bundle**
+
 - ⚠️ No se verificó lazy loading de rutas
 - **Recomendación**: Implementar lazy loading para features grandes
 
 #### 9. **Documentación de Código**
+
 - ⚠️ Comentarios en español e inglés mezclados
 - ⚠️ Falta documentación JSDoc en métodos públicos
 - **Recomendación**: Estandarizar documentación
 
 #### 10. **Seguridad**
+
 - ⚠️ Email de admin hardcodeado: `admin@mapptuu.com`
 - **Recomendación**: Mover a configuración o usar roles de Firebase
 - ⚠️ Credenciales de Firebase en código fuente
@@ -671,10 +714,12 @@ Actualmente solo existe `environment.ts` (desarrollo). **No se encontró**:
 ### Comentarios en Código (TODOs Implícitos)
 
 1. **`landing-page.component.ts`** (líneas 48-49, 54-55):
+
    ```typescript
    //una vez que tengamos implementados los planes hay que poner la ruta a la lista
    //this.router.navigate(['/plans']);
    ```
+
    **Estado**: Parece que los planes ya están implementados, comentario posiblemente obsoleto
 
 2. **`auth.service.ts`** (línea 34):
@@ -748,4 +793,3 @@ Esta documentación proporciona una visión completa del frontend de MapTuu. El 
 
 **Última Actualización**: Basado en análisis del código fuente (Enero 2025)
 **Versión del Proyecto**: 0.0.0 (desarrollo activo)
-
