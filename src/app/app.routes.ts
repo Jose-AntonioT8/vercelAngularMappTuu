@@ -13,6 +13,7 @@ import { ActivityTypesDetailComponent } from './features/activity-type/activity-
 import { ActivityTypesListComponent } from './features/activity-type/activity-types-list/activity-types-list.component';
 import { ActivityTypesUpdateComponent } from './features/activity-type/activity-types-update/activity-types-update.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { IaComponent } from './features/ia/ia/ia.component';
 import { LandingPageComponent } from './features/landing-page/landing-page.component';
 import { MapsComponent } from './features/maps/maps.component';
 import { CreatedPlansComponent } from './features/plans/created-plans/created-plans.component';
@@ -27,6 +28,7 @@ import { SignupComponent } from './features/user/sign-up/sign-up.component';
 // prettier-ignore
 export const routes: Routes = [
   {path: 'createdPlans', component: CreatedPlansComponent, canActivate: [authGuard]},
+  {path: 'ia', component: IaComponent},
   {path: 'savedPlans', component: SavedPlansComponent, canActivate: [authGuard]},
   {path: 'savedActivities', component: SavedActivitiesComponent, canActivate: [authGuard]},
   {path : 'maps', component: MapsComponent},

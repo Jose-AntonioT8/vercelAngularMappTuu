@@ -53,6 +53,13 @@ export const environment = {
   CLOUD_NAME: readEnv('NG_APP_CLOUDINARY_CLOUD_NAME'),
   UPLOAD_PRESET: readEnv('NG_APP_UPLOAD_PRESET'),
   CLOUDINARY_API_KEY: readEnv('NG_APP_CLOUDINARY_API_KEY'),
+  ia: {
+    model: readEnv('NG_APP_IA_MODEL'),
+    apiUrl:
+      readEnv('NG_APP_IA_API_URL') ||
+      'https://openrouter.ai/api/v1/chat/completions',
+    apiKey: readEnv('NG_APP_IA_API_KEY'),
+  },
   firebase: {
     apiKey: readFirebaseEnv(
       'apiKey',
