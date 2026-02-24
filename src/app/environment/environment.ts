@@ -48,17 +48,30 @@ const readFirebaseEnv = (field: string, ...aliases: string[]): string => {
   return readEnv(...aliases);
 };
 
+const readEnvArray = (...keys: string[]): string[] => {
+  const raw = readEnv(...keys);
+  if (!raw) {
+    return [];
+  }
+
+  return raw
+    .split(',')
+    .map((value) => value.trim())
+    .filter((value) => isValidEnvValue(value));
+};
+
 export const environment = {
   production: true,
   CLOUD_NAME: readEnv('NG_APP_CLOUDINARY_CLOUD_NAME'),
   UPLOAD_PRESET: readEnv('NG_APP_UPLOAD_PRESET'),
   CLOUDINARY_API_KEY: readEnv('NG_APP_CLOUDINARY_API_KEY'),
   ia: {
-    model: readEnv('NG_APP_IA_MODEL'),
+    model: readEnv('NG_APP_IA_MODEL', 'IA_MODEL'),
     apiUrl:
-      readEnv('NG_APP_IA_API_URL') ||
+      readEnv('NG_APP_IA_API_URL', 'IA_API_URL') ||
       'https://openrouter.ai/api/v1/chat/completions',
-    apiKey: readEnv('NG_APP_IA_API_KEY'),
+    apiKey: readEnv('NG_APP_IA_API_KEY', 'IA_API_KEY'),
+    fallbackModels: readEnvArray('NG_APP_IA_FALLBACK_MODELS', 'IA_FALLBACK_MODELS'),
   },
   firebase: {
     apiKey: readFirebaseEnv(

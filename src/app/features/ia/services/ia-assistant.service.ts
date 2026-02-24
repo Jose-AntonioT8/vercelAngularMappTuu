@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collection, getDocs } from 'firebase/firestore';
-import { from, map, of, switchMap } from 'rxjs';
+import { catchError, from, map, of, switchMap, throwError } from 'rxjs';
 import { environment } from '../../../environment/environment';
 
 interface IaChatMessage {
@@ -28,6 +28,10 @@ interface IaFirebaseData {
 export class IaAssistantService {
   private firestore = inject(Firestore);
   private http = inject(HttpClient);
+  private readonly defaultFallbackModels = [
+    'meta-llama/llama-3.1-8b-instruct:free',
+    'mistralai/mistral-7b-instruct:free',
+  ];
 
   private readonly allowedTopicPattern =
     /(plan|planes|actividad|actividades|activity|activities|activitytype|activity type|tipo|tipos|ruta|rutas|itinerario|itinerarios)/i;
@@ -66,6 +70,10 @@ export class IaAssistantService {
       'URL:',
       environment.ia.apiUrl,
     );
+    console.log(
+      '[IA] Runtime env model:',
+      (window as any)?.__env__?.NG_APP_IA_MODEL || '(vacío)',
+    );
 
     return from(this.getFirebaseData()).pipe(
       switchMap((firebaseData) => {
@@ -85,33 +93,74 @@ export class IaAssistantService {
           },
         ];
 
-        return this.http
-          .post<IaChatResponse>(
-            environment.ia.apiUrl,
-            {
-              model: model,
-              messages,
-              temperature: 0.2,
-            },
-            {
-              headers: new HttpHeaders({
-                Authorization: `Bearer ${apiKey}`,
-                'Content-Type': 'application/json',
-              }),
-            },
-          )
-          .pipe(
-            map((response) => {
-              const content = response.choices?.[0]?.message?.content?.trim();
-              return (
-                content ||
-                'No he podido generar una respuesta con los datos disponibles.'
-              );
-            }),
-            switchMap((result) => of(result)),
-          );
+        const fallbackModels = [
+          ...(environment.ia.fallbackModels || []),
+          ...this.defaultFallbackModels,
+        ].filter(
+          (candidate, index, all) =>
+            !!candidate && all.indexOf(candidate) === index,
+        );
+
+        return this.requestWithModel(model, messages, apiKey, false).pipe(
+          catchError((error: any) => {
+            if (error?.status !== 404) {
+              return throwError(() => error);
+            }
+
+            const nextModel = fallbackModels.find(
+              (candidate) => candidate !== model,
+            );
+
+            if (!nextModel) {
+              return throwError(() => error);
+            }
+
+            console.warn(
+              '[IA] Modelo principal devolvió 404. Probando fallback:',
+              nextModel,
+            );
+            return this.requestWithModel(nextModel, messages, apiKey, true);
+          }),
+        );
       }),
     );
+  }
+
+  private requestWithModel(
+    model: string,
+    messages: IaChatMessage[],
+    apiKey: string,
+    isFallback: boolean,
+  ) {
+    return this.http
+      .post<IaChatResponse>(
+        environment.ia.apiUrl,
+        {
+          model,
+          messages,
+          temperature: 0.2,
+        },
+        {
+          headers: new HttpHeaders({
+            Authorization: `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+          }),
+        },
+      )
+      .pipe(
+        map((response) => {
+          const content = response.choices?.[0]?.message?.content?.trim();
+          const resolvedContent =
+            content ||
+            'No he podido generar una respuesta con los datos disponibles.';
+
+          if (!isFallback) {
+            return resolvedContent;
+          }
+
+          return `[Usando modelo fallback: ${model}]\n\n${resolvedContent}`;
+        }),
+      );
   }
 
   private async getFirebaseData(): Promise<IaFirebaseData> {

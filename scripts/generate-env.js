@@ -5,11 +5,17 @@ const env = {
   NG_APP_CLOUDINARY_CLOUD_NAME: process.env.NG_APP_CLOUDINARY_CLOUD_NAME || "",
   NG_APP_UPLOAD_PRESET: process.env.NG_APP_UPLOAD_PRESET || "",
   NG_APP_CLOUDINARY_API_KEY: process.env.NG_APP_CLOUDINARY_API_KEY || "",
-  NG_APP_IA_MODEL: process.env.NG_APP_IA_MODEL || "",
+  NG_APP_IA_MODEL: process.env.NG_APP_IA_MODEL || process.env.IA_MODEL || "",
   NG_APP_IA_API_URL:
     process.env.NG_APP_IA_API_URL ||
+    process.env.IA_API_URL ||
     "https://openrouter.ai/api/v1/chat/completions",
-  NG_APP_IA_API_KEY: process.env.NG_APP_IA_API_KEY || "",
+  NG_APP_IA_API_KEY:
+    process.env.NG_APP_IA_API_KEY || process.env.IA_API_KEY || "",
+  NG_APP_IA_FALLBACK_MODELS:
+    process.env.NG_APP_IA_FALLBACK_MODELS ||
+    process.env.IA_FALLBACK_MODELS ||
+    "",
   NG_APP_API_KEY:
     process.env.NG_APP_API_KEY ||
     process.env.NG_APP_FIREBASE_API_KEY ||

@@ -5,6 +5,7 @@ window.__env__ = {
   "NG_APP_IA_MODEL": "",
   "NG_APP_IA_API_URL": "https://openrouter.ai/api/v1/chat/completions",
   "NG_APP_IA_API_KEY": "",
+  "NG_APP_IA_FALLBACK_MODELS": "",
   "NG_APP_API_KEY": "",
   "NG_APP_AUTH_DOMAIN": "",
   "NG_APP_PROJECT_ID": "",
