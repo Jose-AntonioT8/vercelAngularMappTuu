@@ -1,79 +1,80 @@
+<head>
+  <meta charset="utf-8" />
+  <title>MapTuu - Producción</title>
+  <base href="/" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://apis.google.com https://accounts.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://accounts.google.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://vercel-node-mapp-tuu.vercel.app https://api.bigdatacloud.net https://api.cloudinary.com https://*.googleapis.com https://*.firebaseio.com https://firebasestorage.googleapis.com https://firestore.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://api.cloudinary.com/v1_1/dnre5bukm/image/upload https://accounts.google.com; frame-src https://accounts.google.com;"
+  />
+  <!-- Meta tags SEO -->
+  <meta
+    name="description"
+    content="MapTuu es una aplicación para crear, gestionar y compartir planes y actividades sobre mapas de forma sencilla."
+  />
+  <meta
+    name="keywords"
+    content="mapptuu, planes, actividades, mapas, viajes, rutas, ocio"
+  />
+  <meta name="author" content="MapTuu" />
+  <meta name="robots" content="index, follow" />
 
-  <head>
-    <meta charset="utf-8" />
-    <title>MapTuu - Producción</title>
-    <base href="/" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://apis.google.com https://accounts.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://accounts.google.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://vercel-node-mapp-tuu.vercel.app https://api.bigdatacloud.net https://api.cloudinary.com https://*.googleapis.com https://*.firebaseio.com https://firebasestorage.googleapis.com https://firestore.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://api.cloudinary.com/v1_1/dnre5bukm/image/upload https://accounts.google.com; frame-src https://accounts.google.com;">    <!-- Meta tags SEO -->
-    <meta
-      name="description"
-      content="MapTuu es una aplicación para crear, gestionar y compartir planes y actividades sobre mapas de forma sencilla."
-    />
-    <meta
-      name="keywords"
-      content="mapptuu, planes, actividades, mapas, viajes, rutas, ocio"
-    />
-    <meta name="author" content="MapTuu" />
-    <meta name="robots" content="index, follow" />
+  <!-- Open Graph (Redes Sociales) -->
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:url"
+    content="https://vercel-angular-mapp-tuu.vercel.app/landingPage"
+  />
+  <meta property="og:title" content="MapTuu" />
+  <meta
+    property="og:description"
+    content="Crea y comparte tus planes y actividades en mapas interactivos con MapTuu."
+  />
+  <meta
+    property="og:image"
+    content="https://vercel-angular-mapp-tuu.vercel.app/og-image.jpg"
+  />
 
-    <!-- Open Graph (Redes Sociales) -->
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:url"
-      content="https://vercel-angular-mapp-tuu.vercel.app/landingPage"
-    />
-    <meta property="og:title" content="MapTuu" />
-    <meta
-      property="og:description"
-      content="Crea y comparte tus planes y actividades en mapas interactivos con MapTuu."
-    />
-    <meta
-      property="og:image"
-      content="https://vercel-angular-mapp-tuu.vercel.app/og-image.jpg"
-    />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta
+    name="twitter:url"
+    content="https://vercel-angular-mapp-tuu.vercel.app/landingPage"
+  />
+  <meta name="twitter:title" content="MapTuu" />
+  <meta
+    name="twitter:description"
+    content="Crea y comparte tus planes y actividades en mapas interactivos con MapTuu."
+  />
+  <meta
+    name="twitter:image"
+    content="https://vercel-angular-mapp-tuu.vercel.app/twitter-image.jpg"
+  />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:url"
-      content="https://vercel-angular-mapp-tuu.vercel.app/landingPage"
-    />
-    <meta name="twitter:title" content="MapTuu" />
-    <meta
-      name="twitter:description"
-      content="Crea y comparte tus planes y actividades en mapas interactivos con MapTuu."
-    />
-    <meta
-      name="twitter:image"
-      content="https://vercel-angular-mapp-tuu.vercel.app/twitter-image.jpg"
-    />
+  <!-- Tema del navegador (móviles) -->
+  <meta name="theme-color" content="#1976d2" />
 
-    <!-- Tema del navegador (móviles) -->
-    <meta name="theme-color" content="#1976d2" />
+  <!-- PWA (si aplica) -->
+  <link rel="manifest" href="manifest.webmanifest" />
 
-    <!-- PWA (si aplica) -->
-    <link rel="manifest" href="manifest.webmanifest" />
+  <!-- Favicon existente -->
+  <link rel="icon" type="image/png" href="assets/logo/logo.png" />
 
-    <!-- Favicon existente -->
-    <link rel="icon" type="image/png" href="assets/logo/logo.png" />
+  <script src="assets/env.js"></script>
 
-    <script src="assets/env.js"></script>
+  <!-- Preconnect para rendimiento -->
+  <link rel="preconnect" href="https://vercel-node-mapp-tuu.vercel.app" />
+  <link rel="preconnect" href="https://api.bigdatacloud.net" />
+</head>
+<body>
+  <app-root></app-root>
 
-    <!-- Preconnect para rendimiento -->
-    <link rel="preconnect" href="https://vercel-node-mapp-tuu.vercel.app" />
-    <link rel="preconnect" href="https://api.bigdatacloud.net" />
-  </head>
-  <body>
-    <app-root></app-root>
-
-    <!-- Mensaje para usuarios sin JavaScript -->
-    <noscript>
-      <div class="p-5 text-center">        <h1>JavaScript requerido.</h1>
-        <p>Esta aplicación requiere JavaScript para funcionar correctamente.</p>
-        <p>
-          Por favor, habilita JavaScript en tu navegador e intenta de nuevo.
-        </p>
-      </div>
-    </noscript>
-  </body>
-
+  <!-- Mensaje para usuarios sin JavaScript -->
+  <noscript>
+    <div class="p-5 text-center">
+      <h1>JavaScript requerido.</h1>
+      <p>Esta aplicación requiere JavaScript para funcionar correctamente.</p>
+      <p>Por favor, habilita JavaScript en tu navegador e intenta de nuevo.</p>
+    </div>
+  </noscript>
+</body>
