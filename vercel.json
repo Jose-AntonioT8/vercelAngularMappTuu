@@ -14,7 +14,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "connect-src 'self' https://vercel-node-mapp-tuu.vercel.app https://api.bigdatacloud.net https://.googleapis.com https://.firebaseio.com https://firebasestorage.googleapis.com https://firestore.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://accounts.google.com"
+          "value": "connect-src 'self' https://vercel-node-mapp-tuu.vercel.app https://api.bigdatacloud.net https://api.cloudinary.com https://*.googleapis.com https://*.firebaseio.com https://firebasestorage.googleapis.com https://firestore.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://openrouter.ai https://accounts.google.com"
         },
         {
           "key": "X-Frame-Options",
