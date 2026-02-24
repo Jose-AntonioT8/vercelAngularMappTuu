@@ -28,7 +28,7 @@ import { SignupComponent } from './features/user/sign-up/sign-up.component';
 // prettier-ignore
 export const routes: Routes = [
   {path: 'createdPlans', component: CreatedPlansComponent, canActivate: [authGuard]},
-  {path: 'ia', component: IaComponent},
+  {path: 'ia', component: IaComponent, canActivate: [authGuard]},
   {path: 'savedPlans', component: SavedPlansComponent, canActivate: [authGuard]},
   {path: 'savedActivities', component: SavedActivitiesComponent, canActivate: [authGuard]},
   {path : 'maps', component: MapsComponent},
