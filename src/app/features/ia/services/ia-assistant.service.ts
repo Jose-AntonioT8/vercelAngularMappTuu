@@ -29,8 +29,10 @@ export class IaAssistantService {
   private firestore = inject(Firestore);
   private http = inject(HttpClient);
   private readonly defaultFallbackModels = [
-    'meta-llama/llama-3.1-8b-instruct:free',
-    'mistralai/mistral-7b-instruct:free',
+    'openai/gpt-oss-20b:free',
+    'openai/gpt-oss-120b',
+    'meta-llama/llama-3.1-8b-instruct',
+    'mistralai/mistral-7b-instruct',
   ];
 
   private readonly allowedTopicPattern =
@@ -94,6 +96,7 @@ export class IaAssistantService {
         ];
 
         const fallbackModels = [
+          ...this.buildModelVariants(model),
           ...(environment.ia.fallbackModels || []),
           ...this.defaultFallbackModels,
         ].filter(
@@ -161,6 +164,22 @@ export class IaAssistantService {
           return `[Usando modelo fallback: ${model}]\n\n${resolvedContent}`;
         }),
       );
+  }
+
+  private buildModelVariants(model: string): string[] {
+    const variants = [model];
+
+    if (model.endsWith(':free')) {
+      variants.push(model.replace(/:free$/, ''));
+    } else {
+      variants.push(`${model}:free`);
+    }
+
+    if (model.endsWith(':exacto')) {
+      variants.push(model.replace(/:exacto$/, ''));
+    }
+
+    return variants;
   }
 
   private async getFirebaseData(): Promise<IaFirebaseData> {
