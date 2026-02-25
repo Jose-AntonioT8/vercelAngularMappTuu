@@ -10,7 +10,6 @@ import {
   of,
   switchMap,
   throwError,
-  timer,
 } from 'rxjs';
 import { environment } from '../../../environment/environment';
 
@@ -50,7 +49,6 @@ export class IaAssistantService {
   private readonly maxModelAttempts = 3;
   private readonly maxDocsPerCollection = 25;
   private readonly maxFirebaseJsonChars = 15000;
-  private readonly fallbackRetryDelayMs = 2500;
   private readonly defaultFallbackModels = [
     'openai/gpt-oss-20b:free',
     'meta-llama/llama-3.3-70b-instruct:free',
@@ -219,10 +217,7 @@ export class IaAssistantService {
       isFallback,
     ).pipe(
       catchError((error: any): Observable<string> => {
-        const isRateLimit = error?.status === 429;
-        const allowRetryOn429 = isRateLimit && index === 0;
-        const shouldTryNext =
-          error?.status === 402 || error?.status === 404 || allowRetryOn429;
+        const shouldTryNext = error?.status === 402 || error?.status === 404;
         const nextModel = models[index + 1];
 
         if (error?.status === 404) {
@@ -237,17 +232,6 @@ export class IaAssistantService {
           `[IA] Modelo ${currentModel} devolvió ${error?.status}. Probando fallback:`,
           nextModel,
         );
-
-        if (error?.status === 429) {
-          console.info(
-            `[IA] Esperando ${this.fallbackRetryDelayMs}ms antes de reintentar con fallback.`,
-          );
-          return timer(this.fallbackRetryDelayMs).pipe(
-            switchMap(() =>
-              this.requestWithModelChain(models, messages, apiKey, index + 1),
-            ),
-          );
-        }
 
         return this.requestWithModelChain(models, messages, apiKey, index + 1);
       }),
