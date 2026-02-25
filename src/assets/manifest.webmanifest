@@ -9,12 +9,12 @@
   "theme_color": "#1976d2",
   "icons": [
     {
-      "src": "assets/logo/logo.png",
+      "src": "/assets/logo/logo.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "assets/logo/logo.png",
+      "src": "/assets/logo/logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }

@@ -37,7 +37,7 @@ export class IaComponent {
           if (error instanceof HttpErrorResponse) {
             switch (error.status) {
               case 404:
-                this.errorMessage = `❌ 404: Modelo/endpoint no encontrado. Verifica NG_APP_IA_MODEL (ej: meta-llama/llama-3.1-8b-instruct:free) en vars. entorno.`;
+                this.errorMessage = `❌ 404: Modelo/endpoint no encontrado. Verifica NG_APP_IA_MODEL (ej: meta-llama/llama-3.3-70b-instruct:free) en vars. entorno.`;
                 break;
               case 401:
                 this.errorMessage = `❌ 401: API key inválida. Revisa tu NG_APP_IA_API_KEY en variables de entorno de Vercel/local.`;

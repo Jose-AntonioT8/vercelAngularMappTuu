@@ -27,6 +27,12 @@ interface IaChatResponse {
   }>;
 }
 
+interface OpenRouterModelsResponse {
+  data?: Array<{
+    id?: string;
+  }>;
+}
+
 interface IaFirebaseData {
   activity: Array<Record<string, unknown>>;
   activityType: Array<Record<string, unknown>>;
@@ -38,6 +44,10 @@ export class IaAssistantService {
   private firestore = inject(Firestore);
   private http = inject(HttpClient);
   private readonly unavailableModels = new Set<string>();
+  private availableModelsCache: Set<string> | null = null;
+  private availableModelsCachedAt = 0;
+  private readonly availableModelsCacheTtlMs = 10 * 60 * 1000;
+  private readonly maxModelAttempts = 4;
   private readonly fallbackRetryDelayMs = 2500;
   private readonly defaultFallbackModels = [
     'openai/gpt-oss-20b:free',
@@ -125,13 +135,52 @@ export class IaAssistantService {
           (candidate) => !this.unavailableModels.has(candidate),
         );
 
-        return this.requestWithModelChain(
-          availableCandidateModels,
-          messages,
-          apiKey,
+        return this.getAvailableModels().pipe(
+          switchMap((knownModels) => {
+            const validCandidateModels = knownModels
+              ? availableCandidateModels.filter((candidate) =>
+                  knownModels.has(candidate),
+                )
+              : availableCandidateModels;
+
+            const modelsToTry = validCandidateModels.slice(
+              0,
+              this.maxModelAttempts,
+            );
+
+            return this.requestWithModelChain(modelsToTry, messages, apiKey);
+          }),
         );
       }),
     );
+  }
+
+  private getAvailableModels(): Observable<Set<string> | null> {
+    const now = Date.now();
+    const hasFreshCache =
+      this.availableModelsCache &&
+      now - this.availableModelsCachedAt < this.availableModelsCacheTtlMs;
+
+    if (hasFreshCache) {
+      return of(this.availableModelsCache);
+    }
+
+    return this.http
+      .get<OpenRouterModelsResponse>('https://openrouter.ai/api/v1/models')
+      .pipe(
+        map((response) => {
+          const modelIds = (response.data || [])
+            .map((item) => item.id?.trim())
+            .filter((id): id is string => !!id);
+
+          const modelSet = new Set(modelIds);
+          this.availableModelsCache = modelSet;
+          this.availableModelsCachedAt = Date.now();
+
+          return modelSet;
+        }),
+        catchError(() => of(null)),
+      );
   }
 
   private requestWithModelChain(
