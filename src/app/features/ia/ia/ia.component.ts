@@ -42,6 +42,9 @@ export class IaComponent {
               case 401:
                 this.errorMessage = `❌ 401: API key inválida. Revisa tu NG_APP_IA_API_KEY en variables de entorno de Vercel/local.`;
                 break;
+              case 402:
+                this.errorMessage = `❌ 402: El modelo seleccionado requiere créditos. Usa un modelo con sufijo :free o revisa tus fallbacks.`;
+                break;
               case 429:
                 this.errorMessage = `❌ 429: Límite de rate limit alcanzado. Espera un momento e intenta de nuevo.`;
                 break;

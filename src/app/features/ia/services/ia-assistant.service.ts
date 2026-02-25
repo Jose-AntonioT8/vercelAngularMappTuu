@@ -40,9 +40,8 @@ export class IaAssistantService {
   private readonly fallbackRetryDelayMs = 2500;
   private readonly defaultFallbackModels = [
     'openai/gpt-oss-20b:free',
-    'openai/gpt-oss-120b',
-    'meta-llama/llama-3.1-8b-instruct',
-    'mistralai/mistral-7b-instruct',
+    'meta-llama/llama-3.1-8b-instruct:free',
+    'mistralai/mistral-7b-instruct:free',
   ];
 
   private readonly allowedTopicPattern =
@@ -114,7 +113,16 @@ export class IaAssistantService {
             !!candidate && all.indexOf(candidate) === index,
         );
 
-        return this.requestWithModelChain(candidateModels, messages, apiKey);
+        const preferFreeModels = this.isFreeModel(model);
+        const filteredCandidateModels = preferFreeModels
+          ? candidateModels.filter((candidate) => this.isFreeModel(candidate))
+          : candidateModels;
+
+        return this.requestWithModelChain(
+          filteredCandidateModels,
+          messages,
+          apiKey,
+        );
       }),
     );
   }
@@ -145,7 +153,10 @@ export class IaAssistantService {
       isFallback,
     ).pipe(
       catchError((error: any): Observable<string> => {
-        const shouldTryNext = error?.status === 404 || error?.status === 429;
+        const shouldTryNext =
+          error?.status === 402 ||
+          error?.status === 404 ||
+          error?.status === 429;
         const nextModel = models[index + 1];
 
         if (!shouldTryNext || !nextModel) {
@@ -213,9 +224,7 @@ export class IaAssistantService {
   private buildModelVariants(model: string): string[] {
     const variants = [model];
 
-    if (model.endsWith(':free')) {
-      variants.push(model.replace(/:free$/, ''));
-    } else {
+    if (!model.endsWith(':free')) {
       variants.push(`${model}:free`);
     }
 
@@ -224,6 +233,10 @@ export class IaAssistantService {
     }
 
     return variants;
+  }
+
+  private isFreeModel(model: string): boolean {
+    return model.endsWith(':free');
   }
 
   private async getFirebaseData(): Promise<IaFirebaseData> {
