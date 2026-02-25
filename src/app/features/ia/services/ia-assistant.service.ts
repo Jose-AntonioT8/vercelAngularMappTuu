@@ -37,11 +37,14 @@ interface IaFirebaseData {
 export class IaAssistantService {
   private firestore = inject(Firestore);
   private http = inject(HttpClient);
+  private readonly unavailableModels = new Set<string>();
   private readonly fallbackRetryDelayMs = 2500;
   private readonly defaultFallbackModels = [
     'openai/gpt-oss-20b:free',
-    'meta-llama/llama-3.1-8b-instruct:free',
-    'mistralai/mistral-7b-instruct:free',
+    'meta-llama/llama-3.3-70b-instruct:free',
+    'openai/gpt-oss-120b:free',
+    'mistralai/mistral-small-3.1-24b-instruct:free',
+    'google/gemma-3-12b-it:free',
   ];
 
   private readonly allowedTopicPattern =
@@ -65,7 +68,7 @@ export class IaAssistantService {
 
     if (!model || model === '') {
       return of(
-        '❌ Modelo IA no configurado. Define NG_APP_IA_MODEL (ej: meta-llama/llama-3.1-8b-instruct:free) en variables de entorno.',
+        '❌ Modelo IA no configurado. Define NG_APP_IA_MODEL (ej: meta-llama/llama-3.3-70b-instruct:free) en variables de entorno.',
       );
     }
 
@@ -118,8 +121,12 @@ export class IaAssistantService {
           ? candidateModels.filter((candidate) => this.isFreeModel(candidate))
           : candidateModels;
 
+        const availableCandidateModels = filteredCandidateModels.filter(
+          (candidate) => !this.unavailableModels.has(candidate),
+        );
+
         return this.requestWithModelChain(
-          filteredCandidateModels,
+          availableCandidateModels,
           messages,
           apiKey,
         );
@@ -158,6 +165,10 @@ export class IaAssistantService {
           error?.status === 404 ||
           error?.status === 429;
         const nextModel = models[index + 1];
+
+        if (error?.status === 404) {
+          this.unavailableModels.add(currentModel);
+        }
 
         if (!shouldTryNext || !nextModel) {
           return throwError(() => error);
