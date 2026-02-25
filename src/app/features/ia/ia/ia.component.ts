@@ -45,6 +45,9 @@ export class IaComponent {
               case 402:
                 this.errorMessage = `❌ 402: El modelo seleccionado requiere créditos. Usa un modelo con sufijo :free o revisa tus fallbacks.`;
                 break;
+              case 400:
+                this.errorMessage = `❌ 400: Solicitud inválida para el modelo actual (normalmente por límites de contexto o formato). Intenta una pregunta más corta.`;
+                break;
               case 429:
                 this.errorMessage = `❌ 429: Límite de rate limit alcanzado. Espera un momento e intenta de nuevo.`;
                 break;

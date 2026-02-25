@@ -47,7 +47,9 @@ export class IaAssistantService {
   private availableModelsCache: Set<string> | null = null;
   private availableModelsCachedAt = 0;
   private readonly availableModelsCacheTtlMs = 10 * 60 * 1000;
-  private readonly maxModelAttempts = 4;
+  private readonly maxModelAttempts = 3;
+  private readonly maxDocsPerCollection = 25;
+  private readonly maxFirebaseJsonChars = 15000;
   private readonly fallbackRetryDelayMs = 2500;
   private readonly defaultFallbackModels = [
     'openai/gpt-oss-20b:free',
@@ -101,18 +103,26 @@ export class IaAssistantService {
 
     return from(this.getFirebaseData()).pipe(
       switchMap((firebaseData) => {
+        const compactFirebaseData = this.compactFirebaseData(firebaseData);
+        const firebaseDataJson = JSON.stringify(compactFirebaseData);
+
+        const trimmedFirebaseDataJson =
+          firebaseDataJson.length > this.maxFirebaseJsonChars
+            ? `${firebaseDataJson.slice(0, this.maxFirebaseJsonChars)}... [TRUNCADO]`
+            : firebaseDataJson;
+
         const messages: IaChatMessage[] = [
           {
             role: 'system',
             content:
-              'Eres un asistente de MappTuu. Solo puedes responder usando como fuente de datos las colecciones de Firebase activity, activityType y plans. Si la pregunta no trata de planes o actividades, debes rechazarla brevemente. Si no hay información suficiente en los datos, responde que no está disponible en Firebase.',
+              'Eres un asistente de MappTuu. Solo puedes responder usando como fuente de datos las colecciones de Firebase activity, activityType y plans. Si la pregunta no trata de planes o actividades, debes rechazarla brevemente. Si no hay información suficiente en los datos, responde que no está disponible en Firebase. Los datos pueden venir resumidos o truncados para evitar límites del modelo.',
           },
           {
             role: 'user',
             content: [
               `Pregunta: ${cleanQuestion}`,
               'Datos Firebase (fuente única):',
-              JSON.stringify(firebaseData),
+              trimmedFirebaseDataJson,
             ].join('\n\n'),
           },
         ];
@@ -209,10 +219,10 @@ export class IaAssistantService {
       isFallback,
     ).pipe(
       catchError((error: any): Observable<string> => {
+        const isRateLimit = error?.status === 429;
+        const allowRetryOn429 = isRateLimit && index === 0;
         const shouldTryNext =
-          error?.status === 402 ||
-          error?.status === 404 ||
-          error?.status === 429;
+          error?.status === 402 || error?.status === 404 || allowRetryOn429;
         const nextModel = models[index + 1];
 
         if (error?.status === 404) {
@@ -297,6 +307,17 @@ export class IaAssistantService {
 
   private isFreeModel(model: string): boolean {
     return model.endsWith(':free');
+  }
+
+  private compactFirebaseData(firebaseData: IaFirebaseData): IaFirebaseData {
+    return {
+      activity: firebaseData.activity.slice(0, this.maxDocsPerCollection),
+      activityType: firebaseData.activityType.slice(
+        0,
+        this.maxDocsPerCollection,
+      ),
+      plans: firebaseData.plans.slice(0, this.maxDocsPerCollection),
+    };
   }
 
   private async getFirebaseData(): Promise<IaFirebaseData> {
