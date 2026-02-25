@@ -2,7 +2,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { collection, getDocs } from 'firebase/firestore';
-import { catchError, from, map, of, switchMap, throwError } from 'rxjs';
+import {
+  Observable,
+  catchError,
+  from,
+  map,
+  of,
+  switchMap,
+  throwError,
+  timer,
+} from 'rxjs';
 import { environment } from '../../../environment/environment';
 
 interface IaChatMessage {
@@ -28,6 +37,7 @@ interface IaFirebaseData {
 export class IaAssistantService {
   private firestore = inject(Firestore);
   private http = inject(HttpClient);
+  private readonly fallbackRetryDelayMs = 2500;
   private readonly defaultFallbackModels = [
     'openai/gpt-oss-20b:free',
     'openai/gpt-oss-120b',
@@ -95,7 +105,7 @@ export class IaAssistantService {
           },
         ];
 
-        const fallbackModels = [
+        const candidateModels = [
           ...this.buildModelVariants(model),
           ...(environment.ia.fallbackModels || []),
           ...this.defaultFallbackModels,
@@ -104,27 +114,61 @@ export class IaAssistantService {
             !!candidate && all.indexOf(candidate) === index,
         );
 
-        return this.requestWithModel(model, messages, apiKey, false).pipe(
-          catchError((error: any) => {
-            if (error?.status !== 404) {
-              return throwError(() => error);
-            }
+        return this.requestWithModelChain(candidateModels, messages, apiKey);
+      }),
+    );
+  }
 
-            const nextModel = fallbackModels.find(
-              (candidate) => candidate !== model,
-            );
+  private requestWithModelChain(
+    models: string[],
+    messages: IaChatMessage[],
+    apiKey: string,
+    index = 0,
+  ): Observable<string> {
+    const currentModel = models[index];
 
-            if (!nextModel) {
-              return throwError(() => error);
-            }
+    if (!currentModel) {
+      return throwError(
+        () =>
+          new Error(
+            'No hay modelos disponibles para responder en este momento.',
+          ),
+      );
+    }
 
-            console.warn(
-              '[IA] Modelo principal devolvió 404. Probando fallback:',
-              nextModel,
-            );
-            return this.requestWithModel(nextModel, messages, apiKey, true);
-          }),
+    const isFallback = index > 0;
+
+    return this.requestWithModel(
+      currentModel,
+      messages,
+      apiKey,
+      isFallback,
+    ).pipe(
+      catchError((error: any): Observable<string> => {
+        const shouldTryNext = error?.status === 404 || error?.status === 429;
+        const nextModel = models[index + 1];
+
+        if (!shouldTryNext || !nextModel) {
+          return throwError(() => error);
+        }
+
+        console.warn(
+          `[IA] Modelo ${currentModel} devolvió ${error?.status}. Probando fallback:`,
+          nextModel,
         );
+
+        if (error?.status === 429) {
+          console.info(
+            `[IA] Esperando ${this.fallbackRetryDelayMs}ms antes de reintentar con fallback.`,
+          );
+          return timer(this.fallbackRetryDelayMs).pipe(
+            switchMap(() =>
+              this.requestWithModelChain(models, messages, apiKey, index + 1),
+            ),
+          );
+        }
+
+        return this.requestWithModelChain(models, messages, apiKey, index + 1);
       }),
     );
   }
