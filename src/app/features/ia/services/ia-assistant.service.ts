@@ -7,8 +7,11 @@ import {
   catchError,
   from,
   map,
+  mergeMap,
   of,
+  retryWhen,
   switchMap,
+  timer,
   throwError,
 } from 'rxjs';
 import { environment } from '../../../environment/environment';
@@ -260,6 +263,22 @@ export class IaAssistantService {
         },
       )
       .pipe(
+        retryWhen((errors) =>
+          errors.pipe(
+            mergeMap((err: any, attempt: number) => {
+              if (err?.status !== 429 || attempt >= 3) {
+                return throwError(() => err);
+              }
+
+              const delayMs = 10000 * Math.pow(2, attempt);
+              console.log(
+                `429 - esperando ${delayMs / 1000}s antes de reintentar`,
+              );
+
+              return timer(delayMs);
+            }),
+          ),
+        ),
         map((response) => {
           const content = response.choices?.[0]?.message?.content?.trim();
           const resolvedContent =
