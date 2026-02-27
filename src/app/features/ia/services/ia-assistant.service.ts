@@ -52,13 +52,6 @@ export class IaAssistantService {
   private readonly maxModelAttempts = 3;
   private readonly maxDocsPerCollection = 25;
   private readonly maxFirebaseJsonChars = 15000;
-  private readonly defaultFallbackModels = [
-    'openai/gpt-oss-20b:free',
-    'meta-llama/llama-3.3-70b-instruct:free',
-    'openai/gpt-oss-120b:free',
-    'mistralai/mistral-small-3.1-24b-instruct:free',
-    'google/gemma-3-12b-it:free',
-  ];
 
   private readonly allowedTopicPattern =
     /(plan|planes|actividad|actividades|activity|activities|activitytype|activity type|tipo|tipos|ruta|rutas|itinerario|itinerarios)/i;
@@ -91,12 +84,7 @@ export class IaAssistantService {
       );
     }
 
-    console.log(
-      '[IA] Llamando OpenRouter con modelo:',
-      model,
-      'URL:',
-      environment.ia.apiUrl,
-    );
+    console.log(model, 'URL:', environment.ia.apiUrl);
     console.log(
       '[IA] Runtime env model:',
       (window as any)?.__env__?.NG_APP_IA_MODEL || '(vacío)',
@@ -131,7 +119,6 @@ export class IaAssistantService {
         const candidateModels = [
           ...this.buildModelVariants(model),
           ...(environment.ia.fallbackModels || []),
-          ...this.defaultFallbackModels,
         ].filter(
           (candidate, index, all) =>
             !!candidate && all.indexOf(candidate) === index,
