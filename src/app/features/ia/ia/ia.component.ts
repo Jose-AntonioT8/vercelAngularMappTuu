@@ -37,13 +37,13 @@ export class IaComponent {
           if (error instanceof HttpErrorResponse) {
             switch (error.status) {
               case 404:
-                this.errorMessage = `❌ 404: Modelo/endpoint no encontrado. Verifica NG_APP_IA_MODEL (ej: meta-llama/llama-3.3-70b-instruct:free) en vars. entorno.`;
+                this.errorMessage = `❌ 404: Modelo o endpoint no encontrado. Verifica NG_APP_IA_MODEL/IA_MODEL y NG_APP_IA_API_URL/IA_API_URL.`;
                 break;
               case 401:
                 this.errorMessage = `❌ 401: API key inválida. Revisa tu NG_APP_IA_API_KEY en variables de entorno de Vercel/local.`;
                 break;
               case 402:
-                this.errorMessage = `❌ 402: El modelo seleccionado requiere créditos. Usa un modelo con sufijo :free o revisa tus fallbacks.`;
+                this.errorMessage = `❌ 402: El proveedor IA requiere créditos o plan activo para ese modelo. Prueba otro modelo o revisa tu cuenta.`;
                 break;
               case 400:
                 this.errorMessage = `❌ 400: Solicitud inválida para el modelo actual (normalmente por límites de contexto o formato). Intenta una pregunta más corta.`;
@@ -52,7 +52,7 @@ export class IaComponent {
                 this.errorMessage = `❌ 429: Límite de rate limit alcanzado. Espera un momento e intenta de nuevo.`;
                 break;
               case 500:
-                this.errorMessage = `❌ 500: Error del servidor OpenRouter. Intenta en unos momentos.`;
+                this.errorMessage = `❌ 500: Error del servidor Groq. Intenta en unos momentos.`;
                 break;
               default:
                 this.errorMessage = `❌ Error HTTP ${error.status}: ${error.message}`;

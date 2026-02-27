@@ -9,7 +9,7 @@ const env = {
   NG_APP_IA_API_URL:
     process.env.NG_APP_IA_API_URL ||
     process.env.IA_API_URL ||
-    "https://openrouter.ai/api/v1/chat/completions",
+    "https://api.groq.com/openai/v1/chat/completions",
   NG_APP_IA_API_KEY:
     process.env.NG_APP_IA_API_KEY || process.env.IA_API_KEY || "",
   NG_APP_IA_FALLBACK_MODELS:

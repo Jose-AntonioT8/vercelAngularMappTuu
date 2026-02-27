@@ -11,8 +11,8 @@ import {
   of,
   retryWhen,
   switchMap,
-  timer,
   throwError,
+  timer,
 } from 'rxjs';
 import { environment } from '../../../environment/environment';
 
@@ -29,12 +29,6 @@ interface IaChatResponse {
   }>;
 }
 
-interface OpenRouterModelsResponse {
-  data?: Array<{
-    id?: string;
-  }>;
-}
-
 interface IaFirebaseData {
   activity: Array<Record<string, unknown>>;
   activityType: Array<Record<string, unknown>>;
@@ -46,9 +40,6 @@ export class IaAssistantService {
   private firestore = inject(Firestore);
   private http = inject(HttpClient);
   private readonly unavailableModels = new Set<string>();
-  private availableModelsCache: Set<string> | null = null;
-  private availableModelsCachedAt = 0;
-  private readonly availableModelsCacheTtlMs = 10 * 60 * 1000;
   private readonly maxModelAttempts = 3;
   private readonly maxDocsPerCollection = 25;
   private readonly maxFirebaseJsonChars = 15000;
@@ -71,6 +62,8 @@ export class IaAssistantService {
 
     const model = environment.ia.model?.trim();
     const apiKey = environment.ia.apiKey?.trim();
+    const rawApiUrl = environment.ia.apiUrl?.trim();
+    const apiUrl = this.resolveChatCompletionsUrl(rawApiUrl);
 
     if (!model || model === '') {
       return of(
@@ -80,11 +73,17 @@ export class IaAssistantService {
 
     if (!apiKey || apiKey === '') {
       return of(
-        '❌ API key no configurada. Define NG_APP_IA_API_KEY en variables de entorno (obtén gratis en openrouter.ai).',
+        '❌ API key no configurada. Define NG_APP_IA_API_KEY (o IA_API_KEY) en variables de entorno.',
       );
     }
 
-    console.log(model, 'URL:', environment.ia.apiUrl);
+    if (!apiUrl) {
+      return of(
+        '❌ URL de IA no configurada. Define NG_APP_IA_API_URL (o IA_API_URL) en variables de entorno.',
+      );
+    }
+
+    console.log(model, 'URL:', apiUrl);
     console.log(
       '[IA] Runtime env model:',
       (window as any)?.__env__?.NG_APP_IA_MODEL || '(vacío)',
@@ -117,74 +116,38 @@ export class IaAssistantService {
         ];
 
         const candidateModels = [
-          ...this.buildModelVariants(model),
+          model,
           ...(environment.ia.fallbackModels || []),
         ].filter(
           (candidate, index, all) =>
             !!candidate && all.indexOf(candidate) === index,
         );
 
-        const preferFreeModels = this.isFreeModel(model);
-        const filteredCandidateModels = preferFreeModels
-          ? candidateModels.filter((candidate) => this.isFreeModel(candidate))
-          : candidateModels;
-
-        const availableCandidateModels = filteredCandidateModels.filter(
+        const availableCandidateModels = candidateModels.filter(
           (candidate) => !this.unavailableModels.has(candidate),
         );
 
-        return this.getAvailableModels().pipe(
-          switchMap((knownModels) => {
-            const validCandidateModels = knownModels
-              ? availableCandidateModels.filter((candidate) =>
-                  knownModels.has(candidate),
-                )
-              : availableCandidateModels;
+        const modelsToTry = (
+          availableCandidateModels.length > 0
+            ? availableCandidateModels
+            : candidateModels
+        ).slice(0, this.maxModelAttempts);
 
-            const modelsToTry = validCandidateModels.slice(
-              0,
-              this.maxModelAttempts,
-            );
-
-            return this.requestWithModelChain(modelsToTry, messages, apiKey);
-          }),
+        return this.requestWithModelChain(
+          modelsToTry,
+          messages,
+          apiKey,
+          apiUrl,
         );
       }),
     );
-  }
-
-  private getAvailableModels(): Observable<Set<string> | null> {
-    const now = Date.now();
-    const hasFreshCache =
-      this.availableModelsCache &&
-      now - this.availableModelsCachedAt < this.availableModelsCacheTtlMs;
-
-    if (hasFreshCache) {
-      return of(this.availableModelsCache);
-    }
-
-    return this.http
-      .get<OpenRouterModelsResponse>('https://openrouter.ai/api/v1/models')
-      .pipe(
-        map((response) => {
-          const modelIds = (response.data || [])
-            .map((item) => item.id?.trim())
-            .filter((id): id is string => !!id);
-
-          const modelSet = new Set(modelIds);
-          this.availableModelsCache = modelSet;
-          this.availableModelsCachedAt = Date.now();
-
-          return modelSet;
-        }),
-        catchError(() => of(null)),
-      );
   }
 
   private requestWithModelChain(
     models: string[],
     messages: IaChatMessage[],
     apiKey: string,
+    apiUrl: string,
     index = 0,
   ): Observable<string> {
     const currentModel = models[index];
@@ -204,6 +167,7 @@ export class IaAssistantService {
       currentModel,
       messages,
       apiKey,
+      apiUrl,
       isFallback,
     ).pipe(
       catchError((error: any): Observable<string> => {
@@ -223,7 +187,13 @@ export class IaAssistantService {
           nextModel,
         );
 
-        return this.requestWithModelChain(models, messages, apiKey, index + 1);
+        return this.requestWithModelChain(
+          models,
+          messages,
+          apiKey,
+          apiUrl,
+          index + 1,
+        );
       }),
     );
   }
@@ -232,11 +202,12 @@ export class IaAssistantService {
     model: string,
     messages: IaChatMessage[],
     apiKey: string,
+    apiUrl: string,
     isFallback: boolean,
   ) {
     return this.http
       .post<IaChatResponse>(
-        environment.ia.apiUrl,
+        apiUrl,
         {
           model,
           messages,
@@ -281,22 +252,17 @@ export class IaAssistantService {
       );
   }
 
-  private buildModelVariants(model: string): string[] {
-    const variants = [model];
-
-    if (!model.endsWith(':free')) {
-      variants.push(`${model}:free`);
+  private resolveChatCompletionsUrl(apiUrl?: string): string {
+    const raw = (apiUrl || '').trim();
+    if (!raw) {
+      return '';
     }
 
-    if (model.endsWith(':exacto')) {
-      variants.push(model.replace(/:exacto$/, ''));
+    if (/\/models\/?$/i.test(raw)) {
+      return raw.replace(/\/models\/?$/i, '/chat/completions');
     }
 
-    return variants;
-  }
-
-  private isFreeModel(model: string): boolean {
-    return model.endsWith(':free');
+    return raw;
   }
 
   private compactFirebaseData(firebaseData: IaFirebaseData): IaFirebaseData {

@@ -69,9 +69,12 @@ export const environment = {
     model: readEnv('NG_APP_IA_MODEL', 'IA_MODEL'),
     apiUrl:
       readEnv('NG_APP_IA_API_URL', 'IA_API_URL') ||
-      'https://openrouter.ai/api/v1/chat/completions',
+      'https://api.groq.com/openai/v1/chat/completions',
     apiKey: readEnv('NG_APP_IA_API_KEY', 'IA_API_KEY'),
-    fallbackModels: readEnvArray('NG_APP_IA_FALLBACK_MODELS', 'IA_FALLBACK_MODELS'),
+    fallbackModels: readEnvArray(
+      'NG_APP_IA_FALLBACK_MODELS',
+      'IA_FALLBACK_MODELS',
+    ),
   },
   firebase: {
     apiKey: readFirebaseEnv(
