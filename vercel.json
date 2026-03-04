@@ -1,8 +1,12 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run build && npm run docs:build",
   "outputDirectory": "dist/map-tuu/browser",
   "framework": "angular",
   "rewrites": [
+    {
+      "source": "/documentation/:path*",
+      "destination": "/documentation/:path*"
+    },
     {
       "source": "/:path*",
       "destination": "/index.html"

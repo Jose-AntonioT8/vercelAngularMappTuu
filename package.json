@@ -2,16 +2,16 @@
   "name": "map-tuu",
   "version": "0.0.0",
   "scripts": {
-    "prestart": "node scripts/generate-env.js",
-    "ng": "ng",
-    "start": "ng serve",
-    "prebuild": "node scripts/generate-env.js",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "docs": "compodoc -p tsconfig.doc.json",
-    "docs:serve": "compodoc -p tsconfig.doc.json -s",
-    "docs:build": "compodoc -p tsconfig.doc.json --output docs"
+  "prestart": "node scripts/generate-env.js",
+  "ng": "ng",
+  "start": "ng serve",
+  "prebuild": "node scripts/generate-env.js",
+  "build": "ng build",
+  "watch": "ng build --watch --configuration development",
+  "test": "ng test",
+  "docs": "compodoc -p tsconfig.doc.json",
+  "docs:serve": "compodoc -p tsconfig.doc.json -s",
+  "docs:build": "compodoc -p tsconfig.doc.json --output dist/map-tuu/browser/documentation"
   },
   "private": true,
   "dependencies": {
