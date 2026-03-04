@@ -1,4 +1,10 @@
 {
+  "ia":{
+    "title": "AI Assistant for plans and activities",
+    "description": "Ask me about interesting plans and activities to do",
+    "question": "Your question...",
+    "answer": "Answer"
+  },
   "common": {
     "appName": "MappTuu",
     "search": "Search",
@@ -22,6 +28,7 @@
     "date": "Date: "
   },
   "header": {
+    "ia":"AI",
     "loginButton": "Sign In",
     "home": "Home",
     "explore": "Explore",

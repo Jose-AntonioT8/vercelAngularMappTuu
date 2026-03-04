@@ -4,12 +4,14 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { catchError, finalize, of } from 'rxjs';
 import { HeaderComponent } from '../../../common/header/header.component';
-import { IaAssistantService } from '../services/ia-assistant.service';
+import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
+import { TranslatePipe } from '../../../core/pipes/translate.pipe';
+import { IaAssistantService } from '../../../core/services/ia-assistant.service';
 
 @Component({
   selector: 'app-ia',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent],
+  imports: [CommonModule, FormsModule, HeaderComponent, TranslatePipe, LanguageSelectorComponent],
   templateUrl: './ia.component.html',
   styleUrl: './ia.component.scss',
 })

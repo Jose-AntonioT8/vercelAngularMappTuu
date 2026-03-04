@@ -5,17 +5,15 @@
     class="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8"
   >
     <h1 class="text-2xl md:text-3xl font-bold text-slate-900">
-      Asistente IA de planes y actividades
+      {{ 'ia.title' | translate }}
     </h1>
     <p class="mt-2 text-slate-600">
-      Solo responde sobre planes, actividades y tipos de actividad usando
-      Firebase.
+      {{ 'ia.description' | translate }}
     </p>
 
     <div class="mt-6 space-y-3">
       <label for="ia-question" class="block text-sm font-medium text-slate-700"
-        >Tu pregunta</label
-      >
+        >{{ 'ia.question' | translate }}</label>
       <textarea
         id="ia-question"
         [(ngModel)]="question"
@@ -43,7 +41,7 @@
       *ngIf="answer"
       class="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-4"
     >
-      <h2 class="text-sm font-semibold text-slate-800 mb-2">Respuesta</h2>
+      <h2 class="text-sm font-semibold text-slate-800 mb-2">{{ 'ia.answer' | translate }}</h2>
       <p class="text-slate-700 whitespace-pre-wrap">{{ answer }}</p>
     </article>
   </section>

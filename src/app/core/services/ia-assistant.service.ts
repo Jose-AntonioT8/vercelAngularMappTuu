@@ -14,7 +14,7 @@ import {
   throwError,
   timer,
 } from 'rxjs';
-import { environment } from '../../../environment/environment';
+import { environment } from '../../../app/environment/environment';
 
 interface IaChatMessage {
   role: 'system' | 'user';

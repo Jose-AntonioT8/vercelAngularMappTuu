@@ -1,4 +1,10 @@
 {
+  "ia":{
+    "title": "Asistente de IA de planes y actividades",
+    "description": "Preguntame sobre planes y actividades interasantes que hacer",
+    "question": "Tu pregunta...",
+    "answer": "Respuesta"
+  },
   "common": {
     "appName": "MappTuu",
     "search": "Buscar",
@@ -20,6 +26,7 @@
     "date": "Fecha: "
   },
   "header": {
+    "ia":"IA",
     "loginButton": "Iniciar sesión",
     "home": "Inicio",
     "explore": "Explorar",

@@ -1,4 +1,10 @@
 {
+  "ia":{
+    "title": "KI-Assistent für Pläne und Aktivitäten",
+    "description": "Frag mich nach interessanten Plänen und Aktivitäten",
+    "question": "Deine Frage...",
+    "answer": "Antwort"
+  },
   "common": {
     "appName": "MappTuu",
     "search": "Suchen",
@@ -22,6 +28,7 @@
     "date": "Datum: "
   },
   "header": {
+    "ia":"KI",
     "loginButton": "Anmelden",
     "home": "Startseite",
     "explore": "Entdecken",
