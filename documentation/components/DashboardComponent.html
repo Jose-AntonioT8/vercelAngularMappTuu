@@ -1,0 +1,914 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>map-tuu documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">map-tuu documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  DashboardComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/dashboard/dashboard.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-dashboard</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                            <code>TranslatePipe</code>
+                                <code><a href="../components/LanguageSelectorComponent.html" target="_self" >LanguageSelectorComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./dashboard.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./dashboard.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#createActivities" >createActivities</a>
+                            </li>
+                            <li>
+                                <a href="#createActivitiesTypes" >createActivitiesTypes</a>
+                            </li>
+                            <li>
+                                <a href="#createPlans" >createPlans</a>
+                            </li>
+                            <li>
+                                <a href="#logOut" >logOut</a>
+                            </li>
+                            <li>
+                                <a href="#viewAcctivities" >viewAcctivities</a>
+                            </li>
+                            <li>
+                                <a href="#viewActivitiesTypes" >viewActivitiesTypes</a>
+                            </li>
+                            <li>
+                                <a href="#viewPlans" >viewPlans</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(auth: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/features/dashboard/dashboard.component.ts:17</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>auth</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createActivities"></a>
+                    <span class="name">
+                        <span ><b>createActivities</b></span>
+                        <a href="#createActivities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createActivities()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="28"
+                                    class="link-to-prism">src/app/features/dashboard/dashboard.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createActivitiesTypes"></a>
+                    <span class="name">
+                        <span ><b>createActivitiesTypes</b></span>
+                        <a href="#createActivitiesTypes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createActivitiesTypes()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="36"
+                                    class="link-to-prism">src/app/features/dashboard/dashboard.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createPlans"></a>
+                    <span class="name">
+                        <span ><b>createPlans</b></span>
+                        <a href="#createPlans"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createPlans()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="43"
+                                    class="link-to-prism">src/app/features/dashboard/dashboard.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logOut"></a>
+                    <span class="name">
+                        <span ><b>logOut</b></span>
+                        <a href="#logOut"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logOut()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="23"
+                                    class="link-to-prism">src/app/features/dashboard/dashboard.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewAcctivities"></a>
+                    <span class="name">
+                        <span ><b>viewAcctivities</b></span>
+                        <a href="#viewAcctivities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>viewAcctivities()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="32"
+                                    class="link-to-prism">src/app/features/dashboard/dashboard.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewActivitiesTypes"></a>
+                    <span class="name">
+                        <span ><b>viewActivitiesTypes</b></span>
+                        <a href="#viewActivitiesTypes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>viewActivitiesTypes()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/app/features/dashboard/dashboard.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="viewPlans"></a>
+                    <span class="name">
+                        <span ><b>viewPlans</b></span>
+                        <a href="#viewPlans"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>viewPlans()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/features/dashboard/dashboard.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import{ Router } from &#x27;@angular/router&#x27;;
+import { AuthService } from &#x27;../../core/services/auth.service&#x27;;
+import { RouterModule } from &#x27;@angular/router&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { TranslatePipe } from &#x27;../../core/pipes/translate.pipe&#x27;;
+import { LanguageSelectorComponent } from &#x27;../../common/language-selector/language-selector.component&#x27;;
+
+  
+@Component({
+  selector: &#x27;app-dashboard&#x27;,
+  standalone: true,
+  imports: [RouterModule, CommonModule, TranslatePipe, LanguageSelectorComponent],
+  templateUrl: &#x27;./dashboard.component.html&#x27;,
+  styleUrl: &#x27;./dashboard.component.scss&#x27;
+})
+export class DashboardComponent {
+  constructor(
+    private auth: AuthService,
+    private route: Router
+  ){
+  }
+ logOut(){
+     this.route.navigate([&#x27;/landingPage&#x27;])
+    this.auth.logout()
+  }
+
+  createActivities(){
+    this.route.navigate([&#x27;/activitiesCreation&#x27;])
+  }
+
+  viewAcctivities(){
+    this.route.navigate([&#x27;/activitiesList&#x27;])
+  }
+
+  createActivitiesTypes(){
+    this.route.navigate([&#x27;/activityTypesCreation&#x27;])
+  }
+  viewActivitiesTypes(){
+    this.route.navigate([&#x27;/activityTypesList&#x27;])
+  }
+
+  createPlans(){
+    this.route.navigate([&#x27;/plansCreation&#x27;])
+  }
+  viewPlans(){
+    this.route.navigate([&#x27;/plansList&#x27;])
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;es&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot; /&gt;
+    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot; /&gt;
+    &lt;title&gt;Dashboard&lt;/title&gt;
+    &lt;script src&#x3D;&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;
+      /* Fix para altura completa */
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+
+      /* Estilos reutilizables para los botones 3D */
+      .btn-3d {
+        box-shadow: 0 6px 0 rgb(173, 173, 173), 0 8px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.1s;
+      }
+      .btn-3d:active {
+        box-shadow: 0 2px 0 rgb(173, 173, 173), 0 4px 10px rgba(0, 0, 0, 0.2);
+        transform: translateY(4px);
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;main&gt;
+      &lt;div
+        class&#x3D;&quot;min-h-screen w-full bg-cover bg-center text-white font-[&#x27;Inter&#x27;] relative flex flex-col&quot;
+        style&#x3D;&quot;
+          background-image: url(&#x27;/assets/icons/fondorealista.jpeg&#x27;);
+          background-attachment: fixed;
+        &quot;
+      &gt;
+        &lt;div class&#x3D;&quot;absolute inset-0 bg-black/10 z-0&quot;&gt;&lt;/div&gt;
+
+        &lt;header class&#x3D;&quot;absolute top-4 left-4 right-4 flex justify-between items-center z-50&quot;&gt;
+          
+          &lt;a 
+            [routerLink]&#x3D;&quot;[&#x27;/landingPage&#x27;]&quot; 
+            class&#x3D;&quot;flex items-center space-x-2 text-base font-bold bg-white px-3 py-1.5 rounded-full shadow-lg hover:opacity-80 transition-opacity cursor-pointer&quot;
+          &gt;
+            &lt;img
+              src&#x3D;&quot;/assets/logo/logo.png&quot;
+              alt&#x3D;&quot;Logo&quot;
+              class&#x3D;&quot;w-10 h-10 md:w-14 md:h-14 object-contain&quot;
+            /&gt;
+            &lt;span class&#x3D;&quot;text-gray-900&quot;&gt;MappTuu&lt;/span&gt;
+          &lt;/a&gt;
+
+          &lt;div class&#x3D;&quot;flex items-center gap-4 relative z-50&quot;&gt;
+            &lt;div class&#x3D;&quot;relative z-50&quot;&gt;
+              &lt;app-language-selector&gt;&lt;/app-language-selector&gt;
+            &lt;/div&gt;
+
+            &lt;a
+              [routerLink]&#x3D;&quot;[&#x27;/profile&#x27;]&quot;
+              aria-label&#x3D;&quot;redirect to profile&quot;
+              class&#x3D;&quot;text-gray-900 bg-white p-2 rounded-full shadow-lg hover:opacity-80 transition-opacity flex items-center justify-center&quot;
+            &gt;
+              &lt;svg
+                width&#x3D;&quot;24&quot;
+                height&#x3D;&quot;24&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                stroke-width&#x3D;&quot;2&quot;
+                stroke-linecap&#x3D;&quot;round&quot;
+                stroke-linejoin&#x3D;&quot;round&quot;
+                class&#x3D;&quot;feather feather-user&quot;
+              &gt;
+                &lt;path d&#x3D;&quot;M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2&quot;&gt;&lt;/path&gt;
+                &lt;circle cx&#x3D;&quot;12&quot; cy&#x3D;&quot;7&quot; r&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
+              &lt;/svg&gt;
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/header&gt;
+&lt;!--dsfdfs--&gt;
+        &lt;div class&#x3D;&quot;relative z-10 flex flex-grow flex-col items-center justify-center pt-24 pb-10 px-4 w-full&quot;&gt;
+          
+          &lt;h1 class&#x3D;&quot;text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-wider mb-8 drop-shadow-lg text-center max-w-4xl&quot;&gt;
+            {{ &#x27;dashboard.title&#x27; | translate }}
+          &lt;/h1&gt;
+          
+          &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl&quot;&gt;
+            
+            &lt;div class&#x3D;&quot;bg-black/40 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-white/10&quot;&gt;
+              &lt;h2 class&#x3D;&quot;text-xl md:text-2xl font-bold mb-6 text-center border-b-2 border-white/50 pb-3 drop-shadow-md&quot;&gt;
+                {{ &#x27;dashboard.activities&#x27; | translate }}
+              &lt;/h2&gt;
+              &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+                &lt;button
+                  (click)&#x3D;&quot;createActivities()&quot;
+                  class&#x3D;&quot;w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none&quot;
+                &gt;
+                  {{ &#x27;dashboard.createActivities&#x27; | translate }}
+                &lt;/button&gt;
+                &lt;button
+                  (click)&#x3D;&quot;viewAcctivities()&quot;
+                  class&#x3D;&quot;w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none&quot;
+                &gt;
+                  {{ &#x27;dashboard.viewActivities&#x27; | translate }}
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;bg-black/40 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-white/10&quot;&gt;
+              &lt;h2 class&#x3D;&quot;text-xl md:text-2xl font-bold mb-6 text-center border-b-2 border-white/50 pb-3 drop-shadow-md&quot;&gt;
+                {{ &#x27;dashboard.activityTypes&#x27; | translate }}
+              &lt;/h2&gt;
+              &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+                &lt;button
+                  (click)&#x3D;&quot;createActivitiesTypes()&quot;
+                  class&#x3D;&quot;w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none&quot;
+                &gt;
+                  {{ &#x27;dashboard.createActivityTypes&#x27; | translate }}
+                &lt;/button&gt;
+                &lt;button
+                  (click)&#x3D;&quot;viewActivitiesTypes()&quot;
+                  class&#x3D;&quot;w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none&quot;
+                &gt;
+                  {{ &#x27;dashboard.viewActivityTypes&#x27; | translate }}
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;bg-black/40 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-white/10&quot;&gt;
+              &lt;h2 class&#x3D;&quot;text-xl md:text-2xl font-bold mb-6 text-center border-b-2 border-white/50 pb-3 drop-shadow-md&quot;&gt;
+                {{ &#x27;dashboard.plans&#x27; | translate }}
+              &lt;/h2&gt;
+              &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
+                &lt;button
+                  (click)&#x3D;&quot;createPlans()&quot;
+                  class&#x3D;&quot;w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none&quot;
+                &gt;
+                  {{ &#x27;dashboard.createPlans&#x27; | translate }}
+                &lt;/button&gt;
+                &lt;button
+                  (click)&#x3D;&quot;viewPlans()&quot;
+                  class&#x3D;&quot;w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none&quot;
+                &gt;
+                  {{ &#x27;dashboard.viewPlans&#x27; | translate }}
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;h-8 w-full&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!DOCTYPE html><html lang="es">  <head>    <meta charset="UTF-8" />    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    <title>Dashboard</title>    <script src="https://cdn.tailwindcss.com"></script>    <style>      /* Fix para altura completa */      html, body {        height: 100%;        margin: 0;      }      /* Estilos reutilizables para los botones 3D */      .btn-3d {        box-shadow: 0 6px 0 rgb(173, 173, 173), 0 8px 15px rgba(0, 0, 0, 0.2);        transition: all 0.1s;      }      .btn-3d:active {        box-shadow: 0 2px 0 rgb(173, 173, 173), 0 4px 10px rgba(0, 0, 0, 0.2);        transform: translateY(4px);      }    </style>  </head>  <body>    <main>      <div        class="min-h-screen w-full bg-cover bg-center text-white font-[\'Inter\'] relative flex flex-col"        style="          background-image: url(\'/assets/icons/fondorealista.jpeg\');          background-attachment: fixed;        "      >        <div class="absolute inset-0 bg-black/10 z-0"></div>        <header class="absolute top-4 left-4 right-4 flex justify-between items-center z-50">                    <a             [routerLink]="[\'/landingPage\']"             class="flex items-center space-x-2 text-base font-bold bg-white px-3 py-1.5 rounded-full shadow-lg hover:opacity-80 transition-opacity cursor-pointer"          >            <img              src="/assets/logo/logo.png"              alt="Logo"              class="w-10 h-10 md:w-14 md:h-14 object-contain"            />            <span class="text-gray-900">MappTuu</span>          </a>          <div class="flex items-center gap-4 relative z-50">            <div class="relative z-50">              <app-language-selector></app-language-selector>            </div>            <a              [routerLink]="[\'/profile\']"              aria-label="redirect to profile"              class="text-gray-900 bg-white p-2 rounded-full shadow-lg hover:opacity-80 transition-opacity flex items-center justify-center"            >              <svg                width="24"                height="24"                viewBox="0 0 24 24"                fill="none"                stroke="currentColor"                stroke-width="2"                stroke-linecap="round"                stroke-linejoin="round"                class="feather feather-user"              >                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>                <circle cx="12" cy="7" r="4"></circle>              </svg>            </a>          </div>        </header><!--dsfdfs-->        <div class="relative z-10 flex flex-grow flex-col items-center justify-center pt-24 pb-10 px-4 w-full">                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-wider mb-8 drop-shadow-lg text-center max-w-4xl">            {{ \'dashboard.title\' | translate }}          </h1>                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl">                        <div class="bg-black/40 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-white/10">              <h2 class="text-xl md:text-2xl font-bold mb-6 text-center border-b-2 border-white/50 pb-3 drop-shadow-md">                {{ \'dashboard.activities\' | translate }}              </h2>              <div class="space-y-4">                <button                  (click)="createActivities()"                  class="w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"                >                  {{ \'dashboard.createActivities\' | translate }}                </button>                <button                  (click)="viewAcctivities()"                  class="w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"                >                  {{ \'dashboard.viewActivities\' | translate }}                </button>              </div>            </div>            <div class="bg-black/40 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-white/10">              <h2 class="text-xl md:text-2xl font-bold mb-6 text-center border-b-2 border-white/50 pb-3 drop-shadow-md">                {{ \'dashboard.activityTypes\' | translate }}              </h2>              <div class="space-y-4">                <button                  (click)="createActivitiesTypes()"                  class="w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"                >                  {{ \'dashboard.createActivityTypes\' | translate }}                </button>                <button                  (click)="viewActivitiesTypes()"                  class="w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"                >                  {{ \'dashboard.viewActivityTypes\' | translate }}                </button>              </div>            </div>            <div class="bg-black/40 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-white/10">              <h2 class="text-xl md:text-2xl font-bold mb-6 text-center border-b-2 border-white/50 pb-3 drop-shadow-md">                {{ \'dashboard.plans\' | translate }}              </h2>              <div class="space-y-4">                <button                  (click)="createPlans()"                  class="w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"                >                  {{ \'dashboard.createPlans\' | translate }}                </button>                <button                  (click)="viewPlans()"                  class="w-full py-3 md:py-4 text-base md:text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"                >                  {{ \'dashboard.viewPlans\' | translate }}                </button>              </div>            </div>          </div>        </div>        <div class="h-8 w-full"></div>      </div>    </main>  </body></html></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
+    var ACTUAL_COMPONENT = {'name': 'DashboardComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'DashboardComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

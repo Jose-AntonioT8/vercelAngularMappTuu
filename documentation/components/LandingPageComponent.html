@@ -1,0 +1,933 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>map-tuu documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">map-tuu documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  LandingPageComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/landing-page/landing-page.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-landing-page</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                            <code>TranslatePipe</code>
+                                <code><a href="../components/LanguageSelectorComponent.html" target="_self" >LanguageSelectorComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./landing-page.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./landing-page.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#handleLoginActivities" >handleLoginActivities</a>
+                            </li>
+                            <li>
+                                <a href="#isadmin" >isadmin</a>
+                            </li>
+                            <li>
+                                <a href="#isAuthenticated" >isAuthenticated</a>
+                            </li>
+                            <li>
+                                <a href="#logOut" >logOut</a>
+                            </li>
+                            <li>
+                                <a href="#readirectToDashboard" >readirectToDashboard</a>
+                            </li>
+                            <li>
+                                <a href="#redirectoToPlans" >redirectoToPlans</a>
+                            </li>
+                            <li>
+                                <a href="#redirectToActivities" >redirectToActivities</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(auth: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/landing-page/landing-page.component.ts:20</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>auth</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleLoginActivities"></a>
+                    <span class="name">
+                        <span ><b>handleLoginActivities</b></span>
+                        <a href="#handleLoginActivities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleLoginActivities()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/features/landing-page/landing-page.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isadmin"></a>
+                    <span class="name">
+                        <span ><b>isadmin</b></span>
+                        <a href="#isadmin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isadmin()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">src/app/features/landing-page/landing-page.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isAuthenticated"></a>
+                    <span class="name">
+                        <span ><b>isAuthenticated</b></span>
+                        <a href="#isAuthenticated"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isAuthenticated()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="28"
+                                    class="link-to-prism">src/app/features/landing-page/landing-page.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logOut"></a>
+                    <span class="name">
+                        <span ><b>logOut</b></span>
+                        <a href="#logOut"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logOut()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/app/features/landing-page/landing-page.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="readirectToDashboard"></a>
+                    <span class="name">
+                        <span ><b>readirectToDashboard</b></span>
+                        <a href="#readirectToDashboard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>readirectToDashboard()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/features/landing-page/landing-page.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="redirectoToPlans"></a>
+                    <span class="name">
+                        <span ><b>redirectoToPlans</b></span>
+                        <a href="#redirectoToPlans"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>redirectoToPlans()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/app/features/landing-page/landing-page.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="redirectToActivities"></a>
+                    <span class="name">
+                        <span ><b>redirectToActivities</b></span>
+                        <a href="#redirectToActivities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>redirectToActivities()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/app/features/landing-page/landing-page.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import{ Router } from &#x27;@angular/router&#x27;;
+import { AuthService } from &#x27;../../core/services/auth.service&#x27;;
+import { RouterModule } from &#x27;@angular/router&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { TranslatePipe } from &#x27;../../core/pipes/translate.pipe&#x27;;
+import { LanguageSelectorComponent } from &#x27;../../common/language-selector/language-selector.component&#x27;;
+
+
+@Component({
+  selector: &#x27;app-landing-page&#x27;,
+  standalone: true, 
+  imports: [CommonModule, RouterModule, TranslatePipe, LanguageSelectorComponent],
+  templateUrl: &#x27;./landing-page.component.html&#x27;,
+  styleUrl: &#x27;./landing-page.component.scss&#x27;
+})
+
+  
+
+export class LandingPageComponent {
+  constructor(
+    private auth: AuthService,
+    private route: Router
+  ){
+  }
+
+
+  isAuthenticated(): boolean {
+    return this.auth.isAuthenticated();
+  }
+  isadmin(): boolean {
+    return this.auth.isAdmin();
+  }
+
+  handleLoginActivities(){
+    if (this.isAuthenticated()){
+      this.redirectToActivities();
+    }else{
+      this.route.navigate([&#x27;/login&#x27;]);
+    }
+
+  }
+
+  redirectoToPlans(){
+        this.route.navigate([&#x27;/plansList&#x27;])
+
+  }
+  readirectToDashboard(){
+    this.route.navigate([&#x27;/dashboard&#x27;])
+    //una vez que tengamos implementados los planes hay que poner la ruta a la lista
+    //this.router.navigate([&#x27;/plans&#x27;]);
+  }
+  redirectToActivities(){
+    this.route.navigate([&#x27;/activitiesList&#x27;])
+
+    //una vez que tengamos implementados las actividades hay que poner la ruta a la lista
+    //this.router.navigate([&#x27;/activities&#x27;]);
+  }
+
+  logOut(){
+     this.route.navigate([&#x27;/landingPage&#x27;])
+    this.auth.logout()
+  }
+}
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang&#x3D;&quot;es&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset&#x3D;&quot;UTF-8&quot; /&gt;
+    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot; /&gt;
+    &lt;title&gt;Login&lt;/title&gt;
+    &lt;script src&#x3D;&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;
+    &lt;style&gt;
+      /* Reset básico para asegurar altura completa */
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+      
+      .input-shadow {
+        box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+      }
+
+      /* Botón estilo 3D */
+      .btn-3d {
+        box-shadow: 0 6px 0 rgb(173, 173, 173), 0 8px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.1s;
+      }
+      .btn-3d:active {
+        box-shadow: 0 2px 0 rgb(173, 173, 173), 0 4px 10px rgba(0, 0, 0, 0.2);
+        transform: translateY(4px);
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;main&gt;
+      &lt;div
+        class&#x3D;&quot;min-h-screen w-full bg-cover bg-center text-white font-[&#x27;Inter&#x27;] relative flex flex-col&quot;
+        style&#x3D;&quot;
+          background-image: url(&#x27;/assets/icons/fondorealista.jpeg&#x27;);
+          background-attachment: fixed;
+        &quot;
+      &gt;
+        &lt;div class&#x3D;&quot;absolute inset-0 bg-black/10 z-0&quot;&gt;&lt;/div&gt;
+
+        &lt;header class&#x3D;&quot;relative z-50 w-full p-4 flex justify-between items-center&quot;&gt;
+          
+          &lt;div class&#x3D;&quot;flex items-center space-x-2 text-base font-bold bg-white px-3 py-1.5 rounded-full shadow-lg&quot;&gt;
+            &lt;img
+              src&#x3D;&quot;/assets/logo/logo.png&quot;
+              alt&#x3D;&quot;Logo&quot;
+              class&#x3D;&quot;w-10 h-10 md:w-14 md:h-14 object-contain&quot;
+            /&gt;
+            &lt;span class&#x3D;&quot;text-gray-900&quot;&gt;MappTuu&lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;flex items-center gap-4 relative&quot;&gt;
+            
+            &lt;div class&#x3D;&quot;relative z-50&quot;&gt;
+              &lt;app-language-selector&gt;&lt;/app-language-selector&gt;
+            &lt;/div&gt;
+
+            @if(!isAuthenticated()){
+              &lt;a
+                href&#x3D;&quot;login&quot;
+                [routerLink]&#x3D;&quot;[&#x27;/login&#x27;]&quot;
+                aria-label&#x3D;&quot;redirect to login&quot;
+                class&#x3D;&quot;text-gray-900 bg-white p-2 rounded-full shadow-lg hover:opacity-80 transition-opacity flex items-center justify-center relative z-40&quot;
+              &gt;
+                &lt;svg width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; class&#x3D;&quot;text-gray-900&quot;&gt;
+                  &lt;path d&#x3D;&quot;M13 2C10.2386 2 8 4.23858 8 7C8 7.55228 8.44772 8 9 8C9.55228 8 10 7.55228 10 7C10 5.34315 11.3431 4 13 4H17C18.6569 4 20 5.34315 20 7V17C20 18.6569 18.6569 20 17 20H13C11.3431 20 10 18.6569 10 17C10 16.4477 9.55228 16 9 16C8.44772 16 8 16.4477 8 17C8 19.7614 10.2386 22 13 22H17C19.7614 22 22 19.7614 22 17V7C22 4.23858 19.7614 2 17 2H13Z&quot; fill&#x3D;&quot;currentColor&quot;/&gt;
+                  &lt;path d&#x3D;&quot;M3 11C2.44772 11 2 11.4477 2 12C2 12.5523 2.44772 13 3 13H11.2821C11.1931 13.1098 11.1078 13.2163 11.0271 13.318C10.7816 13.6277 10.5738 13.8996 10.427 14.0945C10.3536 14.1921 10.2952 14.2705 10.255 14.3251L10.2084 14.3884L10.1959 14.4055L10.1915 14.4115C10.1914 14.4116 10.191 14.4122 11 15L10.1915 14.4115C9.86687 14.8583 9.96541 15.4844 10.4122 15.809C10.859 16.1336 11.4843 16.0346 11.809 15.5879L11.8118 15.584L11.822 15.57L11.8638 15.5132C11.9007 15.4632 11.9553 15.3897 12.0247 15.2975C12.1637 15.113 12.3612 14.8546 12.5942 14.5606C13.0655 13.9663 13.6623 13.2519 14.2071 12.7071L14.9142 12L14.2071 11.2929C13.6623 10.7481 13.0655 10.0337 12.5942 9.43937C12.3612 9.14542 12.1637 8.88702 12.0247 8.7025C11.9553 8.61033 11.9007 8.53682 11.8638 8.48679L11.822 8.43002L11.8118 8.41602L11.8095 8.41281C11.4848 7.96606 10.859 7.86637 10.4122 8.19098C9.96541 8.51561 9.86636 9.14098 10.191 9.58778L11 9C10.191 9.58778 10.1909 9.58773 10.191 9.58778L10.1925 9.58985L10.1959 9.59454L10.2084 9.61162L10.255 9.67492C10.2952 9.72946 10.3536 9.80795 10.427 9.90549C10.5738 10.1004 10.7816 10.3723 11.0271 10.682C11.1078 10.7837 11.1931 10.8902 11.2821 11H3Z&quot; fill&#x3D;&quot;currentColor&quot;/&gt;
+                &lt;/svg&gt;
+              &lt;/a&gt;
+            } @else {
+              &lt;a
+                [routerLink]&#x3D;&quot;[&#x27;/profile&#x27;]&quot;
+                aria-label&#x3D;&quot;redirect to profile&quot;
+                class&#x3D;&quot;text-gray-900 bg-white p-2 rounded-full shadow-lg hover:opacity-80 transition-opacity flex items-center justify-center relative z-40&quot;
+              &gt;
+                &lt;svg width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;2&quot; stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot;&gt;
+                  &lt;path d&#x3D;&quot;M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2&quot;&gt;&lt;/path&gt;
+                  &lt;circle cx&#x3D;&quot;12&quot; cy&#x3D;&quot;7&quot; r&#x3D;&quot;4&quot;&gt;&lt;/circle&gt;
+                &lt;/svg&gt;
+              &lt;/a&gt;
+            }
+          &lt;/div&gt;
+        &lt;/header&gt;
+
+        &lt;div class&#x3D;&quot;relative z-10 flex flex-grow flex-col items-center justify-center px-4 py-12 w-full&quot;&gt;
+          
+          &lt;h1 class&#x3D;&quot;text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-wider mb-8 drop-shadow-lg text-center max-w-2xl&quot;&gt;
+            {{ &#x27;landing.title&#x27; | translate }}
+          &lt;/h1&gt;
+
+          &lt;div class&#x3D;&quot;relative w-full sm:w-4/5 max-w-md mb-12 group&quot;&gt;
+            &lt;input
+              type&#x3D;&quot;text&quot;
+              [placeholder]&#x3D;&quot;(isAuthenticated() ? &#x27;landing.searchButton&#x27; : &#x27;landing.searchButtonToLogin&#x27;) | translate&quot;
+              class&#x3D;&quot;w-full py-4 pl-12 pr-4 text-gray-800 rounded-full shadow-2xl bg-white/90 focus:outline-none focus:ring-4 focus:ring-white/50 transition duration-300 placeholder-gray-500&quot;
+              style&#x3D;&quot;backdrop-filter: blur(5px)&quot;
+            /&gt;
+            &lt;svg
+              class&#x3D;&quot;absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-500 group-focus-within:text-blue-500 transition-colors&quot;
+              fill&#x3D;&quot;none&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+              stroke&#x3D;&quot;currentColor&quot;
+            &gt;
+              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z&quot; /&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;space-y-6 w-full sm:w-4/5 max-w-xs flex flex-col items-center&quot;&gt;
+            
+            &lt;button
+              (click)&#x3D;&quot;handleLoginActivities()&quot;
+              class&#x3D;&quot;w-full py-4 text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none&quot;
+            &gt;
+              @if(isAuthenticated()){
+                {{ &#x27;landing.activitiesButton&#x27; | translate }}
+              } @else {
+                {{ &#x27;landing.loginButton&#x27; | translate }}
+              }
+            &lt;/button&gt;
+
+            @if(isAuthenticated()){
+              &lt;button
+                (click)&#x3D;&quot;redirectoToPlans()&quot;
+                class&#x3D;&quot;w-full py-4 text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none&quot;
+              &gt;
+                {{ &#x27;landing.plansButton&#x27; | translate }}
+              &lt;/button&gt;
+            }
+
+            @if(isadmin()){
+              &lt;button
+                (click)&#x3D;&quot;readirectToDashboard()&quot;
+                class&#x3D;&quot;w-full py-4 text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none&quot;
+              &gt;
+                {{ &#x27;landing.administrateMappTuu&#x27; | translate }}
+              &lt;/button&gt;
+            }
+
+            &lt;!-- Botón About visible para todos --&gt;
+            &lt;a
+              routerLink&#x3D;&quot;/about&quot;
+              class&#x3D;&quot;w-full py-4 text-lg font-bold rounded-full text-white bg-gradient-to-r from-brand-primary to-brand-secondary btn-3d focus:outline-none text-center flex items-center justify-center gap-2&quot;
+              style&#x3D;&quot;box-shadow: 0 6px 0 rgb(50, 100, 150), 0 8px 15px rgba(0, 0, 0, 0.3);&quot;
+            &gt;
+              &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+                &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&quot;&gt;&lt;/path&gt;
+              &lt;/svg&gt;
+              {{ &#x27;landing.aboutUs&#x27; | translate }}
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        
+        &lt;div class&#x3D;&quot;h-4 w-full&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!DOCTYPE html><html lang="es">  <head>    <meta charset="UTF-8" />    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    <title>Login</title>    <script src="https://cdn.tailwindcss.com"></script>    <style>      /* Reset básico para asegurar altura completa */      html, body {        height: 100%;        margin: 0;      }            .input-shadow {        box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);      }      /* Botón estilo 3D */      .btn-3d {        box-shadow: 0 6px 0 rgb(173, 173, 173), 0 8px 15px rgba(0, 0, 0, 0.2);        transition: all 0.1s;      }      .btn-3d:active {        box-shadow: 0 2px 0 rgb(173, 173, 173), 0 4px 10px rgba(0, 0, 0, 0.2);        transform: translateY(4px);      }    </style>  </head>  <body>    <main>      <div        class="min-h-screen w-full bg-cover bg-center text-white font-[\'Inter\'] relative flex flex-col"        style="          background-image: url(\'/assets/icons/fondorealista.jpeg\');          background-attachment: fixed;        "      >        <div class="absolute inset-0 bg-black/10 z-0"></div>        <header class="relative z-50 w-full p-4 flex justify-between items-center">                    <div class="flex items-center space-x-2 text-base font-bold bg-white px-3 py-1.5 rounded-full shadow-lg">            <img              src="/assets/logo/logo.png"              alt="Logo"              class="w-10 h-10 md:w-14 md:h-14 object-contain"            />            <span class="text-gray-900">MappTuu</span>          </div>          <div class="flex items-center gap-4 relative">                        <div class="relative z-50">              <app-language-selector></app-language-selector>            </div>            @if(!isAuthenticated()){              <a                href="login"                [routerLink]="[\'/login\']"                aria-label="redirect to login"                class="text-gray-900 bg-white p-2 rounded-full shadow-lg hover:opacity-80 transition-opacity flex items-center justify-center relative z-40"              >                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-gray-900">                  <path d="M13 2C10.2386 2 8 4.23858 8 7C8 7.55228 8.44772 8 9 8C9.55228 8 10 7.55228 10 7C10 5.34315 11.3431 4 13 4H17C18.6569 4 20 5.34315 20 7V17C20 18.6569 18.6569 20 17 20H13C11.3431 20 10 18.6569 10 17C10 16.4477 9.55228 16 9 16C8.44772 16 8 16.4477 8 17C8 19.7614 10.2386 22 13 22H17C19.7614 22 22 19.7614 22 17V7C22 4.23858 19.7614 2 17 2H13Z" fill="currentColor"/>                  <path d="M3 11C2.44772 11 2 11.4477 2 12C2 12.5523 2.44772 13 3 13H11.2821C11.1931 13.1098 11.1078 13.2163 11.0271 13.318C10.7816 13.6277 10.5738 13.8996 10.427 14.0945C10.3536 14.1921 10.2952 14.2705 10.255 14.3251L10.2084 14.3884L10.1959 14.4055L10.1915 14.4115C10.1914 14.4116 10.191 14.4122 11 15L10.1915 14.4115C9.86687 14.8583 9.96541 15.4844 10.4122 15.809C10.859 16.1336 11.4843 16.0346 11.809 15.5879L11.8118 15.584L11.822 15.57L11.8638 15.5132C11.9007 15.4632 11.9553 15.3897 12.0247 15.2975C12.1637 15.113 12.3612 14.8546 12.5942 14.5606C13.0655 13.9663 13.6623 13.2519 14.2071 12.7071L14.9142 12L14.2071 11.2929C13.6623 10.7481 13.0655 10.0337 12.5942 9.43937C12.3612 9.14542 12.1637 8.88702 12.0247 8.7025C11.9553 8.61033 11.9007 8.53682 11.8638 8.48679L11.822 8.43002L11.8118 8.41602L11.8095 8.41281C11.4848 7.96606 10.859 7.86637 10.4122 8.19098C9.96541 8.51561 9.86636 9.14098 10.191 9.58778L11 9C10.191 9.58778 10.1909 9.58773 10.191 9.58778L10.1925 9.58985L10.1959 9.59454L10.2084 9.61162L10.255 9.67492C10.2952 9.72946 10.3536 9.80795 10.427 9.90549C10.5738 10.1004 10.7816 10.3723 11.0271 10.682C11.1078 10.7837 11.1931 10.8902 11.2821 11H3Z" fill="currentColor"/>                </svg>              </a>            } @else {              <a                [routerLink]="[\'/profile\']"                aria-label="redirect to profile"                class="text-gray-900 bg-white p-2 rounded-full shadow-lg hover:opacity-80 transition-opacity flex items-center justify-center relative z-40"              >                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>                  <circle cx="12" cy="7" r="4"></circle>                </svg>              </a>            }          </div>        </header>        <div class="relative z-10 flex flex-grow flex-col items-center justify-center px-4 py-12 w-full">                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-wider mb-8 drop-shadow-lg text-center max-w-2xl">            {{ \'landing.title\' | translate }}          </h1>          <div class="relative w-full sm:w-4/5 max-w-md mb-12 group">            <input              type="text"              [placeholder]="(isAuthenticated() ? \'landing.searchButton\' : \'landing.searchButtonToLogin\') | translate"              class="w-full py-4 pl-12 pr-4 text-gray-800 rounded-full shadow-2xl bg-white/90 focus:outline-none focus:ring-4 focus:ring-white/50 transition duration-300 placeholder-gray-500"              style="backdrop-filter: blur(5px)"            />            <svg              class="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-500 group-focus-within:text-blue-500 transition-colors"              fill="none"              viewBox="0 0 24 24"              stroke="currentColor"            >              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />            </svg>          </div>          <div class="space-y-6 w-full sm:w-4/5 max-w-xs flex flex-col items-center">                        <button              (click)="handleLoginActivities()"              class="w-full py-4 text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"            >              @if(isAuthenticated()){                {{ \'landing.activitiesButton\' | translate }}              } @else {                {{ \'landing.loginButton\' | translate }}              }            </button>            @if(isAuthenticated()){              <button                (click)="redirectoToPlans()"                class="w-full py-4 text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"              >                {{ \'landing.plansButton\' | translate }}              </button>            }            @if(isadmin()){              <button                (click)="readirectToDashboard()"                class="w-full py-4 text-lg font-bold rounded-full text-gray-800 bg-white btn-3d focus:outline-none"              >                {{ \'landing.administrateMappTuu\' | translate }}              </button>            }            <!-- Botón About visible para todos -->            <a              routerLink="/about"              class="w-full py-4 text-lg font-bold rounded-full text-white bg-gradient-to-r from-brand-primary to-brand-secondary btn-3d focus:outline-none text-center flex items-center justify-center gap-2"              style="box-shadow: 0 6px 0 rgb(50, 100, 150), 0 8px 15px rgba(0, 0, 0, 0.3);"            >              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>              </svg>              {{ \'landing.aboutUs\' | translate }}            </a>          </div>        </div>                <div class="h-4 w-full"></div>      </div>    </main>  </body></html></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
+    var ACTUAL_COMPONENT = {'name': 'LandingPageComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'LandingPageComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

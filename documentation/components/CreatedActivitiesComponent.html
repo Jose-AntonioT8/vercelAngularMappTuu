@@ -1,0 +1,1060 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>map-tuu documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">map-tuu documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  CreatedActivitiesComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/activities/created-activities/created-activities.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-created-activities</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="../components/HeaderComponent.html" target="_self" >HeaderComponent</a></code>
+                                <code><a href="../components/FilterComponent.html" target="_self" >FilterComponent</a></code>
+                                <code><a href="../components/CardComponent.html" target="_self" >CardComponent</a></code>
+                            <code>TranslatePipe</code>
+                                <code><a href="https://angular.io/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./created-activities.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./created-activities.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#activities$" >activities$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activityService" >activityService</a>
+                            </li>
+                            <li>
+                                <a href="#activityTypes$" >activityTypes$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activityTypeService" >activityTypeService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <a href="#isFilterOpen" >isFilterOpen</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#user" >user</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#userService" >userService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeFilter" >closeFilter</a>
+                            </li>
+                            <li>
+                                <a href="#goCreateActivity" >goCreateActivity</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#toggleFilter" >toggleFilter</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/activities/created-activities/created-activities.component.ts:35</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeFilter"></a>
+                    <span class="name">
+                        <span ><b>closeFilter</b></span>
+                        <a href="#closeFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeFilter()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/features/activities/created-activities/created-activities.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goCreateActivity"></a>
+                    <span class="name">
+                        <span ><b>goCreateActivity</b></span>
+                        <a href="#goCreateActivity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goCreateActivity()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/features/activities/created-activities/created-activities.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/app/features/activities/created-activities/created-activities.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleFilter"></a>
+                    <span class="name">
+                        <span ><b>toggleFilter</b></span>
+                        <a href="#toggleFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleFilter()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/features/activities/created-activities/created-activities.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activities$"></a>
+                    <span class="name">
+                        <span ><b>activities$</b></span>
+                        <a href="#activities$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>of&lt;Activity[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/activities/created-activities/created-activities.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activityService</b></span>
+                        <a href="#activityService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivityService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/activities/created-activities/created-activities.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityTypes$"></a>
+                    <span class="name">
+                        <span ><b>activityTypes$</b></span>
+                        <a href="#activityTypes$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Observable&lt;ActivityType[]&gt;</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/activities/created-activities/created-activities.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityTypeService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activityTypeService</b></span>
+                        <a href="#activityTypeService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivityTypeService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/activities/created-activities/created-activities.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/activities/created-activities/created-activities.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isFilterOpen"></a>
+                    <span class="name">
+                        <span ><b>isFilterOpen</b></span>
+                        <a href="#isFilterOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/activities/created-activities/created-activities.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="user"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>user</b></span>
+                        <a href="#user"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.authService.currentUser</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/activities/created-activities/created-activities.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/activities/created-activities/created-activities.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
+import { Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { Observable, combineLatest, of } from &#x27;rxjs&#x27;;
+import { CardComponent } from &#x27;../../../common/activities/card/card.component&#x27;;
+import { FilterComponent } from &#x27;../../../common/activities/filter/filter.component&#x27;;
+import { HeaderComponent } from &#x27;../../../common/header/header.component&#x27;;
+import { Activity } from &#x27;../../../common/models/activity.model&#x27;;
+import { ActivityType } from &#x27;../../../common/models/activityType.models&#x27;;
+import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
+import { ActivityService } from &#x27;../../../core/services/activity.service&#x27;;
+import { ActivityTypeService } from &#x27;../../../core/services/activitytype.service&#x27;;
+import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
+import { UserService } from &#x27;../../../core/services/user.service&#x27;;
+@Component({
+  selector: &#x27;app-created-activities&#x27;,
+  standalone: true,
+  imports: [
+    CommonModule,
+    HeaderComponent,
+    FilterComponent,
+    CardComponent,
+    TranslatePipe,
+    RouterModule,
+  ],
+  templateUrl: &#x27;./created-activities.component.html&#x27;,
+  styleUrl: &#x27;./created-activities.component.scss&#x27;,
+})
+export class CreatedActivitiesComponent implements OnInit {
+  private userService &#x3D; inject(UserService);
+  private activityService &#x3D; inject(ActivityService);
+  private activityTypeService &#x3D; inject(ActivityTypeService);
+  private authService &#x3D; inject(AuthService);
+  activities$ &#x3D; of&lt;Activity[]&gt;([]);
+  activityTypes$!: Observable&lt;ActivityType[]&gt;;
+
+  constructor(private route: Router) {}
+  isFilterOpen &#x3D; false;
+
+  private user &#x3D; this.authService.currentUser;
+
+  ngOnInit() {
+    if (typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; window.innerWidth &gt;&#x3D; 1024) {
+      this.isFilterOpen &#x3D; true;
+    }
+    this.userService.getUserId(this.user!.uid).subscribe((user) &#x3D;&gt; {
+      if (user.createdActivities &amp;&amp; user.createdActivities.length &gt; 0) {
+        const activityObservables &#x3D; user.createdActivities.map((activityId) &#x3D;&gt;
+          this.activityService.getActivityId(activityId),
+        );
+        this.activities$ &#x3D; combineLatest(activityObservables);
+      } else {
+        this.activities$ &#x3D; of([]);
+      }
+    });
+    this.activityTypes$ &#x3D; this.activityTypeService.getActivitiesType();
+  }
+
+  toggleFilter() {
+    this.isFilterOpen &#x3D; !this.isFilterOpen;
+  }
+  goCreateActivity() {
+    this.route.navigate([&#x27;/activitiesCreation&#x27;]);
+  }
+  closeFilter() {
+    if (window.innerWidth &lt; 1024) {
+      this.isFilterOpen &#x3D; false;
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;header class&#x3D;&quot;sticky top-0 z-50&quot;&gt;
+  &lt;app-header&gt;&lt;/app-header&gt;
+&lt;/header&gt;
+
+&lt;div class&#x3D;&quot;bg-white border-b shadow-sm&quot;&gt;
+  &lt;div class&#x3D;&quot;px-4 py-3 flex items-center justify-center&quot;&gt;
+    &lt;div
+      class&#x3D;&quot;flex items-center bg-gray-100 rounded-full px-4 py-2 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl transition-shadow focus-within:ring-2 focus-within:ring-blue-200 shadow-md&quot;
+    &gt;
+      &lt;img
+        src&#x3D;&quot;assets/icons/header/search.svg&quot;
+        alt&#x3D;&quot;Search&quot;
+        class&#x3D;&quot;w-4 h-4 opacity-50 mr-2&quot;
+      /&gt;
+      &lt;input
+        type&#x3D;&quot;search&quot;
+        [placeholder]&#x3D;&quot;&#x27;activities.searchPlaceholder&#x27; | translate&quot;
+        class&#x3D;&quot;bg-transparent border-none outline-none w-full text-sm text-gray-700 placeholder-gray-400&quot;
+      /&gt;
+    &lt;/div&gt;
+    &lt;button
+      (click)&#x3D;&quot;goCreateActivity()&quot;
+      class&#x3D;&quot;flex items-center gap-20 px-4 py-2 rounded-full bg-[#5675AC] text-white hover:bg-[#4a6399] hover:text-white transition-all duration-200 text-sm font-medium&quot;
+    &gt;
+      {{ &quot;dashboard.createActivities&quot; | translate }}
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;section
+  class&#x3D;&quot;pb-5 block xl:grid xl:grid-cols-[20%_80%] xl:items-start w-full min-h-[80vh] relative&quot;
+&gt;
+  &lt;button
+    (click)&#x3D;&quot;toggleFilter()&quot;
+    class&#x3D;&quot;xl:hidden fixed top-20 right-4 z-40 bg-[#5675AC] text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2 hover:bg-[#4a6399] transition-colors&quot;
+  &gt;
+    &lt;svg class&#x3D;&quot;w-5 h-5&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+      &lt;path
+        stroke-linecap&#x3D;&quot;round&quot;
+        stroke-linejoin&#x3D;&quot;round&quot;
+        stroke-width&#x3D;&quot;2&quot;
+        d&#x3D;&quot;M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z&quot;
+      &gt;&lt;/path&gt;
+    &lt;/svg&gt;
+    {{ &quot;activities.filters&quot; | translate }}
+  &lt;/button&gt;
+
+  &lt;div
+    class&#x3D;&quot;xl:hidden fixed inset-0 bg-black/50 z-30 transition-opacity&quot;
+    [class.opacity-0]&#x3D;&quot;!isFilterOpen&quot;
+    [class.pointer-events-none]&#x3D;&quot;!isFilterOpen&quot;
+    [class.opacity-100]&#x3D;&quot;isFilterOpen&quot;
+    (click)&#x3D;&quot;closeFilter()&quot;
+  &gt;&lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;hidden xl:block&quot;&gt;&lt;/div&gt;
+
+  &lt;section class&#x3D;&quot;p-2.5 xl:p-6 xl:px-8 w-full&quot;&gt;
+    &lt;ng-container
+      *ngIf&#x3D;&quot;{ list: activities$ | async, types: activityTypes$ | async } as vm&quot;
+    &gt;
+      &lt;section
+        class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full&quot;
+      &gt;
+        &lt;app-card
+          *ngFor&#x3D;&quot;let activity of vm.list&quot;
+          [activity]&#x3D;&quot;activity&quot;
+          [activityTypes]&#x3D;&quot;vm.types || []&quot;
+        &gt;
+        &lt;/app-card&gt;
+      &lt;/section&gt;
+
+      &lt;div *ngIf&#x3D;&quot;vm.list?.length &#x3D;&#x3D;&#x3D; 0&quot; class&#x3D;&quot;text-center py-8&quot;&gt;
+        &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;{{ &quot;activities.noActivities&quot; | translate }}&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/ng-container&gt;
+  &lt;/section&gt;
+
+  &lt;div
+    class&#x3D;&quot;fixed xl:fixed xl:top-[160px] xl:left-0 left-0 top-0 h-full xl:h-[calc(100vh-160px)] w-80 xl:w-[20%] max-h-screen xl:max-h-none overflow-y-auto z-40 xl:z-auto transform xl:translate-x-0 transition-transform duration-300 ease-in-out&quot;
+    [class.-translate-x-full]&#x3D;&quot;!isFilterOpen&quot;
+    [class.translate-x-0]&#x3D;&quot;isFilterOpen&quot;
+    (click)&#x3D;&quot;$event.stopPropagation()&quot;
+  &gt;
+    &lt;div
+      class&#x3D;&quot;xl:hidden flex justify-between items-center p-4 border-b bg-[#CFE8FF]&quot;
+    &gt;
+      &lt;h2 class&#x3D;&quot;text-xl font-bold&quot;&gt;{{ &quot;activities.filters&quot; | translate }}&lt;/h2&gt;
+      &lt;button (click)&#x3D;&quot;closeFilter()&quot; class&#x3D;&quot;text-gray-600 hover:text-gray-800&quot;&gt;
+        &lt;svg
+          class&#x3D;&quot;w-6 h-6&quot;
+          fill&#x3D;&quot;none&quot;
+          stroke&#x3D;&quot;currentColor&quot;
+          viewBox&#x3D;&quot;0 0 24 24&quot;
+        &gt;
+          &lt;path
+            stroke-linecap&#x3D;&quot;round&quot;
+            stroke-linejoin&#x3D;&quot;round&quot;
+            stroke-width&#x3D;&quot;2&quot;
+            d&#x3D;&quot;M6 18L18 6M6 6l12 12&quot;
+          &gt;&lt;/path&gt;
+        &lt;/svg&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;xl:px-4 xl:py-2&quot;&gt;
+      &lt;app-filter&gt;&lt;/app-filter&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><header class="sticky top-0 z-50">  <app-header></app-header></header><div class="bg-white border-b shadow-sm">  <div class="px-4 py-3 flex items-center justify-center">    <div      class="flex items-center bg-gray-100 rounded-full px-4 py-2 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl transition-shadow focus-within:ring-2 focus-within:ring-blue-200 shadow-md"    >      <img        src="assets/icons/header/search.svg"        alt="Search"        class="w-4 h-4 opacity-50 mr-2"      />      <input        type="search"        [placeholder]="\'activities.searchPlaceholder\' | translate"        class="bg-transparent border-none outline-none w-full text-sm text-gray-700 placeholder-gray-400"      />    </div>    <button      (click)="goCreateActivity()"      class="flex items-center gap-20 px-4 py-2 rounded-full bg-[#5675AC] text-white hover:bg-[#4a6399] hover:text-white transition-all duration-200 text-sm font-medium"    >      {{ "dashboard.createActivities" | translate }}    </button>  </div></div><section  class="pb-5 block xl:grid xl:grid-cols-[20%_80%] xl:items-start w-full min-h-[80vh] relative">  <button    (click)="toggleFilter()"    class="xl:hidden fixed top-20 right-4 z-40 bg-[#5675AC] text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2 hover:bg-[#4a6399] transition-colors"  >    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">      <path        stroke-linecap="round"        stroke-linejoin="round"        stroke-width="2"        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"      ></path>    </svg>    {{ "activities.filters" | translate }}  </button>  <div    class="xl:hidden fixed inset-0 bg-black/50 z-30 transition-opacity"    [class.opacity-0]="!isFilterOpen"    [class.pointer-events-none]="!isFilterOpen"    [class.opacity-100]="isFilterOpen"    (click)="closeFilter()"  ></div>  <div class="hidden xl:block"></div>  <section class="p-2.5 xl:p-6 xl:px-8 w-full">    <ng-container      *ngIf="{ list: activities$ | async, types: activityTypes$ | async } as vm"    >      <section        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full"      >        <app-card          *ngFor="let activity of vm.list"          [activity]="activity"          [activityTypes]="vm.types || []"        >        </app-card>      </section>      <div *ngIf="vm.list?.length === 0" class="text-center py-8">        <p class="text-gray-600">{{ "activities.noActivities" | translate }}</p>      </div>    </ng-container>  </section>  <div    class="fixed xl:fixed xl:top-[160px] xl:left-0 left-0 top-0 h-full xl:h-[calc(100vh-160px)] w-80 xl:w-[20%] max-h-screen xl:max-h-none overflow-y-auto z-40 xl:z-auto transform xl:translate-x-0 transition-transform duration-300 ease-in-out"    [class.-translate-x-full]="!isFilterOpen"    [class.translate-x-0]="isFilterOpen"    (click)="$event.stopPropagation()"  >    <div      class="xl:hidden flex justify-between items-center p-4 border-b bg-[#CFE8FF]"    >      <h2 class="text-xl font-bold">{{ "activities.filters" | translate }}</h2>      <button (click)="closeFilter()" class="text-gray-600 hover:text-gray-800">        <svg          class="w-6 h-6"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M6 18L18 6M6 6l12 12"          ></path>        </svg>      </button>    </div>    <div class="xl:px-4 xl:py-2">      <app-filter></app-filter>    </div>  </div></section></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
+    var ACTUAL_COMPONENT = {'name': 'CreatedActivitiesComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CreatedActivitiesComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

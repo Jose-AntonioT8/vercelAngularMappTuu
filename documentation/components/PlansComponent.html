@@ -1,0 +1,2295 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>map-tuu documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">map-tuu documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PlansComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/plans/plans-detail/plans.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-plans</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                                <code><a href="../components/OptionsPlansComponent.html" target="_self" >OptionsPlansComponent</a></code>
+                            <code>TranslatePipe</code>
+                                <code><a href="../components/LanguageSelectorComponent.html" target="_self" >LanguageSelectorComponent</a></code>
+                                <code><a href="../components/ReviewModalComponent.html" target="_self" >ReviewModalComponent</a></code>
+                                <code><a href="../components/ReviewsListModalComponent.html" target="_self" >ReviewsListModalComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./plans.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./plans.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#activities" >activities</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activityService" >activityService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cdr" >cdr</a>
+                            </li>
+                            <li>
+                                <a href="#isPlanSaved" >isPlanSaved</a>
+                            </li>
+                            <li>
+                                <a href="#isReviewModalOpen" >isReviewModalOpen</a>
+                            </li>
+                            <li>
+                                <a href="#isReviewsListModalOpen" >isReviewsListModalOpen</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#plan" >plan</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#planDescription" >planDescription</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#planService" >planService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
+                                <a href="#userReview" >userReview</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#checkIfPlanSaved" >checkIfPlanSaved</a>
+                            </li>
+                            <li>
+                                <a href="#closeReviewModal" >closeReviewModal</a>
+                            </li>
+                            <li>
+                                <a href="#closeReviewsListModal" >closeReviewsListModal</a>
+                            </li>
+                            <li>
+                                <a href="#getFormattedDate" >getFormattedDate</a>
+                            </li>
+                            <li>
+                                <a href="#getStarsArray" >getStarsArray</a>
+                            </li>
+                            <li>
+                                <a href="#getStarState" >getStarState</a>
+                            </li>
+                            <li>
+                                <a href="#goBack" >goBack</a>
+                            </li>
+                            <li>
+                                <a href="#handleReviewSubmit" >handleReviewSubmit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadUserReview" >loadUserReview</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#openReviewModal" >openReviewModal</a>
+                            </li>
+                            <li>
+                                <a href="#openReviewsListModal" >openReviewsListModal</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#savePlan" >savePlan</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, auth: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>auth</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkIfPlanSaved"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>checkIfPlanSaved</b></span>
+                        <a href="#checkIfPlanSaved"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>checkIfPlanSaved()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeReviewModal"></a>
+                    <span class="name">
+                        <span ><b>closeReviewModal</b></span>
+                        <a href="#closeReviewModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeReviewModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="227"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:227</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeReviewsListModal"></a>
+                    <span class="name">
+                        <span ><b>closeReviewsListModal</b></span>
+                        <a href="#closeReviewsListModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeReviewsListModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFormattedDate"></a>
+                    <span class="name">
+                        <span ><b>getFormattedDate</b></span>
+                        <a href="#getFormattedDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getFormattedDate(firebaseTimestamp: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="134"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:134</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>firebaseTimestamp</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStarsArray"></a>
+                    <span class="name">
+                        <span ><b>getStarsArray</b></span>
+                        <a href="#getStarsArray"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStarsArray()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Crea un array con los índices de las 5 estrellas.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>number[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Array [0, 1, 2, 3, 4] para iterar sobre las 5 estrellas</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStarState"></a>
+                    <span class="name">
+                        <span ><b>getStarState</b></span>
+                        <a href="#getStarState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStarState(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene el estado de cada estrella según la puntuación.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Índice de la estrella (0-4, correspondiente a estrellas 1-5)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>&quot;full&quot; | &quot;half&quot; | &quot;empty&quot;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>&#39;full&#39; si la estrella está completamente llena, &#39;half&#39; si está a la mitad, &#39;empty&#39; si está vacía</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goBack"></a>
+                    <span class="name">
+                        <span ><b>goBack</b></span>
+                        <a href="#goBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goBack()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:116</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleReviewSubmit"></a>
+                    <span class="name">
+                        <span ><b>handleReviewSubmit</b></span>
+                        <a href="#handleReviewSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleReviewSubmit(review: <a href="../interfaces/Review.html" target="_self">Review</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="231"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:231</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>review</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Review.html" target="_self" >Review</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadUserReview"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadUserReview</b></span>
+                        <a href="#loadUserReview"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadUserReview()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="186"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:186</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Carga la reseña del usuario actual para este plan</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openReviewModal"></a>
+                    <span class="name">
+                        <span ><b>openReviewModal</b></span>
+                        <a href="#openReviewModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openReviewModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="223"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:223</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openReviewsListModal"></a>
+                    <span class="name">
+                        <span ><b>openReviewsListModal</b></span>
+                        <a href="#openReviewsListModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openReviewsListModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="savePlan"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>savePlan</b></span>
+                        <a href="#savePlan"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>savePlan()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activities"></a>
+                    <span class="name">
+                        <span ><b>activities</b></span>
+                        <a href="#activities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Activity.html" target="_self" >Activity[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activityService</b></span>
+                        <a href="#activityService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivityService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cdr"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cdr</b></span>
+                        <a href="#cdr"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ChangeDetectorRef)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isPlanSaved"></a>
+                    <span class="name">
+                        <span ><b>isPlanSaved</b></span>
+                        <a href="#isPlanSaved"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isReviewModalOpen"></a>
+                    <span class="name">
+                        <span ><b>isReviewModalOpen</b></span>
+                        <a href="#isReviewModalOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isReviewsListModalOpen"></a>
+                    <span class="name">
+                        <span ><b>isReviewsListModalOpen</b></span>
+                        <a href="#isReviewsListModalOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="plan"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>plan</b></span>
+                        <a href="#plan"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Plan.html" target="_self" >Plan</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="planDescription"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>planDescription</b></span>
+                        <a href="#planDescription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="planService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>planService</b></span>
+                        <a href="#planService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(PlanService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userReview"></a>
+                    <span class="name">
+                        <span ><b>userReview</b></span>
+                        <a href="#userReview"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Review | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ChangeDetectorRef, Component, inject, OnInit } from &#x27;@angular/core&#x27;;
+import { ActivatedRoute, Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { forkJoin, of } from &#x27;rxjs&#x27;;
+import { catchError } from &#x27;rxjs/operators&#x27;;
+import { LanguageSelectorComponent } from &#x27;../../../common/language-selector/language-selector.component&#x27;;
+import { ReviewModalComponent } from &#x27;../../../common/modals/review-modal/review-modal.component&#x27;;
+import { ReviewsListModalComponent } from &#x27;../../../common/modals/reviews-list-modal/reviews-list-modal&#x27;; // Ajusta ruta
+import { Activity, Review } from &#x27;../../../common/models/activity.model&#x27;;
+import { Plan } from &#x27;../../../common/models/plan.model&#x27;;
+import { OptionsPlansComponent } from &#x27;../../../common/options/options-plans/options-plans.component&#x27;;
+import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
+import { ActivityService } from &#x27;../../../core/services/activity.service&#x27;;
+import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
+import { PlanService } from &#x27;../../../core/services/plan.service&#x27;;
+import { UserService } from &#x27;../../../core/services/user.service&#x27;;
+@Component({
+  selector: &#x27;app-plans&#x27;,
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    OptionsPlansComponent,
+    TranslatePipe,
+    LanguageSelectorComponent,
+    ReviewModalComponent,
+    ReviewsListModalComponent,
+  ],
+  templateUrl: &#x27;./plans.component.html&#x27;,
+  styleUrl: &#x27;./plans.component.scss&#x27;,
+})
+export class PlansComponent implements OnInit {
+  constructor(private userService: UserService, private auth: AuthService) {}
+  isPlanSaved &#x3D; false;
+  plan?: Plan;
+  planDescription?: string;
+  activities: Activity[] &#x3D; [];
+  isReviewModalOpen &#x3D; false;
+  userReview: Review | null &#x3D; null;
+  private cdr &#x3D; inject(ChangeDetectorRef);
+  isReviewsListModalOpen &#x3D; false;
+  private activityService &#x3D; inject(ActivityService);
+  private planService &#x3D; inject(PlanService);
+  private route &#x3D; inject(ActivatedRoute);
+  private router &#x3D; inject(Router);
+  public authService &#x3D; inject(AuthService);
+
+  ngOnInit() {
+    const idUrl &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;);
+    this.planService.getPlanId(idUrl!).subscribe({
+      next: (data) &#x3D;&gt; {
+        this.plan &#x3D; data;
+        this.planDescription &#x3D; (data as any).description ?? &#x27;&#x27;;
+
+        const ids &#x3D; this.plan?.activitiesIds ?? [];
+        if (ids.length &gt; 0) {
+          this.activities &#x3D; []; // limpiar antes
+          forkJoin(
+            ids.map((id) &#x3D;&gt;
+              this.activityService.getActivityId(id).pipe(
+                catchError((err) &#x3D;&gt; {
+                  console.warn(&#x60;Actividad ${id} no encontrada&#x60;, err);
+                  return of(null);
+                })
+              )
+            )
+          ).subscribe({
+            next: (results) &#x3D;&gt; {
+              this.activities &#x3D; results.filter((r) &#x3D;&gt; r !&#x3D;&#x3D; null) as Activity[];
+            },
+            error: (err) &#x3D;&gt; {
+              console.error(&#x27;Error cargando actividades del plan&#x27;, err);
+            },
+          });
+        }
+
+        if (this.plan) {
+          this.loadUserReview();
+          this.checkIfPlanSaved(); // Verificar si el plan ya está guardado
+        }
+      },
+      error: (err) &#x3D;&gt; {
+        console.error(&#x27;Error cargando plan&#x27;, err);
+      },
+    });
+  }
+
+  private async checkIfPlanSaved(): Promise&lt;void&gt; {
+    const user &#x3D; this.authService.currentUser;
+    if (!user || !this.plan) return;
+
+    try {
+      const planId &#x3D; this.plan.id;
+      this.userService.getUserId(user.uid).subscribe({
+        next: (userData) &#x3D;&gt; {
+          this.isPlanSaved &#x3D; userData.savedPlans?.includes(planId) ?? false;
+        },
+        error: (err) &#x3D;&gt; {
+          console.error(&#x27;Error al verificar si el plan está guardado&#x27;, err);
+          this.isPlanSaved &#x3D; false;
+        },
+      });
+    } catch (error) {
+      console.error(&#x27;Error al obtener el token&#x27;, error);
+      this.isPlanSaved &#x3D; false;
+    }
+  }
+
+  openReviewsListModal() {
+    this.isReviewsListModalOpen &#x3D; true;
+  }
+
+  closeReviewsListModal() {
+    this.isReviewsListModalOpen &#x3D; false;
+  }
+  goBack() {
+    this.router.navigate([&#x27;/plansList&#x27;]);
+  }
+  async savePlan() {
+    if (this.isPlanSaved) return; // Evitar guardar si ya está guardado
+
+    const user &#x3D; this.auth.currentUser;
+    if (!user) {
+      console.error(&#x27;Usuario no autenticado&#x27;);
+      return;
+    }
+    const token &#x3D; await user.getIdToken();
+    console.log(this.plan!.id);
+    console.log(token);
+    console.log(user.uid);
+    this.userService.savePlan(user.uid, this.plan!.id, token).subscribe();
+  }
+
+  getFormattedDate(firebaseTimestamp: any): string {
+    // Convierte el Timestamp de Firebase a un objeto Date de JavaScript.
+    // Esto puede causar una pérdida de precisión a milisegundos.
+    const date &#x3D; firebaseTimestamp.toDate();
+
+    // Obtiene el día, mes y año.
+    const day &#x3D; String(date.getDate()).padStart(2, &#x27;0&#x27;);
+    const month &#x3D; String(date.getMonth() + 1).padStart(2, &#x27;0&#x27;); // Los meses son base 0 en JavaScript
+    const year &#x3D; date.getFullYear();
+
+    // Retorna la fecha formateada.
+    return &#x60;${day}/${month}/${year}&#x60;;
+  }
+
+  /**
+   * Obtiene el estado de cada estrella según la puntuación.
+   *
+   * @param index - Índice de la estrella (0-4, correspondiente a estrellas 1-5)
+   * @returns &#x27;full&#x27; si la estrella está completamente llena, &#x27;half&#x27; si está a la mitad, &#x27;empty&#x27; si está vacía
+   */
+  getStarState(index: number): &#x27;full&#x27; | &#x27;half&#x27; | &#x27;empty&#x27; {
+    if (!this.plan) return &#x27;empty&#x27;;
+
+    const rating &#x3D; this.plan.rating;
+    const starValue &#x3D; index + 1; // 1, 2, 3, 4, 5
+
+    // Si la puntuación es mayor o igual al valor de la estrella, está llena
+    if (rating &gt;&#x3D; starValue) {
+      return &#x27;full&#x27;;
+    }
+    // Si la puntuación es mayor o igual a (valor - 0.5), está a la mitad
+    else if (rating &gt;&#x3D; starValue - 0.5) {
+      return &#x27;half&#x27;;
+    }
+    // Si no, está vacía
+    else {
+      return &#x27;empty&#x27;;
+    }
+  }
+
+  /**
+   * Crea un array con los índices de las 5 estrellas.
+   *
+   * @returns Array [0, 1, 2, 3, 4] para iterar sobre las 5 estrellas
+   */
+  getStarsArray(): number[] {
+    return [0, 1, 2, 3, 4];
+  }
+
+  /**
+   * Carga la reseña del usuario actual para este plan
+   */
+  private loadUserReview(): void {
+    const user &#x3D; this.authService.currentUser;
+    if (!user || !this.plan) {
+      console.log(
+        &#x27;❌ No se puede cargar reseña - Usuario o plan no disponible&#x27;
+      );
+      return;
+    }
+
+    // Buscar en las reseñas del plan si existe una del usuario actual
+    const reviews &#x3D; this.plan.reviews || [];
+    console.log(
+      &#x27;🔍 Buscando reseña del usuario&#x27;,
+      user.uid,
+      &#x27;en&#x27;,
+      reviews.length,
+      &#x27;reseñas&#x27;
+    );
+
+    const userReview &#x3D; reviews.find(
+      (review: Review) &#x3D;&gt; review.userId &#x3D;&#x3D;&#x3D; user.uid
+    );
+
+    if (userReview) {
+      this.userReview &#x3D; {
+        id: userReview.id,
+        rating: userReview.rating || 0,
+        comment: userReview.comment || &#x27;&#x27;,
+        userId: userReview.userId,
+      };
+      console.log(&#x27;✅ Reseña del usuario encontrada:&#x27;, this.userReview);
+    } else {
+      this.userReview &#x3D; null;
+      console.log(&#x27;ℹ️ El usuario no tiene reseña para este plan&#x27;);
+    }
+  }
+
+  openReviewModal() {
+    this.isReviewModalOpen &#x3D; true;
+  }
+
+  closeReviewModal() {
+    this.isReviewModalOpen &#x3D; false;
+  }
+
+  handleReviewSubmit(review: Review) {
+    if (!this.plan) return;
+
+    try {
+      const user &#x3D; this.authService.currentUser;
+      if (!user) throw new Error(&#x27;No autenticado&#x27;);
+
+      user.getIdToken().then((token) &#x3D;&gt; {
+        const isUpdate &#x3D; !!review.id;
+
+        const ratingData &#x3D; {
+          rating: review.rating,
+          comment: review.comment,
+          userId: user.uid,
+          id: review.id,
+          isUpdate: isUpdate,
+          previousRating: isUpdate ? this.userReview?.rating : undefined,
+        };
+
+        console.log(&#x27;📤 Enviando reseña:&#x27;, {
+          isUpdate,
+          newRating: review.rating,
+          previousRating: this.userReview?.rating,
+          userId: user.uid,
+          planId: this.plan!.id,
+        });
+
+        this.planService.ratePlan(this.plan!.id, ratingData, token).subscribe({
+          next: (res) &#x3D;&gt; {
+            console.log(&#x27;✅ Reseña guardada con éxito:&#x27;, res);
+
+            // Actualizar el plan completo con los datos del backend
+            if (res &amp;&amp; res.plan) {
+              this.plan &#x3D; {
+                ...this.plan!,
+                rating: res.plan.rating,
+                numRatings: res.plan.numRatings,
+                reviews: res.plan.reviews,
+              };
+
+              console.log(
+                &#x27;🔄 Plan actualizado con reviews:&#x27;,
+                this.plan.reviews
+              );
+
+              // Recargar la reseña del usuario desde el array actualizado
+              this.loadUserReview();
+            }
+            this.cdr.detectChanges();
+          },
+          error: (err) &#x3D;&gt; {
+            console.error(&#x27;❌ Error al guardar la reseña:&#x27;, err);
+          },
+        });
+      });
+    } catch (err: any) {
+      console.error(&#x27;Error de autenticación:&#x27;, err);
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;header
+  class&#x3D;&quot;text-white px-4 flex justify-between items-center h-16 sticky top-0 z-50 shadow-md&quot;
+  style&#x3D;&quot;background-color: #5675ac&quot;
+&gt;
+  &lt;div class&#x3D;&quot;flex items-center gap-4&quot;&gt;
+    &lt;button
+      (click)&#x3D;&quot;goBack()&quot;
+      class&#x3D;&quot;flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-white/20&quot;
+    &gt;
+      &lt;svg
+        class&#x3D;&quot;w-6 h-6&quot;
+        fill&#x3D;&quot;none&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          stroke-width&#x3D;&quot;2&quot;
+          d&#x3D;&quot;M15 19l-7-7 7-7&quot;
+        &gt;&lt;/path&gt;
+      &lt;/svg&gt;
+    &lt;/button&gt;
+    &lt;h1 class&#x3D;&quot;text-xl font-bold&quot;&gt;{{ &quot;plans.viewer&quot; | translate }}&lt;/h1&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;relative z-50&quot;&gt;
+    &lt;app-language-selector&gt;&lt;/app-language-selector&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;div
+  class&#x3D;&quot;min-h-screen bg-gradient-to-br from-slate-200 via-slate-300/50 to-brand-muted/30 p-4 pb-8&quot;
+&gt;
+  @if (plan) {
+  &lt;div
+    class&#x3D;&quot;bg-white rounded-3xl shadow-2xl overflow-hidden max-w-6xl mx-auto border border-white&quot;
+  &gt;
+    &lt;div class&#x3D;&quot;p-6 md:p-8&quot;&gt;
+      &lt;div class&#x3D;&quot;flex justify-end mb-2&quot;&gt;
+        &lt;app-options-plans&gt;&lt;/app-options-plans&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 gap-8&quot;&gt;
+        &lt;div class&#x3D;&quot;flex-shrink-0 h-full&quot;&gt;
+          &lt;div
+            class&#x3D;&quot;aspect-w-4 aspect-h-3 md:aspect-auto h-full min-h-[300px] rounded-2xl overflow-hidden shadow-md relative group&quot;
+          &gt;
+            &lt;img
+              [src]&#x3D;&quot;plan.imgRef&quot;
+              [alt]&#x3D;&quot;plan.name + &#x27; Image&#x27;&quot;
+              class&#x3D;&quot;w-full h-full object-cover transition-transform duration-700 group-hover:scale-105&quot;
+              onerror&#x3D;&quot;this.src&#x3D;&#x27;assets/images/placeholder.jpg&#x27;;&quot;
+            /&gt;
+
+            &lt;div
+              class&#x3D;&quot;absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-60&quot;
+            &gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;flex flex-col h-full&quot;&gt;
+          &lt;h2
+            class&#x3D;&quot;text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-tight&quot;
+          &gt;
+            {{ plan.name }}
+          &lt;/h2&gt;
+
+          &lt;div
+            class&#x3D;&quot;flex items-center gap-3 mb-6 bg-slate-50 p-2 rounded-lg w-fit border border-slate-100&quot;
+          &gt;
+            &lt;div class&#x3D;&quot;flex items-center gap-1&quot;&gt;
+              &lt;ng-container
+                *ngFor&#x3D;&quot;let starIndex of getStarsArray(); let i &#x3D; index&quot;
+              &gt;
+                &lt;svg
+                  *ngIf&#x3D;&quot;getStarState(i) &#x3D;&#x3D;&#x3D; &#x27;full&#x27;&quot;
+                  class&#x3D;&quot;w-6 h-6 text-yellow-400 fill-current drop-shadow-sm&quot;
+                  viewBox&#x3D;&quot;0 0 20 20&quot;
+                &gt;
+                  &lt;path
+                    d&#x3D;&quot;M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                &lt;div
+                  *ngIf&#x3D;&quot;getStarState(i) &#x3D;&#x3D;&#x3D; &#x27;half&#x27;&quot;
+                  class&#x3D;&quot;relative w-6 h-6&quot;
+                &gt;
+                  &lt;svg
+                    class&#x3D;&quot;absolute inset-0 w-6 h-6 text-gray-300 fill-current&quot;
+                    viewBox&#x3D;&quot;0 0 20 20&quot;
+                  &gt;
+                    &lt;path
+                      d&#x3D;&quot;M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                  &lt;svg
+                    class&#x3D;&quot;absolute inset-0 w-6 h-6 text-yellow-400 fill-current&quot;
+                    viewBox&#x3D;&quot;0 0 20 20&quot;
+                    style&#x3D;&quot;clip-path: inset(0 50% 0 0)&quot;
+                  &gt;
+                    &lt;path
+                      d&#x3D;&quot;M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                &lt;/div&gt;
+                &lt;svg
+                  *ngIf&#x3D;&quot;getStarState(i) &#x3D;&#x3D;&#x3D; &#x27;empty&#x27;&quot;
+                  class&#x3D;&quot;w-6 h-6 text-gray-300 fill-current&quot;
+                  viewBox&#x3D;&quot;0 0 20 20&quot;
+                &gt;
+                  &lt;path
+                    d&#x3D;&quot;M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/ng-container&gt;
+            &lt;/div&gt;
+            &lt;span class&#x3D;&quot;text-lg font-bold text-gray-700&quot;
+              &gt;{{ plan.rating }}/5&lt;/span
+            &gt;
+          &lt;/div&gt;
+
+          &lt;!-- En la sección de botones, reemplaza el botón de &quot;Guardar&quot; con este bloque --&gt;
+          &lt;div class&#x3D;&quot;flex items-center gap-3 mb-6&quot;&gt;
+            &lt;button
+              (click)&#x3D;&quot;openReviewModal()&quot;
+              class&#x3D;&quot;flex items-center gap-2 text-slate-600 hover:text-[#5675AC] transition-all group w-fit px-4 py-2 rounded-full hover:bg-blue-50 border border-transparent hover:border-blue-100&quot;
+            &gt;
+              &lt;svg
+                class&#x3D;&quot;w-6 h-6 group-hover:scale-110 transition-transform&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;2&quot;
+                  d&#x3D;&quot;M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z&quot;
+                &gt;&lt;/path&gt;
+              &lt;/svg&gt;
+              &lt;span class&#x3D;&quot;font-medium&quot;&gt;{{ &quot;plans.review&quot; | translate }}&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              (click)&#x3D;&quot;openReviewsListModal()&quot;
+              class&#x3D;&quot;flex items-center gap-2 text-slate-600 hover:text-[#5675AC] transition-all group w-fit px-4 py-2 rounded-full hover:bg-blue-50 border border-transparent hover:border-blue-100&quot;
+            &gt;
+              &lt;svg
+                class&#x3D;&quot;w-6 h-6 group-hover:scale-110 transition-transform&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;2&quot;
+                  d&#x3D;&quot;M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z&quot;
+                &gt;&lt;/path&gt;
+              &lt;/svg&gt;
+              &lt;span class&#x3D;&quot;font-medium&quot;&gt;{{
+                &quot;plans.viewReviews&quot; | translate
+              }}&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              (click)&#x3D;&quot;savePlan()&quot;
+              [disabled]&#x3D;&quot;isPlanSaved&quot;
+              class&#x3D;&quot;flex items-center gap-2 px-4 py-2 rounded-full&quot;
+              [ngClass]&#x3D;&quot;{
+                &#x27;bg-red-50 text-red-500 border-red-100&#x27;: isPlanSaved,
+                &#x27;hover:bg-red-50 text-gray-600 hover:text-red-500 border-transparent hover:border-red-100&#x27;:
+                  !isPlanSaved
+              }&quot;
+            &gt;
+              &lt;svg
+                class&#x3D;&quot;w-6 h-6 group-hover:scale-110 transition-transform&quot;
+                fill&#x3D;&quot;none&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                viewBox&#x3D;&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  stroke-linecap&#x3D;&quot;round&quot;
+                  stroke-linejoin&#x3D;&quot;round&quot;
+                  stroke-width&#x3D;&quot;2&quot;
+                  d&#x3D;&quot;M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z&quot;
+                &gt;&lt;/path&gt;
+              &lt;/svg&gt;
+              &lt;span class&#x3D;&quot;font-medium&quot;&gt;{{ &quot;plans.save&quot; | translate }}&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Actualiza el span de rating del plan --&gt;
+          &lt;span class&#x3D;&quot;text-lg font-bold text-gray-700&quot;
+            &gt;{{ plan.rating | number : &quot;1.0-2&quot; }}/5&lt;/span
+          &gt;
+
+          &lt;!-- En la lista de actividades, actualiza el rating --&gt;
+          &lt;span class&#x3D;&quot;font-semibold text-slate-700&quot;&gt;{{
+            plan.rating || 0 | number : &quot;1.0-2&quot;
+          }}&lt;/span&gt;
+
+          &lt;!-- Agrega el modal al final del componente, fuera de los divs principales --&gt;
+
+          &lt;div class&#x3D;&quot;flex-grow flex flex-col&quot;&gt;
+            &lt;h3
+              class&#x3D;&quot;text-lg font-bold text-slate-800 mb-3 flex items-center gap-2 pb-2 border-b border-slate-100&quot;
+            &gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-5 w-5 text-[#5675AC]&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path d&#x3D;&quot;M9 2a1 1 0 000 2h2a1 1 0 100-2H9z&quot; /&gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+              {{ &quot;plans.activities&quot; | translate }}
+              &lt;span
+                class&#x3D;&quot;bg-slate-100 text-slate-500 text-xs px-2 py-0.5 rounded-full&quot;
+                &gt;{{ activities.length }}&lt;/span
+              &gt;
+            &lt;/h3&gt;
+
+            &lt;div
+              class&#x3D;&quot;space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar&quot;
+            &gt;
+              @if (plan.activitiesIds &amp;&amp; plan.activitiesIds.length &gt; 0 &amp;&amp;
+              activities.length &gt; 0) {
+              &lt;a
+                *ngFor&#x3D;&quot;let activity of activities&quot;
+                [routerLink]&#x3D;&quot;[&#x27;/activityDetail&#x27;, activity.id]&quot;
+                class&#x3D;&quot;flex items-center gap-4 p-3 bg-slate-50 rounded-xl border border-slate-100 hover:border-[#5675AC]/30 hover:shadow-md hover:bg-white transition-all duration-300 group cursor-pointer&quot;
+              &gt;
+                &lt;div
+                  class&#x3D;&quot;w-16 h-16 rounded-lg overflow-hidden bg-slate-200 flex-shrink-0 shadow-sm relative&quot;
+                &gt;
+                  &lt;img
+                    [src]&#x3D;&quot;activity.imageURL&quot;
+                    [alt]&#x3D;&quot;activity.name&quot;
+                    class&#x3D;&quot;w-full h-full object-cover group-hover:scale-110 transition-transform duration-500&quot;
+                    onerror&#x3D;&quot;this.src&#x3D;&#x27;assets/images/placeholder.jpg&#x27;;&quot;
+                  /&gt;
+                &lt;/div&gt;
+
+                &lt;div class&#x3D;&quot;flex-1 min-w-0&quot;&gt;
+                  &lt;p
+                    class&#x3D;&quot;font-bold text-gray-800 truncate group-hover:text-[#5675AC] transition-colors text-lg&quot;
+                  &gt;
+                    {{ activity.name }}
+                  &lt;/p&gt;
+
+                  &lt;div
+                    class&#x3D;&quot;flex items-center gap-3 mt-1 text-sm text-gray-500&quot;
+                  &gt;
+                    &lt;span
+                      class&#x3D;&quot;flex items-center gap-1 bg-white px-2 py-0.5 rounded-md shadow-sm border border-slate-100&quot;
+                    &gt;
+                      &lt;svg
+                        class&#x3D;&quot;w-3.5 h-3.5 text-yellow-400 fill-current&quot;
+                        viewBox&#x3D;&quot;0 0 20 20&quot;
+                      &gt;
+                        &lt;path
+                          d&#x3D;&quot;M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z&quot;
+                        /&gt;
+                      &lt;/svg&gt;
+                    &lt;/span&gt;
+
+                    &lt;span
+                      *ngIf&#x3D;&quot;activity.latitude&quot;
+                      class&#x3D;&quot;flex items-center gap-1 truncate max-w-[150px]&quot;
+                    &gt;
+                      &lt;svg
+                        class&#x3D;&quot;w-3.5 h-3.5 text-slate-400&quot;
+                        fill&#x3D;&quot;none&quot;
+                        stroke&#x3D;&quot;currentColor&quot;
+                        viewBox&#x3D;&quot;0 0 24 24&quot;
+                      &gt;
+                        &lt;path
+                          stroke-linecap&#x3D;&quot;round&quot;
+                          stroke-linejoin&#x3D;&quot;round&quot;
+                          stroke-width&#x3D;&quot;2&quot;
+                          d&#x3D;&quot;M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z&quot;
+                        &gt;&lt;/path&gt;
+                        &lt;path
+                          stroke-linecap&#x3D;&quot;round&quot;
+                          stroke-linejoin&#x3D;&quot;round&quot;
+                          stroke-width&#x3D;&quot;2&quot;
+                          d&#x3D;&quot;M15 11a3 3 0 11-6 0 3 3 0 016 0z&quot;
+                        &gt;&lt;/path&gt;
+                      &lt;/svg&gt;
+                      Loc
+                    &lt;/span&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;svg
+                  xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                  class&#x3D;&quot;h-5 w-5 text-slate-300 group-hover:text-[#5675AC] group-hover:translate-x-1 transition-all&quot;
+                  viewBox&#x3D;&quot;0 0 20 20&quot;
+                  fill&#x3D;&quot;currentColor&quot;
+                &gt;
+                  &lt;path
+                    fill-rule&#x3D;&quot;evenodd&quot;
+                    d&#x3D;&quot;M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z&quot;
+                    clip-rule&#x3D;&quot;evenodd&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/a&gt;
+              } @else {
+              &lt;div
+                class&#x3D;&quot;flex flex-col items-center justify-center py-10 text-slate-400 bg-slate-50 rounded-xl border border-dashed border-slate-200&quot;
+              &gt;
+                &lt;svg
+                  xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                  class&#x3D;&quot;h-10 w-10 mb-2 opacity-50&quot;
+                  fill&#x3D;&quot;none&quot;
+                  viewBox&#x3D;&quot;0 0 24 24&quot;
+                  stroke&#x3D;&quot;currentColor&quot;
+                &gt;
+                  &lt;path
+                    stroke-linecap&#x3D;&quot;round&quot;
+                    stroke-linejoin&#x3D;&quot;round&quot;
+                    stroke-width&#x3D;&quot;1.5&quot;
+                    d&#x3D;&quot;M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                &lt;p class&#x3D;&quot;text-sm font-medium&quot;&gt;
+                  {{ &quot;messages.noResults&quot; | translate }}
+                &lt;/p&gt;
+              &lt;/div&gt;
+              }
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div
+        class&#x3D;&quot;mt-8 pt-6 border-t border-slate-100 grid grid-cols-1 md:grid-cols-3 gap-6&quot;
+      &gt;
+        &lt;div class&#x3D;&quot;md:col-span-2&quot;&gt;
+          &lt;h3
+            class&#x3D;&quot;text-lg font-bold text-slate-800 mb-3 flex items-center gap-2&quot;
+          &gt;
+            &lt;svg
+              class&#x3D;&quot;w-5 h-5 text-[#5675AC]&quot;
+              fill&#x3D;&quot;none&quot;
+              stroke&#x3D;&quot;currentColor&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+            &gt;
+              &lt;path
+                stroke-linecap&#x3D;&quot;round&quot;
+                stroke-linejoin&#x3D;&quot;round&quot;
+                stroke-width&#x3D;&quot;2&quot;
+                d&#x3D;&quot;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&quot;
+              &gt;&lt;/path&gt;
+            &lt;/svg&gt;
+            {{ &quot;plans.description&quot; | translate }}
+          &lt;/h3&gt;
+          &lt;p class&#x3D;&quot;text-slate-600 leading-relaxed text-lg&quot;&gt;
+            {{
+              planDescription || (&quot;plans.descriptionPlaceholder&quot; | translate)
+            }}
+          &lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;flex flex-col justify-between items-end gap-4&quot;&gt;
+          @if(plan.visibility) {
+          &lt;div
+            class&#x3D;&quot;flex items-center gap-2 px-4 py-2 bg-green-50 text-green-700 rounded-full border border-green-200 shadow-sm&quot;
+          &gt;
+            &lt;span
+              class&#x3D;&quot;w-2 h-2 rounded-full bg-green-500 animate-pulse&quot;
+            &gt;&lt;/span&gt;
+            &lt;span class&#x3D;&quot;font-bold text-sm&quot;&gt;{{
+              &quot;plans.public&quot; | translate
+            }}&lt;/span&gt;
+          &lt;/div&gt;
+          } @else {
+          &lt;div
+            class&#x3D;&quot;flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-600 rounded-full border border-slate-200 shadow-sm&quot;
+          &gt;
+            &lt;svg
+              class&#x3D;&quot;w-4 h-4&quot;
+              fill&#x3D;&quot;none&quot;
+              stroke&#x3D;&quot;currentColor&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+            &gt;
+              &lt;path
+                stroke-linecap&#x3D;&quot;round&quot;
+                stroke-linejoin&#x3D;&quot;round&quot;
+                stroke-width&#x3D;&quot;2&quot;
+                d&#x3D;&quot;M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z&quot;
+              &gt;&lt;/path&gt;
+            &lt;/svg&gt;
+            &lt;span class&#x3D;&quot;font-bold text-sm&quot;&gt;{{
+              &quot;plans.private&quot; | translate
+            }}&lt;/span&gt;
+          &lt;/div&gt;
+          }
+
+          &lt;div class&#x3D;&quot;text-right&quot;&gt;
+            &lt;p
+              class&#x3D;&quot;text-xs font-bold text-slate-400 uppercase tracking-wider mb-1&quot;
+            &gt;
+              {{ &quot;plans.uploadedOn&quot; | translate }}
+            &lt;/p&gt;
+            &lt;p class&#x3D;&quot;text-sm font-semibold text-slate-700&quot;&gt;
+              {{ getFormattedDate(plan!.createdAt) }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  } @else {
+  &lt;div
+    class&#x3D;&quot;bg-white rounded-3xl shadow-lg p-12 text-center max-w-2xl mx-auto mt-20 border border-white&quot;
+  &gt;
+    &lt;div
+      class&#x3D;&quot;bg-slate-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6&quot;
+    &gt;
+      &lt;svg
+        class&#x3D;&quot;w-10 h-10 text-slate-400&quot;
+        fill&#x3D;&quot;none&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          stroke-width&#x3D;&quot;2&quot;
+          d&#x3D;&quot;M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&quot;
+        &gt;&lt;/path&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+    &lt;h1 class&#x3D;&quot;text-2xl font-bold text-slate-900 mb-2&quot;&gt;
+      {{ &quot;plans.notFound&quot; | translate }}
+    &lt;/h1&gt;
+    &lt;p class&#x3D;&quot;text-slate-500&quot;&gt;{{ &quot;messages.tryAgain&quot; | translate }}&lt;/p&gt;
+  &lt;/div&gt;
+  }
+&lt;/div&gt;
+
+&lt;app-review-modal
+  [isOpen]&#x3D;&quot;isReviewModalOpen&quot;
+  [activityId]&#x3D;&quot;plan?.id&quot;
+  [userId]&#x3D;&quot;authService.currentUser?.uid || &#x27;&#x27;&quot;
+  [existingReview]&#x3D;&quot;userReview&quot;
+  (onClose)&#x3D;&quot;closeReviewModal()&quot;
+  (onSubmit)&#x3D;&quot;handleReviewSubmit($event)&quot;
+&gt;&lt;/app-review-modal&gt;
+&lt;app-reviews-list-modal
+  [isOpen]&#x3D;&quot;isReviewsListModalOpen&quot;
+  [reviews]&#x3D;&quot;plan?.reviews || []&quot;
+  [title]&#x3D;&quot;&#x27;Reseñas del Plan&#x27;&quot;
+  (onClose)&#x3D;&quot;closeReviewsListModal()&quot;
+&gt;&lt;/app-reviews-list-modal&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><header  class="text-white px-4 flex justify-between items-center h-16 sticky top-0 z-50 shadow-md"  style="background-color: #5675ac">  <div class="flex items-center gap-4">    <button      (click)="goBack()"      class="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-white/20"    >      <svg        class="w-6 h-6"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M15 19l-7-7 7-7"        ></path>      </svg>    </button>    <h1 class="text-xl font-bold">{{ "plans.viewer" | translate }}</h1>  </div>  <div class="relative z-50">    <app-language-selector></app-language-selector>  </div></header><div  class="min-h-screen bg-gradient-to-br from-slate-200 via-slate-300/50 to-brand-muted/30 p-4 pb-8">  @if (plan) {  <div    class="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-6xl mx-auto border border-white"  >    <div class="p-6 md:p-8">      <div class="flex justify-end mb-2">        <app-options-plans></app-options-plans>      </div>      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">        <div class="flex-shrink-0 h-full">          <div            class="aspect-w-4 aspect-h-3 md:aspect-auto h-full min-h-[300px] rounded-2xl overflow-hidden shadow-md relative group"          >            <img              [src]="plan.imgRef"              [alt]="plan.name + \' Image\'"              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"              onerror="this.src=\'assets/images/placeholder.jpg\';"            />            <div              class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-60"            ></div>          </div>        </div>        <div class="flex flex-col h-full">          <h2            class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-tight"          >            {{ plan.name }}          </h2>          <div            class="flex items-center gap-3 mb-6 bg-slate-50 p-2 rounded-lg w-fit border border-slate-100"          >            <div class="flex items-center gap-1">              <ng-container                *ngFor="let starIndex of getStarsArray(); let i = index"              >                <svg                  *ngIf="getStarState(i) === \'full\'"                  class="w-6 h-6 text-yellow-400 fill-current drop-shadow-sm"                  viewBox="0 0 20 20"                >                  <path                    d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"                  />                </svg>                <div                  *ngIf="getStarState(i) === \'half\'"                  class="relative w-6 h-6"                >                  <svg                    class="absolute inset-0 w-6 h-6 text-gray-300 fill-current"                    viewBox="0 0 20 20"                  >                    <path                      d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"                    />                  </svg>                  <svg                    class="absolute inset-0 w-6 h-6 text-yellow-400 fill-current"                    viewBox="0 0 20 20"                    style="clip-path: inset(0 50% 0 0)"                  >                    <path                      d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"                    />                  </svg>                </div>                <svg                  *ngIf="getStarState(i) === \'empty\'"                  class="w-6 h-6 text-gray-300 fill-current"                  viewBox="0 0 20 20"                >                  <path                    d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"                  />                </svg>              </ng-container>            </div>            <span class="text-lg font-bold text-gray-700"              >{{ plan.rating }}/5</span            >          </div>          <!-- En la sección de botones, reemplaza el botón de "Guardar" con este bloque -->          <div class="flex items-center gap-3 mb-6">            <button              (click)="openReviewModal()"              class="flex items-center gap-2 text-slate-600 hover:text-[#5675AC] transition-all group w-fit px-4 py-2 rounded-full hover:bg-blue-50 border border-transparent hover:border-blue-100"            >              <svg                class="w-6 h-6 group-hover:scale-110 transition-transform"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="2"                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"                ></path>              </svg>              <span class="font-medium">{{ "plans.review" | translate }}</span>            </button>            <button              (click)="openReviewsListModal()"              class="flex items-center gap-2 text-slate-600 hover:text-[#5675AC] transition-all group w-fit px-4 py-2 rounded-full hover:bg-blue-50 border border-transparent hover:border-blue-100"            >              <svg                class="w-6 h-6 group-hover:scale-110 transition-transform"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="2"                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"                ></path>              </svg>              <span class="font-medium">{{                "plans.viewReviews" | translate              }}</span>            </button>            <button              (click)="savePlan()"              [disabled]="isPlanSaved"              class="flex items-center gap-2 px-4 py-2 rounded-full"              [ngClass]="{                \'bg-red-50 text-red-500 border-red-100\': isPlanSaved,                \'hover:bg-red-50 text-gray-600 hover:text-red-500 border-transparent hover:border-red-100\':                  !isPlanSaved              }"            >              <svg                class="w-6 h-6 group-hover:scale-110 transition-transform"                fill="none"                stroke="currentColor"                viewBox="0 0 24 24"              >                <path                  stroke-linecap="round"                  stroke-linejoin="round"                  stroke-width="2"                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"                ></path>              </svg>              <span class="font-medium">{{ "plans.save" | translate }}</span>            </button>          </div>          <!-- Actualiza el span de rating del plan -->          <span class="text-lg font-bold text-gray-700"            >{{ plan.rating | number : "1.0-2" }}/5</span          >          <!-- En la lista de actividades, actualiza el rating -->          <span class="font-semibold text-slate-700">{{            plan.rating || 0 | number : "1.0-2"          }}</span>          <!-- Agrega el modal al final del componente, fuera de los divs principales -->          <div class="flex-grow flex flex-col">            <h3              class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2 pb-2 border-b border-slate-100"            >              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-5 w-5 text-[#5675AC]"                viewBox="0 0 20 20"                fill="currentColor"              >                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />                <path                  fill-rule="evenodd"                  d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"                  clip-rule="evenodd"                />              </svg>              {{ "plans.activities" | translate }}              <span                class="bg-slate-100 text-slate-500 text-xs px-2 py-0.5 rounded-full"                >{{ activities.length }}</span              >            </h3>            <div              class="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar"            >              @if (plan.activitiesIds && plan.activitiesIds.length > 0 &&              activities.length > 0) {              <a                *ngFor="let activity of activities"                [routerLink]="[\'/activityDetail\', activity.id]"                class="flex items-center gap-4 p-3 bg-slate-50 rounded-xl border border-slate-100 hover:border-[#5675AC]/30 hover:shadow-md hover:bg-white transition-all duration-300 group cursor-pointer"              >                <div                  class="w-16 h-16 rounded-lg overflow-hidden bg-slate-200 flex-shrink-0 shadow-sm relative"                >                  <img                    [src]="activity.imageURL"                    [alt]="activity.name"                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"                    onerror="this.src=\'assets/images/placeholder.jpg\';"                  />                </div>                <div class="flex-1 min-w-0">                  <p                    class="font-bold text-gray-800 truncate group-hover:text-[#5675AC] transition-colors text-lg"                  >                    {{ activity.name }}                  </p>                  <div                    class="flex items-center gap-3 mt-1 text-sm text-gray-500"                  >                    <span                      class="flex items-center gap-1 bg-white px-2 py-0.5 rounded-md shadow-sm border border-slate-100"                    >                      <svg                        class="w-3.5 h-3.5 text-yellow-400 fill-current"                        viewBox="0 0 20 20"                      >                        <path                          d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"                        />                      </svg>                    </span>                    <span                      *ngIf="activity.latitude"                      class="flex items-center gap-1 truncate max-w-[150px]"                    >                      <svg                        class="w-3.5 h-3.5 text-slate-400"                        fill="none"                        stroke="currentColor"                        viewBox="0 0 24 24"                      >                        <path                          stroke-linecap="round"                          stroke-linejoin="round"                          stroke-width="2"                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"                        ></path>                        <path                          stroke-linecap="round"                          stroke-linejoin="round"                          stroke-width="2"                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"                        ></path>                      </svg>                      Loc                    </span>                  </div>                </div>                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-5 w-5 text-slate-300 group-hover:text-[#5675AC] group-hover:translate-x-1 transition-all"                  viewBox="0 0 20 20"                  fill="currentColor"                >                  <path                    fill-rule="evenodd"                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"                    clip-rule="evenodd"                  />                </svg>              </a>              } @else {              <div                class="flex flex-col items-center justify-center py-10 text-slate-400 bg-slate-50 rounded-xl border border-dashed border-slate-200"              >                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-10 w-10 mb-2 opacity-50"                  fill="none"                  viewBox="0 0 24 24"                  stroke="currentColor"                >                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    stroke-width="1.5"                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"                  />                </svg>                <p class="text-sm font-medium">                  {{ "messages.noResults" | translate }}                </p>              </div>              }            </div>          </div>        </div>      </div>      <div        class="mt-8 pt-6 border-t border-slate-100 grid grid-cols-1 md:grid-cols-3 gap-6"      >        <div class="md:col-span-2">          <h3            class="text-lg font-bold text-slate-800 mb-3 flex items-center gap-2"          >            <svg              class="w-5 h-5 text-[#5675AC]"              fill="none"              stroke="currentColor"              viewBox="0 0 24 24"            >              <path                stroke-linecap="round"                stroke-linejoin="round"                stroke-width="2"                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"              ></path>            </svg>            {{ "plans.description" | translate }}          </h3>          <p class="text-slate-600 leading-relaxed text-lg">            {{              planDescription || ("plans.descriptionPlaceholder" | translate)            }}          </p>        </div>        <div class="flex flex-col justify-between items-end gap-4">          @if(plan.visibility) {          <div            class="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-700 rounded-full border border-green-200 shadow-sm"          >            <span              class="w-2 h-2 rounded-full bg-green-500 animate-pulse"            ></span>            <span class="font-bold text-sm">{{              "plans.public" | translate            }}</span>          </div>          } @else {          <div            class="flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-600 rounded-full border border-slate-200 shadow-sm"          >            <svg              class="w-4 h-4"              fill="none"              stroke="currentColor"              viewBox="0 0 24 24"            >              <path                stroke-linecap="round"                stroke-linejoin="round"                stroke-width="2"                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"              ></path>            </svg>            <span class="font-bold text-sm">{{              "plans.private" | translate            }}</span>          </div>          }          <div class="text-right">            <p              class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1"            >              {{ "plans.uploadedOn" | translate }}            </p>            <p class="text-sm font-semibold text-slate-700">              {{ getFormattedDate(plan!.createdAt) }}            </p>          </div>        </div>      </div>    </div>  </div>  } @else {  <div    class="bg-white rounded-3xl shadow-lg p-12 text-center max-w-2xl mx-auto mt-20 border border-white"  >    <div      class="bg-slate-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"    >      <svg        class="w-10 h-10 text-slate-400"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"        ></path>      </svg>    </div>    <h1 class="text-2xl font-bold text-slate-900 mb-2">      {{ "plans.notFound" | translate }}    </h1>    <p class="text-slate-500">{{ "messages.tryAgain" | translate }}</p>  </div>  }</div><app-review-modal  [isOpen]="isReviewModalOpen"  [activityId]="plan?.id"  [userId]="authService.currentUser?.uid || \'\'"  [existingReview]="userReview"  (onClose)="closeReviewModal()"  (onSubmit)="handleReviewSubmit($event)"></app-review-modal><app-reviews-list-modal  [isOpen]="isReviewsListModalOpen"  [reviews]="plan?.reviews || []"  [title]="\'Reseñas del Plan\'"  (onClose)="closeReviewsListModal()"></app-reviews-list-modal></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
+    var ACTUAL_COMPONENT = {'name': 'PlansComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PlansComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

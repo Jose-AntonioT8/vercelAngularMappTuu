@@ -1,0 +1,2027 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>map-tuu documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">map-tuu documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >IaAssistantService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/core/services/ia-assistant.service.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#allowedTopicPattern" >allowedTopicPattern</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#firestore" >firestore</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#http" >http</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#maxDocsPerCollection" >maxDocsPerCollection</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#maxFirebaseJsonChars" >maxFirebaseJsonChars</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#maxModelAttempts" >maxModelAttempts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#unavailableModels" >unavailableModels</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ask" >ask</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#buildRelationalContext" >buildRelationalContext</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#compactFirebaseData" >compactFirebaseData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#getFirebaseData" >getFirebaseData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getStringArrayField" >getStringArrayField</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getStringField" >getStringField</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#requestWithModel" >requestWithModel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#requestWithModelChain" >requestWithModelChain</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#resolveChatCompletionsUrl" >resolveChatCompletionsUrl</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ask"></a>
+                    <span class="name">
+                        <span ><b>ask</b></span>
+                        <a href="#ask"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ask(question: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/core/services/ia-assistant.service.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Realiza una pregunta al asistente.</p>
+<p>Reglas:</p>
+<ul>
+<li>Si la pregunta no trata sobre el dominio permitido, se rechaza.</li>
+<li>Si falta configuración (modelo/API key/URL), devuelve un mensaje de error controlado.</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>question</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Pregunta del usuario (texto libre).</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Observable con la respuesta en texto.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buildRelationalContext"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>buildRelationalContext</b></span>
+                        <a href="#buildRelationalContext"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>buildRelationalContext(firebaseData: <a href="../interfaces/IaFirebaseData.html" target="_self">IaFirebaseData</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="388"
+                                    class="link-to-prism">src/app/core/services/ia-assistant.service.ts:388</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Construye relaciones entre planes/actividades/tipos a partir de IDs.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>firebaseData</td>
+                                            <td>
+                                                            <code><a href="../interfaces/IaFirebaseData.html" target="_self" >IaFirebaseData</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Dataset (posiblemente compacto) de Firebase.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/IaRelationalContext.html" target="_self" >IaRelationalContext</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Estructura relacional usada como “memoria” para el modelo.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="compactFirebaseData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>compactFirebaseData</b></span>
+                        <a href="#compactFirebaseData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>compactFirebaseData(firebaseData: <a href="../interfaces/IaFirebaseData.html" target="_self">IaFirebaseData</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="371"
+                                    class="link-to-prism">src/app/core/services/ia-assistant.service.ts:371</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Reduce tamaño del dataset para mantener el prompt dentro de límites razonables.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>firebaseData</td>
+                                            <td>
+                                                            <code><a href="../interfaces/IaFirebaseData.html" target="_self" >IaFirebaseData</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/IaFirebaseData.html" target="_self" >IaFirebaseData</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getFirebaseData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>getFirebaseData</b></span>
+                        <a href="#getFirebaseData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getFirebaseData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="637"
+                                    class="link-to-prism">src/app/core/services/ia-assistant.service.ts:637</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Carga datos desde Firebase (colecciones de dominio) y los transforma en JSON simple.</p>
+<p>Nota: se usa <code>getDocs</code> (snapshot puntual) para componer contexto; no mantiene listener.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/IaFirebaseData.html" target="_self" >Promise&lt;IaFirebaseData&gt;</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStringArrayField"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getStringArrayField</b></span>
+                        <a href="#getStringArrayField"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getStringArrayField(source: Record<string | unknown> | undefined, keys: string[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="606"
+                                    class="link-to-prism">src/app/core/services/ia-assistant.service.ts:606</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Extrae un campo <code>string[]</code> priorizando las <code>keys</code> dadas.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>source</td>
+                                            <td>
+                                                        <code>Record&lt;string | unknown&gt; | undefined</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>keys</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>array normalizado (sin vacíos) o [] si no existe.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStringField"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getStringField</b></span>
+                        <a href="#getStringField"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getStringField(source: Record<string | unknown> | undefined, keys: string[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="580"
+                                    class="link-to-prism">src/app/core/services/ia-assistant.service.ts:580</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Extrae un campo string priorizando las <code>keys</code> dadas.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>source</td>
+                                            <td>
+                                                        <code>Record&lt;string | unknown&gt; | undefined</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>keys</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>string normalizada (trim) o string vacío si no existe.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="requestWithModel"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>requestWithModel</b></span>
+                        <a href="#requestWithModel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>requestWithModel(model: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, messages: <a href="../interfaces/IaChatMessage.html" target="_self">IaChatMessage[]</a>, apiKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, apiUrl: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, isFallback: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="298"
+                                    class="link-to-prism">src/app/core/services/ia-assistant.service.ts:298</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Lanza una petición al endpoint de chat completions.</p>
+<p>Manejo:</p>
+<ul>
+<li>Reintentos exponenciales ante 429 (rate limit).</li>
+<li>Devuelve contenido de <code>choices[0].message.content</code> o mensaje “fallback”.</li>
+</ul>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>model</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>messages</td>
+                                            <td>
+                                                            <code><a href="../interfaces/IaChatMessage.html" target="_self" >IaChatMessage[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>apiKey</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>apiUrl</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>isFallback</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="requestWithModelChain"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>requestWithModelChain</b></span>
+                        <a href="#requestWithModelChain"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>requestWithModelChain(models: string[], messages: <a href="../interfaces/IaChatMessage.html" target="_self">IaChatMessage[]</a>, apiKey: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, apiUrl: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="236"
+                                    class="link-to-prism">src/app/core/services/ia-assistant.service.ts:236</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Ejecuta la petición probando modelos en cadena (principal + fallbacks).</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>models</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <p>Lista de modelos a intentar, en orden.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>messages</td>
+                                            <td>
+                                                            <code><a href="../interfaces/IaChatMessage.html" target="_self" >IaChatMessage[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <p>Prompt en formato chat.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>apiKey</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <p>API key del proveedor.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>apiUrl</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <p>Endpoint de chat completions.</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>0</code>
+                                            </td>
+
+                                            <td>
+                                                    <p>Índice actual dentro de <code>models</code>.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;string&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resolveChatCompletionsUrl"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>resolveChatCompletionsUrl</b></span>
+                        <a href="#resolveChatCompletionsUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resolveChatCompletionsUrl(apiUrl?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="355"
+                                    class="link-to-prism">src/app/core/services/ia-assistant.service.ts:355</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Normaliza URLs configuradas y ajusta <code>/models</code> -&gt; <code>/chat/completions</code> si aplica.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>apiUrl</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="allowedTopicPattern"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>allowedTopicPattern</b></span>
+                        <a href="#allowedTopicPattern"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>/(plan|planes|actividad|actividades|activity|activities|activitytype|activity type|tipo|tipos|ruta|rutas|itinerario|itinerarios)/i</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/core/services/ia-assistant.service.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="firestore"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>firestore</b></span>
+                        <a href="#firestore"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Firestore)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/core/services/ia-assistant.service.ts:101</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="http"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>http</b></span>
+                        <a href="#http"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(HttpClient)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/core/services/ia-assistant.service.ts:102</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="maxDocsPerCollection"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>maxDocsPerCollection</b></span>
+                        <a href="#maxDocsPerCollection"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>25</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/core/services/ia-assistant.service.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="maxFirebaseJsonChars"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>maxFirebaseJsonChars</b></span>
+                        <a href="#maxFirebaseJsonChars"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>15000</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/core/services/ia-assistant.service.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="maxModelAttempts"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>maxModelAttempts</b></span>
+                        <a href="#maxModelAttempts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>3</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/core/services/ia-assistant.service.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="unavailableModels"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>unavailableModels</b></span>
+                        <a href="#unavailableModels"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Set&lt;string&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/core/services/ia-assistant.service.ts:103</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
+import { Injectable, inject } from &#x27;@angular/core&#x27;;
+import { Firestore } from &#x27;@angular/fire/firestore&#x27;;
+import { collection, getDocs } from &#x27;firebase/firestore&#x27;;
+import {
+  Observable,
+  catchError,
+  from,
+  map,
+  mergeMap,
+  of,
+  retryWhen,
+  switchMap,
+  throwError,
+  timer,
+} from &#x27;rxjs&#x27;;
+import { environment } from &#x27;../../../app/environment/environment&#x27;;
+
+interface IaChatMessage {
+  role: &#x27;system&#x27; | &#x27;user&#x27;;
+  content: string;
+}
+
+interface IaChatResponse {
+  choices?: Array&lt;{
+    message?: {
+      content?: string;
+    };
+  }&gt;;
+}
+
+interface IaFirebaseData {
+  activity: Array&lt;Record&lt;string, unknown&gt;&gt;;
+  activityType: Array&lt;Record&lt;string, unknown&gt;&gt;;
+  plans: Array&lt;Record&lt;string, unknown&gt;&gt;;
+}
+
+interface IaRelationalContext {
+  plansWithActivities: Array&lt;{
+    planId: string;
+    planName: string;
+    activityIds: string[];
+    activityNames: string[];
+    missingActivityIds: string[];
+    activityTypeIds: string[];
+    activityTypeNames: string[];
+  }&gt;;
+  activitiesWithType: Array&lt;{
+    activityId: string;
+    activityName: string;
+    activityTypeId: string;
+    activityTypeName: string;
+  }&gt;;
+  orphanActivities: Array&lt;{
+    activityId: string;
+    activityName: string;
+    activityTypeId: string;
+    activityTypeName: string;
+  }&gt;;
+  orphanActivityTypes: Array&lt;{
+    activityTypeId: string;
+    activityTypeName: string;
+  }&gt;;
+  activityToPlans: Array&lt;{
+    activityId: string;
+    activityName: string;
+    planIds: string[];
+    planNames: string[];
+  }&gt;;
+  activityTypeToActivities: Array&lt;{
+    activityTypeId: string;
+    activityTypeName: string;
+    activityIds: string[];
+    activityNames: string[];
+  }&gt;;
+  stats: {
+    totalPlans: number;
+    totalActivities: number;
+    totalActivityTypes: number;
+    missingActivityLinksInPlans: number;
+    activitiesWithoutType: number;
+  };
+}
+
+@Injectable({ providedIn: &#x27;root&#x27; })
+/**
+ * Asistente IA acotado al dominio de MapTuu.
+ *
+ * Objetivo:
+ * - Responder preguntas **solo** sobre planes, actividades y tipos de actividad,
+ *   usando como fuente de datos Firebase (colecciones &#x60;activities&#x60;, &#x60;activityTypes&#x60;, &#x60;plans&#x60;).
+ *
+ * Decisiones de diseño:
+ * - Se construye un **contexto relacional** (IDs enlazados) para mejorar respuestas
+ *   y reducir alucinaciones (ej: plan.activitiesIds -&gt; activity.id).
+ * - Se aplican límites de tamaño (&#x60;maxFirebaseJsonChars&#x60;, &#x60;maxDocsPerCollection&#x60;)
+ *   para evitar que el prompt exceda límites del proveedor.
+ * - Se soporta cadena de modelos (principal + fallbacks) con manejo de errores 402/404/429.
+ */
+export class IaAssistantService {
+  private firestore &#x3D; inject(Firestore);
+  private http &#x3D; inject(HttpClient);
+  private readonly unavailableModels &#x3D; new Set&lt;string&gt;();
+  private readonly maxModelAttempts &#x3D; 3;
+  private readonly maxDocsPerCollection &#x3D; 25;
+  private readonly maxFirebaseJsonChars &#x3D; 15000;
+
+  private readonly allowedTopicPattern &#x3D;
+    /(plan|planes|actividad|actividades|activity|activities|activitytype|activity type|tipo|tipos|ruta|rutas|itinerario|itinerarios)/i;
+
+  /**
+   * Realiza una pregunta al asistente.
+   *
+   * Reglas:
+   * - Si la pregunta no trata sobre el dominio permitido, se rechaza.
+   * - Si falta configuración (modelo/API key/URL), devuelve un mensaje de error controlado.
+   *
+   * @param question Pregunta del usuario (texto libre).
+   * @returns Observable con la respuesta en texto.
+   */
+  ask(question: string) {
+    const cleanQuestion &#x3D; question.trim();
+
+    if (!cleanQuestion) {
+      return of(&#x27;Escribe una pregunta para poder ayudarte.&#x27;);
+    }
+
+    if (!this.allowedTopicPattern.test(cleanQuestion)) {
+      return of(
+        &#x27;Solo puedo responder preguntas sobre planes, actividades o tipos de actividad.&#x27;,
+      );
+    }
+
+    const model &#x3D; environment.ia.model?.trim();
+    const apiKey &#x3D; environment.ia.apiKey?.trim();
+    const rawApiUrl &#x3D; environment.ia.apiUrl?.trim();
+    const apiUrl &#x3D; this.resolveChatCompletionsUrl(rawApiUrl);
+
+    if (!model || model &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+      return of(
+        &#x27;❌ Modelo IA no configurado. Define NG_APP_IA_MODEL (ej: meta-llama/llama-3.3-70b-instruct:free) en variables de entorno.&#x27;,
+      );
+    }
+
+    if (!apiKey || apiKey &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+      return of(
+        &#x27;❌ API key no configurada. Define NG_APP_IA_API_KEY (o IA_API_KEY) en variables de entorno.&#x27;,
+      );
+    }
+
+    if (!apiUrl) {
+      return of(
+        &#x27;❌ URL de IA no configurada. Define NG_APP_IA_API_URL (o IA_API_URL) en variables de entorno.&#x27;,
+      );
+    }
+
+    console.log(model, &#x27;URL:&#x27;, apiUrl);
+    console.log(
+      &#x27;[IA] Runtime env model:&#x27;,
+      (window as any)?.__env__?.NG_APP_IA_MODEL || &#x27;(vacío)&#x27;,
+    );
+
+    return from(this.getFirebaseData()).pipe(
+      switchMap((firebaseData) &#x3D;&gt; {
+        const compactFirebaseData &#x3D; this.compactFirebaseData(firebaseData);
+        const relationalContext &#x3D;
+          this.buildRelationalContext(compactFirebaseData);
+        const firebaseDataJson &#x3D; JSON.stringify(compactFirebaseData);
+        const relationalContextJson &#x3D; JSON.stringify(relationalContext);
+
+        const trimmedFirebaseDataJson &#x3D;
+          firebaseDataJson.length &gt; this.maxFirebaseJsonChars
+            ? &#x60;${firebaseDataJson.slice(0, this.maxFirebaseJsonChars)}... [TRUNCADO]&#x60;
+            : firebaseDataJson;
+
+        const trimmedRelationalContextJson &#x3D;
+          relationalContextJson.length &gt; this.maxFirebaseJsonChars
+            ? &#x60;${relationalContextJson.slice(0, this.maxFirebaseJsonChars)}... [TRUNCADO]&#x60;
+            : relationalContextJson;
+
+        const messages: IaChatMessage[] &#x3D; [
+          {
+            role: &#x27;system&#x27;,
+            content:
+              &#x27;Eres un asistente de MappTuu. Solo puedes responder usando como fuente de datos las colecciones de Firebase activities, activityTypes y plans y el contexto relacional derivado de esos datos. Si la pregunta no trata de planes o actividades, debes rechazarla brevemente. Siempre prioriza relaciones por IDs: plans.activitiesIds -&gt; activity.id y activity.activityTypeId -&gt; activityType.id. Usa también relaciones inversas (activityToPlans y activityTypeToActivities) para responder mejor. Si falta información, di que no está disponible en Firebase. Los datos pueden venir resumidos o truncados para evitar límites del modelo.&#x27;,
+          },
+          {
+            role: &#x27;user&#x27;,
+            content: [
+              &#x60;Pregunta: ${cleanQuestion}&#x60;,
+              &#x27;Datos Firebase (fuente única):&#x27;,
+              trimmedFirebaseDataJson,
+              &#x27;Contexto relacional precalculado (IDs enlazados):&#x27;,
+              trimmedRelationalContextJson,
+            ].join(&#x27;\n\n&#x27;),
+          },
+        ];
+
+        const candidateModels &#x3D; [
+          model,
+          ...(environment.ia.fallbackModels || []),
+        ].filter(
+          (candidate, index, all) &#x3D;&gt;
+            !!candidate &amp;&amp; all.indexOf(candidate) &#x3D;&#x3D;&#x3D; index,
+        );
+
+        const availableCandidateModels &#x3D; candidateModels.filter(
+          (candidate) &#x3D;&gt; !this.unavailableModels.has(candidate),
+        );
+
+        const modelsToTry &#x3D; (
+          availableCandidateModels.length &gt; 0
+            ? availableCandidateModels
+            : candidateModels
+        ).slice(0, this.maxModelAttempts);
+
+        return this.requestWithModelChain(
+          modelsToTry,
+          messages,
+          apiKey,
+          apiUrl,
+        );
+      }),
+    );
+  }
+
+  /**
+   * Ejecuta la petición probando modelos en cadena (principal + fallbacks).
+   *
+   * @param models Lista de modelos a intentar, en orden.
+   * @param messages Prompt en formato chat.
+   * @param apiKey API key del proveedor.
+   * @param apiUrl Endpoint de chat completions.
+   * @param index Índice actual dentro de &#x60;models&#x60;.
+   */
+  private requestWithModelChain(
+    models: string[],
+    messages: IaChatMessage[],
+    apiKey: string,
+    apiUrl: string,
+    index &#x3D; 0,
+  ): Observable&lt;string&gt; {
+    const currentModel &#x3D; models[index];
+
+    if (!currentModel) {
+      return throwError(
+        () &#x3D;&gt;
+          new Error(
+            &#x27;No hay modelos disponibles para responder en este momento.&#x27;,
+          ),
+      );
+    }
+
+    const isFallback &#x3D; index &gt; 0;
+
+    return this.requestWithModel(
+      currentModel,
+      messages,
+      apiKey,
+      apiUrl,
+      isFallback,
+    ).pipe(
+      catchError((error: any): Observable&lt;string&gt; &#x3D;&gt; {
+        const shouldTryNext &#x3D; error?.status &#x3D;&#x3D;&#x3D; 402 || error?.status &#x3D;&#x3D;&#x3D; 404;
+        const nextModel &#x3D; models[index + 1];
+
+        if (error?.status &#x3D;&#x3D;&#x3D; 404) {
+          this.unavailableModels.add(currentModel);
+        }
+
+        if (!shouldTryNext || !nextModel) {
+          return throwError(() &#x3D;&gt; error);
+        }
+
+        console.warn(
+          &#x60;[IA] Modelo ${currentModel} devolvió ${error?.status}. Probando fallback:&#x60;,
+          nextModel,
+        );
+
+        return this.requestWithModelChain(
+          models,
+          messages,
+          apiKey,
+          apiUrl,
+          index + 1,
+        );
+      }),
+    );
+  }
+
+  /**
+   * Lanza una petición al endpoint de chat completions.
+   *
+   * Manejo:
+   * - Reintentos exponenciales ante 429 (rate limit).
+   * - Devuelve contenido de &#x60;choices[0].message.content&#x60; o mensaje “fallback”.
+   */
+  private requestWithModel(
+    model: string,
+    messages: IaChatMessage[],
+    apiKey: string,
+    apiUrl: string,
+    isFallback: boolean,
+  ) {
+    return this.http
+      .post&lt;IaChatResponse&gt;(
+        apiUrl,
+        {
+          model,
+          messages,
+          temperature: 0.2,
+        },
+        {
+          headers: new HttpHeaders({
+            Authorization: &#x60;Bearer ${apiKey}&#x60;,
+            &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
+          }),
+        },
+      )
+      .pipe(
+        retryWhen((errors) &#x3D;&gt;
+          errors.pipe(
+            mergeMap((err: any, attempt: number) &#x3D;&gt; {
+              if (err?.status !&#x3D;&#x3D; 429 || attempt &gt;&#x3D; 3) {
+                return throwError(() &#x3D;&gt; err);
+              }
+
+              const delayMs &#x3D; 10000 * Math.pow(2, attempt);
+              console.log(
+                &#x60;429 - esperando ${delayMs / 1000}s antes de reintentar&#x60;,
+              );
+
+              return timer(delayMs);
+            }),
+          ),
+        ),
+        map((response) &#x3D;&gt; {
+          const content &#x3D; response.choices?.[0]?.message?.content?.trim();
+          const resolvedContent &#x3D;
+            content ||
+            &#x27;No he podido generar una respuesta con los datos disponibles.&#x27;;
+
+          if (!isFallback) {
+            return resolvedContent;
+          }
+
+          return &#x60;[Usando modelo fallback: ${model}]\n\n${resolvedContent}&#x60;;
+        }),
+      );
+  }
+
+  /**
+   * Normaliza URLs configuradas y ajusta &#x60;/models&#x60; -&gt; &#x60;/chat/completions&#x60; si aplica.
+   */
+  private resolveChatCompletionsUrl(apiUrl?: string): string {
+    const raw &#x3D; (apiUrl || &#x27;&#x27;).trim();
+    if (!raw) {
+      return &#x27;&#x27;;
+    }
+
+    if (/\/models\/?$/i.test(raw)) {
+      return raw.replace(/\/models\/?$/i, &#x27;/chat/completions&#x27;);
+    }
+
+    return raw;
+  }
+
+  /**
+   * Reduce tamaño del dataset para mantener el prompt dentro de límites razonables.
+   */
+  private compactFirebaseData(firebaseData: IaFirebaseData): IaFirebaseData {
+    return {
+      activity: firebaseData.activity.slice(0, this.maxDocsPerCollection),
+      activityType: firebaseData.activityType.slice(
+        0,
+        this.maxDocsPerCollection,
+      ),
+      plans: firebaseData.plans.slice(0, this.maxDocsPerCollection),
+    };
+  }
+
+  /**
+   * Construye relaciones entre planes/actividades/tipos a partir de IDs.
+   *
+   * @param firebaseData Dataset (posiblemente compacto) de Firebase.
+   * @returns Estructura relacional usada como “memoria” para el modelo.
+   */
+  private buildRelationalContext(
+    firebaseData: IaFirebaseData,
+  ): IaRelationalContext {
+    const activitiesById &#x3D; new Map&lt;string, Record&lt;string, unknown&gt;&gt;();
+    const activityTypesById &#x3D; new Map&lt;string, Record&lt;string, unknown&gt;&gt;();
+    const planRefsByActivityId &#x3D; new Map&lt;
+      string,
+      { planId: string; planName: string }[]
+    &gt;();
+    const activitiesByTypeId &#x3D; new Map&lt;
+      string,
+      { activityId: string; activityName: string }[]
+    &gt;();
+    const usedActivityIds &#x3D; new Set&lt;string&gt;();
+    const usedActivityTypeIds &#x3D; new Set&lt;string&gt;();
+    let missingActivityLinksInPlans &#x3D; 0;
+    let activitiesWithoutType &#x3D; 0;
+
+    for (const activity of firebaseData.activity) {
+      const activityId &#x3D; this.getStringField(activity, [&#x27;id&#x27;]);
+      if (!activityId) {
+        continue;
+      }
+      activitiesById.set(activityId, activity);
+    }
+
+    for (const activityType of firebaseData.activityType) {
+      const activityTypeId &#x3D; this.getStringField(activityType, [&#x27;id&#x27;]);
+      if (!activityTypeId) {
+        continue;
+      }
+      activityTypesById.set(activityTypeId, activityType);
+    }
+
+    const plansWithActivities &#x3D; firebaseData.plans.map((plan) &#x3D;&gt; {
+      const planId &#x3D; this.getStringField(plan, [&#x27;id&#x27;]) || &#x27;sin-id&#x27;;
+      const planName &#x3D;
+        this.getStringField(plan, [&#x27;name&#x27;, &#x27;title&#x27;]) || &#x27;Sin nombre&#x27;;
+      const activityIds &#x3D; this.getStringArrayField(plan, [&#x27;activitiesIds&#x27;]);
+
+      const activityNames: string[] &#x3D; [];
+      const missingActivityIds: string[] &#x3D; [];
+      const activityTypeIds &#x3D; new Set&lt;string&gt;();
+      const activityTypeNames &#x3D; new Set&lt;string&gt;();
+
+      for (const activityId of activityIds) {
+        const activity &#x3D; activitiesById.get(activityId);
+        if (!activity) {
+          missingActivityIds.push(activityId);
+          continue;
+        }
+
+        usedActivityIds.add(activityId);
+
+        const activityName &#x3D;
+          this.getStringField(activity, [&#x27;name&#x27;, &#x27;title&#x27;]) || activityId;
+        activityNames.push(activityName);
+
+        const plansForActivity &#x3D; planRefsByActivityId.get(activityId) || [];
+        plansForActivity.push({ planId, planName });
+        planRefsByActivityId.set(activityId, plansForActivity);
+
+        const activityTypeId &#x3D; this.getStringField(activity, [
+          &#x27;activityTypeId&#x27;,
+        ]);
+
+        if (!activityTypeId) {
+          activitiesWithoutType +&#x3D; 1;
+          continue;
+        }
+
+        activityTypeIds.add(activityTypeId);
+        usedActivityTypeIds.add(activityTypeId);
+
+        const activityType &#x3D; activityTypesById.get(activityTypeId);
+        const activityTypeName &#x3D;
+          this.getStringField(activityType, [&#x27;name&#x27;]) || activityTypeId;
+        activityTypeNames.add(activityTypeName);
+
+        const activitiesForType &#x3D; activitiesByTypeId.get(activityTypeId) || [];
+        activitiesForType.push({ activityId, activityName });
+        activitiesByTypeId.set(activityTypeId, activitiesForType);
+      }
+
+      missingActivityLinksInPlans +&#x3D; missingActivityIds.length;
+
+      return {
+        planId,
+        planName,
+        activityIds,
+        activityNames,
+        missingActivityIds,
+        activityTypeIds: Array.from(activityTypeIds),
+        activityTypeNames: Array.from(activityTypeNames),
+      };
+    });
+
+    const activitiesWithType &#x3D; firebaseData.activity.map((activity) &#x3D;&gt; {
+      const activityId &#x3D; this.getStringField(activity, [&#x27;id&#x27;]) || &#x27;sin-id&#x27;;
+      const activityName &#x3D;
+        this.getStringField(activity, [&#x27;name&#x27;, &#x27;title&#x27;]) || &#x27;Sin nombre&#x27;;
+      const activityTypeId &#x3D;
+        this.getStringField(activity, [&#x27;activityTypeId&#x27;]) || &#x27;sin-tipo&#x27;;
+      const activityType &#x3D; activityTypesById.get(activityTypeId);
+      const activityTypeName &#x3D;
+        this.getStringField(activityType, [&#x27;name&#x27;]) ||
+        (activityTypeId &#x3D;&#x3D;&#x3D; &#x27;sin-tipo&#x27; ? &#x27;Sin tipo&#x27; : activityTypeId);
+
+      if (activityTypeId !&#x3D;&#x3D; &#x27;sin-tipo&#x27;) {
+        usedActivityTypeIds.add(activityTypeId);
+
+        const activitiesForType &#x3D; activitiesByTypeId.get(activityTypeId) || [];
+        if (!activitiesForType.some((item) &#x3D;&gt; item.activityId &#x3D;&#x3D;&#x3D; activityId)) {
+          activitiesForType.push({ activityId, activityName });
+          activitiesByTypeId.set(activityTypeId, activitiesForType);
+        }
+      } else {
+        activitiesWithoutType +&#x3D; 1;
+      }
+
+      return {
+        activityId,
+        activityName,
+        activityTypeId,
+        activityTypeName,
+      };
+    });
+
+    const orphanActivities &#x3D; activitiesWithType.filter(
+      (activity) &#x3D;&gt; !usedActivityIds.has(activity.activityId),
+    );
+
+    const orphanActivityTypes &#x3D; Array.from(activityTypesById.entries())
+      .filter(([activityTypeId]) &#x3D;&gt; !usedActivityTypeIds.has(activityTypeId))
+      .map(([activityTypeId, activityType]) &#x3D;&gt; ({
+        activityTypeId,
+        activityTypeName:
+          this.getStringField(activityType, [&#x27;name&#x27;]) || activityTypeId,
+      }));
+
+    const activityToPlans &#x3D; Array.from(planRefsByActivityId.entries()).map(
+      ([activityId, planRefs]) &#x3D;&gt; {
+        const activity &#x3D; activitiesById.get(activityId);
+        const activityName &#x3D;
+          this.getStringField(activity, [&#x27;name&#x27;, &#x27;title&#x27;]) || activityId;
+
+        return {
+          activityId,
+          activityName,
+          planIds: planRefs.map((item) &#x3D;&gt; item.planId),
+          planNames: planRefs.map((item) &#x3D;&gt; item.planName),
+        };
+      },
+    );
+
+    const activityTypeToActivities &#x3D; Array.from(
+      activitiesByTypeId.entries(),
+    ).map(([activityTypeId, activityRefs]) &#x3D;&gt; {
+      const activityType &#x3D; activityTypesById.get(activityTypeId);
+      const activityTypeName &#x3D;
+        this.getStringField(activityType, [&#x27;name&#x27;]) || activityTypeId;
+
+      return {
+        activityTypeId,
+        activityTypeName,
+        activityIds: activityRefs.map((item) &#x3D;&gt; item.activityId),
+        activityNames: activityRefs.map((item) &#x3D;&gt; item.activityName),
+      };
+    });
+
+    return {
+      plansWithActivities,
+      activitiesWithType,
+      orphanActivities,
+      orphanActivityTypes,
+      activityToPlans,
+      activityTypeToActivities,
+      stats: {
+        totalPlans: firebaseData.plans.length,
+        totalActivities: firebaseData.activity.length,
+        totalActivityTypes: firebaseData.activityType.length,
+        missingActivityLinksInPlans,
+        activitiesWithoutType,
+      },
+    };
+  }
+
+  /**
+   * Extrae un campo string priorizando las &#x60;keys&#x60; dadas.
+   *
+   * @returns string normalizada (trim) o string vacío si no existe.
+   */
+  private getStringField(
+    source: Record&lt;string, unknown&gt; | undefined,
+    keys: string[],
+  ): string {
+    if (!source) {
+      return &#x27;&#x27;;
+    }
+
+    for (const key of keys) {
+      const value &#x3D; source[key];
+      if (typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+        const normalized &#x3D; value.trim();
+        if (normalized) {
+          return normalized;
+        }
+      }
+    }
+
+    return &#x27;&#x27;;
+  }
+
+  /**
+   * Extrae un campo &#x60;string[]&#x60; priorizando las &#x60;keys&#x60; dadas.
+   *
+   * @returns array normalizado (sin vacíos) o [] si no existe.
+   */
+  private getStringArrayField(
+    source: Record&lt;string, unknown&gt; | undefined,
+    keys: string[],
+  ): string[] {
+    if (!source) {
+      return [];
+    }
+
+    for (const key of keys) {
+      const value &#x3D; source[key];
+      if (!Array.isArray(value)) {
+        continue;
+      }
+
+      const normalizedValues &#x3D; value
+        .map((item) &#x3D;&gt; (typeof item &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? item.trim() : &#x27;&#x27;))
+        .filter((item) &#x3D;&gt; !!item);
+
+      if (normalizedValues.length &gt; 0) {
+        return normalizedValues;
+      }
+    }
+
+    return [];
+  }
+
+  /**
+   * Carga datos desde Firebase (colecciones de dominio) y los transforma en JSON simple.
+   *
+   * Nota: se usa &#x60;getDocs&#x60; (snapshot puntual) para componer contexto; no mantiene listener.
+   */
+  private async getFirebaseData(): Promise&lt;IaFirebaseData&gt; {
+    const [activityDocs, activityTypeDocs, plansDocs] &#x3D; await Promise.all([
+      getDocs(collection(this.firestore, &#x27;activities&#x27;)),
+      getDocs(collection(this.firestore, &#x27;activityTypes&#x27;)),
+      getDocs(collection(this.firestore, &#x27;plans&#x27;)),
+    ]);
+
+    return {
+      activity: activityDocs.docs.map((docSnap) &#x3D;&gt; ({
+        id: docSnap.id,
+        ...docSnap.data(),
+      })),
+      activityType: activityTypeDocs.docs.map((docSnap) &#x3D;&gt; ({
+        id: docSnap.id,
+        ...docSnap.data(),
+      })),
+      plans: plansDocs.docs.map((docSnap) &#x3D;&gt; ({
+        id: docSnap.id,
+        ...docSnap.data(),
+      })),
+    };
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'IaAssistantService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

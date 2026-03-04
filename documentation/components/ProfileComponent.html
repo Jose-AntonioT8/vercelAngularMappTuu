@@ -1,0 +1,2705 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>map-tuu documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">map-tuu documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ProfileComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/user/profile/profile.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-profile</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                            <code>TranslatePipe</code>
+                                <code><a href="../directives/DefaultAvatarDirective.html" target="_self" >DefaultAvatarDirective</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./profile.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./profile.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#achievements" >achievements</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#avatarInput" >avatarInput</a>
+                            </li>
+                            <li>
+                                <a href="#avatarPreview" >avatarPreview</a>
+                            </li>
+                            <li>
+                                <a href="#expandedSection" >expandedSection</a>
+                            </li>
+                            <li>
+                                <a href="#isUploadingAvatar" >isUploadingAvatar</a>
+                            </li>
+                            <li>
+                                <a href="#recentActivities" >recentActivities</a>
+                            </li>
+                            <li>
+                                <a href="#showResetModal" >showResetModal</a>
+                            </li>
+                            <li>
+                                <a href="#stats" >stats</a>
+                            </li>
+                            <li>
+                                <a href="#user" >user</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeResetModal" >closeResetModal</a>
+                            </li>
+                            <li>
+                                <a href="#goBack" >goBack</a>
+                            </li>
+                            <li>
+                                <a href="#logout" >logout</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#onAvatarSelected" >onAvatarSelected</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#sendPasswordReset" >sendPasswordReset</a>
+                            </li>
+                            <li>
+                                <a href="#setLanguage" >setLanguage</a>
+                            </li>
+                            <li>
+                                <a href="#toggleSection" >toggleSection</a>
+                            </li>
+                            <li>
+                                <a href="#triggerAvatarInput" >triggerAvatarInput</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#unlockedCount" >unlockedCount</a>
+                                </li>
+                                <li>
+                                    <a href="#displayAvatar" >displayAvatar</a>
+                                </li>
+                                <li>
+                                    <a href="#currentLanguage" >currentLanguage</a>
+                                </li>
+                                <li>
+                                    <a href="#userInitial" >userInitial</a>
+                                </li>
+                                <li>
+                                    <a href="#userName" >userName</a>
+                                </li>
+                                <li>
+                                    <a href="#userEmail" >userEmail</a>
+                                </li>
+                                <li>
+                                    <a href="#isAdmin" >isAdmin</a>
+                                </li>
+                                <li>
+                                    <a href="#memberSince" >memberSince</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, location: <a href="https://angular.io/api/common/Location" target="_blank">Location</a>, translationService: <a href="../injectables/TranslationService.html" target="_self">TranslationService</a>, mediaService: <a href="../injectables/CloudinaryService.html" target="_self">CloudinaryService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/features/user/profile/profile.component.ts:99</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>location</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/common/Location" target="_blank" >Location</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>translationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TranslationService.html" target="_self" >TranslationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>mediaService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CloudinaryService.html" target="_self" >CloudinaryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeResetModal"></a>
+                    <span class="name">
+                        <span ><b>closeResetModal</b></span>
+                        <a href="#closeResetModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeResetModal()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/features/user/profile/profile.component.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goBack"></a>
+                    <span class="name">
+                        <span ><b>goBack</b></span>
+                        <a href="#goBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goBack()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="234"
+                                    class="link-to-prism">src/app/features/user/profile/profile.component.ts:234</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="230"
+                                    class="link-to-prism">src/app/features/user/profile/profile.component.ts:230</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="192"
+                                    class="link-to-prism">src/app/features/user/profile/profile.component.ts:192</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onAvatarSelected"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onAvatarSelected</b></span>
+                        <a href="#onAvatarSelected"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onAvatarSelected(event: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/features/user/profile/profile.component.ts:129</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sendPasswordReset"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>sendPasswordReset</b></span>
+                        <a href="#sendPasswordReset"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>sendPasswordReset()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/app/features/user/profile/profile.component.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setLanguage"></a>
+                    <span class="name">
+                        <span ><b>setLanguage</b></span>
+                        <a href="#setLanguage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setLanguage(lang: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="188"
+                                    class="link-to-prism">src/app/features/user/profile/profile.component.ts:188</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>lang</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleSection"></a>
+                    <span class="name">
+                        <span ><b>toggleSection</b></span>
+                        <a href="#toggleSection"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleSection(section: "achievements" | "recent" | "actions")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/features/user/profile/profile.component.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>section</td>
+                                            <td>
+                                                        <code>&quot;achievements&quot; | &quot;recent&quot; | &quot;actions&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="triggerAvatarInput"></a>
+                    <span class="name">
+                        <span ><b>triggerAvatarInput</b></span>
+                        <a href="#triggerAvatarInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>triggerAvatarInput()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/app/features/user/profile/profile.component.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="achievements"></a>
+                    <span class="name">
+                        <span ><b>achievements</b></span>
+                        <a href="#achievements"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+      id: 1,
+      name: &#x27;Explorador&#x27;,
+      icon: &#x27;🧭&#x27;,
+      bgColor: &#x27;#dbeafe&#x27;,
+      unlocked: true,
+    },
+    { id: 2, name: &#x27;Viajero&#x27;, icon: &#x27;✈️&#x27;, bgColor: &#x27;#fef3c7&#x27;, unlocked: true },
+    {
+      id: 3,
+      name: &#x27;Planificador&#x27;,
+      icon: &#x27;📋&#x27;,
+      bgColor: &#x27;#ede9fe&#x27;,
+      unlocked: true,
+    },
+    {
+      id: 4,
+      name: &#x27;Aventurero&#x27;,
+      icon: &#x27;🏔️&#x27;,
+      bgColor: &#x27;#dcfce7&#x27;,
+      unlocked: false,
+    },
+    { id: 5, name: &#x27;Social&#x27;, icon: &#x27;👥&#x27;, bgColor: &#x27;#fce7f3&#x27;, unlocked: false },
+    {
+      id: 6,
+      name: &#x27;Fotógrafo&#x27;,
+      icon: &#x27;📸&#x27;,
+      bgColor: &#x27;#fed7aa&#x27;,
+      unlocked: false,
+    },
+    { id: 7, name: &#x27;Experto&#x27;, icon: &#x27;🏆&#x27;, bgColor: &#x27;#fef08a&#x27;, unlocked: false },
+    { id: 8, name: &#x27;Leyenda&#x27;, icon: &#x27;⭐&#x27;, bgColor: &#x27;#e0e7ff&#x27;, unlocked: false },
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/user/profile/profile.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="avatarInput"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>avatarInput</b></span>
+                        <a href="#avatarInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ElementRef&lt;HTMLInputElement&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;avatarInput&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/features/user/profile/profile.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="avatarPreview"></a>
+                    <span class="name">
+                        <span ><b>avatarPreview</b></span>
+                        <a href="#avatarPreview"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/user/profile/profile.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="expandedSection"></a>
+                    <span class="name">
+                        <span ><b>expandedSection</b></span>
+                        <a href="#expandedSection"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>&quot;achievements&quot; | &quot;recent&quot; | &quot;actions&quot; | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/features/user/profile/profile.component.ts:94</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isUploadingAvatar"></a>
+                    <span class="name">
+                        <span ><b>isUploadingAvatar</b></span>
+                        <a href="#isUploadingAvatar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/features/user/profile/profile.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="recentActivities"></a>
+                    <span class="name">
+                        <span ><b>recentActivities</b></span>
+                        <a href="#recentActivities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+      id: &#x27;1&#x27;,
+      name: &#x27;Senderismo en Sierra Nevada&#x27;,
+      image:
+        &#x27;https://images.unsplash.com/photo-1551632811-561732d1e306?w&#x3D;100&amp;h&#x3D;100&amp;fit&#x3D;crop&#x27;,
+      date: &#x27;Hace 2 días&#x27;,
+    },
+    {
+      id: &#x27;2&#x27;,
+      name: &#x27;Yoga al atardecer&#x27;,
+      image:
+        &#x27;https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w&#x3D;100&amp;h&#x3D;100&amp;fit&#x3D;crop&#x27;,
+      date: &#x27;Hace 5 días&#x27;,
+    },
+    {
+      id: &#x27;3&#x27;,
+      name: &#x27;Tour gastronómico&#x27;,
+      image:
+        &#x27;https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w&#x3D;100&amp;h&#x3D;100&amp;fit&#x3D;crop&#x27;,
+      date: &#x27;Hace 1 semana&#x27;,
+    },
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/features/user/profile/profile.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showResetModal"></a>
+                    <span class="name">
+                        <span ><b>showResetModal</b></span>
+                        <a href="#showResetModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/features/user/profile/profile.component.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="stats"></a>
+                    <span class="name">
+                        <span ><b>stats</b></span>
+                        <a href="#stats"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    activitiesVisited: 12,
+    plansCreated: 5,
+    favorites: 8,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/user/profile/profile.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="user"></a>
+                    <span class="name">
+                        <span ><b>user</b></span>
+                        <a href="#user"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >User | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/features/user/profile/profile.component.ts:21</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="unlockedCount"></a>
+                        <span class="name"><b>unlockedCount</b><a href="#unlockedCount"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>unlockedCount()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/features/user/profile/profile.component.ts:90</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="displayAvatar"></a>
+                        <span class="name"><b>displayAvatar</b><a href="#displayAvatar"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>displayAvatar()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="180" class="link-to-prism">src/app/features/user/profile/profile.component.ts:180</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentLanguage"></a>
+                        <span class="name"><b>currentLanguage</b><a href="#currentLanguage"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>currentLanguage()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="184" class="link-to-prism">src/app/features/user/profile/profile.component.ts:184</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="userInitial"></a>
+                        <span class="name"><b>userInitial</b><a href="#userInitial"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>userInitial()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/app/features/user/profile/profile.component.ts:201</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="userName"></a>
+                        <span class="name"><b>userName</b><a href="#userName"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>userName()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="211" class="link-to-prism">src/app/features/user/profile/profile.component.ts:211</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="userEmail"></a>
+                        <span class="name"><b>userEmail</b><a href="#userEmail"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>userEmail()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="215" class="link-to-prism">src/app/features/user/profile/profile.component.ts:215</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isAdmin"></a>
+                        <span class="name"><b>isAdmin</b><a href="#isAdmin"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>isAdmin()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="219" class="link-to-prism">src/app/features/user/profile/profile.component.ts:219</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="memberSince"></a>
+                        <span class="name"><b>memberSince</b><a href="#memberSince"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>memberSince()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="223" class="link-to-prism">src/app/features/user/profile/profile.component.ts:223</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule, Location } from &#x27;@angular/common&#x27;;
+import { Component, ElementRef, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
+import { User } from &#x27;@angular/fire/auth&#x27;;
+import { Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { getAuth, sendPasswordResetEmail } from &#x27;firebase/auth&#x27;;
+import { DefaultAvatarDirective } from &#x27;../../../core/directives/default-avatar.directive&#x27;;
+import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
+import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
+import { CloudinaryService } from &#x27;../../../core/services/firebase-media.service&#x27;;
+import { TranslationService } from &#x27;../../../core/services/translation.service&#x27;;
+@Component({
+  selector: &#x27;app-profile&#x27;,
+  standalone: true,
+  imports: [CommonModule, RouterModule, TranslatePipe, DefaultAvatarDirective],
+  templateUrl: &#x27;./profile.component.html&#x27;,
+  styleUrl: &#x27;./profile.component.scss&#x27;,
+})
+export class ProfileComponent implements OnInit {
+  @ViewChild(&#x27;avatarInput&#x27;) avatarInput!: ElementRef&lt;HTMLInputElement&gt;;
+
+  user: User | null &#x3D; null;
+  isUploadingAvatar &#x3D; false;
+  avatarPreview: string | null &#x3D; null;
+
+  stats &#x3D; {
+    activitiesVisited: 12,
+    plansCreated: 5,
+    favorites: 8,
+  };
+
+  achievements &#x3D; [
+    {
+      id: 1,
+      name: &#x27;Explorador&#x27;,
+      icon: &#x27;🧭&#x27;,
+      bgColor: &#x27;#dbeafe&#x27;,
+      unlocked: true,
+    },
+    { id: 2, name: &#x27;Viajero&#x27;, icon: &#x27;✈️&#x27;, bgColor: &#x27;#fef3c7&#x27;, unlocked: true },
+    {
+      id: 3,
+      name: &#x27;Planificador&#x27;,
+      icon: &#x27;📋&#x27;,
+      bgColor: &#x27;#ede9fe&#x27;,
+      unlocked: true,
+    },
+    {
+      id: 4,
+      name: &#x27;Aventurero&#x27;,
+      icon: &#x27;🏔️&#x27;,
+      bgColor: &#x27;#dcfce7&#x27;,
+      unlocked: false,
+    },
+    { id: 5, name: &#x27;Social&#x27;, icon: &#x27;👥&#x27;, bgColor: &#x27;#fce7f3&#x27;, unlocked: false },
+    {
+      id: 6,
+      name: &#x27;Fotógrafo&#x27;,
+      icon: &#x27;📸&#x27;,
+      bgColor: &#x27;#fed7aa&#x27;,
+      unlocked: false,
+    },
+    { id: 7, name: &#x27;Experto&#x27;, icon: &#x27;🏆&#x27;, bgColor: &#x27;#fef08a&#x27;, unlocked: false },
+    { id: 8, name: &#x27;Leyenda&#x27;, icon: &#x27;⭐&#x27;, bgColor: &#x27;#e0e7ff&#x27;, unlocked: false },
+  ];
+
+  recentActivities &#x3D; [
+    {
+      id: &#x27;1&#x27;,
+      name: &#x27;Senderismo en Sierra Nevada&#x27;,
+      image:
+        &#x27;https://images.unsplash.com/photo-1551632811-561732d1e306?w&#x3D;100&amp;h&#x3D;100&amp;fit&#x3D;crop&#x27;,
+      date: &#x27;Hace 2 días&#x27;,
+    },
+    {
+      id: &#x27;2&#x27;,
+      name: &#x27;Yoga al atardecer&#x27;,
+      image:
+        &#x27;https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w&#x3D;100&amp;h&#x3D;100&amp;fit&#x3D;crop&#x27;,
+      date: &#x27;Hace 5 días&#x27;,
+    },
+    {
+      id: &#x27;3&#x27;,
+      name: &#x27;Tour gastronómico&#x27;,
+      image:
+        &#x27;https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w&#x3D;100&amp;h&#x3D;100&amp;fit&#x3D;crop&#x27;,
+      date: &#x27;Hace 1 semana&#x27;,
+    },
+  ];
+
+  get unlockedCount(): number {
+    return this.achievements.filter((a) &#x3D;&gt; a.unlocked).length;
+  }
+
+  expandedSection: &#x27;achievements&#x27; | &#x27;recent&#x27; | &#x27;actions&#x27; | null &#x3D; null;
+  showResetModal &#x3D; false;
+
+  toggleSection(section: &#x27;achievements&#x27; | &#x27;recent&#x27; | &#x27;actions&#x27;): void {
+    this.expandedSection &#x3D; this.expandedSection &#x3D;&#x3D;&#x3D; section ? null : section;
+  }
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private location: Location,
+    private translationService: TranslationService,
+    private mediaService: CloudinaryService
+  ) {}
+
+  async sendPasswordReset(): Promise&lt;void&gt; {
+    if (!this.user?.email) {
+      return;
+    }
+    try {
+      await sendPasswordResetEmail(getAuth(), this.user.email);
+      this.showResetModal &#x3D; true;
+    } catch (err) {
+      console.error(&#x27;Error al enviar correo de restablecimiento&#x27;, err);
+    }
+  }
+
+  closeResetModal(): void {
+    this.showResetModal &#x3D; false;
+  }
+
+  triggerAvatarInput(): void {
+    this.avatarInput.nativeElement.click();
+  }
+
+  async onAvatarSelected(event: Event): Promise&lt;void&gt; {
+    const input &#x3D; event.target as HTMLInputElement;
+    if (!input.files || !input.files[0]) return;
+
+    const file &#x3D; input.files[0];
+    console.log(&#x27;📷 Archivo seleccionado:&#x27;, file.name, file.type, file.size);
+
+    if (!file.type.startsWith(&#x27;image/&#x27;)) {
+      console.error(&#x27;❌ No es una imagen válida&#x27;);
+      return;
+    }
+
+    if (file.size &gt; 5 * 1024 * 1024) {
+      console.error(&#x27;❌ Imagen demasiado grande (máx 5MB)&#x27;);
+      return;
+    }
+
+    const reader &#x3D; new FileReader();
+    reader.onload &#x3D; (e: any) &#x3D;&gt; {
+      this.avatarPreview &#x3D; e.target.result;
+    };
+    reader.readAsDataURL(file);
+
+    this.isUploadingAvatar &#x3D; true;
+
+    try {
+      console.log(&#x27;⬆️ Iniciando subida...&#x27;);
+
+      this.mediaService.upload(file, &#x27;avatars&#x27;).subscribe({
+        next: async (urls: any) &#x3D;&gt; {
+          console.log(&#x27;✅ URLs recibidas:&#x27;, urls);
+          if (urls &amp;&amp; urls.length &gt; 0) {
+            await this.authService.updateUserPhoto(urls[0]);
+            console.log(&#x27;✅ Foto de perfil actualizada&#x27;);
+            this.avatarPreview &#x3D; null;
+          }
+          this.isUploadingAvatar &#x3D; false;
+        },
+        error: (err: any) &#x3D;&gt; {
+          console.error(&#x27;❌ Error en upload:&#x27;, err);
+          this.avatarPreview &#x3D; null;
+          this.isUploadingAvatar &#x3D; false;
+        },
+      });
+    } catch (err) {
+      console.error(&#x27;❌ Error:&#x27;, err);
+      this.avatarPreview &#x3D; null;
+      this.isUploadingAvatar &#x3D; false;
+    }
+  }
+
+  get displayAvatar(): string | null {
+    return this.avatarPreview || this.user?.photoURL || null;
+  }
+
+  get currentLanguage(): string {
+    return this.translationService.getCurrentLanguage();
+  }
+
+  setLanguage(lang: string): void {
+    this.translationService.setLanguage(lang);
+  }
+
+  ngOnInit(): void {
+    this.authService.user$.subscribe((user) &#x3D;&gt; {
+      this.user &#x3D; user;
+      if (!user) {
+        this.router.navigate([&#x27;/login&#x27;]);
+      }
+    });
+  }
+
+  get userInitial(): string {
+    if (this.user?.displayName) {
+      return this.user.displayName.charAt(0).toUpperCase();
+    }
+    if (this.user?.email) {
+      return this.user.email.charAt(0).toUpperCase();
+    }
+    return &#x27;U&#x27;;
+  }
+
+  get userName(): string {
+    return this.user?.displayName || this.user?.email?.split(&#x27;@&#x27;)[0] || &#x27;&#x27;;
+  }
+
+  get userEmail(): string {
+    return this.user?.email || &#x27;&#x27;;
+  }
+
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
+  get memberSince(): string {
+    if (this.user?.metadata?.creationTime) {
+      return new Date(this.user.metadata.creationTime).toLocaleDateString();
+    }
+    return &#x27;&#x27;;
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;header class&#x3D;&quot;bg-brand-primary p-4 flex items-center justify-between h-16&quot;&gt;
+  &lt;div class&#x3D;&quot;flex items-center&quot;&gt;
+    &lt;button
+      (click)&#x3D;&quot;goBack()&quot;
+      class&#x3D;&quot;text-white hover:text-gray-700 transition-colors&quot;
+    &gt;
+      &lt;svg
+        xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+        fill&#x3D;&quot;none&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+        stroke-width&#x3D;&quot;2.5&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        class&#x3D;&quot;w-7 h-7&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          d&#x3D;&quot;M10.5 19.5 3 12m0 0 7.5-7.5M3 12h17.5&quot;
+        /&gt;
+      &lt;/svg&gt;
+    &lt;/button&gt;
+    &lt;span class&#x3D;&quot;ml-4 text-white font-semibold text-lg&quot;&gt;{{
+      &quot;common.profile&quot; | translate
+    }}&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;button class&#x3D;&quot;p-2 hover:bg-white/10 rounded-full transition-colors&quot;&gt;
+    &lt;svg
+      xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+      fill&#x3D;&quot;none&quot;
+      viewBox&#x3D;&quot;0 0 24 24&quot;
+      stroke-width&#x3D;&quot;1.5&quot;
+      stroke&#x3D;&quot;white&quot;
+      class&#x3D;&quot;w-6 h-6&quot;
+    &gt;
+      &lt;path
+        stroke-linecap&#x3D;&quot;round&quot;
+        stroke-linejoin&#x3D;&quot;round&quot;
+        d&#x3D;&quot;M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z&quot;
+      /&gt;
+      &lt;path
+        stroke-linecap&#x3D;&quot;round&quot;
+        stroke-linejoin&#x3D;&quot;round&quot;
+        d&#x3D;&quot;M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z&quot;
+      /&gt;
+    &lt;/svg&gt;
+  &lt;/button&gt;
+&lt;/header&gt;
+
+&lt;main
+  class&#x3D;&quot;min-h-screen bg-gradient-to-br from-slate-200 via-slate-300/50 to-brand-muted/30&quot;
+&gt;
+  &lt;div class&#x3D;&quot;bg-brand-primary pt-6 pb-24 px-4 relative shadow-lg&quot;&gt;
+    &lt;div class&#x3D;&quot;absolute inset-0 opacity-10&quot;&gt;
+      &lt;div
+        class&#x3D;&quot;absolute top-0 right-0 w-40 h-40 bg-white rounded-full -translate-y-1/2 translate-x-1/2&quot;
+      &gt;&lt;/div&gt;
+      &lt;div
+        class&#x3D;&quot;absolute bottom-0 left-0 w-32 h-32 bg-white rounded-full translate-y-1/2 -translate-x-1/2&quot;
+      &gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;max-w-md mx-auto text-center relative z-10&quot;&gt;
+      &lt;div
+        class&#x3D;&quot;relative w-28 h-28 mx-auto group cursor-pointer&quot;
+        (click)&#x3D;&quot;triggerAvatarInput()&quot;
+      &gt;
+        &lt;div
+          class&#x3D;&quot;w-full h-full rounded-full bg-white shadow-xl flex items-center justify-center border-4 border-white/50 overflow-hidden ring-4 ring-white/20 transition-transform group-hover:scale-105&quot;
+        &gt;
+          &lt;img
+            [src]&#x3D;&quot;displayAvatar&quot;
+            [appDefaultAvatar]&#x3D;&quot;userName&quot;
+            [avatarSize]&#x3D;&quot;112&quot;
+            avatarBgColor&#x3D;&quot;#5675AC&quot;
+            alt&#x3D;&quot;Avatar&quot;
+            class&#x3D;&quot;w-full h-full rounded-full object-cover&quot;
+          /&gt;
+        &lt;/div&gt;
+
+        @if (isUploadingAvatar) {
+          &lt;div
+            class&#x3D;&quot;absolute inset-0 rounded-full bg-black/60 flex items-center justify-center&quot;
+          &gt;
+            &lt;svg
+              class&#x3D;&quot;animate-spin h-8 w-8 text-white&quot;
+              xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+              fill&#x3D;&quot;none&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+            &gt;
+              &lt;circle
+                class&#x3D;&quot;opacity-25&quot;
+                cx&#x3D;&quot;12&quot;
+                cy&#x3D;&quot;12&quot;
+                r&#x3D;&quot;10&quot;
+                stroke&#x3D;&quot;currentColor&quot;
+                stroke-width&#x3D;&quot;4&quot;
+              &gt;&lt;/circle&gt;
+              &lt;path
+                class&#x3D;&quot;opacity-75&quot;
+                fill&#x3D;&quot;currentColor&quot;
+                d&#x3D;&quot;M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z&quot;
+              &gt;&lt;/path&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+        } @else {
+          &lt;div
+            class&#x3D;&quot;absolute inset-0 rounded-full bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200&quot;
+          &gt;
+            &lt;svg
+              xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+              class&#x3D;&quot;h-8 w-8 text-white&quot;
+              fill&#x3D;&quot;none&quot;
+              viewBox&#x3D;&quot;0 0 24 24&quot;
+              stroke&#x3D;&quot;currentColor&quot;
+              stroke-width&#x3D;&quot;2&quot;
+            &gt;
+              &lt;path
+                stroke-linecap&#x3D;&quot;round&quot;
+                stroke-linejoin&#x3D;&quot;round&quot;
+                d&#x3D;&quot;M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z&quot;
+              /&gt;
+              &lt;path
+                stroke-linecap&#x3D;&quot;round&quot;
+                stroke-linejoin&#x3D;&quot;round&quot;
+                d&#x3D;&quot;M15 13a3 3 0 11-6 0 3 3 0 016 0z&quot;
+              /&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+        }
+
+        &lt;input
+          #avatarInput
+          type&#x3D;&quot;file&quot;
+          accept&#x3D;&quot;image/*&quot;
+          (change)&#x3D;&quot;onAvatarSelected($event)&quot;
+          class&#x3D;&quot;hidden&quot;
+        /&gt;
+      &lt;/div&gt;
+      &lt;h1 class&#x3D;&quot;text-2xl font-bold text-white mt-4&quot;&gt;{{ userName }}&lt;/h1&gt;
+      &lt;p class&#x3D;&quot;text-white/70 text-sm&quot;&gt;{{ userEmail }}&lt;/p&gt;
+      &lt;div class&#x3D;&quot;flex items-center justify-center gap-2 mt-2&quot;&gt;
+        @if (isAdmin) {
+          &lt;span
+            class&#x3D;&quot;inline-flex items-center gap-1 px-3 py-1 bg-yellow-400 text-yellow-900 text-xs font-bold rounded-full shadow-lg&quot;
+          &gt;
+            &lt;svg
+              xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+              class&#x3D;&quot;h-3.5 w-3.5&quot;
+              viewBox&#x3D;&quot;0 0 20 20&quot;
+              fill&#x3D;&quot;currentColor&quot;
+            &gt;
+              &lt;path
+                fill-rule&#x3D;&quot;evenodd&quot;
+                d&#x3D;&quot;M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z&quot;
+                clip-rule&#x3D;&quot;evenodd&quot;
+              /&gt;
+            &lt;/svg&gt;
+            Admin
+          &lt;/span&gt;
+        }
+        &lt;span
+          class&#x3D;&quot;inline-flex items-center gap-1 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-lg animate-pulse&quot;
+        &gt;
+          &lt;svg
+            xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+            class&#x3D;&quot;h-3.5 w-3.5&quot;
+            viewBox&#x3D;&quot;0 0 20 20&quot;
+            fill&#x3D;&quot;currentColor&quot;
+          &gt;
+            &lt;path
+              fill-rule&#x3D;&quot;evenodd&quot;
+              d&#x3D;&quot;M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z&quot;
+              clip-rule&#x3D;&quot;evenodd&quot;
+            /&gt;
+          &lt;/svg&gt;
+          {{ &quot;profile.verified&quot; | translate }}
+        &lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;px-4 -mt-16 pb-8 relative z-10&quot;&gt;
+    &lt;div class&#x3D;&quot;max-w-md mx-auto space-y-4&quot;&gt;
+      &lt;div
+        class&#x3D;&quot;bg-white rounded-2xl shadow-xl p-3 border border-slate-200 ring-1 ring-black/5&quot;
+      &gt;
+        &lt;div class&#x3D;&quot;grid grid-cols-3 gap-2&quot;&gt;
+          &lt;a
+            routerLink&#x3D;&quot;/activitiesList&quot;
+            class&#x3D;&quot;text-center py-3 px-2 bg-gradient-to-br from-blue-100 to-blue-200/80 rounded-xl min-h-[80px] flex flex-col justify-center cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all duration-200 active:scale-[0.98] border border-blue-200/50&quot;
+          &gt;
+            &lt;div
+              class&#x3D;&quot;text-xl sm:text-2xl font-bold text-brand-primary drop-shadow-sm&quot;
+            &gt;
+              {{ stats.activitiesVisited }}
+            &lt;/div&gt;
+            &lt;div
+              class&#x3D;&quot;text-[10px] sm:text-xs text-gray-600 font-medium mt-1 leading-tight&quot;
+            &gt;
+              {{ &quot;profile.activitiesVisited&quot; | translate }}
+            &lt;/div&gt;
+          &lt;/a&gt;
+          &lt;a
+            routerLink&#x3D;&quot;/plansList&quot;
+            class&#x3D;&quot;text-center py-3 px-2 bg-gradient-to-br from-purple-100 to-purple-200/80 rounded-xl min-h-[80px] flex flex-col justify-center cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all duration-200 active:scale-[0.98] border border-purple-200/50&quot;
+          &gt;
+            &lt;div
+              class&#x3D;&quot;text-xl sm:text-2xl font-bold text-purple-600 drop-shadow-sm&quot;
+            &gt;
+              {{ stats.plansCreated }}
+            &lt;/div&gt;
+            &lt;div
+              class&#x3D;&quot;text-[10px] sm:text-xs text-gray-600 font-medium mt-1 leading-tight&quot;
+            &gt;
+              {{ &quot;profile.plansCreated&quot; | translate }}
+            &lt;/div&gt;
+          &lt;/a&gt;
+          &lt;div
+            class&#x3D;&quot;text-center py-3 px-2 bg-gradient-to-br from-pink-100 to-pink-200/80 rounded-xl min-h-[80px] flex flex-col justify-center cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all duration-200 active:scale-[0.98] border border-pink-200/50&quot;
+          &gt;
+            &lt;div
+              class&#x3D;&quot;text-xl sm:text-2xl font-bold text-pink-500 drop-shadow-sm&quot;
+            &gt;
+              {{ stats.favorites }}
+            &lt;/div&gt;
+            &lt;div
+              class&#x3D;&quot;text-[10px] sm:text-xs text-gray-600 font-medium mt-1 leading-tight&quot;
+            &gt;
+              {{ &quot;profile.favorites&quot; | translate }}
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      @if (expandedSection &#x3D;&#x3D;&#x3D; null) {
+        &lt;div class&#x3D;&quot;grid grid-cols-3 gap-2&quot;&gt;
+          &lt;button
+            (click)&#x3D;&quot;toggleSection(&#x27;achievements&#x27;)&quot;
+            class&#x3D;&quot;bg-white rounded-2xl shadow-xl p-3 flex flex-col items-center justify-center gap-2 hover:shadow-2xl hover:scale-[1.02] transition-all duration-200 active:scale-[0.98] min-h-[90px] border border-slate-200 ring-1 ring-black/5&quot;
+          &gt;
+            &lt;div
+              class&#x3D;&quot;w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center&quot;
+            &gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-5 w-5 text-yellow-500&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+            &lt;span
+              class&#x3D;&quot;text-[10px] font-semibold text-gray-700 text-center leading-tight&quot;
+              &gt;{{ &quot;profile.achievements&quot; | translate }}&lt;/span
+            &gt;
+            &lt;span class&#x3D;&quot;text-[9px] text-gray-400&quot;
+              &gt;{{ unlockedCount }}/{{ achievements.length }}&lt;/span
+            &gt;
+          &lt;/button&gt;
+
+          &lt;button
+            (click)&#x3D;&quot;toggleSection(&#x27;recent&#x27;)&quot;
+            class&#x3D;&quot;bg-white rounded-2xl shadow-xl p-3 flex flex-col items-center justify-center gap-2 hover:shadow-2xl hover:scale-[1.02] transition-all duration-200 active:scale-[0.98] min-h-[90px] border border-slate-200 ring-1 ring-black/5&quot;
+          &gt;
+            &lt;div
+              class&#x3D;&quot;w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center&quot;
+            &gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-5 w-5 text-orange-500&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+            &lt;span
+              class&#x3D;&quot;text-[10px] font-semibold text-gray-700 text-center leading-tight&quot;
+              &gt;{{ &quot;profile.recentActivity&quot; | translate }}&lt;/span
+            &gt;
+            &lt;span class&#x3D;&quot;text-[9px] text-gray-400&quot;&gt;{{
+              recentActivities.length
+            }}&lt;/span&gt;
+          &lt;/button&gt;
+
+          &lt;button
+            (click)&#x3D;&quot;toggleSection(&#x27;actions&#x27;)&quot;
+            class&#x3D;&quot;bg-white rounded-2xl shadow-xl p-3 flex flex-col items-center justify-center gap-2 hover:shadow-2xl hover:scale-[1.02] transition-all duration-200 active:scale-[0.98] min-h-[90px] border border-slate-200 ring-1 ring-black/5&quot;
+          &gt;
+            &lt;div
+              class&#x3D;&quot;w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center&quot;
+            &gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-5 w-5 text-brand-primary&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  d&#x3D;&quot;M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+            &lt;span
+              class&#x3D;&quot;text-[10px] font-semibold text-gray-700 text-center leading-tight&quot;
+              &gt;{{ &quot;profile.quickActions&quot; | translate }}&lt;/span
+            &gt;
+            &lt;span class&#x3D;&quot;text-[9px] text-gray-400&quot;&gt;3&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+      }
+      @if (expandedSection &#x3D;&#x3D;&#x3D; &quot;achievements&quot;) {
+        &lt;div
+          class&#x3D;&quot;bg-white rounded-2xl shadow-xl p-4 animate-fade-in border border-slate-200 ring-1 ring-black/5&quot;
+        &gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between mb-3&quot;&gt;
+            &lt;h2
+              class&#x3D;&quot;font-semibold text-gray-800 flex items-center gap-2 text-sm&quot;
+            &gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-4 w-4 text-yellow-500&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+              {{ &quot;profile.achievements&quot; | translate }}
+            &lt;/h2&gt;
+            &lt;button
+              (click)&#x3D;&quot;toggleSection(&#x27;achievements&#x27;)&quot;
+              class&#x3D;&quot;p-1.5 hover:bg-gray-100 rounded-full transition-colors&quot;
+            &gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-4 w-4 text-gray-400&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;flex gap-2 overflow-x-auto pb-1 scrollbar-hide&quot;&gt;
+            @for (achievement of achievements; track achievement.id) {
+              &lt;div
+                class&#x3D;&quot;flex-shrink-0 flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 hover:scale-110 cursor-pointer&quot;
+                [class.opacity-40]&#x3D;&quot;!achievement.unlocked&quot;
+                [class.grayscale]&#x3D;&quot;!achievement.unlocked&quot;
+              &gt;
+                &lt;div
+                  class&#x3D;&quot;w-11 h-11 rounded-full flex items-center justify-center text-lg shadow-sm&quot;
+                  [style.background]&#x3D;&quot;
+                    achievement.unlocked ? achievement.bgColor : &#x27;#e5e7eb&#x27;
+                  &quot;
+                &gt;
+                  {{ achievement.icon }}
+                &lt;/div&gt;
+                &lt;span
+                  class&#x3D;&quot;text-[9px] text-gray-500 font-medium text-center leading-tight max-w-[50px]&quot;
+                  &gt;{{ achievement.name }}&lt;/span
+                &gt;
+              &lt;/div&gt;
+            }
+          &lt;/div&gt;
+        &lt;/div&gt;
+      }
+      @if (expandedSection &#x3D;&#x3D;&#x3D; &quot;recent&quot;) {
+        &lt;div
+          class&#x3D;&quot;bg-white rounded-2xl shadow-xl p-4 animate-fade-in border border-slate-200 ring-1 ring-black/5&quot;
+        &gt;
+          &lt;div class&#x3D;&quot;flex items-center justify-between mb-3&quot;&gt;
+            &lt;h2
+              class&#x3D;&quot;font-semibold text-gray-800 flex items-center gap-2 text-sm&quot;
+            &gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-4 w-4 text-orange-500&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+              {{ &quot;profile.recentActivity&quot; | translate }}
+            &lt;/h2&gt;
+            &lt;button
+              (click)&#x3D;&quot;toggleSection(&#x27;recent&#x27;)&quot;
+              class&#x3D;&quot;p-1.5 hover:bg-gray-100 rounded-full transition-colors&quot;
+            &gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-4 w-4 text-gray-400&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;space-y-2&quot;&gt;
+            @for (activity of recentActivities; track activity.id) {
+              &lt;a
+                [routerLink]&#x3D;&quot;[&#x27;/activityDetail&#x27;, activity.id]&quot;
+                class&#x3D;&quot;flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition-all duration-200 group&quot;
+              &gt;
+                &lt;div
+                  class&#x3D;&quot;w-10 h-10 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0&quot;
+                &gt;
+                  &lt;img
+                    [src]&#x3D;&quot;activity.image&quot;
+                    alt&#x3D;&quot;&quot;
+                    class&#x3D;&quot;w-full h-full object-cover&quot;
+                  /&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;flex-1 min-w-0&quot;&gt;
+                  &lt;p
+                    class&#x3D;&quot;text-sm font-medium text-gray-800 truncate group-hover:text-brand-primary transition-colors&quot;
+                  &gt;
+                    {{ activity.name }}
+                  &lt;/p&gt;
+                  &lt;p class&#x3D;&quot;text-[10px] text-gray-400&quot;&gt;{{ activity.date }}&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;svg
+                  xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                  class&#x3D;&quot;h-4 w-4 text-gray-300 group-hover:text-brand-primary group-hover:translate-x-1 transition-all&quot;
+                  viewBox&#x3D;&quot;0 0 20 20&quot;
+                  fill&#x3D;&quot;currentColor&quot;
+                &gt;
+                  &lt;path
+                    fill-rule&#x3D;&quot;evenodd&quot;
+                    d&#x3D;&quot;M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z&quot;
+                    clip-rule&#x3D;&quot;evenodd&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/a&gt;
+            }
+          &lt;/div&gt;
+        &lt;/div&gt;
+      }
+      @if (expandedSection &#x3D;&#x3D;&#x3D; &quot;actions&quot;) {
+        &lt;div
+          class&#x3D;&quot;bg-white rounded-2xl shadow-xl overflow-hidden animate-fade-in border border-slate-200 ring-1 ring-black/5&quot;
+        &gt;
+          &lt;div
+            class&#x3D;&quot;p-4 border-b border-gray-100 flex items-center justify-between bg-gradient-to-r from-brand-primary/5 to-transparent&quot;
+          &gt;
+            &lt;h2 class&#x3D;&quot;font-semibold text-gray-800 flex items-center gap-2&quot;&gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-5 w-5 text-brand-primary&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  d&#x3D;&quot;M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z&quot;
+                /&gt;
+              &lt;/svg&gt;
+              {{ &quot;profile.quickActions&quot; | translate }}
+            &lt;/h2&gt;
+            &lt;button
+              (click)&#x3D;&quot;toggleSection(&#x27;actions&#x27;)&quot;
+              class&#x3D;&quot;p-1.5 hover:bg-gray-100 rounded-full transition-colors&quot;
+            &gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-4 w-4 text-gray-400&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;divide-y divide-gray-50&quot;&gt;
+            &lt;a
+              routerLink&#x3D;&quot;/maps&quot;
+              class&#x3D;&quot;flex items-center gap-4 p-4 hover:bg-blue-50/50 transition-all duration-200 group&quot;
+            &gt;
+              &lt;div
+                class&#x3D;&quot;p-2.5 bg-blue-100 rounded-xl group-hover:bg-blue-200 group-hover:scale-110 transition-all duration-200&quot;
+              &gt;
+                &lt;svg
+                  xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                  class&#x3D;&quot;h-5 w-5 text-blue-600&quot;
+                  viewBox&#x3D;&quot;0 0 20 20&quot;
+                  fill&#x3D;&quot;currentColor&quot;
+                &gt;
+                  &lt;path
+                    fill-rule&#x3D;&quot;evenodd&quot;
+                    d&#x3D;&quot;M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293zM17.707 5.293L14 1.586v12.828l2.293 2.293A1 1 0 0018 16V6a1 1 0 00-.293-.707z&quot;
+                    clip-rule&#x3D;&quot;evenodd&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;flex-1&quot;&gt;
+                &lt;p
+                  class&#x3D;&quot;font-medium text-gray-800 group-hover:text-blue-600 transition-colors&quot;
+                &gt;
+                  {{ &quot;profile.exploreMap&quot; | translate }}
+                &lt;/p&gt;
+                &lt;p class&#x3D;&quot;text-xs text-gray-400&quot;&gt;
+                  {{ &quot;profile.exploreMapDesc&quot; | translate }}
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-5 w-5 text-gray-300 group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-200&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/a&gt;
+
+            &lt;a
+              routerLink&#x3D;&quot;/createdActivities&quot;
+              class&#x3D;&quot;flex items-center gap-4 p-4 hover:bg-green-50/50 transition-all duration-200 group&quot;
+            &gt;
+              &lt;div
+                class&#x3D;&quot;p-2.5 bg-green-100 rounded-xl group-hover:bg-green-200 group-hover:scale-110 transition-all duration-200&quot;
+              &gt;
+                &lt;svg
+                  xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                  class&#x3D;&quot;h-5 w-5 text-green-600&quot;
+                  viewBox&#x3D;&quot;0 0 20 20&quot;
+                  fill&#x3D;&quot;currentColor&quot;
+                &gt;
+                  &lt;path d&#x3D;&quot;M9 2a1 1 0 000 2h2a1 1 0 100-2H9z&quot; /&gt;
+                  &lt;path
+                    fill-rule&#x3D;&quot;evenodd&quot;
+                    d&#x3D;&quot;M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z&quot;
+                    clip-rule&#x3D;&quot;evenodd&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;flex-1&quot;&gt;
+                &lt;p
+                  class&#x3D;&quot;font-medium text-gray-800 group-hover:text-green-600 transition-colors&quot;
+                &gt;
+                  {{ &quot;profile.createdActivities&quot; | translate }}
+                &lt;/p&gt;
+                &lt;p class&#x3D;&quot;text-xs text-gray-400&quot;&gt;
+                  {{ &quot;profile.createdActivitiesDesc&quot; | translate }}
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-5 w-5 text-gray-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all duration-200&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/a&gt;
+            &lt;a
+              routerLink&#x3D;&quot;/savedActivities&quot;
+              class&#x3D;&quot;flex items-center gap-4 p-4 hover:bg-green-50/50 transition-all duration-200 group&quot;
+            &gt;
+              &lt;div
+                class&#x3D;&quot;p-2.5 bg-green-100 rounded-xl group-hover:bg-green-200 group-hover:scale-110 transition-all duration-200&quot;
+              &gt;
+                &lt;svg
+                  xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                  class&#x3D;&quot;h-5 w-5 text-green-600&quot;
+                  viewBox&#x3D;&quot;0 0 20 20&quot;
+                  fill&#x3D;&quot;currentColor&quot;
+                &gt;
+                  &lt;path d&#x3D;&quot;M9 2a1 1 0 000 2h2a1 1 0 100-2H9z&quot; /&gt;
+                  &lt;path
+                    fill-rule&#x3D;&quot;evenodd&quot;
+                    d&#x3D;&quot;M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z&quot;
+                    clip-rule&#x3D;&quot;evenodd&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;flex-1&quot;&gt;
+                &lt;p
+                  class&#x3D;&quot;font-medium text-gray-800 group-hover:text-green-600 transition-colors&quot;
+                &gt;
+                  {{ &quot;profile.savedActivities&quot; | translate }}
+                &lt;/p&gt;
+                &lt;p class&#x3D;&quot;text-xs text-gray-400&quot;&gt;
+                  {{ &quot;profile.savedActivitiesDesc&quot; | translate }}
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-5 w-5 text-gray-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all duration-200&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/a&gt;
+            &lt;a
+              routerLink&#x3D;&quot;/createdPlans&quot;
+              class&#x3D;&quot;flex items-center gap-4 p-4 hover:bg-purple-50/50 transition-all duration-200 group&quot;
+            &gt;
+              &lt;div
+                class&#x3D;&quot;p-2.5 bg-purple-100 rounded-xl group-hover:bg-purple-200 group-hover:scale-110 transition-all duration-200&quot;
+              &gt;
+                &lt;svg
+                  xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                  class&#x3D;&quot;h-5 w-5 text-purple-600&quot;
+                  viewBox&#x3D;&quot;0 0 20 20&quot;
+                  fill&#x3D;&quot;currentColor&quot;
+                &gt;
+                  &lt;path
+                    d&#x3D;&quot;M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V8z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;flex-1&quot;&gt;
+                &lt;p
+                  class&#x3D;&quot;font-medium text-gray-800 group-hover:text-purple-600 transition-colors&quot;
+                &gt;
+                  {{ &quot;profile.createdPlans&quot; | translate }}
+                &lt;/p&gt;
+                &lt;p class&#x3D;&quot;text-xs text-gray-400&quot;&gt;
+                  {{ &quot;profile.createdPlansDesc&quot; | translate }}
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-5 w-5 text-gray-300 group-hover:text-purple-500 group-hover:translate-x-1 transition-all duration-200&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/a&gt;
+
+            &lt;a
+              routerLink&#x3D;&quot;/savedPlans&quot;
+              class&#x3D;&quot;flex items-center gap-4 p-4 hover:bg-purple-50/50 transition-all duration-200 group&quot;
+            &gt;
+              &lt;div
+                class&#x3D;&quot;p-2.5 bg-purple-100 rounded-xl group-hover:bg-purple-200 group-hover:scale-110 transition-all duration-200&quot;
+              &gt;
+                &lt;svg
+                  xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                  class&#x3D;&quot;h-5 w-5 text-purple-600&quot;
+                  viewBox&#x3D;&quot;0 0 20 20&quot;
+                  fill&#x3D;&quot;currentColor&quot;
+                &gt;
+                  &lt;path
+                    d&#x3D;&quot;M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V8z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;flex-1&quot;&gt;
+                &lt;p
+                  class&#x3D;&quot;font-medium text-gray-800 group-hover:text-purple-600 transition-colors&quot;
+                &gt;
+                  {{ &quot;profile.savedPlans&quot; | translate }}
+                &lt;/p&gt;
+                &lt;p class&#x3D;&quot;text-xs text-gray-400&quot;&gt;
+                  {{ &quot;profile.savedPlansDesc&quot; | translate }}
+                &lt;/p&gt;
+              &lt;/div&gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-5 w-5 text-gray-300 group-hover:text-purple-500 group-hover:translate-x-1 transition-all duration-200&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      }
+
+      &lt;div
+        class&#x3D;&quot;bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200 ring-1 ring-black/5&quot;
+      &gt;
+        &lt;div
+          class&#x3D;&quot;p-4 border-b border-gray-100 bg-gradient-to-r from-brand-primary/5 to-transparent&quot;
+        &gt;
+          &lt;h2 class&#x3D;&quot;font-semibold text-gray-800 flex items-center gap-2&quot;&gt;
+            &lt;svg
+              xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+              class&#x3D;&quot;h-5 w-5 text-brand-primary&quot;
+              viewBox&#x3D;&quot;0 0 20 20&quot;
+              fill&#x3D;&quot;currentColor&quot;
+            &gt;
+              &lt;path
+                fill-rule&#x3D;&quot;evenodd&quot;
+                d&#x3D;&quot;M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z&quot;
+                clip-rule&#x3D;&quot;evenodd&quot;
+              /&gt;
+            &lt;/svg&gt;
+            {{ &quot;profile.accountInfo&quot; | translate }}
+          &lt;/h2&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;p-4 space-y-4&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+            &lt;div class&#x3D;&quot;p-2 bg-gray-100 rounded-lg&quot;&gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-5 w-5 text-gray-500&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  d&#x3D;&quot;M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z&quot;
+                /&gt;
+                &lt;path
+                  d&#x3D;&quot;M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;flex-1 min-w-0&quot;&gt;
+              &lt;p class&#x3D;&quot;text-xs text-gray-400 uppercase font-semibold&quot;&gt;
+                {{ &quot;auth.login.email&quot; | translate }}
+              &lt;/p&gt;
+              &lt;p class&#x3D;&quot;text-gray-700 font-medium truncate&quot;&gt;{{ userEmail }}&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          @if (memberSince) {
+            &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+              &lt;div class&#x3D;&quot;p-2 bg-gray-100 rounded-lg&quot;&gt;
+                &lt;svg
+                  xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                  class&#x3D;&quot;h-5 w-5 text-gray-500&quot;
+                  viewBox&#x3D;&quot;0 0 20 20&quot;
+                  fill&#x3D;&quot;currentColor&quot;
+                &gt;
+                  &lt;path
+                    fill-rule&#x3D;&quot;evenodd&quot;
+                    d&#x3D;&quot;M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z&quot;
+                    clip-rule&#x3D;&quot;evenodd&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;p class&#x3D;&quot;text-xs text-gray-400 uppercase font-semibold&quot;&gt;
+                  {{ &quot;profile.memberSince&quot; | translate }}
+                &lt;/p&gt;
+                &lt;p class&#x3D;&quot;text-gray-700 font-medium&quot;&gt;{{ memberSince }}&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          }
+
+          &lt;div class&#x3D;&quot;flex items-center gap-3&quot;&gt;
+            &lt;div class&#x3D;&quot;p-2 bg-gray-100 rounded-lg&quot;&gt;
+              &lt;svg
+                xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                class&#x3D;&quot;h-5 w-5 text-gray-500&quot;
+                viewBox&#x3D;&quot;0 0 20 20&quot;
+                fill&#x3D;&quot;currentColor&quot;
+              &gt;
+                &lt;path
+                  fill-rule&#x3D;&quot;evenodd&quot;
+                  d&#x3D;&quot;M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z&quot;
+                  clip-rule&#x3D;&quot;evenodd&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;flex-1&quot;&gt;
+              &lt;p class&#x3D;&quot;text-xs text-gray-400 uppercase font-semibold&quot;&gt;
+                {{ &quot;profile.language&quot; | translate }}
+              &lt;/p&gt;
+              &lt;div class&#x3D;&quot;flex gap-2 mt-1.5&quot;&gt;
+                &lt;button
+                  (click)&#x3D;&quot;setLanguage(&#x27;es&#x27;)&quot;
+                  class&#x3D;&quot;flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200&quot;
+                  [class.bg-brand-primary]&#x3D;&quot;currentLanguage &#x3D;&#x3D;&#x3D; &#x27;es&#x27;&quot;
+                  [class.text-white]&#x3D;&quot;currentLanguage &#x3D;&#x3D;&#x3D; &#x27;es&#x27;&quot;
+                  [class.shadow-md]&#x3D;&quot;currentLanguage &#x3D;&#x3D;&#x3D; &#x27;es&#x27;&quot;
+                  [class.bg-gray-100]&#x3D;&quot;currentLanguage !&#x3D;&#x3D; &#x27;es&#x27;&quot;
+                  [class.text-gray-600]&#x3D;&quot;currentLanguage !&#x3D;&#x3D; &#x27;es&#x27;&quot;
+                  [class.hover:bg-gray-200]&#x3D;&quot;currentLanguage !&#x3D;&#x3D; &#x27;es&#x27;&quot;
+                &gt;
+                  &lt;span class&#x3D;&quot;text-base&quot;&gt;🇪🇸&lt;/span&gt;
+                  &lt;span&gt;Español&lt;/span&gt;
+                &lt;/button&gt;
+                &lt;button
+                  (click)&#x3D;&quot;setLanguage(&#x27;en&#x27;)&quot;
+                  class&#x3D;&quot;flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200&quot;
+                  [class.bg-brand-primary]&#x3D;&quot;currentLanguage &#x3D;&#x3D;&#x3D; &#x27;en&#x27;&quot;
+                  [class.text-white]&#x3D;&quot;currentLanguage &#x3D;&#x3D;&#x3D; &#x27;en&#x27;&quot;
+                  [class.shadow-md]&#x3D;&quot;currentLanguage &#x3D;&#x3D;&#x3D; &#x27;en&#x27;&quot;
+                  [class.bg-gray-100]&#x3D;&quot;currentLanguage !&#x3D;&#x3D; &#x27;en&#x27;&quot;
+                  [class.text-gray-600]&#x3D;&quot;currentLanguage !&#x3D;&#x3D; &#x27;en&#x27;&quot;
+                  [class.hover:bg-gray-200]&#x3D;&quot;currentLanguage !&#x3D;&#x3D; &#x27;en&#x27;&quot;
+                &gt;
+                  &lt;span class&#x3D;&quot;text-base&quot;&gt;🇬🇧&lt;/span&gt;
+                  &lt;span&gt;English&lt;/span&gt;
+                &lt;/button&gt;
+                &lt;button
+                  (click)&#x3D;&quot;setLanguage(&#x27;de&#x27;)&quot;
+                  class&#x3D;&quot;flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200&quot;
+                  [class.bg-brand-primary]&#x3D;&quot;currentLanguage &#x3D;&#x3D;&#x3D; &#x27;de&#x27;&quot;
+                  [class.text-white]&#x3D;&quot;currentLanguage &#x3D;&#x3D;&#x3D; &#x27;de&#x27;&quot;
+                  [class.shadow-md]&#x3D;&quot;currentLanguage &#x3D;&#x3D;&#x3D; &#x27;de&#x27;&quot;
+                  [class.bg-gray-100]&#x3D;&quot;currentLanguage !&#x3D;&#x3D; &#x27;de&#x27;&quot;
+                  [class.text-gray-600]&#x3D;&quot;currentLanguage !&#x3D;&#x3D; &#x27;de&#x27;&quot;
+                  [class.hover:bg-gray-200]&#x3D;&quot;currentLanguage !&#x3D;&#x3D; &#x27;de&#x27;&quot;
+                &gt;
+                  &lt;span class&#x3D;&quot;text-base&quot;&gt;🇩🇪&lt;/span&gt;
+                  &lt;span&gt;Deutsch&lt;/span&gt;
+                &lt;/button&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;button
+            type&#x3D;&quot;button&quot;
+            (click)&#x3D;&quot;sendPasswordReset()&quot;
+            class&#x3D;&quot;w-full py-3.5 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold rounded-xl shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200&quot;
+          &gt;
+            {{ &quot;profile.changePassword&quot; | translate }}
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;space-y-3 pt-2&quot;&gt;
+        @if (isAdmin) {
+          &lt;a
+            routerLink&#x3D;&quot;/dashboard&quot;
+            class&#x3D;&quot;flex items-center justify-center gap-2 w-full py-3.5 bg-brand-primary text-white font-semibold rounded-xl hover:bg-brand-secondary hover:shadow-xl transition-all duration-200 shadow-lg shadow-brand-primary/30 active:scale-[0.98]&quot;
+          &gt;
+            &lt;svg
+              xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+              class&#x3D;&quot;h-5 w-5&quot;
+              viewBox&#x3D;&quot;0 0 20 20&quot;
+              fill&#x3D;&quot;currentColor&quot;
+            &gt;
+              &lt;path
+                d&#x3D;&quot;M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z&quot;
+              /&gt;
+            &lt;/svg&gt;
+            {{ &quot;dashboard.title&quot; | translate }}
+          &lt;/a&gt;
+        }
+
+        &lt;button
+          (click)&#x3D;&quot;logout()&quot;
+          class&#x3D;&quot;flex items-center justify-center gap-2 w-full py-3.5 bg-white border-2 border-red-200 text-red-600 font-semibold rounded-xl hover:bg-red-50 hover:border-red-300 hover:shadow-md transition-all duration-200 active:scale-[0.98]&quot;
+        &gt;
+          &lt;svg
+            xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+            class&#x3D;&quot;h-5 w-5&quot;
+            viewBox&#x3D;&quot;0 0 20 20&quot;
+            fill&#x3D;&quot;currentColor&quot;
+          &gt;
+            &lt;path
+              fill-rule&#x3D;&quot;evenodd&quot;
+              d&#x3D;&quot;M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z&quot;
+              clip-rule&#x3D;&quot;evenodd&quot;
+            /&gt;
+          &lt;/svg&gt;
+          {{ &quot;common.logout&quot; | translate }}
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;p class&#x3D;&quot;text-center text-xs text-gray-400 pt-4&quot;&gt;MappTuu v1.0.0&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  @if (showResetModal) {
+    &lt;div
+      class&#x3D;&quot;fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm&quot;
+      aria-modal&#x3D;&quot;true&quot;
+      role&#x3D;&quot;dialog&quot;
+    &gt;
+      &lt;div class&#x3D;&quot;bg-white rounded-2xl shadow-2xl p-6 w-80 text-center&quot;&gt;
+        &lt;h2 class&#x3D;&quot;text-lg font-semibold text-gray-900 mb-3&quot;&gt;
+          {{ &quot;auth.login.restorePaswword&quot; | translate }}
+        &lt;/h2&gt;
+        &lt;p class&#x3D;&quot;text-sm text-gray-700 mb-6 leading-relaxed&quot;&gt;
+          {{ &quot;auth.login.modalRestore&quot; | translate }}
+        &lt;/p&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;closeResetModal()&quot;
+          class&#x3D;&quot;w-full py-3 bg-brand-primary text-white font-semibold rounded-xl hover:bg-brand-secondary transition-colors&quot;
+        &gt;
+          OK
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  }
+&lt;/main&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><header class="bg-brand-primary p-4 flex items-center justify-between h-16">  <div class="flex items-center">    <button      (click)="goBack()"      class="text-white hover:text-gray-700 transition-colors"    >      <svg        xmlns="http://www.w3.org/2000/svg"        fill="none"        viewBox="0 0 24 24"        stroke-width="2.5"        stroke="currentColor"        class="w-7 h-7"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h17.5"        />      </svg>    </button>    <span class="ml-4 text-white font-semibold text-lg">{{      "common.profile" | translate    }}</span>  </div>  <button class="p-2 hover:bg-white/10 rounded-full transition-colors">    <svg      xmlns="http://www.w3.org/2000/svg"      fill="none"      viewBox="0 0 24 24"      stroke-width="1.5"      stroke="white"      class="w-6 h-6"    >      <path        stroke-linecap="round"        stroke-linejoin="round"        d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"      />      <path        stroke-linecap="round"        stroke-linejoin="round"        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"      />    </svg>  </button></header><main  class="min-h-screen bg-gradient-to-br from-slate-200 via-slate-300/50 to-brand-muted/30">  <div class="bg-brand-primary pt-6 pb-24 px-4 relative shadow-lg">    <div class="absolute inset-0 opacity-10">      <div        class="absolute top-0 right-0 w-40 h-40 bg-white rounded-full -translate-y-1/2 translate-x-1/2"      ></div>      <div        class="absolute bottom-0 left-0 w-32 h-32 bg-white rounded-full translate-y-1/2 -translate-x-1/2"      ></div>    </div>    <div class="max-w-md mx-auto text-center relative z-10">      <div        class="relative w-28 h-28 mx-auto group cursor-pointer"        (click)="triggerAvatarInput()"      >        <div          class="w-full h-full rounded-full bg-white shadow-xl flex items-center justify-center border-4 border-white/50 overflow-hidden ring-4 ring-white/20 transition-transform group-hover:scale-105"        >          <img            [src]="displayAvatar"            [appDefaultAvatar]="userName"            [avatarSize]="112"            avatarBgColor="#5675AC"            alt="Avatar"            class="w-full h-full rounded-full object-cover"          />        </div>        @if (isUploadingAvatar) {          <div            class="absolute inset-0 rounded-full bg-black/60 flex items-center justify-center"          >            <svg              class="animate-spin h-8 w-8 text-white"              xmlns="http://www.w3.org/2000/svg"              fill="none"              viewBox="0 0 24 24"            >              <circle                class="opacity-25"                cx="12"                cy="12"                r="10"                stroke="currentColor"                stroke-width="4"              ></circle>              <path                class="opacity-75"                fill="currentColor"                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"              ></path>            </svg>          </div>        } @else {          <div            class="absolute inset-0 rounded-full bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200"          >            <svg              xmlns="http://www.w3.org/2000/svg"              class="h-8 w-8 text-white"              fill="none"              viewBox="0 0 24 24"              stroke="currentColor"              stroke-width="2"            >              <path                stroke-linecap="round"                stroke-linejoin="round"                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"              />              <path                stroke-linecap="round"                stroke-linejoin="round"                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"              />            </svg>          </div>        }        <input          #avatarInput          type="file"          accept="image/*"          (change)="onAvatarSelected($event)"          class="hidden"        />      </div>      <h1 class="text-2xl font-bold text-white mt-4">{{ userName }}</h1>      <p class="text-white/70 text-sm">{{ userEmail }}</p>      <div class="flex items-center justify-center gap-2 mt-2">        @if (isAdmin) {          <span            class="inline-flex items-center gap-1 px-3 py-1 bg-yellow-400 text-yellow-900 text-xs font-bold rounded-full shadow-lg"          >            <svg              xmlns="http://www.w3.org/2000/svg"              class="h-3.5 w-3.5"              viewBox="0 0 20 20"              fill="currentColor"            >              <path                fill-rule="evenodd"                d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z"                clip-rule="evenodd"              />            </svg>            Admin          </span>        }        <span          class="inline-flex items-center gap-1 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-lg animate-pulse"        >          <svg            xmlns="http://www.w3.org/2000/svg"            class="h-3.5 w-3.5"            viewBox="0 0 20 20"            fill="currentColor"          >            <path              fill-rule="evenodd"              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"              clip-rule="evenodd"            />          </svg>          {{ "profile.verified" | translate }}        </span>      </div>    </div>  </div>  <div class="px-4 -mt-16 pb-8 relative z-10">    <div class="max-w-md mx-auto space-y-4">      <div        class="bg-white rounded-2xl shadow-xl p-3 border border-slate-200 ring-1 ring-black/5"      >        <div class="grid grid-cols-3 gap-2">          <a            routerLink="/activitiesList"            class="text-center py-3 px-2 bg-gradient-to-br from-blue-100 to-blue-200/80 rounded-xl min-h-[80px] flex flex-col justify-center cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all duration-200 active:scale-[0.98] border border-blue-200/50"          >            <div              class="text-xl sm:text-2xl font-bold text-brand-primary drop-shadow-sm"            >              {{ stats.activitiesVisited }}            </div>            <div              class="text-[10px] sm:text-xs text-gray-600 font-medium mt-1 leading-tight"            >              {{ "profile.activitiesVisited" | translate }}            </div>          </a>          <a            routerLink="/plansList"            class="text-center py-3 px-2 bg-gradient-to-br from-purple-100 to-purple-200/80 rounded-xl min-h-[80px] flex flex-col justify-center cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all duration-200 active:scale-[0.98] border border-purple-200/50"          >            <div              class="text-xl sm:text-2xl font-bold text-purple-600 drop-shadow-sm"            >              {{ stats.plansCreated }}            </div>            <div              class="text-[10px] sm:text-xs text-gray-600 font-medium mt-1 leading-tight"            >              {{ "profile.plansCreated" | translate }}            </div>          </a>          <div            class="text-center py-3 px-2 bg-gradient-to-br from-pink-100 to-pink-200/80 rounded-xl min-h-[80px] flex flex-col justify-center cursor-pointer hover:shadow-lg hover:scale-[1.02] transition-all duration-200 active:scale-[0.98] border border-pink-200/50"          >            <div              class="text-xl sm:text-2xl font-bold text-pink-500 drop-shadow-sm"            >              {{ stats.favorites }}            </div>            <div              class="text-[10px] sm:text-xs text-gray-600 font-medium mt-1 leading-tight"            >              {{ "profile.favorites" | translate }}            </div>          </div>        </div>      </div>      @if (expandedSection === null) {        <div class="grid grid-cols-3 gap-2">          <button            (click)="toggleSection(\'achievements\')"            class="bg-white rounded-2xl shadow-xl p-3 flex flex-col items-center justify-center gap-2 hover:shadow-2xl hover:scale-[1.02] transition-all duration-200 active:scale-[0.98] min-h-[90px] border border-slate-200 ring-1 ring-black/5"          >            <div              class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center"            >              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-5 w-5 text-yellow-500"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  fill-rule="evenodd"                  d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z"                  clip-rule="evenodd"                />              </svg>            </div>            <span              class="text-[10px] font-semibold text-gray-700 text-center leading-tight"              >{{ "profile.achievements" | translate }}</span            >            <span class="text-[9px] text-gray-400"              >{{ unlockedCount }}/{{ achievements.length }}</span            >          </button>          <button            (click)="toggleSection(\'recent\')"            class="bg-white rounded-2xl shadow-xl p-3 flex flex-col items-center justify-center gap-2 hover:shadow-2xl hover:scale-[1.02] transition-all duration-200 active:scale-[0.98] min-h-[90px] border border-slate-200 ring-1 ring-black/5"          >            <div              class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center"            >              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-5 w-5 text-orange-500"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  fill-rule="evenodd"                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"                  clip-rule="evenodd"                />              </svg>            </div>            <span              class="text-[10px] font-semibold text-gray-700 text-center leading-tight"              >{{ "profile.recentActivity" | translate }}</span            >            <span class="text-[9px] text-gray-400">{{              recentActivities.length            }}</span>          </button>          <button            (click)="toggleSection(\'actions\')"            class="bg-white rounded-2xl shadow-xl p-3 flex flex-col items-center justify-center gap-2 hover:shadow-2xl hover:scale-[1.02] transition-all duration-200 active:scale-[0.98] min-h-[90px] border border-slate-200 ring-1 ring-black/5"          >            <div              class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center"            >              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-5 w-5 text-brand-primary"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"                />              </svg>            </div>            <span              class="text-[10px] font-semibold text-gray-700 text-center leading-tight"              >{{ "profile.quickActions" | translate }}</span            >            <span class="text-[9px] text-gray-400">3</span>          </button>        </div>      }      @if (expandedSection === "achievements") {        <div          class="bg-white rounded-2xl shadow-xl p-4 animate-fade-in border border-slate-200 ring-1 ring-black/5"        >          <div class="flex items-center justify-between mb-3">            <h2              class="font-semibold text-gray-800 flex items-center gap-2 text-sm"            >              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-4 w-4 text-yellow-500"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  fill-rule="evenodd"                  d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z"                  clip-rule="evenodd"                />              </svg>              {{ "profile.achievements" | translate }}            </h2>            <button              (click)="toggleSection(\'achievements\')"              class="p-1.5 hover:bg-gray-100 rounded-full transition-colors"            >              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-4 w-4 text-gray-400"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  fill-rule="evenodd"                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"                  clip-rule="evenodd"                />              </svg>            </button>          </div>          <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">            @for (achievement of achievements; track achievement.id) {              <div                class="flex-shrink-0 flex flex-col items-center gap-1 p-2 rounded-xl transition-all duration-200 hover:scale-110 cursor-pointer"                [class.opacity-40]="!achievement.unlocked"                [class.grayscale]="!achievement.unlocked"              >                <div                  class="w-11 h-11 rounded-full flex items-center justify-center text-lg shadow-sm"                  [style.background]="                    achievement.unlocked ? achievement.bgColor : \'#e5e7eb\'                  "                >                  {{ achievement.icon }}                </div>                <span                  class="text-[9px] text-gray-500 font-medium text-center leading-tight max-w-[50px]"                  >{{ achievement.name }}</span                >              </div>            }          </div>        </div>      }      @if (expandedSection === "recent") {        <div          class="bg-white rounded-2xl shadow-xl p-4 animate-fade-in border border-slate-200 ring-1 ring-black/5"        >          <div class="flex items-center justify-between mb-3">            <h2              class="font-semibold text-gray-800 flex items-center gap-2 text-sm"            >              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-4 w-4 text-orange-500"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  fill-rule="evenodd"                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"                  clip-rule="evenodd"                />              </svg>              {{ "profile.recentActivity" | translate }}            </h2>            <button              (click)="toggleSection(\'recent\')"              class="p-1.5 hover:bg-gray-100 rounded-full transition-colors"            >              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-4 w-4 text-gray-400"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  fill-rule="evenodd"                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"                  clip-rule="evenodd"                />              </svg>            </button>          </div>          <div class="space-y-2">            @for (activity of recentActivities; track activity.id) {              <a                [routerLink]="[\'/activityDetail\', activity.id]"                class="flex items-center gap-3 p-2 rounded-xl hover:bg-gray-50 transition-all duration-200 group"              >                <div                  class="w-10 h-10 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0"                >                  <img                    [src]="activity.image"                    alt=""                    class="w-full h-full object-cover"                  />                </div>                <div class="flex-1 min-w-0">                  <p                    class="text-sm font-medium text-gray-800 truncate group-hover:text-brand-primary transition-colors"                  >                    {{ activity.name }}                  </p>                  <p class="text-[10px] text-gray-400">{{ activity.date }}</p>                </div>                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-4 w-4 text-gray-300 group-hover:text-brand-primary group-hover:translate-x-1 transition-all"                  viewBox="0 0 20 20"                  fill="currentColor"                >                  <path                    fill-rule="evenodd"                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"                    clip-rule="evenodd"                  />                </svg>              </a>            }          </div>        </div>      }      @if (expandedSection === "actions") {        <div          class="bg-white rounded-2xl shadow-xl overflow-hidden animate-fade-in border border-slate-200 ring-1 ring-black/5"        >          <div            class="p-4 border-b border-gray-100 flex items-center justify-between bg-gradient-to-r from-brand-primary/5 to-transparent"          >            <h2 class="font-semibold text-gray-800 flex items-center gap-2">              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-5 w-5 text-brand-primary"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"                />              </svg>              {{ "profile.quickActions" | translate }}            </h2>            <button              (click)="toggleSection(\'actions\')"              class="p-1.5 hover:bg-gray-100 rounded-full transition-colors"            >              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-4 w-4 text-gray-400"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  fill-rule="evenodd"                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"                  clip-rule="evenodd"                />              </svg>            </button>          </div>          <div class="divide-y divide-gray-50">            <a              routerLink="/maps"              class="flex items-center gap-4 p-4 hover:bg-blue-50/50 transition-all duration-200 group"            >              <div                class="p-2.5 bg-blue-100 rounded-xl group-hover:bg-blue-200 group-hover:scale-110 transition-all duration-200"              >                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-5 w-5 text-blue-600"                  viewBox="0 0 20 20"                  fill="currentColor"                >                  <path                    fill-rule="evenodd"                    d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293zM17.707 5.293L14 1.586v12.828l2.293 2.293A1 1 0 0018 16V6a1 1 0 00-.293-.707z"                    clip-rule="evenodd"                  />                </svg>              </div>              <div class="flex-1">                <p                  class="font-medium text-gray-800 group-hover:text-blue-600 transition-colors"                >                  {{ "profile.exploreMap" | translate }}                </p>                <p class="text-xs text-gray-400">                  {{ "profile.exploreMapDesc" | translate }}                </p>              </div>              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-5 w-5 text-gray-300 group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-200"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  fill-rule="evenodd"                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"                  clip-rule="evenodd"                />              </svg>            </a>            <a              routerLink="/createdActivities"              class="flex items-center gap-4 p-4 hover:bg-green-50/50 transition-all duration-200 group"            >              <div                class="p-2.5 bg-green-100 rounded-xl group-hover:bg-green-200 group-hover:scale-110 transition-all duration-200"              >                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-5 w-5 text-green-600"                  viewBox="0 0 20 20"                  fill="currentColor"                >                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />                  <path                    fill-rule="evenodd"                    d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"                    clip-rule="evenodd"                  />                </svg>              </div>              <div class="flex-1">                <p                  class="font-medium text-gray-800 group-hover:text-green-600 transition-colors"                >                  {{ "profile.createdActivities" | translate }}                </p>                <p class="text-xs text-gray-400">                  {{ "profile.createdActivitiesDesc" | translate }}                </p>              </div>              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-5 w-5 text-gray-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all duration-200"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  fill-rule="evenodd"                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"                  clip-rule="evenodd"                />              </svg>            </a>            <a              routerLink="/savedActivities"              class="flex items-center gap-4 p-4 hover:bg-green-50/50 transition-all duration-200 group"            >              <div                class="p-2.5 bg-green-100 rounded-xl group-hover:bg-green-200 group-hover:scale-110 transition-all duration-200"              >                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-5 w-5 text-green-600"                  viewBox="0 0 20 20"                  fill="currentColor"                >                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />                  <path                    fill-rule="evenodd"                    d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"                    clip-rule="evenodd"                  />                </svg>              </div>              <div class="flex-1">                <p                  class="font-medium text-gray-800 group-hover:text-green-600 transition-colors"                >                  {{ "profile.savedActivities" | translate }}                </p>                <p class="text-xs text-gray-400">                  {{ "profile.savedActivitiesDesc" | translate }}                </p>              </div>              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-5 w-5 text-gray-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all duration-200"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  fill-rule="evenodd"                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"                  clip-rule="evenodd"                />              </svg>            </a>            <a              routerLink="/createdPlans"              class="flex items-center gap-4 p-4 hover:bg-purple-50/50 transition-all duration-200 group"            >              <div                class="p-2.5 bg-purple-100 rounded-xl group-hover:bg-purple-200 group-hover:scale-110 transition-all duration-200"              >                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-5 w-5 text-purple-600"                  viewBox="0 0 20 20"                  fill="currentColor"                >                  <path                    d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V8z"                  />                </svg>              </div>              <div class="flex-1">                <p                  class="font-medium text-gray-800 group-hover:text-purple-600 transition-colors"                >                  {{ "profile.createdPlans" | translate }}                </p>                <p class="text-xs text-gray-400">                  {{ "profile.createdPlansDesc" | translate }}                </p>              </div>              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-5 w-5 text-gray-300 group-hover:text-purple-500 group-hover:translate-x-1 transition-all duration-200"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  fill-rule="evenodd"                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"                  clip-rule="evenodd"                />              </svg>            </a>            <a              routerLink="/savedPlans"              class="flex items-center gap-4 p-4 hover:bg-purple-50/50 transition-all duration-200 group"            >              <div                class="p-2.5 bg-purple-100 rounded-xl group-hover:bg-purple-200 group-hover:scale-110 transition-all duration-200"              >                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-5 w-5 text-purple-600"                  viewBox="0 0 20 20"                  fill="currentColor"                >                  <path                    d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V8z"                  />                </svg>              </div>              <div class="flex-1">                <p                  class="font-medium text-gray-800 group-hover:text-purple-600 transition-colors"                >                  {{ "profile.savedPlans" | translate }}                </p>                <p class="text-xs text-gray-400">                  {{ "profile.savedPlansDesc" | translate }}                </p>              </div>              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-5 w-5 text-gray-300 group-hover:text-purple-500 group-hover:translate-x-1 transition-all duration-200"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  fill-rule="evenodd"                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"                  clip-rule="evenodd"                />              </svg>            </a>          </div>        </div>      }      <div        class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200 ring-1 ring-black/5"      >        <div          class="p-4 border-b border-gray-100 bg-gradient-to-r from-brand-primary/5 to-transparent"        >          <h2 class="font-semibold text-gray-800 flex items-center gap-2">            <svg              xmlns="http://www.w3.org/2000/svg"              class="h-5 w-5 text-brand-primary"              viewBox="0 0 20 20"              fill="currentColor"            >              <path                fill-rule="evenodd"                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"                clip-rule="evenodd"              />            </svg>            {{ "profile.accountInfo" | translate }}          </h2>        </div>        <div class="p-4 space-y-4">          <div class="flex items-center gap-3">            <div class="p-2 bg-gray-100 rounded-lg">              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-5 w-5 text-gray-500"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"                />                <path                  d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"                />              </svg>            </div>            <div class="flex-1 min-w-0">              <p class="text-xs text-gray-400 uppercase font-semibold">                {{ "auth.login.email" | translate }}              </p>              <p class="text-gray-700 font-medium truncate">{{ userEmail }}</p>            </div>          </div>          @if (memberSince) {            <div class="flex items-center gap-3">              <div class="p-2 bg-gray-100 rounded-lg">                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-5 w-5 text-gray-500"                  viewBox="0 0 20 20"                  fill="currentColor"                >                  <path                    fill-rule="evenodd"                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"                    clip-rule="evenodd"                  />                </svg>              </div>              <div>                <p class="text-xs text-gray-400 uppercase font-semibold">                  {{ "profile.memberSince" | translate }}                </p>                <p class="text-gray-700 font-medium">{{ memberSince }}</p>              </div>            </div>          }          <div class="flex items-center gap-3">            <div class="p-2 bg-gray-100 rounded-lg">              <svg                xmlns="http://www.w3.org/2000/svg"                class="h-5 w-5 text-gray-500"                viewBox="0 0 20 20"                fill="currentColor"              >                <path                  fill-rule="evenodd"                  d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z"                  clip-rule="evenodd"                />              </svg>            </div>            <div class="flex-1">              <p class="text-xs text-gray-400 uppercase font-semibold">                {{ "profile.language" | translate }}              </p>              <div class="flex gap-2 mt-1.5">                <button                  (click)="setLanguage(\'es\')"                  class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200"                  [class.bg-brand-primary]="currentLanguage === \'es\'"                  [class.text-white]="currentLanguage === \'es\'"                  [class.shadow-md]="currentLanguage === \'es\'"                  [class.bg-gray-100]="currentLanguage !== \'es\'"                  [class.text-gray-600]="currentLanguage !== \'es\'"                  [class.hover:bg-gray-200]="currentLanguage !== \'es\'"                >                  <span class="text-base">🇪🇸</span>                  <span>Español</span>                </button>                <button                  (click)="setLanguage(\'en\')"                  class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200"                  [class.bg-brand-primary]="currentLanguage === \'en\'"                  [class.text-white]="currentLanguage === \'en\'"                  [class.shadow-md]="currentLanguage === \'en\'"                  [class.bg-gray-100]="currentLanguage !== \'en\'"                  [class.text-gray-600]="currentLanguage !== \'en\'"                  [class.hover:bg-gray-200]="currentLanguage !== \'en\'"                >                  <span class="text-base">🇬🇧</span>                  <span>English</span>                </button>                <button                  (click)="setLanguage(\'de\')"                  class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200"                  [class.bg-brand-primary]="currentLanguage === \'de\'"                  [class.text-white]="currentLanguage === \'de\'"                  [class.shadow-md]="currentLanguage === \'de\'"                  [class.bg-gray-100]="currentLanguage !== \'de\'"                  [class.text-gray-600]="currentLanguage !== \'de\'"                  [class.hover:bg-gray-200]="currentLanguage !== \'de\'"                >                  <span class="text-base">🇩🇪</span>                  <span>Deutsch</span>                </button>              </div>            </div>          </div>          <button            type="button"            (click)="sendPasswordReset()"            class="w-full py-3.5 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold rounded-xl shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"          >            {{ "profile.changePassword" | translate }}          </button>        </div>      </div>      <div class="space-y-3 pt-2">        @if (isAdmin) {          <a            routerLink="/dashboard"            class="flex items-center justify-center gap-2 w-full py-3.5 bg-brand-primary text-white font-semibold rounded-xl hover:bg-brand-secondary hover:shadow-xl transition-all duration-200 shadow-lg shadow-brand-primary/30 active:scale-[0.98]"          >            <svg              xmlns="http://www.w3.org/2000/svg"              class="h-5 w-5"              viewBox="0 0 20 20"              fill="currentColor"            >              <path                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"              />            </svg>            {{ "dashboard.title" | translate }}          </a>        }        <button          (click)="logout()"          class="flex items-center justify-center gap-2 w-full py-3.5 bg-white border-2 border-red-200 text-red-600 font-semibold rounded-xl hover:bg-red-50 hover:border-red-300 hover:shadow-md transition-all duration-200 active:scale-[0.98]"        >          <svg            xmlns="http://www.w3.org/2000/svg"            class="h-5 w-5"            viewBox="0 0 20 20"            fill="currentColor"          >            <path              fill-rule="evenodd"              d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z"              clip-rule="evenodd"            />          </svg>          {{ "common.logout" | translate }}        </button>      </div>      <p class="text-center text-xs text-gray-400 pt-4">MappTuu v1.0.0</p>    </div>  </div>  @if (showResetModal) {    <div      class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"      aria-modal="true"      role="dialog"    >      <div class="bg-white rounded-2xl shadow-2xl p-6 w-80 text-center">        <h2 class="text-lg font-semibold text-gray-900 mb-3">          {{ "auth.login.restorePaswword" | translate }}        </h2>        <p class="text-sm text-gray-700 mb-6 leading-relaxed">          {{ "auth.login.modalRestore" | translate }}        </p>        <button          type="button"          (click)="closeResetModal()"          class="w-full py-3 bg-brand-primary text-white font-semibold rounded-xl hover:bg-brand-secondary transition-colors"        >          OK        </button>      </div>    </div>  }</main></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
+    var ACTUAL_COMPONENT = {'name': 'ProfileComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProfileComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,900 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>map-tuu documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">map-tuu documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Variables</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#adminGuard" title="src/app/core/guards/admin.guards.ts" ><b>adminGuard</b>&nbsp;&nbsp;&nbsp;(src/.../admin.guards.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#apiUrl" title="src/app/common/models/apiurl.model.ts" ><b>apiUrl</b>&nbsp;&nbsp;&nbsp;(src/.../apiurl.model.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#appConfig" title="src/app/app.config.ts" ><b>appConfig</b>&nbsp;&nbsp;&nbsp;(src/.../app.config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#authGuard" title="src/app/core/guards/auth.guards.ts" ><b>authGuard</b>&nbsp;&nbsp;&nbsp;(src/.../auth.guards.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/app/environment/environment.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#FIREBASEOPTIONS" title="src/app/repositories/repository.token.ts" ><b>FIREBASEOPTIONS</b>&nbsp;&nbsp;&nbsp;(src/.../repository.token.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#guestGuard" title="src/app/core/guards/guest.guards.ts" ><b>guestGuard</b>&nbsp;&nbsp;&nbsp;(src/.../guest.guards.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#isValidEnvValue" title="src/app/environment/environment.ts" ><b>isValidEnvValue</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#missingFirebaseFields" title="src/app/environment/environment.ts" ><b>missingFirebaseFields</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#readEnv" title="src/app/environment/environment.ts" ><b>readEnv</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#readEnvArray" title="src/app/environment/environment.ts" ><b>readEnvArray</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#readFirebaseEnv" title="src/app/environment/environment.ts" ><b>readFirebaseEnv</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#routes" title="src/app/app.routes.ts" ><b>routes</b>&nbsp;&nbsp;&nbsp;(src/.../app.routes.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#runtimeEnv" title="src/app/environment/environment.ts" ><b>runtimeEnv</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#runtimeFirebase" title="src/app/environment/environment.ts" ><b>runtimeFirebase</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#runtimeRoot" title="src/app/environment/environment.ts" ><b>runtimeRoot</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/app/core/guards/admin.guards.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="adminGuard"></a>
+                    <span class="name">
+                        <span ><b>adminGuard</b></span>
+                        <a href="#adminGuard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>CanActivateFn</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {
+  const auth &#x3D; inject(AuthService);
+  const router &#x3D; inject(Router);
+
+  if (auth.isAuthenticated() &amp;&amp; auth.isAdmin()) {
+    return true;
+  } else {
+    router.navigate([&#x27;/dashboard&#x27;]);
+    return false;
+  }
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/common/models/apiurl.model.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apiUrl"></a>
+                    <span class="name">
+                        <span ><b>apiUrl</b></span>
+                        <a href="#apiUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;https://vercel-node-mapp-tuu.vercel.app/api&#x27;</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/app.config.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="appConfig"></a>
+                    <span class="name">
+                        <span ><b>appConfig</b></span>
+                        <a href="#appConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ApplicationConfig</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideRouter(routes, withComponentInputBinding()),
+    provideHttpClient(),
+
+    provideFirebaseApp(() &#x3D;&gt; initializeApp(environment.firebase)),
+    
+    provideAuth(() &#x3D;&gt; getAuth()),
+
+    provideFirestore(() &#x3D;&gt; getFirestore()), 
+
+    provideStorage(() &#x3D;&gt; getStorage()),
+  ]
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Configuración global de la aplicación (standalone).</p>
+<p>Aquí se registran los proveedores transversales:</p>
+<ul>
+<li><strong>Router</strong>: definición de rutas y binding de inputs desde params/query.</li>
+<li><strong>HttpClient</strong>: acceso a la API HTTP.</li>
+<li><strong>Firebase</strong>: inicialización centralizada (Auth/Firestore/Storage).</li>
+</ul>
+<p>Nota: mover la inicialización a un único punto evita estados inconsistentes
+(p.ej. múltiples instancias de Firebase) y facilita el despliegue por entorno
+vía <code>environment</code>.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/core/guards/auth.guards.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authGuard"></a>
+                    <span class="name">
+                        <span ><b>authGuard</b></span>
+                        <a href="#authGuard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>CanActivateFn</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {
+  const auth &#x3D; inject(AuthService);
+  const router &#x3D; inject(Router);
+
+  if (auth.isAuthenticated()) {
+    return true;
+  } else {
+    router.navigate([&#x27;/landingPage&#x27;]);
+    return false;
+  }
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/environment/environment.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  production: true,
+  CLOUD_NAME: readEnv(&#x27;NG_APP_CLOUDINARY_CLOUD_NAME&#x27;),
+  UPLOAD_PRESET: readEnv(&#x27;NG_APP_UPLOAD_PRESET&#x27;),
+  CLOUDINARY_API_KEY: readEnv(&#x27;NG_APP_CLOUDINARY_API_KEY&#x27;),
+  ia: {
+    model: readEnv(&#x27;NG_APP_IA_MODEL&#x27;, &#x27;IA_MODEL&#x27;),
+    apiUrl:
+      readEnv(&#x27;NG_APP_IA_API_URL&#x27;, &#x27;IA_API_URL&#x27;) ||
+      &#x27;https://api.groq.com/openai/v1/chat/completions&#x27;,
+    apiKey: readEnv(&#x27;NG_APP_IA_API_KEY&#x27;, &#x27;IA_API_KEY&#x27;),
+    fallbackModels: readEnvArray(
+      &#x27;NG_APP_IA_FALLBACK_MODELS&#x27;,
+      &#x27;IA_FALLBACK_MODELS&#x27;,
+    ),
+  },
+  firebase: {
+    apiKey: readFirebaseEnv(
+      &#x27;apiKey&#x27;,
+      &#x27;NG_APP_API_KEY&#x27;,
+      &#x27;NG_APP_FIREBASE_API_KEY&#x27;,
+      &#x27;FIREBASE_API_KEY&#x27;,
+    ),
+    authDomain: readFirebaseEnv(
+      &#x27;authDomain&#x27;,
+      &#x27;NG_APP_AUTH_DOMAIN&#x27;,
+      &#x27;FIREBASE_AUTH_DOMAIN&#x27;,
+    ),
+    projectId: readFirebaseEnv(
+      &#x27;projectId&#x27;,
+      &#x27;NG_APP_PROJECT_ID&#x27;,
+      &#x27;FIREBASE_PROJECT_ID&#x27;,
+    ),
+    storageBucket: readFirebaseEnv(
+      &#x27;storageBucket&#x27;,
+      &#x27;NG_APP_STORAGE_BUCKET&#x27;,
+      &#x27;FIREBASE_STORAGE_BUCKET&#x27;,
+    ),
+    messagingSenderId: readFirebaseEnv(
+      &#x27;messagingSenderId&#x27;,
+      &#x27;NG_APP_MESSAGING_SENDER_ID&#x27;,
+      &#x27;FIREBASE_MESSAGING_SENDER_ID&#x27;,
+    ),
+    appId: readFirebaseEnv(&#x27;appId&#x27;, &#x27;NG_APP_APP_ID&#x27;, &#x27;FIREBASE_APP_ID&#x27;),
+    measurementId: readFirebaseEnv(
+      &#x27;measurementId&#x27;,
+      &#x27;NG_APP_MEASUREMENT_ID&#x27;,
+      &#x27;FIREBASE_MEASUREMENT_ID&#x27;,
+    ),
+  },
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isValidEnvValue"></a>
+                    <span class="name">
+                        <span ><b>isValidEnvValue</b></span>
+                        <a href="#isValidEnvValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(value: string): boolean &#x3D;&gt; {
+  const normalized &#x3D; value.trim();
+  if (!normalized) {
+    return false;
+  }
+
+  const lower &#x3D; normalized.toLowerCase();
+  if (lower &#x3D;&#x3D;&#x3D; &#x27;undefined&#x27; || lower &#x3D;&#x3D;&#x3D; &#x27;null&#x27;) {
+    return false;
+  }
+
+  if (normalized.includes(&#x27;${&#x27;) || normalized.includes(&#x27;@@&#x27;)) {
+    return false;
+  }
+
+  return true;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="missingFirebaseFields"></a>
+                    <span class="name">
+                        <span ><b>missingFirebaseFields</b></span>
+                        <a href="#missingFirebaseFields"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Object.entries(environment.firebase)
+  .filter(([, value]) &#x3D;&gt; !value)
+  .map(([key]) &#x3D;&gt; key)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="readEnv"></a>
+                    <span class="name">
+                        <span ><b>readEnv</b></span>
+                        <a href="#readEnv"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(...keys: string[]): string &#x3D;&gt; {
+  for (const key of keys) {
+    const value &#x3D; runtimeEnv[key];
+    if (typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+      const sanitized &#x3D; value.trim().replace(/^[&#x27;\&quot;]|[&#x27;\&quot;]$/g, &#x27;&#x27;);
+      if (isValidEnvValue(sanitized)) {
+        return sanitized;
+      }
+    }
+  }
+
+  return &#x27;&#x27;;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="readEnvArray"></a>
+                    <span class="name">
+                        <span ><b>readEnvArray</b></span>
+                        <a href="#readEnvArray"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(...keys: string[]): string[] &#x3D;&gt; {
+  const raw &#x3D; readEnv(...keys);
+  if (!raw) {
+    return [];
+  }
+
+  return raw
+    .split(&#x27;,&#x27;)
+    .map((value) &#x3D;&gt; value.trim())
+    .filter((value) &#x3D;&gt; isValidEnvValue(value));
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="readFirebaseEnv"></a>
+                    <span class="name">
+                        <span ><b>readFirebaseEnv</b></span>
+                        <a href="#readFirebaseEnv"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(field: string, ...aliases: string[]): string &#x3D;&gt; {
+  const nestedValue &#x3D; runtimeFirebase[field];
+  if (typeof nestedValue &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+    const sanitized &#x3D; nestedValue.trim().replace(/^[&#x27;\&quot;]|[&#x27;\&quot;]$/g, &#x27;&#x27;);
+    if (isValidEnvValue(sanitized)) {
+      return sanitized;
+    }
+  }
+
+  return readEnv(...aliases);
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="runtimeEnv"></a>
+                    <span class="name">
+                        <span ><b>runtimeEnv</b></span>
+                        <a href="#runtimeEnv"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(runtimeRoot.__env__ || runtimeRoot) as RuntimeEnv</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="runtimeFirebase"></a>
+                    <span class="name">
+                        <span ><b>runtimeFirebase</b></span>
+                        <a href="#runtimeFirebase"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(runtimeEnv[&#x27;firebase&#x27;] || {}) as RuntimeEnv</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="runtimeRoot"></a>
+                    <span class="name">
+                        <span ><b>runtimeRoot</b></span>
+                        <a href="#runtimeRoot"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>window as any</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/repositories/repository.token.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FIREBASEOPTIONS"></a>
+                    <span class="name">
+                        <span ><b>FIREBASEOPTIONS</b></span>
+                        <a href="#FIREBASEOPTIONS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;any&gt;(&#x27;firebase.config&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/core/guards/guest.guards.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="guestGuard"></a>
+                    <span class="name">
+                        <span ><b>guestGuard</b></span>
+                        <a href="#guestGuard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>CanActivateFn</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {
+  const auth &#x3D; inject(AuthService);
+  const router &#x3D; inject(Router);
+
+  if (!auth.isAuthenticated()) {
+    return true;
+  }
+  router.navigate([&#x27;/landingPage&#x27;]);
+  return false;
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/app.routes.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="routes"></a>
+                    <span class="name">
+                        <span ><b>routes</b></span>
+                        <a href="#routes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/router/Routes" target="_blank" >Routes</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  {path: &#x27;createdPlans&#x27;, component: CreatedPlansComponent, canActivate: [authGuard]},
+  {path: &#x27;ia&#x27;, component: IaComponent, canActivate: [authGuard]},
+  {path: &#x27;savedPlans&#x27;, component: SavedPlansComponent, canActivate: [authGuard]},
+  {path: &#x27;savedActivities&#x27;, component: SavedActivitiesComponent, canActivate: [authGuard]},
+  {path : &#x27;maps&#x27;, component: MapsComponent},
+  {path : &#x27;updatePlan/:id&#x27;, component: PlansUpdateComponent, canActivate: [authGuard]},
+  {path : &#x27;landingPage&#x27;, component: LandingPageComponent},
+  { path: &#x27;activitiesList&#x27;, component: ListActivitiesComponent},
+  { path: &#x27;createdActivities&#x27;, component: CreatedActivitiesComponent},
+  { path: &#x27;activityDetail/:id&#x27;, component: ActivityDetailComponent},
+  { path: &#x27;updateActivity/:id&#x27;, component: ActivitiesUpdateComponent},
+  { path: &#x27;login&#x27;, component: LoginComponent, canActivate: [guestGuard] },
+  { path: &#x27;signup&#x27;, component: SignupComponent, canActivate: [guestGuard] },
+  { path: &#x27;about&#x27;, loadComponent: () &#x3D;&gt; &quot;import(&#x27;./features/about/about.component&#x27;).then(m &#x3D;&gt; m.AboutComponent)&quot; },
+  { path: &#x27;dashboard&#x27;, component: DashboardComponent, canActivate: [adminGuard] },
+  {path: &#x27;activitiesCreation&#x27;, component: ActivitiesCreationComponent, canActivate: [authGuard]},
+  {path: &#x27;plansDetail/:id&#x27;, component: PlansComponent, canActivate: [authGuard]},
+  {path: &#x27;activityTypeDetail/:id&#x27;, component: ActivityTypesDetailComponent, canActivate: [adminGuard]},
+  {path: &#x27;activityTypesUpdate/:id&#x27;, component: ActivityTypesUpdateComponent, canActivate: [adminGuard]},
+  {path: &#x27;planDetail/:id&#x27;, component: PlansComponent, canActivate: [authGuard]},
+  {path: &#x27;profile&#x27;, component: ProfileComponent, canActivate: [authGuard]},
+  {path: &#x27;activityTypesCreation&#x27;, component: ActivityTypesCreationComponent, canActivate: [adminGuard]},
+  {path: &#x27;activityTypesList&#x27;, component: ActivityTypesListComponent, canActivate: [adminGuard]},
+  {path: &#x27;plansCreation&#x27;, component: PlansCreationComponent, canActivate: [authGuard]},
+  {path: &#x27;plansList&#x27;, component: PlansListComponent, canActivate: [authGuard]},
+  { path: &#x27;&#x27;, redirectTo: &#x27;landingPage&#x27;, pathMatch: &#x27;full&#x27; }
+]</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Tabla de rutas de la app.</p>
+<p>Convenciones relevantes:</p>
+<ul>
+<li><strong>Rutas públicas</strong>: accesibles sin autenticación (ej: landing, maps).</li>
+<li><strong>Rutas guest</strong>: solo para no autenticados (login/signup).</li>
+<li><strong>Rutas auth</strong>: requieren sesión (canActivate: <code>authGuard</code>).</li>
+<li><strong>Rutas admin</strong>: requieren rol admin (canActivate: <code>adminGuard</code>).</li>
+</ul>
+<p>Mantener esta tabla como “fuente de verdad” evita lógica de acceso dispersa
+en componentes, y permite auditar permisos de forma centralizada.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

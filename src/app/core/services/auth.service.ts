@@ -15,10 +15,22 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
+/**
+ * Fachada de autenticación de la app.
+ *
+ * Responsabilidades:
+ * - Gestionar sesión con Firebase Auth (email/password + proveedores OAuth).
+ * - Exponer el usuario actual como stream (`user$`) para que UI/guards reaccionen.
+ *
+ * No es responsabilidad de este servicio:
+ * - Persistir perfiles de usuario en Firestore (ver `UserService`).
+ * - Implementar autorización granular (solo expone helpers básicos como `isAdmin`).
+ */
 export class AuthService {
   private auth = inject(Auth);
   private ngZone = inject(NgZone);
   private userSubject = new BehaviorSubject<User | null>(null);
+  /** Stream reactivo del usuario autenticado (o `null` si no hay sesión). */
   user$ = this.userSubject.asObservable();
 
   constructor(private router: Router) {
@@ -29,17 +41,40 @@ export class AuthService {
     });
   }
 
+  /**
+   * Inicia sesión con email/password.
+   *
+   * Efectos:
+   * - Actualiza estado interno por `onAuthStateChanged`.
+   * - Navega a `landingPage` si la autenticación tiene éxito.
+   *
+   * @param email Email del usuario.
+   * @param password Contraseña del usuario.
+   */
   async login(email: string, password: string) {
     await signInWithEmailAndPassword(this.auth, email, password);
     this.router.navigate(['/landingPage']);
   }
 
+  /**
+   * Registra un usuario (email/password) en Firebase Auth.
+   *
+   * Nota: este método solo crea la cuenta en Auth. Si se necesita un registro
+   * de perfil/datos adicionales, debe coordinarse con `UserService`.
+   *
+   * @param email Email del usuario.
+   * @param password Contraseña del usuario.
+   */
   async register(email: string, password: string) {
     await createUserWithEmailAndPassword(this.auth, email, password);
     this.router.navigate(['/landingPage']);
   }
 
-  // Login con Google
+  /**
+   * Login con Google vía popup.
+   *
+   * @returns Resultado del login (incluye credenciales/usuario).
+   */
   async loginWithGoogle() {
     const provider = new GoogleAuthProvider();
     provider.addScope('email');
@@ -49,7 +84,11 @@ export class AuthService {
     return result;
   }
 
-  // Login con GitHub
+  /**
+   * Login con GitHub vía popup.
+   *
+   * @returns Resultado del login (incluye credenciales/usuario).
+   */
   async loginWithGithub() {
     const provider = new GithubAuthProvider();
     provider.addScope('user:email');
@@ -57,7 +96,18 @@ export class AuthService {
     this.router.navigate(['/landingPage']);
     return result;
   }
- //no esta implementado el logout en la interfaz pero lo agrego para tenerlo listo
+
+  /**
+   * Cierra sesión y limpia estado local.
+   *
+   * Efectos:
+   * - Llama a `signOut` (Firebase Auth).
+   * - Limpia `localStorage`/`sessionStorage` y, si existe, `CacheStorage`.
+   * - Fuerza recarga de página para resetear estado de UI de forma agresiva.
+   *
+   * Nota: el `location.reload()` se usa como “reset” global. Si más adelante
+   * se requiere UX sin recarga, habrá que re-trabajar el flujo de estado.
+   */
   async logout() {
     await signOut(this.auth);
     try {
@@ -77,11 +127,22 @@ export class AuthService {
     this.userSubject.next(null);
     location.reload();
   }
-//para el guards
+
+  /**
+   * Indica si hay sesión activa (usado por guards).
+   *
+   * Importante: depende del último valor emitido por `onAuthStateChanged`.
+   */
   isAuthenticated(): boolean {
     return !!this.userSubject.value;
   }
 
+  /**
+   * Autorización básica de admin.
+   *
+   * Regla actual: email fijo `admin@mapptuu.com`.
+   * Si se migra a roles/claims, este método debe cambiar.
+   */
   isAdmin(): boolean {
     const user = this.userSubject.value;
     if(user?.email === 'admin@mapptuu.com'){
@@ -90,10 +151,16 @@ export class AuthService {
     return false;
   }
 
+  /** Acceso directo al usuario actual (o `null`). */
   get currentUser() {
     return this.userSubject.value;
   }
 
+  /**
+   * Actualiza la foto de perfil del usuario en Firebase Auth.
+   *
+   * @param photoURL URL pública de la imagen.
+   */
   async updateUserPhoto(photoURL: string): Promise<void> {
     const user = this.auth.currentUser;
     if (user) {

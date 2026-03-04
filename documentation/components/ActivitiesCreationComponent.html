@@ -1,0 +1,1801 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>map-tuu documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">map-tuu documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ActivitiesCreationComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/features/activities/activities-creation/activities.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-activities</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                            <code>TranslatePipe</code>
+                                <code><a href="../components/MapPreviewComponent.html" target="_self" >MapPreviewComponent</a></code>
+                                <code><a href="../components/LanguageSelectorComponent.html" target="_self" >LanguageSelectorComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./activities.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./activities.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#activityTypes" >activityTypes</a>
+                            </li>
+                            <li>
+                                <a href="#activityTypesName" >activityTypesName</a>
+                            </li>
+                            <li>
+                                <a href="#error" >error</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#fileInput" >fileInput</a>
+                            </li>
+                            <li>
+                                <a href="#formActivityCreation" >formActivityCreation</a>
+                            </li>
+                            <li>
+                                <a href="#imagePreview" >imagePreview</a>
+                            </li>
+                            <li>
+                                <a href="#isUploading" >isUploading</a>
+                            </li>
+                            <li>
+                                <a href="#selectedFile" >selectedFile</a>
+                            </li>
+                            <li>
+                                <a href="#success" >success</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#onCreate" >onCreate</a>
+                            </li>
+                            <li>
+                                <a href="#onFileSelected" >onFileSelected</a>
+                            </li>
+                            <li>
+                                <a href="#onMapCoordinatesChange" >onMapCoordinatesChange</a>
+                            </li>
+                            <li>
+                                <a href="#triggerFileInput" >triggerFileInput</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#uploadImage" >uploadImage</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#mapLatitude" >mapLatitude</a>
+                                </li>
+                                <li>
+                                    <a href="#mapLongitude" >mapLongitude</a>
+                                </li>
+                                <li>
+                                    <a href="#currentImage" >currentImage</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(formSvc: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, auth: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, activityService: <a href="../injectables/ActivityService.html" target="_self">ActivityService</a>, ActivityTypeService: <a href="../injectables/ActivityTypeService.html" target="_self">ActivityTypeService</a>, mediaService: <a href="../injectables/CloudinaryService.html" target="_self">CloudinaryService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:47</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>formSvc</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>auth</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activityService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ActivityService.html" target="_self" >ActivityService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>ActivityTypeService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ActivityTypeService.html" target="_self" >ActivityTypeService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>mediaService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CloudinaryService.html" target="_self" >CloudinaryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCreate"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>onCreate</b></span>
+                        <a href="#onCreate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onCreate()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="162"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:162</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFileSelected"></a>
+                    <span class="name">
+                        <span ><b>onFileSelected</b></span>
+                        <a href="#onFileSelected"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onFileSelected(event: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:115</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onMapCoordinatesChange"></a>
+                    <span class="name">
+                        <span ><b>onMapCoordinatesChange</b></span>
+                        <a href="#onMapCoordinatesChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onMapCoordinatesChange(coords: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:101</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>coords</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="triggerFileInput"></a>
+                    <span class="name">
+                        <span ><b>triggerFileInput</b></span>
+                        <a href="#triggerFileInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>triggerFileInput()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="45"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadImage"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>uploadImage</b></span>
+                        <a href="#uploadImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>uploadImage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="137"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:137</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;string | null&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityTypes"></a>
+                    <span class="name">
+                        <span ><b>activityTypes</b></span>
+                        <a href="#activityTypes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityTypesName"></a>
+                    <span class="name">
+                        <span ><b>activityTypesName</b></span>
+                        <a href="#activityTypesName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="error"></a>
+                    <span class="name">
+                        <span ><b>error</b></span>
+                        <a href="#error"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fileInput"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>fileInput</b></span>
+                        <a href="#fileInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ElementRef&lt;HTMLInputElement&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;fileInput&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formActivityCreation"></a>
+                    <span class="name">
+                        <span ><b>formActivityCreation</b></span>
+                        <a href="#formActivityCreation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imagePreview"></a>
+                    <span class="name">
+                        <span ><b>imagePreview</b></span>
+                        <a href="#imagePreview"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isUploading"></a>
+                    <span class="name">
+                        <span ><b>isUploading</b></span>
+                        <a href="#isUploading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedFile"></a>
+                    <span class="name">
+                        <span ><b>selectedFile</b></span>
+                        <a href="#selectedFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>File | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="success"></a>
+                    <span class="name">
+                        <span ><b>success</b></span>
+                        <a href="#success"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="mapLatitude"></a>
+                        <span class="name"><b>mapLatitude</b><a href="#mapLatitude"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>mapLatitude()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:93</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="mapLongitude"></a>
+                        <span class="name"><b>mapLongitude</b><a href="#mapLongitude"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>mapLongitude()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:97</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentImage"></a>
+                        <span class="name"><b>currentImage</b><a href="#currentImage"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>currentImage()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:111</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Component, ElementRef, ViewChild } from &#x27;@angular/core&#x27;;
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from &#x27;@angular/forms&#x27;;
+import { Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { LanguageSelectorComponent } from &#x27;../../../common/language-selector/language-selector.component&#x27;;
+import { MapPreviewComponent } from &#x27;../../../common/maps/map-preview.component&#x27;;
+import { ActivityType } from &#x27;../../../common/models/activityType.models&#x27;;
+import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
+import { ActivityService } from &#x27;../../../core/services/activity.service&#x27;;
+import { ActivityTypeService } from &#x27;../../../core/services/activitytype.service&#x27;;
+import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
+import { CloudinaryService } from &#x27;../../../core/services/firebase-media.service&#x27;;
+import { UserService } from &#x27;../../../core/services/user.service&#x27;;
+@Component({
+  standalone: true,
+  selector: &#x27;app-activities&#x27;,
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    TranslatePipe,
+    MapPreviewComponent,
+    LanguageSelectorComponent,
+  ],
+  templateUrl: &#x27;./activities.component.html&#x27;,
+  styleUrl: &#x27;./activities.component.scss&#x27;,
+})
+export class ActivitiesCreationComponent {
+  @ViewChild(&#x27;fileInput&#x27;) fileInput!: ElementRef&lt;HTMLInputElement&gt;;
+
+  error &#x3D; &#x27;&#x27;;
+  success &#x3D; &#x27;&#x27;;
+  formActivityCreation: FormGroup;
+  activityTypes: any;
+  activityTypesName: string[] &#x3D; [];
+  selectedFile: File | null &#x3D; null;
+  imagePreview: string | null &#x3D; null;
+  isUploading &#x3D; false;
+
+  triggerFileInput(): void {
+    this.fileInput.nativeElement.click();
+  }
+
+  constructor(
+    private formSvc: FormBuilder,
+    private route: Router,
+    private userService: UserService,
+    private auth: AuthService,
+    private activityService: ActivityService,
+    private ActivityTypeService: ActivityTypeService,
+    private mediaService: CloudinaryService
+  ) {
+    this.formActivityCreation &#x3D; this.formSvc.group({
+      name: [&#x27;&#x27;, [Validators.required]],
+      description: [&#x27;&#x27;, [Validators.required]],
+      activityType: [&#x27;&#x27;, [Validators.required]],
+      latitude: [
+        &#x27;&#x27;,
+        [
+          Validators.required,
+          Validators.pattern(/^-?\d+(\.\d+)?$/),
+          Validators.min(-90),
+          Validators.max(90),
+        ],
+      ],
+      longitude: [
+        &#x27;&#x27;,
+        [
+          Validators.required,
+          Validators.pattern(/^-?\d+(\.\d+)?$/),
+          Validators.min(-180),
+          Validators.max(180),
+        ],
+      ],
+      price: [null, [Validators.min(0)]],
+    });
+    this.activityTypes &#x3D; this.ActivityTypeService.getActivitiesType();
+  }
+  ngOnInit(): void {
+    this.ActivityTypeService.getActivitiesType().subscribe(
+      (res: ActivityType[]) &#x3D;&gt; {
+        this.activityTypes &#x3D; res;
+        this.activityTypesName &#x3D; res.map((type) &#x3D;&gt; type.name);
+      }
+    );
+  }
+
+  get mapLatitude(): string {
+    return this.formActivityCreation.get(&#x27;latitude&#x27;)?.value || &#x27;&#x27;;
+  }
+
+  get mapLongitude(): string {
+    return this.formActivityCreation.get(&#x27;longitude&#x27;)?.value || &#x27;&#x27;;
+  }
+
+  onMapCoordinatesChange(coords: {
+    latitude: number;
+    longitude: number;
+  }): void {
+    this.formActivityCreation.patchValue({
+      latitude: coords.latitude.toString(),
+      longitude: coords.longitude.toString(),
+    });
+  }
+
+  get currentImage(): string {
+    return this.imagePreview || &#x27;&#x27;;
+  }
+
+  onFileSelected(event: Event): void {
+    const input &#x3D; event.target as HTMLInputElement;
+    if (input.files &amp;&amp; input.files[0]) {
+      const file &#x3D; input.files[0];
+      if (!file.type.startsWith(&#x27;image/&#x27;)) {
+        this.error &#x3D; &#x27;Por favor, selecciona un archivo de imagen válido&#x27;;
+        return;
+      }
+      if (file.size &gt; 5 * 1024 * 1024) {
+        this.error &#x3D; &#x27;La imagen no debe superar los 5MB&#x27;;
+        return;
+      }
+      this.selectedFile &#x3D; file;
+      this.error &#x3D; &#x27;&#x27;;
+      const reader &#x3D; new FileReader();
+      reader.onload &#x3D; (e: any) &#x3D;&gt; {
+        this.imagePreview &#x3D; e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  async uploadImage(): Promise&lt;string | null&gt; {
+    if (!this.selectedFile) return null;
+    this.isUploading &#x3D; true;
+    this.error &#x3D; &#x27;&#x27;;
+    try {
+      const blob &#x3D; new Blob([this.selectedFile], {
+        type: this.selectedFile.type,
+      });
+      const urls &#x3D; await this.mediaService
+        .upload(blob, &#x27;activities&#x27;)
+        .toPromise();
+      if (urls &amp;&amp; urls.length &gt; 0) {
+        this.isUploading &#x3D; false;
+        return urls[0];
+      }
+      throw new Error(&#x27;No se obtuvo URL de la imagen subida&#x27;);
+    } catch (err: any) {
+      this.isUploading &#x3D; false;
+      this.error &#x3D;
+        err.message ||
+        &#x27;Error al subir la imagen. Por favor, intenta nuevamente.&#x27;;
+      return null;
+    }
+  }
+
+  async onCreate() {
+    if (!this.selectedFile) {
+      this.error &#x3D; &#x27;Debes subir una imagen&#x27;;
+      return;
+    }
+
+    if (this.formActivityCreation.invalid) {
+      this.formActivityCreation.markAllAsTouched();
+      return;
+    }
+
+    const selectedActivityType &#x3D; this.activityTypes.find(
+      (type: ActivityType) &#x3D;&gt;
+        type.name &#x3D;&#x3D;&#x3D; this.formActivityCreation.value.activityType
+    );
+
+    const imageUrl &#x3D; await this.uploadImage();
+    if (!imageUrl) return;
+
+    const activityData &#x3D; {
+      name: this.formActivityCreation.value.name,
+      description: this.formActivityCreation.value.description,
+      latitude: this.formActivityCreation.value.latitude,
+      longitude: this.formActivityCreation.value.longitude,
+      imageRef: imageUrl,
+      activityTypeId: selectedActivityType ? selectedActivityType.id : null,
+      createdAt: Date.now(),
+      ownerId: this.auth.currentUser,
+      rating: 0,
+      price: parseFloat(this.formActivityCreation.value.price) || 0,
+    };
+
+    try {
+      const user &#x3D; this.auth.currentUser;
+      if (!user) throw new Error(&#x27;No autenticado&#x27;);
+      const token &#x3D; await user.getIdToken();
+
+      this.activityService.createActivity(activityData, token).subscribe({
+        next: (res) &#x3D;&gt; {
+          this.userService.createActivity(user.uid, res.id, token).subscribe();
+          this.success &#x3D; &#x27;Actividad creada con éxito&#x27;;
+          setTimeout(() &#x3D;&gt; {
+            this.route.navigate([&#x27;/activitiesList&#x27;]);
+          }, 1000);
+        },
+        error: (err) &#x3D;&gt; {
+          this.error &#x3D;
+            &#x27;Error al crear la actividad. Por favor, intenta nuevamente.&#x27;;
+        },
+      });
+    } catch (err) {
+      this.error &#x3D;
+        &#x27;Error de autenticación. Por favor, inicia sesión nuevamente.&#x27;;
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;header
+  class&#x3D;&quot;bg-brand-primary px-4 flex justify-between items-center h-16 sticky top-0 z-50 shadow-md&quot;
+&gt;
+  &lt;div class&#x3D;&quot;flex items-center gap-4&quot;&gt;
+    &lt;a
+      routerLink&#x3D;&quot;/activitiesList&quot;
+      aria-label&#x3D;&quot;Volver atrás&quot;
+      class&#x3D;&quot;text-white hover:text-gray-200 transition-colors&quot;
+    &gt;
+      &lt;svg
+        xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+        fill&#x3D;&quot;none&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+        stroke-width&#x3D;&quot;2.5&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        class&#x3D;&quot;w-8 h-8&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          d&#x3D;&quot;M10.5 19.5 3 12m0 0 7.5-7.5M3 12h17.5&quot;
+        /&gt;
+      &lt;/svg&gt;
+    &lt;/a&gt;
+    &lt;div class&#x3D;&quot;text-white font-semibold text-lg&quot;&gt;
+      {{ &quot;activities.createTitle&quot; | translate }}
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;relative z-50&quot;&gt;
+    &lt;app-language-selector&gt;&lt;/app-language-selector&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;main
+  class&#x3D;&quot;flex-grow flex justify-center items-start pt-10 px-4 pb-10 min-h-screen bg-gradient-to-br from-slate-200 via-slate-300/50 to-brand-muted/30&quot;
+&gt;
+  &lt;div
+    class&#x3D;&quot;bg-white w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden border border-slate-300 ring-1 ring-black/10&quot;
+  &gt;
+    &lt;form
+      [formGroup]&#x3D;&quot;formActivityCreation&quot;
+      (submit)&#x3D;&quot;onCreate()&quot;
+      class&#x3D;&quot;flex flex-col&quot;
+    &gt;
+      &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-5 h-full&quot;&gt;
+        &lt;div
+          class&#x3D;&quot;lg:col-span-2 relative min-h-[350px] lg:min-h-full group overflow-hidden bg-slate-100 p-4 lg:p-5&quot;
+        &gt;
+          &lt;div
+            (click)&#x3D;&quot;triggerFileInput()&quot;
+            class&#x3D;&quot;w-full h-full rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 bg-white cursor-pointer relative&quot;
+          &gt;
+            &lt;img
+              [src]&#x3D;&quot;
+                currentImage ||
+                &#x27;https://via.placeholder.com/600x800?text&#x3D;No+Image&#x27;
+              &quot;
+              class&#x3D;&quot;w-full h-full object-cover transition-transform duration-700 group-hover:scale-105&quot;
+              alt&#x3D;&quot;Activity Preview&quot;
+              onerror&#x3D;&quot;this.src&#x3D;&#x27;https://via.placeholder.com/600x800?text&#x3D;Invalid+URL&#x27;&quot;
+            /&gt;
+
+            &lt;div
+              class&#x3D;&quot;absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center&quot;
+            &gt;
+              &lt;div
+                class&#x3D;&quot;opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center&quot;
+              &gt;
+                &lt;svg
+                  xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                  class&#x3D;&quot;h-12 w-12 mx-auto mb-2&quot;
+                  fill&#x3D;&quot;none&quot;
+                  viewBox&#x3D;&quot;0 0 24 24&quot;
+                  stroke&#x3D;&quot;currentColor&quot;
+                  stroke-width&#x3D;&quot;1.5&quot;
+                &gt;
+                  &lt;path
+                    stroke-linecap&#x3D;&quot;round&quot;
+                    stroke-linejoin&#x3D;&quot;round&quot;
+                    d&#x3D;&quot;M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z&quot;
+                  /&gt;
+                  &lt;path
+                    stroke-linecap&#x3D;&quot;round&quot;
+                    stroke-linejoin&#x3D;&quot;round&quot;
+                    d&#x3D;&quot;M15 13a3 3 0 11-6 0 3 3 0 016 0z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                &lt;p class&#x3D;&quot;text-sm font-medium&quot;&gt;
+                  {{ &quot;activities.uploadImage&quot; | translate }}
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;input
+            #fileInput
+            type&#x3D;&quot;file&quot;
+            accept&#x3D;&quot;image/*&quot;
+            (change)&#x3D;&quot;onFileSelected($event)&quot;
+            class&#x3D;&quot;hidden&quot;
+          /&gt;
+
+          @if(isUploading) {
+          &lt;div
+            class&#x3D;&quot;absolute bottom-6 left-6 right-6 lg:bottom-7 lg:left-7 lg:right-7 z-10&quot;
+          &gt;
+            &lt;div
+              class&#x3D;&quot;bg-white/90 backdrop-blur-md p-3 rounded-2xl border border-white/40 shadow-lg&quot;
+            &gt;
+              &lt;p
+                class&#x3D;&quot;text-xs text-blue-600 flex items-center justify-center gap-2&quot;
+              &gt;
+                &lt;svg
+                  class&#x3D;&quot;animate-spin h-4 w-4&quot;
+                  xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                  fill&#x3D;&quot;none&quot;
+                  viewBox&#x3D;&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;circle
+                    class&#x3D;&quot;opacity-25&quot;
+                    cx&#x3D;&quot;12&quot;
+                    cy&#x3D;&quot;12&quot;
+                    r&#x3D;&quot;10&quot;
+                    stroke&#x3D;&quot;currentColor&quot;
+                    stroke-width&#x3D;&quot;4&quot;
+                  &gt;&lt;/circle&gt;
+                  &lt;path
+                    class&#x3D;&quot;opacity-75&quot;
+                    fill&#x3D;&quot;currentColor&quot;
+                    d&#x3D;&quot;M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z&quot;
+                  &gt;&lt;/path&gt;
+                &lt;/svg&gt;
+                {{ &quot;messages.loading&quot; | translate }}...
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          }
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;lg:col-span-3 p-6 md:p-10 flex flex-col gap-8&quot;&gt;
+          &lt;div class&#x3D;&quot;relative group&quot;&gt;
+            &lt;label
+              class&#x3D;&quot;absolute -top-2.5 left-3 bg-white px-2 text-xs font-bold uppercase tracking-wider&quot;
+              style&#x3D;&quot;color: #5675ac&quot;
+              &gt;{{ &quot;activities.activityName&quot; | translate }}&lt;/label
+            &gt;
+            &lt;input
+              type&#x3D;&quot;text&quot;
+              formControlName&#x3D;&quot;name&quot;
+              class&#x3D;&quot;w-full bg-white border-2 border-slate-100 rounded-xl px-4 py-4 text-xl font-bold text-slate-800 placeholder-slate-300 focus:outline-none focus:ring-4 transition-all&quot;
+              style&#x3D;&quot;border-color: transparent; outline: none&quot;
+              [style.borderColor]&#x3D;&quot;&#x27;#e2e8f0&#x27;&quot;
+              onfocus&#x3D;&quot;this.style.borderColor&#x3D;&#x27;#5675AC&#x27;; this.style.boxShadow&#x3D;&#x27;0 0 0 4px rgba(86, 117, 172, 0.1)&#x27;&quot;
+              onblur&#x3D;&quot;this.style.borderColor&#x3D;&#x27;#e2e8f0&#x27;; this.style.boxShadow&#x3D;&#x27;none&#x27;&quot;
+              [placeholder]&#x3D;&quot;&#x27;activities.activityNamePlaceholder&#x27; | translate&quot;
+            /&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;grid grid-cols-2 gap-4&quot;&gt;
+            &lt;div&gt;
+              &lt;label
+                class&#x3D;&quot;block text-xs font-bold text-brand-primary uppercase tracking-wider mb-2 ml-1&quot;
+                &gt;{{ &quot;activities.category&quot; | translate }}&lt;/label
+              &gt;
+              &lt;div class&#x3D;&quot;relative&quot;&gt;
+                &lt;select
+                  formControlName&#x3D;&quot;activityType&quot;
+                  class&#x3D;&quot;appearance-none w-full bg-slate-50 border border-slate-200 text-slate-700 font-medium rounded-xl px-4 py-3 pr-10 focus:outline-none focus:bg-white transition-colors cursor-pointer&quot;
+                  onfocus&#x3D;&quot;this.style.borderColor&#x3D;&#x27;#5675AC&#x27;&quot;
+                  onblur&#x3D;&quot;this.style.borderColor&#x3D;&#x27;#e2e8f0&#x27;&quot;
+                &gt;
+                  &lt;option *ngFor&#x3D;&quot;let name of activityTypesName&quot; [value]&#x3D;&quot;name&quot;&gt;
+                    {{ name }}
+                  &lt;/option&gt;
+                &lt;/select&gt;
+                &lt;div
+                  class&#x3D;&quot;pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500&quot;
+                &gt;
+                  &lt;svg
+                    xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                    viewBox&#x3D;&quot;0 0 20 20&quot;
+                    fill&#x3D;&quot;currentColor&quot;
+                    class&#x3D;&quot;w-5 h-5&quot;
+                  &gt;
+                    &lt;path
+                      fill-rule&#x3D;&quot;evenodd&quot;
+                      d&#x3D;&quot;M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z&quot;
+                      clip-rule&#x3D;&quot;evenodd&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div&gt;
+              &lt;label
+                class&#x3D;&quot;block text-xs font-bold text-brand-primary uppercase tracking-wider mb-2 ml-1&quot;
+                &gt;{{ &quot;activities.price&quot; | translate }}&lt;/label
+              &gt;
+              &lt;div class&#x3D;&quot;relative&quot;&gt;
+                &lt;span
+                  class&#x3D;&quot;absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium&quot;
+                  &gt;€&lt;/span
+                &gt;
+                &lt;input
+                  type&#x3D;&quot;number&quot;
+                  formControlName&#x3D;&quot;price&quot;
+                  class&#x3D;&quot;w-full bg-slate-50 border border-slate-200 text-slate-700 font-medium rounded-xl pl-8 pr-4 py-3 focus:outline-none focus:bg-white transition-colors&quot;
+                  onfocus&#x3D;&quot;this.style.borderColor&#x3D;&#x27;#5675AC&#x27;&quot;
+                  onblur&#x3D;&quot;this.style.borderColor&#x3D;&#x27;#e2e8f0&#x27;&quot;
+                  [placeholder]&#x3D;&quot;&#x27;activities.pricePlaceholder&#x27; | translate&quot;
+                  min&#x3D;&quot;0&quot;
+                  step&#x3D;&quot;0.01&quot;
+                /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;bg-slate-50 rounded-2xl p-1 border border-slate-100&quot;&gt;
+            &lt;div class&#x3D;&quot;p-3 pb-0 flex items-center gap-2 mb-3&quot;&gt;
+              &lt;div
+                class&#x3D;&quot;p-1.5 rounded-lg text-white&quot;
+                style&#x3D;&quot;background-color: #5675ac&quot;
+              &gt;
+                &lt;svg
+                  xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                  class&#x3D;&quot;h-4 w-4&quot;
+                  viewBox&#x3D;&quot;0 0 20 20&quot;
+                  fill&#x3D;&quot;currentColor&quot;
+                &gt;
+                  &lt;path
+                    fill-rule&#x3D;&quot;evenodd&quot;
+                    d&#x3D;&quot;M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z&quot;
+                    clip-rule&#x3D;&quot;evenodd&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/div&gt;
+              &lt;span
+                class&#x3D;&quot;text-xs font-bold text-brand-primary uppercase tracking-wider&quot;
+                &gt;{{ &quot;activities.location&quot; | translate }}&lt;/span
+              &gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;grid grid-cols-2 gap-4 px-3 mb-3&quot;&gt;
+              &lt;div&gt;
+                &lt;input
+                  type&#x3D;&quot;text&quot;
+                  formControlName&#x3D;&quot;latitude&quot;
+                  [placeholder]&#x3D;&quot;&#x27;activities.latitude&#x27; | translate&quot;
+                  class&#x3D;&quot;w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono text-slate-600 focus:outline-none transition-colors&quot;
+                  onfocus&#x3D;&quot;this.style.borderColor&#x3D;&#x27;#5675AC&#x27;&quot;
+                  onblur&#x3D;&quot;this.style.borderColor&#x3D;&#x27;#e2e8f0&#x27;&quot;
+                /&gt;
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;input
+                  type&#x3D;&quot;text&quot;
+                  formControlName&#x3D;&quot;longitude&quot;
+                  [placeholder]&#x3D;&quot;&#x27;activities.longitude&#x27; | translate&quot;
+                  class&#x3D;&quot;w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono text-slate-600 focus:outline-none transition-colors&quot;
+                  onfocus&#x3D;&quot;this.style.borderColor&#x3D;&#x27;#5675AC&#x27;&quot;
+                  onblur&#x3D;&quot;this.style.borderColor&#x3D;&#x27;#e2e8f0&#x27;&quot;
+                /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div
+              class&#x3D;&quot;relative h-48 rounded-xl overflow-hidden border border-white shadow-sm mx-1 mb-1 bg-slate-200&quot;
+            &gt;
+              &lt;app-map-preview
+                [latitude]&#x3D;&quot;mapLatitude&quot;
+                [longitude]&#x3D;&quot;mapLongitude&quot;
+                [interactive]&#x3D;&quot;true&quot;
+                markerColor&#x3D;&quot;#5675AC&quot;
+                (coordinatesChange)&#x3D;&quot;onMapCoordinatesChange($event)&quot;
+              &gt;
+              &lt;/app-map-preview&gt;
+            &lt;/div&gt;
+            &lt;p class&#x3D;&quot;text-[10px] text-slate-400 text-center mt-1 mx-1&quot;&gt;
+              {{ &quot;activities.clickMapToSetLocation&quot; | translate }}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;px-6 md:px-10 py-8 bg-slate-50/50 border-t border-slate-100&quot;&gt;
+        &lt;div class&#x3D;&quot;mb-8&quot;&gt;
+          &lt;label
+            class&#x3D;&quot;block text-xs font-bold text-brand-primary uppercase tracking-wider mb-3 ml-1&quot;
+            &gt;{{ &quot;activities.aboutThisActivity&quot; | translate }}&lt;/label
+          &gt;
+          &lt;textarea
+            formControlName&#x3D;&quot;description&quot;
+            rows&#x3D;&quot;4&quot;
+            class&#x3D;&quot;w-full bg-white border border-slate-200 rounded-2xl p-5 text-slate-700 leading-relaxed outline-none resize-none transition-all shadow-sm&quot;
+            onfocus&#x3D;&quot;this.style.borderColor&#x3D;&#x27;#5675AC&#x27;; this.style.boxShadow&#x3D;&#x27;0 0 0 4px rgba(86, 117, 172, 0.1)&#x27;&quot;
+            onblur&#x3D;&quot;this.style.borderColor&#x3D;&#x27;#e2e8f0&#x27;; this.style.boxShadow&#x3D;&#x27;none&#x27;&quot;
+            [placeholder]&#x3D;&quot;&#x27;activities.describeTheExperience&#x27; | translate&quot;
+          &gt;&lt;/textarea&gt;
+        &lt;/div&gt;
+
+        &lt;button
+          type&#x3D;&quot;submit&quot;
+          [disabled]&#x3D;&quot;formActivityCreation.invalid || isUploading&quot;
+          class&#x3D;&quot;group w-full relative text-white font-bold py-4 rounded-xl text-lg shadow-xl transition-all transform hover:-translate-y-0.5 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none overflow-hidden&quot;
+          style&#x3D;&quot;
+            background-color: #5675ac;
+            box-shadow: 0 10px 15px -3px rgba(86, 117, 172, 0.3);
+          &quot;
+        &gt;
+          &lt;div
+            class&#x3D;&quot;absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]&quot;
+          &gt;&lt;/div&gt;
+
+          &lt;span class&#x3D;&quot;flex items-center justify-center gap-2 relative z-10&quot;&gt;
+            &lt;svg
+              xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+              viewBox&#x3D;&quot;0 0 20 20&quot;
+              fill&#x3D;&quot;currentColor&quot;
+              class&#x3D;&quot;w-5 h-5&quot;
+            &gt;
+              &lt;path
+                fill-rule&#x3D;&quot;evenodd&quot;
+                d&#x3D;&quot;M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z&quot;
+                clip-rule&#x3D;&quot;evenodd&quot;
+              /&gt;
+            &lt;/svg&gt;
+            @if(isUploading) {
+            {{ &quot;messages.loading&quot; | translate }}... } @else {
+            {{ &quot;activities.create&quot; | translate }}
+            }
+          &lt;/span&gt;
+        &lt;/button&gt;
+
+        &lt;div
+          *ngIf&#x3D;&quot;error&quot;
+          class&#x3D;&quot;mt-4 p-3 bg-red-50 text-red-600 text-sm font-medium rounded-lg text-center border border-red-100 flex items-center justify-center gap-2 animate-pulse&quot;
+        &gt;
+          &lt;svg
+            xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+            viewBox&#x3D;&quot;0 0 20 20&quot;
+            fill&#x3D;&quot;currentColor&quot;
+            class&#x3D;&quot;w-4 h-4&quot;
+          &gt;
+            &lt;path
+              fill-rule&#x3D;&quot;evenodd&quot;
+              d&#x3D;&quot;M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z&quot;
+              clip-rule&#x3D;&quot;evenodd&quot;
+            /&gt;
+          &lt;/svg&gt;
+          {{ error }}
+        &lt;/div&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;success&quot;
+          class&#x3D;&quot;mt-4 p-3 bg-green-50 text-green-700 text-sm font-medium rounded-lg text-center border border-green-100 flex items-center justify-center gap-2&quot;
+        &gt;
+          &lt;svg
+            xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+            viewBox&#x3D;&quot;0 0 20 20&quot;
+            fill&#x3D;&quot;currentColor&quot;
+            class&#x3D;&quot;w-4 h-4&quot;
+          &gt;
+            &lt;path
+              fill-rule&#x3D;&quot;evenodd&quot;
+              d&#x3D;&quot;M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z&quot;
+              clip-rule&#x3D;&quot;evenodd&quot;
+            /&gt;
+          &lt;/svg&gt;
+          {{ success }}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+&lt;/main&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><header  class="bg-brand-primary px-4 flex justify-between items-center h-16 sticky top-0 z-50 shadow-md">  <div class="flex items-center gap-4">    <a      routerLink="/activitiesList"      aria-label="Volver atrás"      class="text-white hover:text-gray-200 transition-colors"    >      <svg        xmlns="http://www.w3.org/2000/svg"        fill="none"        viewBox="0 0 24 24"        stroke-width="2.5"        stroke="currentColor"        class="w-8 h-8"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h17.5"        />      </svg>    </a>    <div class="text-white font-semibold text-lg">      {{ "activities.createTitle" | translate }}    </div>  </div>  <div class="relative z-50">    <app-language-selector></app-language-selector>  </div></header><main  class="flex-grow flex justify-center items-start pt-10 px-4 pb-10 min-h-screen bg-gradient-to-br from-slate-200 via-slate-300/50 to-brand-muted/30">  <div    class="bg-white w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden border border-slate-300 ring-1 ring-black/10"  >    <form      [formGroup]="formActivityCreation"      (submit)="onCreate()"      class="flex flex-col"    >      <div class="grid grid-cols-1 lg:grid-cols-5 h-full">        <div          class="lg:col-span-2 relative min-h-[350px] lg:min-h-full group overflow-hidden bg-slate-100 p-4 lg:p-5"        >          <div            (click)="triggerFileInput()"            class="w-full h-full rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 bg-white cursor-pointer relative"          >            <img              [src]="                currentImage ||                \'https://via.placeholder.com/600x800?text=No+Image\'              "              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"              alt="Activity Preview"              onerror="this.src=\'https://via.placeholder.com/600x800?text=Invalid+URL\'"            />            <div              class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center"            >              <div                class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center"              >                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-12 w-12 mx-auto mb-2"                  fill="none"                  viewBox="0 0 24 24"                  stroke="currentColor"                  stroke-width="1.5"                >                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"                  />                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"                  />                </svg>                <p class="text-sm font-medium">                  {{ "activities.uploadImage" | translate }}                </p>              </div>            </div>          </div>          <input            #fileInput            type="file"            accept="image/*"            (change)="onFileSelected($event)"            class="hidden"          />          @if(isUploading) {          <div            class="absolute bottom-6 left-6 right-6 lg:bottom-7 lg:left-7 lg:right-7 z-10"          >            <div              class="bg-white/90 backdrop-blur-md p-3 rounded-2xl border border-white/40 shadow-lg"            >              <p                class="text-xs text-blue-600 flex items-center justify-center gap-2"              >                <svg                  class="animate-spin h-4 w-4"                  xmlns="http://www.w3.org/2000/svg"                  fill="none"                  viewBox="0 0 24 24"                >                  <circle                    class="opacity-25"                    cx="12"                    cy="12"                    r="10"                    stroke="currentColor"                    stroke-width="4"                  ></circle>                  <path                    class="opacity-75"                    fill="currentColor"                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"                  ></path>                </svg>                {{ "messages.loading" | translate }}...              </p>            </div>          </div>          }        </div>        <div class="lg:col-span-3 p-6 md:p-10 flex flex-col gap-8">          <div class="relative group">            <label              class="absolute -top-2.5 left-3 bg-white px-2 text-xs font-bold uppercase tracking-wider"              style="color: #5675ac"              >{{ "activities.activityName" | translate }}</label            >            <input              type="text"              formControlName="name"              class="w-full bg-white border-2 border-slate-100 rounded-xl px-4 py-4 text-xl font-bold text-slate-800 placeholder-slate-300 focus:outline-none focus:ring-4 transition-all"              style="border-color: transparent; outline: none"              [style.borderColor]="\'#e2e8f0\'"              onfocus="this.style.borderColor=\'#5675AC\'; this.style.boxShadow=\'0 0 0 4px rgba(86, 117, 172, 0.1)\'"              onblur="this.style.borderColor=\'#e2e8f0\'; this.style.boxShadow=\'none\'"              [placeholder]="\'activities.activityNamePlaceholder\' | translate"            />          </div>          <div class="grid grid-cols-2 gap-4">            <div>              <label                class="block text-xs font-bold text-brand-primary uppercase tracking-wider mb-2 ml-1"                >{{ "activities.category" | translate }}</label              >              <div class="relative">                <select                  formControlName="activityType"                  class="appearance-none w-full bg-slate-50 border border-slate-200 text-slate-700 font-medium rounded-xl px-4 py-3 pr-10 focus:outline-none focus:bg-white transition-colors cursor-pointer"                  onfocus="this.style.borderColor=\'#5675AC\'"                  onblur="this.style.borderColor=\'#e2e8f0\'"                >                  <option *ngFor="let name of activityTypesName" [value]="name">                    {{ name }}                  </option>                </select>                <div                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500"                >                  <svg                    xmlns="http://www.w3.org/2000/svg"                    viewBox="0 0 20 20"                    fill="currentColor"                    class="w-5 h-5"                  >                    <path                      fill-rule="evenodd"                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"                      clip-rule="evenodd"                    />                  </svg>                </div>              </div>            </div>            <div>              <label                class="block text-xs font-bold text-brand-primary uppercase tracking-wider mb-2 ml-1"                >{{ "activities.price" | translate }}</label              >              <div class="relative">                <span                  class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium"                  >€</span                >                <input                  type="number"                  formControlName="price"                  class="w-full bg-slate-50 border border-slate-200 text-slate-700 font-medium rounded-xl pl-8 pr-4 py-3 focus:outline-none focus:bg-white transition-colors"                  onfocus="this.style.borderColor=\'#5675AC\'"                  onblur="this.style.borderColor=\'#e2e8f0\'"                  [placeholder]="\'activities.pricePlaceholder\' | translate"                  min="0"                  step="0.01"                />              </div>            </div>          </div>          <div class="bg-slate-50 rounded-2xl p-1 border border-slate-100">            <div class="p-3 pb-0 flex items-center gap-2 mb-3">              <div                class="p-1.5 rounded-lg text-white"                style="background-color: #5675ac"              >                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-4 w-4"                  viewBox="0 0 20 20"                  fill="currentColor"                >                  <path                    fill-rule="evenodd"                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"                    clip-rule="evenodd"                  />                </svg>              </div>              <span                class="text-xs font-bold text-brand-primary uppercase tracking-wider"                >{{ "activities.location" | translate }}</span              >            </div>            <div class="grid grid-cols-2 gap-4 px-3 mb-3">              <div>                <input                  type="text"                  formControlName="latitude"                  [placeholder]="\'activities.latitude\' | translate"                  class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono text-slate-600 focus:outline-none transition-colors"                  onfocus="this.style.borderColor=\'#5675AC\'"                  onblur="this.style.borderColor=\'#e2e8f0\'"                />              </div>              <div>                <input                  type="text"                  formControlName="longitude"                  [placeholder]="\'activities.longitude\' | translate"                  class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono text-slate-600 focus:outline-none transition-colors"                  onfocus="this.style.borderColor=\'#5675AC\'"                  onblur="this.style.borderColor=\'#e2e8f0\'"                />              </div>            </div>            <div              class="relative h-48 rounded-xl overflow-hidden border border-white shadow-sm mx-1 mb-1 bg-slate-200"            >              <app-map-preview                [latitude]="mapLatitude"                [longitude]="mapLongitude"                [interactive]="true"                markerColor="#5675AC"                (coordinatesChange)="onMapCoordinatesChange($event)"              >              </app-map-preview>            </div>            <p class="text-[10px] text-slate-400 text-center mt-1 mx-1">              {{ "activities.clickMapToSetLocation" | translate }}            </p>          </div>        </div>      </div>      <div class="px-6 md:px-10 py-8 bg-slate-50/50 border-t border-slate-100">        <div class="mb-8">          <label            class="block text-xs font-bold text-brand-primary uppercase tracking-wider mb-3 ml-1"            >{{ "activities.aboutThisActivity" | translate }}</label          >          <textarea            formControlName="description"            rows="4"            class="w-full bg-white border border-slate-200 rounded-2xl p-5 text-slate-700 leading-relaxed outline-none resize-none transition-all shadow-sm"            onfocus="this.style.borderColor=\'#5675AC\'; this.style.boxShadow=\'0 0 0 4px rgba(86, 117, 172, 0.1)\'"            onblur="this.style.borderColor=\'#e2e8f0\'; this.style.boxShadow=\'none\'"            [placeholder]="\'activities.describeTheExperience\' | translate"          ></textarea>        </div>        <button          type="submit"          [disabled]="formActivityCreation.invalid || isUploading"          class="group w-full relative text-white font-bold py-4 rounded-xl text-lg shadow-xl transition-all transform hover:-translate-y-0.5 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none overflow-hidden"          style="            background-color: #5675ac;            box-shadow: 0 10px 15px -3px rgba(86, 117, 172, 0.3);          "        >          <div            class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"          ></div>          <span class="flex items-center justify-center gap-2 relative z-10">            <svg              xmlns="http://www.w3.org/2000/svg"              viewBox="0 0 20 20"              fill="currentColor"              class="w-5 h-5"            >              <path                fill-rule="evenodd"                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"                clip-rule="evenodd"              />            </svg>            @if(isUploading) {            {{ "messages.loading" | translate }}... } @else {            {{ "activities.create" | translate }}            }          </span>        </button>        <div          *ngIf="error"          class="mt-4 p-3 bg-red-50 text-red-600 text-sm font-medium rounded-lg text-center border border-red-100 flex items-center justify-center gap-2 animate-pulse"        >          <svg            xmlns="http://www.w3.org/2000/svg"            viewBox="0 0 20 20"            fill="currentColor"            class="w-4 h-4"          >            <path              fill-rule="evenodd"              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"              clip-rule="evenodd"            />          </svg>          {{ error }}        </div>        <div          *ngIf="success"          class="mt-4 p-3 bg-green-50 text-green-700 text-sm font-medium rounded-lg text-center border border-green-100 flex items-center justify-center gap-2"        >          <svg            xmlns="http://www.w3.org/2000/svg"            viewBox="0 0 20 20"            fill="currentColor"            class="w-4 h-4"          >            <path              fill-rule="evenodd"              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"              clip-rule="evenodd"            />          </svg>          {{ success }}        </div>      </div>    </form>  </div></main></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
+    var ACTUAL_COMPONENT = {'name': 'ActivitiesCreationComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ActivitiesCreationComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

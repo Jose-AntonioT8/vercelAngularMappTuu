@@ -1,0 +1,262 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>map-tuu documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">map-tuu documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content readme">
+                   <div class="content-data">
+
+
+<h1>MapTuu (Angular)</h1>
+<p>Proyecto Angular (standalone) con Firebase (Auth/Firestore/Storage), Leaflet, Tailwind y una API HTTP (<code>apiUrl</code>) para operaciones de dominio.</p>
+<p>La documentación de este repo se mantiene en dos capas:</p>
+<ul>
+<li><strong>Manual (este README)</strong>: arquitectura, reglas y cómo trabajar en el proyecto.</li>
+<li><strong>Automática (Compodoc)</strong>: documentación navegable de componentes/servicios/guards/pipes/etc, basada en comentarios JSDoc del código.</li>
+</ul>
+<h2>Requisitos</h2>
+<ul>
+<li>Node.js + npm (recomendado: versión LTS).</li>
+<li>Angular CLI (opcional; el proyecto funciona con <code>npx ng ...</code>).</li>
+</ul>
+<h2>Instalación</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm install</code></pre></div><h2>Variables de entorno</h2>
+<p>Antes de ejecutar o construir, el proyecto genera un runtime env mediante <code>scripts/generate-env.js</code> (se ejecuta en <code>prestart</code> y <code>prebuild</code>).</p>
+<ul>
+<li><strong>Objetivo</strong>: evitar “secrets” hardcodeados y permitir configuración por entorno (local/CI/producción).</li>
+<li><strong>Dónde se consume</strong>: <code>src/app/environment/environment.ts</code> y el runtime env expuesto en <code>window.__env__</code> (si aplica).</li>
+</ul>
+<h2>Ejecutar en local</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run start</code></pre></div><p>Luego abre <code>http://localhost:4200/</code>.</p>
+<h2>Build</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run build</code></pre></div><p>Salida en <code>dist/</code>.</p>
+<h2>Estructura del proyecto (high-level)</h2>
+<ul>
+<li><code>src/app/app.config.ts</code>: proveedores globales (router, HttpClient, Firebase).</li>
+<li><code>src/app/app.routes.ts</code>: rutas y guards.</li>
+<li><code>src/app/core/</code>: infraestructura transversal (services, guards, pipes, directives, validators).</li>
+<li><code>src/app/features/</code>: pantallas/feature areas (activities, plans, maps, user, etc).</li>
+<li><code>src/app/common/</code>: componentes reutilizables (cards, filtros, controles, modelos).</li>
+<li><code>src/app/repositories/</code>: tokens/abstracciones (si aplica) para desacoplar acceso a datos.</li>
+</ul>
+<h2>Arquitectura (cómo pensar el código)</h2>
+<p>Este proyecto separa responsabilidades de forma práctica:</p>
+<ul>
+<li><strong>UI / Features</strong> (<code>features/</code>, <code>common/</code>): componentes standalone que renderizan, validan formularios y orquestan acciones de usuario.</li>
+<li><strong>Dominio / Casos de uso</strong> (principalmente en <code>core/services/</code>): servicios que encapsulan reglas de uso, llamadas HTTP y lecturas de Firebase.</li>
+<li><strong>Infra / Datos</strong> (<code>core/services/</code>, <code>environment/</code>): integración con Firebase, HttpClient y configuración por entorno.</li>
+</ul>
+<h3>Datos y fuentes</h3>
+<ul>
+<li><strong>Firebase</strong>: lecturas reactivas con listeners (<code>onSnapshot</code>) para colecciones (ej: activities/activityTypes/users).</li>
+<li><strong>API HTTP</strong>: operaciones de escritura/actualización (create/update/delete) con <code>Authorization: Bearer &lt;token&gt;</code>.</li>
+</ul>
+<h2>Documentación automática con Compodoc</h2>
+<p>Compodoc genera una web con:
+componentes, servicios, guards, pipes, directivas, routing, interfaces/tipos, etc.</p>
+<h3>Instalar (ya incluido en el proyecto)</h3>
+<p>Compodoc está como dependencia dev en <code>package.json</code>.</p>
+<h3>Generar documentación</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run docs</code></pre></div><h3>Servir documentación en local</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run docs:serve</code></pre></div><p>Por defecto abre en <code>http://localhost:8080</code>.</p>
+<h3>Exportar documentación a carpeta <code>docs/</code></h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash">npm run docs:build</code></pre></div><h2>Convención de documentación en código (JSDoc)</h2>
+<p>Compodoc lee comentarios JSDoc (<code>/** ... */</code>).</p>
+<p>Documentamos lo que reduce incertidumbre:</p>
+<ul>
+<li><strong>Responsabilidad</strong> (qué hace y qué NO hace).</li>
+<li><strong>Contratos</strong>: entradas esperadas, efectos, errores esperables.</li>
+<li><strong>Reglas de negocio</strong> (si las hay).</li>
+<li><strong>Ejemplos</strong> de uso cuando ayuda.</li>
+</ul>
+<p>Evitar:</p>
+<ul>
+<li>comentarios obvios o redundantes,</li>
+<li>narrar línea a línea,</li>
+<li>cosas que se desactualizan fácil (salvo que aporten contexto real).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'readme';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

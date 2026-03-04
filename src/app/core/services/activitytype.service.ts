@@ -13,6 +13,15 @@ import { Firestore as FirestoreType, collection as col, onSnapshot as onSnap, do
 
 import { BehaviorSubject, Observable, from, map } from 'rxjs';
 @Injectable({ providedIn: 'root' })
+/**
+ * Servicio de dominio para Tipos de Actividad.
+ *
+ * Fuentes:
+ * - **Firestore (activityTypes)**: lectura reactiva para listados/detalle.
+ * - **API HTTP (`/activitytypes`)**: mutaciones con token Bearer.
+ *
+ * Igual que `ActivityService`, evita múltiples listeners con `unsubscribeListener`.
+ */
 export class ActivityTypeService {
   private url = `${apiUrl}/activitytypes`;
   private db: FirestoreType = inject(Firestore); 
@@ -28,12 +37,23 @@ export class ActivityTypeService {
 
 
 
+  /**
+   * Crea un tipo de actividad vía API HTTP.
+   *
+   * @param activityTypeData Payload según contrato de API.
+   * @param token JWT/Bearer token.
+   */
   createActivityType(activityTypeData: any, token: any): Observable<any> {
     return this.http.post(this.url, activityTypeData, { headers: { Authorization: `Bearer ${token}` } });
   }
   
 
   
+  /**
+   * Obtiene tipos de actividad desde Firestore de forma reactiva.
+   *
+   * @returns Observable con listado actualizado.
+   */
   getActivitiesType(): Observable<ActivityType[]> {
     if (this.unsubscribeListener) {
       return this.activities$;
@@ -63,6 +83,12 @@ export class ActivityTypeService {
   }
 
  
+  /**
+   * Obtiene un tipo de actividad por id desde Firestore.
+   *
+   * @param id Document id.
+   * @throws Error('Activity not found') si no existe el documento.
+   */
   getActivityId(id: string): Observable<ActivityType> {
     const dRef = docRef(this.db, this.collectionName, id);
     return from(getDoc(dRef)).pipe(
@@ -76,6 +102,10 @@ export class ActivityTypeService {
       })
     );
   }
+
+  /**
+   * Libera el listener de Firestore y completa el stream.
+   */
   ngOnDestroy() {
     if (this.unsubscribeListener) {
       this.unsubscribeListener();
@@ -83,10 +113,23 @@ export class ActivityTypeService {
     this._activities.complete();
   }
 
+  /**
+   * Actualiza un tipo de actividad vía API HTTP.
+   *
+   * @param id Id de tipo.
+   * @param activityTypeData Cambios (contrato API).
+   * @param token JWT/Bearer token.
+   */
   updateActivityType(id: string, activityTypeData: any, token: any): Observable<any> {
     return this.http.patch(`${this.url}/${id}`, activityTypeData, { headers: { Authorization: `Bearer ${token}` } });
   }
 
+  /**
+   * Elimina un tipo de actividad vía API HTTP.
+   *
+   * @param id Id de tipo.
+   * @param token JWT/Bearer token.
+   */
   deleteActivityType(id: string, token: any): Observable<any> {
     return this.http.delete(`${this.url}/${id}`, { headers: { Authorization: `Bearer ${token}` } });
   }

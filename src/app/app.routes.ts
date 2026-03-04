@@ -26,6 +26,19 @@ import { LoginComponent } from './features/user/login/login.component';
 import { ProfileComponent } from './features/user/profile/profile.component';
 import { SignupComponent } from './features/user/sign-up/sign-up.component';
 // prettier-ignore
+
+/**
+ * Tabla de rutas de la app.
+ *
+ * Convenciones relevantes:
+ * - **Rutas públicas**: accesibles sin autenticación (ej: landing, maps).
+ * - **Rutas guest**: solo para no autenticados (login/signup).
+ * - **Rutas auth**: requieren sesión (canActivate: `authGuard`).
+ * - **Rutas admin**: requieren rol admin (canActivate: `adminGuard`).
+ *
+ * Mantener esta tabla como “fuente de verdad” evita lógica de acceso dispersa
+ * en componentes, y permite auditar permisos de forma centralizada.
+ */
 export const routes: Routes = [
   {path: 'createdPlans', component: CreatedPlansComponent, canActivate: [authGuard]},
   {path: 'ia', component: IaComponent, canActivate: [authGuard]},

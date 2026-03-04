@@ -83,6 +83,20 @@ interface IaRelationalContext {
 }
 
 @Injectable({ providedIn: 'root' })
+/**
+ * Asistente IA acotado al dominio de MapTuu.
+ *
+ * Objetivo:
+ * - Responder preguntas **solo** sobre planes, actividades y tipos de actividad,
+ *   usando como fuente de datos Firebase (colecciones `activities`, `activityTypes`, `plans`).
+ *
+ * Decisiones de diseño:
+ * - Se construye un **contexto relacional** (IDs enlazados) para mejorar respuestas
+ *   y reducir alucinaciones (ej: plan.activitiesIds -> activity.id).
+ * - Se aplican límites de tamaño (`maxFirebaseJsonChars`, `maxDocsPerCollection`)
+ *   para evitar que el prompt exceda límites del proveedor.
+ * - Se soporta cadena de modelos (principal + fallbacks) con manejo de errores 402/404/429.
+ */
 export class IaAssistantService {
   private firestore = inject(Firestore);
   private http = inject(HttpClient);
@@ -94,6 +108,16 @@ export class IaAssistantService {
   private readonly allowedTopicPattern =
     /(plan|planes|actividad|actividades|activity|activities|activitytype|activity type|tipo|tipos|ruta|rutas|itinerario|itinerarios)/i;
 
+  /**
+   * Realiza una pregunta al asistente.
+   *
+   * Reglas:
+   * - Si la pregunta no trata sobre el dominio permitido, se rechaza.
+   * - Si falta configuración (modelo/API key/URL), devuelve un mensaje de error controlado.
+   *
+   * @param question Pregunta del usuario (texto libre).
+   * @returns Observable con la respuesta en texto.
+   */
   ask(question: string) {
     const cleanQuestion = question.trim();
 
@@ -200,6 +224,15 @@ export class IaAssistantService {
     );
   }
 
+  /**
+   * Ejecuta la petición probando modelos en cadena (principal + fallbacks).
+   *
+   * @param models Lista de modelos a intentar, en orden.
+   * @param messages Prompt en formato chat.
+   * @param apiKey API key del proveedor.
+   * @param apiUrl Endpoint de chat completions.
+   * @param index Índice actual dentro de `models`.
+   */
   private requestWithModelChain(
     models: string[],
     messages: IaChatMessage[],
@@ -255,6 +288,13 @@ export class IaAssistantService {
     );
   }
 
+  /**
+   * Lanza una petición al endpoint de chat completions.
+   *
+   * Manejo:
+   * - Reintentos exponenciales ante 429 (rate limit).
+   * - Devuelve contenido de `choices[0].message.content` o mensaje “fallback”.
+   */
   private requestWithModel(
     model: string,
     messages: IaChatMessage[],
@@ -309,6 +349,9 @@ export class IaAssistantService {
       );
   }
 
+  /**
+   * Normaliza URLs configuradas y ajusta `/models` -> `/chat/completions` si aplica.
+   */
   private resolveChatCompletionsUrl(apiUrl?: string): string {
     const raw = (apiUrl || '').trim();
     if (!raw) {
@@ -322,6 +365,9 @@ export class IaAssistantService {
     return raw;
   }
 
+  /**
+   * Reduce tamaño del dataset para mantener el prompt dentro de límites razonables.
+   */
   private compactFirebaseData(firebaseData: IaFirebaseData): IaFirebaseData {
     return {
       activity: firebaseData.activity.slice(0, this.maxDocsPerCollection),
@@ -333,6 +379,12 @@ export class IaAssistantService {
     };
   }
 
+  /**
+   * Construye relaciones entre planes/actividades/tipos a partir de IDs.
+   *
+   * @param firebaseData Dataset (posiblemente compacto) de Firebase.
+   * @returns Estructura relacional usada como “memoria” para el modelo.
+   */
   private buildRelationalContext(
     firebaseData: IaFirebaseData,
   ): IaRelationalContext {
@@ -520,6 +572,11 @@ export class IaAssistantService {
     };
   }
 
+  /**
+   * Extrae un campo string priorizando las `keys` dadas.
+   *
+   * @returns string normalizada (trim) o string vacío si no existe.
+   */
   private getStringField(
     source: Record<string, unknown> | undefined,
     keys: string[],
@@ -541,6 +598,11 @@ export class IaAssistantService {
     return '';
   }
 
+  /**
+   * Extrae un campo `string[]` priorizando las `keys` dadas.
+   *
+   * @returns array normalizado (sin vacíos) o [] si no existe.
+   */
   private getStringArrayField(
     source: Record<string, unknown> | undefined,
     keys: string[],
@@ -567,6 +629,11 @@ export class IaAssistantService {
     return [];
   }
 
+  /**
+   * Carga datos desde Firebase (colecciones de dominio) y los transforma en JSON simple.
+   *
+   * Nota: se usa `getDocs` (snapshot puntual) para componer contexto; no mantiene listener.
+   */
   private async getFirebaseData(): Promise<IaFirebaseData> {
     const [activityDocs, activityTypeDocs, plansDocs] = await Promise.all([
       getDocs(collection(this.firestore, 'activities')),

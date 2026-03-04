@@ -1,59 +1,111 @@
-# MapTuu
+# MapTuu (Angular)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.18.
+Proyecto Angular (standalone) con Firebase (Auth/Firestore/Storage), Leaflet, Tailwind y una API HTTP (`apiUrl`) para operaciones de dominio.
 
-## Development server
+La documentación de este repo se mantiene en dos capas:
 
-To start a local development server, run:
+- **Manual (este README)**: arquitectura, reglas y cómo trabajar en el proyecto.
+- **Automática (Compodoc)**: documentación navegable de componentes/servicios/guards/pipes/etc, basada en comentarios JSDoc del código.
 
-```bash
-ng serve
-```
+## Requisitos
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Node.js + npm (recomendado: versión LTS).
+- Angular CLI (opcional; el proyecto funciona con `npx ng ...`).
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Instalación
 
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Variables de entorno
+
+Antes de ejecutar o construir, el proyecto genera un runtime env mediante `scripts/generate-env.js` (se ejecuta en `prestart` y `prebuild`).
+
+- **Objetivo**: evitar “secrets” hardcodeados y permitir configuración por entorno (local/CI/producción).
+- **Dónde se consume**: `src/app/environment/environment.ts` y el runtime env expuesto en `window.__env__` (si aplica).
+
+## Ejecutar en local
 
 ```bash
-ng generate --help
+npm run start
 ```
 
-## Building
+Luego abre `http://localhost:4200/`.
 
-To build the project run:
+## Build
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Salida en `dist/`.
 
-## Running unit tests
+## Estructura del proyecto (high-level)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- `src/app/app.config.ts`: proveedores globales (router, HttpClient, Firebase).
+- `src/app/app.routes.ts`: rutas y guards.
+- `src/app/core/`: infraestructura transversal (services, guards, pipes, directives, validators).
+- `src/app/features/`: pantallas/feature areas (activities, plans, maps, user, etc).
+- `src/app/common/`: componentes reutilizables (cards, filtros, controles, modelos).
+- `src/app/repositories/`: tokens/abstracciones (si aplica) para desacoplar acceso a datos.
+
+## Arquitectura (cómo pensar el código)
+
+Este proyecto separa responsabilidades de forma práctica:
+
+- **UI / Features** (`features/`, `common/`): componentes standalone que renderizan, validan formularios y orquestan acciones de usuario.
+- **Dominio / Casos de uso** (principalmente en `core/services/`): servicios que encapsulan reglas de uso, llamadas HTTP y lecturas de Firebase.
+- **Infra / Datos** (`core/services/`, `environment/`): integración con Firebase, HttpClient y configuración por entorno.
+
+### Datos y fuentes
+
+- **Firebase**: lecturas reactivas con listeners (`onSnapshot`) para colecciones (ej: activities/activityTypes/users).
+- **API HTTP**: operaciones de escritura/actualización (create/update/delete) con `Authorization: Bearer <token>`.
+
+## Documentación automática con Compodoc
+
+Compodoc genera una web con:
+componentes, servicios, guards, pipes, directivas, routing, interfaces/tipos, etc.
+
+### Instalar (ya incluido en el proyecto)
+
+Compodoc está como dependencia dev en `package.json`.
+
+### Generar documentación
 
 ```bash
-ng test
+npm run docs
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### Servir documentación en local
 
 ```bash
-ng e2e
+npm run docs:serve
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Por defecto abre en `http://localhost:8080`.
 
-## Additional Resources
+### Exportar documentación a carpeta `docs/`
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm run docs:build
+```
+
+## Convención de documentación en código (JSDoc)
+
+Compodoc lee comentarios JSDoc (`/** ... */`).
+
+Documentamos lo que reduce incertidumbre:
+
+- **Responsabilidad** (qué hace y qué NO hace).
+- **Contratos**: entradas esperadas, efectos, errores esperables.
+- **Reglas de negocio** (si las hay).
+- **Ejemplos** de uso cuando ayuda.
+
+Evitar:
+
+- comentarios obvios o redundantes,
+- narrar línea a línea,
+- cosas que se desactualizan fácil (salvo que aporten contexto real).
+
