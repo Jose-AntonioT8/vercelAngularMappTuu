@@ -19,7 +19,7 @@
         [(ngModel)]="question"
         [disabled]="isLoading"
         rows="5"
-        :placeholder= "[[ 'ia.questionPlaceholder' | translate ]]"
+        :placeholder="'ia.questionPlaceholder' | translate"
         class="w-full rounded-xl border border-slate-300 focus:border-brand-primary focus:ring-brand-primary resize-y p-3 text-slate-900"
       ></textarea>
 
@@ -29,8 +29,7 @@
         [disabled]="isLoading || !question.trim()"
         class="inline-flex items-center justify-center rounded-xl px-5 py-2.5 font-semibold text-white bg-brand-primary hover:bg-brand-secondary disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {{ isLoading ? [[ 'ia.asking' | translate ]] : [[ 'ia.ask' | translate ]] }}
-      </button>
+      {{ (isLoading ? 'ia.asking' : 'ia.ask') | translate }}      </button>
     </div>
 
     <p *ngIf="errorMessage" class="mt-4 text-sm text-red-600">
