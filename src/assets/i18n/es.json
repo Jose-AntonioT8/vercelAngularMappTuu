@@ -122,6 +122,7 @@
     }
   },
   "about": {
+    "documentation": "Ver documentación",
     "tagline": "Descubre tu próxima aventura",
     "heroTitle": "Conectamos personas con experiencias únicas",
     "heroDescription": "MappTuu es la plataforma definitiva para descubrir, planificar y compartir actividades y planes increíbles en tu ciudad y más allá.",
