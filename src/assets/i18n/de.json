@@ -1,9 +1,12 @@
 {
   "ia":{
-    "title": "KI-Assistent für Pläne und Aktivitäten",
-    "description": "Frag mich nach interessanten Plänen und Aktivitäten",
+   "title": "KI-Assistent für Pläne und Aktivitäten",
+    "description": "Willkommen bei MappTuu, deinem KI-Assistenten, frag mich nach interessanten Plänen und Aktivitäten",
     "question": "Deine Frage...",
-    "answer": "Antwort"
+    "answer": "Antwort",
+    "questionPlaceholder": "Welche Pläne empfiehlst du mir für dieses Wochenende?...",
+    "asking": "Abfragen...",
+    "ask": "MappTuu fragen"
   },
   "common": {
     "appName": "MappTuu",

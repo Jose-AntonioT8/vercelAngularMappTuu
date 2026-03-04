@@ -1,9 +1,12 @@
 {
   "ia":{
     "title": "AI Assistant for plans and activities",
-    "description": "Ask me about interesting plans and activities to do",
+    "description": "Welcome to MappTuu, your AI assistant, ask me about interesting plans and activities to do",
     "question": "Your question...",
-    "answer": "Answer"
+    "answer": "Answer",
+    "questionPlaceholder": "What plans do you recommend for this weekend?...",
+    "asking": "Consulting...",
+    "ask": "Ask MappTuu"
   },
   "common": {
     "appName": "MappTuu",
