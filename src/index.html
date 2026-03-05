@@ -8,73 +8,84 @@
     content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://apis.google.com https://accounts.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://accounts.google.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://vercel-node-mapp-tuu.vercel.app https://api.bigdatacloud.net https://api.cloudinary.com https://*.googleapis.com https://*.firebaseio.com https://firebasestorage.googleapis.com https://firestore.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://api.cloudinary.com/v1_1/dnre5bukm/image/upload https://api.groq.com https://accounts.google.com; frame-src https://accounts.google.com;"
   />
   <!-- Meta tags SEO -->
+  <!-- Meta tags SEO -->
   <meta
-    name="description"
-    content="MapTuu es una aplicación para crear, gestionar y compartir planes y actividades sobre mapas de forma sencilla."
-  />
-  <meta
-    name="keywords"
-    content="mapptuu, planes, actividades, mapas, viajes, rutas, ocio"
-  />
-  <meta name="author" content="MapTuu" />
-  <meta name="robots" content="index, follow" />
+  name="description"
+  content="MapTuu es una aplicación para crear, gestionar y compartir planes y actividades sobre mapas de forma sencilla."
+/>
+<meta
+  name="keywords"
+  content="mapptuu, planes, actividades, mapas, viajes, rutas, ocio"
+/>
+<meta name="author" content="MapTuu" />
+<meta name="robots" content="index, follow" />
 
-  <!-- Open Graph (Redes Sociales) -->
-  <meta property="og:type" content="website" />
-  <meta
-    property="og:url"
-    content="https://vercel-angular-mapp-tuu.vercel.app/landingPage"
-  />
-  <meta property="og:title" content="MapTuu" />
-  <meta
-    property="og:description"
-    content="Crea y comparte tus planes y actividades en mapas interactivos con MapTuu."
-  />
-  <meta
-    property="og:image"
-    content="https://vercel-angular-mapp-tuu.vercel.app/og-image.jpg"
-  />
+<!-- Open Graph (Redes Sociales) -->
+<meta property="og:type" content="website" />
+<meta
+  property="og:url"
+  content="https://vercel-angular-mapp-tuu.vercel.app/landingPage"
+/>
+<meta property="og:title" content="MapTuu" />
+<meta
+  property="og:description"
+  content="Crea y comparte tus planes y actividades en mapas interactivos con MapTuu."
+/>
+<meta
+  property="og:image"
+  content="https://vercel-angular-mapp-tuu.vercel.app/og-image.jpg"
+/>
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta
-    name="twitter:url"
-    content="https://vercel-angular-mapp-tuu.vercel.app/landingPage"
-  />
-  <meta name="twitter:title" content="MapTuu" />
-  <meta
-    name="twitter:description"
-    content="Crea y comparte tus planes y actividades en mapas interactivos con MapTuu."
-  />
-  <meta
-    name="twitter:image"
-    content="https://vercel-angular-mapp-tuu.vercel.app/twitter-image.jpg"
-  />
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta
+  name="twitter:url"
+  content="https://vercel-angular-mapp-tuu.vercel.app/landingPage"
+/>
+<meta name="twitter:title" content="MapTuu" />
+<meta
+  name="twitter:description"
+  content="Crea y comparte tus planes y actividades en mapas interactivos con MapTuu."
+/>
+<meta
+  name="twitter:image"
+  content="https://vercel-angular-mapp-tuu.vercel.app/twitter-image.jpg"
+/>
 
-  <!-- Tema del navegador (móviles) -->
-  <meta name="theme-color" content="#1976d2" />
+<!-- Tema del navegador (móviles) -->
+<meta name="theme-color" content="#1976d2" />
 
-  <!-- PWA (si aplica) -->
-  <link rel="manifest" href="assets/manifest.webmanifest" />
+<!-- PWA -->
+<link rel="manifest" href="assets/manifest.webmanifest" />
 
-  <!-- Favicon existente -->
-  <link rel="icon" type="image/png" href="assets/logo/logo.png" />
+<!-- Favicons -->
+<link rel="icon" type="image/png" href="assets/logo/logo.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/logo/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/logo/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/logo/favicon-16x16.png">
 
-  <script src="assets/env.js"></script>
 
-  <!-- Preconnect para rendimiento -->
-  <link rel="preconnect" href="https://vercel-node-mapp-tuu.vercel.app" />
-  <link rel="preconnect" href="https://api.bigdatacloud.net" />
+<script src="assets/env.js"></script>
+
+<!-- Preconnect y DNS-Prefetch para rendimiento -->
+<link rel="preconnect" href="https://vercel-node-mapp-tuu.vercel.app" />
+<link rel="preconnect" href="https://api.bigdatacloud.net" />
+<link rel="preconnect" href="https://api.cloudinary.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="dns-prefetch" href="https://api.groq.com" />
+<link rel="dns-prefetch" href="https://firebasestorage.googleapis.com" />
+
 </head>
 <body>
-  <app-root></app-root>
+<app-root></app-root>
 
-  <!-- Mensaje para usuarios sin JavaScript -->
-  <noscript>
-    <div class="p-5 text-center">
-      <h1>JavaScript requerido.</h1>
-      <p>Esta aplicación requiere JavaScript para funcionar correctamente.</p>
-      <p>Por favor, habilita JavaScript en tu navegador e intenta de nuevo.</p>
-    </div>
-  </noscript>
+<!-- Mensaje para usuarios sin JavaScript -->
+<noscript>
+  <div style="padding: 20px; text-align: center; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: .25rem;">
+    <h1>JavaScript es Requerido</h1>
+    <p>Esta aplicación necesita JavaScript para funcionar correctamente.</p>
+    <p>Por favor, habilita JavaScript en la configuración de tu navegador y recarga la página.</p>
+  </div>
+</noscript>
 </body>
+</html>

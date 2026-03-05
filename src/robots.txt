@@ -1,0 +1,20 @@
+# robots.txt para MapTuu en Producción
+
+# Permitir a todos los rastreadores
+User-agent: *
+Allow: /
+
+# Ubicación del sitemap
+Sitemap: https://vercel-angular-mapp-tuu.vercel.app/sitemap.xml
+
+# Bloquear rutas que no deben ser indexadas
+Disallow: /admin
+Disallow: /api/
+Disallow: /private/
+
+# Permitir el rastreo de assets para un renderizado correcto
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.svg$

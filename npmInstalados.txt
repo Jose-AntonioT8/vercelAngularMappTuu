@@ -1,3 +1,0 @@
-ng add @angular/fire  ( @angular/fire@19.2.0.)
-
-npm install -D tailwindcss@3.4.18 postcss autoprefixer
