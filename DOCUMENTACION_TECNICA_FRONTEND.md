@@ -21,7 +21,7 @@
 
 - **Explorar actividades turísticas** geolocalizadas en un mapa interactivo
 - **Buscar y filtrar actividades** por diferentes criterios
-- **Crear y gestionar planes de viaje** personalizados
+- **Crear y gestionar planes de viaje** personalizados.
 - **Visualizar detalles** de actividades (horarios, precios, contacto, etc.)
 - **Gestionar perfiles de usuario** con autenticación.
 
