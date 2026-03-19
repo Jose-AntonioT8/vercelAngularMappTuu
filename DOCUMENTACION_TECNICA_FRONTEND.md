@@ -31,7 +31,7 @@ Proporcionar una plataforma intuitiva donde los usuarios puedan descubrir activi
 
 ### Descripción de UX/UI
 
-- **Diseño Moderno**: Utiliza **Tailwind CSS** para un diseño responsive y moderno
+- **Diseño Moderno**: Utiliza **Tailwind CSS** para un diseño responsive y moderno.
 - **Mapas Interactivos**: Integración con **Leaflet** para visualización geográfica de actividades
 - **Navegación Intuitiva**: Header con navegación contextual y footer para acceso rápido
 - **Responsive Design**: Adaptación a diferentes tamaños de pantalla (móvil, tablet, desktop)
