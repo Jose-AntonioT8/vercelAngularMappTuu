@@ -144,6 +144,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Reseña/valoración.</p>
+<p>Se usa tanto en planes como en actividades (dependiendo del módulo).</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -232,6 +240,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Comentario textual (opcional según UX; aquí se requiere string).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -270,6 +284,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Fecha de creación (si la aporta backend).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -308,6 +328,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ID de la reseña (si ya existe en DB).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -341,6 +367,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Puntuación del 1 al 5.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -374,6 +406,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ID del usuario que publica la reseña.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -382,24 +420,45 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Plan {
+  /** Identificador único del plan. */
   id: string;
+  /** Nombre/título del plan. */
   name: string;
+  /** IDs de actividades asociadas al plan. */
   activitiesIds: string[];
+  /** Referencia/URL de imagen principal. */
   imgRef: string;
+  /** ID del usuario propietario/creador. */
   ownerId: string;
+  /** Fecha de creación (si la aporta backend). */
   createdAt?: Date;
+  /** Media de rating del plan. */
   rating: number;
+  /** Visibilidad pública. */
   visibility: boolean;
+  /** Descripción larga del plan. */
   description: string;
+  /** Número total de valoraciones usadas en &#x60;rating&#x60;. */
   numRatings: number;
+  /** Reseñas asociadas (opcional, según endpoint). */
   reviews?: Review[];
 }
 
+/**
+ * Reseña/valoración.
+ *
+ * Se usa tanto en planes como en actividades (dependiendo del módulo).
+ */
 export interface Review {
+  /** ID de la reseña (si ya existe en DB). */
   id?: string;
+  /** ID del usuario que publica la reseña. */
   userId: string;
+  /** Puntuación del 1 al 5. */
   rating: number;
+  /** Comentario textual (opcional según UX; aquí se requiere string). */
   comment: string;
+  /** Fecha de creación (si la aporta backend). */
   createdAt?: Date;
 }
 </code></pre>

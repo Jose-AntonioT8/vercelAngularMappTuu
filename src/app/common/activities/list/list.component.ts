@@ -7,6 +7,13 @@ import { ActivityType } from '../../models/activityType.models';
 import { Observable } from 'rxjs';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 
+/**
+ * Listado de actividades.
+ *
+ * Orquesta la carga inicial:
+ * - Actividades (desde `ActivityService`)
+ * - Tipos de actividad (desde `ActivityTypeService`)
+ */
 @Component({
   selector: 'app-list',
   standalone: true,
@@ -16,12 +23,17 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 })
 export class ListComponent implements OnInit {
   
+  /** Servicio de actividades para alimentar el stream del listado. */
   private activityService = inject(ActivityService);
+  /** Servicio de tipos para enriquecer cards (labels/colores). */
   private activityTypeService = inject(ActivityTypeService);
 
+  /** Stream reactivo de actividades para renderizar el listado. */
   activities$ = this.activityService.activities$;
+  /** Stream de tipos usado por las cards para colorear/etiquetar. */
   activityTypes$!: Observable<ActivityType[]>; 
 
+  /** Dispara cargas iniciales necesarias para el listado. */
   ngOnInit(): void {
     this.activityService.getActivities();
     this.activityTypes$ = this.activityTypeService.getActivitiesType();

@@ -219,6 +219,14 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Guard de administrador.</p>
+<p>Permite acceso solo a usuarios autenticados con rol admin.
+Si falla, redirige al dashboard.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -248,6 +256,14 @@
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Base URL de la API HTTP (backend) para operaciones de dominio.</p>
+<p>En el frontend se usa como raíz para endpoints REST que requieren
+<code>Authorization: Bearer &lt;token&gt;</code>.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -345,6 +361,13 @@ vía <code>environment</code>.</p>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Guard de autenticación.</p>
+<p>Permite acceso solo si hay sesión activa; en caso contrario redirige al landing.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -424,6 +447,14 @@ vía <code>environment</code>.</p>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Configuración de entorno consumida por la aplicación.</p>
+<p>Nota: aunque el campo se llame <code>production</code>, en este proyecto se usa runtime env
+también en desarrollo. El valor depende del build/configuración.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -466,6 +497,13 @@ vía <code>environment</code>.</p>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Valida si un string representa un valor “real” de entorno.</p>
+<p>Filtra placeholders típicos (<code>undefined</code>, <code>null</code>, <code>${...}</code>, etc.).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -494,6 +532,12 @@ vía <code>environment</code>.</p>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lista de campos Firebase requeridos que no están presentes en runtime.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -532,6 +576,13 @@ vía <code>environment</code>.</p>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lee una variable de entorno en runtime probando varias claves (aliases).
+Devuelve string vacío si no encuentra un valor válido.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -568,6 +619,12 @@ vía <code>environment</code>.</p>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lee una lista separada por comas desde el env runtime.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -604,6 +661,16 @@ vía <code>environment</code>.</p>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lee configuración de Firebase priorizando:</p>
+<ol>
+<li><code>window.__env__.firebase[field]</code> si existe,</li>
+<li>aliases de nivel raíz (por ejemplo <code>NG_APP_*</code> y <code>FIREBASE_*</code>).</li>
+</ol>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -630,6 +697,12 @@ vía <code>environment</code>.</p>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Entorno runtime leído desde <code>window.__env__</code> si existe.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -656,6 +729,12 @@ vía <code>environment</code>.</p>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Sub-objeto opcional <code>firebase</code> dentro del runtime env.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -682,6 +761,12 @@ vía <code>environment</code>.</p>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Raíz de runtime (normalmente <code>window</code>).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -711,6 +796,14 @@ vía <code>environment</code>.</p>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Token de inyección para opciones/configuración de Firebase.</p>
+<p>Se usa para desacoplar el consumo de configuración (en providers) del origen
+real de la misma (runtime env, environment, etc.).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -749,6 +842,13 @@ vía <code>environment</code>.</p>
                     </td>
                 </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Guard de “invitado”.</p>
+<p>Evita acceder a rutas de guest-only (login/signup) si ya hay sesión activa.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>

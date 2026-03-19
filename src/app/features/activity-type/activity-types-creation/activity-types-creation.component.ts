@@ -8,6 +8,14 @@ import { ActivityTypeService } from '../../../core/services/activitytype.service
 import { ActivityType } from '../../../common/models/activityType.models';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
+
+/**
+ * Pantalla de creación de tipos de actividad.
+ *
+ * - Valida formulario (nombre/descripcion/color).
+ * - Normaliza el color a formato hex con `#`.
+ * - Envía creación al backend con Bearer token (Firebase ID token).
+ */
 @Component({
   selector: 'app-activity-types-creation',
   standalone: true,
@@ -16,18 +24,28 @@ import { LanguageSelectorComponent } from '../../../common/language-selector/lan
   styleUrl: './activity-types-creation.component.scss'
 })
 export class ActivityTypesCreationComponent {
+  /** Mensaje de error para UI. */
   error = '';
+  /** Mensaje de éxito para UI. */
   success = '';
+  /** Formulario reactivo de creación de tipo. */
   formActivityCreation;
+  /** Payload auxiliar (no tipado) usado por la pantalla. */
   activityData: any;
+  /** Catálogo de tipos (si se usa en UI). */
   activityTypes: any;
-activityTypesName : string[] = [];
+  /** Lista de nombres (derivada) para mostrar en UI. */
+  activityTypesName : string[] = [];
 
   constructor(
     
+    /** Constructor de formularios. */
     private formSvc: FormBuilder,
+    /** Router para navegar tras crear. */
     private route: Router,
+    /** Auth para token/usuario actual. */
     private auth: AuthService,
+    /** Servicio de tipos (mutación + catálogo). */
     private ActivityTypeService: ActivityTypeService
   ) {
     this.formActivityCreation = this.formSvc.group({
@@ -39,6 +57,7 @@ activityTypesName : string[] = [];
 
     this.activityTypes = this.ActivityTypeService.getActivitiesType();
   }
+  /** Carga tipos existentes para UI (si aplica). */
   ngOnInit(): void {
     this.ActivityTypeService.getActivitiesType().subscribe(
       (res: ActivityType[]) => {
@@ -48,10 +67,12 @@ activityTypesName : string[] = [];
       
     );
   }
+  /** Cierra sesión y vuelve al landing. */
   logOut() {
     this.route.navigate(['/landingPage']);
     this.auth.logout();
   }
+  /** Devuelve un mensaje de error según el control invalidado. */
   getError(control: string) {
     switch (control) {
       case 'name':
@@ -90,6 +111,7 @@ activityTypesName : string[] = [];
     return '';
   }
 
+  /** Crea un nuevo tipo de actividad en el backend. */
   async onCreate() {
     if (this.formActivityCreation.invalid) {
       this.formActivityCreation.markAllAsTouched();

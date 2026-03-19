@@ -138,6 +138,19 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Pantalla de registro de usuario.</p>
+<p>Responsabilidades:</p>
+<ul>
+<li>Validar formulario (email/nombre/contraseña + repetición + términos).</li>
+<li>Registrar en Firebase Auth (email/password) o iniciar con OAuth (Google/GitHub).</li>
+<li>Crear el “usuario de dominio” en el backend usando Bearer token (Firebase ID token).</li>
+</ul>
+
+    </p>
 
 
 
@@ -244,10 +257,6 @@
                                 <a href="#getError" >getError</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#handleSocialError" >handleSocialError</a>
-                            </li>
-                            <li>
                                 <a href="#login" >login</a>
                             </li>
                             <li>
@@ -305,7 +314,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:44</a></div>
                             </td>
                         </tr>
 
@@ -420,14 +429,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:92</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:114</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Devuelve mensaje de error traducido según validación actual del control.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -438,6 +449,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -452,93 +464,16 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Nombre lógico del control.</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="handleSocialError"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>handleSocialError</b></span>
-                        <a href="#handleSocialError"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>handleSocialError(err: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, provider: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="148"
-                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:148</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>err</td>
-                                            <td>
-                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                        <tr>
-                                                <td>provider</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                             <div class="io-description">
@@ -568,14 +503,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="126"
-                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:126</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="149"
+                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:149</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Navega a login.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -607,14 +544,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="139"
-                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:139</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:164</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Registro/inicio vía GitHub OAuth.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
@@ -646,14 +585,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="130"
-                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:130</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:154</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Registro/inicio vía Google OAuth.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
@@ -685,14 +626,23 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="165"
-                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:165</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="200"
+                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:200</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Registro con email/password.</p>
+<p>Flujo:</p>
+<ol>
+<li>Registrar en Firebase Auth</li>
+<li>Obtener ID token</li>
+<li>Crear usuario en backend (dominio)</li>
+<li>Navegar a la app</li>
+</ol>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
@@ -722,14 +672,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="88"
-                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:88</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:106</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Alterna visibilidad del campo repetir contraseña.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -759,14 +711,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:84</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:101</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Alterna visibilidad del campo contraseña.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -806,10 +760,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:34</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mensaje de error para UI.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -832,10 +792,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:44</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>FormGroup tipado en runtime por FormBuilder.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -863,10 +829,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:38</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag para evitar dobles envíos.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -894,10 +866,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:42</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Toggle visibilidad de confirmación de password.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -925,10 +903,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:40</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Toggle visibilidad del password.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -956,10 +940,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:36</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mensaje de éxito para UI.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -985,9 +975,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:62</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/features/user/sign-up/sign-up.component.ts:78</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Heurística simple de fuerza de contraseña para feedback visual.</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>&quot;weak&quot; | &quot;medium&quot; | &quot;strong&quot;</code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1006,6 +1007,15 @@ import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
 import { TranslationService } from &#x27;../../../core/services/translation.service&#x27;;
 import { UserService } from &#x27;../../../core/services/user.service&#x27;;
 import { matchPasswordValidator } from &#x27;../../../core/validators/match-password.validator&#x27;;
+
+/**
+ * Pantalla de registro de usuario.
+ *
+ * Responsabilidades:
+ * - Validar formulario (email/nombre/contraseña + repetición + términos).
+ * - Registrar en Firebase Auth (email/password) o iniciar con OAuth (Google/GitHub).
+ * - Crear el “usuario de dominio” en el backend usando Bearer token (Firebase ID token).
+ */
 @Component({
   selector: &#x27;app-signup&#x27;,
   standalone: true,
@@ -1019,11 +1029,17 @@ import { matchPasswordValidator } from &#x27;../../../core/validators/match-pass
   templateUrl: &#x27;./sign-up.component.html&#x27;,
 })
 export class SignupComponent {
+  /** Mensaje de error para UI. */
   error &#x3D; &#x27;&#x27;;
+  /** Mensaje de éxito para UI. */
   success &#x3D; &#x27;&#x27;;
+  /** Flag para evitar dobles envíos. */
   isLoading &#x3D; false;
+  /** Toggle visibilidad del password. */
   showPassword &#x3D; false;
+  /** Toggle visibilidad de confirmación de password. */
   showConfirmPassword &#x3D; false;
+  /** FormGroup tipado en runtime por FormBuilder. */
   formSignup;
 
   constructor(
@@ -1057,6 +1073,7 @@ export class SignupComponent {
     );
   }
 
+  /** Heurística simple de fuerza de contraseña para feedback visual. */
   get passwordStrength(): &#x27;weak&#x27; | &#x27;medium&#x27; | &#x27;strong&#x27; {
     const password &#x3D; this.formSignup.controls.password.value || &#x27;&#x27;;
 
@@ -1079,14 +1096,20 @@ export class SignupComponent {
     return &#x27;strong&#x27;;
   }
 
+  /** Alterna visibilidad del campo contraseña. */
   togglePassword(): void {
     this.showPassword &#x3D; !this.showPassword;
   }
 
+  /** Alterna visibilidad del campo repetir contraseña. */
   toggleConfirmPassword(): void {
     this.showConfirmPassword &#x3D; !this.showConfirmPassword;
   }
 
+  /**
+   * Devuelve mensaje de error traducido según validación actual del control.
+   * @param control Nombre lógico del control.
+   */
   getError(control: string): string {
     switch (control) {
       case &#x27;email&#x27;:
@@ -1121,10 +1144,12 @@ export class SignupComponent {
     return &#x27;&#x27;;
   }
 
+  /** Navega a login. */
   login(): void {
     this.route.navigate([&#x27;/login&#x27;]);
   }
 
+  /** Registro/inicio vía Google OAuth. */
   async onGoogleSignup(): Promise&lt;void&gt; {
     try {
       this.error &#x3D; &#x27;&#x27;;
@@ -1134,6 +1159,7 @@ export class SignupComponent {
     }
   }
 
+  /** Registro/inicio vía GitHub OAuth. */
   async onGithubSignup(): Promise&lt;void&gt; {
     try {
       this.error &#x3D; &#x27;&#x27;;
@@ -1143,6 +1169,7 @@ export class SignupComponent {
     }
   }
 
+  /** Mapea errores frecuentes de OAuth para UX. */
   private handleSocialError(err: any, provider: string): void {
     switch (err.code) {
       case &#x27;auth/popup-closed-by-user&#x27;:
@@ -1160,6 +1187,15 @@ export class SignupComponent {
     }
   }
 
+  /**
+   * Registro con email/password.
+   *
+   * Flujo:
+   * 1) Registrar en Firebase Auth
+   * 2) Obtener ID token
+   * 3) Crear usuario en backend (dominio)
+   * 4) Navegar a la app
+   */
   async onSignup(): Promise&lt;void&gt; {
     if (this.formSignup.invalid || this.isLoading) return;
 

@@ -144,6 +144,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Estado serializable de filtros para tipos de actividad.</p>
+<p>Se emite hacia el componente padre para filtrar listados.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -218,6 +226,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ID/nombre del tipo de actividad seleccionado.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -251,6 +265,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Filtro de ubicación textual (si aplica).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -284,6 +304,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Rating mínimo para filtrar resultados.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -298,17 +324,36 @@ import { ActivityType } from &#x27;../../models/activityType.models&#x27;;
 import { ActivityTypeService } from &#x27;../../../core/services/activitytype.service&#x27;;
 import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
 
-interface FilterItem {
+/**
+ * Opción de filtro (id + nombre) para selects/listas.
+ */
+export interface FilterItem {
+  /** Identificador del tipo/ítem. */
   id: string;
+  /** Nombre legible para mostrar en UI. */
   name: string;
 }
 
+/**
+ * Estado serializable de filtros para tipos de actividad.
+ *
+ * Se emite hacia el componente padre para filtrar listados.
+ */
 export interface ActivityFilterState {
+    /** ID/nombre del tipo de actividad seleccionado. */
     activityType: string | null; 
+    /** Filtro de ubicación textual (si aplica). */
     location: string | null;
+    /** Rating mínimo para filtrar resultados. */
     ratingMin: number; 
 }
 
+/**
+ * Componente de filtros para tipos de actividad.
+ *
+ * Nota: parte del estado (por ejemplo &#x60;location&#x60;) puede no usarse en todas las pantallas
+ * pero se conserva para mantener compatibilidad con otros filtros.
+ */
 @Component({
   selector: &#x27;app-filter&#x27;,
   standalone: true,
@@ -319,17 +364,26 @@ export interface ActivityFilterState {
 
 
 export class FilterComponent implements OnInit, ActivityFilterState{
+    /** Tipo seleccionado. &#x60;null&#x60; &#x3D; sin filtro. */
     activityType: string | null &#x3D; null;
+    /** Texto de ubicación (opcional). */
     location: string | null &#x3D; null;
+    /** Rating mínimo (0 &#x3D; sin filtro). */
     ratingMin: number &#x3D; 0;
+    /** Lista derivada de nombres de tipos para selects. */
     activityTypesName : string[] &#x3D; [];
+    /** Catálogo completo de tipos cargado desde el servicio. */
     activityTypes : ActivityType[] &#x3D; [];
+    /** Evento hacia el padre cuando cambian los filtros. */
     @Output() filterChanged &#x3D; new EventEmitter&lt;ActivityFilterState&gt;();
     
+    /** Tipos disponibles inyectados por el padre (opcional). */
     @Input() availableTypes: FilterItem[] &#x3D; []; 
+    /** Inyecta &#x60;ActivityTypeService&#x60; para cargar catálogo. */
 constructor( private ActivityTypeService: ActivityTypeService,
 ) {}
 
+    /** Carga tipos y emite el estado inicial. */
     ngOnInit() {
         this.emitCurrentFilterState();
         this.ActivityTypeService.getActivitiesType().subscribe(
@@ -343,6 +397,7 @@ constructor( private ActivityTypeService: ActivityTypeService,
           );
     }
 
+    /** Construye y emite el estado actual. */
     emitCurrentFilterState() {
         const filterState: ActivityFilterState &#x3D; {
             activityType: this.activityType,
@@ -352,6 +407,7 @@ constructor( private ActivityTypeService: ActivityTypeService,
         this.filterChanged.emit(filterState);
     }
 
+    /** Resetea filtros al estado inicial y re-emite. */
     resetFilters() {
         this.activityType &#x3D; null;
         this.location &#x3D; null;

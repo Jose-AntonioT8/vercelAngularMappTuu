@@ -16,12 +16,21 @@ import {
 } from 'rxjs';
 import { environment } from '../../../app/environment/environment';
 
+/**
+ * Mensaje en formato chat enviado al proveedor de IA.
+ */
 interface IaChatMessage {
+  /** Rol del mensaje (system/user). */
   role: 'system' | 'user';
+  /** Contenido textual del mensaje. */
   content: string;
 }
 
+/**
+ * Respuesta mínima esperada del proveedor (compatible con OpenAI-like).
+ */
 interface IaChatResponse {
+  /** Lista de elecciones/respuestas candidatas. */
   choices?: Array<{
     message?: {
       content?: string;
@@ -29,13 +38,23 @@ interface IaChatResponse {
   }>;
 }
 
+/**
+ * Dataset base obtenido desde Firebase para construir contexto.
+ */
 interface IaFirebaseData {
+  /** Colección `activities` serializada. */
   activity: Array<Record<string, unknown>>;
+  /** Colección `activityTypes` serializada. */
   activityType: Array<Record<string, unknown>>;
+  /** Colección `plans` serializada. */
   plans: Array<Record<string, unknown>>;
 }
 
+/**
+ * Contexto relacional derivado (IDs enlazados) para mejorar respuestas y trazabilidad.
+ */
 interface IaRelationalContext {
+  /** Planes con actividades resueltas (IDs ↔ nombres) y faltantes detectados. */
   plansWithActivities: Array<{
     planId: string;
     planName: string;
@@ -45,34 +64,40 @@ interface IaRelationalContext {
     activityTypeIds: string[];
     activityTypeNames: string[];
   }>;
+  /** Actividades con su tipo asociado resuelto. */
   activitiesWithType: Array<{
     activityId: string;
     activityName: string;
     activityTypeId: string;
     activityTypeName: string;
   }>;
+  /** Actividades que no se pudieron asociar a un tipo. */
   orphanActivities: Array<{
     activityId: string;
     activityName: string;
     activityTypeId: string;
     activityTypeName: string;
   }>;
+  /** Tipos de actividad que no aparecen en ninguna actividad. */
   orphanActivityTypes: Array<{
     activityTypeId: string;
     activityTypeName: string;
   }>;
+  /** Relación inversa: actividad → planes donde aparece. */
   activityToPlans: Array<{
     activityId: string;
     activityName: string;
     planIds: string[];
     planNames: string[];
   }>;
+  /** Relación inversa: tipo → actividades que lo usan. */
   activityTypeToActivities: Array<{
     activityTypeId: string;
     activityTypeName: string;
     activityIds: string[];
     activityNames: string[];
   }>;
+  /** Estadísticas agregadas para debugging/observabilidad. */
   stats: {
     totalPlans: number;
     totalActivities: number;
@@ -82,7 +107,6 @@ interface IaRelationalContext {
   };
 }
 
-@Injectable({ providedIn: 'root' })
 /**
  * Asistente IA acotado al dominio de MapTuu.
  *
@@ -97,19 +121,33 @@ interface IaRelationalContext {
  *   para evitar que el prompt exceda límites del proveedor.
  * - Se soporta cadena de modelos (principal + fallbacks) con manejo de errores 402/404/429.
  */
+@Injectable({ providedIn: 'root' })
 export class IaAssistantService {
+  /** Instancia Firestore para lecturas puntuales de colecciones. */
   private firestore = inject(Firestore);
+  /** Cliente HTTP para llamar al proveedor de IA (chat completions). */
   private http = inject(HttpClient);
+  /** Set de modelos marcados como no disponibles (por ejemplo 404). */
   private readonly unavailableModels = new Set<string>();
+  /** Máximo de modelos a intentar por pregunta (principal + fallbacks). */
   private readonly maxModelAttempts = 3;
+  /** Límite de documentos a incluir por colección en el contexto. */
   private readonly maxDocsPerCollection = 25;
+  /** Límite duro de chars de JSON para evitar prompts gigantes. */
   private readonly maxFirebaseJsonChars = 15000;
 
+  /** Regex de “tema permitido” para limitar el dominio del asistente. */
   private readonly allowedTopicPattern =
     /(plan|planes|actividad|actividades|activity|activities|activitytype|activity type|tipo|tipos|ruta|rutas|itinerario|itinerarios)/i;
 
   /**
-   * Realiza una pregunta al asistente.
+   * Punto de entrada del asistente.
+   *
+   * Devuelve un Observable para integrarse bien con Angular/RxJS.
+   * Internamente:
+   * - valida dominio
+   * - construye contexto desde Firebase
+   * - ejecuta petición a proveedor con cadena de modelos
    *
    * Reglas:
    * - Si la pregunta no trata sobre el dominio permitido, se rechaza.
@@ -118,7 +156,7 @@ export class IaAssistantService {
    * @param question Pregunta del usuario (texto libre).
    * @returns Observable con la respuesta en texto.
    */
-  ask(question: string) {
+  ask(question: string): Observable<string> {
     const cleanQuestion = question.trim();
 
     if (!cleanQuestion) {
@@ -301,7 +339,7 @@ export class IaAssistantService {
     apiKey: string,
     apiUrl: string,
     isFallback: boolean,
-  ) {
+  ): Observable<string> {
     return this.http
       .post<IaChatResponse>(
         apiUrl,

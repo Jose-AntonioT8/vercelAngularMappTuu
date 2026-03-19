@@ -27,12 +27,16 @@ import { BehaviorSubject } from 'rxjs';
  * - Implementar autorización granular (solo expone helpers básicos como `isAdmin`).
  */
 export class AuthService {
+  /** Instancia de Firebase Auth. */
   private auth = inject(Auth);
+  /** Zona para propagar cambios al árbol de Angular. */
   private ngZone = inject(NgZone);
+  /** Estado interno del usuario autenticado. */
   private userSubject = new BehaviorSubject<User | null>(null);
   /** Stream reactivo del usuario autenticado (o `null` si no hay sesión). */
   user$ = this.userSubject.asObservable();
 
+  /** Se suscribe a `onAuthStateChanged` para mantener `user$` sincronizado. */
   constructor(private router: Router) {
     onAuthStateChanged(this.auth, user => {
       this.ngZone.run(() => {

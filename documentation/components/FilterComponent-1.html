@@ -138,6 +138,15 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente de filtros para tipos de actividad.</p>
+<p>Nota: parte del estado (por ejemplo <code>location</code>) puede no usarse en todas las pantallas
+pero se conserva para mantener compatibilidad con otros filtros.</p>
+
+    </p>
 
 
     <p class="comment">
@@ -302,12 +311,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:62</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Inyecta <code>ActivityTypeService</code> para cargar catálogo.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -363,9 +374,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:36</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:62</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Tipos disponibles inyectados por el padre (opcional).</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -387,9 +404,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:59</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Evento hacia el padre cuando cambian los filtros.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -420,14 +443,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="53"
-                                    class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:53</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:82</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Construye y emite el estado actual.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -457,14 +482,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="40"
-                                    class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:40</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:68</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Carga tipos y emite el estado inicial.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -494,14 +521,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:92</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Resetea filtros al estado inicial y re-emite.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -541,10 +570,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:49</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Tipo seleccionado. <code>null</code> = sin filtro.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -572,10 +607,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:57</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Catálogo completo de tipos cargado desde el servicio.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -603,10 +644,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:55</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lista derivada de nombres de tipos para selects.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -634,10 +681,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:51</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Texto de ubicación (opcional).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -665,10 +718,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:53</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Rating mínimo (0 = sin filtro).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -685,17 +744,36 @@ import { ActivityType } from &#x27;../../models/activityType.models&#x27;;
 import { ActivityTypeService } from &#x27;../../../core/services/activitytype.service&#x27;;
 import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
 
-interface FilterItem {
+/**
+ * Opción de filtro (id + nombre) para selects/listas.
+ */
+export interface FilterItem {
+  /** Identificador del tipo/ítem. */
   id: string;
+  /** Nombre legible para mostrar en UI. */
   name: string;
 }
 
+/**
+ * Estado serializable de filtros para tipos de actividad.
+ *
+ * Se emite hacia el componente padre para filtrar listados.
+ */
 export interface ActivityFilterState {
+    /** ID/nombre del tipo de actividad seleccionado. */
     activityType: string | null; 
+    /** Filtro de ubicación textual (si aplica). */
     location: string | null;
+    /** Rating mínimo para filtrar resultados. */
     ratingMin: number; 
 }
 
+/**
+ * Componente de filtros para tipos de actividad.
+ *
+ * Nota: parte del estado (por ejemplo &#x60;location&#x60;) puede no usarse en todas las pantallas
+ * pero se conserva para mantener compatibilidad con otros filtros.
+ */
 @Component({
   selector: &#x27;app-filter&#x27;,
   standalone: true,
@@ -706,17 +784,26 @@ export interface ActivityFilterState {
 
 
 export class FilterComponent implements OnInit, ActivityFilterState{
+    /** Tipo seleccionado. &#x60;null&#x60; &#x3D; sin filtro. */
     activityType: string | null &#x3D; null;
+    /** Texto de ubicación (opcional). */
     location: string | null &#x3D; null;
+    /** Rating mínimo (0 &#x3D; sin filtro). */
     ratingMin: number &#x3D; 0;
+    /** Lista derivada de nombres de tipos para selects. */
     activityTypesName : string[] &#x3D; [];
+    /** Catálogo completo de tipos cargado desde el servicio. */
     activityTypes : ActivityType[] &#x3D; [];
+    /** Evento hacia el padre cuando cambian los filtros. */
     @Output() filterChanged &#x3D; new EventEmitter&lt;ActivityFilterState&gt;();
     
+    /** Tipos disponibles inyectados por el padre (opcional). */
     @Input() availableTypes: FilterItem[] &#x3D; []; 
+    /** Inyecta &#x60;ActivityTypeService&#x60; para cargar catálogo. */
 constructor( private ActivityTypeService: ActivityTypeService,
 ) {}
 
+    /** Carga tipos y emite el estado inicial. */
     ngOnInit() {
         this.emitCurrentFilterState();
         this.ActivityTypeService.getActivitiesType().subscribe(
@@ -730,6 +817,7 @@ constructor( private ActivityTypeService: ActivityTypeService,
           );
     }
 
+    /** Construye y emite el estado actual. */
     emitCurrentFilterState() {
         const filterState: ActivityFilterState &#x3D; {
             activityType: this.activityType,
@@ -739,6 +827,7 @@ constructor( private ActivityTypeService: ActivityTypeService,
         this.filterChanged.emit(filterState);
     }
 
+    /** Resetea filtros al estado inicial y re-emite. */
     resetFilters() {
         this.activityType &#x3D; null;
         this.location &#x3D; null;

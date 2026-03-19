@@ -138,6 +138,15 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Pantalla “Explorar actividades” (listado).</p>
+<p>Compone header + filtros + listado.
+En desktop, el panel de filtros se muestra abierto.</p>
+
+    </p>
 
 
 
@@ -261,7 +270,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:31</a></div>
                             </td>
                         </tr>
 
@@ -328,14 +337,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="41"
-                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:41</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:52</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Cierra filtros en pantallas pequeñas.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -365,14 +376,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:48</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Navega a la pantalla de creación de actividad.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -402,14 +415,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="29"
-                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:29</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:37</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>En desktop (&gt;= 1024px) abre filtros por defecto.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -439,14 +454,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:44</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Alterna el panel de filtros.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -486,10 +503,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:34</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Estado del panel de filtros (mobile).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -509,6 +532,12 @@ import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
 
 import { RouterModule } from &#x27;@angular/router&#x27;;
 
+/**
+ * Pantalla “Explorar actividades” (listado).
+ *
+ * Compone header + filtros + listado.
+ * En desktop, el panel de filtros se muestra abierto.
+ */
 @Component({
   selector: &#x27;app-list-activities&#x27;,
   standalone: true,
@@ -525,20 +554,25 @@ import { RouterModule } from &#x27;@angular/router&#x27;;
 })
 export class ListActivitiesComponent {
   constructor(private route: Router) {}
+  /** Estado del panel de filtros (mobile). */
   isFilterOpen &#x3D; false;
 
+  /** En desktop (&gt;&#x3D; 1024px) abre filtros por defecto. */
   ngOnInit() {
     if (typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; window.innerWidth &gt;&#x3D; 1024) {
       this.isFilterOpen &#x3D; true;
     }
   }
 
+  /** Alterna el panel de filtros. */
   toggleFilter() {
     this.isFilterOpen &#x3D; !this.isFilterOpen;
   }
+  /** Navega a la pantalla de creación de actividad. */
   goCreateActivity() {
     this.route.navigate([&#x27;/activitiesCreation&#x27;]);
   }
+  /** Cierra filtros en pantallas pequeñas. */
   closeFilter() {
     if (window.innerWidth &lt; 1024) {
       this.isFilterOpen &#x3D; false;

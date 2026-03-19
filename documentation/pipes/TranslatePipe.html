@@ -141,6 +141,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Pipe de traducción para templates.</p>
+<p>Es <code>pure: false</code> para reevaluar cuando cambia el idioma en runtime.
+Uso: <code>{{ &#39;auth.login.title&#39; | translate }}</code>.</p>
+
+            </p>
 
 
         <section data-compodoc="block-metadata">
@@ -184,14 +193,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="12"
-                                    class="link-to-prism">src/app/core/pipes/translate.pipe.ts:12</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="19"
+                                    class="link-to-prism">src/app/core/pipes/translate.pipe.ts:19</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Resuelve una clave de traducción con fallback opcional.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -252,6 +263,12 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Pipe, PipeTransform } from &#x27;@angular/core&#x27;;
 import { TranslationService } from &#x27;../services/translation.service&#x27;;
 
+/**
+ * Pipe de traducción para templates.
+ *
+ * Es &#x60;pure: false&#x60; para reevaluar cuando cambia el idioma en runtime.
+ * Uso: &#x60;{{ &#x27;auth.login.title&#x27; | translate }}&#x60;.
+ */
 @Pipe({
   name: &#x27;translate&#x27;,
   pure: false,
@@ -260,6 +277,7 @@ import { TranslationService } from &#x27;../services/translation.service&#x27;;
 export class TranslatePipe implements PipeTransform {
   constructor(private translationService: TranslationService) {}
 
+  /** Resuelve una clave de traducción con fallback opcional. */
   transform(key: string, defaultValue?: string): string {
     return this.translationService.get(key, defaultValue);
   }

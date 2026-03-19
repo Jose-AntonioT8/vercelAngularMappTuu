@@ -14,6 +14,13 @@ import { ActivityService } from '../../../core/services/activity.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { PlanService } from '../../../core/services/plan.service';
 import { UserService } from '../../../core/services/user.service';
+/**
+ * Detalle de plan.
+ *
+ * - Carga el plan por id de ruta y resuelve sus actividades.
+ * - Permite guardar el plan en el perfil del usuario.
+ * - Permite crear/editar reseñas y listar reseñas existentes.
+ */
 @Component({
   selector: 'app-plans',
   standalone: true,
@@ -31,20 +38,29 @@ import { UserService } from '../../../core/services/user.service';
 })
 export class PlansComponent implements OnInit {
   constructor(private userService: UserService, private auth: AuthService) {}
+  /** Indica si el plan está guardado por el usuario actual. */
   isPlanSaved = false;
+  /** Plan cargado desde API. */
   plan?: Plan;
+  /** Descripción derivada del plan (por compatibilidad). */
   planDescription?: string;
+  /** Actividades resueltas a partir de `plan.activitiesIds`. */
   activities: Activity[] = [];
+  /** Controla el modal de reseña (crear/editar). */
   isReviewModalOpen = false;
+  /** Reseña del usuario actual (si existe). */
   userReview: Review | null = null;
   private cdr = inject(ChangeDetectorRef);
+  /** Controla el modal con la lista de reseñas. */
   isReviewsListModalOpen = false;
   private activityService = inject(ActivityService);
   private planService = inject(PlanService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  /** Servicio de auth expuesto al template. */
   public authService = inject(AuthService);
 
+  /** Carga el plan y sus actividades asociadas. */
   ngOnInit() {
     const idUrl = this.route.snapshot.paramMap.get('id');
     this.planService.getPlanId(idUrl!).subscribe({
@@ -85,6 +101,7 @@ export class PlansComponent implements OnInit {
     });
   }
 
+  /** Verifica en el perfil del usuario si el plan ya está guardado. */
   private async checkIfPlanSaved(): Promise<void> {
     const user = this.authService.currentUser;
     if (!user || !this.plan) return;
@@ -106,16 +123,20 @@ export class PlansComponent implements OnInit {
     }
   }
 
+  /** Abre el modal de lista de reseñas. */
   openReviewsListModal() {
     this.isReviewsListModalOpen = true;
   }
 
+  /** Cierra el modal de lista de reseñas. */
   closeReviewsListModal() {
     this.isReviewsListModalOpen = false;
   }
+  /** Navega de vuelta al listado de planes. */
   goBack() {
     this.router.navigate(['/plansList']);
   }
+  /** Guarda el plan en el perfil del usuario actual. */
   async savePlan() {
     if (this.isPlanSaved) return; // Evitar guardar si ya está guardado
 
@@ -131,6 +152,7 @@ export class PlansComponent implements OnInit {
     this.userService.savePlan(user.uid, this.plan!.id, token).subscribe();
   }
 
+  /** Formatea un Timestamp de Firebase a `dd/mm/yyyy`. */
   getFormattedDate(firebaseTimestamp: any): string {
     // Convierte el Timestamp de Firebase a un objeto Date de JavaScript.
     // Esto puede causar una pérdida de precisión a milisegundos.
@@ -220,14 +242,17 @@ export class PlansComponent implements OnInit {
     }
   }
 
+  /** Abre el modal de reseña. */
   openReviewModal() {
     this.isReviewModalOpen = true;
   }
 
+  /** Cierra el modal de reseña. */
   closeReviewModal() {
     this.isReviewModalOpen = false;
   }
 
+  /** Emite la reseña al backend y sincroniza el plan con la respuesta. */
   handleReviewSubmit(review: Review) {
     if (!this.plan) return;
 

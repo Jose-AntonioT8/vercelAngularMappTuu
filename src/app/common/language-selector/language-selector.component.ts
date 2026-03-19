@@ -4,6 +4,12 @@ import { TranslationService } from '../../core/services/translation.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+/**
+ * Selector de idioma (standalone) con dropdown.
+ *
+ * Sincroniza el idioma actual con `TranslationService.currentLanguage$` y
+ * se auto-limpia en `ngOnDestroy` usando `takeUntil`.
+ */
 @Component({
   selector: 'app-language-selector',
   standalone: true,
@@ -62,13 +68,18 @@ import { takeUntil } from 'rxjs/operators';
   `]
 })
 export class LanguageSelectorComponent implements OnInit, OnDestroy {
+  /** Código de idioma activo (por defecto: español). */
   currentLanguage: string = 'es';
+  /** Lista de idiomas soportados expuesta por `TranslationService`. */
   languages: string[] = [];
+  /** Controla el estado del dropdown. */
   isDropdownOpen: boolean = false;
+  /** Notificador de destrucción para cortar subscriptions. */
   private destroy$ = new Subject<void>();
 
   constructor(private translationService: TranslationService) {}
 
+  /** Inicializa el idioma y se suscribe a cambios reactivos. */
   ngOnInit(): void {
     this.currentLanguage = this.translationService.getCurrentLanguage();
     this.languages = this.translationService.getSupportedLanguages();
@@ -81,28 +92,34 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
       });
   }
 
+  /** Limpia subscriptions/recursos del componente. */
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 
+  /** Cambia el idioma actual y cierra el dropdown. */
   changeLanguage(lang: string): void {
     this.translationService.setLanguage(lang);
     this.closeDropdown();
   }
 
+  /** Alterna el estado abierto/cerrado del dropdown. */
   toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
+  /** Cierra el dropdown si está abierto. */
   closeDropdown(): void {
     this.isDropdownOpen = false;
   }
 
+  /** Devuelve el emoji bandera del idioma actual. */
   getLanguageFlag(): string {
     return this.getLanguageFlagByCode(this.currentLanguage);
   }
 
+  /** Mapea un código de idioma a su emoji (fallback: 🌐). */
   getLanguageFlagByCode(lang: string): string {
     const flags: { [key: string]: string } = {
       'es': '🇪🇸',
@@ -112,10 +129,12 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     return flags[lang] || '🌐';
   }
 
+  /** Devuelve el label del idioma actual. */
   getLanguageLabel(): string {
     return this.getLanguageLabelByCode(this.currentLanguage);
   }
 
+  /** Mapea un código de idioma a su nombre legible (fallback: `lang.toUpperCase()`). */
   getLanguageLabelByCode(lang: string): string {
     const labels: { [key: string]: string } = {
       'es': 'Español',

@@ -144,6 +144,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Valor de coordenadas para el control de formulario.</p>
+<p><code>null</code> representa “sin valor” (campo vacío).</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -212,6 +220,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Latitud en grados ([-90, 90]) o <code>null</code> si no hay valor.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -245,6 +259,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Longitud en grados ([-180, 180]) o <code>null</code> si no hay valor.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -257,11 +277,28 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from &#x27;@angular/forms&#x27;;
 import { DomSanitizer, SafeResourceUrl } from &#x27;@angular/platform-browser&#x27;;
 
+/**
+ * Valor de coordenadas para el control de formulario.
+ *
+ * &#x60;null&#x60; representa “sin valor” (campo vacío).
+ */
 export interface Coordinates {
+  /** Latitud en grados ([-90, 90]) o &#x60;null&#x60; si no hay valor. */
   latitude: number | null;
+  /** Longitud en grados ([-180, 180]) o &#x60;null&#x60; si no hay valor. */
   longitude: number | null;
 }
 
+/**
+ * Control personalizado de coordenadas (lat/lng) compatible con Reactive Forms.
+ *
+ * - Expone inputs para latitud/longitud como strings (UX) pero emite números.
+ * - Puede mostrar un mapa embebido (Google Maps) cuando las coordenadas son válidas.
+ *
+ * Nota de seguridad:
+ * - Se usa &#x60;bypassSecurityTrustResourceUrl&#x60; únicamente para una URL construida
+ *   a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.
+ */
 @Component({
   selector: &#x27;app-coordinates-input&#x27;,
   standalone: true,
@@ -277,20 +314,30 @@ export interface Coordinates {
   ]
 })
 export class CoordinatesInputComponent implements ControlValueAccessor {
+  /** Etiqueta del campo. */
   @Input() label: string &#x3D; &#x27;Coordenadas&#x27;;
+  /** Mensaje de error a mostrar en UI. */
   @Input() errorMessage: string &#x3D; &#x27;&#x27;;
+  /** Si &#x60;true&#x60;, muestra un iframe de mapa cuando el valor es válido. */
   @Input() showMap: boolean &#x3D; true;
   
+  /** Latitud introducida (string para permitir campos vacíos). */
   latitude: string &#x3D; &#x27;&#x27;;
+  /** Longitud introducida (string para permitir campos vacíos). */
   longitude: string &#x3D; &#x27;&#x27;;
+  /** Estado disabled recibido desde el formulario. */
   disabled: boolean &#x3D; false;
+  /** Marca si el usuario ya tocó el control. */
   touched: boolean &#x3D; false;
 
+  /** Callback del formulario al cambiar el valor. */
   onChange: any &#x3D; () &#x3D;&gt; {};
+  /** Callback del formulario al marcar como tocado. */
   onTouched: any &#x3D; () &#x3D;&gt; {};
 
   constructor(private sanitizer: DomSanitizer) {}
 
+  /** Sincroniza el valor externo (form) hacia el control. */
   writeValue(value: Coordinates): void {
     if (value) {
       this.latitude &#x3D; value.latitude !&#x3D;&#x3D; null ? String(value.latitude) : &#x27;&#x27;;
@@ -305,31 +352,37 @@ export class CoordinatesInputComponent implements ControlValueAccessor {
     this.onChange &#x3D; fn;
   }
 
+  /** Registra el callback de &quot;tocado&quot; del formulario. */
   registerOnTouched(fn: any): void {
     this.onTouched &#x3D; fn;
   }
 
+  /** Habilita/deshabilita el control desde el form. */
   setDisabledState(isDisabled: boolean): void {
     this.disabled &#x3D; isDisabled;
   }
 
+  /** Handler de cambio en el input de latitud. */
   onLatitudeChange(event: Event): void {
     const input &#x3D; event.target as HTMLInputElement;
     this.latitude &#x3D; input.value;
     this.emitValue();
   }
 
+  /** Handler de cambio en el input de longitud. */
   onLongitudeChange(event: Event): void {
     const input &#x3D; event.target as HTMLInputElement;
     this.longitude &#x3D; input.value;
     this.emitValue();
   }
 
+  /** Marca el control como “tocado” (touched). */
   onBlur(): void {
     this.touched &#x3D; true;
     this.onTouched();
   }
 
+  /** Construye el valor &#x60;Coordinates&#x60; y lo propaga al formulario. */
   private emitValue(): void {
     const lat &#x3D; this.latitude ? parseFloat(this.latitude) : null;
     const lng &#x3D; this.longitude ? parseFloat(this.longitude) : null;
@@ -340,6 +393,11 @@ export class CoordinatesInputComponent implements ControlValueAccessor {
     });
   }
 
+  /**
+   * URL (sanitizada) de Google Maps para embebido.
+   *
+   * Devuelve &#x60;null&#x60; si lat/lng no son números.
+   */
   get mapUrl(): SafeResourceUrl | null {
     const lat &#x3D; parseFloat(this.latitude);
     const lng &#x3D; parseFloat(this.longitude);
@@ -352,6 +410,7 @@ export class CoordinatesInputComponent implements ControlValueAccessor {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
+  /** Valida rango numérico de las coordenadas. */
   get isValidCoordinates(): boolean {
     const lat &#x3D; parseFloat(this.latitude);
     const lng &#x3D; parseFloat(this.longitude);

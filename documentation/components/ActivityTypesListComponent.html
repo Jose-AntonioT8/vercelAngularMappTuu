@@ -138,6 +138,14 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Pantalla de listado de tipos de actividad.</p>
+<p>Delega el render del listado al componente común <code>activityTypes/list</code>.</p>
+
+    </p>
 
 
 
@@ -219,6 +227,11 @@ import { HeaderComponent } from &#x27;../../../common/header/header.component&#x
 import { ListComponent as ActivityTypeList } from &#x27;../../../common/activityTypes/list/list.component&#x27;;
 import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
 
+/**
+ * Pantalla de listado de tipos de actividad.
+ *
+ * Delega el render del listado al componente común &#x60;activityTypes/list&#x60;.
+ */
 @Component({
   selector: &#x27;app-activity-types-list&#x27;,
   standalone: true,

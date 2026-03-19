@@ -138,6 +138,14 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Footer de navegación primaria (mobile-first).</p>
+<p>Renderiza accesos rápidos a secciones clave (home/mapa/perfil).</p>
+
+    </p>
 
 
 
@@ -262,10 +270,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/common/footer/footer.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/common/footer/footer.component.ts:24</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Items de navegación renderizados por el template.</p>
+<p>Nota: el <code>route</code> apunta a rutas del router Angular.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -279,6 +294,11 @@
 import { Component, inject } from &#x27;@angular/core&#x27;;
 import { RouterLink } from &#x27;@angular/router&#x27;;
 
+/**
+ * Footer de navegación primaria (mobile-first).
+ *
+ * Renderiza accesos rápidos a secciones clave (home/mapa/perfil).
+ */
 @Component({
   selector: &#x27;app-footer&#x27;,
   standalone: true,
@@ -288,7 +308,11 @@ import { RouterLink } from &#x27;@angular/router&#x27;;
 })
 export class FooterComponent {
 
-  
+  /**
+   * Items de navegación renderizados por el template.
+   *
+   * Nota: el &#x60;route&#x60; apunta a rutas del router Angular.
+   */
   navItems &#x3D; [
     { name: &#x27;Home&#x27;, route: &#x27;/landingPage&#x27;, icon: &#x27;home&#x27;, iconURL: &#x27;assets/icons/footer/home.svg&#x27; },
     { name: &#x27;Maps&#x27;, route: &#x27;/maps&#x27;, icon: &#x27;map&#x27;, iconURL: &#x27;assets/icons/footer/maps.svg&#x27; },

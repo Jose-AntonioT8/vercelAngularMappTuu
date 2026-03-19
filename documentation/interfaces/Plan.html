@@ -144,6 +144,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Modelo de plan.</p>
+<p>Un plan agrupa actividades (por <code>activitiesIds</code>) y puede ser público/privado.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -268,6 +276,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>IDs de actividades asociadas al plan.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -306,6 +320,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Fecha de creación (si la aporta backend).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -339,6 +359,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Descripción larga del plan.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -372,6 +398,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Identificador único del plan.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -405,6 +437,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Referencia/URL de imagen principal.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -438,6 +476,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Nombre/título del plan.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -471,6 +515,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Número total de valoraciones usadas en <code>rating</code>.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -504,6 +554,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ID del usuario propietario/creador.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -537,6 +593,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Media de rating del plan.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -575,6 +637,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Reseñas asociadas (opcional, según endpoint).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -608,6 +676,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Visibilidad pública.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -616,24 +690,45 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Plan {
+  /** Identificador único del plan. */
   id: string;
+  /** Nombre/título del plan. */
   name: string;
+  /** IDs de actividades asociadas al plan. */
   activitiesIds: string[];
+  /** Referencia/URL de imagen principal. */
   imgRef: string;
+  /** ID del usuario propietario/creador. */
   ownerId: string;
+  /** Fecha de creación (si la aporta backend). */
   createdAt?: Date;
+  /** Media de rating del plan. */
   rating: number;
+  /** Visibilidad pública. */
   visibility: boolean;
+  /** Descripción larga del plan. */
   description: string;
+  /** Número total de valoraciones usadas en &#x60;rating&#x60;. */
   numRatings: number;
+  /** Reseñas asociadas (opcional, según endpoint). */
   reviews?: Review[];
 }
 
+/**
+ * Reseña/valoración.
+ *
+ * Se usa tanto en planes como en actividades (dependiendo del módulo).
+ */
 export interface Review {
+  /** ID de la reseña (si ya existe en DB). */
   id?: string;
+  /** ID del usuario que publica la reseña. */
   userId: string;
+  /** Puntuación del 1 al 5. */
   rating: number;
+  /** Comentario textual (opcional según UX; aquí se requiere string). */
   comment: string;
+  /** Fecha de creación (si la aporta backend). */
   createdAt?: Date;
 }
 </code></pre>

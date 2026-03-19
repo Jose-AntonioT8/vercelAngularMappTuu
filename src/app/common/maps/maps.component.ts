@@ -1,23 +1,45 @@
 import { Component, AfterViewInit, Input, OnChanges, ViewChild, ElementRef, SimpleChanges, Inject, PLATFORM_ID, NgZone } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import {mapsService} from '../../core/services/maps.service'
+import { MapsService } from '../../core/services/maps.service'
 import * as L from 'leaflet';
 import { TranslatePipe } from '../../core/pipes/translate.pipe';
 import { PricePipe } from '../../core/pipes/price.pipe';
 
+/**
+ * Datos de marcador para pintar puntos en el mapa.
+ *
+ * Se usa tanto en el mapa general como en listados con mini-mapa.
+ */
 export interface MapMarkerData {
+  /** Latitud del marcador. */
   latitude: number;
+  /** Longitud del marcador. */
   longitude: number;
+  /** Título visible del punto. */
   title: string;
+  /** Descripción opcional. */
   description?: string;
+  /** Rating opcional (por ejemplo, media). */
   rating?: number;
+  /** Enlace a detalle (routerLink o URL). */
   link?: string;
+  /** URL de imagen asociada. */
   image?: string;
+  /** Color del marcador (CSS). */
   color?: string;
+  /** Precio opcional asociado al punto. */
   price?: number;
 }
 
+/**
+ * Mapa interactivo de actividades basado en Leaflet.
+ *
+ * - Pinta marcadores a partir de `points`.
+ * - Ajusta el viewport para encajar todos los puntos.
+ * - Al clicar un marcador, muestra una tarjeta y resuelve la dirección por `mapsService`.
+ * - En SSR, evita inicializar Leaflet (solo browser).
+ */
 @Component({
   selector: 'app-activity-map',
   standalone: true,
@@ -45,15 +67,20 @@ export interface MapMarkerData {
 
 export class MapComponent implements AfterViewInit, OnChanges {
 
+  /** Puntos a renderizar como marcadores. */
   @Input() points: MapMarkerData[] = [];
+  /** Centro inicial del mapa (fallback si no hay puntos). */
   @Input() center: [number, number] = [40.416, -3.703];
+  /** Zoom inicial del mapa. */
   @Input() zoom: number = 6;
 
+  /** Dirección humana del punto seleccionado (si se resuelve). */
   location?: string;
 
+  /** Contenedor DOM del mapa. */
   @ViewChild('mapContainer') mapContainer!: ElementRef;
 
-  // Variable para controlar qué tarjeta se muestra
+  /** Punto seleccionado para mostrar su tarjeta. */
   selectedPoint: MapMarkerData | null = null;
 
   private map: L.Map | undefined;
@@ -62,7 +89,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private zone: NgZone,
-    private servimapa: mapsService,
+    private servimapa: MapsService,
   ) {}
 
 
@@ -76,17 +103,19 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
   }
 
+  /** Re-renderiza marcadores cuando cambia `points`. */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['points'] && this.map) {
       this.updateMarkers();
     }
   }
 
-  // Método para cerrar la tarjeta manualmente
+  /** Cierra la tarjeta del punto seleccionado. */
   closeCard() {
     this.selectedPoint = null;
   }
 
+  /** Inicializa Leaflet (tiles, controles, handlers) y la capa de marcadores. */
   private initMap(): void {
     this.map = L.map(this.mapContainer.nativeElement, { zoomControl: false }).setView(this.center, this.zoom);
 
@@ -112,6 +141,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     });
   }
 
+  /** Sincroniza la capa de marcadores con el array `points`. */
   private updateMarkers(): void {
     if (!this.map) return;
     
@@ -157,11 +187,13 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
   }
 
+  /** Ajusta el icono default de Leaflet para que use nuestro estilo. */
   private fixLeafletIcons(): void {
     const iconDefault = this.createColoredMarker('#5675AC');
     L.Marker.prototype.options.icon = iconDefault;
   }
 
+  /** Crea un `DivIcon` SVG con color configurado. */
   private createColoredMarker(color: string): L.DivIcon {
     const svgIcon = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36">
@@ -178,10 +210,5 @@ export class MapComponent implements AfterViewInit, OnChanges {
       popupAnchor: [0, -36]
     });
   }
-  ngOnInit() {
-    
-      
-      
-    }
-  
+
 }

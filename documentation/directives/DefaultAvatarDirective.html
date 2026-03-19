@@ -136,6 +136,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Directiva para fallback de avatar en <code>&lt;img&gt;</code>.</p>
+<p>Si la imagen no tiene <code>src</code> válido o falla al cargar, genera un SVG inline
+(data URL) con una inicial.</p>
+
+            </p>
 
 
             <p class="comment">
@@ -181,23 +190,11 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#generateSvgAvatar" >generateSvgAvatar</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#getInitial" >getInitial</a>
-                            </li>
-                            <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
                                     <span class="modifier"></span>
                                 <a href="#onError" >onError</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#setDefaultAvatar" >setDefaultAvatar</a>
                             </li>
                         </ul>
                     </td>
@@ -259,7 +256,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:21</a></div>
                             </td>
                         </tr>
 
@@ -320,9 +317,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:8</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:15</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Texto base para extraer la inicial (por ejemplo nombre o email).</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -346,9 +349,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:19</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Color de fondo del SVG.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -372,9 +381,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:9</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:17</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Tamaño del avatar (px).</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -398,9 +413,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:11</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:21</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Color de texto (inicial) del SVG.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -424,12 +445,19 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:35</a></div>
                 </td>
             </tr>
 
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Handler del evento <code>error</code> del <code>&lt;img&gt;</code> para aplicar fallback.</p>
+</div>
+
+                </td>
+            </tr>
         </tbody>
     </table>
 </section>
@@ -438,114 +466,6 @@
     <h3 id="methods">
         Methods
     </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="generateSvgAvatar"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>generateSvgAvatar</b></span>
-                        <a href="#generateSvgAvatar"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>generateSvgAvatar(initial: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="39"
-                                    class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:39</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>initial</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getInitial"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>getInitial</b></span>
-                        <a href="#getInitial"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getInitial()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:32</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -566,14 +486,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:15</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="26"
+                                    class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:26</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Aplica el avatar por defecto si no hay <code>src</code> válido.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -612,53 +534,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:35</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="setDefaultAvatar"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>setDefaultAvatar</b></span>
-                        <a href="#setDefaultAvatar"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>setDefaultAvatar()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/app/core/directives/default-avatar.directive.ts:27</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
+                        <div class="io-description"><p>Handler del evento <code>error</code> del <code>&lt;img&gt;</code> para aplicar fallback.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -677,18 +562,29 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Directive, ElementRef, Input, OnInit, HostListener } from &#x27;@angular/core&#x27;;
 
+/**
+ * Directiva para fallback de avatar en &#x60;&lt;img&gt;&#x60;.
+ *
+ * Si la imagen no tiene &#x60;src&#x60; válido o falla al cargar, genera un SVG inline
+ * (data URL) con una inicial.
+ */
 @Directive({
   selector: &#x27;[appDefaultAvatar]&#x27;,
   standalone: true
 })
 export class DefaultAvatarDirective implements OnInit {
+  /** Texto base para extraer la inicial (por ejemplo nombre o email). */
   @Input() appDefaultAvatar: string &#x3D; &#x27;&#x27;;
+  /** Tamaño del avatar (px). */
   @Input() avatarSize: number &#x3D; 100;
+  /** Color de fondo del SVG. */
   @Input() avatarBgColor: string &#x3D; &#x27;#5675AC&#x27;;
+  /** Color de texto (inicial) del SVG. */
   @Input() avatarTextColor: string &#x3D; &#x27;#ffffff&#x27;;
 
   constructor(private el: ElementRef&lt;HTMLImageElement&gt;) {}
 
+  /** Aplica el avatar por defecto si no hay &#x60;src&#x60; válido. */
   ngOnInit(): void {
     const img &#x3D; this.el.nativeElement;
     if (!img.src || img.src &#x3D;&#x3D;&#x3D; window.location.href) {
@@ -696,16 +592,19 @@ export class DefaultAvatarDirective implements OnInit {
     }
   }
 
+  /** Handler del evento &#x60;error&#x60; del &#x60;&lt;img&gt;&#x60; para aplicar fallback. */
   @HostListener(&#x27;error&#x27;)
   onError(): void {
     this.setDefaultAvatar();
   }
 
+  /** Establece el data URL generado como &#x60;src&#x60; del &#x60;&lt;img&gt;&#x60;. */
   private setDefaultAvatar(): void {
     const initial &#x3D; this.getInitial();
     this.el.nativeElement.src &#x3D; this.generateSvgAvatar(initial);
   }
 
+  /** Obtiene la inicial a partir del texto de entrada (fallback: &#x27;?&#x27;). */
   private getInitial(): string {
     if (this.appDefaultAvatar) {
       return this.appDefaultAvatar.charAt(0).toUpperCase();
@@ -713,6 +612,7 @@ export class DefaultAvatarDirective implements OnInit {
     return &#x27;?&#x27;;
   }
 
+  /** Genera un SVG circular con la inicial y lo retorna como data URL base64. */
   private generateSvgAvatar(initial: string): string {
     const svg &#x3D; &#x60;
       &lt;svg xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; width&#x3D;&quot;${this.avatarSize}&quot; height&#x3D;&quot;${this.avatarSize}&quot; viewBox&#x3D;&quot;0 0 100 100&quot;&gt;

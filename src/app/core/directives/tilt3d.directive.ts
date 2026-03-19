@@ -1,15 +1,29 @@
 import { Directive, ElementRef, HostListener, Input, OnInit, OnDestroy, Renderer2 } from '@angular/core';
 
+/**
+ * Directiva de efecto “tilt 3D” al pasar el ratón.
+ *
+ * Aplica transforms de rotación/escala en función de la posición del mouse y,
+ * opcionalmente, un overlay de “glare” para dar profundidad.
+ *
+ * Diseñada para usarse en cards (por ejemplo `app-card`).
+ */
 @Directive({
   selector: '[appTilt3D]',
   standalone: true
 })
 export class Tilt3DDirective implements OnInit, OnDestroy {
+  /** Rotación máxima en eje X (grados). */
   @Input() tiltMaxX: number = 15;
+  /** Rotación máxima en eje Y (grados). */
   @Input() tiltMaxY: number = 15;
+  /** Escala aplicada durante el hover. */
   @Input() tiltScale: number = 1.02;
+  /** Duración de transición (ms). */
   @Input() tiltSpeed: number = 400;
+  /** Si `true`, añade capa de brillo (glare). */
   @Input() glareEnabled: boolean = true;
+  /** Opacidad máxima del glare. */
   @Input() glareMaxOpacity: number = 0.3;
 
   private glareElement?: HTMLElement;
@@ -20,6 +34,7 @@ export class Tilt3DDirective implements OnInit, OnDestroy {
     private renderer: Renderer2
   ) {}
 
+  /** Inicializa wrapper/estilos y (opcionalmente) el glare. */
   ngOnInit() {
     this.wrapElement();
     this.setupStyles();
@@ -28,12 +43,14 @@ export class Tilt3DDirective implements OnInit, OnDestroy {
     }
   }
 
+  /** Limpia el glare si fue creado. */
   ngOnDestroy() {
     if (this.glareElement) {
       this.glareElement.remove();
     }
   }
 
+  /** Configura estilos base necesarios para el efecto (perspective/clip). */
   private wrapElement() {
     const element = this.el.nativeElement;
     const computedStyle = window.getComputedStyle(element);
@@ -54,6 +71,7 @@ export class Tilt3DDirective implements OnInit, OnDestroy {
     element.style.webkitMaskImage = '-webkit-radial-gradient(white, black)';
   }
 
+  /** Aplica estilos de transición/optimizaciones para animación. */
   private setupStyles() {
     const element = this.el.nativeElement;
     element.style.transformStyle = 'flat';
@@ -61,6 +79,7 @@ export class Tilt3DDirective implements OnInit, OnDestroy {
     element.style.willChange = 'transform';
   }
 
+  /** Crea y añade la capa de brillo (glare) si está habilitada. */
   private createGlare() {
     const element = this.el.nativeElement;
     const computedStyle = window.getComputedStyle(element);
@@ -86,12 +105,14 @@ export class Tilt3DDirective implements OnInit, OnDestroy {
     element.appendChild(this.glareElement);
   }
 
+  /** Ajusta transición al entrar con el mouse. */
   @HostListener('mouseenter')
   onMouseEnter() {
     const element = this.el.nativeElement;
     element.style.transition = `transform ${this.tiltSpeed}ms cubic-bezier(0.03, 0.98, 0.52, 0.99)`;
   }
 
+  /** Calcula rotación/escala según posición del mouse y actualiza glare. */
   @HostListener('mousemove', ['$event'])
   onMouseMove(event: MouseEvent) {
     const element = this.el.nativeElement;
@@ -128,6 +149,7 @@ export class Tilt3DDirective implements OnInit, OnDestroy {
     }
   }
 
+  /** Resetea transform y oculta glare al salir con el mouse. */
   @HostListener('mouseleave')
   onMouseLeave() {
     const element = this.el.nativeElement;

@@ -8,6 +8,15 @@ import { LanguageSelectorComponent } from '../../../common/language-selector/lan
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { AuthService } from '../../../core/services/auth.service';
 import { TranslationService } from '../../../core/services/translation.service';
+
+/**
+ * Pantalla de login.
+ *
+ * Responsabilidades:
+ * - Validar credenciales (email/password) y orquestar el login con `AuthService`.
+ * - Soportar login social (Google/GitHub).
+ * - Enviar correo de restablecimiento de contraseña (Firebase Auth).
+ */
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -21,11 +30,17 @@ import { TranslationService } from '../../../core/services/translation.service';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
+  /** Mensaje de error para UI. */
   error = '';
+  /** Mensaje de éxito para UI. */
   success = '';
+  /** Flag para evitar dobles envíos. */
   isLoading = false;
+  /** Toggle de visibilidad del password. */
   showPassword = false;
+  /** Email usado para el modal de reset. */
   emailAddress: string = '';
+  /** Controla el modal de reset de contraseña. */
   showResetModal = false;
   formLogin;
 
@@ -43,10 +58,12 @@ export class LoginComponent {
     });
   }
 
+  /** Alterna visibilidad del campo contraseña. */
   togglePassword(): void {
     this.showPassword = !this.showPassword;
   }
 
+  /** Envía email de restablecimiento usando el email actual del formulario. */
   sendPasswordReset(): void {
     if (!this.formLogin.controls.email.value) {
       this.error = this.translation.instant('auth.login.emailRequired');
@@ -68,10 +85,12 @@ export class LoginComponent {
       });
   }
 
+  /** Cierra el modal de reset. */
   closeResetModal(): void {
     this.showResetModal = false;
   }
 
+  /** Devuelve mensaje de error traducido según validación del control. */
   getError(control: string): string {
     switch (control) {
       case 'email':
@@ -91,10 +110,12 @@ export class LoginComponent {
     return '';
   }
 
+  /** Navega a la pantalla de registro. */
   singUp(): void {
     this.route.navigate(['/signup']);
   }
 
+  /** Login vía Google OAuth. */
   async onGoogleLogin(): Promise<void> {
     try {
       this.error = '';
@@ -104,6 +125,7 @@ export class LoginComponent {
     }
   }
 
+  /** Login vía GitHub OAuth. */
   async onGithubLogin(): Promise<void> {
     try {
       this.error = '';
@@ -113,6 +135,7 @@ export class LoginComponent {
     }
   }
 
+  /** Mapea errores frecuentes de OAuth para UX. */
   private handleSocialError(err: any, provider: string): void {
     switch (err.code) {
       case 'auth/popup-closed-by-user':
@@ -132,6 +155,7 @@ export class LoginComponent {
     }
   }
 
+  /** Login con email/password. */
   async onLogin(): Promise<void> {
     if (this.formLogin.invalid || this.isLoading) return;
 

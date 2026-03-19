@@ -144,6 +144,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Datos de marcador para pintar puntos en el mapa.</p>
+<p>Se usa tanto en el mapa general como en listados con mini-mapa.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -265,6 +273,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Color del marcador (CSS).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -303,6 +317,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Descripción opcional.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -341,6 +361,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>URL de imagen asociada.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -374,6 +400,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Latitud del marcador.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -412,6 +444,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Enlace a detalle (routerLink o URL).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -445,6 +483,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Longitud del marcador.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -483,6 +527,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Precio opcional asociado al punto.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -521,6 +571,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Rating opcional (por ejemplo, media).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -554,6 +610,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Título visible del punto.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -564,23 +626,45 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, AfterViewInit, Input, OnChanges, ViewChild, ElementRef, SimpleChanges, Inject, PLATFORM_ID, NgZone } from &#x27;@angular/core&#x27;;
 import { isPlatformBrowser, CommonModule } from &#x27;@angular/common&#x27;;
 import { RouterLink } from &#x27;@angular/router&#x27;;
-import {mapsService} from &#x27;../../core/services/maps.service&#x27;
+import { MapsService } from &#x27;../../core/services/maps.service&#x27;
 import * as L from &#x27;leaflet&#x27;;
 import { TranslatePipe } from &#x27;../../core/pipes/translate.pipe&#x27;;
 import { PricePipe } from &#x27;../../core/pipes/price.pipe&#x27;;
 
+/**
+ * Datos de marcador para pintar puntos en el mapa.
+ *
+ * Se usa tanto en el mapa general como en listados con mini-mapa.
+ */
 export interface MapMarkerData {
+  /** Latitud del marcador. */
   latitude: number;
+  /** Longitud del marcador. */
   longitude: number;
+  /** Título visible del punto. */
   title: string;
+  /** Descripción opcional. */
   description?: string;
+  /** Rating opcional (por ejemplo, media). */
   rating?: number;
+  /** Enlace a detalle (routerLink o URL). */
   link?: string;
+  /** URL de imagen asociada. */
   image?: string;
+  /** Color del marcador (CSS). */
   color?: string;
+  /** Precio opcional asociado al punto. */
   price?: number;
 }
 
+/**
+ * Mapa interactivo de actividades basado en Leaflet.
+ *
+ * - Pinta marcadores a partir de &#x60;points&#x60;.
+ * - Ajusta el viewport para encajar todos los puntos.
+ * - Al clicar un marcador, muestra una tarjeta y resuelve la dirección por &#x60;mapsService&#x60;.
+ * - En SSR, evita inicializar Leaflet (solo browser).
+ */
 @Component({
   selector: &#x27;app-activity-map&#x27;,
   standalone: true,
@@ -608,15 +692,20 @@ export interface MapMarkerData {
 
 export class MapComponent implements AfterViewInit, OnChanges {
 
+  /** Puntos a renderizar como marcadores. */
   @Input() points: MapMarkerData[] &#x3D; [];
+  /** Centro inicial del mapa (fallback si no hay puntos). */
   @Input() center: [number, number] &#x3D; [40.416, -3.703];
+  /** Zoom inicial del mapa. */
   @Input() zoom: number &#x3D; 6;
 
+  /** Dirección humana del punto seleccionado (si se resuelve). */
   location?: string;
 
+  /** Contenedor DOM del mapa. */
   @ViewChild(&#x27;mapContainer&#x27;) mapContainer!: ElementRef;
 
-  // Variable para controlar qué tarjeta se muestra
+  /** Punto seleccionado para mostrar su tarjeta. */
   selectedPoint: MapMarkerData | null &#x3D; null;
 
   private map: L.Map | undefined;
@@ -625,7 +714,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private zone: NgZone,
-    private servimapa: mapsService,
+    private servimapa: MapsService,
   ) {}
 
 
@@ -639,17 +728,19 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
   }
 
+  /** Re-renderiza marcadores cuando cambia &#x60;points&#x60;. */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes[&#x27;points&#x27;] &amp;&amp; this.map) {
       this.updateMarkers();
     }
   }
 
-  // Método para cerrar la tarjeta manualmente
+  /** Cierra la tarjeta del punto seleccionado. */
   closeCard() {
     this.selectedPoint &#x3D; null;
   }
 
+  /** Inicializa Leaflet (tiles, controles, handlers) y la capa de marcadores. */
   private initMap(): void {
     this.map &#x3D; L.map(this.mapContainer.nativeElement, { zoomControl: false }).setView(this.center, this.zoom);
 
@@ -675,6 +766,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     });
   }
 
+  /** Sincroniza la capa de marcadores con el array &#x60;points&#x60;. */
   private updateMarkers(): void {
     if (!this.map) return;
     
@@ -720,11 +812,13 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
   }
 
+  /** Ajusta el icono default de Leaflet para que use nuestro estilo. */
   private fixLeafletIcons(): void {
     const iconDefault &#x3D; this.createColoredMarker(&#x27;#5675AC&#x27;);
     L.Marker.prototype.options.icon &#x3D; iconDefault;
   }
 
+  /** Crea un &#x60;DivIcon&#x60; SVG con color configurado. */
   private createColoredMarker(color: string): L.DivIcon {
     const svgIcon &#x3D; &#x60;
       &lt;svg xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; viewBox&#x3D;&quot;0 0 24 24&quot; width&#x3D;&quot;36&quot; height&#x3D;&quot;36&quot;&gt;
@@ -741,12 +835,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
       popupAnchor: [0, -36]
     });
   }
-  ngOnInit() {
-    
-      
-      
-    }
-  
+
 }</code></pre>
     </div>
 </div>

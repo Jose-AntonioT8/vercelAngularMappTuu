@@ -10,6 +10,14 @@ import { RouterModule } from '@angular/router';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 
+/**
+ * Pantalla de edición de un plan existente.
+ *
+ * Flujo:
+ * - Carga el catálogo de actividades (para seleccionar por nombre en la UI).
+ * - Carga el plan por `id` de ruta y “traduce” `activitiesIds` ↔ nombres.
+ * - En el submit, convierte nombres seleccionados a IDs y llama al backend con token.
+ */
 @Component({
   standalone: true,
   selector: 'app-plans-update',
@@ -18,20 +26,33 @@ import { LanguageSelectorComponent } from '../../../common/language-selector/lan
   styleUrls: ['./plans-update.component.scss']
 })
 export class PlansUpdateComponent implements OnInit {
+  /** Mensaje de error para UI. */
   error = '';
+  /** Mensaje de éxito para UI. */
   success = '';
+  /** Formulario reactivo de edición del plan. */
   formPlanUpdate: FormGroup;
+  /** Snapshot del plan cargado (no tipado). */
   planData: any;
+  /** ID del plan en edición (ruta). */
   currentId: string | null = null;
+  /** Catálogo de actividades disponible para mapear ids ↔ nombres. */
   activities: Activity[] = [];
+  /** Lista de nombres (derivada) para UI. */
   activitiesName: string[] = [];
 
   constructor(
+    /** Constructor de formularios. */
     private formSvc: FormBuilder,
+    /** Router para navegar tras actualizar. */
     private route: Router,
+    /** Ruta activa para leer `id`. */
     private router: ActivatedRoute,
+    /** Auth para token/usuario actual. */
     private auth: AuthService,
+    /** Servicio de planes (lectura puntual + mutación). */
     private planService: PlanService,
+    /** Servicio de actividades (catálogo). */
     private activityService: ActivityService
   ) {
     this.formPlanUpdate = this.formSvc.group({
@@ -43,6 +64,7 @@ export class PlansUpdateComponent implements OnInit {
     });
   }
 
+  /** Carga actividades y, cuando estén disponibles, carga el plan. */
   ngOnInit(): void {
     // Cargar actividades primero
     this.activityService.getActivities().subscribe(
@@ -59,6 +81,7 @@ export class PlansUpdateComponent implements OnInit {
     );
   }
 
+  /** Carga el plan por ID de ruta y rellena el formulario. */
   loadPlan(): void {
     this.currentId = this.router.snapshot.paramMap.get('id');
     console.log('ID del plan:', this.currentId);
@@ -90,15 +113,18 @@ export class PlansUpdateComponent implements OnInit {
     }
   }
 
+  /** Imagen actual del formulario (para preview). */
   get currentImage(): string {
     return this.formPlanUpdate.get('imageRef')?.value || '';
   }
 
+  /** Devuelve si un nombre de actividad está seleccionado en el form. */
   isSelected(activityName: string): boolean {
     const selectedNames: string[] = this.formPlanUpdate.get('activitiesIds')?.value || [];
     return selectedNames.includes(activityName);
   }
 
+  /** Alterna selección de una actividad por nombre (UI). */
   toggleActivitySelection(activityName: string): void {
     const currentSelectedNames: string[] = this.formPlanUpdate.get('activitiesIds')?.value || [];
     let updatedSelectedNames: string[] = [];
@@ -112,6 +138,13 @@ export class PlansUpdateComponent implements OnInit {
     this.formPlanUpdate.get('activitiesIds')?.setValue(updatedSelectedNames);
   }
 
+  /**
+   * Envía actualización del plan al backend.
+   *
+   * - Convierte nombres seleccionados a IDs
+   * - Construye un payload parcial (solo campos con valor)
+   * - Adjunta token Bearer del usuario autenticado
+   */
   async onUpdate() {
     const selectedActivityNames: string[] = this.formPlanUpdate.value.activitiesIds || [];
     const selectedActivityIds: string[] = this.activities

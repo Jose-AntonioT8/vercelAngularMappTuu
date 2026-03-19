@@ -8,6 +8,12 @@ import { LanguageSelectorComponent } from '../../../common/language-selector/lan
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { IaAssistantService } from '../../../core/services/ia-assistant.service';
 
+/**
+ * Pantalla de asistente IA.
+ *
+ * Envía una pregunta al servicio `IaAssistantService` y muestra la respuesta.
+ * Incluye un mapeo de errores HTTP comunes para dar feedback útil en UI.
+ */
 @Component({
   selector: 'app-ia',
   standalone: true,
@@ -18,11 +24,16 @@ import { IaAssistantService } from '../../../core/services/ia-assistant.service'
 export class IaComponent {
   private iaAssistantService = inject(IaAssistantService);
 
+  /** Pregunta del usuario (input). */
   question = '';
+  /** Respuesta renderizada en UI. */
   answer = '';
+  /** Mensaje de error para UI. */
   errorMessage = '';
+  /** Flag para evitar envíos concurrentes. */
   isLoading = false;
 
+  /** Envía la pregunta y gestiona estados de carga/errores. */
   sendQuestion(): void {
     if (!this.question.trim() || this.isLoading) {
       return;

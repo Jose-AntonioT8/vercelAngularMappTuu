@@ -144,6 +144,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Modelo extendido de <code>Activity</code> para pantallas de detalle.</p>
+<p>Incluye campos adicionales que normalmente no están presentes en listados
+compactos (descripción, precio, horarios, etc.).</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -242,6 +251,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Email de contacto (si aplica).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -275,6 +290,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Descripción larga/expandida de la actividad.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -308,6 +329,13 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Datos completos para el mapa (estructura variable según proveedor).
+Se mantiene como <code>any</code> porque puede venir de APIs externas.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -341,6 +369,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Lista de puntos destacados (bullet points) para UI.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -374,6 +408,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Horarios de apertura por día.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -407,6 +447,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Precio (si aplica).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -414,17 +460,30 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Activity } from &quot;./activity.model&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Activity } from &#x27;./activity.model&#x27;;
 
-
-
+/**
+ * Modelo extendido de &#x60;Activity&#x60; para pantallas de detalle.
+ *
+ * Incluye campos adicionales que normalmente no están presentes en listados
+ * compactos (descripción, precio, horarios, etc.).
+ */
 export interface ActivityDetail extends Activity {
-    description: string;
-    price: number;
-    openingHours: { day: string, hours: string }[];
-    contactEmail: string;
-    fullMapData: any; // Aquí irían datos complejos como coordenadas, etc.
-    highlights: string[];
+  /** Descripción larga/expandida de la actividad. */
+  description: string;
+  /** Precio (si aplica). */
+  price: number;
+  /** Horarios de apertura por día. */
+  openingHours: { day: string; hours: string }[];
+  /** Email de contacto (si aplica). */
+  contactEmail: string;
+  /**
+   * Datos completos para el mapa (estructura variable según proveedor).
+   * Se mantiene como &#x60;any&#x60; porque puede venir de APIs externas.
+   */
+  fullMapData: any;
+  /** Lista de puntos destacados (bullet points) para UI. */
+  highlights: string[];
 }</code></pre>
     </div>
 </div>

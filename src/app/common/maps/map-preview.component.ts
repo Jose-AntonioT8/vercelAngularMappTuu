@@ -2,6 +2,13 @@ import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewC
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import * as L from 'leaflet';
 
+/**
+ * Vista previa de mapa (Leaflet) para mostrar/editar coordenadas.
+ *
+ * - Si `interactive` está activo, permite click/drag para actualizar el marcador.
+ * - Emite `coordinatesChange` con valores normalizados (6 decimales).
+ * - En SSR, evita inicializar Leaflet (solo browser).
+ */
 @Component({
   selector: 'app-map-preview',
   standalone: true,
@@ -26,33 +33,43 @@ import * as L from 'leaflet';
   `]
 })
 export class MapPreviewComponent implements AfterViewInit, OnChanges {
+  /** Latitud (number o string) para facilitar binding desde forms. */
   @Input() latitude: number | string = 0;
+  /** Longitud (number o string) para facilitar binding desde forms. */
   @Input() longitude: number | string = 0;
+  /** Color del marcador en formato CSS. */
   @Input() markerColor: string = '#5675AC';
+  /** Habilita interacciones (click/drag). */
   @Input() interactive: boolean = true;
 
+  /** Emite coordenadas cuando el usuario cambia el marcador. */
   @Output() coordinatesChange = new EventEmitter<{ latitude: number; longitude: number }>();
 
+  /** Referencia al contenedor del mapa. */
   @ViewChild('mapContainer') mapContainer!: ElementRef;
 
   private map?: L.Map;
   private marker?: L.Marker;
+  /** Evita loops cuando el cambio viene de fuera vs. interacción interna. */
   private isInternalUpdate = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
+  /** Inicializa el mapa tras el render (solo browser). */
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       setTimeout(() => this.initMap(), 100);
     }
   }
 
+  /** Actualiza marcador cuando cambian inputs desde fuera. */
   ngOnChanges(changes: SimpleChanges): void {
     if ((changes['latitude'] || changes['longitude']) && this.map && !this.isInternalUpdate) {
       this.updateMarker();
     }
   }
 
+  /** Crea mapa, tiles y (si hay coords válidas) marcador inicial. */
   private initMap(): void {
     const lat = this.parseCoord(this.latitude);
     const lng = this.parseCoord(this.longitude);
@@ -80,6 +97,7 @@ export class MapPreviewComponent implements AfterViewInit, OnChanges {
     }
   }
 
+  /** Sincroniza marcador/viewport con las coords actuales. */
   private updateMarker(): void {
     if (!this.map) return;
 
@@ -99,6 +117,10 @@ export class MapPreviewComponent implements AfterViewInit, OnChanges {
     }
   }
 
+  /**
+   * Actualiza el marcador por interacción del usuario y emite cambios.
+   * Usa `isInternalUpdate` para evitar un ciclo con `ngOnChanges`.
+   */
   private setMarkerPosition(lat: number, lng: number): void {
     this.isInternalUpdate = true;
     
@@ -116,6 +138,7 @@ export class MapPreviewComponent implements AfterViewInit, OnChanges {
     setTimeout(() => this.isInternalUpdate = false, 100);
   }
 
+  /** Crea y añade el marcador (draggable si es interactivo). */
   private addMarker(lat: number, lng: number): void {
     const icon = this.createMarkerIcon();
     this.marker = L.marker([lat, lng], { 
@@ -131,6 +154,7 @@ export class MapPreviewComponent implements AfterViewInit, OnChanges {
     }
   }
 
+  /** Genera un `DivIcon` SVG con el color configurado. */
   private createMarkerIcon(): L.DivIcon {
     const svg = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="36" height="36">
@@ -146,10 +170,12 @@ export class MapPreviewComponent implements AfterViewInit, OnChanges {
     });
   }
 
+  /** Parsea coordenadas desde string/number. */
   private parseCoord(value: number | string): number {
     return typeof value === 'string' ? parseFloat(value) : value;
   }
 
+  /** Valida que lat/lng sean numéricas y no sean 0/0. */
   private hasValidCoords(): boolean {
     const lat = this.parseCoord(this.latitude);
     const lng = this.parseCoord(this.longitude);

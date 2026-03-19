@@ -7,6 +7,11 @@ import { OptionsActivityTypesComponent } from '../../../common/options/options-a
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 
+/**
+ * Pantalla de detalle de un tipo de actividad.
+ *
+ * Carga el tipo por `id` de ruta y muestra acciones contextuales (opciones).
+ */
 @Component({
   selector: 'app-activity-types-detail',
   standalone: true,
@@ -14,12 +19,17 @@ import { LanguageSelectorComponent } from '../../../common/language-selector/lan
   templateUrl: './activity-types-detail.component.html',
 })
 export class ActivityTypesDetailComponent {
+  /** Tipo de actividad cargado para renderizar. */
   activityType?: ActivityType;
 
+  /** Ruta activa para leer parámetros. */
   private route = inject(ActivatedRoute);
+  /** Router para navegación. */
   private router = inject(Router);
+  /** Servicio de tipos para cargar el detalle. */
   private service = inject(ActivityTypeService);
 
+  /** Carga el tipo desde el servicio en base al `id` de la ruta. */
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (!id) return;
@@ -28,6 +38,7 @@ export class ActivityTypesDetailComponent {
     });
   }
 
+  /** Vuelve al listado de tipos. */
   goBack() {
     this.router.navigate(['/activityTypesList']);
   }

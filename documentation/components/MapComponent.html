@@ -142,6 +142,19 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Mapa interactivo de actividades basado en Leaflet.</p>
+<ul>
+<li>Pinta marcadores a partir de <code>points</code>.</li>
+<li>Ajusta el viewport para encajar todos los puntos.</li>
+<li>Al clicar un marcador, muestra una tarjeta y resuelve la dirección por <code>mapsService</code>.</li>
+<li>En SSR, evita inicializar Leaflet (solo browser).</li>
+</ul>
+
+    </p>
 
 
     <p class="comment">
@@ -246,16 +259,8 @@
                                 <a href="#location" >location</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#map" >map</a>
-                            </li>
-                            <li>
                                     <span class="modifier"></span>
                                 <a href="#mapContainer" >mapContainer</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#markersLayer" >markersLayer</a>
                             </li>
                             <li>
                                 <a href="#selectedPoint" >selectedPoint</a>
@@ -276,29 +281,10 @@
                                 <a href="#closeCard" >closeCard</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#createColoredMarker" >createColoredMarker</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#fixLeafletIcons" >fixLeafletIcons</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#initMap" >initMap</a>
-                            </li>
-                            <li>
                                 <a href="#ngAfterViewInit" >ngAfterViewInit</a>
                             </li>
                             <li>
                                 <a href="#ngOnChanges" >ngOnChanges</a>
-                            </li>
-                            <li>
-                                <a href="#ngOnInit" >ngOnInit</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#updateMarkers" >updateMarkers</a>
                             </li>
                         </ul>
                     </td>
@@ -338,12 +324,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(platformId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>, zone: <a href="https://angular.io/api/core/NgZone" target="_blank">NgZone</a>, servimapa: <a href="../injectables/mapsService.html" target="_self">mapsService</a>)</code>
+<code>constructor(platformId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>, zone: <a href="https://angular.io/api/core/NgZone" target="_blank">NgZone</a>, servimapa: <a href="../injectables/MapsService.html" target="_self">MapsService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/common/maps/maps.component.ts:60</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/common/maps/maps.component.ts:87</a></div>
                             </td>
                         </tr>
 
@@ -388,7 +374,7 @@
                                                         <td>servimapa</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/mapsService.html" target="_self" >mapsService</a></code>
+                                                                        <code><a href="../injectables/MapsService.html" target="_self" >MapsService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -428,9 +414,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/common/maps/maps.component.ts:49</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/common/maps/maps.component.ts:73</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Centro inicial del mapa (fallback si no hay puntos).</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -454,9 +446,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/common/maps/maps.component.ts:48</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/common/maps/maps.component.ts:71</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Puntos a renderizar como marcadores.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -480,9 +478,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/common/maps/maps.component.ts:50</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/common/maps/maps.component.ts:75</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Zoom inicial del mapa.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -514,161 +518,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="86"
-                                    class="link-to-prism">src/app/common/maps/maps.component.ts:86</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/common/maps/maps.component.ts:114</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="createColoredMarker"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>createColoredMarker</b></span>
-                        <a href="#createColoredMarker"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>createColoredMarker(color: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="165"
-                                    class="link-to-prism">src/app/common/maps/maps.component.ts:165</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>color</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>L.DivIcon</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="fixLeafletIcons"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>fixLeafletIcons</b></span>
-                        <a href="#fixLeafletIcons"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>fixLeafletIcons()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="160"
-                                    class="link-to-prism">src/app/common/maps/maps.component.ts:160</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="initMap"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>initMap</b></span>
-                        <a href="#initMap"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>initMap()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="90"
-                                    class="link-to-prism">src/app/common/maps/maps.component.ts:90</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
+                        <div class="io-description"><p>Cierra la tarjeta del punto seleccionado.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -698,8 +557,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="72"
-                                    class="link-to-prism">src/app/common/maps/maps.component.ts:72</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/common/maps/maps.component.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -735,14 +594,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">src/app/common/maps/maps.component.ts:79</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/common/maps/maps.component.ts:107</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Re-renderiza marcadores cuando cambia <code>points</code>.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -782,82 +643,6 @@
             </tr>
         </tbody>
     </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnInit"></a>
-                    <span class="name">
-                        <span ><b>ngOnInit</b></span>
-                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngOnInit()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="181"
-                                    class="link-to-prism">src/app/common/maps/maps.component.ts:181</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateMarkers"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>updateMarkers</b></span>
-                        <a href="#updateMarkers"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>updateMarkers()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="115"
-                                    class="link-to-prism">src/app/common/maps/maps.component.ts:115</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </section>
     <section data-compodoc="block-properties">
     
@@ -884,37 +669,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/common/maps/maps.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/common/maps/maps.component.ts:78</a></div>
                         </td>
                     </tr>
 
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="map"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>map</b></span>
-                        <a href="#map"><span class="icon ion-ios-link"></span></a>
-                    </span>
+                    <div class="io-description"><p>Dirección humana del punto seleccionado (si se resuelve).</p>
+</div>
                 </td>
             </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>L.Map | undefined</code>
-
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/common/maps/maps.component.ts:59</a></div>
-                        </td>
-                    </tr>
-
 
         </tbody>
     </table>
@@ -947,42 +711,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/common/maps/maps.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/common/maps/maps.component.ts:81</a></div>
                         </td>
                     </tr>
 
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="markersLayer"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>markersLayer</b></span>
-                        <a href="#markersLayer"><span class="icon ion-ios-link"></span></a>
-                    </span>
+                    <div class="io-description"><p>Contenedor DOM del mapa.</p>
+</div>
                 </td>
             </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>new L.LayerGroup()</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/common/maps/maps.component.ts:60</a></div>
-                        </td>
-                    </tr>
-
 
         </tbody>
     </table>
@@ -1010,10 +748,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/common/maps/maps.component.ts:57</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/common/maps/maps.component.ts:84</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Punto seleccionado para mostrar su tarjeta.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1026,23 +770,45 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, AfterViewInit, Input, OnChanges, ViewChild, ElementRef, SimpleChanges, Inject, PLATFORM_ID, NgZone } from &#x27;@angular/core&#x27;;
 import { isPlatformBrowser, CommonModule } from &#x27;@angular/common&#x27;;
 import { RouterLink } from &#x27;@angular/router&#x27;;
-import {mapsService} from &#x27;../../core/services/maps.service&#x27;
+import { MapsService } from &#x27;../../core/services/maps.service&#x27;
 import * as L from &#x27;leaflet&#x27;;
 import { TranslatePipe } from &#x27;../../core/pipes/translate.pipe&#x27;;
 import { PricePipe } from &#x27;../../core/pipes/price.pipe&#x27;;
 
+/**
+ * Datos de marcador para pintar puntos en el mapa.
+ *
+ * Se usa tanto en el mapa general como en listados con mini-mapa.
+ */
 export interface MapMarkerData {
+  /** Latitud del marcador. */
   latitude: number;
+  /** Longitud del marcador. */
   longitude: number;
+  /** Título visible del punto. */
   title: string;
+  /** Descripción opcional. */
   description?: string;
+  /** Rating opcional (por ejemplo, media). */
   rating?: number;
+  /** Enlace a detalle (routerLink o URL). */
   link?: string;
+  /** URL de imagen asociada. */
   image?: string;
+  /** Color del marcador (CSS). */
   color?: string;
+  /** Precio opcional asociado al punto. */
   price?: number;
 }
 
+/**
+ * Mapa interactivo de actividades basado en Leaflet.
+ *
+ * - Pinta marcadores a partir de &#x60;points&#x60;.
+ * - Ajusta el viewport para encajar todos los puntos.
+ * - Al clicar un marcador, muestra una tarjeta y resuelve la dirección por &#x60;mapsService&#x60;.
+ * - En SSR, evita inicializar Leaflet (solo browser).
+ */
 @Component({
   selector: &#x27;app-activity-map&#x27;,
   standalone: true,
@@ -1070,15 +836,20 @@ export interface MapMarkerData {
 
 export class MapComponent implements AfterViewInit, OnChanges {
 
+  /** Puntos a renderizar como marcadores. */
   @Input() points: MapMarkerData[] &#x3D; [];
+  /** Centro inicial del mapa (fallback si no hay puntos). */
   @Input() center: [number, number] &#x3D; [40.416, -3.703];
+  /** Zoom inicial del mapa. */
   @Input() zoom: number &#x3D; 6;
 
+  /** Dirección humana del punto seleccionado (si se resuelve). */
   location?: string;
 
+  /** Contenedor DOM del mapa. */
   @ViewChild(&#x27;mapContainer&#x27;) mapContainer!: ElementRef;
 
-  // Variable para controlar qué tarjeta se muestra
+  /** Punto seleccionado para mostrar su tarjeta. */
   selectedPoint: MapMarkerData | null &#x3D; null;
 
   private map: L.Map | undefined;
@@ -1087,7 +858,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private zone: NgZone,
-    private servimapa: mapsService,
+    private servimapa: MapsService,
   ) {}
 
 
@@ -1101,17 +872,19 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
   }
 
+  /** Re-renderiza marcadores cuando cambia &#x60;points&#x60;. */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes[&#x27;points&#x27;] &amp;&amp; this.map) {
       this.updateMarkers();
     }
   }
 
-  // Método para cerrar la tarjeta manualmente
+  /** Cierra la tarjeta del punto seleccionado. */
   closeCard() {
     this.selectedPoint &#x3D; null;
   }
 
+  /** Inicializa Leaflet (tiles, controles, handlers) y la capa de marcadores. */
   private initMap(): void {
     this.map &#x3D; L.map(this.mapContainer.nativeElement, { zoomControl: false }).setView(this.center, this.zoom);
 
@@ -1137,6 +910,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
     });
   }
 
+  /** Sincroniza la capa de marcadores con el array &#x60;points&#x60;. */
   private updateMarkers(): void {
     if (!this.map) return;
     
@@ -1182,11 +956,13 @@ export class MapComponent implements AfterViewInit, OnChanges {
     }
   }
 
+  /** Ajusta el icono default de Leaflet para que use nuestro estilo. */
   private fixLeafletIcons(): void {
     const iconDefault &#x3D; this.createColoredMarker(&#x27;#5675AC&#x27;);
     L.Marker.prototype.options.icon &#x3D; iconDefault;
   }
 
+  /** Crea un &#x60;DivIcon&#x60; SVG con color configurado. */
   private createColoredMarker(color: string): L.DivIcon {
     const svgIcon &#x3D; &#x60;
       &lt;svg xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; viewBox&#x3D;&quot;0 0 24 24&quot; width&#x3D;&quot;36&quot; height&#x3D;&quot;36&quot;&gt;
@@ -1203,12 +979,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
       popupAnchor: [0, -36]
     });
   }
-  ngOnInit() {
-    
-      
-      
-    }
-  
+
 }</code></pre>
     </div>
 

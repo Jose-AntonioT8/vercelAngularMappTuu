@@ -142,6 +142,22 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Control personalizado de coordenadas (lat/lng) compatible con Reactive Forms.</p>
+<ul>
+<li>Expone inputs para latitud/longitud como strings (UX) pero emite números.</li>
+<li>Puede mostrar un mapa embebido (Google Maps) cuando las coordenadas son válidas.</li>
+</ul>
+<p>Nota de seguridad:</p>
+<ul>
+<li>Se usa <code>bypassSecurityTrustResourceUrl</code> únicamente para una URL construida
+a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.</li>
+</ul>
+
+    </p>
 
 
     <p class="comment">
@@ -257,10 +273,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#emitValue" >emitValue</a>
-                            </li>
-                            <li>
                                 <a href="#onBlur" >onBlur</a>
                             </li>
                             <li>
@@ -341,7 +353,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:62</a></div>
                             </td>
                         </tr>
 
@@ -402,9 +414,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:46</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Mensaje de error a mostrar en UI.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -428,9 +446,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:26</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:44</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Etiqueta del campo.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -454,9 +478,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:48</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Si <code>true</code>, muestra un iframe de mapa cuando el valor es válido.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -468,45 +498,6 @@
     <h3 id="methods">
         Methods
     </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="emitValue"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>emitValue</b></span>
-                        <a href="#emitValue"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>emitValue()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:79</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -527,14 +518,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="74"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:74</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:106</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Marca el control como “tocado” (touched).</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -564,14 +557,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:92</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Handler de cambio en el input de latitud.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -631,14 +626,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:99</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Handler de cambio en el input de longitud.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -698,8 +695,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="50"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:50</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:77</a></div>
                         </td>
                     </tr>
 
@@ -765,14 +762,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="54"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:54</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:82</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Registra el callback de &quot;tocado&quot; del formulario.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -832,14 +831,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:58</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:87</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Habilita/deshabilita el control desde el form.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -899,14 +900,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="40"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:40</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:67</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Sincroniza el valor externo (form) hacia el control.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -976,10 +979,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:55</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Estado disabled recibido desde el formulario.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1007,10 +1016,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:51</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Latitud introducida (string para permitir campos vacíos).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1038,10 +1053,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:53</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Longitud introducida (string para permitir campos vacíos).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1069,10 +1090,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:60</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Callback del formulario al cambiar el valor.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1100,10 +1127,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:62</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Callback del formulario al marcar como tocado.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1131,10 +1164,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:57</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Marca si el usuario ya tocó el control.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1160,9 +1199,21 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:89</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:127</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>URL (sanitizada) de Google Maps para embebido.</p>
+<p>Devuelve <code>null</code> si lat/lng no son números.</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>SafeResourceUrl | null</code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1182,9 +1233,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:101</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="140" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:140</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Valida rango numérico de las coordenadas.</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1198,11 +1260,28 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from &#x27;@angular/forms&#x27;;
 import { DomSanitizer, SafeResourceUrl } from &#x27;@angular/platform-browser&#x27;;
 
+/**
+ * Valor de coordenadas para el control de formulario.
+ *
+ * &#x60;null&#x60; representa “sin valor” (campo vacío).
+ */
 export interface Coordinates {
+  /** Latitud en grados ([-90, 90]) o &#x60;null&#x60; si no hay valor. */
   latitude: number | null;
+  /** Longitud en grados ([-180, 180]) o &#x60;null&#x60; si no hay valor. */
   longitude: number | null;
 }
 
+/**
+ * Control personalizado de coordenadas (lat/lng) compatible con Reactive Forms.
+ *
+ * - Expone inputs para latitud/longitud como strings (UX) pero emite números.
+ * - Puede mostrar un mapa embebido (Google Maps) cuando las coordenadas son válidas.
+ *
+ * Nota de seguridad:
+ * - Se usa &#x60;bypassSecurityTrustResourceUrl&#x60; únicamente para una URL construida
+ *   a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.
+ */
 @Component({
   selector: &#x27;app-coordinates-input&#x27;,
   standalone: true,
@@ -1218,20 +1297,30 @@ export interface Coordinates {
   ]
 })
 export class CoordinatesInputComponent implements ControlValueAccessor {
+  /** Etiqueta del campo. */
   @Input() label: string &#x3D; &#x27;Coordenadas&#x27;;
+  /** Mensaje de error a mostrar en UI. */
   @Input() errorMessage: string &#x3D; &#x27;&#x27;;
+  /** Si &#x60;true&#x60;, muestra un iframe de mapa cuando el valor es válido. */
   @Input() showMap: boolean &#x3D; true;
   
+  /** Latitud introducida (string para permitir campos vacíos). */
   latitude: string &#x3D; &#x27;&#x27;;
+  /** Longitud introducida (string para permitir campos vacíos). */
   longitude: string &#x3D; &#x27;&#x27;;
+  /** Estado disabled recibido desde el formulario. */
   disabled: boolean &#x3D; false;
+  /** Marca si el usuario ya tocó el control. */
   touched: boolean &#x3D; false;
 
+  /** Callback del formulario al cambiar el valor. */
   onChange: any &#x3D; () &#x3D;&gt; {};
+  /** Callback del formulario al marcar como tocado. */
   onTouched: any &#x3D; () &#x3D;&gt; {};
 
   constructor(private sanitizer: DomSanitizer) {}
 
+  /** Sincroniza el valor externo (form) hacia el control. */
   writeValue(value: Coordinates): void {
     if (value) {
       this.latitude &#x3D; value.latitude !&#x3D;&#x3D; null ? String(value.latitude) : &#x27;&#x27;;
@@ -1246,31 +1335,37 @@ export class CoordinatesInputComponent implements ControlValueAccessor {
     this.onChange &#x3D; fn;
   }
 
+  /** Registra el callback de &quot;tocado&quot; del formulario. */
   registerOnTouched(fn: any): void {
     this.onTouched &#x3D; fn;
   }
 
+  /** Habilita/deshabilita el control desde el form. */
   setDisabledState(isDisabled: boolean): void {
     this.disabled &#x3D; isDisabled;
   }
 
+  /** Handler de cambio en el input de latitud. */
   onLatitudeChange(event: Event): void {
     const input &#x3D; event.target as HTMLInputElement;
     this.latitude &#x3D; input.value;
     this.emitValue();
   }
 
+  /** Handler de cambio en el input de longitud. */
   onLongitudeChange(event: Event): void {
     const input &#x3D; event.target as HTMLInputElement;
     this.longitude &#x3D; input.value;
     this.emitValue();
   }
 
+  /** Marca el control como “tocado” (touched). */
   onBlur(): void {
     this.touched &#x3D; true;
     this.onTouched();
   }
 
+  /** Construye el valor &#x60;Coordinates&#x60; y lo propaga al formulario. */
   private emitValue(): void {
     const lat &#x3D; this.latitude ? parseFloat(this.latitude) : null;
     const lng &#x3D; this.longitude ? parseFloat(this.longitude) : null;
@@ -1281,6 +1376,11 @@ export class CoordinatesInputComponent implements ControlValueAccessor {
     });
   }
 
+  /**
+   * URL (sanitizada) de Google Maps para embebido.
+   *
+   * Devuelve &#x60;null&#x60; si lat/lng no son números.
+   */
   get mapUrl(): SafeResourceUrl | null {
     const lat &#x3D; parseFloat(this.latitude);
     const lng &#x3D; parseFloat(this.longitude);
@@ -1293,6 +1393,7 @@ export class CoordinatesInputComponent implements ControlValueAccessor {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
+  /** Valida rango numérico de las coordenadas. */
   get isValidCoordinates(): boolean {
     const lat &#x3D; parseFloat(this.latitude);
     const lng &#x3D; parseFloat(this.longitude);

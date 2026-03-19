@@ -109,7 +109,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >mapsService</li>
+  <li class="breadcrumb-item" >MapsService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -154,7 +154,13 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#buildReverseGeocodeUrl" >buildReverseGeocodeUrl</a>
+                            </li>
+                            <li>
                                 <a href="#getAddress" >getAddress</a>
+                            </li>
+                            <li>
+                                <a href="#pickBestLocality" >pickBestLocality</a>
                             </li>
                         </ul>
                     </td>
@@ -179,12 +185,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/core/services/maps.service.ts:7</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/core/services/maps.service.ts:12</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Cliente HTTP usado para consultar el proveedor de geocodificación.</p>
+<p>Inicializa el servicio con el <code>HttpClient</code> de Angular.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -193,6 +202,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -207,6 +217,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>HttpClient Angular</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -222,6 +236,120 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buildReverseGeocodeUrl"></a>
+                    <span class="name">
+                        <span ><b>buildReverseGeocodeUrl</b></span>
+                        <a href="#buildReverseGeocodeUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>buildReverseGeocodeUrl(lat: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, lon: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, localityLanguage: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="45"
+                                    class="link-to-prism">src/app/core/services/maps.service.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Construye la URL del proveedor de reverse geocoding.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>lat</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <p>Latitud</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>lon</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <p>Longitud</p>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>localityLanguage</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;es&#x27;</code>
+                                            </td>
+
+                                            <td>
+                                                    <p>Idioma preferido para la respuesta (por defecto <code>es</code>)</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -242,14 +370,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="11"
-                                    class="link-to-prism">src/app/core/services/maps.service.ts:11</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">src/app/core/services/maps.service.ts:31</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene una descripción de ubicación aproximada para unas coordenadas.</p>
+<p>Nota: usa BigDataCloud reverse-geocode-client y devuelve un fallback si no hay datos.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -260,6 +391,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -274,6 +406,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Latitud</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>lon</td>
@@ -286,6 +422,10 @@
                                             </td>
 
 
+                                            <td>
+                                                    <p>Longitud</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -295,7 +435,83 @@
 
                         </div>
                             <div class="io-description">
+                                <p>Observable que emite la mejor cadena de ubicación encontrada.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pickBestLocality"></a>
+                    <span class="name">
+                        <span ><b>pickBestLocality</b></span>
+                        <a href="#pickBestLocality"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>pickBestLocality(response: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/core/services/maps.service.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Selecciona el mejor campo de localidad disponible de la respuesta del proveedor.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
                                 
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Respuesta JSON de BigDataCloud</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Una cadena legible (fallback: &quot;Ubicación desconocida&quot;)</p>
+
                             </div>
                 </td>
             </tr>
@@ -310,24 +526,65 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { Observable, map } from &#x27;rxjs&#x27;;
-import { apiUrl } from &#x27;../../common/models/apiurl.model&#x27;;
 @Injectable({ providedIn: &#x27;root&#x27; })
 
-export class mapsService{
-    constructor(private http: HttpClient
-    ) {}
+/**
+ * Servicio de utilidades de mapas/geocodificación.
+ *
+ * Actualmente implementa reverse geocoding para convertir lat/lng en una
+ * cadena legible de ubicación usando BigDataCloud.
+ */
+export class MapsService{
+    /**
+     * Cliente HTTP usado para consultar el proveedor de geocodificación.
+     *
+     * Inicializa el servicio con el &#x60;HttpClient&#x60; de Angular.
+     *
+     * @param http HttpClient Angular
+     */
+    constructor(private http: HttpClient) {}
     
+    /**
+     * Obtiene una descripción de ubicación aproximada para unas coordenadas.
+     *
+     * Nota: usa BigDataCloud reverse-geocode-client y devuelve un fallback si no hay datos.
+     *
+     * @param lat Latitud
+     * @param lon Longitud
+     * @returns Observable que emite la mejor cadena de ubicación encontrada.
+     */
     getAddress(lat: number, lon: number): Observable&lt;string&gt; {
-        // Nota la URL diferente
-        const url &#x3D; &#x60;https://api.bigdatacloud.net/data/reverse-geocode-client?latitude&#x3D;${lat}&amp;longitude&#x3D;${lon}&amp;localityLanguage&#x3D;es&#x60;;
-      
+        const url &#x3D; this.buildReverseGeocodeUrl(lat, lon);
         return this.http.get&lt;any&gt;(url).pipe(
-          map(response &#x3D;&gt; {
-            // La estructura de respuesta es diferente a OSM
-            return response.locality || response.city || response.principalSubdivision || &#x27;Ubicación desconocida&#x27;;
-          })
+          map((response) &#x3D;&gt; this.pickBestLocality(response))
         );
       }
+
+    /**
+     * Construye la URL del proveedor de reverse geocoding.
+     *
+     * @param lat Latitud
+     * @param lon Longitud
+     * @param localityLanguage Idioma preferido para la respuesta (por defecto &#x60;es&#x60;)
+     */
+    buildReverseGeocodeUrl(lat: number, lon: number, localityLanguage: string &#x3D; &#x27;es&#x27;): string {
+      return &#x60;https://api.bigdatacloud.net/data/reverse-geocode-client?latitude&#x3D;${lat}&amp;longitude&#x3D;${lon}&amp;localityLanguage&#x3D;${encodeURIComponent(localityLanguage)}&#x60;;
+    }
+
+    /**
+     * Selecciona el mejor campo de localidad disponible de la respuesta del proveedor.
+     *
+     * @param response Respuesta JSON de BigDataCloud
+     * @returns Una cadena legible (fallback: &quot;Ubicación desconocida&quot;)
+     */
+    pickBestLocality(response: any): string {
+      return (
+        response?.locality ||
+        response?.city ||
+        response?.principalSubdivision ||
+        &#x27;Ubicación desconocida&#x27;
+      );
+    }
 }
 </code></pre>
     </div>
@@ -372,7 +629,7 @@ export class mapsService{
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'mapsService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'MapsService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

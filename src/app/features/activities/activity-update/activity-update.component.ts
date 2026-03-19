@@ -11,6 +11,14 @@ import { ActivityTypeService } from '../../../core/services/activitytype.service
 import { AuthService } from '../../../core/services/auth.service';
 import { CloudinaryService } from '../../../core/services/firebase-media.service';
 
+/**
+ * Pantalla de edición de actividad.
+ *
+ * - Carga la actividad por `id` de ruta y rellena el formulario.
+ * - Permite cambiar coordenadas (con previsualización de mapa).
+ * - Permite actualizar la imagen (subida a Cloudinary) o mantener la existente.
+ * - Envía actualización al backend con Bearer token.
+ */
 @Component({
   standalone: true,
   selector: 'app-activity-update',
@@ -19,23 +27,39 @@ import { CloudinaryService } from '../../../core/services/firebase-media.service
   styleUrl: './activity-update.component.scss',
 })
 export class ActivitiesUpdateComponent {
+  /** Mensaje de error para UI. */
   error = '';
+  /** Mensaje de éxito para UI. */
   success = '';
+  /** Formulario reactivo de edición. */
   formActivityUpdate: FormGroup;
+  /** Catálogo de tipos de actividad. */
   activityTypes: any;
+  /** Lista de nombres de tipos (derivada) para la UI. */
   activityTypesName : string[] = [];
+  /** ID de la actividad en edición (ruta). */
   currentId: string | null = null;
+  /** Archivo de imagen seleccionado para reemplazar (opcional). */
   selectedFile: File | null = null;
+  /** Preview local de la imagen (data URL). */
   imagePreview: string | null = null;
+  /** Flag de subida en curso (para deshabilitar UI). */
   isUploading = false;
 
   constructor(
+    /** Constructor de formularios. */
     private formSvc: FormBuilder,
+    /** Router para navegar tras actualizar. */
     private route: Router,
+    /** Ruta activa para leer `id`. */
     private router: ActivatedRoute,
+    /** Auth para token/usuario actual. */
     private auth: AuthService,
+    /** Servicio de actividades (lectura puntual y mutación). */
     private activityService: ActivityService,
+    /** Servicio de tipos para catálogo. */
     private ActivityTypeService: ActivityTypeService,
+    /** Servicio de media (Cloudinary). */
     private mediaService: CloudinaryService
   ) {
     this.formActivityUpdate = this.formSvc.group({
@@ -48,6 +72,7 @@ export class ActivitiesUpdateComponent {
     });
     this.activityTypes = this.ActivityTypeService.getActivitiesType();
   }
+  /** Carga tipos y la actividad a editar. */
   ngOnInit(): void {
     this.ActivityTypeService.getActivitiesType().subscribe(
       (res: ActivityType[]) => {
@@ -73,14 +98,17 @@ export class ActivitiesUpdateComponent {
       });
     }
   }
+  /** Coordenadas para el preview del mapa (lat). */
   get mapLatitude(): string {
     return this.formActivityUpdate.get('latitude')?.value || '';
   }
 
+  /** Coordenadas para el preview del mapa (lng). */
   get mapLongitude(): string {
     return this.formActivityUpdate.get('longitude')?.value || '';
   }
 
+  /** Actualiza el form cuando el usuario selecciona coords en el mapa. */
   onMapCoordinatesChange(coords: { latitude: number; longitude: number }): void {
     this.formActivityUpdate.patchValue({
       latitude: coords.latitude.toString(),
@@ -88,17 +116,20 @@ export class ActivitiesUpdateComponent {
     });
   }
 
+  /** Cierra sesión y vuelve al landing. */
   logOut() {
     this.route.navigate(['/landingPage']);
     this.auth.logout();
   }
 
+  /** Imagen actual (preview > existente). */
   get currentImage(): string {
     if (this.imagePreview) return this.imagePreview;
     const existingImage = (this.formActivityUpdate as any).existingImageRef;
     return existingImage || '';
   }
 
+  /** Valida y previsualiza un fichero de imagen seleccionado. */
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -121,6 +152,7 @@ export class ActivitiesUpdateComponent {
     }
   }
 
+  /** Sube la imagen seleccionada a Cloudinary y devuelve la URL. */
   async uploadImage(): Promise<string | null> {
     if (!this.selectedFile) return null;
     this.isUploading = true;
@@ -140,6 +172,7 @@ export class ActivitiesUpdateComponent {
     }
   }
 
+  /** Envía la actualización de la actividad al backend. */
   async onCreate() {
     if (this.formActivityUpdate.invalid) {
       this.formActivityUpdate.markAllAsTouched();

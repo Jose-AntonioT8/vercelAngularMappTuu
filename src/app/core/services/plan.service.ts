@@ -25,24 +25,42 @@ import { BehaviorSubject, Observable, from, map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class PlanService {
+  /** Base URL del API para planes. */
   private url = `${apiUrl}/plans`;
+  /** Instancia de Firestore (compat firebase/firestore). */
   private db: FirestoreType = inject(Firestore);
+  /** Zona para re-entrar a Angular desde callbacks externos. */
   private ngZone = inject(NgZone);
 
+  /** Nombre de la colección Firestore. */
   private readonly collectionName = 'plans';
+  /** Listener activo de Firestore para evitar duplicados. */
   private unsubscribeListener: Unsubscribe | null = null;
 
+  /** Estado interno del listado de planes (stream). */
   private plans = new BehaviorSubject<Plan[]>([]);
+  /** Stream público de planes. */
   public plans$ = this.plans.asObservable();
 
+  /**
+   * Servicio de planes.
+   *
+   * Fuentes:
+   * - Escrituras (create/update/delete/rate) vía API HTTP con Bearer token.
+   * - Lectura reactiva (listado) vía Firestore con filtros de visibilidad:
+   *   - público para anónimos
+   *   - público + privados propios cuando hay sesión
+   */
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+  /** Crea un plan en el backend. */
   createPlan(planData: any, token: any): Observable<any> {
     return this.http.post(this.url, planData, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
 
+  /** Envía una valoración de plan al backend. */
   ratePlan(id: string, planData: any, token: any): Observable<any> {
     console.log('hola');
     console.log(id);
@@ -52,18 +70,25 @@ export class PlanService {
     });
   }
 
+  /** Actualiza un plan (parcial) en el backend. */
   updatePlan(id: string, planData: any, token: any): Observable<any> {
     return this.http.patch(`${this.url}/${id}`, planData, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
 
+  /** Elimina un plan en el backend. */
   deletePlan(id: string, token: any): Observable<any> {
     return this.http.delete(`${this.url}/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
 
+  /**
+   * Escucha planes desde Firestore (stream).
+   *
+   * Mantiene un listener único (se reutiliza si ya existe).
+   */
   getPlans(): Observable<Plan[]> {
     if (this.unsubscribeListener) {
       return this.plans$;
@@ -103,6 +128,7 @@ export class PlanService {
     return this.plans$;
   }
 
+  /** Obtiene un plan concreto por ID (lectura puntual). */
   getPlanId(id: string): Observable<Plan> {
     const dRef = docRef(this.db, this.collectionName, id);
     return from(getDoc(dRef)).pipe(

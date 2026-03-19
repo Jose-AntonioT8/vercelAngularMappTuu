@@ -138,6 +138,18 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Card de plan para listados.</p>
+<ul>
+<li>Navega al detalle del plan.</li>
+<li>Renderiza rating en estrellas.</li>
+<li>Puede recibir actividades para enriquecer la UI (si aplica).</li>
+</ul>
+
+    </p>
 
 
     <p class="comment">
@@ -261,17 +273,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, mapService: <a href="../injectables/mapsService.html" target="_self">mapsService</a>)</code>
+<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, mapService: <a href="../injectables/MapsService.html" target="_self">MapsService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:27</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Router para navegar al detalle del plan.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -299,7 +313,7 @@
                                                         <td>mapService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/mapsService.html" target="_self" >mapsService</a></code>
+                                                                        <code><a href="../injectables/MapsService.html" target="_self" >MapsService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -339,9 +353,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:27</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Actividades relacionadas (opcional).</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -360,9 +380,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:25</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Plan a renderizar.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -394,14 +420,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="44"
-                                    class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:44</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:59</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Helper para iterar 5 estrellas en template.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>number[]</code>
@@ -431,14 +459,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:49</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Devuelve estado de una estrella (full/half/empty) para un índice 0..4.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -498,14 +528,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:33</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Hook para reaccionar a cambios del <code>@Input plan</code> (si se necesita).</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -565,14 +597,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:39</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Hook de inicialización del componente.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -602,14 +636,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/app/common/plans/card-plans/card-plans.component.ts:44</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Navega al detalle del plan.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -629,10 +665,17 @@
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { Plan } from &#x27;../../models/plan.model&#x27;;
-import { mapsService } from &#x27;../../../core/services/maps.service&#x27;;
+import { MapsService } from &#x27;../../../core/services/maps.service&#x27;;
 import { Activity } from &#x27;../../models/activity.model&#x27;;
 import { Tilt3DDirective } from &#x27;../../../core/directives/tilt3d.directive&#x27;;
 
+/**
+ * Card de plan para listados.
+ *
+ * - Navega al detalle del plan.
+ * - Renderiza rating en estrellas.
+ * - Puede recibir actividades para enriquecer la UI (si aplica).
+ */
 @Component({
   selector: &#x27;app-card-plans&#x27;,
   imports: [CommonModule, Tilt3DDirective],
@@ -641,24 +684,31 @@ import { Tilt3DDirective } from &#x27;../../../core/directives/tilt3d.directive&
 })
 export class CardPlansComponent implements OnInit, OnChanges {
 
+  /** Plan a renderizar. */
   @Input() plan!: Plan;
+  /** Actividades relacionadas (opcional). */
   @Input() activity: Activity[] &#x3D; [];
 
-  constructor(private router: Router, private mapService: mapsService) {}
+  /** Router para navegar al detalle del plan. */
+  constructor(private router: Router, private mapService: MapsService) {}
 
+  /** Hook para reaccionar a cambios del &#x60;@Input plan&#x60; (si se necesita). */
   ngOnChanges(changes: SimpleChanges): void {
     if (changes[&#x27;plan&#x27;] ) {
     }
   }
 
+  /** Hook de inicialización del componente. */
   ngOnInit(): void {
    
   }
 
+  /** Navega al detalle del plan. */
   redirectToDetail() {
     this.router.navigate([&#x27;/planDetail&#x27;, this.plan.id]);
   }
 
+  /** Devuelve estado de una estrella (full/half/empty) para un índice 0..4. */
   getStarState(index: number): &#x27;full&#x27; | &#x27;half&#x27; | &#x27;empty&#x27; {
     if (!this.plan) return &#x27;empty&#x27;;
     const rating &#x3D; this.plan.rating;
@@ -668,6 +718,7 @@ export class CardPlansComponent implements OnInit, OnChanges {
     else return &#x27;empty&#x27;;
   }
 
+  /** Helper para iterar 5 estrellas en template. */
   getStarsArray(): number[] {
     return [0, 1, 2, 3, 4];
   }

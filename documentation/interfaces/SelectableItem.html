@@ -144,6 +144,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Item seleccionable para el selector genérico.</p>
+<p>Nota: el control emite/recibe una lista de <code>name</code> (no de <code>id</code>) para mantener
+el binding simple en UI. Si necesitas persistencia por ID, adapta el contrato.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -212,6 +221,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ID del elemento (opcionalmente usado por la pantalla).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -245,6 +260,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Nombre visible del elemento (y clave de selección por defecto).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -256,11 +277,24 @@
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from &#x27;@angular/forms&#x27;;
 
+/**
+ * Item seleccionable para el selector genérico.
+ *
+ * Nota: el control emite/recibe una lista de &#x60;name&#x60; (no de &#x60;id&#x60;) para mantener
+ * el binding simple en UI. Si necesitas persistencia por ID, adapta el contrato.
+ */
 export interface SelectableItem {
+  /** ID del elemento (opcionalmente usado por la pantalla). */
   id: string;
+  /** Nombre visible del elemento (y clave de selección por defecto). */
   name: string;
 }
 
+/**
+ * Control de formulario para seleccionar múltiples elementos.
+ *
+ * Implementa &#x60;ControlValueAccessor&#x60; y trabaja con una lista de strings (&#x60;name&#x60;).
+ */
 @Component({
   selector: &#x27;app-activity-selector&#x27;,
   standalone: true,
@@ -276,17 +310,26 @@ export interface SelectableItem {
   ]
 })
 export class ActivitySelectorComponent implements ControlValueAccessor {
+  /** Catálogo de elementos disponibles para seleccionar. */
   @Input() items: SelectableItem[] &#x3D; [];
+  /** Etiqueta del control. */
   @Input() label: string &#x3D; &#x27;Seleccionar elementos&#x27;;
+  /** Mensaje de error para UI. */
   @Input() errorMessage: string &#x3D; &#x27;&#x27;;
   
+  /** Lista de nombres seleccionados (valor del form). */
   selectedNames: string[] &#x3D; [];
+  /** Estado disabled recibido desde el formulario. */
   disabled: boolean &#x3D; false;
+  /** Marca si el usuario ya tocó el control. */
   touched: boolean &#x3D; false;
 
+  /** Callback del formulario al cambiar el valor. */
   onChange: any &#x3D; () &#x3D;&gt; {};
+  /** Callback del formulario al marcar como tocado. */
   onTouched: any &#x3D; () &#x3D;&gt; {};
 
+  /** Sincroniza el valor externo hacia el control. */
   writeValue(value: string[]): void {
     this.selectedNames &#x3D; value || [];
   }
@@ -295,18 +338,22 @@ export class ActivitySelectorComponent implements ControlValueAccessor {
     this.onChange &#x3D; fn;
   }
 
+  /** Registra el callback de &quot;tocado&quot; del formulario. */
   registerOnTouched(fn: any): void {
     this.onTouched &#x3D; fn;
   }
 
+  /** Habilita/deshabilita el control desde el form. */
   setDisabledState(isDisabled: boolean): void {
     this.disabled &#x3D; isDisabled;
   }
 
+  /** Devuelve si un nombre está seleccionado. */
   isSelected(itemName: string): boolean {
     return this.selectedNames.includes(itemName);
   }
 
+  /** Alterna la selección de un elemento (no-op si está deshabilitado). */
   toggleSelection(itemName: string): void {
     if (this.disabled) return;
     
