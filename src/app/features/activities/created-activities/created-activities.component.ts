@@ -12,6 +12,13 @@ import { ActivityService } from '../../../core/services/activity.service';
 import { ActivityTypeService } from '../../../core/services/activitytype.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { UserService } from '../../../core/services/user.service';
+
+/**
+ * Pantalla de actividades creadas por el usuario.
+ *
+ * Lee `createdActivities` del perfil de usuario y carga cada actividad por ID,
+ * combinando los resultados en un stream para renderizar cards.
+ */
 @Component({
   selector: 'app-created-activities',
   standalone: true,
@@ -27,18 +34,27 @@ import { UserService } from '../../../core/services/user.service';
   styleUrl: './created-activities.component.scss',
 })
 export class CreatedActivitiesComponent implements OnInit {
+  /** Acceso a perfil/relaciones del usuario. */
   private userService = inject(UserService);
+  /** Acceso al catálogo/detalle de actividades. */
   private activityService = inject(ActivityService);
+  /** Acceso al catálogo de tipos de actividad. */
   private activityTypeService = inject(ActivityTypeService);
+  /** Acceso a sesión/usuario actual. */
   private authService = inject(AuthService);
+  /** Stream de actividades creadas para la UI. */
   activities$ = of<Activity[]>([]);
+  /** Catálogo de tipos para enriquecer cards/filtros. */
   activityTypes$!: Observable<ActivityType[]>;
 
   constructor(private route: Router) {}
+  /** Controla el panel de filtros (responsive). */
   isFilterOpen = false;
 
+  /** Usuario autenticado actual (si existe). */
   private user = this.authService.currentUser;
 
+  /** Inicializa streams y abre filtros por defecto en desktop. */
   ngOnInit() {
     if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
       this.isFilterOpen = true;
@@ -56,12 +72,15 @@ export class CreatedActivitiesComponent implements OnInit {
     this.activityTypes$ = this.activityTypeService.getActivitiesType();
   }
 
+  /** Alterna el panel de filtros. */
   toggleFilter() {
     this.isFilterOpen = !this.isFilterOpen;
   }
+  /** Navega a creación de actividad. */
   goCreateActivity() {
     this.route.navigate(['/activitiesCreation']);
   }
+  /** Cierra filtros en pantallas pequeñas. */
   closeFilter() {
     if (window.innerWidth < 1024) {
       this.isFilterOpen = false;

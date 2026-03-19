@@ -17,8 +17,17 @@ import { PricePipe } from '../../../core/pipes/price.pipe';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { mapsService } from '../../../core/services/maps.service';
+import { MapsService } from '../../../core/services/maps.service';
 import { UserService } from '../../../core/services/user.service';
+/**
+ * Detalle de actividad.
+ *
+ * - Carga la actividad por id de ruta.
+ * - Resuelve la dirección humana mediante `mapsService`.
+ * - Renderiza un mapa Leaflet con marcador y atajos a Google Maps.
+ * - Permite guardar la actividad en el perfil del usuario.
+ * - Permite crear/editar reseñas y listar reseñas existentes.
+ */
 @Component({
   selector: 'app-activity-detail',
   standalone: true,
@@ -36,24 +45,41 @@ import { UserService } from '../../../core/services/user.service';
 })
 export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
   constructor(private userService: UserService, private auth: AuthService) {}
+  /** Controla el modal con la lista de reseñas. */
   isReviewsListModalOpen = false;
+  /** Indica si la actividad está guardada por el usuario actual. */
   isActivitySaved = false;
+  /** Actividad cargada desde API. */
   activity?: Activity;
+  /** Dirección humana resuelta desde coordenadas. */
   location?: string;
+  /** Descripción derivada (por compatibilidad). */
   activityDescription?: string;
+  /** Instancia Leaflet del mapa (se crea al cargar la actividad). */
   private map?: L.Map;
+  /** Marcador Leaflet de la ubicación de la actividad. */
   private marker?: L.Marker;
+  /** Evita reinicializar el mapa. */
   mapInitialized = false;
+  /** Controla el modal de reseña (crear/editar). */
   isReviewModalOpen = false;
+  /** Reseña del usuario actual (si existe). */
   userReview: Review | null = null;
 
+  /** Servicio de actividades para lecturas y rating. */
   private activityService = inject(ActivityService);
+  /** Ruta activa para leer el `id` de la actividad. */
   private route = inject(ActivatedRoute);
+  /** Router para navegación (volver). */
   private router = inject(Router);
-  private mapService = inject(mapsService);
+  /** Servicio de mapas para reverse geocoding. */
+  private mapService = inject(MapsService);
+  /** ChangeDetector para refrescar UI tras callbacks externos. */
   private cdr = inject(ChangeDetectorRef);
+  /** Servicio de auth expuesto al template. */
   public authService = inject(AuthService);
 
+  /** Carga actividad, dirección, reseña del usuario y estado de guardado. */
   ngOnInit() {
     const idUrl = this.route.snapshot.paramMap.get('id');
     this.activityService.getActivityId(idUrl!).subscribe((data) => {
@@ -89,6 +115,7 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
     });
   }
 
+  /** Verifica en el perfil del usuario si la actividad ya está guardada. */
   private async checkIfActivitySaved(): Promise<void> {
     const user = this.authService.currentUser;
     if (!user || !this.activity) return;
@@ -114,10 +141,12 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
     }
   }
 
+  /** Abre el modal con la lista de reseñas. */
   openReviewsListModal() {
     this.isReviewsListModalOpen = true;
   }
 
+  /** Cierra el modal con la lista de reseñas. */
   closeReviewsListModal() {
     this.isReviewsListModalOpen = false;
   }
@@ -163,10 +192,12 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
     }
   }
 
+  /** Hook de vista: el mapa se inicializa tras cargar actividad. */
   ngAfterViewInit() {
     // El mapa se inicializa después de que activity esté cargado en ngOnInit
   }
 
+  /** Limpia recursos (mapa Leaflet) al destruir el componente. */
   ngOnDestroy() {
     // Limpiar el mapa cuando se destruye el componente
     if (this.map) {
@@ -257,10 +288,12 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
     }, 200);
   }
 
+  /** Navega de vuelta al listado de actividades. */
   goBack() {
     this.router.navigate(['/activitiesList']);
   }
 
+  /** Formatea un Timestamp de Firebase a `dd/mm/yyyy`. */
   getFormattedDate(firebaseTimestamp: any): string {
     // Convierte el Timestamp de Firebase a un objeto Date de JavaScript.
     // Esto puede causar una pérdida de precisión a milisegundos.
@@ -286,6 +319,7 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
     return !isNaN(lat) && !isNaN(lon);
   }
 
+  /** Abre Google Maps en nueva pestaña con las coordenadas de la actividad. */
   openGoogleMaps() {
     if (!this.activity) return;
     window.open(
@@ -329,18 +363,22 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
     return [0, 1, 2, 3, 4];
   }
 
+  /** Precio de la actividad, si el modelo lo expone. */
   get activityPrice(): number | null {
     return (this.activity as any)?.price ?? null;
   }
 
+  /** Abre el modal de reseña. */
   openReviewModal() {
     this.isReviewModalOpen = true;
   }
 
+  /** Cierra el modal de reseña. */
   closeReviewModal() {
     this.isReviewModalOpen = false;
   }
 
+  /** Guarda la actividad en el perfil del usuario actual. */
   async saveActivity() {
     if (this.isActivitySaved) return; // Evitar guardar si ya está guardada
 
@@ -358,6 +396,7 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
       .subscribe();
   }
 
+  /** Emite la reseña al backend y sincroniza la actividad con la respuesta. */
   handleReviewSubmit(review: Review) {
     if (!this.activity) return;
 

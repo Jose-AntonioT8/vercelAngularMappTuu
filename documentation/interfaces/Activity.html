@@ -144,6 +144,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Modelo base de Actividad usado por la UI.</p>
+<p>Nota: en algunas pantallas se extiende (ver <code>ActivityDetail</code>) para incluir
+campos adicionales (descripción, precio, etc.).</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -273,6 +282,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Fecha de creación (si la fuente de datos la aporta).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -306,6 +321,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Indicador de favorito en UI (puede ser derivado por usuario).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -339,6 +360,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ID único de la actividad.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -372,6 +399,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ID del tipo de actividad asociado.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -405,6 +438,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>URL de imagen principal.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -438,6 +477,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Latitud en formato string (por compatibilidad con formularios/UI).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -471,6 +516,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Longitud en formato string (por compatibilidad con formularios/UI).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -504,6 +555,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Nombre visible de la actividad.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -537,6 +594,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Número total de valoraciones usadas para <code>rating</code>.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -570,6 +633,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Rating agregado de la actividad.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -608,6 +677,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Lista de reseñas, si se carga junto a la actividad.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -616,24 +691,46 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Review {
+  /** ID de la reseña (si viene de backend/Firestore). */
   id?: string;
+  /** ID del usuario autor de la reseña. */
   userId: string;
+  /** Puntuación numérica (por ejemplo 1-5). */
   rating: number;
+  /** Comentario de texto libre. */
   comment: string;
+  /** Fecha de creación (si está disponible). */
   createdAt?: Date;
 }
 
+/**
+ * Modelo base de Actividad usado por la UI.
+ *
+ * Nota: en algunas pantallas se extiende (ver &#x60;ActivityDetail&#x60;) para incluir
+ * campos adicionales (descripción, precio, etc.).
+ */
 export interface Activity {
+  /** Fecha de creación (si la fuente de datos la aporta). */
   createdAt?: Date;
+  /** ID único de la actividad. */
   id: string;
+  /** Nombre visible de la actividad. */
   name: string;
+  /** URL de imagen principal. */
   imageURL: string;
+  /** Indicador de favorito en UI (puede ser derivado por usuario). */
   favorite: boolean;
+  /** ID del tipo de actividad asociado. */
   IdTypeActivity: string;
+  /** Longitud en formato string (por compatibilidad con formularios/UI). */
   longitude: string;
+  /** Latitud en formato string (por compatibilidad con formularios/UI). */
   latitude: string;
+  /** Rating agregado de la actividad. */
   rating: number;
+  /** Número total de valoraciones usadas para &#x60;rating&#x60;. */
   numRatings: number;
+  /** Lista de reseñas, si se carga junto a la actividad. */
   reviews?: Review[];
 }
 </code></pre>

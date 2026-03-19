@@ -138,6 +138,19 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Pantalla de creación de actividades.</p>
+<ul>
+<li>Valida formulario (nombre/descripcion/tipo/coordenadas/precio).</li>
+<li>Obliga a subir una imagen y la sube a Cloudinary.</li>
+<li>Crea la actividad vía backend con Bearer token.</li>
+<li>Asocia la actividad al usuario (en <code>UserService</code>) tras crearla.</li>
+</ul>
+
+    </p>
 
 
 
@@ -318,7 +331,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:66</a></div>
                             </td>
                         </tr>
 
@@ -457,14 +470,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:84</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:111</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Carga tipos disponibles para el selector.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -496,14 +511,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="162"
-                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:162</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="196"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:196</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Crea la actividad en backend y la vincula al usuario.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
@@ -533,14 +550,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="115"
-                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:115</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:147</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Valida y previsualiza un fichero de imagen seleccionado.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -600,14 +619,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="101"
-                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:101</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:131</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Actualiza el formulario cuando el mapa emite nuevas coordenadas.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -667,14 +688,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:45</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:64</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Abre el selector de archivo para subir imagen.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -706,14 +729,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="137"
-                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:137</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="170"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:170</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Sube la imagen seleccionada a Cloudinary y devuelve su URL.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;string | null&gt;</code>
@@ -748,10 +773,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:53</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Catálogo de tipos (para selects).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -779,10 +810,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:55</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lista de nombres (derivada) usada por la UI.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -810,10 +847,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:47</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mensaje de error para UI.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -846,10 +889,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:44</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Input file nativo para seleccionar imagen.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -872,10 +921,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:51</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario reactivo de creación.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -903,10 +958,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:59</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Preview local de imagen (data URL).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -934,10 +995,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:61</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag de subida en curso.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -965,10 +1032,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:57</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Archivo de imagen seleccionado.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -996,10 +1069,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:49</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mensaje de éxito para UI.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1025,9 +1104,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:93</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:121</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Coordenadas para el preview (lat).</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1047,9 +1137,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:97</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:126</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Coordenadas para el preview (lng).</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1069,9 +1170,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:111</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:142</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Imagen actual para preview (data URL).</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1098,6 +1210,15 @@ import { ActivityTypeService } from &#x27;../../../core/services/activitytype.se
 import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
 import { CloudinaryService } from &#x27;../../../core/services/firebase-media.service&#x27;;
 import { UserService } from &#x27;../../../core/services/user.service&#x27;;
+
+/**
+ * Pantalla de creación de actividades.
+ *
+ * - Valida formulario (nombre/descripcion/tipo/coordenadas/precio).
+ * - Obliga a subir una imagen y la sube a Cloudinary.
+ * - Crea la actividad vía backend con Bearer token.
+ * - Asocia la actividad al usuario (en &#x60;UserService&#x60;) tras crearla.
+ */
 @Component({
   standalone: true,
   selector: &#x27;app-activities&#x27;,
@@ -1113,28 +1234,45 @@ import { UserService } from &#x27;../../../core/services/user.service&#x27;;
   styleUrl: &#x27;./activities.component.scss&#x27;,
 })
 export class ActivitiesCreationComponent {
+  /** Input file nativo para seleccionar imagen. */
   @ViewChild(&#x27;fileInput&#x27;) fileInput!: ElementRef&lt;HTMLInputElement&gt;;
 
+  /** Mensaje de error para UI. */
   error &#x3D; &#x27;&#x27;;
+  /** Mensaje de éxito para UI. */
   success &#x3D; &#x27;&#x27;;
+  /** Formulario reactivo de creación. */
   formActivityCreation: FormGroup;
+  /** Catálogo de tipos (para selects). */
   activityTypes: any;
+  /** Lista de nombres (derivada) usada por la UI. */
   activityTypesName: string[] &#x3D; [];
+  /** Archivo de imagen seleccionado. */
   selectedFile: File | null &#x3D; null;
+  /** Preview local de imagen (data URL). */
   imagePreview: string | null &#x3D; null;
+  /** Flag de subida en curso. */
   isUploading &#x3D; false;
 
+  /** Abre el selector de archivo para subir imagen. */
   triggerFileInput(): void {
     this.fileInput.nativeElement.click();
   }
 
   constructor(
+    /** Constructor de formularios. */
     private formSvc: FormBuilder,
+    /** Router para navegar tras crear. */
     private route: Router,
+    /** Servicio para relacionar actividad creada con usuario. */
     private userService: UserService,
+    /** Auth para token/usuario actual. */
     private auth: AuthService,
+    /** Servicio de actividades (mutación). */
     private activityService: ActivityService,
+    /** Servicio de tipos para catálogo. */
     private ActivityTypeService: ActivityTypeService,
+    /** Servicio de media (Cloudinary). */
     private mediaService: CloudinaryService
   ) {
     this.formActivityCreation &#x3D; this.formSvc.group({
@@ -1163,6 +1301,7 @@ export class ActivitiesCreationComponent {
     });
     this.activityTypes &#x3D; this.ActivityTypeService.getActivitiesType();
   }
+  /** Carga tipos disponibles para el selector. */
   ngOnInit(): void {
     this.ActivityTypeService.getActivitiesType().subscribe(
       (res: ActivityType[]) &#x3D;&gt; {
@@ -1172,14 +1311,17 @@ export class ActivitiesCreationComponent {
     );
   }
 
+  /** Coordenadas para el preview (lat). */
   get mapLatitude(): string {
     return this.formActivityCreation.get(&#x27;latitude&#x27;)?.value || &#x27;&#x27;;
   }
 
+  /** Coordenadas para el preview (lng). */
   get mapLongitude(): string {
     return this.formActivityCreation.get(&#x27;longitude&#x27;)?.value || &#x27;&#x27;;
   }
 
+  /** Actualiza el formulario cuando el mapa emite nuevas coordenadas. */
   onMapCoordinatesChange(coords: {
     latitude: number;
     longitude: number;
@@ -1190,10 +1332,12 @@ export class ActivitiesCreationComponent {
     });
   }
 
+  /** Imagen actual para preview (data URL). */
   get currentImage(): string {
     return this.imagePreview || &#x27;&#x27;;
   }
 
+  /** Valida y previsualiza un fichero de imagen seleccionado. */
   onFileSelected(event: Event): void {
     const input &#x3D; event.target as HTMLInputElement;
     if (input.files &amp;&amp; input.files[0]) {
@@ -1216,6 +1360,7 @@ export class ActivitiesCreationComponent {
     }
   }
 
+  /** Sube la imagen seleccionada a Cloudinary y devuelve su URL. */
   async uploadImage(): Promise&lt;string | null&gt; {
     if (!this.selectedFile) return null;
     this.isUploading &#x3D; true;
@@ -1241,6 +1386,7 @@ export class ActivitiesCreationComponent {
     }
   }
 
+  /** Crea la actividad en backend y la vincula al usuario. */
   async onCreate() {
     if (!this.selectedFile) {
       this.error &#x3D; &#x27;Debes subir una imagen&#x27;;

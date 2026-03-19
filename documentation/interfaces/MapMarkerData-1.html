@@ -144,6 +144,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Datos mínimos para un marcador en mapas.</p>
+<p>Este modelo está pensado para capas/preview donde solo se necesitan coords
+y algunos metadatos opcionales.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -238,6 +247,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Descripción opcional del punto.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -271,6 +286,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Latitud (Leaflet exige number).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -309,6 +330,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Enlace asociado (por ejemplo, a detalle).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -342,6 +369,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Longitud (Leaflet exige number).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -380,6 +413,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Título opcional del punto.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -387,16 +426,18 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Activity } from &quot;./activity.model&quot;;
-
-
-export interface MapMarkerData{
-  latitude: number;   // El mapa exige números
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface MapMarkerData {
+  /** Latitud (Leaflet exige number). */
+  latitude: number;
+  /** Longitud (Leaflet exige number). */
   longitude: number;
+  /** Título opcional del punto. */
   title?: string;
+  /** Descripción opcional del punto. */
   description?: string;
+  /** Enlace asociado (por ejemplo, a detalle). */
   link?: string;
-  }</code></pre>
+}</code></pre>
     </div>
 </div>
 

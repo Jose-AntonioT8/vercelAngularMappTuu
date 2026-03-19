@@ -2,7 +2,11 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
-// Prevents access to guest-only routes (login/signup) when already authenticated
+/**
+ * Guard de “invitado”.
+ *
+ * Evita acceder a rutas de guest-only (login/signup) si ya hay sesión activa.
+ */
 export const guestGuard: CanActivateFn = () => {
   const auth = inject(AuthService);
   const router = inject(Router);

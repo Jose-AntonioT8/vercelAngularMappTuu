@@ -5,6 +5,15 @@ import { HeaderComponent } from "../../common/header/header.component";
 import { MapComponent, MapMarkerData } from '../../common/maps/maps.component';
 import { combineLatest, Subscription, filter } from 'rxjs';
 
+/**
+ * Pantalla de mapa “Explorar”.
+ *
+ * Construye `mapPoints` combinando:
+ * - Actividades (lat/lng, nombre, rating, imagen, precio)
+ * - Tipos de actividad (para derivar color del marker)
+ *
+ * El render real del mapa vive en `MapComponent`.
+ */
 @Component({
   selector: 'app-maps',
   standalone: true,
@@ -14,7 +23,9 @@ import { combineLatest, Subscription, filter } from 'rxjs';
 })
 export class MapsComponent implements OnInit, OnDestroy {
 
+  /** Puntos que se pasan al componente de mapa para renderizar markers. */
   mapPoints: MapMarkerData[] = [];
+  /** Suscripción a streams combinados (activities + types). */
   private subscription?: Subscription;
 
   constructor(
@@ -22,6 +33,7 @@ export class MapsComponent implements OnInit, OnDestroy {
     private activityTypeService: ActivityTypeService
   ) { }
 
+  /** Suscribe a actividades y tipos para construir `mapPoints`. */
   ngOnInit() {
     this.subscription = combineLatest([
       this.activityservice.getActivities(),
@@ -53,6 +65,7 @@ export class MapsComponent implements OnInit, OnDestroy {
     });
   }
 
+  /** Limpia la suscripción al destruir el componente. */
   ngOnDestroy() {
     this.subscription?.unsubscribe();
   }

@@ -8,6 +8,16 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { AuthService } from '../../../core/services/auth.service';
 import { CloudinaryService } from '../../../core/services/firebase-media.service';
 import { TranslationService } from '../../../core/services/translation.service';
+
+/**
+ * Pantalla de perfil de usuario.
+ *
+ * Responsabilidades:
+ * - Mostrar datos básicos del usuario autenticado (nombre/email/avatar).
+ * - Permitir restablecer contraseña (Firebase Auth).
+ * - Permitir subir avatar (Cloudinary) y sincronizarlo en Firebase Auth.
+ * - Exponer acciones de navegación (volver, logout) y cambio de idioma.
+ */
 @Component({
   selector: 'app-profile',
   standalone: true,
@@ -16,18 +26,24 @@ import { TranslationService } from '../../../core/services/translation.service';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
+  /** Input file nativo para seleccionar avatar. */
   @ViewChild('avatarInput') avatarInput!: ElementRef<HTMLInputElement>;
 
+  /** Usuario autenticado actual (Firebase Auth). */
   user: User | null = null;
+  /** Flag de subida de avatar en curso. */
   isUploadingAvatar = false;
+  /** Preview local del avatar antes de subir (data URL). */
   avatarPreview: string | null = null;
 
+  /** Estadísticas (placeholder) para tarjetas de perfil. */
   stats = {
     activitiesVisited: 12,
     plansCreated: 5,
     favorites: 8,
   };
 
+  /** Logros (placeholder) renderizados en UI. */
   achievements = [
     {
       id: 1,
@@ -63,6 +79,7 @@ export class ProfileComponent implements OnInit {
     { id: 8, name: 'Leyenda', icon: '⭐', bgColor: '#e0e7ff', unlocked: false },
   ];
 
+  /** Actividades recientes (placeholder) renderizadas en UI. */
   recentActivities = [
     {
       id: '1',
@@ -87,13 +104,17 @@ export class ProfileComponent implements OnInit {
     },
   ];
 
+  /** Número de logros desbloqueados. */
   get unlockedCount(): number {
     return this.achievements.filter((a) => a.unlocked).length;
   }
 
+  /** Controla qué sección está expandida en UI. */
   expandedSection: 'achievements' | 'recent' | 'actions' | null = null;
+  /** Controla el modal de reset de contraseña. */
   showResetModal = false;
 
+  /** Alterna la sección expandida en UI. */
   toggleSection(section: 'achievements' | 'recent' | 'actions'): void {
     this.expandedSection = this.expandedSection === section ? null : section;
   }
@@ -106,6 +127,7 @@ export class ProfileComponent implements OnInit {
     private mediaService: CloudinaryService
   ) {}
 
+  /** Envía email de restablecimiento de contraseña (si hay email). */
   async sendPasswordReset(): Promise<void> {
     if (!this.user?.email) {
       return;
@@ -118,14 +140,23 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  /** Cierra el modal de reset. */
   closeResetModal(): void {
     this.showResetModal = false;
   }
 
+  /** Abre el selector de archivo para cambiar avatar. */
   triggerAvatarInput(): void {
     this.avatarInput.nativeElement.click();
   }
 
+  /**
+   * Valida y sube el avatar seleccionado.
+   *
+   * Reglas UX:
+   * - Solo imágenes
+   * - Máximo 5MB
+   */
   async onAvatarSelected(event: Event): Promise<void> {
     const input = event.target as HTMLInputElement;
     if (!input.files || !input.files[0]) return;
@@ -177,14 +208,17 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  /** Devuelve el avatar a mostrar (preview > photoURL > null). */
   get displayAvatar(): string | null {
     return this.avatarPreview || this.user?.photoURL || null;
   }
 
+  /** Idioma actual (desde TranslationService). */
   get currentLanguage(): string {
     return this.translationService.getCurrentLanguage();
   }
 
+  /** Cambia el idioma actual. */
   setLanguage(lang: string): void {
     this.translationService.setLanguage(lang);
   }
@@ -198,6 +232,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  /** Inicial del usuario para avatar fallback. */
   get userInitial(): string {
     if (this.user?.displayName) {
       return this.user.displayName.charAt(0).toUpperCase();
@@ -208,18 +243,22 @@ export class ProfileComponent implements OnInit {
     return 'U';
   }
 
+  /** Nombre visible del usuario (displayName o derivado del email). */
   get userName(): string {
     return this.user?.displayName || this.user?.email?.split('@')[0] || '';
   }
 
+  /** Email del usuario. */
   get userEmail(): string {
     return this.user?.email || '';
   }
 
+  /** Indica si el usuario actual es admin (regla en AuthService). */
   get isAdmin(): boolean {
     return this.authService.isAdmin();
   }
 
+  /** Fecha de alta del usuario (si está disponible en metadata). */
   get memberSince(): string {
     if (this.user?.metadata?.creationTime) {
       return new Date(this.user.metadata.creationTime).toLocaleDateString();
@@ -227,10 +266,12 @@ export class ProfileComponent implements OnInit {
     return '';
   }
 
+  /** Cierra sesión. */
   logout(): void {
     this.authService.logout();
   }
 
+  /** Navega hacia atrás usando el historial. */
   goBack(): void {
     this.location.back();
   }

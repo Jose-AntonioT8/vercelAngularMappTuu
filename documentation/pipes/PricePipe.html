@@ -141,6 +141,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Pipe de formateo de precio.</p>
+<p>Convierte un número (o string numérico) a formato monetario.
+Si el valor es <code>0</code>/<code>null</code>/<code>undefined</code>/NaN devuelve la etiqueta de “Gratis”.</p>
+
+            </p>
 
 
         <section data-compodoc="block-metadata">
@@ -184,14 +193,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="12"
-                                    class="link-to-prism">src/app/core/pipes/price.pipe.ts:12</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="19"
+                                    class="link-to-prism">src/app/core/pipes/price.pipe.ts:19</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Formatea el valor numérico a <code>X.XX €</code> o devuelve “Gratis”.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -240,6 +251,12 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Pipe, PipeTransform } from &#x27;@angular/core&#x27;;
 import { TranslationService } from &#x27;../services/translation.service&#x27;;
 
+/**
+ * Pipe de formateo de precio.
+ *
+ * Convierte un número (o string numérico) a formato monetario.
+ * Si el valor es &#x60;0&#x60;/&#x60;null&#x60;/&#x60;undefined&#x60;/NaN devuelve la etiqueta de “Gratis”.
+ */
 @Pipe({
   name: &#x27;price&#x27;,
   pure: false,
@@ -248,6 +265,7 @@ import { TranslationService } from &#x27;../services/translation.service&#x27;;
 export class PricePipe implements PipeTransform {
   constructor(private translationService: TranslationService) {}
 
+  /** Formatea el valor numérico a &#x60;X.XX €&#x60; o devuelve “Gratis”. */
   transform(value: number | string | null | undefined): string {
     // Convertir a número si es string
     const numValue &#x3D; typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? parseFloat(value) : value;

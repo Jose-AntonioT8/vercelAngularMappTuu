@@ -3,6 +3,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { Review } from '../../models/activity.model'; // Asumiendo que Review es compartido
 
+/**
+ * Modal para mostrar una lista de reseñas.
+ *
+ * Es un modal presentacional: recibe `reviews` y emite `onClose` cuando se cierra.
+ * Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.
+ */
 @Component({
   selector: 'app-reviews-list-modal',
   standalone: true,
@@ -11,16 +17,24 @@ import { Review } from '../../models/activity.model'; // Asumiendo que Review es
   styleUrl: './reviews-list-modal.component.scss',
 })
 export class ReviewsListModalComponent {
+  /** Controla si el modal está visible. */
   @Input() isOpen = false;
+  /** Lista de reseñas a renderizar. */
   @Input() reviews: Review[] = [];
+  /** Título del modal (por ejemplo: "Reseñas de la Actividad"). */
   @Input() title = 'Reseñas'; // Título dinámico, ej. "Reseñas de la Actividad"
+  /** Evento de cierre hacia el padre. */
   @Output() onClose = new EventEmitter<void>();
 
+  /** Cierra el modal notificando al padre. */
   closeModal() {
     this.onClose.emit();
   }
 
-  // Método para calcular estrellas (similar a getStarState)
+  /**
+   * Devuelve el estado visual de la estrella para un rating dado.
+   * `index` es 0-based (0..4).
+   */
   getStarState(rating: number, index: number): 'full' | 'half' | 'empty' {
     const starValue = index + 1;
     if (rating >= starValue) return 'full';
@@ -28,11 +42,16 @@ export class ReviewsListModalComponent {
     return 'empty';
   }
 
+  /** Array fijo de 5 posiciones para iterar estrellas en la plantilla. */
   getStarsArray(): number[] {
     return [0, 1, 2, 3, 4];
   }
 
-  // Formatear fecha (opcional, si Review tiene createdAt)
+  /**
+   * Formatea un Timestamp de Firebase a `dd/mm/yyyy`.
+   *
+   * Acepta `any` porque Firebase Timestamp no siempre está tipado en el modelo.
+   */
   formatDate(firebaseTimestamp: any): string {
     // Convierte el Timestamp de Firebase a un objeto Date de JavaScript.
     // Esto puede causar una pérdida de precisión a milisegundos.

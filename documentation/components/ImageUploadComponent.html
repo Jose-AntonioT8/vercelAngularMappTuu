@@ -142,6 +142,15 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Control de subida de imágenes compatible con Angular Forms.</p>
+<p>Valida tipo (imagen) y tamaño máximo (5MB) antes de propagar el <code>File</code>.
+También mantiene un preview local usando <code>FileReader</code>.</p>
+
+    </p>
 
 
     <p class="comment">
@@ -257,10 +266,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#loadPreview" >loadPreview</a>
-                            </li>
-                            <li>
                                 <a href="#onFileSelected" >onFileSelected</a>
                             </li>
                             <li>
@@ -345,9 +350,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:31</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Mensaje de error a renderizar en la UI (opcional).</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -371,9 +382,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:27</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Etiqueta del control (UI).</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -397,9 +414,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:21</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:29</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>URL de preview remota (por ejemplo, imagen ya guardada).</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -411,75 +434,6 @@
     <h3 id="methods">
         Methods
     </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="loadPreview"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>loadPreview</b></span>
-                        <a href="#loadPreview"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>loadPreview(file: File)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="73"
-                                    class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:73</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>file</td>
-                                            <td>
-                                                        <code>File</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -500,14 +454,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:74</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Handler de selección de archivo.</p>
+<p>Solo acepta <code>image/*</code> y un tamaño máximo de 5MB.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -567,8 +524,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="39"
-                                    class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:39</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -634,14 +591,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="43"
-                                    class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:43</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:60</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Registra el callback de &quot;tocado&quot; del formulario.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -701,14 +660,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="47"
-                                    class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:47</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:65</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Actualiza el estado disabled desde el formulario.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -768,14 +729,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:32</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:48</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Escribe el valor desde el formulario al control.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -845,10 +808,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:38</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Estado disabled recibido desde el formulario.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -876,10 +845,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:36</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Preview generado en cliente como data URL.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -907,10 +882,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:43</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Callback del formulario al cambiar el valor.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -938,10 +919,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:45</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Callback del formulario al marcar como tocado.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -969,10 +956,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:34</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Archivo seleccionado (si existe).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1000,10 +993,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:40</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Marca si el usuario ya interactuó con el control.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1029,9 +1028,21 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:81</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/common/custom-controls/image-upload/image-upload.component.ts:110</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Preview a mostrar en UI.</p>
+<p>Prioridad: preview local → previewUrl → placeholder.</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1044,6 +1055,12 @@
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from &#x27;@angular/forms&#x27;;
 
+/**
+ * Control de subida de imágenes compatible con Angular Forms.
+ *
+ * Valida tipo (imagen) y tamaño máximo (5MB) antes de propagar el &#x60;File&#x60;.
+ * También mantiene un preview local usando &#x60;FileReader&#x60;.
+ */
 @Component({
   selector: &#x27;app-image-upload&#x27;,
   standalone: true,
@@ -1059,18 +1076,28 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from &#x27;@angular/forms&#x2
   ]
 })
 export class ImageUploadComponent implements ControlValueAccessor {
+  /** Etiqueta del control (UI). */
   @Input() label: string &#x3D; &#x27;Imagen&#x27;;
+  /** URL de preview remota (por ejemplo, imagen ya guardada). */
   @Input() previewUrl: string &#x3D; &#x27;&#x27;;
+  /** Mensaje de error a renderizar en la UI (opcional). */
   @Input() errorMessage: string &#x3D; &#x27;&#x27;;
   
+  /** Archivo seleccionado (si existe). */
   selectedFile: File | null &#x3D; null;
+  /** Preview generado en cliente como data URL. */
   imagePreview: string | null &#x3D; null;
+  /** Estado disabled recibido desde el formulario. */
   disabled: boolean &#x3D; false;
+  /** Marca si el usuario ya interactuó con el control. */
   touched: boolean &#x3D; false;
 
+  /** Callback del formulario al cambiar el valor. */
   onChange: any &#x3D; () &#x3D;&gt; {};
+  /** Callback del formulario al marcar como tocado. */
   onTouched: any &#x3D; () &#x3D;&gt; {};
 
+  /** Escribe el valor desde el formulario al control. */
   writeValue(file: File | null): void {
     this.selectedFile &#x3D; file;
     if (file) {
@@ -1082,14 +1109,21 @@ export class ImageUploadComponent implements ControlValueAccessor {
     this.onChange &#x3D; fn;
   }
 
+  /** Registra el callback de &quot;tocado&quot; del formulario. */
   registerOnTouched(fn: any): void {
     this.onTouched &#x3D; fn;
   }
 
+  /** Actualiza el estado disabled desde el formulario. */
   setDisabledState(isDisabled: boolean): void {
     this.disabled &#x3D; isDisabled;
   }
 
+  /**
+   * Handler de selección de archivo.
+   *
+   * Solo acepta &#x60;image/*&#x60; y un tamaño máximo de 5MB.
+   */
   onFileSelected(event: Event): void {
     const input &#x3D; event.target as HTMLInputElement;
     
@@ -1112,6 +1146,7 @@ export class ImageUploadComponent implements ControlValueAccessor {
     }
   }
 
+  /** Genera y guarda un preview base64 del archivo. */
   private loadPreview(file: File): void {
     const reader &#x3D; new FileReader();
     reader.onload &#x3D; (e: any) &#x3D;&gt; {
@@ -1120,6 +1155,11 @@ export class ImageUploadComponent implements ControlValueAccessor {
     reader.readAsDataURL(file);
   }
 
+  /**
+   * Preview a mostrar en UI.
+   *
+   * Prioridad: preview local → previewUrl → placeholder.
+   */
   get currentPreview(): string {
     return this.imagePreview || this.previewUrl || &#x27;https://via.placeholder.com/400x300?text&#x3D;Sin+Imagen&#x27;;
   }

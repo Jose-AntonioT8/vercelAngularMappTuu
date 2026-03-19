@@ -18,6 +18,13 @@ import {
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { Review } from '../../models/activity.model';
 
+/**
+ * Modal para crear/editar una reseña.
+ *
+ * - Si `existingReview` viene con rating válido, entra en modo edición.
+ * - Valida rating (1..5) y comment (máx 500).
+ * - Emite `onSubmit` con el objeto `Review` listo para persistir.
+ */
 @Component({
   selector: 'app-review-modal',
   standalone: true,
@@ -26,18 +33,30 @@ import { Review } from '../../models/activity.model';
   styleUrl: './review-modal.component.scss',
 })
 export class ReviewModalComponent implements OnInit, OnChanges {
+  /** Controla si el modal está visible. */
   @Input() isOpen = false;
+  /** ID de actividad a la que pertenece la reseña (si aplica). */
   @Input() activityId: string | undefined;
+  /** ID del usuario autor de la reseña. */
   @Input() userId: string = '';
+  /** Reseña existente (si se está editando). */
   @Input() existingReview: Review | null = null;
+  /** Evento de cierre hacia el padre. */
   @Output() onClose = new EventEmitter<void>();
+  /** Evento de submit hacia el padre con la reseña. */
   @Output() onSubmit = new EventEmitter<Review>();
 
+  /** Formulario reactivo de la reseña. */
   formReview: FormGroup;
+  /** Rating temporal al hover (para previsualizar estrellas). */
   hoverRating = 0;
+  /** Mensaje de error para UI. */
   error = '';
+  /** Mensaje de éxito para UI. */
   success = '';
+  /** Estado de submit (spinner/disable). */
   isSubmitting = false;
+  /** Indica si el modal está editando una reseña existente. */
   isEditMode = false;
 
   private formBuilder = inject(FormBuilder);
@@ -49,10 +68,12 @@ export class ReviewModalComponent implements OnInit, OnChanges {
     });
   }
 
+  /** Inicializa el formulario con datos si corresponde. */
   ngOnInit() {
     this.loadReview();
   }
 
+  /** Sincroniza formulario cuando cambia `existingReview` o se abre el modal. */
   ngOnChanges(changes: SimpleChanges) {
     // Detectar cambios en existingReview o isOpen y actualizar el formulario
     if (changes['existingReview'] || changes['isOpen']) {
@@ -62,6 +83,7 @@ export class ReviewModalComponent implements OnInit, OnChanges {
     }
   }
 
+  /** Carga en el formulario los valores de `existingReview` o resetea a nuevo. */
   private loadReview() {
     // Si existe una reseña anterior, cargar sus valores
     console.log('📝 Cargando reseña existente:', this.existingReview);
@@ -94,6 +116,7 @@ export class ReviewModalComponent implements OnInit, OnChanges {
     }
   }
 
+  /** Cierra el modal y resetea mensajes/estado de submit. */
   closeModal() {
     this.error = '';
     this.success = '';
@@ -101,6 +124,10 @@ export class ReviewModalComponent implements OnInit, OnChanges {
     this.onClose.emit();
   }
 
+  /**
+   * Valida y emite la reseña construida desde el formulario.
+   * Mantiene un feedback de éxito y cierra automáticamente tras 1s.
+   */
   submitReview() {
     if (this.formReview.invalid || this.formReview.get('rating')?.value === 0) {
       this.error = 'Por favor, selecciona una puntuación';
@@ -128,18 +155,25 @@ export class ReviewModalComponent implements OnInit, OnChanges {
     }, 1000);
   }
 
+  /** Fija el rating seleccionado (click). */
   setRating(value: number) {
     this.formReview.patchValue({ rating: value });
   }
 
+  /** Fija el rating de hover (previsualización). */
   setHoverRating(value: number) {
     this.hoverRating = value;
   }
 
+  /** Limpia el hover rating. */
   clearHoverRating() {
     this.hoverRating = 0;
   }
 
+  /**
+   * Devuelve el estado visual de una estrella (full/empty).
+   * `index` es 0-based (0..4). Si `useHover` está activo, usa `hoverRating`.
+   */
   getStarState(index: number, useHover = false): 'full' | 'empty' {
     const currentRating = useHover
       ? this.hoverRating
@@ -147,6 +181,7 @@ export class ReviewModalComponent implements OnInit, OnChanges {
     return currentRating >= index + 1 ? 'full' : 'empty';
   }
 
+  /** Array fijo de 5 posiciones para iterar estrellas en la plantilla. */
   getStarsArray(): number[] {
     return [0, 1, 2, 3, 4];
   }

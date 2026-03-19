@@ -16,6 +16,15 @@ import { ActivityTypeService } from '../../../core/services/activitytype.service
 import { AuthService } from '../../../core/services/auth.service';
 import { CloudinaryService } from '../../../core/services/firebase-media.service';
 import { UserService } from '../../../core/services/user.service';
+
+/**
+ * Pantalla de creación de actividades.
+ *
+ * - Valida formulario (nombre/descripcion/tipo/coordenadas/precio).
+ * - Obliga a subir una imagen y la sube a Cloudinary.
+ * - Crea la actividad vía backend con Bearer token.
+ * - Asocia la actividad al usuario (en `UserService`) tras crearla.
+ */
 @Component({
   standalone: true,
   selector: 'app-activities',
@@ -31,28 +40,45 @@ import { UserService } from '../../../core/services/user.service';
   styleUrl: './activities.component.scss',
 })
 export class ActivitiesCreationComponent {
+  /** Input file nativo para seleccionar imagen. */
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
+  /** Mensaje de error para UI. */
   error = '';
+  /** Mensaje de éxito para UI. */
   success = '';
+  /** Formulario reactivo de creación. */
   formActivityCreation: FormGroup;
+  /** Catálogo de tipos (para selects). */
   activityTypes: any;
+  /** Lista de nombres (derivada) usada por la UI. */
   activityTypesName: string[] = [];
+  /** Archivo de imagen seleccionado. */
   selectedFile: File | null = null;
+  /** Preview local de imagen (data URL). */
   imagePreview: string | null = null;
+  /** Flag de subida en curso. */
   isUploading = false;
 
+  /** Abre el selector de archivo para subir imagen. */
   triggerFileInput(): void {
     this.fileInput.nativeElement.click();
   }
 
   constructor(
+    /** Constructor de formularios. */
     private formSvc: FormBuilder,
+    /** Router para navegar tras crear. */
     private route: Router,
+    /** Servicio para relacionar actividad creada con usuario. */
     private userService: UserService,
+    /** Auth para token/usuario actual. */
     private auth: AuthService,
+    /** Servicio de actividades (mutación). */
     private activityService: ActivityService,
+    /** Servicio de tipos para catálogo. */
     private ActivityTypeService: ActivityTypeService,
+    /** Servicio de media (Cloudinary). */
     private mediaService: CloudinaryService
   ) {
     this.formActivityCreation = this.formSvc.group({
@@ -81,6 +107,7 @@ export class ActivitiesCreationComponent {
     });
     this.activityTypes = this.ActivityTypeService.getActivitiesType();
   }
+  /** Carga tipos disponibles para el selector. */
   ngOnInit(): void {
     this.ActivityTypeService.getActivitiesType().subscribe(
       (res: ActivityType[]) => {
@@ -90,14 +117,17 @@ export class ActivitiesCreationComponent {
     );
   }
 
+  /** Coordenadas para el preview (lat). */
   get mapLatitude(): string {
     return this.formActivityCreation.get('latitude')?.value || '';
   }
 
+  /** Coordenadas para el preview (lng). */
   get mapLongitude(): string {
     return this.formActivityCreation.get('longitude')?.value || '';
   }
 
+  /** Actualiza el formulario cuando el mapa emite nuevas coordenadas. */
   onMapCoordinatesChange(coords: {
     latitude: number;
     longitude: number;
@@ -108,10 +138,12 @@ export class ActivitiesCreationComponent {
     });
   }
 
+  /** Imagen actual para preview (data URL). */
   get currentImage(): string {
     return this.imagePreview || '';
   }
 
+  /** Valida y previsualiza un fichero de imagen seleccionado. */
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -134,6 +166,7 @@ export class ActivitiesCreationComponent {
     }
   }
 
+  /** Sube la imagen seleccionada a Cloudinary y devuelve su URL. */
   async uploadImage(): Promise<string | null> {
     if (!this.selectedFile) return null;
     this.isUploading = true;
@@ -159,6 +192,7 @@ export class ActivitiesCreationComponent {
     }
   }
 
+  /** Crea la actividad en backend y la vincula al usuario. */
   async onCreate() {
     if (!this.selectedFile) {
       this.error = 'Debes subir una imagen';

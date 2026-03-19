@@ -1,6 +1,14 @@
 
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
+/**
+ * Validador cruzado: comprueba que dos controles de un mismo FormGroup tengan el mismo valor.
+ *
+ * Uso típico: `password` y `repeatpassword` en formularios de registro.
+ *
+ * @param controlName Nombre del control base (por ejemplo `password`).
+ * @param matchingControlName Nombre del control a comparar (por ejemplo `repeatpassword`).
+ */
 export function matchPasswordValidator(
   controlName: string,
   matchingControlName: string

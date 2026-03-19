@@ -144,6 +144,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Estado serializable de filtros para planes.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -212,6 +219,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Actividad seleccionada (por nombre o id según UI).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -245,6 +258,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Rating mínimo.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -259,13 +278,23 @@ import { Activity } from &#x27;../../models/activity.model&#x27;;
 import { ActivityService } from &#x27;../../../core/services/activity.service&#x27;;
 import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
 
-interface FilterItem {
+/**
+ * Opción de filtro (id + nombre) para selects/listas.
+ */
+export interface FilterItem {
+  /** Identificador del ítem (por ejemplo, id de actividad). */
   id: string;
+  /** Nombre legible para UI. */
   name: string;
 }
 
+/**
+ * Estado serializable de filtros para planes.
+ */
 export interface ActivityFilterState {
+    /** Actividad seleccionada (por nombre o id según UI). */
     activity: string | null; 
+    /** Rating mínimo. */
     ratingMin: number; 
 }
 
@@ -279,17 +308,26 @@ export interface ActivityFilterState {
 })
 export class FilterPlansComponent  implements OnInit, ActivityFilterState{
 
+    /** Actividad seleccionada. */
     activity: string | null &#x3D; null;
+    /** Ubicación textual (si aplica en la pantalla). */
     location: string | null &#x3D; null;
+    /** Rating mínimo seleccionado. */
     ratingMin: number &#x3D; 0;
+    /** Lista derivada de nombres de actividades para el selector. */
     activitiesName : string[] &#x3D; [];
+    /** Catálogo completo de actividades cargado desde el servicio. */
     activities : Activity[] &#x3D; [];
+    /** Evento hacia el padre con el estado de filtros. */
     @Output() filterChanged &#x3D; new EventEmitter&lt;ActivityFilterState&gt;();
     
+    /** Catálogo opcional inyectado por el padre (si no se usa Firestore). */
     @Input() availableTypes: FilterItem[] &#x3D; []; 
+    /** Inyecta &#x60;ActivityService&#x60; para cargar catálogo. */
 constructor( private ActivityService: ActivityService,
 ) {}
 
+    /** Carga catálogo de actividades y emite el estado inicial. */
     ngOnInit() {
         this.emitCurrentFilterState();
         this.ActivityService.getActivities().subscribe(
@@ -303,6 +341,7 @@ constructor( private ActivityService: ActivityService,
           );
     }
 
+    /** Emite el estado actual de filtros. */
     emitCurrentFilterState() {
         const filterState: ActivityFilterState &#x3D; {
             activity: this.activity,
@@ -311,6 +350,7 @@ constructor( private ActivityService: ActivityService,
         this.filterChanged.emit(filterState);
     }
 
+    /** Limpia filtros al estado inicial y re-emite. */
     resetFilters() {
         this.activity &#x3D; null;
         this.ratingMin &#x3D; 0;

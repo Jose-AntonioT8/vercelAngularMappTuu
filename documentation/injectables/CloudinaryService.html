@@ -137,6 +137,22 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Servicio de subida de media a Cloudinary.</p>
+<p>Se usa desde el frontend para subir imágenes (u otros blobs) a una carpeta
+lógica de Cloudinary. Requiere que exista un usuario autenticado en
+<code>AuthService</code> para poder adjuntar metadatos de trazabilidad.</p>
+<p>Nota de seguridad:</p>
+<ul>
+<li>El <code>api_key</code> de Cloudinary <strong>no es un secreto</strong> (no es el <code>api_secret</code>).
+La autorización real debe estar gobernada por el <code>upload_preset</code> y, si se
+necesita control más estricto, por un flujo firmado desde backend.</li>
+</ul>
+
+            </p>
 
 
 
@@ -144,31 +160,6 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#authService" >authService</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#CLOUD_NAME" >CLOUD_NAME</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#UPLOAD_PRESET" >UPLOAD_PRESET</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -222,14 +213,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="13"
-                                    class="link-to-prism">src/app/core/services/firebase-media.service.ts:13</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/app/core/services/firebase-media.service.ts:38</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Sube un <code>Blob</code> a Cloudinary y devuelve las URLs seguras resultantes.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -241,6 +234,7 @@
                                                 <td>Type</td>
                                             <td>Optional</td>
                                                 <td>Default value</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -257,6 +251,10 @@
                                             <td>
                                             </td>
 
+                                            <td>
+                                                    <p>Fichero binario (por ejemplo, una imagen) a subir.</p>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>folder</td>
@@ -272,6 +270,10 @@
                                                     <code>&#x27;uploads&#x27;</code>
                                             </td>
 
+                                            <td>
+                                                    <p>Carpeta lógica destino en Cloudinary (por defecto <code>uploads</code>).</p>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -281,114 +283,11 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Observable que emite una lista de URLs (<code>secure_url</code>) y completa.</p>
+
                             </div>
                 </td>
             </tr>
-        </tbody>
-    </table>
-</section>
-            <section data-compodoc="block-properties">
-    
-    <h3 id="inputs">
-        Properties
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="authService"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>authService</b></span>
-                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(AuthService)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/core/services/firebase-media.service.ts:9</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="CLOUD_NAME"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Readonly</span>
-                        <span ><b>CLOUD_NAME</b></span>
-                        <a href="#CLOUD_NAME"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>environment.CLOUD_NAME</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/core/services/firebase-media.service.ts:10</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="UPLOAD_PRESET"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Readonly</span>
-                        <span ><b>UPLOAD_PRESET</b></span>
-                        <a href="#UPLOAD_PRESET"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>environment.UPLOAD_PRESET</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/core/services/firebase-media.service.ts:11</a></div>
-                        </td>
-                    </tr>
-
-
         </tbody>
     </table>
 </section>
@@ -401,14 +300,39 @@
 import { Observable } from &#x27;rxjs&#x27;;
 import { environment } from &#x27;../../environment/environment&#x27;;
 import { AuthService } from &#x27;./auth.service&#x27;;
+
+/**
+ * Servicio de subida de media a Cloudinary.
+ *
+ * Se usa desde el frontend para subir imágenes (u otros blobs) a una carpeta
+ * lógica de Cloudinary. Requiere que exista un usuario autenticado en
+ * &#x60;AuthService&#x60; para poder adjuntar metadatos de trazabilidad.
+ *
+ * Nota de seguridad:
+ * - El &#x60;api_key&#x60; de Cloudinary **no es un secreto** (no es el &#x60;api_secret&#x60;).
+ *   La autorización real debe estar gobernada por el &#x60;upload_preset&#x60; y, si se
+ *   necesita control más estricto, por un flujo firmado desde backend.
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class CloudinaryService {
+  /** Servicio de auth para obtener el usuario actual (trazabilidad). */
   private authService &#x3D; inject(AuthService);
+  /** Cloud name de Cloudinary (parte de la URL del endpoint). */
   private readonly CLOUD_NAME &#x3D; environment.CLOUD_NAME;
+  /** Upload preset (gobierna permisos/transformaciones del upload no firmado). */
   private readonly UPLOAD_PRESET &#x3D; environment.UPLOAD_PRESET;
 
+  /**
+   * Sube un &#x60;Blob&#x60; a Cloudinary y devuelve las URLs seguras resultantes.
+   *
+   * @param blob Fichero binario (por ejemplo, una imagen) a subir.
+   * @param folder Carpeta lógica destino en Cloudinary (por defecto &#x60;uploads&#x60;).
+   *
+   * @throws Error si no hay usuario autenticado.
+   * @returns Observable que emite una lista de URLs (&#x60;secure_url&#x60;) y completa.
+   */
   public upload(blob: Blob, folder: string &#x3D; &#x27;uploads&#x27;): Observable&lt;string[]&gt; {
     return new Observable(observer &#x3D;&gt; {
       const user &#x3D; this.authService.currentUser;

@@ -4,6 +4,11 @@ import { HeaderComponent } from '../../../common/header/header.component';
 import { ListComponent as ActivityTypeList } from '../../../common/activityTypes/list/list.component';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 
+/**
+ * Pantalla de listado de tipos de actividad.
+ *
+ * Delega el render del listado al componente común `activityTypes/list`.
+ */
 @Component({
   selector: 'app-activity-types-list',
   standalone: true,

@@ -10,6 +10,13 @@ import { AuthService } from '../../../core/services/auth.service';
 import { CloudinaryService } from '../../../core/services/firebase-media.service';
 import { PlanService } from '../../../core/services/plan.service';
 import { UserService } from '../../../core/services/user.service';
+/**
+ * Pantalla para crear un plan.
+ *
+ * - Carga actividades disponibles y permite seleccionarlas (selector múltiple).
+ * - Permite subir una imagen (Cloudinary) y guardar el plan vía API protegida.
+ * - Al crear, también registra la relación usuario→plan en `UserService`.
+ */
 @Component({
   selector: 'app-plans-creation',
   standalone: true,
@@ -24,16 +31,26 @@ import { UserService } from '../../../core/services/user.service';
   styleUrl: './plans-creation.component.scss',
 })
 export class PlansCreationComponent implements OnInit {
+  /** Input file nativo (se dispara con un botón custom). */
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
+  /** Mensaje de error para la UI. */
   error = '';
+  /** Mensaje de éxito para la UI. */
   success = '';
+  /** Formulario reactivo de creación del plan. */
   formPlanCreation;
+  /** Payload auxiliar (no tipado) usado por la pantalla. */
   planData: any;
+  /** Actividades disponibles cargadas desde API. */
   activities: Activity[] = [];
+  /** Nombres de actividades para el selector. */
   activitiesName: string[] = [];
+  /** Archivo de imagen seleccionado para subir. */
   selectedFile: File | null = null;
+  /** Preview local de la imagen. */
   imagePreview: string | null = null;
+  /** Estado de subida (para deshabilitar UI/mostrar spinner). */
   isUploading = false;
 
   constructor(
@@ -56,6 +73,7 @@ export class PlansCreationComponent implements OnInit {
     });
   }
 
+  /** Carga el catálogo de actividades para permitir selección. */
   ngOnInit(): void {
     this.activityService.getActivities().subscribe(
       (res: Activity[]) => {
@@ -68,16 +86,19 @@ export class PlansCreationComponent implements OnInit {
     );
   }
 
+  /** Abre el selector de archivo nativo. */
   triggerFileInput(): void {
     this.fileInput.nativeElement.click();
   }
 
+  /** Imagen actual a mostrar: preview local o valor del formulario. */
   get currentImage(): string {
     return (
       this.imagePreview || this.formPlanCreation.get('imgRef')?.value || ''
     );
   }
 
+  /** Handler de selección de imagen con validación básica (tipo y tamaño). */
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -100,6 +121,10 @@ export class PlansCreationComponent implements OnInit {
     }
   }
 
+  /**
+   * Sube la imagen seleccionada a Cloudinary y devuelve su URL.
+   * Si no hay archivo nuevo, reutiliza `imgRef` del formulario.
+   */
   async uploadImage(): Promise<string | null> {
     if (!this.selectedFile)
       return this.formPlanCreation.get('imgRef')?.value || null;
@@ -122,6 +147,7 @@ export class PlansCreationComponent implements OnInit {
     }
   }
 
+  /** Cuenta cuántas actividades hay seleccionadas en el control. */
   getSelectedCount(): number {
     const selected: string[] =
       this.formPlanCreation.get('activitiesIds')?.value || [];
@@ -167,6 +193,11 @@ export class PlansCreationComponent implements OnInit {
 
   // --- Lógica de Envío del Formulario ---
 
+  /**
+   * Crea el plan.
+   *
+   * Valida formulario, mapea nombres→ids, sube imagen si aplica, obtiene token y llama al API.
+   */
   async onCreate() {
     if (this.formPlanCreation.invalid) {
       this.formPlanCreation.markAllAsTouched();
@@ -222,11 +253,13 @@ export class PlansCreationComponent implements OnInit {
 
   // --- Lógica de Navegación y Errores (sin cambios mayores) ---
 
+  /** Cierra sesión y vuelve a landing. */
   logOut() {
     this.route.navigate(['/landingPage']);
     this.auth.logout();
   }
 
+  /** Devuelve un mensaje de error por control del formulario. */
   getError(control: string) {
     switch (control) {
       case 'name':

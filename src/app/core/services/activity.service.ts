@@ -29,16 +29,24 @@ import { BehaviorSubject, Observable, from, map } from 'rxjs';
  *   (cache simple con `unsubscribeListener`) para evitar listeners duplicados.
  */
 export class ActivityService {
+  /** Base URL del API para actividades. */
   private url = `${apiUrl}/activities`;
-private db: FirestoreType = inject(Firestore); 
+  /** Instancia de Firestore (compat firebase/firestore). */
+  private db: FirestoreType = inject(Firestore); 
+  /** Zona para re-entrar a Angular desde callbacks externos. */
   private ngZone = inject(NgZone);
 
+  /** Nombre de la colección Firestore. */
   private readonly collectionName = 'activities';
+  /** Listener activo para evitar duplicados. */
   private unsubscribeListener: Unsubscribe | null = null;
   
+  /** Estado interno del listado (stream). */
   private _activities = new BehaviorSubject<ActivityDetail[]>([]);
+  /** Stream público de actividades. */
   public activities$ = this._activities.asObservable();
   
+  /** Cliente HTTP para mutaciones vía API protegida. */
   constructor(private http: HttpClient) {}
 
   

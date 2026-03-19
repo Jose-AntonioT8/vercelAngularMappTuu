@@ -144,6 +144,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Modelo de usuario de la app.</p>
+<p>Este modelo representa el perfil persistido en backend/DB (no necesariamente
+coincide 1:1 con el <code>User</code> de Firebase Auth).</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -257,6 +266,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>IDs de actividades creadas por el usuario.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -290,6 +305,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Fecha de alta/creación del registro.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -328,6 +349,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>IDs de planes creados por el usuario.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -361,6 +388,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Email principal del usuario.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -394,6 +427,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Identificador único del usuario (por ejemplo, UID).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -427,6 +466,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Nombre visible del usuario.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -465,6 +510,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>IDs de actividades guardadas por el usuario.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -503,6 +554,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>IDs de planes guardados por el usuario.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -511,13 +568,21 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface User {
+  /** Email principal del usuario. */
   email: string;
+  /** Identificador único del usuario (por ejemplo, UID). */
   id: string;
+  /** Nombre visible del usuario. */
   name: string;
+  /** Fecha de alta/creación del registro. */
   createdAt: Date;
+  /** IDs de actividades guardadas por el usuario. */
   savedActivities?: string[]; // IDs de actividades guardadas por el usuario
+  /** IDs de planes guardados por el usuario. */
   savedPlans?: string[]; // IDs de planes guardados por el usuario
+  /** IDs de actividades creadas por el usuario. */
   createdActivities?: string[]; // IDs de actividades creadas por el usuario
+  /** IDs de planes creados por el usuario. */
   createdPlans?: string[]; // IDs de planes creados por el usuario
 }
 </code></pre>

@@ -138,6 +138,19 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Pantalla de login.</p>
+<p>Responsabilidades:</p>
+<ul>
+<li>Validar credenciales (email/password) y orquestar el login con <code>AuthService</code>.</li>
+<li>Soportar login social (Google/GitHub).</li>
+<li>Enviar correo de restablecimiento de contraseña (Firebase Auth).</li>
+</ul>
+
+    </p>
 
 
 
@@ -250,10 +263,6 @@
                                 <a href="#getError" >getError</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#handleSocialError" >handleSocialError</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Async</span>
                                 <a href="#onGithubLogin" >onGithubLogin</a>
                             </li>
@@ -297,7 +306,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/user/login/login.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/user/login/login.component.ts:45</a></div>
                             </td>
                         </tr>
 
@@ -412,14 +421,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="71"
-                                    class="link-to-prism">src/app/features/user/login/login.component.ts:71</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/features/user/login/login.component.ts:89</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Cierra el modal de reset.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -449,14 +460,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">src/app/features/user/login/login.component.ts:75</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="94"
+                                    class="link-to-prism">src/app/features/user/login/login.component.ts:94</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Devuelve mensaje de error traducido según validación del control.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -500,87 +513,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="handleSocialError"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>handleSocialError</b></span>
-                        <a href="#handleSocialError"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>handleSocialError(err: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, provider: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="116"
-                                    class="link-to-prism">src/app/features/user/login/login.component.ts:116</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>err</td>
-                                            <td>
-                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                        <tr>
-                                                <td>provider</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="onGithubLogin"></a>
                     <span class="name">
                             <span class="modifier">Async</span>
@@ -599,14 +531,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="107"
-                                    class="link-to-prism">src/app/features/user/login/login.component.ts:107</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/features/user/login/login.component.ts:129</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Login vía GitHub OAuth.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
@@ -638,14 +572,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="98"
-                                    class="link-to-prism">src/app/features/user/login/login.component.ts:98</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/features/user/login/login.component.ts:119</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Login vía Google OAuth.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
@@ -677,14 +613,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="135"
-                                    class="link-to-prism">src/app/features/user/login/login.component.ts:135</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">src/app/features/user/login/login.component.ts:159</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Login con email/password.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
@@ -714,14 +652,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="50"
-                                    class="link-to-prism">src/app/features/user/login/login.component.ts:50</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/features/user/login/login.component.ts:67</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Envía email de restablecimiento usando el email actual del formulario.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -751,14 +691,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="94"
-                                    class="link-to-prism">src/app/features/user/login/login.component.ts:94</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/features/user/login/login.component.ts:114</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Navega a la pantalla de registro.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -788,14 +730,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="46"
-                                    class="link-to-prism">src/app/features/user/login/login.component.ts:46</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/features/user/login/login.component.ts:62</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Alterna visibilidad del campo contraseña.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -835,10 +779,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/user/login/login.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/user/login/login.component.ts:42</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Email usado para el modal de reset.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -866,10 +816,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/features/user/login/login.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/user/login/login.component.ts:34</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mensaje de error para UI.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -892,7 +848,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/user/login/login.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/user/login/login.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -923,10 +879,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/features/user/login/login.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/user/login/login.component.ts:38</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag para evitar dobles envíos.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -954,10 +916,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/user/login/login.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/user/login/login.component.ts:40</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Toggle de visibilidad del password.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -985,10 +953,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/user/login/login.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/user/login/login.component.ts:44</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controla el modal de reset de contraseña.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1016,10 +990,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/features/user/login/login.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/user/login/login.component.ts:36</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mensaje de éxito para UI.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1039,6 +1019,15 @@ import { LanguageSelectorComponent } from &#x27;../../../common/language-selecto
 import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
 import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
 import { TranslationService } from &#x27;../../../core/services/translation.service&#x27;;
+
+/**
+ * Pantalla de login.
+ *
+ * Responsabilidades:
+ * - Validar credenciales (email/password) y orquestar el login con &#x60;AuthService&#x60;.
+ * - Soportar login social (Google/GitHub).
+ * - Enviar correo de restablecimiento de contraseña (Firebase Auth).
+ */
 @Component({
   selector: &#x27;app-login&#x27;,
   standalone: true,
@@ -1052,11 +1041,17 @@ import { TranslationService } from &#x27;../../../core/services/translation.serv
   templateUrl: &#x27;./login.component.html&#x27;,
 })
 export class LoginComponent {
+  /** Mensaje de error para UI. */
   error &#x3D; &#x27;&#x27;;
+  /** Mensaje de éxito para UI. */
   success &#x3D; &#x27;&#x27;;
+  /** Flag para evitar dobles envíos. */
   isLoading &#x3D; false;
+  /** Toggle de visibilidad del password. */
   showPassword &#x3D; false;
+  /** Email usado para el modal de reset. */
   emailAddress: string &#x3D; &#x27;&#x27;;
+  /** Controla el modal de reset de contraseña. */
   showResetModal &#x3D; false;
   formLogin;
 
@@ -1074,10 +1069,12 @@ export class LoginComponent {
     });
   }
 
+  /** Alterna visibilidad del campo contraseña. */
   togglePassword(): void {
     this.showPassword &#x3D; !this.showPassword;
   }
 
+  /** Envía email de restablecimiento usando el email actual del formulario. */
   sendPasswordReset(): void {
     if (!this.formLogin.controls.email.value) {
       this.error &#x3D; this.translation.instant(&#x27;auth.login.emailRequired&#x27;);
@@ -1099,10 +1096,12 @@ export class LoginComponent {
       });
   }
 
+  /** Cierra el modal de reset. */
   closeResetModal(): void {
     this.showResetModal &#x3D; false;
   }
 
+  /** Devuelve mensaje de error traducido según validación del control. */
   getError(control: string): string {
     switch (control) {
       case &#x27;email&#x27;:
@@ -1122,10 +1121,12 @@ export class LoginComponent {
     return &#x27;&#x27;;
   }
 
+  /** Navega a la pantalla de registro. */
   singUp(): void {
     this.route.navigate([&#x27;/signup&#x27;]);
   }
 
+  /** Login vía Google OAuth. */
   async onGoogleLogin(): Promise&lt;void&gt; {
     try {
       this.error &#x3D; &#x27;&#x27;;
@@ -1135,6 +1136,7 @@ export class LoginComponent {
     }
   }
 
+  /** Login vía GitHub OAuth. */
   async onGithubLogin(): Promise&lt;void&gt; {
     try {
       this.error &#x3D; &#x27;&#x27;;
@@ -1144,6 +1146,7 @@ export class LoginComponent {
     }
   }
 
+  /** Mapea errores frecuentes de OAuth para UX. */
   private handleSocialError(err: any, provider: string): void {
     switch (err.code) {
       case &#x27;auth/popup-closed-by-user&#x27;:
@@ -1163,6 +1166,7 @@ export class LoginComponent {
     }
   }
 
+  /** Login con email/password. */
   async onLogin(): Promise&lt;void&gt; {
     if (this.formLogin.invalid || this.isLoading) return;
 

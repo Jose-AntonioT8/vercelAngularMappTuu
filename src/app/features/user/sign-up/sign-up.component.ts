@@ -8,6 +8,15 @@ import { AuthService } from '../../../core/services/auth.service';
 import { TranslationService } from '../../../core/services/translation.service';
 import { UserService } from '../../../core/services/user.service';
 import { matchPasswordValidator } from '../../../core/validators/match-password.validator';
+
+/**
+ * Pantalla de registro de usuario.
+ *
+ * Responsabilidades:
+ * - Validar formulario (email/nombre/contraseña + repetición + términos).
+ * - Registrar en Firebase Auth (email/password) o iniciar con OAuth (Google/GitHub).
+ * - Crear el “usuario de dominio” en el backend usando Bearer token (Firebase ID token).
+ */
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -21,11 +30,17 @@ import { matchPasswordValidator } from '../../../core/validators/match-password.
   templateUrl: './sign-up.component.html',
 })
 export class SignupComponent {
+  /** Mensaje de error para UI. */
   error = '';
+  /** Mensaje de éxito para UI. */
   success = '';
+  /** Flag para evitar dobles envíos. */
   isLoading = false;
+  /** Toggle visibilidad del password. */
   showPassword = false;
+  /** Toggle visibilidad de confirmación de password. */
   showConfirmPassword = false;
+  /** FormGroup tipado en runtime por FormBuilder. */
   formSignup;
 
   constructor(
@@ -59,6 +74,7 @@ export class SignupComponent {
     );
   }
 
+  /** Heurística simple de fuerza de contraseña para feedback visual. */
   get passwordStrength(): 'weak' | 'medium' | 'strong' {
     const password = this.formSignup.controls.password.value || '';
 
@@ -81,14 +97,20 @@ export class SignupComponent {
     return 'strong';
   }
 
+  /** Alterna visibilidad del campo contraseña. */
   togglePassword(): void {
     this.showPassword = !this.showPassword;
   }
 
+  /** Alterna visibilidad del campo repetir contraseña. */
   toggleConfirmPassword(): void {
     this.showConfirmPassword = !this.showConfirmPassword;
   }
 
+  /**
+   * Devuelve mensaje de error traducido según validación actual del control.
+   * @param control Nombre lógico del control.
+   */
   getError(control: string): string {
     switch (control) {
       case 'email':
@@ -123,10 +145,12 @@ export class SignupComponent {
     return '';
   }
 
+  /** Navega a login. */
   login(): void {
     this.route.navigate(['/login']);
   }
 
+  /** Registro/inicio vía Google OAuth. */
   async onGoogleSignup(): Promise<void> {
     try {
       this.error = '';
@@ -136,6 +160,7 @@ export class SignupComponent {
     }
   }
 
+  /** Registro/inicio vía GitHub OAuth. */
   async onGithubSignup(): Promise<void> {
     try {
       this.error = '';
@@ -145,6 +170,7 @@ export class SignupComponent {
     }
   }
 
+  /** Mapea errores frecuentes de OAuth para UX. */
   private handleSocialError(err: any, provider: string): void {
     switch (err.code) {
       case 'auth/popup-closed-by-user':
@@ -162,6 +188,15 @@ export class SignupComponent {
     }
   }
 
+  /**
+   * Registro con email/password.
+   *
+   * Flujo:
+   * 1) Registrar en Firebase Auth
+   * 2) Obtener ID token
+   * 3) Crear usuario en backend (dominio)
+   * 4) Navegar a la app
+   */
   async onSignup(): Promise<void> {
     if (this.formSignup.invalid || this.isLoading) return;
 

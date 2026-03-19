@@ -138,6 +138,18 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Pantalla para crear un plan.</p>
+<ul>
+<li>Carga actividades disponibles y permite seleccionarlas (selector múltiple).</li>
+<li>Permite subir una imagen (Cloudinary) y guardar el plan vía API protegida.</li>
+<li>Al crear, también registra la relación usuario→plan en <code>UserService</code>.</li>
+</ul>
+
+    </p>
 
 
     <p class="comment">
@@ -332,7 +344,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:54</a></div>
                             </td>
                         </tr>
 
@@ -471,14 +483,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="230"
-                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:230</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="263"
+                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:263</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Devuelve un mensaje de error por control del formulario.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -538,14 +552,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="125"
-                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:125</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:151</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Cuenta cuántas actividades hay seleccionadas en el control.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
@@ -575,8 +591,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="138"
-                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:138</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:164</a></div>
                         </td>
                     </tr>
 
@@ -650,14 +666,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="225"
-                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:225</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="257"
+                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:257</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Cierra sesión y vuelve a landing.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -687,14 +705,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="59"
-                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:59</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:77</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Carga el catálogo de actividades para permitir selección.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -726,14 +746,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="170"
-                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:170</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="201"
+                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:201</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Crea el plan.</p>
+<p>Valida formulario, mapea nombres→ids, sube imagen si aplica, obtiene token y llama al API.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
@@ -763,14 +786,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="81"
-                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:81</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:102</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Handler de selección de imagen con validación básica (tipo y tamaño).</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -830,8 +855,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="148"
-                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:148</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="174"
+                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:174</a></div>
                         </td>
                     </tr>
 
@@ -904,14 +929,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="71"
-                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:71</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:90</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Abre el selector de archivo nativo.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -943,14 +970,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="103"
-                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:103</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:128</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Sube la imagen seleccionada a Cloudinary y devuelve su URL.
+Si no hay archivo nuevo, reutiliza <code>imgRef</code> del formulario.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;string | null&gt;</code>
@@ -990,10 +1020,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:46</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Actividades disponibles cargadas desde API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1021,10 +1057,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:48</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Nombres de actividades para el selector.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1052,10 +1094,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:38</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mensaje de error para la UI.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1088,10 +1136,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:35</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Input file nativo (se dispara con un botón custom).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1114,10 +1168,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:42</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario reactivo de creación del plan.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1145,10 +1205,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:52</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Preview local de la imagen.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1176,10 +1242,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:54</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Estado de subida (para deshabilitar UI/mostrar spinner).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1202,10 +1274,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:44</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Payload auxiliar (no tipado) usado por la pantalla.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1233,10 +1311,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:50</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Archivo de imagen seleccionado para subir.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1264,10 +1348,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:40</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mensaje de éxito para la UI.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1293,9 +1383,20 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:75</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/features/plans/plans-creation/plans-creation.component.ts:95</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Imagen actual a mostrar: preview local o valor del formulario.</p>
+</div>
+
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -1316,6 +1417,13 @@ import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
 import { CloudinaryService } from &#x27;../../../core/services/firebase-media.service&#x27;;
 import { PlanService } from &#x27;../../../core/services/plan.service&#x27;;
 import { UserService } from &#x27;../../../core/services/user.service&#x27;;
+/**
+ * Pantalla para crear un plan.
+ *
+ * - Carga actividades disponibles y permite seleccionarlas (selector múltiple).
+ * - Permite subir una imagen (Cloudinary) y guardar el plan vía API protegida.
+ * - Al crear, también registra la relación usuario→plan en &#x60;UserService&#x60;.
+ */
 @Component({
   selector: &#x27;app-plans-creation&#x27;,
   standalone: true,
@@ -1330,16 +1438,26 @@ import { UserService } from &#x27;../../../core/services/user.service&#x27;;
   styleUrl: &#x27;./plans-creation.component.scss&#x27;,
 })
 export class PlansCreationComponent implements OnInit {
+  /** Input file nativo (se dispara con un botón custom). */
   @ViewChild(&#x27;fileInput&#x27;) fileInput!: ElementRef&lt;HTMLInputElement&gt;;
 
+  /** Mensaje de error para la UI. */
   error &#x3D; &#x27;&#x27;;
+  /** Mensaje de éxito para la UI. */
   success &#x3D; &#x27;&#x27;;
+  /** Formulario reactivo de creación del plan. */
   formPlanCreation;
+  /** Payload auxiliar (no tipado) usado por la pantalla. */
   planData: any;
+  /** Actividades disponibles cargadas desde API. */
   activities: Activity[] &#x3D; [];
+  /** Nombres de actividades para el selector. */
   activitiesName: string[] &#x3D; [];
+  /** Archivo de imagen seleccionado para subir. */
   selectedFile: File | null &#x3D; null;
+  /** Preview local de la imagen. */
   imagePreview: string | null &#x3D; null;
+  /** Estado de subida (para deshabilitar UI/mostrar spinner). */
   isUploading &#x3D; false;
 
   constructor(
@@ -1362,6 +1480,7 @@ export class PlansCreationComponent implements OnInit {
     });
   }
 
+  /** Carga el catálogo de actividades para permitir selección. */
   ngOnInit(): void {
     this.activityService.getActivities().subscribe(
       (res: Activity[]) &#x3D;&gt; {
@@ -1374,16 +1493,19 @@ export class PlansCreationComponent implements OnInit {
     );
   }
 
+  /** Abre el selector de archivo nativo. */
   triggerFileInput(): void {
     this.fileInput.nativeElement.click();
   }
 
+  /** Imagen actual a mostrar: preview local o valor del formulario. */
   get currentImage(): string {
     return (
       this.imagePreview || this.formPlanCreation.get(&#x27;imgRef&#x27;)?.value || &#x27;&#x27;
     );
   }
 
+  /** Handler de selección de imagen con validación básica (tipo y tamaño). */
   onFileSelected(event: Event): void {
     const input &#x3D; event.target as HTMLInputElement;
     if (input.files &amp;&amp; input.files[0]) {
@@ -1406,6 +1528,10 @@ export class PlansCreationComponent implements OnInit {
     }
   }
 
+  /**
+   * Sube la imagen seleccionada a Cloudinary y devuelve su URL.
+   * Si no hay archivo nuevo, reutiliza &#x60;imgRef&#x60; del formulario.
+   */
   async uploadImage(): Promise&lt;string | null&gt; {
     if (!this.selectedFile)
       return this.formPlanCreation.get(&#x27;imgRef&#x27;)?.value || null;
@@ -1428,6 +1554,7 @@ export class PlansCreationComponent implements OnInit {
     }
   }
 
+  /** Cuenta cuántas actividades hay seleccionadas en el control. */
   getSelectedCount(): number {
     const selected: string[] &#x3D;
       this.formPlanCreation.get(&#x27;activitiesIds&#x27;)?.value || [];
@@ -1473,6 +1600,11 @@ export class PlansCreationComponent implements OnInit {
 
   // --- Lógica de Envío del Formulario ---
 
+  /**
+   * Crea el plan.
+   *
+   * Valida formulario, mapea nombres→ids, sube imagen si aplica, obtiene token y llama al API.
+   */
   async onCreate() {
     if (this.formPlanCreation.invalid) {
       this.formPlanCreation.markAllAsTouched();
@@ -1528,11 +1660,13 @@ export class PlansCreationComponent implements OnInit {
 
   // --- Lógica de Navegación y Errores (sin cambios mayores) ---
 
+  /** Cierra sesión y vuelve a landing. */
   logOut() {
     this.route.navigate([&#x27;/landingPage&#x27;]);
     this.auth.logout();
   }
 
+  /** Devuelve un mensaje de error por control del formulario. */
   getError(control: string) {
     switch (control) {
       case &#x27;name&#x27;:

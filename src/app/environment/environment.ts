@@ -1,9 +1,23 @@
+/**
+ * Mapa de variables de entorno en runtime.
+ *
+ * Estas claves se inyectan en `window.__env__` (generado por `scripts/generate-env.js`)
+ * para evitar hardcodear secretos en el bundle.
+ */
 type RuntimeEnv = Record<string, unknown>;
 
+/** Raíz de runtime (normalmente `window`). */
 const runtimeRoot = window as any;
+/** Entorno runtime leído desde `window.__env__` si existe. */
 const runtimeEnv = (runtimeRoot.__env__ || runtimeRoot) as RuntimeEnv;
+/** Sub-objeto opcional `firebase` dentro del runtime env. */
 const runtimeFirebase = (runtimeEnv['firebase'] || {}) as RuntimeEnv;
 
+/**
+ * Valida si un string representa un valor “real” de entorno.
+ *
+ * Filtra placeholders típicos (`undefined`, `null`, `${...}`, etc.).
+ */
 const isValidEnvValue = (value: string): boolean => {
   const normalized = value.trim();
   if (!normalized) {
@@ -22,6 +36,10 @@ const isValidEnvValue = (value: string): boolean => {
   return true;
 };
 
+/**
+ * Lee una variable de entorno en runtime probando varias claves (aliases).
+ * Devuelve string vacío si no encuentra un valor válido.
+ */
 const readEnv = (...keys: string[]): string => {
   for (const key of keys) {
     const value = runtimeEnv[key];
@@ -36,6 +54,11 @@ const readEnv = (...keys: string[]): string => {
   return '';
 };
 
+/**
+ * Lee configuración de Firebase priorizando:
+ * 1) `window.__env__.firebase[field]` si existe,
+ * 2) aliases de nivel raíz (por ejemplo `NG_APP_*` y `FIREBASE_*`).
+ */
 const readFirebaseEnv = (field: string, ...aliases: string[]): string => {
   const nestedValue = runtimeFirebase[field];
   if (typeof nestedValue === 'string') {
@@ -48,6 +71,7 @@ const readFirebaseEnv = (field: string, ...aliases: string[]): string => {
   return readEnv(...aliases);
 };
 
+/** Lee una lista separada por comas desde el env runtime. */
 const readEnvArray = (...keys: string[]): string[] => {
   const raw = readEnv(...keys);
   if (!raw) {
@@ -60,6 +84,12 @@ const readEnvArray = (...keys: string[]): string[] => {
     .filter((value) => isValidEnvValue(value));
 };
 
+/**
+ * Configuración de entorno consumida por la aplicación.
+ *
+ * Nota: aunque el campo se llame `production`, en este proyecto se usa runtime env
+ * también en desarrollo. El valor depende del build/configuración.
+ */
 export const environment = {
   production: true,
   CLOUD_NAME: readEnv('NG_APP_CLOUDINARY_CLOUD_NAME'),
@@ -112,6 +142,7 @@ export const environment = {
   },
 };
 
+/** Lista de campos Firebase requeridos que no están presentes en runtime. */
 const missingFirebaseFields = Object.entries(environment.firebase)
   .filter(([, value]) => !value)
   .map(([key]) => key);

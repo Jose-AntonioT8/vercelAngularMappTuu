@@ -14,6 +14,15 @@ import { ActivityTypeService } from '../../../core/services/activitytype.service
 import { AuthService } from '../../../core/services/auth.service';
 import { PlanService } from '../../../core/services/plan.service';
 import { UserService } from '../../../core/services/user.service';
+
+/**
+ * Pantalla de planes guardados por el usuario.
+ *
+ * Carga:
+ * - El documento de usuario para leer `savedPlans`.
+ * - Cada plan por ID, combinando resultados en un único stream (`plans$`).
+ * - Tipos de actividad y actividades (para enriquecer UI/filtros).
+ */
 @Component({
   selector: 'app-saved-plans',
   standalone: true,
@@ -29,20 +38,32 @@ import { UserService } from '../../../core/services/user.service';
   styleUrl: './saved-plans.component.scss',
 })
 export class SavedPlansComponent implements OnInit {
+  /** Acceso a perfil/relaciones del usuario. */
   private userService = inject(UserService);
+  /** Acceso a planes (detalle/listado). */
   private planService = inject(PlanService);
+  /** Acceso al catálogo de tipos de actividad. */
   private activityTypeService = inject(ActivityTypeService);
+  /** Acceso a sesión/usuario actual. */
   private authService = inject(AuthService);
+
+  /** Stream de planes guardados listos para la UI. */
   plans$ = of<Plan[]>([]);
+  /** Catálogo de tipos para enriquecer cards/filtros. */
   activityTypes$!: Observable<ActivityType[]>;
+  /** Acceso a actividades para enriquecer UI. */
   private activityService = inject(ActivityService);
+  /** Stream de actividades (catálogo) para filtros/cards. */
   activity$!: Observable<Activity[]>;
 
   constructor(private route: Router) {}
+  /** Controla el panel de filtro (responsive). */
   isFilterOpen = false;
 
+  /** Usuario autenticado actual (si existe). */
   private user = this.authService.currentUser;
 
+  /** Inicializa streams y abre el filtro en desktop. */
   ngOnInit() {
     if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
       this.isFilterOpen = true;
@@ -62,12 +83,15 @@ export class SavedPlansComponent implements OnInit {
     this.activityTypes$ = this.activityTypeService.getActivitiesType();
   }
 
+  /** Alterna el panel de filtro (mobile/desktop). */
   toggleFilter() {
     this.isFilterOpen = !this.isFilterOpen;
   }
+  /** Navega a crear plan. */
   goCreatePlan() {
     this.route.navigate(['/plansCreation']);
   }
+  /** Cierra filtro en pantallas pequeñas. */
   closeFilter() {
     if (window.innerWidth < 1024) {
       this.isFilterOpen = false;

@@ -8,6 +8,13 @@ import { ActivityType } from '../../../common/models/activityType.models';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 
+/**
+ * Pantalla de edición de un tipo de actividad.
+ *
+ * - Carga el tipo por `id` de ruta.
+ * - Permite editar nombre/descripcion/color (normalizando a hex).
+ * - Envía un payload parcial al backend con Bearer token.
+ */
 @Component({
   selector: 'app-activity-types-update',
   standalone: true,
@@ -15,17 +22,27 @@ import { LanguageSelectorComponent } from '../../../common/language-selector/lan
   templateUrl: './activity-types-update.component.html',
 })
 export class ActivityTypesUpdateComponent {
+  /** Mensaje de error para UI. */
   error = '';
+  /** Mensaje de éxito para UI. */
   success = '';
+  /** Formulario reactivo de edición del tipo. */
   formActivityTypeUpdate: FormGroup;
+  /** ID del tipo en edición (ruta). */
   currentId: string | null = null;
+  /** Snapshot del tipo cargado para fallback/preview. */
   typeData?: ActivityType;
 
   constructor(
+    /** Constructor de formularios. */
     private fb: FormBuilder,
+    /** Ruta activa para leer `id`. */
     private router: ActivatedRoute,
+    /** Router para navegar tras actualizar. */
     private nav: Router,
+    /** Auth para token/usuario actual. */
     private auth: AuthService,
+    /** Servicio de tipos (lectura puntual + mutación). */
     private typeService: ActivityTypeService
   ) {
     this.formActivityTypeUpdate = this.fb.group({
@@ -35,6 +52,7 @@ export class ActivityTypesUpdateComponent {
     });
   }
 
+  /** Inicializa cargando el tipo a editar. */
   ngOnInit(): void {
     this.currentId = this.router.snapshot.paramMap.get('id');
     if (!this.currentId) return;
@@ -51,12 +69,14 @@ export class ActivityTypesUpdateComponent {
     });
   }
 
+  /** Color mostrado para preview (asegura prefijo `#`). */
   get displayColor(): string {
     const val = this.formActivityTypeUpdate.get('color')?.value || this.typeData?.color || '#cccccc';
     const s = String(val);
     return s.startsWith('#') ? s : `#${s}`;
   }
 
+  /** Envía actualización al backend con token. */
   async onUpdate() {
     const payload: Partial<ActivityType> = {};
     const v = this.formActivityTypeUpdate.value;

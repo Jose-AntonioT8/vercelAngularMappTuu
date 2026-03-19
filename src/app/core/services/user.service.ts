@@ -30,17 +30,25 @@ import { AuthService } from './auth.service';
  * Nota: este servicio no autentica; usa `AuthService` para sesión si se requiere.
  */
 export class UserService {
+  /** Base URL del API para usuarios. */
   private url = `${apiUrl}/users`;
 
+  /** Instancia de Firestore (compat firebase/firestore). */
   private db: FirestoreType = inject(Firestore);
+  /** Zona para re-entrar a Angular desde callbacks externos. */
   private ngZone = inject(NgZone);
 
+  /** Nombre de la colección Firestore. */
   private readonly collectionName = 'users';
+  /** Listener activo de Firestore para evitar duplicados. */
   private unsubscribeListener: Unsubscribe | null = null;
 
+  /** Estado interno del listado de usuarios (stream). */
   private users = new BehaviorSubject<User[]>([]);
+  /** Stream público de usuarios. */
   public users$ = this.users.asObservable();
 
+  /** Cliente HTTP para API y AuthService para contexto de sesión si aplica. */
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   /**

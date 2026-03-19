@@ -134,6 +134,15 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente raíz de la aplicación.</p>
+<p>Su responsabilidad es mínima: alojar el <code>RouterOutlet</code> para que el router
+renderice las pantallas/feature modules (standalone) según la URL.</p>
+
+    </p>
 
 
 
@@ -254,10 +263,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/app.component.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/app.component.ts:20</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Título de la app (usado principalmente como señal/ejemplo).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -270,6 +285,12 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, signal } from &#x27;@angular/core&#x27;;
 import { RouterOutlet } from &#x27;@angular/router&#x27;;
 
+/**
+ * Componente raíz de la aplicación.
+ *
+ * Su responsabilidad es mínima: alojar el &#x60;RouterOutlet&#x60; para que el router
+ * renderice las pantallas/feature modules (standalone) según la URL.
+ */
 @Component({
   selector: &#x27;app-root&#x27;,
   standalone: true,
@@ -279,6 +300,7 @@ import { RouterOutlet } from &#x27;@angular/router&#x27;;
   &#x60;
 })
 export class AppComponent {
+  /** Título de la app (usado principalmente como señal/ejemplo). */
   title &#x3D; signal(&#x27;mapTuu&#x27;);
 }
 </code></pre>

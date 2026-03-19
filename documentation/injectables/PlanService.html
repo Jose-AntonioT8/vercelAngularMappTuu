@@ -153,33 +153,8 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#collectionName" >collectionName</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#db" >db</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#ngZone" >ngZone</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#plans" >plans</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#plans$" >plans$</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#unsubscribeListener" >unsubscribeListener</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#url" >url</a>
                             </li>
                         </ul>
                     </td>
@@ -234,12 +209,23 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/core/services/plan.service.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/core/services/plan.service.ts:43</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Servicio de planes.</p>
+<p>Fuentes:</p>
+<ul>
+<li>Escrituras (create/update/delete/rate) vía API HTTP con Bearer token.</li>
+<li>Lectura reactiva (listado) vía Firestore con filtros de visibilidad:<ul>
+<li>público para anónimos</li>
+<li>público + privados propios cuando hay sesión</li>
+</ul>
+</li>
+</ul>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -309,14 +295,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="40"
-                                    class="link-to-prism">src/app/core/services/plan.service.ts:40</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="57"
+                                    class="link-to-prism">src/app/core/services/plan.service.ts:57</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Crea un plan en el backend.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -388,14 +376,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="61"
-                                    class="link-to-prism">src/app/core/services/plan.service.ts:61</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">src/app/core/services/plan.service.ts:81</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Elimina un plan en el backend.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -467,14 +457,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="106"
-                                    class="link-to-prism">src/app/core/services/plan.service.ts:106</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/app/core/services/plan.service.ts:132</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene un plan concreto por ID (lectura puntual).</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -534,14 +526,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="67"
-                                    class="link-to-prism">src/app/core/services/plan.service.ts:67</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/core/services/plan.service.ts:92</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Escucha planes desde Firestore (stream).</p>
+<p>Mantiene un listener único (se reutiliza si ya existe).</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/Plan.html" target="_self" >Observable&lt;Plan[]&gt;</a></code>
@@ -571,14 +566,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="46"
-                                    class="link-to-prism">src/app/core/services/plan.service.ts:46</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/core/services/plan.service.ts:64</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Envía una valoración de plan al backend.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -662,14 +659,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">src/app/core/services/plan.service.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/core/services/plan.service.ts:74</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Actualiza un plan (parcial) en el backend.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -743,135 +742,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="collectionName"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Readonly</span>
-                        <span ><b>collectionName</b></span>
-                        <a href="#collectionName"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;plans&#x27;</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/core/services/plan.service.ts:32</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="db"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>db</b></span>
-                        <a href="#db"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>FirestoreType</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(Firestore)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/core/services/plan.service.ts:29</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngZone"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>ngZone</b></span>
-                        <a href="#ngZone"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(NgZone)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/core/services/plan.service.ts:30</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="plans"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>plans</b></span>
-                        <a href="#plans"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>new BehaviorSubject&lt;Plan[]&gt;([])</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/core/services/plan.service.ts:35</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="plans$"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
@@ -893,74 +763,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/core/services/plan.service.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/core/services/plan.service.ts:43</a></div>
                         </td>
                     </tr>
 
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="unsubscribeListener"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>unsubscribeListener</b></span>
-                        <a href="#unsubscribeListener"><span class="icon ion-ios-link"></span></a>
-                    </span>
+                    <div class="io-description"><p>Stream público de planes.</p>
+</div>
                 </td>
             </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>Unsubscribe | null</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>null</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/core/services/plan.service.ts:33</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="url"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>url</b></span>
-                        <a href="#url"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>&#x60;${apiUrl}/plans&#x60;</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/core/services/plan.service.ts:28</a></div>
-                        </td>
-                    </tr>
-
 
         </tbody>
     </table>
@@ -997,24 +809,42 @@ import { BehaviorSubject, Observable, from, map } from &#x27;rxjs&#x27;;
 
 @Injectable({ providedIn: &#x27;root&#x27; })
 export class PlanService {
+  /** Base URL del API para planes. */
   private url &#x3D; &#x60;${apiUrl}/plans&#x60;;
+  /** Instancia de Firestore (compat firebase/firestore). */
   private db: FirestoreType &#x3D; inject(Firestore);
+  /** Zona para re-entrar a Angular desde callbacks externos. */
   private ngZone &#x3D; inject(NgZone);
 
+  /** Nombre de la colección Firestore. */
   private readonly collectionName &#x3D; &#x27;plans&#x27;;
+  /** Listener activo de Firestore para evitar duplicados. */
   private unsubscribeListener: Unsubscribe | null &#x3D; null;
 
+  /** Estado interno del listado de planes (stream). */
   private plans &#x3D; new BehaviorSubject&lt;Plan[]&gt;([]);
+  /** Stream público de planes. */
   public plans$ &#x3D; this.plans.asObservable();
 
+  /**
+   * Servicio de planes.
+   *
+   * Fuentes:
+   * - Escrituras (create/update/delete/rate) vía API HTTP con Bearer token.
+   * - Lectura reactiva (listado) vía Firestore con filtros de visibilidad:
+   *   - público para anónimos
+   *   - público + privados propios cuando hay sesión
+   */
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+  /** Crea un plan en el backend. */
   createPlan(planData: any, token: any): Observable&lt;any&gt; {
     return this.http.post(this.url, planData, {
       headers: { Authorization: &#x60;Bearer ${token}&#x60; },
     });
   }
 
+  /** Envía una valoración de plan al backend. */
   ratePlan(id: string, planData: any, token: any): Observable&lt;any&gt; {
     console.log(&#x27;hola&#x27;);
     console.log(id);
@@ -1024,18 +854,25 @@ export class PlanService {
     });
   }
 
+  /** Actualiza un plan (parcial) en el backend. */
   updatePlan(id: string, planData: any, token: any): Observable&lt;any&gt; {
     return this.http.patch(&#x60;${this.url}/${id}&#x60;, planData, {
       headers: { Authorization: &#x60;Bearer ${token}&#x60; },
     });
   }
 
+  /** Elimina un plan en el backend. */
   deletePlan(id: string, token: any): Observable&lt;any&gt; {
     return this.http.delete(&#x60;${this.url}/${id}&#x60;, {
       headers: { Authorization: &#x60;Bearer ${token}&#x60; },
     });
   }
 
+  /**
+   * Escucha planes desde Firestore (stream).
+   *
+   * Mantiene un listener único (se reutiliza si ya existe).
+   */
   getPlans(): Observable&lt;Plan[]&gt; {
     if (this.unsubscribeListener) {
       return this.plans$;
@@ -1075,6 +912,7 @@ export class PlanService {
     return this.plans$;
   }
 
+  /** Obtiene un plan concreto por ID (lectura puntual). */
   getPlanId(id: string): Observable&lt;Plan&gt; {
     const dRef &#x3D; docRef(this.db, this.collectionName, id);
     return from(getDoc(dRef)).pipe(

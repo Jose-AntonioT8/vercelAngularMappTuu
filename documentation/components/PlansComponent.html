@@ -138,6 +138,18 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Detalle de plan.</p>
+<ul>
+<li>Carga el plan por id de ruta y resuelve sus actividades.</li>
+<li>Permite guardar el plan en el perfil del usuario.</li>
+<li>Permite crear/editar reseñas y listar reseñas existentes.</li>
+</ul>
+
+    </p>
 
 
     <p class="comment">
@@ -226,16 +238,8 @@
                                 <a href="#activities" >activities</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#activityService" >activityService</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#authService" >authService</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#cdr" >cdr</a>
                             </li>
                             <li>
                                 <a href="#isPlanSaved" >isPlanSaved</a>
@@ -255,18 +259,6 @@
                                 <a href="#planDescription" >planDescription</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#planService" >planService</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#route" >route</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#router" >router</a>
-                            </li>
-                            <li>
                                 <a href="#userReview" >userReview</a>
                             </li>
                         </ul>
@@ -281,11 +273,6 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
-                            <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#checkIfPlanSaved" >checkIfPlanSaved</a>
-                            </li>
                             <li>
                                 <a href="#closeReviewModal" >closeReviewModal</a>
                             </li>
@@ -306,10 +293,6 @@
                             </li>
                             <li>
                                 <a href="#handleReviewSubmit" >handleReviewSubmit</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#loadUserReview" >loadUserReview</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
@@ -347,7 +330,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:39</a></div>
                             </td>
                         </tr>
 
@@ -410,46 +393,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="checkIfPlanSaved"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>checkIfPlanSaved</b></span>
-                        <a href="#checkIfPlanSaved"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>checkIfPlanSaved()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="88"
-                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:88</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="closeReviewModal"></a>
                     <span class="name">
                         <span ><b>closeReviewModal</b></span>
@@ -466,14 +409,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="227"
-                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:227</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="251"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:251</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Cierra el modal de reseña.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -503,14 +448,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:132</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Cierra el modal de lista de reseñas.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -540,14 +487,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="134"
-                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:134</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:156</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Formatea un Timestamp de Firebase a <code>dd/mm/yyyy</code>.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -607,8 +556,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="179"
-                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:179</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="201"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:201</a></div>
                         </td>
                     </tr>
 
@@ -650,8 +599,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="154"
-                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:154</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:176</a></div>
                         </td>
                     </tr>
 
@@ -727,14 +676,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="116"
-                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:116</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:136</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Navega de vuelta al listado de planes.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -764,14 +715,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="231"
-                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:231</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="256"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:256</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Emite la reseña al backend y sincroniza el plan con la respuesta.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -815,47 +768,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="loadUserReview"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>loadUserReview</b></span>
-                        <a href="#loadUserReview"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>loadUserReview()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="186"
-                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:186</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Carga la reseña del usuario actual para este plan</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="ngOnInit"></a>
                     <span class="name">
                         <span ><b>ngOnInit</b></span>
@@ -872,14 +784,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="48"
-                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:48</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:64</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Carga el plan y sus actividades asociadas.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -909,14 +823,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="223"
-                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:223</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="246"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:246</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Abre el modal de reseña.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -946,14 +862,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="109"
-                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:109</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:127</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Abre el modal de lista de reseñas.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -985,14 +903,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="119"
-                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:119</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="140"
+                                    class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:140</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Guarda el plan en el perfil del usuario actual.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
@@ -1032,42 +952,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:48</a></div>
                         </td>
                     </tr>
 
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="activityService"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>activityService</b></span>
-                        <a href="#activityService"><span class="icon ion-ios-link"></span></a>
-                    </span>
+                    <div class="io-description"><p>Actividades resueltas a partir de <code>plan.activitiesIds</code>.</p>
+</div>
                 </td>
             </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(ActivityService)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:42</a></div>
-                        </td>
-                    </tr>
-
 
         </tbody>
     </table>
@@ -1096,42 +990,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:61</a></div>
                         </td>
                     </tr>
 
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="cdr"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>cdr</b></span>
-                        <a href="#cdr"><span class="icon ion-ios-link"></span></a>
-                    </span>
+                    <div class="io-description"><p>Servicio de auth expuesto al template.</p>
+</div>
                 </td>
             </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(ChangeDetectorRef)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:40</a></div>
-                        </td>
-                    </tr>
-
 
         </tbody>
     </table>
@@ -1159,10 +1027,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:42</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indica si el plan está guardado por el usuario actual.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1190,10 +1064,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:50</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controla el modal de reseña (crear/editar).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1221,10 +1101,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:55</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controla el modal con la lista de reseñas.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1248,10 +1134,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:44</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Plan cargado desde API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1275,106 +1167,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:46</a></div>
                         </td>
                     </tr>
 
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="planService"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>planService</b></span>
-                        <a href="#planService"><span class="icon ion-ios-link"></span></a>
-                    </span>
+                    <div class="io-description"><p>Descripción derivada del plan (por compatibilidad).</p>
+</div>
                 </td>
             </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(PlanService)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:43</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="route"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>route</b></span>
-                        <a href="#route"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:44</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="router"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>router</b></span>
-                        <a href="#router"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>unknown</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(Router)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:45</a></div>
-                        </td>
-                    </tr>
-
 
         </tbody>
     </table>
@@ -1402,10 +1204,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/plans/plans-detail/plans.component.ts:52</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reseña del usuario actual (si existe).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1431,6 +1239,13 @@ import { ActivityService } from &#x27;../../../core/services/activity.service&#x
 import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
 import { PlanService } from &#x27;../../../core/services/plan.service&#x27;;
 import { UserService } from &#x27;../../../core/services/user.service&#x27;;
+/**
+ * Detalle de plan.
+ *
+ * - Carga el plan por id de ruta y resuelve sus actividades.
+ * - Permite guardar el plan en el perfil del usuario.
+ * - Permite crear/editar reseñas y listar reseñas existentes.
+ */
 @Component({
   selector: &#x27;app-plans&#x27;,
   standalone: true,
@@ -1448,20 +1263,29 @@ import { UserService } from &#x27;../../../core/services/user.service&#x27;;
 })
 export class PlansComponent implements OnInit {
   constructor(private userService: UserService, private auth: AuthService) {}
+  /** Indica si el plan está guardado por el usuario actual. */
   isPlanSaved &#x3D; false;
+  /** Plan cargado desde API. */
   plan?: Plan;
+  /** Descripción derivada del plan (por compatibilidad). */
   planDescription?: string;
+  /** Actividades resueltas a partir de &#x60;plan.activitiesIds&#x60;. */
   activities: Activity[] &#x3D; [];
+  /** Controla el modal de reseña (crear/editar). */
   isReviewModalOpen &#x3D; false;
+  /** Reseña del usuario actual (si existe). */
   userReview: Review | null &#x3D; null;
   private cdr &#x3D; inject(ChangeDetectorRef);
+  /** Controla el modal con la lista de reseñas. */
   isReviewsListModalOpen &#x3D; false;
   private activityService &#x3D; inject(ActivityService);
   private planService &#x3D; inject(PlanService);
   private route &#x3D; inject(ActivatedRoute);
   private router &#x3D; inject(Router);
+  /** Servicio de auth expuesto al template. */
   public authService &#x3D; inject(AuthService);
 
+  /** Carga el plan y sus actividades asociadas. */
   ngOnInit() {
     const idUrl &#x3D; this.route.snapshot.paramMap.get(&#x27;id&#x27;);
     this.planService.getPlanId(idUrl!).subscribe({
@@ -1502,6 +1326,7 @@ export class PlansComponent implements OnInit {
     });
   }
 
+  /** Verifica en el perfil del usuario si el plan ya está guardado. */
   private async checkIfPlanSaved(): Promise&lt;void&gt; {
     const user &#x3D; this.authService.currentUser;
     if (!user || !this.plan) return;
@@ -1523,16 +1348,20 @@ export class PlansComponent implements OnInit {
     }
   }
 
+  /** Abre el modal de lista de reseñas. */
   openReviewsListModal() {
     this.isReviewsListModalOpen &#x3D; true;
   }
 
+  /** Cierra el modal de lista de reseñas. */
   closeReviewsListModal() {
     this.isReviewsListModalOpen &#x3D; false;
   }
+  /** Navega de vuelta al listado de planes. */
   goBack() {
     this.router.navigate([&#x27;/plansList&#x27;]);
   }
+  /** Guarda el plan en el perfil del usuario actual. */
   async savePlan() {
     if (this.isPlanSaved) return; // Evitar guardar si ya está guardado
 
@@ -1548,6 +1377,7 @@ export class PlansComponent implements OnInit {
     this.userService.savePlan(user.uid, this.plan!.id, token).subscribe();
   }
 
+  /** Formatea un Timestamp de Firebase a &#x60;dd/mm/yyyy&#x60;. */
   getFormattedDate(firebaseTimestamp: any): string {
     // Convierte el Timestamp de Firebase a un objeto Date de JavaScript.
     // Esto puede causar una pérdida de precisión a milisegundos.
@@ -1637,14 +1467,17 @@ export class PlansComponent implements OnInit {
     }
   }
 
+  /** Abre el modal de reseña. */
   openReviewModal() {
     this.isReviewModalOpen &#x3D; true;
   }
 
+  /** Cierra el modal de reseña. */
   closeReviewModal() {
     this.isReviewModalOpen &#x3D; false;
   }
 
+  /** Emite la reseña al backend y sincroniza el plan con la respuesta. */
   handleReviewSubmit(review: Review) {
     if (!this.plan) return;
 
