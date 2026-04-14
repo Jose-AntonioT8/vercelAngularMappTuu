@@ -22,6 +22,7 @@ import { PlansComponent } from './features/plans/plans-detail/plans.component';
 import { PlansListComponent } from './features/plans/plans-list/plans-list.component';
 import { PlansUpdateComponent } from './features/plans/plans-update/plans-update.component';
 import { SavedPlansComponent } from './features/plans/saved-plans/saved-plans.component';
+import { ReportsModerationComponent } from './features/reports/reports-moderation/reports-moderation.component';
 import { LoginComponent } from './features/user/login/login.component';
 import { ProfileComponent } from './features/user/profile/profile.component';
 import { SignupComponent } from './features/user/sign-up/sign-up.component';
@@ -55,6 +56,7 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent, canActivate: [guestGuard] },
   { path: 'about', loadComponent: () => import('./features/about/about.component').then(m => m.AboutComponent) },
   { path: 'dashboard', component: DashboardComponent, canActivate: [adminGuard] },
+  { path: 'admin/reports', component: ReportsModerationComponent, canActivate: [adminGuard] },
   {path: 'activitiesCreation', component: ActivitiesCreationComponent, canActivate: [authGuard]},
   {path: 'plansDetail/:id', component: PlansComponent, canActivate: [authGuard]},
   {path: 'activityTypeDetail/:id', component: ActivityTypesDetailComponent, canActivate: [adminGuard]},
@@ -65,5 +67,6 @@ export const routes: Routes = [
   {path: 'activityTypesList', component: ActivityTypesListComponent, canActivate: [adminGuard]},
   {path: 'plansCreation', component: PlansCreationComponent, canActivate: [authGuard]},
   {path: 'plansList', component: PlansListComponent, canActivate: [authGuard]},
-  { path: '', redirectTo: 'landingPage', pathMatch: 'full' }
+  { path: '', redirectTo: 'landingPage', pathMatch: 'full' },
+  { path: '**', redirectTo: 'landingPage' }
 ];

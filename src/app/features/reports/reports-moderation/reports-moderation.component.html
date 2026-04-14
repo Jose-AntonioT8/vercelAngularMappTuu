@@ -1,0 +1,166 @@
+<header class="sticky top-0 z-50">
+  <app-header></app-header>
+</header>
+
+<section class="reports-page p-4 sm:p-6 max-w-5xl mx-auto">
+  <div class="flex flex-col gap-2 mb-6">
+    <h1 class="text-2xl font-bold text-gray-900">
+      {{ 'reports.moderation.title' | translate }}
+    </h1>
+    <p class="text-sm text-gray-600">
+      {{ 'reports.moderation.subtitle' | translate }}
+    </p>
+  </div>
+
+  <div class="bg-white rounded-xl border border-gray-200 p-4 mb-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <select
+        [(ngModel)]="statusFilter"
+        class="rounded-lg border border-gray-300 p-2.5 text-sm"
+      >
+        <option value="">{{ 'reports.moderation.filterStatusAll' | translate }}</option>
+        <option value="pending">{{ 'reports.moderation.filterPending' | translate }}</option>
+        <option value="resolved">{{ 'reports.moderation.filterResolved' | translate }}</option>
+        <option value="deleted">{{ 'reports.moderation.filterDeleted' | translate }}</option>
+      </select>
+
+      <select
+        [(ngModel)]="reasonFilter"
+        class="rounded-lg border border-gray-300 p-2.5 text-sm"
+      >
+        <option value="">{{ 'reports.moderation.filterReasonAll' | translate }}</option>
+        <option value="spam">{{ 'reports.moderation.reasons.spam' | translate }}</option>
+        <option value="inappropriate">{{ 'reports.moderation.reasons.inappropriate' | translate }}</option>
+        <option value="fraud">{{ 'reports.moderation.reasons.fraud' | translate }}</option>
+        <option value="other">{{ 'reports.moderation.reasons.other' | translate }}</option>
+      </select>
+
+      <input
+        type="number"
+        [(ngModel)]="limit"
+        min="1"
+        max="100"
+        class="rounded-lg border border-gray-300 p-2.5 text-sm"
+        [placeholder]="'reports.moderation.limitPlaceholder' | translate"
+      />
+
+      <button
+        type="button"
+        class="rounded-lg bg-[#5675AC] text-white hover:bg-[#4a6399] py-2.5 text-sm font-medium"
+        (click)="loadReports()"
+      >
+        {{ 'reports.moderation.applyFilters' | translate }}
+      </button>
+    </div>
+  </div>
+
+  <p *ngIf="error" class="mb-4 text-sm text-red-600">{{ error }}</p>
+  <p *ngIf="loading" class="mb-4 text-sm text-gray-600">
+    {{ 'reports.moderation.loading' | translate }}
+  </p>
+
+  <ul class="space-y-4" *ngIf="!loading">
+    <li
+      *ngFor="let report of filteredReports"
+      class="report-card bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden p-4 flex flex-col sm:flex-row gap-4"
+    >
+      <a
+        class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden border border-gray-200 bg-gray-50 flex-shrink-0"
+        [routerLink]="['/activityDetail', report.activityId]"
+      >
+        <img
+          [src]="report.activityImageURL || 'assets/logo/logo.png'"
+          [alt]="report.activityName || ('reports.moderation.activityAlt' | translate)"
+          class="w-full h-full object-cover"
+          onerror="this.src='assets/logo/logo.png';"
+        />
+      </a>
+
+      <div class="flex-1 min-w-0">
+        <div class="flex flex-wrap items-center gap-2 mb-2">
+          <h2 class="text-lg font-semibold text-gray-900 truncate">
+            {{ report.activityName || ('reports.moderation.activityNoName' | translate) }}
+          </h2>
+          <span
+            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200"
+          >
+            {{ ('reports.moderation.reasons.' + report.reason) | translate }}
+          </span>
+          <span
+            class="inline-flex items-center px-2 py-0.5 rounded-md text-xs"
+            [ngClass]="statusClass(report)"
+          >
+            {{ ('reports.moderation.status.' + getDisplayStatus(report)) | translate }}
+          </span>
+        </div>
+
+        <p class="text-sm text-gray-700 mb-3">
+          {{ report.details || ('reports.moderation.noDetails' | translate) }}
+        </p>
+
+        <div *ngIf="isActionable(report)" class="flex flex-wrap gap-2 mb-2">
+          <button
+            type="button"
+            class="px-3 py-2 rounded-lg bg-[#5675AC] text-white text-sm hover:bg-[#4a6399]"
+            (click)="openResolveModal(report)"
+          >
+            {{ 'reports.moderation.resolveButton' | translate }}
+          </button>
+        </div>
+
+        <div class="text-xs text-gray-500 flex flex-wrap gap-x-4 gap-y-1">
+          <span>{{ report.createdAt | date: 'short' }}</span>
+          <span>{{ 'reports.moderation.activityIdLabel' | translate }}: {{ report.activityId }}</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <p
+    *ngIf="!loading && filteredReports.length === 0"
+    class="text-center text-gray-500 py-12 bg-white rounded-xl border border-gray-200"
+  >
+    {{ 'reports.moderation.empty' | translate }}
+  </p>
+</section>
+
+<div
+  *ngIf="resolveModalReport"
+  class="fixed inset-0 z-[1200] bg-black/50 flex items-center justify-center p-4"
+  (click)="closeResolveModal()"
+>
+  <div
+    class="w-full max-w-md bg-white rounded-2xl shadow-xl p-6"
+    (click)="$event.stopPropagation()"
+  >
+    <h3 class="text-xl font-bold text-gray-900 mb-2">
+      {{ 'reports.moderation.modalTitle' | translate }}
+    </h3>
+    <p class="text-sm text-gray-600 mb-6">
+      {{ resolveModalReport.activityName || ('reports.moderation.activityAlt' | translate) }}
+    </p>
+    <div class="space-y-3">
+      <button
+        type="button"
+        class="w-full text-left px-4 py-3 rounded-xl border-2 border-green-200 bg-green-50 text-green-900 text-sm hover:bg-green-100"
+        (click)="confirmResolveChoice('resolve')"
+      >
+        {{ 'reports.moderation.keepActivity' | translate }}
+      </button>
+      <button
+        type="button"
+        class="w-full text-left px-4 py-3 rounded-xl border-2 border-red-200 bg-red-50 text-red-900 text-sm hover:bg-red-100"
+        (click)="confirmResolveChoice('delete_activity')"
+      >
+        {{ 'reports.moderation.deleteActivity' | translate }}
+      </button>
+      <button
+        type="button"
+        class="w-full py-2.5 rounded-lg border border-gray-200 text-gray-600 text-sm hover:bg-gray-50"
+        (click)="closeResolveModal()"
+      >
+        {{ 'common.cancel' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

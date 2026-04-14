@@ -30,7 +30,11 @@ import { BehaviorSubject, Observable, from, map } from 'rxjs';
  */
 export class ActivityService {
   /** Base URL del API para actividades. */
-  private url = `${apiUrl}/activities`;
+  private readonly apiBase =
+    typeof window !== 'undefined' && window.location.hostname === 'localhost'
+      ? '/api'
+      : apiUrl;
+  private url = `${this.apiBase}/activities`;
   /** Instancia de Firestore (compat firebase/firestore). */
   private db: FirestoreType = inject(Firestore); 
   /** Zona para re-entrar a Angular desde callbacks externos. */

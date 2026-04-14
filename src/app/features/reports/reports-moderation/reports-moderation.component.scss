@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  min-height: calc(100vh - 70px);
+  background: #f8fafc;
+}
+
+.reports-page .report-card {
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.reports-page .report-card:hover {
+  border-color: rgb(226 232 240);
+  box-shadow: 0 4px 14px rgb(15 23 42 / 0.06);
+}
