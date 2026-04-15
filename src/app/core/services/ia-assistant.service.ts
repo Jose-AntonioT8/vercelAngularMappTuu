@@ -80,6 +80,8 @@ interface IaRelationalContext {
     priceText: string;
     location?: string;
     locationText: string;
+    description?: string;
+    highlights: string[];
   }>;
   /** Actividades que no se pudieron asociar a un tipo. */
   orphanActivities: Array<{
@@ -228,7 +230,7 @@ export class IaAssistantService {
           {
             role: 'system',
             content:
-              'Eres el asistente de MappTuu. Debes responder con tono amable, cercano y claro. Solo puedes responder con el contexto proporcionado. Si preguntan algo fuera de planes/actividades/tipos/ubicaciones, responde brevemente y con amabilidad que no tienes ese dato. Reglas estrictas: nunca muestres IDs; nunca muestres latitud/longitud; no inventes datos. Si el precio de una actividad no está disponible, di literalmente "Gratis". Cuando hables de planes, indica el nombre del plan, las actividades por nombre y el precio total. Cuando hables de ubicaciones, usa solo texto descriptivo (por ejemplo "Málaga capital").',
+              'Eres el asistente de MappTuu. Debes responder con tono amable, cercano, claro y algo más desarrollado que una respuesta telegráfica. Solo puedes responder con el contexto proporcionado. Si preguntan algo fuera de planes/actividades/tipos/ubicaciones, responde brevemente y con amabilidad que no tienes ese dato. Reglas estrictas: nunca muestres IDs; nunca muestres latitud/longitud; no inventes datos. Si el precio de una actividad existe, inclúyelo siempre. Si no hay precio disponible o es cero, di literalmente "Gratis". Cuando hables de actividades, explica qué es la actividad, su tipo, su precio, su ubicación descriptiva y, si existen, sus puntos destacados o descripción. Cuando hables de planes, indica el nombre del plan, las actividades por nombre, el precio total y una explicación breve de por qué puede interesar. Cuando hables de ubicaciones, usa solo texto descriptivo (por ejemplo "Málaga capital"). Responde en 2 a 5 frases cuando sea posible, sin ser excesivamente corto.',
           },
           {
             role: 'user',
@@ -560,6 +562,19 @@ export class IaAssistantService {
         'place',
         'address',
       ]);
+      const description = this.getStringField(activity, [
+        'description',
+        'details',
+        'summary',
+        'about',
+        'text',
+      ]);
+      const highlights = this.getStringArrayField(activity, [
+        'highlights',
+        'features',
+        'points',
+        'bullets',
+      ]);
 
       if (activityTypeId !== 'sin-tipo') {
         usedActivityTypeIds.add(activityTypeId);
@@ -582,6 +597,8 @@ export class IaAssistantService {
         priceText: this.toPriceText(price),
         location: location || undefined,
         locationText: location || 'Ubicacion aproximada no disponible',
+        description: description || undefined,
+        highlights,
       };
     });
 
@@ -662,6 +679,8 @@ export class IaAssistantService {
       activityTypeName: activity.activityTypeName,
       price: activity.priceText,
       location: activity.locationText,
+      description: activity.description || 'Descripcion no disponible',
+      highlights: activity.highlights,
     }));
 
     return {

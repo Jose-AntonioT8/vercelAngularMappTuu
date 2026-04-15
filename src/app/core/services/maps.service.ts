@@ -30,24 +30,32 @@ export class MapsService{
      * @returns Observable que emite la mejor cadena de ubicación encontrada.
      */
     getAddress(lat: number, lon: number): Observable<string> {
+        const normalizedLat = this.normalizeCoordinate(lat);
+        const normalizedLon = this.normalizeCoordinate(lon);
         const googleApiKey = environment.maps.apiKey?.trim();
 
         if (googleApiKey) {
           return this.http
-            .get<any>(this.buildGoogleReverseGeocodeUrl(lat, lon, googleApiKey))
+            .get<any>(this.buildGoogleReverseGeocodeUrl(normalizedLat, normalizedLon, googleApiKey))
             .pipe(
               map((response) => this.pickBestLocalityFromGoogle(response)),
               catchError(() =>
                 this.http
-                  .get<any>(this.buildReverseGeocodeUrl(lat, lon))
-                  .pipe(map((response) => this.pickBestLocality(response))),
+                  .get<any>(this.buildReverseGeocodeUrl(normalizedLat, normalizedLon))
+                  .pipe(
+                    map((response) => this.pickBestLocality(response)),
+                    catchError(() => [this.fallbackLocation()]),
+                  ),
               ),
             );
         }
 
         return this.http
-          .get<any>(this.buildReverseGeocodeUrl(lat, lon))
-          .pipe(map((response) => this.pickBestLocality(response)));
+          .get<any>(this.buildReverseGeocodeUrl(normalizedLat, normalizedLon))
+          .pipe(
+            map((response) => this.pickBestLocality(response)),
+            catchError(() => [this.fallbackLocation()]),
+          );
       }
 
     /**
@@ -75,6 +83,10 @@ export class MapsService{
      * @returns Una cadena legible (fallback: "Ubicación desconocida")
      */
     pickBestLocality(response: any): string {
+      if (response?.status && response.status !== 'OK' && response.status !== 'SUCCESS') {
+        return 'Ubicación desconocida';
+      }
+
       return (
         response?.locality ||
         response?.city ||
@@ -89,6 +101,10 @@ export class MapsService{
     pickBestLocalityFromGoogle(response: any): string {
       const result = response?.results?.[0];
       if (!result) {
+        return 'Ubicación desconocida';
+      }
+
+      if (response?.status && response.status !== 'OK') {
         return 'Ubicación desconocida';
       }
 
@@ -122,5 +138,15 @@ export class MapsService{
       }
 
       return result.formatted_address || 'Ubicación desconocida';
+    }
+
+    /** Redondea coordenadas para evitar consultas inválidas o demasiado precisas. */
+    private normalizeCoordinate(value: number): number {
+      return Math.round(value * 100000) / 100000;
+    }
+
+    /** Fallback silencioso para no romper la UI cuando la geocodificación falla. */
+    private fallbackLocation(): string {
+      return 'Ubicación no disponible';
     }
 }
