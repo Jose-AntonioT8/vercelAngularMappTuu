@@ -4,7 +4,6 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { catchError, finalize, of } from 'rxjs';
 import { HeaderComponent } from '../../../common/header/header.component';
-import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 import { HighlightDirective } from '../../../core/directives/highlight.directive';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { IaAssistantService } from '../../../core/services/ia-assistant.service';
@@ -23,7 +22,6 @@ import { IaAssistantService } from '../../../core/services/ia-assistant.service'
     FormsModule,
     HeaderComponent,
     TranslatePipe,
-    LanguageSelectorComponent,
     HighlightDirective,
   ],
   templateUrl: './ia.component.html',

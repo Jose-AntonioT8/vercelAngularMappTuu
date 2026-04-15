@@ -96,9 +96,9 @@ export class ListComponent implements OnInit {
   }
 
   private getSearchableText(activity: ActivitySearchItem): string {
-    const value = activity as Activity & Record<string, unknown>;
+    const value = activity as unknown as Record<string, unknown>;
     const fields = [
-      value.name,
+      value['name'],
       value['title'],
       value['location'],
       value['locationText'],
@@ -137,7 +137,7 @@ export class ListComponent implements OnInit {
   }
 
   private resolveActivityLocation(activity: Activity): Observable<string> {
-    const value = activity as Activity & Record<string, unknown>;
+    const value = activity as unknown as Record<string, unknown>;
     const explicitLocation = this.pickStringField(value, [
       'location',
       'locationText',
