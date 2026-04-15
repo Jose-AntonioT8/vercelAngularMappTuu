@@ -230,7 +230,7 @@ export class IaAssistantService {
           {
             role: 'system',
             content:
-              'Eres el asistente de MappTuu. Debes responder con tono amable, cercano, claro y algo más desarrollado que una respuesta telegráfica. Solo puedes responder con el contexto proporcionado. Si preguntan algo fuera de planes/actividades/tipos/ubicaciones, responde brevemente y con amabilidad que no tienes ese dato. Reglas estrictas: nunca muestres IDs; nunca muestres latitud/longitud; no inventes datos. Si el precio de una actividad existe, inclúyelo siempre. Si no hay precio disponible o es cero, di literalmente "Gratis". Cuando hables de actividades, explica qué es la actividad, su tipo, su precio, su ubicación descriptiva y, si existen, sus puntos destacados o descripción. Cuando hables de planes, indica el nombre del plan, las actividades por nombre, el precio total y una explicación breve de por qué puede interesar. Cuando hables de ubicaciones, usa solo texto descriptivo (por ejemplo "Málaga capital"). Responde en 2 a 5 frases cuando sea posible, sin ser excesivamente corto.',
+              'Eres el asistente de MappTuu. Debes responder con tono amable, cercano, claro y algo más desarrollado que una respuesta telegráfica. Solo puedes responder con el contexto proporcionado. Si preguntan algo fuera de planes/actividades/tipos/ubicaciones, responde brevemente y con amabilidad que no tienes ese dato. Reglas estrictas: nunca muestres IDs; nunca muestres latitud/longitud; no inventes datos. Si el precio de una actividad existe, inclúyelo siempre. Si no hay precio disponible o es cero, di literalmente "Gratis". Cuando hables de actividades, explica qué es la actividad, su tipo, su precio, su ubicación descriptiva y, si existen, sus puntos destacados o descripción. Cuando hables de planes, indica el nombre del plan, las actividades por nombre, el precio total y una explicación breve de por qué puede interesar. Cuando hables de ubicaciones, usa solo texto descriptivo (por ejemplo "Málaga capital"). Usa de 1 a 3 emojis por respuesta, variados y relacionados con el contenido, evitando repetir siempre el mismo emoji. Responde en 2 a 5 frases cuando sea posible, sin ser excesivamente corto.',
           },
           {
             role: 'user',
@@ -386,12 +386,13 @@ export class IaAssistantService {
             content ||
             'No he podido generar una respuesta con los datos disponibles.';
           const safeContent = this.sanitizeAssistantOutput(resolvedContent);
+          const enrichedContent = this.addContextualEmojis(safeContent);
 
           if (!isFallback) {
-            return safeContent;
+            return enrichedContent;
           }
 
-          return `[Usando modelo fallback: ${model}]\n\n${safeContent}`;
+          return `[Usando modelo fallback: ${model}]\n\n${enrichedContent}`;
         }),
       );
   }
@@ -704,6 +705,49 @@ export class IaAssistantService {
     safe = safe.replace(/\n{3,}/g, '\n\n').trim();
 
     return safe;
+  }
+
+  /** Añade emojis relacionados para que la respuesta sea más visual y contextual. */
+  private addContextualEmojis(rawText: string): string {
+    const text = (rawText || '').trim();
+    if (!text) {
+      return text;
+    }
+
+    const lower = text.toLowerCase();
+    const emojiRules: Array<{ emoji: string; keywords: string[] }> = [
+      { emoji: '🗺️', keywords: ['plan', 'planes', 'ruta', 'itinerario', 'mapa'] },
+      { emoji: '🎯', keywords: ['actividad', 'actividades', 'experiencia'] },
+      { emoji: '💶', keywords: ['precio', 'coste', 'costo', 'euros', 'gratis'] },
+      { emoji: '📍', keywords: ['ubicacion', 'ubicación', 'localidad', 'zona', 'ciudad'] },
+      { emoji: '🍽️', keywords: ['comida', 'restaurante', 'gastronomia', 'gastronomía'] },
+      { emoji: '🏖️', keywords: ['playa', 'mar', 'costa'] },
+      { emoji: '🏛️', keywords: ['museo', 'cultura', 'historico', 'histórico', 'arte'] },
+      { emoji: '🏃', keywords: ['deporte', 'running', 'bicicleta', 'senderismo'] },
+      { emoji: '🌅', keywords: ['atardecer', 'paisaje', 'naturaleza'] },
+    ];
+
+    const selected: string[] = [];
+    for (const rule of emojiRules) {
+      const matches = rule.keywords.some((keyword) => lower.includes(keyword));
+      if (matches && !selected.includes(rule.emoji)) {
+        selected.push(rule.emoji);
+      }
+      if (selected.length >= 3) {
+        break;
+      }
+    }
+
+    if (selected.length === 0) {
+      selected.push('✨');
+    }
+
+    const missing = selected.filter((emoji) => !text.includes(emoji)).slice(0, 3);
+    if (missing.length === 0) {
+      return text;
+    }
+
+    return `${text}\n\n${missing.join(' ')}`;
   }
 
   /**

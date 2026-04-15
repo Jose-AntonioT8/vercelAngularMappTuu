@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { catchError, finalize, of } from 'rxjs';
 import { HeaderComponent } from '../../../common/header/header.component';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
+import { HighlightDirective } from '../../../core/directives/highlight.directive';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { IaAssistantService } from '../../../core/services/ia-assistant.service';
 
@@ -17,7 +18,14 @@ import { IaAssistantService } from '../../../core/services/ia-assistant.service'
 @Component({
   selector: 'app-ia',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent, TranslatePipe, LanguageSelectorComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HeaderComponent,
+    TranslatePipe,
+    LanguageSelectorComponent,
+    HighlightDirective,
+  ],
   templateUrl: './ia.component.html',
   styleUrl: './ia.component.scss',
 })
@@ -30,6 +38,10 @@ export class IaComponent {
   answer = '';
   /** Mensaje de error para UI. */
   errorMessage = '';
+  /** Párrafos renderizados de la respuesta. */
+  answerParagraphs: string[] = [];
+  /** Elementos renderizados como lista para mayor legibilidad. */
+  answerBullets: string[] = [];
   /** Flag para evitar envíos concurrentes. */
   isLoading = false;
 
@@ -42,6 +54,8 @@ export class IaComponent {
     this.isLoading = true;
     this.errorMessage = '';
     this.answer = '';
+    this.answerParagraphs = [];
+    this.answerBullets = [];
 
     this.iaAssistantService
       .ask(this.question)
@@ -83,9 +97,29 @@ export class IaComponent {
         next: (response) => {
           if (response && response.trim()) {
             this.answer = response;
+            this.applyAnswerFormatting(response);
             this.errorMessage = '';
           }
         },
       });
+  }
+
+  /** Convierte texto IA en párrafos y bullets para una lectura más clara. */
+  private applyAnswerFormatting(rawAnswer: string): void {
+    const lines = rawAnswer
+      .split('\n')
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    const bulletPattern = /^(?:[-*•]\s+|\d+\.\s+)/;
+    const bullets = lines
+      .filter((line) => bulletPattern.test(line))
+      .map((line) => line.replace(bulletPattern, '').trim())
+      .filter(Boolean);
+
+    const paragraphs = lines.filter((line) => !bulletPattern.test(line));
+
+    this.answerBullets = bullets;
+    this.answerParagraphs = paragraphs;
   }
 }

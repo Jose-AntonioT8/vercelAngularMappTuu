@@ -38,10 +38,32 @@
 
     <article
       *ngIf="answer"
-      class="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-4"
+      appHighlight
+      [appHighlight]="'#fff7ed'"
+      [highlightDefault]="'#f8fafc'"
+      class="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors duration-200"
     >
       <h2 class="text-sm font-semibold text-slate-800 mb-2">{{ 'ia.answer' | translate }}</h2>
-      <p class="text-slate-700 whitespace-pre-wrap">{{ answer }}</p>
+
+      <div class="space-y-3 text-slate-700">
+        <p
+          *ngFor="let paragraph of answerParagraphs"
+          class="leading-relaxed whitespace-pre-wrap"
+        >
+          {{ paragraph }}
+        </p>
+
+        <ul *ngIf="answerBullets.length" class="list-disc pl-5 space-y-1">
+          <li *ngFor="let bullet of answerBullets" class="leading-relaxed">{{ bullet }}</li>
+        </ul>
+
+        <p
+          *ngIf="!answerParagraphs.length && !answerBullets.length"
+          class="leading-relaxed whitespace-pre-wrap"
+        >
+          {{ answer }}
+        </p>
+      </div>
     </article>
   </section>
 </main>
