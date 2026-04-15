@@ -60,6 +60,8 @@ interface IaRelationalContext {
     planName: string;
     activityIds: string[];
     activityNames: string[];
+    activityPrices?: (number | undefined)[];
+      totalPrice?: number;
     missingActivityIds: string[];
     activityTypeIds: string[];
     activityTypeNames: string[];
@@ -70,6 +72,8 @@ interface IaRelationalContext {
     activityName: string;
     activityTypeId: string;
     activityTypeName: string;
+    price?: number;
+    location?: string;
   }>;
   /** Actividades que no se pudieron asociar a un tipo. */
   orphanActivities: Array<{
@@ -220,7 +224,7 @@ export class IaAssistantService {
           {
             role: 'system',
             content:
-              'Eres un asistente de MappTuu. Solo puedes responder usando como fuente de datos las colecciones de Firebase activities, activityTypes y plans y el contexto relacional derivado de esos datos. Si la pregunta no trata de planes o actividades, debes rechazarla brevemente. Siempre prioriza relaciones por IDs: plans.activitiesIds -> activity.id y activity.activityTypeId -> activityType.id. Usa también relaciones inversas (activityToPlans y activityTypeToActivities) para responder mejor. Si falta información, di que no está disponible en Firebase. Los datos pueden venir resumidos o truncados para evitar límites del modelo.',
+               'Eres un asistente de MappTuu. Solo puedes responder usando como fuente de datos las colecciones de Firebase activities, activityTypes y plans y el contexto relacional derivado de esos datos. Si la pregunta no trata de planes o actividades, debes rechazarla brevemente. IMPORTANTE: NUNCA muestres IDs (de actividades, planes, tipos de actividades) en tus respuestas. Siempre usa solo los nombres. Cuando hables de actividades, incluye SIEMPRE su precio y el nombre de su tipo de actividad, así como su ubicación descriptiva (si está disponible). Cuando hables de planes, NO muestres el ID del plan, pero SÍ muestra los NOMBRES de las actividades que contiene y el PRECIO TOTAL de todas esas actividades. Nunca muestres longitud/latitud; en su lugar usa la ubicación descriptiva (ej: "Málaga capital"). Siempre prioriza relaciones por IDs internamente pero en la respuesta solo muestra nombres y datos útiles. Usa también relaciones inversas (activityToPlans y activityTypeToActivities) para responder mejor. Si falta información, di que no está disponible. Los datos pueden estar truncados para evitar límites del modelo.',
           },
           {
             role: 'user',
@@ -464,6 +468,7 @@ export class IaAssistantService {
       const activityIds = this.getStringArrayField(plan, ['activitiesIds']);
 
       const activityNames: string[] = [];
+      const activityPrices: (number | undefined)[] = [];
       const missingActivityIds: string[] = [];
       const activityTypeIds = new Set<string>();
       const activityTypeNames = new Set<string>();
@@ -480,6 +485,9 @@ export class IaAssistantService {
         const activityName =
           this.getStringField(activity, ['name', 'title']) || activityId;
         activityNames.push(activityName);
+
+        const price = typeof activity['price'] === 'number' ? activity['price'] : undefined;
+        activityPrices.push(price);
 
         const plansForActivity = planRefsByActivityId.get(activityId) || [];
         plansForActivity.push({ planId, planName });
@@ -509,11 +517,18 @@ export class IaAssistantService {
 
       missingActivityLinksInPlans += missingActivityIds.length;
 
-      return {
+     const totalPrice: number = activityPrices.reduce<number>(
+       (sum, price) => sum + (typeof price === 'number' ? price : 0),
+       0,
+     );
+
+     return {
         planId,
         planName,
         activityIds,
         activityNames,
+        activityPrices: activityPrices.length > 0 ? activityPrices : undefined,
+       totalPrice: totalPrice > 0 ? totalPrice : undefined,
         missingActivityIds,
         activityTypeIds: Array.from(activityTypeIds),
         activityTypeNames: Array.from(activityTypeNames),
@@ -530,6 +545,8 @@ export class IaAssistantService {
       const activityTypeName =
         this.getStringField(activityType, ['name']) ||
         (activityTypeId === 'sin-tipo' ? 'Sin tipo' : activityTypeId);
+      const price = typeof activity['price'] === 'number' ? activity['price'] : undefined;
+      const location = this.getStringField(activity, ['location', 'city', 'region', 'place']);
 
       if (activityTypeId !== 'sin-tipo') {
         usedActivityTypeIds.add(activityTypeId);
@@ -548,16 +565,18 @@ export class IaAssistantService {
         activityName,
         activityTypeId,
         activityTypeName,
+        price,
+        location: location || undefined,
       };
     });
 
-    const orphanActivities = activitiesWithType.filter(
-      (activity) => !usedActivityIds.has(activity.activityId),
-    );
+     const orphanActivities = activitiesWithType.filter(
+       (activity) => !usedActivityIds.has(activity.activityId),
+     );
 
-    const orphanActivityTypes = Array.from(activityTypesById.entries())
-      .filter(([activityTypeId]) => !usedActivityTypeIds.has(activityTypeId))
-      .map(([activityTypeId, activityType]) => ({
+     const orphanActivityTypes = Array.from(activityTypesById.entries())
+       .filter(([activityTypeId]) => !usedActivityTypeIds.has(activityTypeId))
+       .map(([activityTypeId, activityType]) => ({
         activityTypeId,
         activityTypeName:
           this.getStringField(activityType, ['name']) || activityTypeId,
@@ -695,3 +714,4 @@ export class IaAssistantService {
     };
   }
 }
+
