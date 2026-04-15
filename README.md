@@ -10,7 +10,7 @@ La documentación de este repo se mantiene en dos capas:
 ## Requisitos
 
 - Node.js + npm (recomendado: versión LTS).
-- Angular CLI (opcional; el proyecto funciona con `npx ng ...`).
+- Angular CLI (opcional; el proyecto funciona con `npx ng ...`)
 
 ## Instalación
 
