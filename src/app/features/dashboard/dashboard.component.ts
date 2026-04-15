@@ -58,4 +58,9 @@ export class DashboardComponent {
   viewPlans(){
     this.route.navigate(['/plansList'])
   }
+
+  /** Navega al panel de moderación de reportes. */
+  viewReportsModeration(){
+    this.route.navigate(['/admin/reports'])
+  }
 }

@@ -1,10 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { Activity } from '../../models/activity.model';
+import { ReportingService } from '../../../core/services/reporting.service';
+import {
+  CreateActivityReportPayload,
+  ReportReason,
+} from '../../models/reporting.types';
+import { firstValueFrom } from 'rxjs';
 
 
 
@@ -18,7 +25,7 @@ import { Activity } from '../../models/activity.model';
 @Component({
   selector: 'app-options',
   standalone: true,
-  imports: [TranslatePipe, CommonModule],
+  imports: [TranslatePipe, CommonModule, FormsModule],
   templateUrl: './options.component.html',
   styles: []
 })
@@ -32,6 +39,8 @@ export class OptionsComponent {
   private router = inject(ActivatedRoute)
   /** Auth para obtener token del usuario actual. */
   private auth = inject(AuthService)
+  /** Servicio de reportes. */
+  private reportService = inject(ReportingService);
 
   /** Estado del menú desplegable. */
   isMenuOpen: boolean = false;
@@ -39,6 +48,13 @@ export class OptionsComponent {
   showDeleteModal = false;
   /** Actividad objetivo de las acciones del menú. */
   activity?: Activity;
+  /** Control del modal de reporte. */
+  isReportModalOpen = false;
+  reportReason: ReportReason = 'spam';
+  reportDetails = '';
+  reportToastKey = '';
+  reportToastType: 'success' | 'error' = 'success';
+  private reportToastTimer: ReturnType<typeof setTimeout> | null = null;
 
   /** Carga la actividad según el `id` de ruta. */
   ngOnInit(){
@@ -63,6 +79,65 @@ export class OptionsComponent {
   askToDelete() {
     this.isMenuOpen = false;
     this.showDeleteModal = true;
+  }
+
+  /** Abre modal para reportar actividad. */
+  openReportModal() {
+    const user = this.auth.currentUser ?? this.auth.firebaseCurrentUser;
+    if (!user) {
+      this.route.navigate(['/login']);
+      return;
+    }
+    this.isMenuOpen = false;
+    this.isReportModalOpen = true;
+  }
+
+  closeReportModal() {
+    this.isReportModalOpen = false;
+  }
+
+  /** Envía el reporte al backend. */
+  async submitReport(): Promise<void> {
+    try {
+      const user = this.auth.currentUser ?? this.auth.firebaseCurrentUser;
+      if (!user) {
+        this.route.navigate(['/login']);
+        return;
+      }
+      if (!this.activity?.id) {
+        this.showReportToast('reports.reportActivity.errors.activityUnknown', 'error');
+        return;
+      }
+      const payload: CreateActivityReportPayload = {
+        activityId: this.activity.id,
+        reason: this.reportReason,
+        details: this.reportDetails.trim() || undefined,
+      };
+      const token = await user.getIdToken();
+      await firstValueFrom(this.reportService.createReport(payload, token));
+      this.isReportModalOpen = false;
+      this.reportReason = 'spam';
+      this.reportDetails = '';
+      this.showReportToast('reports.reportActivity.toastSuccess', 'success');
+    } catch (error) {
+      console.error('Error enviando reporte:', error);
+      this.showReportToast('reports.reportActivity.toastError', 'error');
+    }
+  }
+
+  private showReportToast(
+    translationKey: string,
+    type: 'success' | 'error' = 'success'
+  ): void {
+    this.reportToastKey = translationKey;
+    this.reportToastType = type;
+    if (this.reportToastTimer) {
+      clearTimeout(this.reportToastTimer);
+    }
+    this.reportToastTimer = setTimeout(() => {
+      this.reportToastKey = '';
+      this.reportToastTimer = null;
+    }, 2500);
   }
 
   /** Cancela el borrado (cierra modal). */

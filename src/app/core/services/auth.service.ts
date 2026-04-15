@@ -160,6 +160,11 @@ export class AuthService {
     return this.userSubject.value;
   }
 
+  /** Fallback directo desde Firebase Auth. */
+  get firebaseCurrentUser() {
+    return this.auth.currentUser;
+  }
+
   /**
    * Actualiza la foto de perfil del usuario en Firebase Auth.
    *

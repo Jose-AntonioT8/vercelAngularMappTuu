@@ -376,5 +376,70 @@
     "required": "This field is required",
     "invalid": "Invalid format",
     "tryAgain": "Please, try again"
+  },
+  "reports": {
+    "dashboard": {
+      "sectionTitle": "Moderation",
+      "viewReports": "View reports"
+    },
+    "reportActivity": {
+      "menuItem": "Report activity",
+      "modalTitle": "Report activity",
+      "reasonLabel": "Reason",
+      "detailLabel": "Details (optional)",
+      "detailPlaceholder": "Tell us what issue you found",
+      "submit": "Submit report",
+      "errors": {
+        "activityUnknown": "Could not identify the activity.",
+        "reasonRequired": "Please select a reason.",
+        "detailsTooLong": "Details cannot exceed 500 characters."
+      },
+      "toastSuccess": "Report submitted successfully.",
+      "toastError": "Could not submit the report.",
+      "reasons": {
+        "spam": "Spam",
+        "inappropriate": "Inappropriate content",
+        "fraud": "Fraud / scam",
+        "other": "Other"
+      }
+    },
+    "moderation": {
+      "title": "Report moderation",
+      "subtitle": "Manage activity reports submitted by users.",
+      "filterStatusAll": "Status: all",
+      "filterPending": "Pending",
+      "filterResolved": "Resolved",
+      "filterDeleted": "Deleted",
+      "filterReasonAll": "Reason: all",
+      "limitPlaceholder": "Limit",
+      "applyFilters": "Apply filters",
+      "loading": "Loading reports...",
+      "empty": "No reports to show.",
+      "activityAlt": "Activity",
+      "activityNoName": "Unnamed activity",
+      "noDetails": "No additional details",
+      "resolveButton": "Resolve...",
+      "activityIdLabel": "Activity ID",
+      "modalTitle": "Resolve report",
+      "keepActivity": "Resolve and keep activity",
+      "deleteActivity": "Delete activity",
+      "status": {
+        "pending": "Pending",
+        "resolved": "Resolved",
+        "deleted": "Deleted"
+      },
+      "reasons": {
+        "spam": "Spam",
+        "inappropriate": "Inappropriate",
+        "fraud": "Fraud",
+        "other": "Other"
+      },
+      "errors": {
+        "notAuthenticated": "Not authenticated.",
+        "loadFailed": "Could not load reports.",
+        "sessionFailed": "Could not validate session.",
+        "actionFailed": "Could not apply moderation action."
+      }
+    }
   }
 }

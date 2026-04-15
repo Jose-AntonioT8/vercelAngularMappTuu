@@ -373,5 +373,70 @@
     "required": "Este campo es requerido",
     "invalid": "El formato es inválido",
     "tryAgain": "Por favor, inténtalo de nuevo"
+  },
+  "reports": {
+    "dashboard": {
+      "sectionTitle": "Moderación",
+      "viewReports": "Ver reportes"
+    },
+    "reportActivity": {
+      "menuItem": "Reportar actividad",
+      "modalTitle": "Reportar actividad",
+      "reasonLabel": "Motivo",
+      "detailLabel": "Detalle (opcional)",
+      "detailPlaceholder": "Cuéntanos qué problema has detectado",
+      "submit": "Enviar reporte",
+      "errors": {
+        "activityUnknown": "No se pudo identificar la actividad.",
+        "reasonRequired": "Selecciona un motivo.",
+        "detailsTooLong": "El detalle no puede superar 500 caracteres."
+      },
+      "toastSuccess": "Reporte enviado correctamente.",
+      "toastError": "No se pudo enviar el reporte.",
+      "reasons": {
+        "spam": "Spam",
+        "inappropriate": "Contenido inapropiado",
+        "fraud": "Fraude / estafa",
+        "other": "Otro"
+      }
+    },
+    "moderation": {
+      "title": "Moderación de reportes",
+      "subtitle": "Gestiona incidencias de actividades reportadas por usuarios.",
+      "filterStatusAll": "Estado: todos",
+      "filterPending": "Pendiente",
+      "filterResolved": "Resueltos",
+      "filterDeleted": "Eliminados",
+      "filterReasonAll": "Motivo: todos",
+      "limitPlaceholder": "Límite",
+      "applyFilters": "Aplicar filtros",
+      "loading": "Cargando reportes...",
+      "empty": "No hay reportes para mostrar.",
+      "activityAlt": "Actividad",
+      "activityNoName": "Actividad sin nombre",
+      "noDetails": "Sin detalle adicional",
+      "resolveButton": "Resolver...",
+      "activityIdLabel": "ID actividad",
+      "modalTitle": "Resolver reporte",
+      "keepActivity": "Resolver y mantener actividad",
+      "deleteActivity": "Eliminar actividad",
+      "status": {
+        "pending": "Pendiente",
+        "resolved": "Resuelto",
+        "deleted": "Eliminado"
+      },
+      "reasons": {
+        "spam": "Spam",
+        "inappropriate": "Inapropiado",
+        "fraud": "Fraude",
+        "other": "Otro"
+      },
+      "errors": {
+        "notAuthenticated": "No autenticado.",
+        "loadFailed": "No se pudieron cargar los reportes.",
+        "sessionFailed": "No se pudo validar la sesión.",
+        "actionFailed": "No se pudo aplicar la acción de moderación."
+      }
+    }
   }
 }

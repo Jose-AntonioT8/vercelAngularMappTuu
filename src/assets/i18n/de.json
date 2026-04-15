@@ -376,5 +376,70 @@
     "required": "Dieses Feld ist erforderlich",
     "invalid": "Ungültiges Format",
     "tryAgain": "Bitte versuchen Sie es noch einmal"
+  },
+  "reports": {
+    "dashboard": {
+      "sectionTitle": "Moderation",
+      "viewReports": "Meldungen anzeigen"
+    },
+    "reportActivity": {
+      "menuItem": "Aktivität melden",
+      "modalTitle": "Aktivität melden",
+      "reasonLabel": "Grund",
+      "detailLabel": "Details (optional)",
+      "detailPlaceholder": "Beschreiben Sie das Problem",
+      "submit": "Meldung senden",
+      "errors": {
+        "activityUnknown": "Aktivität konnte nicht identifiziert werden.",
+        "reasonRequired": "Bitte wählen Sie einen Grund.",
+        "detailsTooLong": "Details dürfen 500 Zeichen nicht überschreiten."
+      },
+      "toastSuccess": "Meldung erfolgreich gesendet.",
+      "toastError": "Meldung konnte nicht gesendet werden.",
+      "reasons": {
+        "spam": "Spam",
+        "inappropriate": "Unangemessener Inhalt",
+        "fraud": "Betrug / Abzocke",
+        "other": "Sonstiges"
+      }
+    },
+    "moderation": {
+      "title": "Meldungsmoderation",
+      "subtitle": "Verwalten Sie von Nutzern gemeldete Aktivitäten.",
+      "filterStatusAll": "Status: alle",
+      "filterPending": "Ausstehend",
+      "filterResolved": "Gelöst",
+      "filterDeleted": "Gelöscht",
+      "filterReasonAll": "Grund: alle",
+      "limitPlaceholder": "Limit",
+      "applyFilters": "Filter anwenden",
+      "loading": "Meldungen werden geladen...",
+      "empty": "Keine Meldungen vorhanden.",
+      "activityAlt": "Aktivität",
+      "activityNoName": "Aktivität ohne Namen",
+      "noDetails": "Keine weiteren Details",
+      "resolveButton": "Lösen...",
+      "activityIdLabel": "Aktivitäts-ID",
+      "modalTitle": "Meldung lösen",
+      "keepActivity": "Lösen und Aktivität behalten",
+      "deleteActivity": "Aktivität löschen",
+      "status": {
+        "pending": "Ausstehend",
+        "resolved": "Gelöst",
+        "deleted": "Gelöscht"
+      },
+      "reasons": {
+        "spam": "Spam",
+        "inappropriate": "Unangemessen",
+        "fraud": "Betrug",
+        "other": "Sonstiges"
+      },
+      "errors": {
+        "notAuthenticated": "Nicht angemeldet.",
+        "loadFailed": "Meldungen konnten nicht geladen werden.",
+        "sessionFailed": "Sitzung konnte nicht bestätigt werden.",
+        "actionFailed": "Moderationsaktion konnte nicht ausgeführt werden."
+      }
+    }
   }
 }
