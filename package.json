@@ -4,7 +4,7 @@
   "scripts": {
   "prestart": "node scripts/generate-env.js",
   "ng": "ng",
-  "start": "ng serve --proxy-config proxy.conf.json",
+  "start": "ng serve",
   "prebuild": "node scripts/generate-env.js",
   "build": "ng build",
   "watch": "ng build --watch --configuration development",

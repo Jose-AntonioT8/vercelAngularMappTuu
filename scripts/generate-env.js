@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 
 const env = {
   NG_APP_CLOUDINARY_CLOUD_NAME: process.env.NG_APP_CLOUDINARY_CLOUD_NAME || "",
