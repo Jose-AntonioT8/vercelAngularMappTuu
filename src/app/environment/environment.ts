@@ -106,6 +106,14 @@ export const environment = {
       'IA_FALLBACK_MODELS',
     ),
   },
+  maps: {
+    apiKey: readEnv(
+      'NG_APP_MAPS_API_KEY',
+      'MAPS_API_KEY',
+      'NG_APP_GOOGLE_MAPS_API_KEY',
+      'GOOGLE_MAPS_API_KEY',
+    ),
+  },
   firebase: {
     apiKey: readFirebaseEnv(
       'apiKey',

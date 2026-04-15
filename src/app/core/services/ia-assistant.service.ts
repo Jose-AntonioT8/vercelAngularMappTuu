@@ -5,6 +5,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import {
   Observable,
   catchError,
+  firstValueFrom,
   from,
   map,
   mergeMap,
@@ -15,6 +16,7 @@ import {
   timer,
 } from 'rxjs';
 import { environment } from '../../../app/environment/environment';
+import { MapsService } from './maps.service';
 
 /**
  * Mensaje en formato chat enviado al proveedor de IA.
@@ -61,7 +63,9 @@ interface IaRelationalContext {
     activityIds: string[];
     activityNames: string[];
     activityPrices?: (number | undefined)[];
-      totalPrice?: number;
+    activityPriceTexts: string[];
+    totalPrice?: number;
+    totalPriceText: string;
     missingActivityIds: string[];
     activityTypeIds: string[];
     activityTypeNames: string[];
@@ -73,7 +77,9 @@ interface IaRelationalContext {
     activityTypeId: string;
     activityTypeName: string;
     price?: number;
+    priceText: string;
     location?: string;
+    locationText: string;
   }>;
   /** Actividades que no se pudieron asociar a un tipo. */
   orphanActivities: Array<{
@@ -131,6 +137,8 @@ export class IaAssistantService {
   private firestore = inject(Firestore);
   /** Cliente HTTP para llamar al proveedor de IA (chat completions). */
   private http = inject(HttpClient);
+  /** Servicio de mapas para resolver ubicación legible desde coordenadas. */
+  private mapsService = inject(MapsService);
   /** Set de modelos marcados como no disponibles (por ejemplo 404). */
   private readonly unavailableModels = new Set<string>();
   /** Máximo de modelos a intentar por pregunta (principal + fallbacks). */
@@ -139,6 +147,8 @@ export class IaAssistantService {
   private readonly maxDocsPerCollection = 25;
   /** Límite duro de chars de JSON para evitar prompts gigantes. */
   private readonly maxFirebaseJsonChars = 15000;
+  /** Límite de reverse geocoding por pregunta para evitar latencia excesiva. */
+  private readonly maxReverseGeocodingLookups = 12;
 
   /** Regex de “tema permitido” para limitar el dominio del asistente. */
   private readonly allowedTopicPattern =
@@ -207,33 +217,25 @@ export class IaAssistantService {
         const compactFirebaseData = this.compactFirebaseData(firebaseData);
         const relationalContext =
           this.buildRelationalContext(compactFirebaseData);
-        const firebaseDataJson = JSON.stringify(compactFirebaseData);
-        const relationalContextJson = JSON.stringify(relationalContext);
-
-        const trimmedFirebaseDataJson =
-          firebaseDataJson.length > this.maxFirebaseJsonChars
-            ? `${firebaseDataJson.slice(0, this.maxFirebaseJsonChars)}... [TRUNCADO]`
-            : firebaseDataJson;
-
-        const trimmedRelationalContextJson =
-          relationalContextJson.length > this.maxFirebaseJsonChars
-            ? `${relationalContextJson.slice(0, this.maxFirebaseJsonChars)}... [TRUNCADO]`
-            : relationalContextJson;
+        const assistantContext = this.buildAssistantContext(relationalContext);
+        const assistantContextJson = JSON.stringify(assistantContext);
+        const trimmedAssistantContextJson =
+          assistantContextJson.length > this.maxFirebaseJsonChars
+            ? `${assistantContextJson.slice(0, this.maxFirebaseJsonChars)}... [TRUNCADO]`
+            : assistantContextJson;
 
         const messages: IaChatMessage[] = [
           {
             role: 'system',
             content:
-               'Eres un asistente de MappTuu. Solo puedes responder usando como fuente de datos las colecciones de Firebase activities, activityTypes y plans y el contexto relacional derivado de esos datos. Si la pregunta no trata de planes o actividades, debes rechazarla brevemente. IMPORTANTE: NUNCA muestres IDs (de actividades, planes, tipos de actividades) en tus respuestas. Siempre usa solo los nombres. Cuando hables de actividades, incluye SIEMPRE su precio y el nombre de su tipo de actividad, así como su ubicación descriptiva (si está disponible). Cuando hables de planes, NO muestres el ID del plan, pero SÍ muestra los NOMBRES de las actividades que contiene y el PRECIO TOTAL de todas esas actividades. Nunca muestres longitud/latitud; en su lugar usa la ubicación descriptiva (ej: "Málaga capital"). Siempre prioriza relaciones por IDs internamente pero en la respuesta solo muestra nombres y datos útiles. Usa también relaciones inversas (activityToPlans y activityTypeToActivities) para responder mejor. Si falta información, di que no está disponible. Los datos pueden estar truncados para evitar límites del modelo.',
+              'Eres el asistente de MappTuu. Debes responder con tono amable, cercano y claro. Solo puedes responder con el contexto proporcionado. Si preguntan algo fuera de planes/actividades/tipos/ubicaciones, responde brevemente y con amabilidad que no tienes ese dato. Reglas estrictas: nunca muestres IDs; nunca muestres latitud/longitud; no inventes datos. Si el precio de una actividad no está disponible, di literalmente "Gratis". Cuando hables de planes, indica el nombre del plan, las actividades por nombre y el precio total. Cuando hables de ubicaciones, usa solo texto descriptivo (por ejemplo "Málaga capital").',
           },
           {
             role: 'user',
             content: [
               `Pregunta: ${cleanQuestion}`,
-              'Datos Firebase (fuente única):',
-              trimmedFirebaseDataJson,
-              'Contexto relacional precalculado (IDs enlazados):',
-              trimmedRelationalContextJson,
+              'Contexto de negocio (sin IDs ni coordenadas):',
+              trimmedAssistantContextJson,
             ].join('\n\n'),
           },
         ];
@@ -381,12 +383,13 @@ export class IaAssistantService {
           const resolvedContent =
             content ||
             'No he podido generar una respuesta con los datos disponibles.';
+          const safeContent = this.sanitizeAssistantOutput(resolvedContent);
 
           if (!isFallback) {
-            return resolvedContent;
+            return safeContent;
           }
 
-          return `[Usando modelo fallback: ${model}]\n\n${resolvedContent}`;
+          return `[Usando modelo fallback: ${model}]\n\n${safeContent}`;
         }),
       );
   }
@@ -464,11 +467,12 @@ export class IaAssistantService {
     const plansWithActivities = firebaseData.plans.map((plan) => {
       const planId = this.getStringField(plan, ['id']) || 'sin-id';
       const planName =
-        this.getStringField(plan, ['name', 'title']) || 'Sin nombre';
+        this.getStringField(plan, ['name', 'title']) || 'Plan sin nombre';
       const activityIds = this.getStringArrayField(plan, ['activitiesIds']);
 
       const activityNames: string[] = [];
       const activityPrices: (number | undefined)[] = [];
+      const activityPriceTexts: string[] = [];
       const missingActivityIds: string[] = [];
       const activityTypeIds = new Set<string>();
       const activityTypeNames = new Set<string>();
@@ -483,11 +487,12 @@ export class IaAssistantService {
         usedActivityIds.add(activityId);
 
         const activityName =
-          this.getStringField(activity, ['name', 'title']) || activityId;
+          this.getStringField(activity, ['name', 'title']) || 'Actividad sin nombre';
         activityNames.push(activityName);
 
-        const price = typeof activity['price'] === 'number' ? activity['price'] : undefined;
+        const price = this.getNumberField(activity, ['price', 'cost', 'amount']);
         activityPrices.push(price);
+        activityPriceTexts.push(this.toPriceText(price));
 
         const plansForActivity = planRefsByActivityId.get(activityId) || [];
         plansForActivity.push({ planId, planName });
@@ -528,7 +533,9 @@ export class IaAssistantService {
         activityIds,
         activityNames,
         activityPrices: activityPrices.length > 0 ? activityPrices : undefined,
+        activityPriceTexts,
        totalPrice: totalPrice > 0 ? totalPrice : undefined,
+        totalPriceText: totalPrice > 0 ? this.toPriceText(totalPrice) : 'Gratis',
         missingActivityIds,
         activityTypeIds: Array.from(activityTypeIds),
         activityTypeNames: Array.from(activityTypeNames),
@@ -538,15 +545,21 @@ export class IaAssistantService {
     const activitiesWithType = firebaseData.activity.map((activity) => {
       const activityId = this.getStringField(activity, ['id']) || 'sin-id';
       const activityName =
-        this.getStringField(activity, ['name', 'title']) || 'Sin nombre';
+        this.getStringField(activity, ['name', 'title']) || 'Actividad sin nombre';
       const activityTypeId =
         this.getStringField(activity, ['activityTypeId']) || 'sin-tipo';
       const activityType = activityTypesById.get(activityTypeId);
       const activityTypeName =
         this.getStringField(activityType, ['name']) ||
-        (activityTypeId === 'sin-tipo' ? 'Sin tipo' : activityTypeId);
-      const price = typeof activity['price'] === 'number' ? activity['price'] : undefined;
-      const location = this.getStringField(activity, ['location', 'city', 'region', 'place']);
+        (activityTypeId === 'sin-tipo' ? 'Tipo no disponible' : 'Tipo no disponible');
+      const price = this.getNumberField(activity, ['price', 'cost', 'amount']);
+      const location = this.getStringField(activity, [
+        'location',
+        'city',
+        'region',
+        'place',
+        'address',
+      ]);
 
       if (activityTypeId !== 'sin-tipo') {
         usedActivityTypeIds.add(activityTypeId);
@@ -566,7 +579,9 @@ export class IaAssistantService {
         activityTypeId,
         activityTypeName,
         price,
+        priceText: this.toPriceText(price),
         location: location || undefined,
+        locationText: location || 'Ubicacion aproximada no disponible',
       };
     });
 
@@ -627,6 +642,145 @@ export class IaAssistantService {
         activitiesWithoutType,
       },
     };
+  }
+
+  /**
+   * Construye un contexto orientado a usuario final, sin IDs ni coordenadas.
+   */
+  private buildAssistantContext(relationalContext: IaRelationalContext): Record<string, unknown> {
+    const plans = relationalContext.plansWithActivities.map((plan) => ({
+      planName: plan.planName,
+      activities: plan.activityNames.map((name, index) => ({
+        name,
+        price: plan.activityPriceTexts[index] || 'Gratis',
+      })),
+      totalPrice: plan.totalPriceText,
+    }));
+
+    const activities = relationalContext.activitiesWithType.map((activity) => ({
+      activityName: activity.activityName,
+      activityTypeName: activity.activityTypeName,
+      price: activity.priceText,
+      location: activity.locationText,
+    }));
+
+    return {
+      plans,
+      activities,
+      stats: relationalContext.stats,
+      guidance:
+        'No mostrar IDs ni coordenadas. Si falta precio, mostrar Gratis. Si falta ubicacion, indicar que no esta disponible.',
+    };
+  }
+
+  /**
+   * Limpia la salida textual del modelo para evitar IDs/coords en respuesta final.
+   */
+  private sanitizeAssistantOutput(rawText: string): string {
+    let safe = rawText || '';
+
+    safe = safe.replace(/\b(lat(?:itud)?|lng|long(?:itud)?)\b\s*[:=]?\s*-?\d+(?:\.\d+)?/gi, '');
+    safe = safe.replace(/-?\d{1,2}\.\d{4,}\s*,\s*-?\d{1,3}\.\d{4,}/g, 'ubicacion aproximada disponible');
+    safe = safe.replace(/\b(ids?|id)\s*[:=]\s*[^\n,.;]+/gi, '');
+    safe = safe.replace(/\n{3,}/g, '\n\n').trim();
+
+    return safe;
+  }
+
+  /**
+   * Extrae un campo numérico priorizando las `keys` dadas.
+   */
+  private getNumberField(
+    source: Record<string, unknown> | undefined,
+    keys: string[],
+  ): number | undefined {
+    if (!source) {
+      return undefined;
+    }
+
+    for (const key of keys) {
+      const value = source[key];
+      if (typeof value === 'number' && Number.isFinite(value)) {
+        return value;
+      }
+      if (typeof value === 'string') {
+        const normalized = value.replace(',', '.').trim();
+        const parsed = Number(normalized);
+        if (Number.isFinite(parsed)) {
+          return parsed;
+        }
+      }
+    }
+
+    return undefined;
+  }
+
+  /** Formatea un precio para salida natural al usuario. */
+  private toPriceText(price?: number): string {
+    if (typeof price !== 'number' || !Number.isFinite(price) || price <= 0) {
+      return 'Gratis';
+    }
+
+    return new Intl.NumberFormat('es-ES', {
+      style: 'currency',
+      currency: 'EUR',
+      maximumFractionDigits: 2,
+    }).format(price);
+  }
+
+  /**
+   * Enriquecer actividades con ubicación descriptiva a partir de lat/lng.
+   */
+  private async enrichActivitiesWithLocation(
+    activities: Array<Record<string, unknown>>,
+  ): Promise<Array<Record<string, unknown>>> {
+    const enriched = [...activities];
+    let lookups = 0;
+
+    for (const activity of enriched) {
+      if (lookups >= this.maxReverseGeocodingLookups) {
+        break;
+      }
+
+      const hasLocationText = this.getStringField(activity, [
+        'location',
+        'city',
+        'region',
+        'place',
+        'address',
+      ]);
+
+      if (hasLocationText) {
+        continue;
+      }
+
+      const latitude = this.getNumberField(activity, ['latitude', 'lat']);
+      const longitude = this.getNumberField(activity, ['longitude', 'lng', 'lon']);
+
+      if (
+        typeof latitude !== 'number' ||
+        typeof longitude !== 'number' ||
+        !Number.isFinite(latitude) ||
+        !Number.isFinite(longitude)
+      ) {
+        continue;
+      }
+
+      try {
+        const location = await firstValueFrom(
+          this.mapsService.getAddress(latitude, longitude),
+        );
+
+        if (location && typeof location === 'string') {
+          activity['location'] = location;
+          lookups += 1;
+        }
+      } catch (error) {
+        console.warn('[IA] No se pudo resolver ubicación por geocoding:', error);
+      }
+    }
+
+    return enriched;
   }
 
   /**
@@ -698,11 +852,15 @@ export class IaAssistantService {
       getDocs(collection(this.firestore, 'plans')),
     ]);
 
+    const activities = activityDocs.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...docSnap.data(),
+    }));
+
+    const enrichedActivities = await this.enrichActivitiesWithLocation(activities);
+
     return {
-      activity: activityDocs.docs.map((docSnap) => ({
-        id: docSnap.id,
-        ...docSnap.data(),
-      })),
+      activity: enrichedActivities,
       activityType: activityTypeDocs.docs.map((docSnap) => ({
         id: docSnap.id,
         ...docSnap.data(),

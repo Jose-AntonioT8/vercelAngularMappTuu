@@ -16,6 +16,12 @@ const env = {
     process.env.NG_APP_IA_FALLBACK_MODELS ||
     process.env.IA_FALLBACK_MODELS ||
     "",
+  NG_APP_MAPS_API_KEY:
+    process.env.NG_APP_MAPS_API_KEY ||
+    process.env.MAPS_API_KEY ||
+    process.env.NG_APP_GOOGLE_MAPS_API_KEY ||
+    process.env.GOOGLE_MAPS_API_KEY ||
+    "",
   NG_APP_API_KEY:
     process.env.NG_APP_API_KEY ||
     process.env.NG_APP_FIREBASE_API_KEY ||

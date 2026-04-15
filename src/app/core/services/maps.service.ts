@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map } from 'rxjs';
+import { environment } from '../../../app/environment/environment';
 @Injectable({ providedIn: 'root' })
 
 /**
@@ -29,11 +30,32 @@ export class MapsService{
      * @returns Observable que emite la mejor cadena de ubicación encontrada.
      */
     getAddress(lat: number, lon: number): Observable<string> {
-        const url = this.buildReverseGeocodeUrl(lat, lon);
-        return this.http.get<any>(url).pipe(
-          map((response) => this.pickBestLocality(response))
-        );
+        const googleApiKey = environment.maps.apiKey?.trim();
+
+        if (googleApiKey) {
+          return this.http
+            .get<any>(this.buildGoogleReverseGeocodeUrl(lat, lon, googleApiKey))
+            .pipe(
+              map((response) => this.pickBestLocalityFromGoogle(response)),
+              catchError(() =>
+                this.http
+                  .get<any>(this.buildReverseGeocodeUrl(lat, lon))
+                  .pipe(map((response) => this.pickBestLocality(response))),
+              ),
+            );
+        }
+
+        return this.http
+          .get<any>(this.buildReverseGeocodeUrl(lat, lon))
+          .pipe(map((response) => this.pickBestLocality(response)));
       }
+
+    /**
+     * Construye URL de reverse geocoding de Google Maps API.
+     */
+    buildGoogleReverseGeocodeUrl(lat: number, lon: number, apiKey: string): string {
+      return `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&language=es&key=${encodeURIComponent(apiKey)}`;
+    }
 
     /**
      * Construye la URL del proveedor de reverse geocoding.
@@ -59,5 +81,46 @@ export class MapsService{
         response?.principalSubdivision ||
         'Ubicación desconocida'
       );
+    }
+
+    /**
+     * Selecciona una ubicación legible desde la respuesta de Google Geocoding.
+     */
+    pickBestLocalityFromGoogle(response: any): string {
+      const result = response?.results?.[0];
+      if (!result) {
+        return 'Ubicación desconocida';
+      }
+
+      const components: Array<{ long_name?: string; types?: string[] }> =
+        result.address_components || [];
+
+      const findComponent = (type: string): string => {
+        const component = components.find((item) => item?.types?.includes(type));
+        return component?.long_name?.trim() || '';
+      };
+
+      const locality =
+        findComponent('locality') ||
+        findComponent('postal_town') ||
+        findComponent('administrative_area_level_2');
+
+      const province =
+        findComponent('administrative_area_level_2') ||
+        findComponent('administrative_area_level_1');
+
+      if (locality && province && locality !== province) {
+        return `${locality}, ${province}`;
+      }
+
+      if (locality) {
+        return `${locality} capital`;
+      }
+
+      if (province) {
+        return province;
+      }
+
+      return result.formatted_address || 'Ubicación desconocida';
     }
 }
