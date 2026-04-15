@@ -57,7 +57,7 @@
   <div class="hidden xl:block"></div>
 
   <section class="p-2.5 xl:p-6 xl:px-8 w-full">
-    <app-list [searchTerm]="searchTerm"></app-list>
+    <app-list [searchTerm]="searchTerm" [filterState]="activityFilters"></app-list>
   </section>
 
   <div
@@ -87,7 +87,7 @@
       </button>
     </div>
     <div class="xl:px-4 xl:py-2">
-      <app-filter></app-filter>
+      <app-filter (filterChanged)="onFilterChanged($event)"></app-filter>
     </div>
   </div>
 </section>

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../../../common/header/header.component';
-import { FilterPlansComponent } from '../../../common/plans/filter-plans/filter-plans.component';
+import { ActivityFilterState as PlanFilterState, FilterPlansComponent } from '../../../common/plans/filter-plans/filter-plans.component';
 import { ListPlansComponent } from '../../../common/plans/list-plans/list-plans.component';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 
@@ -31,6 +31,11 @@ export class PlansListComponent {
   constructor(private route: Router) {}
   /** Texto de búsqueda para filtrar planes por nombre. */
   searchTerm = '';
+  /** Estado del panel de filtros de planes. */
+  planFilters: PlanFilterState = {
+    activity: null,
+    ratingMin: 0,
+  };
   /** Estado del panel de filtros (principalmente para mobile). */
   isFilterOpen = false;
 
@@ -47,6 +52,11 @@ export class PlansListComponent {
   /** Alterna el panel de filtros. */
   toggleFilter() {
     this.isFilterOpen = !this.isFilterOpen;
+  }
+
+  /** Actualiza el estado de filtros desde el panel lateral. */
+  onFilterChanged(filterState: PlanFilterState) {
+    this.planFilters = filterState;
   }
 
   /** Cierra filtros en pantallas pequeñas. */

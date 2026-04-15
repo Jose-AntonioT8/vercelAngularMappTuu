@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FilterComponent } from '../../../common/activities/filter/filter.component';
+import { ActivityFilterState, FilterComponent } from '../../../common/activities/filter/filter.component';
 import { ListComponent } from '../../../common/activities/list/list.component';
 import { HeaderComponent } from '../../../common/header/header.component';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
@@ -34,6 +34,12 @@ export class ListActivitiesComponent {
   constructor(private route: Router) {}
   /** Texto de búsqueda para filtrar actividades por nombre. */
   searchTerm = '';
+  /** Estado del panel de filtros de actividades. */
+  activityFilters: ActivityFilterState = {
+    activityType: null,
+    location: null,
+    ratingMin: 0,
+  };
   /** Estado del panel de filtros (mobile). */
   isFilterOpen = false;
 
@@ -47,6 +53,10 @@ export class ListActivitiesComponent {
   /** Alterna el panel de filtros. */
   toggleFilter() {
     this.isFilterOpen = !this.isFilterOpen;
+  }
+  /** Actualiza el estado de filtros desde el panel lateral. */
+  onFilterChanged(filterState: ActivityFilterState) {
+    this.activityFilters = filterState;
   }
   /** Navega a la pantalla de creación de actividad. */
   goCreateActivity() {

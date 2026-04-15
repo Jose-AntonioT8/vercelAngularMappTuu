@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { ActivityService } from '../../../core/services/activity.service';
-import { CardComponent } from '../card/card.component';
-import { ActivityTypeService } from '../../../core/services/activitytype.service';
-import { ActivityType } from '../../models/activityType.models';
 import { BehaviorSubject, Observable, combineLatest, debounceTime, distinctUntilChanged, forkJoin, map, of, shareReplay, switchMap } from 'rxjs';
-import { Activity } from '../../models/activity.model';
+import { ActivityService } from '../../../core/services/activity.service';
+import { ActivityTypeService } from '../../../core/services/activitytype.service';
 import { GeocodedLocation, MapsService } from '../../../core/services/maps.service';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
+import { ActivityType } from '../../models/activityType.models';
+import { Activity } from '../../models/activity.model';
+import { CardComponent } from '../card/card.component';
+import { ActivityFilterState as ActivityListFilterState } from '../filter/filter.component';
 
 interface ActivitySearchItem extends Activity {
   resolvedLocation: string;
@@ -33,7 +34,6 @@ interface SearchQueryState {
   styles: [],
 })
 export class ListComponent implements OnInit {
-  
   /** Servicio de actividades para alimentar el stream del listado. */
   private activityService = inject(ActivityService);
   /** Servicio de tipos para enriquecer cards (labels/colores). */
@@ -44,6 +44,12 @@ export class ListComponent implements OnInit {
   private readonly locationCache = new Map<string, string>();
   /** Caché de geocodificación de términos de búsqueda. */
   private readonly searchGeoCache = new Map<string, GeocodedLocation | null>();
+  /** Estado reactivo del panel de filtros de actividades. */
+  private readonly filterState$ = new BehaviorSubject<ActivityListFilterState>({
+    activityType: null,
+    location: null,
+    ratingMin: 0,
+  });
 
   /** Stream reactivo de actividades para renderizar el listado. */
   activities$ = this.activityService.activities$;
@@ -51,6 +57,8 @@ export class ListComponent implements OnInit {
   activitiesWithLocation$ = this.activities$.pipe(
     switchMap((activities) => this.enrichActivitiesWithLocation(activities || [])),
   );
+  /** Stream de tipos usado por las cards para colorear/etiquetar. */
+  activityTypes$ = this.activityTypeService.activities$;
   /** Stream de búsqueda por nombre desde la pantalla padre. */
   private readonly searchTerm$ = new BehaviorSubject<string>('');
   /** Stream de consulta geocodificada derivada del buscador. */
@@ -60,38 +68,61 @@ export class ListComponent implements OnInit {
     switchMap((term) => this.resolveSearchQuery(term)),
     shareReplay({ bufferSize: 1, refCount: true }),
   );
-  /** Stream final de actividades filtradas por nombre, ubicación resuelta y radio/bbox. */
-  filteredActivities$ = combineLatest([this.activitiesWithLocation$, this.searchQuery$]).pipe(
-    map(([activities, query]) => this.filterByTerm(activities || [], query)),
+  /** Stream final de actividades filtradas por búsqueda y panel de filtros. */
+  filteredActivities$ = combineLatest([
+    this.activitiesWithLocation$,
+    this.searchQuery$,
+    this.filterState$,
+    this.activityTypes$,
+  ]).pipe(
+    map(([activities, query, filterState, activityTypes]) =>
+      this.filterByTerm(activities || [], query, filterState, activityTypes || []),
+    ),
   );
-  /** Stream de tipos usado por las cards para colorear/etiquetar. */
-  activityTypes$!: Observable<ActivityType[]>; 
 
   /** Término de búsqueda externo para filtrar por nombre de actividad. */
   @Input() set searchTerm(value: string) {
     this.searchTerm$.next((value || '').trim());
   }
 
+  /** Estado del panel de filtros (tipo, ubicación y rating). */
+  @Input() set filterState(value: ActivityListFilterState | null) {
+    this.filterState$.next({
+      activityType: value?.activityType ?? null,
+      location: value?.location ?? null,
+      ratingMin: value?.ratingMin ?? 0,
+    });
+  }
+
   /** Dispara cargas iniciales necesarias para el listado. */
   ngOnInit(): void {
     this.activityService.getActivities();
-    this.activityTypes$ = this.activityTypeService.getActivitiesType();
+    this.activityTypeService.getActivitiesType();
   }
 
-  private filterByTerm(activities: ActivitySearchItem[], query: SearchQueryState): Activity[] {
-    const normalizedTerm = query.normalizedTerm;
-    if (!normalizedTerm) {
-      return activities;
-    }
-
+  private filterByTerm(
+    activities: ActivitySearchItem[],
+    query: SearchQueryState,
+    filterState: ActivityListFilterState,
+    activityTypes: ActivityType[],
+  ): Activity[] {
     return activities.filter((activity) => {
-      const searchableText = this.getSearchableText(activity);
-      const textMatch = searchableText.includes(normalizedTerm);
+      const normalizedTerm = query.normalizedTerm;
+      const textMatch = normalizedTerm
+        ? this.getSearchableText(activity).includes(normalizedTerm)
+        : true;
       const geoMatch = query.geoLocation
         ? this.matchesGeoFilter(activity, query.geoLocation)
-        : false;
+        : true;
+      const typeMatch = this.matchesActivityTypeFilter(
+        activity,
+        filterState.activityType,
+        activityTypes,
+      );
+      const locationMatch = this.matchesLocationFilter(activity, filterState.location);
+      const ratingMatch = this.matchesRatingFilter(activity, filterState.ratingMin);
 
-      return textMatch || geoMatch;
+      return (textMatch || geoMatch) && typeMatch && locationMatch && ratingMatch;
     });
   }
 
@@ -115,6 +146,91 @@ export class ListComponent implements OnInit {
       .filter((field): field is string => typeof field === 'string')
       .map((field) => this.normalizeSearchText(field))
       .join(' ');
+  }
+
+  private getLocationSearchText(activity: ActivitySearchItem): string {
+    const value = activity as unknown as Record<string, unknown>;
+    const fields = [
+      value['location'],
+      value['locationText'],
+      value['address'],
+      value['city'],
+      value['region'],
+      value['place'],
+      value['fullAddress'],
+      activity.resolvedLocation,
+    ];
+
+    return fields
+      .filter((field): field is string => typeof field === 'string')
+      .map((field) => this.normalizeSearchText(field))
+      .join(' ');
+  }
+
+  private matchesLocationFilter(
+    activity: ActivitySearchItem,
+    location: string | null,
+  ): boolean {
+    const normalizedLocation = this.normalizeSearchText(location || '');
+    if (!normalizedLocation) {
+      return true;
+    }
+
+    return this.getLocationSearchText(activity).includes(normalizedLocation);
+  }
+
+  private matchesActivityTypeFilter(
+    activity: ActivitySearchItem,
+    selectedType: string | null,
+    activityTypes: ActivityType[],
+  ): boolean {
+    const normalizedSelectedType = this.normalizeSearchText(selectedType || '');
+    if (!normalizedSelectedType) {
+      return true;
+    }
+
+    const activityTypeKey = this.normalizeSearchText(
+      this.pickStringField(activity as unknown as Record<string, unknown>, [
+        'activityTypeId',
+        'IdTypeActivity',
+        'typeId',
+        'activityType',
+        'type',
+        'activityTypeName',
+      ]),
+    );
+
+    if (!activityTypeKey) {
+      return false;
+    }
+
+    const catalogMatch = activityTypes.find((activityType) => {
+      const normalizedId = this.normalizeSearchText(activityType.id);
+      const normalizedName = this.normalizeSearchText(activityType.name);
+      return normalizedId === normalizedSelectedType || normalizedName === normalizedSelectedType;
+    });
+
+    if (catalogMatch) {
+      const normalizedCatalogId = this.normalizeSearchText(catalogMatch.id);
+      const normalizedCatalogName = this.normalizeSearchText(catalogMatch.name);
+      return (
+        activityTypeKey === normalizedCatalogId ||
+        activityTypeKey === normalizedCatalogName
+      );
+    }
+
+    return activityTypeKey === normalizedSelectedType;
+  }
+
+  private matchesRatingFilter(
+    activity: ActivitySearchItem,
+    ratingMin: number,
+  ): boolean {
+    if (!ratingMin || ratingMin <= 0) {
+      return true;
+    }
+
+    return (activity.rating ?? 0) >= ratingMin;
   }
 
   private enrichActivitiesWithLocation(
@@ -190,7 +306,6 @@ export class ListComponent implements OnInit {
     return this.mapsService.geocodeLocation(term).pipe(
       map((geoLocation) => {
         this.searchGeoCache.set(normalizedTerm, geoLocation);
-
         return {
           normalizedTerm,
           geoLocation,

@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable, combineLatest, debounceTime, distinctUntil
 import { Plan } from '../../models/plan.model';
 import { GeocodedLocation, MapsService } from '../../../core/services/maps.service';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
+import { ActivityFilterState as PlanFilterState } from '../filter-plans/filter-plans.component';
 
 interface ActivitySearchItem extends Activity {
   resolvedLocation: string;
@@ -45,6 +46,11 @@ export class ListPlansComponent implements OnInit {
   private readonly locationCache = new Map<string, string>();
   /** Caché de geocodificación de términos de búsqueda. */
   private readonly searchGeoCache = new Map<string, GeocodedLocation | null>();
+  /** Estado reactivo del panel de filtros de planes. */
+  private readonly filterState$ = new BehaviorSubject<PlanFilterState>({
+    activity: null,
+    ratingMin: 0,
+  });
 
   /** Stream de planes para renderizar el listado. */
   plans$ = this.planService.plans$;
@@ -69,6 +75,14 @@ export class ListPlansComponent implements OnInit {
     this.searchTerm$.next((value || '').trim());
   }
 
+  /** Estado del panel de filtros (actividad y rating). */
+  @Input() set filterState(value: PlanFilterState | null) {
+    this.filterState$.next({
+      activity: value?.activity ?? null,
+      ratingMin: value?.ratingMin ?? 0,
+    });
+  }
+
   /** Dispara listeners/cargas necesarias para poblar streams. */
   ngOnInit(): void {
     this.planService.getPlans();
@@ -80,9 +94,10 @@ export class ListPlansComponent implements OnInit {
       this.plans$,
       this.activitiesWithLocation$,
       this.searchQuery$,
+      this.filterState$,
     ]).pipe(
-      map(([plans, activities, query]) =>
-        this.filterByTerm(plans || [], activities || [], query),
+      map(([plans, activities, query, filterState]) =>
+        this.filterByTerm(plans || [], activities || [], query, filterState),
       ),
     );
   }
@@ -91,12 +106,8 @@ export class ListPlansComponent implements OnInit {
     plans: Plan[],
     activities: ActivitySearchItem[],
     query: SearchQueryState,
+    filterState: PlanFilterState,
   ): Plan[] {
-    const normalizedTerm = query.normalizedTerm;
-    if (!normalizedTerm) {
-      return plans;
-    }
-
     const activitiesById = new Map(
       activities
         .filter((activity) => !!activity?.id)
@@ -104,13 +115,20 @@ export class ListPlansComponent implements OnInit {
     );
 
     return plans.filter((plan) => {
+      const normalizedTerm = query.normalizedTerm;
       const searchableText = this.getSearchableText(plan, activitiesById);
-      const textMatch = searchableText.includes(normalizedTerm);
+      const textMatch = normalizedTerm ? searchableText.includes(normalizedTerm) : true;
       const geoMatch = query.geoLocation
         ? this.matchesPlanGeoFilter(plan, activitiesById, query.geoLocation)
-        : false;
+        : true;
+      const activityMatch = this.matchesPlanActivityFilter(
+        plan,
+        activitiesById,
+        filterState.activity,
+      );
+      const ratingMatch = this.matchesPlanRatingFilter(plan, filterState.ratingMin);
 
-      return textMatch || geoMatch;
+      return (textMatch || geoMatch) && activityMatch && ratingMatch;
     });
   }
 
@@ -194,6 +212,42 @@ export class ListPlansComponent implements OnInit {
       }
       return this.matchesGeoFilter(activity, geoLocation);
     });
+  }
+
+  private matchesPlanActivityFilter(
+    plan: Plan,
+    activitiesById: Map<string, ActivitySearchItem>,
+    selectedActivity: string | null,
+  ): boolean {
+    const normalizedSelectedActivity = this.normalizeSearchText(selectedActivity || '');
+    if (!normalizedSelectedActivity) {
+      return true;
+    }
+
+    const value = plan as unknown as Record<string, unknown>;
+    const activityIds = this.getStringArrayField(value, ['activitiesIds']);
+
+    return activityIds.some((activityId) => {
+      const activity = activitiesById.get(activityId);
+      if (!activity) {
+        return false;
+      }
+
+      const activityName = this.normalizeSearchText(activity.name);
+      const activityIdNormalized = this.normalizeSearchText(activity.id);
+      return (
+        activityName === normalizedSelectedActivity ||
+        activityIdNormalized === normalizedSelectedActivity
+      );
+    });
+  }
+
+  private matchesPlanRatingFilter(plan: Plan, ratingMin: number): boolean {
+    if (!ratingMin || ratingMin <= 0) {
+      return true;
+    }
+
+    return (plan.rating ?? 0) >= ratingMin;
   }
 
   private matchesGeoFilter(
@@ -289,7 +343,7 @@ export class ListPlansComponent implements OnInit {
   }
 
   private resolveActivityLocation(activity: Activity): Observable<string> {
-    const value = activity as Activity & Record<string, unknown>;
+    const value = activity as unknown as Record<string, unknown>;
     const explicitLocation = this.pickStringField(value, [
       'location',
       'locationText',

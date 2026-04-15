@@ -57,7 +57,7 @@
   <div class="hidden xl:block"></div>
 
   <section class="p-2.5 xl:p-6 xl:px-8 w-full">
-    <app-list-plans [searchTerm]="searchTerm"></app-list-plans>
+    <app-list-plans [searchTerm]="searchTerm" [filterState]="planFilters"></app-list-plans>
   </section>
 
   <div
@@ -87,7 +87,7 @@
       </button>
     </div>
     <div class="xl:px-4 xl:py-2">
-      <app-filter-plans></app-filter-plans>
+      <app-filter-plans (filterChanged)="onFilterChanged($event)"></app-filter-plans>
     </div>
   </div>
 </section>
