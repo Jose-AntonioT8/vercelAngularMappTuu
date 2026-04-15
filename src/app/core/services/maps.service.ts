@@ -2,8 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
 import { environment } from '../../../app/environment/environment';
-@Injectable({ providedIn: 'root' })
+export interface GeocodedLocation {
+  formattedAddress: string;
+  latitude: number;
+  longitude: number;
+  viewport?: {
+    northeast: { lat: number; lng: number };
+    southwest: { lat: number; lng: number };
+  };
+}
 
+
+@Injectable({ providedIn: 'root' })
 /**
  * Servicio de utilidades de mapas/geocodificación.
  *
@@ -14,6 +24,26 @@ import { environment } from '../../../app/environment/environment';
 export class MapsService{
     /** Cliente HTTP usado para consultar el proveedor de geocodificación. */
     constructor(private http: HttpClient) {}
+
+    /** Geocodifica un texto de ubicación en coordenadas y viewport. */
+    geocodeLocation(query: string): Observable<GeocodedLocation | null> {
+        const normalizedQuery = query.trim();
+        const googleApiKey = environment.maps.apiKey?.trim();
+
+        if (!normalizedQuery || !googleApiKey) {
+          return of(null);
+        }
+
+        return this.http
+          .get<any>(this.buildGoogleGeocodeUrl(normalizedQuery, googleApiKey))
+          .pipe(
+            map((response) => this.pickBestGeocodedLocation(response)),
+            catchError((error) => {
+              console.warn('[Maps] Google forward geocoding failed:', error);
+              return of(null);
+            }),
+          );
+      }
 
     /** Obtiene una ubicación legible desde latitude/longitude. */
     getAddress(lat: number, lon: number): Observable<string> {
@@ -41,6 +71,11 @@ export class MapsService{
      */
     buildGoogleReverseGeocodeUrl(lat: number, lon: number, apiKey: string): string {
       return `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&language=es&key=${encodeURIComponent(apiKey)}`;
+    }
+
+    /** Construye URL de geocoding directo para una ubicación textual. */
+    buildGoogleGeocodeUrl(query: string, apiKey: string): string {
+      return `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(query)}&language=es&key=${encodeURIComponent(apiKey)}`;
     }
 
     pickBestLocality(response: any): string {
@@ -99,6 +134,53 @@ export class MapsService{
       }
 
       return result.formatted_address || 'Ubicación desconocida';
+    }
+
+    /** Convierte una respuesta de geocoding directo a coordenadas + viewport. */
+    pickBestGeocodedLocation(response: any): GeocodedLocation | null {
+      const result = response?.results?.[0];
+      if (!result || (response?.status && response.status !== 'OK')) {
+        return null;
+      }
+
+      const lat = result?.geometry?.location?.lat;
+      const lng = result?.geometry?.location?.lng;
+      if (typeof lat !== 'number' || typeof lng !== 'number') {
+        return null;
+      }
+
+      const viewport = result?.geometry?.viewport;
+      const bounds = result?.geometry?.bounds;
+
+      return {
+        formattedAddress: result.formatted_address || '',
+        latitude: lat,
+        longitude: lng,
+        viewport:
+          viewport && viewport.northeast && viewport.southwest
+            ? {
+                northeast: {
+                  lat: viewport.northeast.lat,
+                  lng: viewport.northeast.lng,
+                },
+                southwest: {
+                  lat: viewport.southwest.lat,
+                  lng: viewport.southwest.lng,
+                },
+              }
+            : bounds && bounds.northeast && bounds.southwest
+              ? {
+                  northeast: {
+                    lat: bounds.northeast.lat,
+                    lng: bounds.northeast.lng,
+                  },
+                  southwest: {
+                    lat: bounds.southwest.lat,
+                    lng: bounds.southwest.lng,
+                  },
+                }
+              : undefined,
+      };
     }
 
     /** Redondea coordenadas para evitar consultas inválidas o demasiado precisas. */
