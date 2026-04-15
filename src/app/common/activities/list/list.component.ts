@@ -58,9 +58,29 @@ export class ListComponent implements OnInit {
     }
 
     return activities.filter((activity) => {
-      const name = (activity?.name || '').toString().toLowerCase();
-      const title = ((activity as any)?.title || '').toString().toLowerCase();
-      return name.includes(normalizedTerm) || title.includes(normalizedTerm);
+      const searchableText = this.getSearchableText(activity);
+      return searchableText.includes(normalizedTerm);
     });
+  }
+
+  private getSearchableText(activity: Activity): string {
+    const value = activity as Activity & Record<string, unknown>;
+    const fields = [
+      value.name,
+      value['title'],
+      value['location'],
+      value['locationText'],
+      value['address'],
+      value['city'],
+      value['region'],
+      value['place'],
+      value['fullAddress'],
+      value['description'],
+    ];
+
+    return fields
+      .filter((field): field is string => typeof field === 'string')
+      .map((field) => field.toLowerCase())
+      .join(' ');
   }
 }

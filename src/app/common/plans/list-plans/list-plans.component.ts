@@ -59,9 +59,28 @@ export class ListPlansComponent implements OnInit {
     }
 
     return plans.filter((plan) => {
-      const name = (plan?.name || '').toString().toLowerCase();
-      const title = ((plan as any)?.title || '').toString().toLowerCase();
-      return name.includes(normalizedTerm) || title.includes(normalizedTerm);
+      const searchableText = this.getSearchableText(plan);
+      return searchableText.includes(normalizedTerm);
     });
+  }
+
+  private getSearchableText(plan: Plan): string {
+    const value = plan as Plan & Record<string, unknown>;
+    const fields = [
+      value.name,
+      value['title'],
+      value['description'],
+      value['location'],
+      value['locationText'],
+      value['address'],
+      value['city'],
+      value['region'],
+      value['place'],
+    ];
+
+    return fields
+      .filter((field): field is string => typeof field === 'string')
+      .map((field) => field.toLowerCase())
+      .join(' ');
   }
 }
