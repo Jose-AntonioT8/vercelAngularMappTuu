@@ -89,6 +89,11 @@ constructor( private ActivityTypeService: ActivityTypeService,
         this.filterChanged.emit(filterState);
     }
 
+    /** Ejecuta la búsqueda de ubicación con el texto actual. */
+    searchByLocation() {
+      this.emitCurrentFilterState();
+    }
+
     /** Limpia todos los filtros al estado inicial y re-emite. */
     resetFilters() {
         this.activityType = null;

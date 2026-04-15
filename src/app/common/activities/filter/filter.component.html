@@ -23,12 +23,28 @@
 
   <div class="mb-6">
     <h3 class="text-base font-bold mb-2.5">{{ 'activities.filterLocationLabel' | translate }}</h3>
-    <input type="text" 
-           [(ngModel)]="location" 
-           name="locationInput" 
-           (blur)="emitCurrentFilterState()" 
-           [placeholder]="'activities.filterLocationPlaceholder' | translate" 
-           class="w-full p-2.5 rounded-xl border border-gray-300 transition-all duration-200 focus:border-blue-500 focus:outline-none">
+    <div class="flex items-stretch gap-2">
+      <div class="relative flex-1">
+        <input
+          type="text"
+          [(ngModel)]="location"
+          name="locationInput"
+          (keydown.enter)="searchByLocation()"
+          [placeholder]="'activities.filterLocationPlaceholder' | translate"
+          class="w-full p-2.5 pr-11 rounded-xl border border-gray-300 transition-all duration-200 focus:border-blue-500 focus:outline-none"
+        >
+        <button
+          type="button"
+          (click)="searchByLocation()"
+          class="absolute right-2 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-8 h-8 rounded-lg bg-[#5675AC] text-white hover:bg-[#4a6399] transition-colors"
+          [attr.aria-label]="'activities.filterLocationLabel' | translate"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m1.85-5.4A7.2 7.2 0 1112 4.8a7.2 7.2 0 016.5 6.45z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
   </div>
   
   <div class="mb-6">
