@@ -1,34 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, map } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { environment } from '../../../app/environment/environment';
 @Injectable({ providedIn: 'root' })
 
 /**
  * Servicio de utilidades de mapas/geocodificación.
  *
- * Actualmente implementa reverse geocoding para convertir lat/lng en una
- * cadena legible de ubicación usando BigDataCloud.
+ * Implementa reverse geocoding con Google Maps API para convertir lat/lng
+ * en una cadena legible. Si no hay API key o falla la consulta, devuelve
+ * un fallback silencioso para no romper la UI.
  */
 export class MapsService{
-    /**
-     * Cliente HTTP usado para consultar el proveedor de geocodificación.
-     *
-     * Inicializa el servicio con el `HttpClient` de Angular.
-     *
-     * @param http HttpClient Angular
-     */
+    /** Cliente HTTP usado para consultar el proveedor de geocodificación. */
     constructor(private http: HttpClient) {}
-    
-    /**
-     * Obtiene una descripción de ubicación aproximada para unas coordenadas.
-     *
-     * Nota: usa BigDataCloud reverse-geocode-client y devuelve un fallback si no hay datos.
-     *
-     * @param lat Latitud
-     * @param lon Longitud
-     * @returns Observable que emite la mejor cadena de ubicación encontrada.
-     */
+
+    /** Obtiene una ubicación legible desde latitude/longitude. */
     getAddress(lat: number, lon: number): Observable<string> {
         const normalizedLat = this.normalizeCoordinate(lat);
         const normalizedLon = this.normalizeCoordinate(lon);
@@ -39,23 +26,14 @@ export class MapsService{
             .get<any>(this.buildGoogleReverseGeocodeUrl(normalizedLat, normalizedLon, googleApiKey))
             .pipe(
               map((response) => this.pickBestLocalityFromGoogle(response)),
-              catchError(() =>
-                this.http
-                  .get<any>(this.buildReverseGeocodeUrl(normalizedLat, normalizedLon))
-                  .pipe(
-                    map((response) => this.pickBestLocality(response)),
-                    catchError(() => [this.fallbackLocation()]),
-                  ),
-              ),
+              catchError((error) => {
+                console.warn('[Maps] Google reverse geocoding failed:', error);
+                return of(this.fallbackLocation());
+              }),
             );
         }
 
-        return this.http
-          .get<any>(this.buildReverseGeocodeUrl(normalizedLat, normalizedLon))
-          .pipe(
-            map((response) => this.pickBestLocality(response)),
-            catchError(() => [this.fallbackLocation()]),
-          );
+        return of(this.fallbackLocation());
       }
 
     /**
@@ -65,23 +43,6 @@ export class MapsService{
       return `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&language=es&key=${encodeURIComponent(apiKey)}`;
     }
 
-    /**
-     * Construye la URL del proveedor de reverse geocoding.
-     *
-     * @param lat Latitud
-     * @param lon Longitud
-     * @param localityLanguage Idioma preferido para la respuesta (por defecto `es`)
-     */
-    buildReverseGeocodeUrl(lat: number, lon: number, localityLanguage: string = 'es'): string {
-      return `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=${encodeURIComponent(localityLanguage)}`;
-    }
-
-    /**
-     * Selecciona el mejor campo de localidad disponible de la respuesta del proveedor.
-     *
-     * @param response Respuesta JSON de BigDataCloud
-     * @returns Una cadena legible (fallback: "Ubicación desconocida")
-     */
     pickBestLocality(response: any): string {
       if (response?.status && response.status !== 'OK' && response.status !== 'SUCCESS') {
         return 'Ubicación desconocida';

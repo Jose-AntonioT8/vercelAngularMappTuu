@@ -150,7 +150,7 @@ export class IaAssistantService {
   /** Límite duro de chars de JSON para evitar prompts gigantes. */
   private readonly maxFirebaseJsonChars = 15000;
   /** Límite de reverse geocoding por pregunta para evitar latencia excesiva. */
-  private readonly maxReverseGeocodingLookups = 12;
+  private readonly maxReverseGeocodingLookups = 10;
 
   /** Regex de “tema permitido” para limitar el dominio del asistente. */
   private readonly allowedTopicPattern =
@@ -748,11 +748,17 @@ export class IaAssistantService {
   }
 
   /**
-   * Enriquecer actividades con ubicación descriptiva a partir de lat/lng.
+   * Enriquece actividades con ubicación descriptiva usando latitude/longitude.
+   * Solo se ejecuta cuando hay API key de mapas configurada.
    */
   private async enrichActivitiesWithLocation(
     activities: Array<Record<string, unknown>>,
   ): Promise<Array<Record<string, unknown>>> {
+    const mapsApiKey = environment.maps.apiKey?.trim();
+    if (!mapsApiKey) {
+      return activities;
+    }
+
     const enriched = [...activities];
     let lookups = 0;
 
@@ -774,7 +780,11 @@ export class IaAssistantService {
       }
 
       const latitude = this.getNumberField(activity, ['latitude', 'lat']);
-      const longitude = this.getNumberField(activity, ['longitude', 'lng', 'lon']);
+      const longitude = this.getNumberField(activity, [
+        'longitude',
+        'lng',
+        'lon',
+      ]);
 
       if (
         typeof latitude !== 'number' ||
@@ -790,12 +800,17 @@ export class IaAssistantService {
           this.mapsService.getAddress(latitude, longitude),
         );
 
-        if (location && typeof location === 'string') {
+        if (
+          typeof location === 'string' &&
+          location.trim() !== '' &&
+          location !== 'Ubicación no disponible' &&
+          location !== 'Ubicación desconocida'
+        ) {
           activity['location'] = location;
           lookups += 1;
         }
-      } catch (error) {
-        console.warn('[IA] No se pudo resolver ubicación por geocoding:', error);
+      } catch {
+        // Silencio: maps.service ya maneja errores y fallback.
       }
     }
 
@@ -876,7 +891,9 @@ export class IaAssistantService {
       ...docSnap.data(),
     }));
 
-    const enrichedActivities = await this.enrichActivitiesWithLocation(activities);
+    const enrichedActivities = await this.enrichActivitiesWithLocation(
+      activities,
+    );
 
     return {
       activity: enrichedActivities,
