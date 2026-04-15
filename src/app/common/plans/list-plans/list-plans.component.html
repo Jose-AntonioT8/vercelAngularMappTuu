@@ -1,4 +1,4 @@
-<ng-container *ngIf="{ list: plans$ | async, types: activity$ | async } as vm">
+<div *ngIf="{ list: filteredPlans$ | async, types: activity$ | async } as vm">
   
     <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
       <app-card-plans
@@ -11,4 +11,4 @@
       <p class="text-gray-600">{{ 'plans.noPlans' | translate }}</p>
     </div>
   
-  </ng-container>
+  </div>

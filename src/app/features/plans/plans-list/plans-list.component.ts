@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../../../common/header/header.component';
 import { FilterPlansComponent } from '../../../common/plans/filter-plans/filter-plans.component';
@@ -17,6 +18,7 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     HeaderComponent,
     FilterPlansComponent,
     ListPlansComponent,
@@ -27,6 +29,8 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 })
 export class PlansListComponent {
   constructor(private route: Router) {}
+  /** Texto de búsqueda para filtrar planes por nombre. */
+  searchTerm = '';
   /** Estado del panel de filtros (principalmente para mobile). */
   isFilterOpen = false;
 

@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { ActivityService } from '../../../core/services/activity.service';
 import { CardComponent } from '../card/card.component';
 import { ActivityTypeService } from '../../../core/services/activitytype.service';
 import { ActivityType } from '../../models/activityType.models';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
+import { Activity } from '../../models/activity.model';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 
 /**
@@ -30,12 +31,36 @@ export class ListComponent implements OnInit {
 
   /** Stream reactivo de actividades para renderizar el listado. */
   activities$ = this.activityService.activities$;
+  /** Stream de búsqueda por nombre desde la pantalla padre. */
+  private readonly searchTerm$ = new BehaviorSubject<string>('');
+  /** Stream final de actividades filtradas por nombre/título. */
+  filteredActivities$ = combineLatest([this.activities$, this.searchTerm$]).pipe(
+    map(([activities, rawTerm]) => this.filterByName(activities || [], rawTerm)),
+  );
   /** Stream de tipos usado por las cards para colorear/etiquetar. */
   activityTypes$!: Observable<ActivityType[]>; 
+
+  /** Término de búsqueda externo para filtrar por nombre de actividad. */
+  @Input() set searchTerm(value: string) {
+    this.searchTerm$.next((value || '').trim());
+  }
 
   /** Dispara cargas iniciales necesarias para el listado. */
   ngOnInit(): void {
     this.activityService.getActivities();
     this.activityTypes$ = this.activityTypeService.getActivitiesType();
+  }
+
+  private filterByName(activities: Activity[], term: string): Activity[] {
+    const normalizedTerm = term.trim().toLowerCase();
+    if (!normalizedTerm) {
+      return activities;
+    }
+
+    return activities.filter((activity) => {
+      const name = (activity?.name || '').toString().toLowerCase();
+      const title = ((activity as any)?.title || '').toString().toLowerCase();
+      return name.includes(normalizedTerm) || title.includes(normalizedTerm);
+    });
   }
 }

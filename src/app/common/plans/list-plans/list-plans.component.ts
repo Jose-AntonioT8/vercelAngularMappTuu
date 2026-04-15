@@ -1,11 +1,12 @@
 
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { PlanService } from '../../../core/services/plan.service';
 import { CardPlansComponent } from '../card-plans/card-plans.component';
 import { ActivityService } from '../../../core/services/activity.service';
 import { Activity } from '../../models/activity.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
+import { Plan } from '../../models/plan.model';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 
 /**
@@ -31,12 +32,36 @@ export class ListPlansComponent implements OnInit {
 
   /** Stream de planes para renderizar el listado. */
   plans$ = this.planService.plans$;
+  /** Stream de búsqueda por nombre desde la pantalla padre. */
+  private readonly searchTerm$ = new BehaviorSubject<string>('');
+  /** Stream final de planes filtrados por nombre/título. */
+  filteredPlans$ = combineLatest([this.plans$, this.searchTerm$]).pipe(
+    map(([plans, rawTerm]) => this.filterByName(plans || [], rawTerm)),
+  );
   /** Stream de actividades para enriquecer cards (si aplica). */
   activity$!: Observable<Activity[]>; 
+
+  /** Término de búsqueda externo para filtrar por nombre de plan. */
+  @Input() set searchTerm(value: string) {
+    this.searchTerm$.next((value || '').trim());
+  }
 
   /** Dispara listeners/cargas necesarias para poblar streams. */
   ngOnInit(): void {
     this.planService.getPlans();
     this.activity$ = this.activityService.getActivities();
+  }
+
+  private filterByName(plans: Plan[], term: string): Plan[] {
+    const normalizedTerm = term.trim().toLowerCase();
+    if (!normalizedTerm) {
+      return plans;
+    }
+
+    return plans.filter((plan) => {
+      const name = (plan?.name || '').toString().toLowerCase();
+      const title = ((plan as any)?.title || '').toString().toLowerCase();
+      return name.includes(normalizedTerm) || title.includes(normalizedTerm);
+    });
   }
 }

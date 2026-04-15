@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FilterComponent } from '../../../common/activities/filter/filter.component';
 import { ListComponent } from '../../../common/activities/list/list.component';
@@ -19,6 +20,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     HeaderComponent,
     FilterComponent,
     ListComponent,
@@ -30,6 +32,8 @@ import { RouterModule } from '@angular/router';
 })
 export class ListActivitiesComponent {
   constructor(private route: Router) {}
+  /** Texto de búsqueda para filtrar actividades por nombre. */
+  searchTerm = '';
   /** Estado del panel de filtros (mobile). */
   isFilterOpen = false;
 

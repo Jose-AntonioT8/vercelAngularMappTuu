@@ -1,4 +1,4 @@
-<ng-container *ngIf="{ list: activities$ | async, types: activityTypes$ | async } as vm">
+<div *ngIf="{ list: filteredActivities$ | async, types: activityTypes$ | async } as vm">
   
     <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
       <app-card 
@@ -11,4 +11,4 @@
       <p class="text-gray-600">{{ 'activities.noActivities' | translate }}</p>
     </div>
   
-  </ng-container>
+  </div>
