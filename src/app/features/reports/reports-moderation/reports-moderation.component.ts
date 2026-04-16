@@ -145,7 +145,10 @@ export class ReportsModerationComponent implements OnInit {
     this.activeMenuReportId = null;
   }
 
-  handleDeleteReport(report: ActivityReport, event?: MouseEvent): void {
+  async handleDeleteReport(
+    report: ActivityReport,
+    event?: MouseEvent
+  ): Promise<void> {
     event?.stopPropagation();
 
     if (this.getDisplayStatus(report) === 'pending') {
@@ -156,8 +159,32 @@ export class ReportsModerationComponent implements OnInit {
     this.error = '';
     this.closeReportMenu();
 
-    this.reportService.deleteReport(report.id, this.authService.currentUser?.getIdToken() ?? '')
-}
+    try {
+      const user =
+        this.authService.currentUser ?? this.authService.firebaseCurrentUser;
+      if (!user) {
+        this.error = this.translation.instant(
+          'reports.moderation.errors.notAuthenticated'
+        );
+        return;
+      }
+
+      const token = await user.getIdToken();
+      this.reportService.deleteReport(report.id, token).subscribe({
+        next: () => this.loadReports(),
+        error: (error) => {
+          this.error = this.httpErrorMessage(
+            error,
+            this.translation.instant('reports.moderation.errors.actionFailed')
+          );
+        },
+      });
+    } catch {
+      this.error = this.translation.instant(
+        'reports.moderation.errors.sessionFailed'
+      );
+    }
+  }
 
   async confirmResolveChoice(
     action: 'dismiss' | 'delete_activity' | 'resolve'

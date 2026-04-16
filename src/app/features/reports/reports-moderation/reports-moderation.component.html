@@ -65,7 +65,7 @@
       class="report-card relative bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden p-4 flex flex-col sm:flex-row gap-4"
       (click)="closeReportMenu()"
     >
-      <div class="absolute top-3 left-3 z-20">
+      <div class="absolute top-3 right-3 z-20">
         <button
           type="button"
           class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 shadow-sm hover:bg-gray-50 hover:text-gray-900"
@@ -78,7 +78,7 @@
 
         <div
           *ngIf="activeMenuReportId === report.id"
-          class="absolute left-0 mt-2 w-44 rounded-xl border border-gray-200 bg-white shadow-xl overflow-hidden"
+          class="absolute right-0 mt-2 w-44 rounded-xl border border-gray-200 bg-white shadow-xl overflow-hidden"
           (click)="$event.stopPropagation()"
         >
           <button
