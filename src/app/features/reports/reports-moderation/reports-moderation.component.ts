@@ -238,7 +238,9 @@ export class ReportsModerationComponent implements OnInit {
   private httpErrorMessage(error: unknown, fallback: string): string {
     if (error instanceof HttpErrorResponse) {
       const body = error.error;
-      if (typeof body === 'string' && body.trim()) return body;
+      if (typeof body === 'string' && body.trim()) {
+        return this.normalizeHttpErrorString(body, fallback);
+      }
       if (body && typeof body === 'object') {
         const msg = (body as Record<string, unknown>)['message'];
         if (typeof msg === 'string') return msg;
@@ -246,6 +248,27 @@ export class ReportsModerationComponent implements OnInit {
       if (error.status) return `${fallback} (HTTP ${error.status})`;
     }
     return fallback;
+  }
+
+  private normalizeHttpErrorString(raw: string, fallback: string): string {
+    const text = raw.replace(/\s+/g, ' ').trim();
+
+    if (text.includes('<') && text.includes('>')) {
+      const preMatch = text.match(/<pre>(.*?)<\/pre>/i);
+      const htmlExtract = preMatch?.[1]?.trim();
+      if (htmlExtract) {
+        if (/Cannot\s+DELETE/i.test(htmlExtract)) {
+          return 'No se pudo borrar el reporte por una ruta invalida del servidor. Intenta de nuevo.';
+        }
+        return htmlExtract;
+      }
+    }
+
+    if (/Cannot\s+DELETE/i.test(text)) {
+      return 'No se pudo borrar el reporte por una ruta invalida del servidor. Intenta de nuevo.';
+    }
+
+    return text || fallback;
   }
 
   getDisplayStatus(
