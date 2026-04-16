@@ -37,6 +37,12 @@ export class ReportingService {
       .pipe(timeout(15000));
   }
 
+  deleteReport(id: string, token: any): Observable<any> {
+    return this.http.delete(`${this.reportsUrl}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+
   getAdminReports(
     token: string,
     filters: ReportQueryFilters = {}

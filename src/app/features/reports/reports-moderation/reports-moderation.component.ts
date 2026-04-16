@@ -8,6 +8,7 @@ import {
   ActivityReport,
   ReportReason,
   ReportStatus,
+  
 } from '../../../common/models/reporting.types';
 import { AuthService } from '../../../core/services/auth.service';
 import { ReportingService } from '../../../core/services/reporting.service';
@@ -32,10 +33,13 @@ export class ReportsModerationComponent implements OnInit {
   private reportService = inject(ReportingService);
   private translation = inject(TranslationService);
   private readonly keepActivityResolvedNote = 'resolved_keep_activity';
+  private readonly openReportDeleteError =
+    'Tienes que resolver el reporte antes de eliminarlo';
 
   reports: ActivityReport[] = [];
   loading = false;
   error = '';
+  activeMenuReportId: string | null = null;
 
   statusFilter: 'pending' | 'resolved' | 'deleted' | '' = '';
   reasonFilter: ReportReason | '' = '';
@@ -130,6 +134,30 @@ export class ReportsModerationComponent implements OnInit {
   closeResolveModal(): void {
     this.resolveModalReport = null;
   }
+
+  toggleReportMenu(reportId: string, event?: MouseEvent): void {
+    event?.stopPropagation();
+    this.activeMenuReportId =
+      this.activeMenuReportId === reportId ? null : reportId;
+  }
+
+  closeReportMenu(): void {
+    this.activeMenuReportId = null;
+  }
+
+  handleDeleteReport(report: ActivityReport, event?: MouseEvent): void {
+    event?.stopPropagation();
+
+    if (this.getDisplayStatus(report) === 'pending') {
+      this.error = this.openReportDeleteError;
+      return;
+    }
+
+    this.error = '';
+    this.closeReportMenu();
+
+    this.reportService.deleteReport(report.id, this.authService.currentUser?.getIdToken() ?? '')
+}
 
   async confirmResolveChoice(
     action: 'dismiss' | 'delete_activity' | 'resolve'
