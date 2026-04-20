@@ -369,7 +369,11 @@
     "created": "Creado correctamente",
     "updated": "Actualizado correctamente",
     "loading": "Cargando...",
+    "generatingWithAI": "Generando con IA...",
+    "autocompleteWithAI": "autocompletar con ia",
     "noResults": "No hay resultados",
+    "completeFieldsBeforeDescription": "Escriba el resto de campos antes de generar la descripcion",
+    "descriptionGenerationFailed": "No se pudo generar la descripcion. Intentalo de nuevo.",
     "required": "Este campo es requerido",
     "invalid": "El formato es inválido",
     "tryAgain": "Por favor, inténtalo de nuevo"

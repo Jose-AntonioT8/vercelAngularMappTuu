@@ -372,7 +372,11 @@
     "created": "Erfolgreich erstellt",
     "updated": "Erfolgreich aktualisiert",
     "loading": "Wird geladen...",
+    "generatingWithAI": "Wird mit KI erstellt...",
+    "autocompleteWithAI": "mit ki autovervollständigen",
     "noResults": "Keine Ergebnisse",
+    "completeFieldsBeforeDescription": "Bitte füllen Sie die restlichen Felder aus, bevor Sie die Beschreibung erstellen",
+    "descriptionGenerationFailed": "Die Beschreibung konnte nicht erstellt werden. Bitte versuchen Sie es erneut.",
     "required": "Dieses Feld ist erforderlich",
     "invalid": "Ungültiges Format",
     "tryAgain": "Bitte versuchen Sie es noch einmal"

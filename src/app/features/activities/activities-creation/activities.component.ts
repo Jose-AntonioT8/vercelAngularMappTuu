@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 import { MapPreviewComponent } from '../../../common/maps/map-preview.component';
 import { ActivityType } from '../../../common/models/activityType.models';
@@ -15,6 +16,8 @@ import { ActivityService } from '../../../core/services/activity.service';
 import { ActivityTypeService } from '../../../core/services/activitytype.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { CloudinaryService } from '../../../core/services/firebase-media.service';
+import { IaAssistantService } from '../../../core/services/ia-assistant.service';
+import { TranslationService } from '../../../core/services/translation.service';
 import { UserService } from '../../../core/services/user.service';
 
 /**
@@ -59,6 +62,8 @@ export class ActivitiesCreationComponent {
   imagePreview: string | null = null;
   /** Flag de subida en curso. */
   isUploading = false;
+  /** Flag para evitar generar descripciones en paralelo. */
+  isGeneratingDescription = false;
 
   /** Abre el selector de archivo para subir imagen. */
   triggerFileInput(): void {
@@ -79,7 +84,11 @@ export class ActivitiesCreationComponent {
     /** Servicio de tipos para catálogo. */
     private ActivityTypeService: ActivityTypeService,
     /** Servicio de media (Cloudinary). */
-    private mediaService: CloudinaryService
+    private mediaService: CloudinaryService,
+    /** Servicio IA para autocompletar descripciones. */
+    private iaAssistantService: IaAssistantService,
+    /** Servicio de traducción runtime para mensajes en TS. */
+    private translationService: TranslationService
   ) {
     this.formActivityCreation = this.formSvc.group({
       name: ['', [Validators.required]],
@@ -246,6 +255,81 @@ export class ActivitiesCreationComponent {
     } catch (err) {
       this.error =
         'Error de autenticación. Por favor, inicia sesión nuevamente.';
+    }
+  }
+
+  /**
+   * Genera una descripción con IA usando nombre, categoría, ubicación y precio.
+   * Si ya hay texto en descripción, se usa como base para mejorar el resultado.
+   */
+  async autocompleteDescriptionWithIA(): Promise<void> {
+    if (this.isGeneratingDescription) {
+      return;
+    }
+
+    const name = (this.formActivityCreation.get('name')?.value || '').trim();
+    const activityType = (
+      this.formActivityCreation.get('activityType')?.value || ''
+    ).trim();
+    const latitude = (this.formActivityCreation.get('latitude')?.value || '').trim();
+    const longitude = (
+      this.formActivityCreation.get('longitude')?.value || ''
+    ).trim();
+
+    if (!name || !activityType || !latitude || !longitude) {
+      this.error = this.translationService.get(
+        'messages.completeFieldsBeforeDescription',
+        'Escriba el resto de campos antes de generar la descripcion',
+      );
+      return;
+    }
+
+    const currentDescription = (
+      this.formActivityCreation.get('description')?.value || ''
+    ).trim();
+    const rawPrice = this.formActivityCreation.get('price')?.value;
+    const hasPrice = rawPrice !== null && rawPrice !== '' && !Number.isNaN(Number(rawPrice));
+    const freeText = this.translationService.get('activities.free', 'Gratis');
+    const priceText = hasPrice ? `${Number(rawPrice)} EUR` : freeText;
+
+    const prompt = [
+      'Necesito que redactes una descripcion para una actividad en MappTuu.',
+      `Nombre: ${name}`,
+      `Categoria: ${activityType}`,
+      `Ubicacion (coordenadas): ${latitude}, ${longitude}`,
+      `Precio: ${priceText}`,
+      currentDescription
+        ? `Texto escrito por el usuario para tener en cuenta: ${currentDescription}`
+        : 'No hay descripcion previa escrita por el usuario.',
+      'Genera una descripcion natural, atractiva y clara en 3-5 frases. Si el precio no existe, menciona que es gratis.',
+      'No uses listas ni encabezados.',
+    ].join('\n');
+
+    this.error = '';
+    this.isGeneratingDescription = true;
+
+    try {
+      const generatedDescription = await firstValueFrom(
+        this.iaAssistantService.ask(prompt),
+      );
+
+      if (generatedDescription && generatedDescription.trim()) {
+        this.formActivityCreation.patchValue({
+          description: generatedDescription.trim(),
+        });
+      } else {
+        this.error = this.translationService.get(
+          'messages.descriptionGenerationFailed',
+          'No se pudo generar la descripcion. Intentalo de nuevo.',
+        );
+      }
+    } catch (error) {
+      this.error = this.translationService.get(
+        'messages.descriptionGenerationFailed',
+        'No se pudo generar la descripcion. Intentalo de nuevo.',
+      );
+    } finally {
+      this.isGeneratingDescription = false;
     }
   }
 }

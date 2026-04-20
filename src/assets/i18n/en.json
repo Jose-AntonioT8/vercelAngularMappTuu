@@ -372,7 +372,11 @@
     "created": "Created successfully",
     "updated": "Updated successfully",
     "loading": "Loading...",
+    "generatingWithAI": "Generating with AI...",
+    "autocompleteWithAI": "autocomplete with ai",
     "noResults": "No results",
+    "completeFieldsBeforeDescription": "Fill in the remaining fields before generating the description",
+    "descriptionGenerationFailed": "The description could not be generated. Please try again.",
     "required": "This field is required",
     "invalid": "Invalid format",
     "tryAgain": "Please, try again"

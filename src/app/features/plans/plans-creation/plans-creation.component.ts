@@ -2,13 +2,18 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 import { Activity } from '../../../common/models/activity.model';
+import { ActivityType } from '../../../common/models/activityType.models';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
+import { ActivityTypeService } from '../../../core/services/activitytype.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { CloudinaryService } from '../../../core/services/firebase-media.service';
+import { IaAssistantService } from '../../../core/services/ia-assistant.service';
 import { PlanService } from '../../../core/services/plan.service';
+import { TranslationService } from '../../../core/services/translation.service';
 import { UserService } from '../../../core/services/user.service';
 /**
  * Pantalla para crear un plan.
@@ -52,6 +57,10 @@ export class PlansCreationComponent implements OnInit {
   imagePreview: string | null = null;
   /** Estado de subida (para deshabilitar UI/mostrar spinner). */
   isUploading = false;
+  /** Catálogo de tipos de actividad para inferir categorías del plan. */
+  activityTypes: ActivityType[] = [];
+  /** Flag para evitar generar descripciones en paralelo. */
+  isGeneratingDescription = false;
 
   constructor(
     private userService: UserService,
@@ -60,7 +69,10 @@ export class PlansCreationComponent implements OnInit {
     private auth: AuthService,
     private planService: PlanService,
     private activityService: ActivityService,
-    private mediaService: CloudinaryService
+    private mediaService: CloudinaryService,
+    private activityTypeService: ActivityTypeService,
+    private iaAssistantService: IaAssistantService,
+    private translationService: TranslationService
   ) {
     // Inicialización del FormGroup en el constructor
     this.formPlanCreation = this.formSvc.group({
@@ -84,6 +96,10 @@ export class PlansCreationComponent implements OnInit {
         console.error('Error cargando actividades', err);
       }
     );
+
+    this.activityTypeService.getActivitiesType().subscribe((res: ActivityType[]) => {
+      this.activityTypes = res;
+    });
   }
 
   /** Abre el selector de archivo nativo. */
@@ -315,5 +331,107 @@ export class PlansCreationComponent implements OnInit {
         return '';
     }
     return '';
+  }
+
+  /**
+   * Genera una descripción de plan con IA tomando nombre, actividades,
+   * categorías, ubicaciones y precio estimado (gratis si no hay precio).
+   */
+  async autocompleteDescriptionWithIA(): Promise<void> {
+    if (this.isGeneratingDescription) {
+      return;
+    }
+
+    const planName = (this.formPlanCreation.get('name')?.value || '').trim();
+    const selectedActivityNames: string[] =
+      this.formPlanCreation.get('activitiesIds')?.value || [];
+    const selectedActivities = this.activities.filter((activity: Activity) =>
+      selectedActivityNames.includes(activity.name),
+    );
+
+    const activityTypeMap = new Map(
+      this.activityTypes.map((type) => [type.id, type.name]),
+    );
+
+    const categories = Array.from(
+      new Set(
+        selectedActivities
+          .map((activity) => activityTypeMap.get(activity.IdTypeActivity) || '')
+          .filter(Boolean),
+      ),
+    );
+
+    const locations = Array.from(
+      new Set(
+        selectedActivities
+          .map((activity) => {
+            const lat = (activity.latitude || '').trim();
+            const lng = (activity.longitude || '').trim();
+            return lat && lng ? `${lat}, ${lng}` : '';
+          })
+          .filter(Boolean),
+      ),
+    );
+
+    if (!planName || categories.length === 0 || locations.length === 0) {
+      this.error = this.translationService.get(
+        'messages.completeFieldsBeforeDescription',
+        'Escriba el resto de campos antes de generar la descripcion',
+      );
+      return;
+    }
+
+    const currentDescription = (
+      this.formPlanCreation.get('description')?.value || ''
+    ).trim();
+
+    const totalPrice = selectedActivities.reduce((sum, activity) => {
+      const value = Number((activity as any).price ?? 0);
+      return Number.isNaN(value) ? sum : sum + value;
+    }, 0);
+
+    const freeText = this.translationService.get('activities.free', 'Gratis');
+    const priceText = totalPrice > 0 ? `${totalPrice.toFixed(2)} EUR` : freeText;
+
+    const prompt = [
+      'Necesito que redactes una descripcion para un plan en MappTuu.',
+      `Nombre del plan: ${planName}`,
+      `Actividades incluidas: ${selectedActivityNames.join(', ') || 'No especificadas'}`,
+      `Categorias del plan: ${categories.join(', ')}`,
+      `Ubicaciones de referencia (coordenadas): ${locations.join(' | ')}`,
+      `Precio estimado del plan: ${priceText}`,
+      currentDescription
+        ? `Texto escrito por el usuario para tener en cuenta: ${currentDescription}`
+        : 'No hay descripcion previa escrita por el usuario.',
+      'Genera una descripcion natural, atractiva y clara en 3-5 frases. Si no hay precio, menciona que es gratis.',
+      'No uses listas ni encabezados.',
+    ].join('\n');
+
+    this.error = '';
+    this.isGeneratingDescription = true;
+
+    try {
+      const generatedDescription = await firstValueFrom(
+        this.iaAssistantService.ask(prompt),
+      );
+
+      if (generatedDescription && generatedDescription.trim()) {
+        this.formPlanCreation.patchValue({
+          description: generatedDescription.trim(),
+        });
+      } else {
+        this.error = this.translationService.get(
+          'messages.descriptionGenerationFailed',
+          'No se pudo generar la descripcion. Intentalo de nuevo.',
+        );
+      }
+    } catch (error) {
+      this.error = this.translationService.get(
+        'messages.descriptionGenerationFailed',
+        'No se pudo generar la descripcion. Intentalo de nuevo.',
+      );
+    } finally {
+      this.isGeneratingDescription = false;
+    }
   }
 }
