@@ -29,6 +29,8 @@ import { UserService } from '../../../core/services/user.service';
 export class ProfileComponent implements OnInit {
   /** Input file nativo para seleccionar avatar. */
   @ViewChild('avatarInput') avatarInput!: ElementRef<HTMLInputElement>;
+  /** Contenedor de rueda+menú para detectar clicks internos. */
+  @ViewChild('settingsMenuContainer') settingsMenuContainer?: ElementRef<HTMLElement>;
 
   /** Usuario autenticado actual (Firebase Auth). */
   user: FirebaseUser | null = null;
@@ -141,8 +143,15 @@ export class ProfileComponent implements OnInit {
   }
 
   /** Cierra el menú de ajustes si se hace click fuera. */
-  @HostListener('document:click')
-  closeSettingsMenu(): void {
+  @HostListener('document:click', ['$event'])
+  closeSettingsMenu(event: MouseEvent): void {
+    const target = event.target as Node | null;
+    if (
+      target &&
+      this.settingsMenuContainer?.nativeElement.contains(target)
+    ) {
+      return;
+    }
     this.isSettingsMenuOpen = false;
   }
 
