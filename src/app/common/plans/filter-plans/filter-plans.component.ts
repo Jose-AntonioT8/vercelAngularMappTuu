@@ -51,14 +51,22 @@ export class FilterPlansComponent  implements OnInit, ActivityFilterState{
     
     /** Catálogo opcional inyectado por el padre (si no se usa Firestore). */
     @Input() availableTypes: FilterItem[] = []; 
-    /** Inyecta `ActivityService` para cargar catálogo. */
-constructor( private ActivityService: ActivityService,
-) {}
+    /** Servicio para cargar catálogo de actividades desde Firestore/API. */
+    private activityService: ActivityService;
+
+    /**
+     * Crea el panel de filtros de planes.
+     * @param activityService Servicio de actividades para poblar el selector.
+     */
+constructor( activityService: ActivityService,
+) {
+  this.activityService = activityService;
+}
 
     /** Carga catálogo de actividades y emite el estado inicial. */
-    ngOnInit() {
+    ngOnInit(): void {
         this.emitCurrentFilterState();
-        this.ActivityService.getActivities().subscribe(
+      this.activityService.getActivities().subscribe(
             (res: Activity[]) => {
               this.activities = res;
               this.activitiesName = res.map((type) => type.name);
@@ -70,7 +78,7 @@ constructor( private ActivityService: ActivityService,
     }
 
     /** Emite el estado actual de filtros. */
-    emitCurrentFilterState() {
+    emitCurrentFilterState(): void {
         const filterState: ActivityFilterState = {
             activity: this.activity,
             ratingMin: this.ratingMin
@@ -79,7 +87,7 @@ constructor( private ActivityService: ActivityService,
     }
 
     /** Limpia filtros al estado inicial y re-emite. */
-    resetFilters() {
+    resetFilters(): void {
         this.activity = null;
         this.ratingMin = 0;
         this.emitCurrentFilterState();

@@ -140,7 +140,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/common/activities/filter/filter.component.ts</code>
+            <code>src/app/common/activityTypes/filter/filter.component.ts</code>
         </p>
 
 
@@ -148,8 +148,8 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Estado serializable de filtros para actividades.</p>
-<p>Se emite al componente padre para filtrar listados.</p>
+                <p>Estado serializable de filtros para tipos de actividad.</p>
+<p>Se emite hacia el componente padre para filtrar listados.</p>
 
             </p>
 
@@ -228,7 +228,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>ID o nombre del tipo seleccionado. <code>null</code> = sin filtro.</p>
+                                    <div class="io-description"><p>ID/nombre del tipo de actividad seleccionado.</p>
 </div>
                                 </td>
                             </tr>
@@ -267,7 +267,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Texto de ubicación (si aplica). <code>null</code> = sin filtro.</p>
+                                    <div class="io-description"><p>Filtro de ubicación textual (si aplica).</p>
 </div>
                                 </td>
                             </tr>
@@ -306,7 +306,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Rating mínimo seleccionado (0 = sin filtro).</p>
+                                    <div class="io-description"><p>Rating mínimo para filtrar resultados.</p>
 </div>
                                 </td>
                             </tr>
@@ -325,35 +325,34 @@ import { ActivityTypeService } from &#x27;../../../core/services/activitytype.se
 import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
 
 /**
- * Opción de filtro disponible en UI (id + nombre).
- *
- * Se usa para poblar selects/listas de tipos, etc.
+ * Opción de filtro (id + nombre) para selects/listas.
  */
 export interface FilterItem {
-  /** Identificador estable del item. */
+  /** Identificador del tipo/ítem. */
   id: string;
-  /** Nombre visible del item. */
+  /** Nombre legible para mostrar en UI. */
   name: string;
 }
 
 /**
- * Estado serializable de filtros para actividades.
+ * Estado serializable de filtros para tipos de actividad.
  *
- * Se emite al componente padre para filtrar listados.
+ * Se emite hacia el componente padre para filtrar listados.
  */
 export interface ActivityFilterState {
-    /** ID o nombre del tipo seleccionado. &#x60;null&#x60; &#x3D; sin filtro. */
+    /** ID/nombre del tipo de actividad seleccionado. */
     activityType: string | null; 
-    /** Texto de ubicación (si aplica). &#x60;null&#x60; &#x3D; sin filtro. */
+    /** Filtro de ubicación textual (si aplica). */
     location: string | null;
-    /** Rating mínimo seleccionado (0 &#x3D; sin filtro). */
+    /** Rating mínimo para filtrar resultados. */
     ratingMin: number; 
 }
 
 /**
- * Componente de filtros de actividades.
+ * Componente de filtros para tipos de actividad.
  *
- * Emite &#x60;filterChanged&#x60; cada vez que cambia el estado actual.
+ * Nota: parte del estado (por ejemplo &#x60;location&#x60;) puede no usarse en todas las pantallas
+ * pero se conserva para mantener compatibilidad con otros filtros.
  */
 @Component({
   selector: &#x27;app-filter&#x27;,
@@ -365,20 +364,20 @@ export interface ActivityFilterState {
 
 
 export class FilterComponent implements OnInit, ActivityFilterState{
-    /** Tipo seleccionado. */
+    /** Tipo seleccionado. &#x60;null&#x60; &#x3D; sin filtro. */
     activityType: string | null &#x3D; null;
-    /** Texto de ubicación seleccionado/introducido. */
+    /** Texto de ubicación (opcional). */
     location: string | null &#x3D; null;
-    /** Rating mínimo. */
+    /** Rating mínimo (0 &#x3D; sin filtro). */
     ratingMin: number &#x3D; 0;
     /** Lista derivada de nombres de tipos para selects. */
     activityTypesName : string[] &#x3D; [];
     /** Catálogo completo de tipos cargado desde el servicio. */
     activityTypes : ActivityType[] &#x3D; [];
-    /** Evento hacia el padre con el nuevo estado de filtros. */
+    /** Evento hacia el padre cuando cambian los filtros. */
     @Output() filterChanged &#x3D; new EventEmitter&lt;ActivityFilterState&gt;();
     
-    /** Tipos disponibles desde el padre (si aplica). */
+    /** Tipos disponibles inyectados por el padre (opcional). */
     @Input() availableTypes: FilterItem[] &#x3D; []; 
     /** Inyecta &#x60;ActivityTypeService&#x60; para cargar catálogo. */
 constructor( private ActivityTypeService: ActivityTypeService,
@@ -398,7 +397,7 @@ constructor( private ActivityTypeService: ActivityTypeService,
           );
     }
 
-    /** Construye y emite el estado actual de filtros. */
+    /** Construye y emite el estado actual. */
     emitCurrentFilterState() {
         const filterState: ActivityFilterState &#x3D; {
             activityType: this.activityType,
@@ -408,7 +407,7 @@ constructor( private ActivityTypeService: ActivityTypeService,
         this.filterChanged.emit(filterState);
     }
 
-    /** Limpia todos los filtros al estado inicial y re-emite. */
+    /** Resetea filtros al estado inicial y re-emite. */
     resetFilters() {
         this.activityType &#x3D; null;
         this.location &#x3D; null;

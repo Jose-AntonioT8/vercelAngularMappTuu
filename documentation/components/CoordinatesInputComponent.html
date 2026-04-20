@@ -273,6 +273,10 @@ a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.</li>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#emitValue" >emitValue</a>
+                            </li>
+                            <li>
                                 <a href="#onBlur" >onBlur</a>
                             </li>
                             <li>
@@ -367,6 +371,7 @@ a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.</li>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -381,6 +386,10 @@ a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.</li>
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Sanitiza la URL del mapa embebido.</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -502,6 +511,47 @@ a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.</li>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="emitValue"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>emitValue</b></span>
+                        <a href="#emitValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>emitValue()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:114</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Construye el valor <code>Coordinates</code> y lo propaga al formulario.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="onBlur"></a>
                     <span class="name">
                         <span ><b>onBlur</b></span>
@@ -518,8 +568,8 @@ a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.</li>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="106"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:106</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:108</a></div>
                         </td>
                     </tr>
 
@@ -557,8 +607,8 @@ a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.</li>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:92</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="94"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:94</a></div>
                         </td>
                     </tr>
 
@@ -626,8 +676,8 @@ a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.</li>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="99"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:99</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:101</a></div>
                         </td>
                     </tr>
 
@@ -695,14 +745,16 @@ a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.</li>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:77</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:79</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Registra el callback de cambio del formulario padre.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -762,8 +814,8 @@ a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.</li>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="82"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:82</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:84</a></div>
                         </td>
                     </tr>
 
@@ -831,8 +883,8 @@ a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.</li>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:87</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:89</a></div>
                         </td>
                     </tr>
 
@@ -900,8 +952,8 @@ a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.</li>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="67"
-                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:67</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -1199,7 +1251,7 @@ a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.</li>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:127</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:129</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1233,7 +1285,7 @@ a partir de números (lat/lng). Evitar pasar texto arbitrario del usuario.</li>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="140" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:140</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/common/custom-controls/coordinates-input/coordinates-input.component.ts:142</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1318,6 +1370,7 @@ export class CoordinatesInputComponent implements ControlValueAccessor {
   /** Callback del formulario al marcar como tocado. */
   onTouched: any &#x3D; () &#x3D;&gt; {};
 
+  /** @param sanitizer Sanitiza la URL del mapa embebido. */
   constructor(private sanitizer: DomSanitizer) {}
 
   /** Sincroniza el valor externo (form) hacia el control. */
@@ -1331,6 +1384,7 @@ export class CoordinatesInputComponent implements ControlValueAccessor {
     }
   }
 
+  /** Registra el callback de cambio del formulario padre. */
   registerOnChange(fn: any): void {
     this.onChange &#x3D; fn;
   }
@@ -1500,8 +1554,8 @@ export class CoordinatesInputComponent implements ControlValueAccessor {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="coordinates-input-container">  <label *ngIf="label" class="block text-sm font-medium text-blue-900 mb-2">    {{ label }}  </label>    <div class="grid grid-cols-2 gap-4">    <!-- Latitud -->    <div>      <label class="block text-xs text-gray-600 mb-1">Latitud</label>      <input         type="number"        step="any"        [value]="latitude"        [disabled]="disabled"        placeholder="-90 a 90"        (input)="onLatitudeChange($event)"        (blur)="onBlur()"        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"      />    </div>        <!-- Longitud -->    <div>      <label class="block text-xs text-gray-600 mb-1">Longitud</label>      <input         type="number"        step="any"        [value]="longitude"        [disabled]="disabled"        placeholder="-180 a 180"        (input)="onLongitudeChange($event)"        (blur)="onBlur()"        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"      />    </div>  </div>    <!-- Mapa -->  <div *ngIf="showMap && mapUrl" class="mt-4 rounded-lg overflow-hidden border border-gray-300">    <iframe       [src]="mapUrl"      width="100%"      height="200"      frameborder="0"      style="border:0"      allowfullscreen    ></iframe>  </div>    <div *ngIf="showMap && !mapUrl && (latitude || longitude)" class="mt-4 p-4 bg-gray-100 rounded-lg text-center text-sm text-gray-500">    Ingresa coordenadas válidas para ver el mapa  </div>    <span *ngIf="errorMessage && touched" class="text-red-500 text-sm mt-1 block">    {{ errorMessage }}  </span></div></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
-    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
     var ACTUAL_COMPONENT = {'name': 'CoordinatesInputComponent'};
 </script>
 <script src="../js/tree.js"></script>

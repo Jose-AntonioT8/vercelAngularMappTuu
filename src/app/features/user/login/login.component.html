@@ -96,18 +96,18 @@
                 [placeholder]="'auth.login.emailPlaceholder' | translate"
                 class="w-full pl-10 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all duration-200 text-gray-900 placeholder-gray-400"
                 [class.border-red-300]="
-                  formLogin.controls.email.touched &&
-                  formLogin.controls.email.errors
+                  formLogin.controls['email'].touched &&
+                  formLogin.controls['email'].errors
                 "
                 [class.border-green-300]="
-                  formLogin.controls.email.touched &&
-                  !formLogin.controls.email.errors &&
-                  formLogin.controls.email.value
+                  formLogin.controls['email'].touched &&
+                  !formLogin.controls['email'].errors &&
+                  formLogin.controls['email'].value
                 "
               />
-              @if (formLogin.controls.email.touched &&
-              !formLogin.controls.email.errors &&
-              formLogin.controls.email.value) {
+              @if (formLogin.controls['email'].touched &&
+              !formLogin.controls['email'].errors &&
+              formLogin.controls['email'].value) {
               <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                 <svg
                   class="w-5 h-5 text-green-500"
@@ -125,8 +125,8 @@
               </div>
               }
             </div>
-            @if (formLogin.controls.email.touched &&
-            formLogin.controls.email.errors) {
+            @if (formLogin.controls['email'].touched &&
+            formLogin.controls['email'].errors) {
             <p class="text-red-500 text-xs mt-1 flex items-center gap-1">
               <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -169,8 +169,8 @@
                 [placeholder]="'auth.login.passwordPlaceholder' | translate"
                 class="w-full pl-10 pr-12 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-all duration-200 text-gray-900 placeholder-gray-400"
                 [class.border-red-300]="
-                  formLogin.controls.password.touched &&
-                  formLogin.controls.password.errors
+                  formLogin.controls['password'].touched &&
+                  formLogin.controls['password'].errors
                 "
               />
               <button
@@ -215,8 +215,8 @@
                 }
               </button>
             </div>
-            @if (formLogin.controls.password.touched &&
-            formLogin.controls.password.errors) {
+            @if (formLogin.controls['password'].touched &&
+            formLogin.controls['password'].errors) {
             <p class="text-red-500 text-xs mt-1 flex items-center gap-1">
               <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                 <path

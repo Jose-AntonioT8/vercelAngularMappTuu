@@ -48,11 +48,14 @@ export class MapPreviewComponent implements AfterViewInit, OnChanges {
   /** Referencia al contenedor del mapa. */
   @ViewChild('mapContainer') mapContainer!: ElementRef;
 
+  /** Instancia Leaflet del mapa de previsualizacion. */
   private map?: L.Map;
+  /** Marcador actual mostrado en el mapa de previsualizacion. */
   private marker?: L.Marker;
   /** Evita loops cuando el cambio viene de fuera vs. interacción interna. */
   private isInternalUpdate = false;
 
+  /** @param platformId Identificador de plataforma para evitar inicializar Leaflet en SSR. */
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   /** Inicializa el mapa tras el render (solo browser). */

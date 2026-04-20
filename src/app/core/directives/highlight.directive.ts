@@ -19,6 +19,7 @@ import { isPlatformBrowser } from '@angular/common';
   standalone: true,
 })
 export class HighlightDirective implements OnInit {
+  /** Color efectivo usado al aplicar el resaltado. */
   private _appHighlight: string = 'yellow';
 
   /** Color de resaltado al entrar el cursor. Por defecto es amarillo. */
@@ -26,6 +27,7 @@ export class HighlightDirective implements OnInit {
     if (color) this._appHighlight = color;
   }
 
+  /** Devuelve el color de resaltado actualmente configurado. */
   get appHighlight(): string {
     return this._appHighlight;
   }
@@ -33,23 +35,36 @@ export class HighlightDirective implements OnInit {
   /** Color de fondo por defecto cuando no hay resaltado. */
   @Input() highlightDefault: string = '';
 
+  /** Color original del elemento antes de aplicar highlight. */
   private originalBackground: string = '';
+  /** Referencia al elemento host donde se aplica la directiva. */
+  private el: ElementRef;
+  /** Renderer de Angular para actualizar estilos de forma segura. */
+  private renderer: Renderer2;
+  /** Identificador de plataforma para evitar acceso DOM en SSR. */
+  private platformId: Object;
 
   /**
+   * Crea la directiva de resaltado para el elemento host.
+   *
    * @param el Referencia al elemento.
    * @param renderer Utilidad para manipular el DOM de forma segura.
    * @param platformId Identificador de plataforma.
    */
   constructor(
-    private el: ElementRef,
-    private renderer: Renderer2,
-    @Inject(PLATFORM_ID) private platformId: Object,
-  ) {}
+    el: ElementRef,
+    renderer: Renderer2,
+    @Inject(PLATFORM_ID) platformId: Object,
+  ) {
+    this.el = el;
+    this.renderer = renderer;
+    this.platformId = platformId;
+  }
 
   /**
    * Captura el color de fondo original al inicializar el componente.
    */
-  ngOnInit() {
+  ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) {
       this.originalBackground = this.highlightDefault || '';
       return;
@@ -60,7 +75,7 @@ export class HighlightDirective implements OnInit {
   }
 
   /** Aplica el resaltado al entrar el ratón. */
-  @HostListener('mouseenter') onMouseEnter() {
+  @HostListener('mouseenter') onMouseEnter(): void {
     this.renderer.setStyle(
       this.el.nativeElement,
       'background-color',
@@ -69,7 +84,7 @@ export class HighlightDirective implements OnInit {
   }
 
   /** Restaura el color original al salir el ratón. */
-  @HostListener('mouseleave') onMouseLeave() {
+  @HostListener('mouseleave') onMouseLeave(): void {
     this.renderer.setStyle(
       this.el.nativeElement,
       'background-color',

@@ -32,19 +32,38 @@ export class ActivityTypesUpdateComponent {
   currentId: string | null = null;
   /** Snapshot del tipo cargado para fallback/preview. */
   typeData?: ActivityType;
+  /** Constructor de formularios reactivos. */
+  private fb: FormBuilder;
+  /** Ruta activa para leer el id del tipo. */
+  private router: ActivatedRoute;
+  /** Router para navegación tras la actualización. */
+  private nav: Router;
+  /** Servicio de autenticación para obtener token. */
+  private auth: AuthService;
+  /** Servicio de tipos para lectura y actualización. */
+  private typeService: ActivityTypeService;
 
+  /**
+   * Crea el formulario de edición de tipo de actividad.
+   *
+   * @param fb Constructor de formularios reactivos.
+   * @param router Ruta activa para leer el id del tipo.
+   * @param nav Router para navegación tras la actualización.
+   * @param auth Servicio de autenticación para obtener token.
+   * @param typeService Servicio de tipos para lectura y actualización.
+   */
   constructor(
-    /** Constructor de formularios. */
-    private fb: FormBuilder,
-    /** Ruta activa para leer `id`. */
-    private router: ActivatedRoute,
-    /** Router para navegar tras actualizar. */
-    private nav: Router,
-    /** Auth para token/usuario actual. */
-    private auth: AuthService,
-    /** Servicio de tipos (lectura puntual + mutación). */
-    private typeService: ActivityTypeService
+    fb: FormBuilder,
+    router: ActivatedRoute,
+    nav: Router,
+    auth: AuthService,
+    typeService: ActivityTypeService
   ) {
+    this.fb = fb;
+    this.router = router;
+    this.nav = nav;
+    this.auth = auth;
+    this.typeService = typeService;
     this.formActivityTypeUpdate = this.fb.group({
       name: [''],
       description: [''],
@@ -77,7 +96,7 @@ export class ActivityTypesUpdateComponent {
   }
 
   /** Envía actualización al backend con token. */
-  async onUpdate() {
+  async onUpdate(): Promise<void> {
     const payload: Partial<ActivityType> = {};
     const v = this.formActivityTypeUpdate.value;
     if (v.name) payload.name = v.name;

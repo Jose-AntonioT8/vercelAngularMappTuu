@@ -42,15 +42,39 @@ export class LoginComponent {
   emailAddress: string = '';
   /** Controla el modal de reset de contraseña. */
   showResetModal = false;
-  formLogin;
+  /** Formulario reactivo de autenticación. */
+  formLogin: ReturnType<FormBuilder['group']>;
 
+  /** Servicio constructor de formularios. */
+  private formSvc: FormBuilder;
+  /** Servicio de autenticación (email/social). */
+  private authService: AuthService;
+  /** Router para redirecciones post-login. */
+  private route: Router;
+  /** Servicio de traducciones para mensajes de validación/estado. */
+  private translation: TranslationService;
+  /** Instancia de Firebase Auth para reset de contraseña. */
+  private auth: Auth;
+
+  /**
+   * @param formSvc Constructor de formularios reactivos.
+   * @param authService Servicio de autenticación.
+   * @param route Router para navegación.
+   * @param translation Servicio de traducciones.
+   * @param auth Instancia de Firebase Auth.
+   */
   constructor(
-    private formSvc: FormBuilder,
-    private authService: AuthService,
-    private route: Router,
-    private translation: TranslationService,
-    private auth: Auth = getAuth()
+    formSvc: FormBuilder,
+    authService: AuthService,
+    route: Router,
+    translation: TranslationService,
+    auth: Auth = getAuth()
   ) {
+    this.formSvc = formSvc;
+    this.authService = authService;
+    this.route = route;
+    this.translation = translation;
+    this.auth = auth;
     this.formLogin = this.formSvc.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -65,11 +89,11 @@ export class LoginComponent {
 
   /** Envía email de restablecimiento usando el email actual del formulario. */
   sendPasswordReset(): void {
-    if (!this.formLogin.controls.email.value) {
+    if (!this.formLogin.controls['email'].value) {
       this.error = this.translation.instant('auth.login.emailRequired');
       return;
     }
-    this.emailAddress = this.formLogin.controls.email.value;
+    this.emailAddress = this.formLogin.controls['email'].value;
     sendPasswordResetEmail(this.auth, this.emailAddress)
       .then(() => {
         this.showResetModal = true;
@@ -94,15 +118,15 @@ export class LoginComponent {
   getError(control: string): string {
     switch (control) {
       case 'email':
-        if (this.formLogin.controls.email.errors?.['required']) {
+        if (this.formLogin.controls['email'].errors?.['required']) {
           return this.translation.instant('auth.login.emailRequired');
         }
-        if (this.formLogin.controls.email.errors?.['email']) {
+        if (this.formLogin.controls['email'].errors?.['email']) {
           return this.translation.instant('auth.login.invalidEmail');
         }
         break;
       case 'password':
-        if (this.formLogin.controls.password.errors?.['required']) {
+        if (this.formLogin.controls['password'].errors?.['required']) {
           return this.translation.instant('auth.login.passwordRequired');
         }
         break;
@@ -165,8 +189,8 @@ export class LoginComponent {
 
     try {
       await this.authService.login(
-        this.formLogin.controls.email.value!,
-        this.formLogin.controls.password.value!
+        this.formLogin.controls['email'].value!,
+        this.formLogin.controls['password'].value!
       );
 
       this.success = this.translation.instant('auth.login.loginSuccess');

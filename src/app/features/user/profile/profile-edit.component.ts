@@ -8,6 +8,12 @@ import { AuthService } from '../../../core/services/auth.service';
 import { TranslationService } from '../../../core/services/translation.service';
 import { UserService } from '../../../core/services/user.service';
 
+/**
+ * Formulario de edición de perfil.
+ *
+ * Permite actualizar nombre y correo del usuario autenticado,
+ * sincronizando Firebase Auth y backend de usuarios.
+ */
 @Component({
   selector: 'app-profile-edit',
   standalone: true,
@@ -16,26 +22,58 @@ import { UserService } from '../../../core/services/user.service';
   styleUrl: './profile-edit.component.scss',
 })
 export class ProfileEditComponent implements OnInit {
+  /** Estado de guardado en curso para bloquear doble envío. */
   isSaving = false;
+  /** Mensaje de error visible en UI. */
   error = '';
+  /** Mensaje de éxito visible en UI. */
   success = '';
 
+  /** Formulario reactivo de edición de perfil. */
   form;
 
+  /** Servicio constructor de formularios. */
+  private fb: FormBuilder;
+  /** Servicio de autenticación para usuario actual y actualización de Auth. */
+  private authService: AuthService;
+  /** Servicio de usuario para sincronizar cambios en backend. */
+  private userService: UserService;
+  /** Servicio de traducciones para mensajes de feedback. */
+  private translationService: TranslationService;
+  /** Router para redirigir tras guardado. */
+  private router: Router;
+  /** Servicio de historial para volver atrás. */
+  private location: Location;
+
+  /**
+   * @param fb Constructor de formularios reactivos.
+   * @param authService Servicio de autenticación.
+   * @param userService Servicio de usuario.
+   * @param translationService Servicio de traducciones.
+   * @param router Router para navegación.
+   * @param location Servicio de navegación histórica.
+   */
   constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private userService: UserService,
-    private translationService: TranslationService,
-    private router: Router,
-    private location: Location,
+    fb: FormBuilder,
+    authService: AuthService,
+    userService: UserService,
+    translationService: TranslationService,
+    router: Router,
+    location: Location,
   ) {
+    this.fb = fb;
+    this.authService = authService;
+    this.userService = userService;
+    this.translationService = translationService;
+    this.router = router;
+    this.location = location;
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
     });
   }
 
+  /** Inicializa el formulario con los datos del usuario autenticado. */
   ngOnInit(): void {
     this.authService.user$.subscribe((user) => {
       if (!user) {
@@ -50,10 +88,19 @@ export class ProfileEditComponent implements OnInit {
     });
   }
 
+  /** Navega a la pantalla anterior. */
   goBack(): void {
     this.location.back();
   }
 
+  /**
+   * Valida y guarda los cambios de perfil.
+   *
+   * Flujo:
+   * 1) Actualiza Auth (displayName/email)
+   * 2) Actualiza backend de usuario
+   * 3) Muestra feedback y vuelve a perfil
+   */
   async onSubmit(): Promise<void> {
     if (this.form.invalid || this.isSaving) {
       this.form.markAllAsTouched();

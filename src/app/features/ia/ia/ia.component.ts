@@ -28,6 +28,7 @@ import { IaAssistantService } from '../../../core/services/ia-assistant.service'
   styleUrl: './ia.component.scss',
 })
 export class IaComponent {
+  /** Servicio IA para enviar prompts y recibir respuestas. */
   private iaAssistantService = inject(IaAssistantService);
 
   /** Pregunta del usuario (input). */

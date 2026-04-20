@@ -36,18 +36,33 @@ export class ActivityTypesCreationComponent {
   activityTypes: any;
   /** Lista de nombres (derivada) para mostrar en UI. */
   activityTypesName : string[] = [];
+  /** Constructor de formularios. */
+  private formSvc: FormBuilder;
+  /** Router para navegación tras crear/cerrar sesión. */
+  private route: Router;
+  /** Auth para token/usuario actual. */
+  private auth: AuthService;
+  /** Servicio de tipos (mutación + catálogo). */
+  private activityTypeService: ActivityTypeService;
 
+  /**
+   * Crea la pantalla de alta de tipos de actividad.
+   *
+   * @param formSvc Constructor de formularios.
+   * @param route Router para navegar tras crear.
+   * @param auth Auth para token/usuario actual.
+   * @param activityTypeService Servicio de tipos (mutación + catálogo).
+   */
   constructor(
-    
-    /** Constructor de formularios. */
-    private formSvc: FormBuilder,
-    /** Router para navegar tras crear. */
-    private route: Router,
-    /** Auth para token/usuario actual. */
-    private auth: AuthService,
-    /** Servicio de tipos (mutación + catálogo). */
-    private ActivityTypeService: ActivityTypeService
+    formSvc: FormBuilder,
+    route: Router,
+    auth: AuthService,
+    activityTypeService: ActivityTypeService
   ) {
+    this.formSvc = formSvc;
+    this.route = route;
+    this.auth = auth;
+    this.activityTypeService = activityTypeService;
     this.formActivityCreation = this.formSvc.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
@@ -55,11 +70,11 @@ export class ActivityTypesCreationComponent {
       color: ['', [Validators.required]],
     });
 
-    this.activityTypes = this.ActivityTypeService.getActivitiesType();
+    this.activityTypes = this.activityTypeService.getActivitiesType();
   }
   /** Carga tipos existentes para UI (si aplica). */
   ngOnInit(): void {
-    this.ActivityTypeService.getActivitiesType().subscribe(
+    this.activityTypeService.getActivitiesType().subscribe(
       (res: ActivityType[]) => {
         this.activityTypes = res;
         this.activityTypesName = res.map((type) => type.name);
@@ -68,12 +83,12 @@ export class ActivityTypesCreationComponent {
     );
   }
   /** Cierra sesión y vuelve al landing. */
-  logOut() {
+  logOut(): void {
     this.route.navigate(['/landingPage']);
     this.auth.logout();
   }
   /** Devuelve un mensaje de error según el control invalidado. */
-  getError(control: string) {
+  getError(control: string): string {
     switch (control) {
       case 'name':
         if (
@@ -112,7 +127,7 @@ export class ActivityTypesCreationComponent {
   }
 
   /** Crea un nuevo tipo de actividad en el backend. */
-  async onCreate() {
+  async onCreate(): Promise<void> {
     if (this.formActivityCreation.invalid) {
       this.formActivityCreation.markAllAsTouched();
       return;
@@ -133,7 +148,7 @@ export class ActivityTypesCreationComponent {
       if (!user) throw new Error('No autenticado');
       const token = await user.getIdToken();
       alert(activityData.color);
-      this.ActivityTypeService.createActivityType(activityData, token).subscribe(
+      this.activityTypeService.createActivityType(activityData, token).subscribe(
         (res) => (this.success = 'Actividad creada con éxito'),
         (err: Error) => console.error('create error', err)
       );

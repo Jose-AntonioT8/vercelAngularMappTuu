@@ -34,6 +34,7 @@ export class ActivityService {
     typeof window !== 'undefined' && window.location.hostname === 'localhost'
       ? '/api'
       : apiUrl;
+  /** URL completa del recurso de actividades en la API. */
   private url = `${this.apiBase}/activities`;
   /** Instancia de Firestore (compat firebase/firestore). */
   private db: FirestoreType = inject(Firestore); 
@@ -163,7 +164,7 @@ export class ActivityService {
    * Nota: Angular solo llamará esto automáticamente si el servicio participa
    * en un ciclo de vida con destrucción (p.ej. providers a nivel de componente).
    */
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.unsubscribeListener) {
       this.unsubscribeListener();
     }

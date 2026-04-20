@@ -83,9 +83,16 @@ export class MapComponent implements AfterViewInit, OnChanges {
   /** Punto seleccionado para mostrar su tarjeta. */
   selectedPoint: MapMarkerData | null = null;
 
+  /** Instancia de Leaflet para controlar viewport/capas. */
   private map: L.Map | undefined;
+  /** Capa agrupada de marcadores para refresco eficiente. */
   private markersLayer = new L.LayerGroup();
 
+  /**
+   * @param platformId Identificador de plataforma para evitar inicializar Leaflet en SSR.
+   * @param zone Zona de Angular para sincronizar callbacks de Leaflet con la UI.
+   * @param servimapa Servicio de mapas para reverse geocoding.
+   */
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private zone: NgZone,
@@ -96,6 +103,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   
   
 
+  /** Inicializa mapa y marcadores cuando la vista ya existe en DOM. */
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.initMap();
@@ -111,7 +119,7 @@ export class MapComponent implements AfterViewInit, OnChanges {
   }
 
   /** Cierra la tarjeta del punto seleccionado. */
-  closeCard() {
+  closeCard(): void {
     this.selectedPoint = null;
   }
 

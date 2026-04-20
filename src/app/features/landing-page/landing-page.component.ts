@@ -24,10 +24,21 @@ import { LanguageSelectorComponent } from '../../common/language-selector/langua
   
 
 export class LandingPageComponent {
+  /** Servicio de autenticación para estado de sesión y rol. */
+  private auth: AuthService;
+  /** Router para navegación entre pantallas públicas/protegidas. */
+  private route: Router;
+
+  /**
+   * @param auth Servicio de autenticación.
+   * @param route Router para navegar desde acciones del landing.
+   */
   constructor(
-    private auth: AuthService,
-    private route: Router
+    auth: AuthService,
+    route: Router
   ){
+    this.auth = auth;
+    this.route = route;
   }
 
   /** `true` si hay sesión activa. */
@@ -40,7 +51,7 @@ export class LandingPageComponent {
   }
 
   /** Si está autenticado va a actividades; si no, redirige a login. */
-  handleLoginActivities(){
+  handleLoginActivities(): void {
     if (this.isAuthenticated()){
       this.redirectToActivities();
     }else{
@@ -50,18 +61,18 @@ export class LandingPageComponent {
   }
 
   /** Navega al listado de planes. */
-  redirectoToPlans(){
+  redirectoToPlans(): void {
         this.route.navigate(['/plansList'])
 
   }
   /** Navega al dashboard (acciones/admin). */
-  readirectToDashboard(){
+  readirectToDashboard(): void {
     this.route.navigate(['/dashboard'])
     //una vez que tengamos implementados los planes hay que poner la ruta a la lista
     //this.router.navigate(['/plans']);
   }
   /** Navega al listado de actividades. */
-  redirectToActivities(){
+  redirectToActivities(): void {
     this.route.navigate(['/activitiesList'])
 
     //una vez que tengamos implementados las actividades hay que poner la ruta a la lista
@@ -69,7 +80,7 @@ export class LandingPageComponent {
   }
 
   /** Cierra sesión y vuelve al landing. */
-  logOut(){
+  logOut(): void {
      this.route.navigate(['/landingPage'])
     this.auth.logout()
   }

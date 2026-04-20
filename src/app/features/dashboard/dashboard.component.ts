@@ -20,47 +20,58 @@ import { LanguageSelectorComponent } from '../../common/language-selector/langua
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
+  /** Servicio de autenticación para cierre de sesión. */
+  private auth: AuthService;
+  /** Router para navegación de acciones rápidas. */
+  private route: Router;
+
+  /**
+   * @param auth Servicio de autenticación.
+   * @param route Router para navegación.
+   */
   constructor(
-    private auth: AuthService,
-    private route: Router
+    auth: AuthService,
+    route: Router
   ){
+    this.auth = auth;
+    this.route = route;
   }
  /** Cierra sesión y vuelve al landing. */
- logOut(){
+ logOut(): void {
      this.route.navigate(['/landingPage'])
     this.auth.logout()
   }
 
   /** Navega a creación de actividades. */
-  createActivities(){
+  createActivities(): void {
     this.route.navigate(['/activitiesCreation'])
   }
 
   /** Navega al listado de actividades. */
-  viewAcctivities(){
+  viewAcctivities(): void {
     this.route.navigate(['/activitiesList'])
   }
 
   /** Navega a creación de tipos de actividad. */
-  createActivitiesTypes(){
+  createActivitiesTypes(): void {
     this.route.navigate(['/activityTypesCreation'])
   }
   /** Navega al listado de tipos de actividad. */
-  viewActivitiesTypes(){
+  viewActivitiesTypes(): void {
     this.route.navigate(['/activityTypesList'])
   }
 
   /** Navega a creación de planes. */
-  createPlans(){
+  createPlans(): void {
     this.route.navigate(['/plansCreation'])
   }
   /** Navega al listado de planes. */
-  viewPlans(){
+  viewPlans(): void {
     this.route.navigate(['/plansList'])
   }
 
   /** Navega al panel de moderación de reportes. */
-  viewReportsModeration(){
+  viewReportsModeration(): void {
     this.route.navigate(['/admin/reports'])
   }
 }

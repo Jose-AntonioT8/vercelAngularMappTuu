@@ -27,14 +27,27 @@ export class MapsComponent implements OnInit, OnDestroy {
   mapPoints: MapMarkerData[] = [];
   /** Suscripción a streams combinados (activities + types). */
   private subscription?: Subscription;
+  /** Servicio para recuperar actividades publicables en el mapa. */
+  private activityservice: ActivityService;
+  /** Servicio para recuperar metadatos de tipos (color, etc.). */
+  private activityTypeService: ActivityTypeService;
 
+  /**
+    * Crea la pantalla de mapa y prepara dependencias de datos.
+    *
+   * @param activityservice Servicio para recuperar actividades publicables en el mapa.
+   * @param activityTypeService Servicio para recuperar metadatos de tipos (color, etc.).
+   */
   constructor(
-    private activityservice: ActivityService,
-    private activityTypeService: ActivityTypeService
-  ) { }
+    activityservice: ActivityService,
+    activityTypeService: ActivityTypeService
+  ) {
+    this.activityservice = activityservice;
+    this.activityTypeService = activityTypeService;
+  }
 
   /** Suscribe a actividades y tipos para construir `mapPoints`. */
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscription = combineLatest([
       this.activityservice.getActivities(),
       this.activityTypeService.getActivitiesType()
@@ -66,7 +79,7 @@ export class MapsComponent implements OnInit, OnDestroy {
   }
 
   /** Limpia la suscripción al destruir el componente. */
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
 }

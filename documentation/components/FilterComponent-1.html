@@ -134,7 +134,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/common/activityTypes/filter/filter.component.ts</code>
+    <code>src/app/common/activities/filter/filter.component.ts</code>
 </p>
 
 
@@ -142,9 +142,8 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Componente de filtros para tipos de actividad.</p>
-<p>Nota: parte del estado (por ejemplo <code>location</code>) puede no usarse en todas las pantallas
-pero se conserva para mantener compatibilidad con otros filtros.</p>
+        <p>Componente de filtros de actividades.</p>
+<p>Emite <code>filterChanged</code> cada vez que cambia el estado actual.</p>
 
     </p>
 
@@ -311,7 +310,7 @@ pero se conserva para mantener compatibilidad con otros filtros.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:62</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/common/activities/filter/filter.component.ts:63</a></div>
                             </td>
                         </tr>
 
@@ -374,12 +373,12 @@ pero se conserva para mantener compatibilidad con otros filtros.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:62</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/common/activities/filter/filter.component.ts:63</a></div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Tipos disponibles inyectados por el padre (opcional).</p>
+                        <div class="io-description"><p>Tipos disponibles desde el padre (si aplica).</p>
 </div>
                     </td>
                 </tr>
@@ -404,12 +403,12 @@ pero se conserva para mantener compatibilidad con otros filtros.</p>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:59</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/common/activities/filter/filter.component.ts:60</a></div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Evento hacia el padre cuando cambian los filtros.</p>
+                        <div class="io-description"><p>Evento hacia el padre con el nuevo estado de filtros.</p>
 </div>
                     </td>
                 </tr>
@@ -443,15 +442,15 @@ pero se conserva para mantener compatibilidad con otros filtros.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="82"
-                                    class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:82</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="83"
+                                    class="link-to-prism">src/app/common/activities/filter/filter.component.ts:83</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Construye y emite el estado actual.</p>
+                        <div class="io-description"><p>Construye y emite el estado actual de filtros.</p>
 </div>
 
                         <div class="io-description">
@@ -482,8 +481,8 @@ pero se conserva para mantener compatibilidad con otros filtros.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">src/app/common/activities/filter/filter.component.ts:69</a></div>
                         </td>
                     </tr>
 
@@ -521,15 +520,15 @@ pero se conserva para mantener compatibilidad con otros filtros.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:92</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/common/activities/filter/filter.component.ts:93</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Resetea filtros al estado inicial y re-emite.</p>
+                        <div class="io-description"><p>Limpia todos los filtros al estado inicial y re-emite.</p>
 </div>
 
                         <div class="io-description">
@@ -570,13 +569,13 @@ pero se conserva para mantener compatibilidad con otros filtros.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/common/activities/filter/filter.component.ts:50</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Tipo seleccionado. <code>null</code> = sin filtro.</p>
+                    <div class="io-description"><p>Tipo seleccionado.</p>
 </div>
                 </td>
             </tr>
@@ -607,7 +606,7 @@ pero se conserva para mantener compatibilidad con otros filtros.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:57</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/common/activities/filter/filter.component.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -644,7 +643,7 @@ pero se conserva para mantener compatibilidad con otros filtros.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/common/activities/filter/filter.component.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -681,13 +680,13 @@ pero se conserva para mantener compatibilidad con otros filtros.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:51</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/common/activities/filter/filter.component.ts:52</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Texto de ubicación (opcional).</p>
+                    <div class="io-description"><p>Texto de ubicación seleccionado/introducido.</p>
 </div>
                 </td>
             </tr>
@@ -718,13 +717,13 @@ pero se conserva para mantener compatibilidad con otros filtros.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/common/activityTypes/filter/filter.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/common/activities/filter/filter.component.ts:54</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Rating mínimo (0 = sin filtro).</p>
+                    <div class="io-description"><p>Rating mínimo.</p>
 </div>
                 </td>
             </tr>
@@ -745,34 +744,35 @@ import { ActivityTypeService } from &#x27;../../../core/services/activitytype.se
 import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
 
 /**
- * Opción de filtro (id + nombre) para selects/listas.
+ * Opción de filtro disponible en UI (id + nombre).
+ *
+ * Se usa para poblar selects/listas de tipos, etc.
  */
 export interface FilterItem {
-  /** Identificador del tipo/ítem. */
+  /** Identificador estable del item. */
   id: string;
-  /** Nombre legible para mostrar en UI. */
+  /** Nombre visible del item. */
   name: string;
 }
 
 /**
- * Estado serializable de filtros para tipos de actividad.
+ * Estado serializable de filtros para actividades.
  *
- * Se emite hacia el componente padre para filtrar listados.
+ * Se emite al componente padre para filtrar listados.
  */
 export interface ActivityFilterState {
-    /** ID/nombre del tipo de actividad seleccionado. */
+    /** ID o nombre del tipo seleccionado. &#x60;null&#x60; &#x3D; sin filtro. */
     activityType: string | null; 
-    /** Filtro de ubicación textual (si aplica). */
+    /** Texto de ubicación (si aplica). &#x60;null&#x60; &#x3D; sin filtro. */
     location: string | null;
-    /** Rating mínimo para filtrar resultados. */
+    /** Rating mínimo seleccionado (0 &#x3D; sin filtro). */
     ratingMin: number; 
 }
 
 /**
- * Componente de filtros para tipos de actividad.
+ * Componente de filtros de actividades.
  *
- * Nota: parte del estado (por ejemplo &#x60;location&#x60;) puede no usarse en todas las pantallas
- * pero se conserva para mantener compatibilidad con otros filtros.
+ * Emite &#x60;filterChanged&#x60; cada vez que cambia el estado actual.
  */
 @Component({
   selector: &#x27;app-filter&#x27;,
@@ -784,20 +784,20 @@ export interface ActivityFilterState {
 
 
 export class FilterComponent implements OnInit, ActivityFilterState{
-    /** Tipo seleccionado. &#x60;null&#x60; &#x3D; sin filtro. */
+    /** Tipo seleccionado. */
     activityType: string | null &#x3D; null;
-    /** Texto de ubicación (opcional). */
+    /** Texto de ubicación seleccionado/introducido. */
     location: string | null &#x3D; null;
-    /** Rating mínimo (0 &#x3D; sin filtro). */
+    /** Rating mínimo. */
     ratingMin: number &#x3D; 0;
     /** Lista derivada de nombres de tipos para selects. */
     activityTypesName : string[] &#x3D; [];
     /** Catálogo completo de tipos cargado desde el servicio. */
     activityTypes : ActivityType[] &#x3D; [];
-    /** Evento hacia el padre cuando cambian los filtros. */
+    /** Evento hacia el padre con el nuevo estado de filtros. */
     @Output() filterChanged &#x3D; new EventEmitter&lt;ActivityFilterState&gt;();
     
-    /** Tipos disponibles inyectados por el padre (opcional). */
+    /** Tipos disponibles desde el padre (si aplica). */
     @Input() availableTypes: FilterItem[] &#x3D; []; 
     /** Inyecta &#x60;ActivityTypeService&#x60; para cargar catálogo. */
 constructor( private ActivityTypeService: ActivityTypeService,
@@ -817,7 +817,7 @@ constructor( private ActivityTypeService: ActivityTypeService,
           );
     }
 
-    /** Construye y emite el estado actual. */
+    /** Construye y emite el estado actual de filtros. */
     emitCurrentFilterState() {
         const filterState: ActivityFilterState &#x3D; {
             activityType: this.activityType,
@@ -827,7 +827,7 @@ constructor( private ActivityTypeService: ActivityTypeService,
         this.filterChanged.emit(filterState);
     }
 
-    /** Resetea filtros al estado inicial y re-emite. */
+    /** Limpia todos los filtros al estado inicial y re-emite. */
     resetFilters() {
         this.activityType &#x3D; null;
         this.location &#x3D; null;
@@ -840,14 +840,14 @@ constructor( private ActivityTypeService: ActivityTypeService,
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;form class&#x3D;&quot;w-full max-h-[calc(100vh-150px)] overflow-y-auto bg-[#CFE8FF] rounded-2xl shadow-lg p-5 md:p-6 flex flex-col&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;form class&#x3D;&quot;w-full bg-[#CFE8FF] rounded-2xl shadow-lg p-5 md:p-6 flex flex-col&quot;&gt;
   
   &lt;div class&#x3D;&quot;mb-5&quot;&gt;
     &lt;h2 class&#x3D;&quot;text-center text-xl md:text-2xl font-bold mb-5&quot;&gt;{{ &#x27;common.filters&#x27; | translate }}&lt;/h2&gt;
   &lt;/div&gt;
   
   &lt;div class&#x3D;&quot;mb-6&quot;&gt;
-    &lt;h3 class&#x3D;&quot;text-base font-bold mb-2.5&quot;&gt;{{ &#x27;activityTypes.filterTypeLabel&#x27; | translate }}&lt;/h3&gt;
+    &lt;h3 class&#x3D;&quot;text-base font-bold mb-2.5&quot;&gt;{{ &#x27;activities.filterTypeLabel&#x27; | translate }}&lt;/h3&gt;
     
     &lt;div&gt;
       &lt;select [(ngModel)]&#x3D;&quot;activityType&quot; 
@@ -864,17 +864,17 @@ constructor( private ActivityTypeService: ActivityTypeService,
   &lt;/div&gt;
 
   &lt;div class&#x3D;&quot;mb-6&quot;&gt;
-    &lt;h3 class&#x3D;&quot;text-base font-bold mb-2.5&quot;&gt;{{ &#x27;activityTypes.filterLocationLabel&#x27; | translate }}&lt;/h3&gt;
+    &lt;h3 class&#x3D;&quot;text-base font-bold mb-2.5&quot;&gt;{{ &#x27;activities.filterLocationLabel&#x27; | translate }}&lt;/h3&gt;
     &lt;input type&#x3D;&quot;text&quot; 
            [(ngModel)]&#x3D;&quot;location&quot; 
            name&#x3D;&quot;locationInput&quot; 
            (blur)&#x3D;&quot;emitCurrentFilterState()&quot; 
-           [placeholder]&#x3D;&quot;&#x27;activityTypes.filterLocationPlaceholder&#x27; | translate&quot; 
+           [placeholder]&#x3D;&quot;&#x27;activities.filterLocationPlaceholder&#x27; | translate&quot; 
            class&#x3D;&quot;w-full p-2.5 rounded-xl border border-gray-300 transition-all duration-200 focus:border-blue-500 focus:outline-none&quot;&gt;
   &lt;/div&gt;
   
   &lt;div class&#x3D;&quot;mb-6&quot;&gt;
-    &lt;h3 class&#x3D;&quot;text-base font-bold mb-2.5&quot;&gt;{{ &#x27;activityTypes.filterRatingLabel&#x27; | translate }} ({{ ratingMin }})&lt;/h3&gt;
+    &lt;h3 class&#x3D;&quot;text-base font-bold mb-2.5&quot;&gt;{{ &#x27;activities.filterRatingLabel&#x27; | translate }} ({{ ratingMin }})&lt;/h3&gt;
     &lt;div&gt;
       &lt;input type&#x3D;&quot;range&quot; 
              [(ngModel)]&#x3D;&quot;ratingMin&quot; 
@@ -886,7 +886,7 @@ constructor( private ActivityTypeService: ActivityTypeService,
              class&#x3D;&quot;w-full cursor-pointer&quot;&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-  &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;resetFilters()&quot; class&#x3D;&quot;mt-auto w-full p-3 bg-[#62C6FF] text-white border-none rounded-xl cursor-pointer text-base transition-all duration-200 hover:bg-[#4eb1eb]&quot;&gt;{{ &#x27;activityTypes.clear&#x27; | translate }}&lt;/button&gt;
+  &lt;button type&#x3D;&quot;button&quot; (click)&#x3D;&quot;resetFilters()&quot; class&#x3D;&quot;mt-auto w-full p-3 bg-[#62C6FF] text-white border-none rounded-xl cursor-pointer text-base transition-all duration-200 hover:bg-[#4eb1eb]&quot;&gt;{{ &#x27;activities.clear&#x27; | translate }}&lt;/button&gt;
 
 &lt;/form&gt;</code></pre>
     </div>
@@ -917,9 +917,9 @@ constructor( private ActivityTypeService: ActivityTypeService,
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><form class="w-full max-h-[calc(100vh-150px)] overflow-y-auto bg-[#CFE8FF] rounded-2xl shadow-lg p-5 md:p-6 flex flex-col">    <div class="mb-5">    <h2 class="text-center text-xl md:text-2xl font-bold mb-5">{{ \'common.filters\' | translate }}</h2>  </div>    <div class="mb-6">    <h3 class="text-base font-bold mb-2.5">{{ \'activityTypes.filterTypeLabel\' | translate }}</h3>        <div>      <select [(ngModel)]="activityType"               name="activityTypeInput"               (change)="emitCurrentFilterState()"               class="w-full p-2.5 rounded-xl border border-gray-300 transition-all duration-200 focus:border-blue-500 focus:outline-none">                <option [ngValue]="null">{{ \'activityTypes.filterAllTypes\' | translate }}</option>                <option *ngFor="let name of activityTypesName" [value]="name">{{ name }}</option>      </select>    </div>  </div>  <div class="mb-6">    <h3 class="text-base font-bold mb-2.5">{{ \'activityTypes.filterLocationLabel\' | translate }}</h3>    <input type="text"            [(ngModel)]="location"            name="locationInput"            (blur)="emitCurrentFilterState()"            [placeholder]="\'activityTypes.filterLocationPlaceholder\' | translate"            class="w-full p-2.5 rounded-xl border border-gray-300 transition-all duration-200 focus:border-blue-500 focus:outline-none">  </div>    <div class="mb-6">    <h3 class="text-base font-bold mb-2.5">{{ \'activityTypes.filterRatingLabel\' | translate }} ({{ ratingMin }})</h3>    <div>      <input type="range"              [(ngModel)]="ratingMin"              name="ratingMinInput"              (change)="emitCurrentFilterState()"              min="0"              max="5"              step="1"              class="w-full cursor-pointer">    </div>  </div>  <button type="button" (click)="resetFilters()" class="mt-auto w-full p-3 bg-[#62C6FF] text-white border-none rounded-xl cursor-pointer text-base transition-all duration-200 hover:bg-[#4eb1eb]">{{ \'activityTypes.clear\' | translate }}</button></form></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
-    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
+        var COMPONENT_TEMPLATE = '<div><form class="w-full bg-[#CFE8FF] rounded-2xl shadow-lg p-5 md:p-6 flex flex-col">    <div class="mb-5">    <h2 class="text-center text-xl md:text-2xl font-bold mb-5">{{ \'common.filters\' | translate }}</h2>  </div>    <div class="mb-6">    <h3 class="text-base font-bold mb-2.5">{{ \'activities.filterTypeLabel\' | translate }}</h3>        <div>      <select [(ngModel)]="activityType"               name="activityTypeInput"               (change)="emitCurrentFilterState()"               class="w-full p-2.5 rounded-xl border border-gray-300 transition-all duration-200 focus:border-blue-500 focus:outline-none">                <option [ngValue]="null">{{ \'activityTypes.filterAllTypes\' | translate }}</option>                <option *ngFor="let name of activityTypesName" [value]="name">{{ name }}</option>      </select>    </div>  </div>  <div class="mb-6">    <h3 class="text-base font-bold mb-2.5">{{ \'activities.filterLocationLabel\' | translate }}</h3>    <input type="text"            [(ngModel)]="location"            name="locationInput"            (blur)="emitCurrentFilterState()"            [placeholder]="\'activities.filterLocationPlaceholder\' | translate"            class="w-full p-2.5 rounded-xl border border-gray-300 transition-all duration-200 focus:border-blue-500 focus:outline-none">  </div>    <div class="mb-6">    <h3 class="text-base font-bold mb-2.5">{{ \'activities.filterRatingLabel\' | translate }} ({{ ratingMin }})</h3>    <div>      <input type="range"              [(ngModel)]="ratingMin"              name="ratingMinInput"              (change)="emitCurrentFilterState()"              min="0"              max="5"              step="1"              class="w-full cursor-pointer">    </div>  </div>  <button type="button" (click)="resetFilters()" class="mt-auto w-full p-3 bg-[#62C6FF] text-white border-none rounded-xl cursor-pointer text-base transition-all duration-200 hover:bg-[#4eb1eb]">{{ \'activities.clear\' | translate }}</button></form></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
     var ACTUAL_COMPONENT = {'name': 'FilterComponent-1'};
 </script>
 <script src="../js/tree.js"></script>

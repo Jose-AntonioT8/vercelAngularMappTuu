@@ -233,13 +233,29 @@
                                 <a href="#activityTypes" >activityTypes</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activityTypeService" >activityTypeService</a>
+                            </li>
+                            <li>
                                 <a href="#activityTypesName" >activityTypesName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#auth" >auth</a>
                             </li>
                             <li>
                                 <a href="#error" >error</a>
                             </li>
                             <li>
                                 <a href="#formActivityCreation" >formActivityCreation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#formSvc" >formSvc</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#route" >route</a>
                             </li>
                             <li>
                                 <a href="#success" >success</a>
@@ -287,17 +303,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(formSvc: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, auth: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, ActivityTypeService: <a href="../injectables/ActivityTypeService.html" target="_self">ActivityTypeService</a>)</code>
+<code>constructor(formSvc: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, auth: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, activityTypeService: <a href="../injectables/ActivityTypeService.html" target="_self">ActivityTypeService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/activity-type/activity-types-creation/activity-types-creation.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/activity-type/activity-types-creation/activity-types-creation.component.ts:46</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Crea la pantalla de alta de tipos de actividad.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -306,6 +324,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -320,6 +339,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Constructor de formularios.</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>route</td>
@@ -332,6 +355,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Router para navegar tras crear.</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>auth</td>
@@ -344,9 +371,13 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Auth para token/usuario actual.</p>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
-                                                        <td>ActivityTypeService</td>
+                                                        <td>activityTypeService</td>
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/ActivityTypeService.html" target="_self" >ActivityTypeService</a></code>
@@ -356,6 +387,10 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Servicio de tipos (mutación + catálogo).</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -395,8 +430,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="76"
-                                    class="link-to-prism">src/app/features/activity-type/activity-types-creation/activity-types-creation.component.ts:76</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/features/activity-type/activity-types-creation/activity-types-creation.component.ts:91</a></div>
                         </td>
                     </tr>
 
@@ -434,7 +469,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>&quot;El nombre es requerido&quot; | &quot;La descripción es requerida&quot; | &quot;El color es requerido&quot; | &quot;&quot;</code>
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
                             <div class="io-description">
@@ -464,8 +499,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="71"
-                                    class="link-to-prism">src/app/features/activity-type/activity-types-creation/activity-types-creation.component.ts:71</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/app/features/activity-type/activity-types-creation/activity-types-creation.component.ts:86</a></div>
                         </td>
                     </tr>
 
@@ -503,8 +538,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="61"
-                                    class="link-to-prism">src/app/features/activity-type/activity-types-creation/activity-types-creation.component.ts:61</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/features/activity-type/activity-types-creation/activity-types-creation.component.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -544,8 +579,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="115"
-                                    class="link-to-prism">src/app/features/activity-type/activity-types-creation/activity-types-creation.component.ts:115</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="130"
+                                    class="link-to-prism">src/app/features/activity-type/activity-types-creation/activity-types-creation.component.ts:130</a></div>
                         </td>
                     </tr>
 
@@ -556,7 +591,7 @@
 </div>
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
                 </td>
@@ -637,6 +672,39 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="activityTypeService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activityTypeService</b></span>
+                        <a href="#activityTypeService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/ActivityTypeService.html" target="_self" >ActivityTypeService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/features/activity-type/activity-types-creation/activity-types-creation.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio de tipos (mutación + catálogo).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="activityTypesName"></a>
                     <span class="name">
                         <span ><b>activityTypesName</b></span>
@@ -664,6 +732,39 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Lista de nombres (derivada) para mostrar en UI.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="auth"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>auth</b></span>
+                        <a href="#auth"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/activity-type/activity-types-creation/activity-types-creation.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Auth para token/usuario actual.</p>
 </div>
                 </td>
             </tr>
@@ -733,6 +834,72 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Formulario reactivo de creación de tipo.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formSvc"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>formSvc</b></span>
+                        <a href="#formSvc"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/activity-type/activity-types-creation/activity-types-creation.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Constructor de formularios.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/activity-type/activity-types-creation/activity-types-creation.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Router para navegación tras crear/cerrar sesión.</p>
 </div>
                 </td>
             </tr>
@@ -820,18 +987,33 @@ export class ActivityTypesCreationComponent {
   activityTypes: any;
   /** Lista de nombres (derivada) para mostrar en UI. */
   activityTypesName : string[] &#x3D; [];
+  /** Constructor de formularios. */
+  private formSvc: FormBuilder;
+  /** Router para navegación tras crear/cerrar sesión. */
+  private route: Router;
+  /** Auth para token/usuario actual. */
+  private auth: AuthService;
+  /** Servicio de tipos (mutación + catálogo). */
+  private activityTypeService: ActivityTypeService;
 
+  /**
+   * Crea la pantalla de alta de tipos de actividad.
+   *
+   * @param formSvc Constructor de formularios.
+   * @param route Router para navegar tras crear.
+   * @param auth Auth para token/usuario actual.
+   * @param activityTypeService Servicio de tipos (mutación + catálogo).
+   */
   constructor(
-    
-    /** Constructor de formularios. */
-    private formSvc: FormBuilder,
-    /** Router para navegar tras crear. */
-    private route: Router,
-    /** Auth para token/usuario actual. */
-    private auth: AuthService,
-    /** Servicio de tipos (mutación + catálogo). */
-    private ActivityTypeService: ActivityTypeService
+    formSvc: FormBuilder,
+    route: Router,
+    auth: AuthService,
+    activityTypeService: ActivityTypeService
   ) {
+    this.formSvc &#x3D; formSvc;
+    this.route &#x3D; route;
+    this.auth &#x3D; auth;
+    this.activityTypeService &#x3D; activityTypeService;
     this.formActivityCreation &#x3D; this.formSvc.group({
       name: [&#x27;&#x27;, [Validators.required]],
       description: [&#x27;&#x27;, [Validators.required]],
@@ -839,11 +1021,11 @@ export class ActivityTypesCreationComponent {
       color: [&#x27;&#x27;, [Validators.required]],
     });
 
-    this.activityTypes &#x3D; this.ActivityTypeService.getActivitiesType();
+    this.activityTypes &#x3D; this.activityTypeService.getActivitiesType();
   }
   /** Carga tipos existentes para UI (si aplica). */
   ngOnInit(): void {
-    this.ActivityTypeService.getActivitiesType().subscribe(
+    this.activityTypeService.getActivitiesType().subscribe(
       (res: ActivityType[]) &#x3D;&gt; {
         this.activityTypes &#x3D; res;
         this.activityTypesName &#x3D; res.map((type) &#x3D;&gt; type.name);
@@ -852,12 +1034,12 @@ export class ActivityTypesCreationComponent {
     );
   }
   /** Cierra sesión y vuelve al landing. */
-  logOut() {
+  logOut(): void {
     this.route.navigate([&#x27;/landingPage&#x27;]);
     this.auth.logout();
   }
   /** Devuelve un mensaje de error según el control invalidado. */
-  getError(control: string) {
+  getError(control: string): string {
     switch (control) {
       case &#x27;name&#x27;:
         if (
@@ -896,7 +1078,7 @@ export class ActivityTypesCreationComponent {
   }
 
   /** Crea un nuevo tipo de actividad en el backend. */
-  async onCreate() {
+  async onCreate(): Promise&lt;void&gt; {
     if (this.formActivityCreation.invalid) {
       this.formActivityCreation.markAllAsTouched();
       return;
@@ -917,7 +1099,7 @@ export class ActivityTypesCreationComponent {
       if (!user) throw new Error(&#x27;No autenticado&#x27;);
       const token &#x3D; await user.getIdToken();
       alert(activityData.color);
-      this.ActivityTypeService.createActivityType(activityData, token).subscribe(
+      this.activityTypeService.createActivityType(activityData, token).subscribe(
         (res) &#x3D;&gt; (this.success &#x3D; &#x27;Actividad creada con éxito&#x27;),
         (err: Error) &#x3D;&gt; console.error(&#x27;create error&#x27;, err)
       );
@@ -1058,8 +1240,8 @@ export class ActivityTypesCreationComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><header class="bg-brand-primary px-4 flex justify-between items-center h-16 sticky top-0 z-50 shadow-md">    <div class="flex items-center gap-4">    <a routerLink="/dashboard" [attr.aria-label]="\'common.back\' | translate" class="text-white hover:text-gray-200 transition-colors">      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-8 h-8">        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h17.5"/>      </svg>    </a>    <div class="text-white font-semibold text-lg">{{ \'activityTypes.createTitle\' | translate }}</div>  </div>  <div class="relative z-50">    <app-language-selector></app-language-selector>  </div></header><main class="flex-grow flex justify-center items-start pt-10 px-4 pb-10 min-h-screen bg-gradient-to-br from-slate-200 via-slate-300/50 to-brand-muted/30">    <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden border border-slate-300 ring-1 ring-black/10 p-8">        <h1 class="text-2xl font-bold mb-8 text-center" style="color: #5675AC;">      {{ \'activityTypes.createTitle\' | translate }}    </h1>    <form [formGroup]="formActivityCreation" class="space-y-8" (ngSubmit)="onCreate()">            <div class="relative group">        <label for="name" class="absolute -top-2.5 left-3 bg-white px-2 text-xs font-bold uppercase tracking-wider" style="color: #5675AC;">          {{ \'activityTypes.name\' | translate }}        </label>        <input type="text" formControlName="name" id="name"                [placeholder]="\'activityTypes.namePlaceholder\' | translate"               class="w-full bg-white border-2 border-slate-100 rounded-xl px-4 py-4 text-lg font-medium text-slate-800 placeholder-slate-300 focus:outline-none focus:ring-4 transition-all"               style="border-color: transparent; outline: none;"                [style.borderColor]="\'#e2e8f0\'"               onfocus="this.style.borderColor=\'#5675AC\'; this.style.boxShadow=\'0 0 0 4px rgba(86, 117, 172, 0.1)\'"               onblur="this.style.borderColor=\'#e2e8f0\'; this.style.boxShadow=\'none\'" />                <span *ngIf="formActivityCreation.controls.name.touched && formActivityCreation.controls.name.errors" class="text-red-500 text-xs mt-1 ml-1 block animate-pulse">          {{ getError(\'name\') }}        </span>      </div>      <div class="relative group">        <label for="description" class="absolute -top-2.5 left-3 bg-white px-2 text-xs font-bold uppercase tracking-wider" style="color: #5675AC;">          {{ \'activityTypes.description\' | translate }}        </label>        <input type="text" formControlName="description" id="description"                [placeholder]="\'activityTypes.descriptionPlaceholder\' | translate"               class="w-full bg-white border-2 border-slate-100 rounded-xl px-4 py-4 text-lg font-medium text-slate-800 placeholder-slate-300 focus:outline-none focus:ring-4 transition-all"               style="border-color: transparent; outline: none;"                [style.borderColor]="\'#e2e8f0\'"               onfocus="this.style.borderColor=\'#5675AC\'; this.style.boxShadow=\'0 0 0 4px rgba(86, 117, 172, 0.1)\'"               onblur="this.style.borderColor=\'#e2e8f0\'; this.style.boxShadow=\'none\'" />                <span *ngIf="formActivityCreation.controls.description.touched && formActivityCreation.controls.description.errors" class="text-red-500 text-xs mt-1 ml-1 block animate-pulse">          {{ getError(\'description\') }}        </span>      </div>      <div class="relative group">        <label for="color" class="block text-xs font-bold uppercase tracking-wider mb-2 ml-1" style="color: #5675AC;">          {{ \'activityTypes.color\' | translate }}        </label>        <div class="flex items-center gap-4 bg-slate-50 p-2 rounded-xl border border-slate-200">           <input type="color" formControlName="color" id="color"                   class="h-12 w-full cursor-pointer rounded-lg border-0 p-1 bg-white shadow-sm transition-transform hover:scale-[1.01]" />        </div>                <span *ngIf="formActivityCreation.controls.color.touched && formActivityCreation.controls.color.errors" class="text-red-500 text-xs mt-1 ml-1 block animate-pulse">          {{ getError(\'color\') }}        </span>      </div>      <button type="submit"               class="group w-full relative text-white font-bold py-4 rounded-xl text-lg shadow-xl transition-all transform hover:-translate-y-0.5 active:scale-[0.99] overflow-hidden mt-6"              style="background-color: #5675AC; box-shadow: 0 10px 15px -3px rgba(86, 117, 172, 0.3);">                <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>                <span class="relative z-10 flex items-center justify-center gap-2">            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />            </svg>            {{ \'activityTypes.create\' | translate }}        </span>      </button>    </form>    <div *ngIf="error" id="errorOnCreate" class="mt-6 p-3 bg-red-50 text-red-600 text-sm font-medium rounded-lg text-center border border-red-100 flex items-center justify-center gap-2">        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>        {{ error }}    </div>  </div></main></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
-    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
     var ACTUAL_COMPONENT = {'name': 'ActivityTypesCreationComponent'};
 </script>
 <script src="../js/tree.js"></script>

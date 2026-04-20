@@ -19,8 +19,13 @@ export class DefaultAvatarDirective implements OnInit {
   @Input() avatarBgColor: string = '#5675AC';
   /** Color de texto (inicial) del SVG. */
   @Input() avatarTextColor: string = '#ffffff';
+  /** Referencia al elemento img host para escribir el src fallback. */
+  private el: ElementRef<HTMLImageElement>;
 
-  constructor(private el: ElementRef<HTMLImageElement>) {}
+  /** @param el Referencia al elemento host donde se aplica la directiva. */
+  constructor(el: ElementRef<HTMLImageElement>) {
+    this.el = el;
+  }
 
   /** Aplica el avatar por defecto si no hay `src` válido. */
   ngOnInit(): void {

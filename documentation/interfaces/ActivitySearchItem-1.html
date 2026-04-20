@@ -1,0 +1,767 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>map-tuu documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">map-tuu documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  ActivitySearchItem</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/common/plans/list-plans/list-plans.component.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Actividad enriquecida con ubicación resuelta para filtros de planes.</p>
+
+            </p>
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                            <code><a href="../interfaces/Activity.html" target="_self" >Activity</a></code>
+            </p>
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#resolvedLocation" 
+>
+                                            resolvedLocation
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="resolvedLocation"></a>
+                                        <span class="name "><b>resolvedLocation</b>
+                                            <a href="#resolvedLocation">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>resolvedLocation:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Ubicación textual derivada de reverse geocoding.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Component, Input, OnInit, inject } from &#x27;@angular/core&#x27;;
+import { PlanService } from &#x27;../../../core/services/plan.service&#x27;;
+import { CardPlansComponent } from &#x27;../card-plans/card-plans.component&#x27;;
+import { ActivityService } from &#x27;../../../core/services/activity.service&#x27;;
+import { Activity } from &#x27;../../models/activity.model&#x27;;
+import { BehaviorSubject, Observable, combineLatest, debounceTime, distinctUntilChanged, forkJoin, map, of, shareReplay, switchMap } from &#x27;rxjs&#x27;;
+import { Plan } from &#x27;../../models/plan.model&#x27;;
+import { GeocodedLocation, MapsService } from &#x27;../../../core/services/maps.service&#x27;;
+import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
+import { ActivityFilterState as PlanFilterState } from &#x27;../filter-plans/filter-plans.component&#x27;;
+
+/** Actividad enriquecida con ubicación resuelta para filtros de planes. */
+interface ActivitySearchItem extends Activity {
+  /** Ubicación textual derivada de reverse geocoding. */
+  resolvedLocation: string;
+}
+
+/** Estado intermedio de búsqueda: término normalizado + posible geocodificación. */
+interface SearchQueryState {
+  /** Término de búsqueda normalizado para comparar. */
+  normalizedTerm: string;
+  /** Resultado geocodificado del término, si aplica. */
+  geoLocation: GeocodedLocation | null;
+}
+
+/**
+ * Listado de planes (componente común).
+ *
+ * Orquesta la carga reactiva de:
+ * - planes desde &#x60;PlanService&#x60;
+ * - actividades desde &#x60;ActivityService&#x60; (para enriquecer cards)
+ */
+@Component({
+  selector: &#x27;app-list-plans&#x27;,
+  standalone: true,
+  imports: [CommonModule, CardPlansComponent, TranslatePipe],
+  templateUrl: &#x27;./list-plans.component.html&#x27;,
+  styles: []
+})
+export class ListPlansComponent implements OnInit {
+  
+  /** Servicio de actividades (catálogo) para enriquecer cards. */
+  private activityService &#x3D; inject(ActivityService);
+  /** Servicio de planes (stream + carga). */
+  private planService &#x3D; inject(PlanService);
+  /** Servicio de mapas para reverse geocoding de actividades. */
+  private mapsService &#x3D; inject(MapsService);
+  /** Caché de ubicaciones resueltas por coordenadas. */
+  private readonly locationCache &#x3D; new Map&lt;string, string&gt;();
+  /** Caché de geocodificación de términos de búsqueda. */
+  private readonly searchGeoCache &#x3D; new Map&lt;string, GeocodedLocation | null&gt;();
+  /** Estado reactivo del panel de filtros de planes. */
+  private readonly filterState$ &#x3D; new BehaviorSubject&lt;PlanFilterState&gt;({
+    activity: null,
+    ratingMin: 0,
+  });
+
+  /** Stream de planes para renderizar el listado. */
+  plans$ &#x3D; this.planService.plans$;
+  /** Stream de búsqueda por nombre desde la pantalla padre. */
+  private readonly searchTerm$ &#x3D; new BehaviorSubject&lt;string&gt;(&#x27;&#x27;);
+  /** Stream de consulta geocodificada derivada del buscador. */
+  private readonly searchQuery$ &#x3D; this.searchTerm$.pipe(
+    debounceTime(250),
+    distinctUntilChanged(),
+    switchMap((term) &#x3D;&gt; this.resolveSearchQuery(term)),
+    shareReplay({ bufferSize: 1, refCount: true }),
+  );
+  /** Stream de actividades para enriquecer cards (si aplica). */
+  activity$!: Observable&lt;Activity[]&gt;; 
+  /** Stream de actividades enriquecidas con ubicación textual resuelta. */
+  activitiesWithLocation$!: Observable&lt;ActivitySearchItem[]&gt;;
+  /** Stream final de planes filtrados por nombre, descripción y actividades relacionadas. */
+  filteredPlans$!: Observable&lt;Plan[]&gt;;
+
+  /** Término de búsqueda externo para filtrar por nombre de plan. */
+  @Input() set searchTerm(value: string) {
+    this.searchTerm$.next((value || &#x27;&#x27;).trim());
+  }
+
+  /** Estado del panel de filtros (actividad y rating). */
+  @Input() set filterState(value: PlanFilterState | null) {
+    this.filterState$.next({
+      activity: value?.activity ?? null,
+      ratingMin: value?.ratingMin ?? 0,
+    });
+  }
+
+  /** Dispara listeners/cargas necesarias para poblar streams. */
+  ngOnInit(): void {
+    this.planService.getPlans();
+    this.activity$ &#x3D; this.activityService.getActivities();
+    this.activitiesWithLocation$ &#x3D; this.activity$.pipe(
+      switchMap((activities) &#x3D;&gt; this.enrichActivitiesWithLocation(activities || [])),
+    );
+    this.filteredPlans$ &#x3D; combineLatest([
+      this.plans$,
+      this.activitiesWithLocation$,
+      this.searchQuery$,
+      this.filterState$,
+    ]).pipe(
+      map(([plans, activities, query, filterState]) &#x3D;&gt;
+        this.filterByTerm(plans || [], activities || [], query, filterState),
+      ),
+    );
+  }
+
+  /**
+   * Aplica filtros combinados de texto, geolocalizacion, actividad y valoracion.
+   */
+  private filterByTerm(
+    plans: Plan[],
+    activities: ActivitySearchItem[],
+    query: SearchQueryState,
+    filterState: PlanFilterState,
+  ): Plan[] {
+    const activitiesById &#x3D; new Map(
+      activities
+        .filter((activity) &#x3D;&gt; !!activity?.id)
+        .map((activity) &#x3D;&gt; [activity.id, activity] as const),
+    );
+
+    return plans.filter((plan) &#x3D;&gt; {
+      const normalizedTerm &#x3D; query.normalizedTerm;
+      const searchableText &#x3D; this.getSearchableText(plan, activitiesById);
+      const textMatch &#x3D; normalizedTerm ? searchableText.includes(normalizedTerm) : true;
+      const geoMatch &#x3D; query.geoLocation
+        ? this.matchesPlanGeoFilter(plan, activitiesById, query.geoLocation)
+        : true;
+      const activityMatch &#x3D; this.matchesPlanActivityFilter(
+        plan,
+        activitiesById,
+        filterState.activity,
+      );
+      const ratingMatch &#x3D; this.matchesPlanRatingFilter(plan, filterState.ratingMin);
+
+      return (textMatch || geoMatch) &amp;&amp; activityMatch &amp;&amp; ratingMatch;
+    });
+  }
+
+  /** Construye el texto indexable de un plan y de sus actividades relacionadas. */
+  private getSearchableText(
+    plan: Plan,
+    activitiesById: Map&lt;string, ActivitySearchItem&gt;,
+  ): string {
+    const value &#x3D; plan as unknown as Record&lt;string, unknown&gt;;
+    const activityIds &#x3D; this.getStringArrayField(value, [&#x27;activitiesIds&#x27;]);
+    const relatedActivities &#x3D; activityIds
+      .map((activityId) &#x3D;&gt; activitiesById.get(String(activityId)))
+      .filter((activity): activity is ActivitySearchItem &#x3D;&gt; !!activity);
+
+    const fields &#x3D; [
+      value[&#x27;name&#x27;],
+      value[&#x27;title&#x27;],
+      value[&#x27;description&#x27;],
+      ...relatedActivities.flatMap((activity) &#x3D;&gt; [
+        activity.name,
+        activity.resolvedLocation,
+        (activity as unknown as Record&lt;string, unknown&gt;)[&#x27;location&#x27;],
+        (activity as unknown as Record&lt;string, unknown&gt;)[&#x27;locationText&#x27;],
+        (activity as unknown as Record&lt;string, unknown&gt;)[&#x27;address&#x27;],
+        (activity as unknown as Record&lt;string, unknown&gt;)[&#x27;city&#x27;],
+        (activity as unknown as Record&lt;string, unknown&gt;)[&#x27;region&#x27;],
+        (activity as unknown as Record&lt;string, unknown&gt;)[&#x27;place&#x27;],
+        (activity as unknown as Record&lt;string, unknown&gt;)[&#x27;description&#x27;],
+      ]),
+    ];
+
+    return fields
+      .filter((field): field is string &#x3D;&gt; typeof field &#x3D;&#x3D;&#x3D; &#x27;string&#x27;)
+      .map((field) &#x3D;&gt; this.normalizeSearchText(field))
+      .join(&#x27; &#x27;);
+  }
+
+  /** Extrae un array de strings desde un conjunto de claves candidatas. */
+  private getStringArrayField(
+    source: Record&lt;string, unknown&gt;,
+    keys: string[],
+  ): string[] {
+    for (const key of keys) {
+      const value &#x3D; source[key];
+      if (Array.isArray(value)) {
+        return value.filter((item): item is string &#x3D;&gt; typeof item &#x3D;&#x3D;&#x3D; &#x27;string&#x27;);
+      }
+    }
+
+    return [];
+  }
+
+  /** Resuelve el termino de busqueda y su posible geocodificacion. */
+  private resolveSearchQuery(term: string): Observable&lt;SearchQueryState&gt; {
+    const normalizedTerm &#x3D; this.normalizeSearchText(term);
+    if (!normalizedTerm) {
+      return of({ normalizedTerm: &#x27;&#x27;, geoLocation: null });
+    }
+
+    const cachedGeoLocation &#x3D; this.searchGeoCache.get(normalizedTerm);
+    if (cachedGeoLocation !&#x3D;&#x3D; undefined) {
+      return of({ normalizedTerm, geoLocation: cachedGeoLocation });
+    }
+
+    return this.mapsService.geocodeLocation(term).pipe(
+      map((geoLocation) &#x3D;&gt; {
+        this.searchGeoCache.set(normalizedTerm, geoLocation);
+        return { normalizedTerm, geoLocation };
+      }),
+    );
+  }
+
+  /** Valida coincidencia geografica de un plan en base a sus actividades. */
+  private matchesPlanGeoFilter(
+    plan: Plan,
+    activitiesById: Map&lt;string, ActivitySearchItem&gt;,
+    geoLocation: GeocodedLocation,
+  ): boolean {
+    const value &#x3D; plan as unknown as Record&lt;string, unknown&gt;;
+    const activityIds &#x3D; this.getStringArrayField(value, [&#x27;activitiesIds&#x27;]);
+    return activityIds.some((activityId) &#x3D;&gt; {
+      const activity &#x3D; activitiesById.get(activityId);
+      if (!activity) {
+        return false;
+      }
+      return this.matchesGeoFilter(activity, geoLocation);
+    });
+  }
+
+  /** Valida coincidencia por actividad seleccionada en el filtro del panel. */
+  private matchesPlanActivityFilter(
+    plan: Plan,
+    activitiesById: Map&lt;string, ActivitySearchItem&gt;,
+    selectedActivity: string | null,
+  ): boolean {
+    const normalizedSelectedActivity &#x3D; this.normalizeSearchText(selectedActivity || &#x27;&#x27;);
+    if (!normalizedSelectedActivity) {
+      return true;
+    }
+
+    const value &#x3D; plan as unknown as Record&lt;string, unknown&gt;;
+    const activityIds &#x3D; this.getStringArrayField(value, [&#x27;activitiesIds&#x27;]);
+
+    return activityIds.some((activityId) &#x3D;&gt; {
+      const activity &#x3D; activitiesById.get(activityId);
+      if (!activity) {
+        return false;
+      }
+
+      const activityName &#x3D; this.normalizeSearchText(activity.name);
+      const activityIdNormalized &#x3D; this.normalizeSearchText(activity.id);
+      return (
+        activityName &#x3D;&#x3D;&#x3D; normalizedSelectedActivity ||
+        activityIdNormalized &#x3D;&#x3D;&#x3D; normalizedSelectedActivity
+      );
+    });
+  }
+
+  /** Valida coincidencia por valoracion minima del plan. */
+  private matchesPlanRatingFilter(plan: Plan, ratingMin: number): boolean {
+    if (!ratingMin || ratingMin &lt;&#x3D; 0) {
+      return true;
+    }
+
+    return (plan.rating ?? 0) &gt;&#x3D; ratingMin;
+  }
+
+  /** Comprueba si una actividad coincide con el filtro geoespacial. */
+  private matchesGeoFilter(
+    activity: ActivitySearchItem,
+    geoLocation: GeocodedLocation,
+  ): boolean {
+    const latitude &#x3D; this.pickNumberField(activity as unknown as Record&lt;string, unknown&gt;, [
+      &#x27;latitude&#x27;,
+      &#x27;lat&#x27;,
+    ]);
+    const longitude &#x3D; this.pickNumberField(activity as unknown as Record&lt;string, unknown&gt;, [
+      &#x27;longitude&#x27;,
+      &#x27;lng&#x27;,
+      &#x27;lon&#x27;,
+    ]);
+
+    if (typeof latitude !&#x3D;&#x3D; &#x27;number&#x27; || typeof longitude !&#x3D;&#x3D; &#x27;number&#x27;) {
+      return false;
+    }
+
+    if (geoLocation.viewport) {
+      return this.isInsideViewport(latitude, longitude, geoLocation.viewport);
+    }
+
+    return this.distanceKm(
+      latitude,
+      longitude,
+      geoLocation.latitude,
+      geoLocation.longitude,
+    ) &lt;&#x3D; this.searchRadiusKm;
+  }
+
+  /** Valida si un punto cae dentro del viewport geocodificado. */
+  private isInsideViewport(
+    latitude: number,
+    longitude: number,
+    viewport: NonNullable&lt;GeocodedLocation[&#x27;viewport&#x27;]&gt;,
+  ): boolean {
+    const minLat &#x3D; Math.min(viewport.northeast.lat, viewport.southwest.lat);
+    const maxLat &#x3D; Math.max(viewport.northeast.lat, viewport.southwest.lat);
+    const minLng &#x3D; Math.min(viewport.northeast.lng, viewport.southwest.lng);
+    const maxLng &#x3D; Math.max(viewport.northeast.lng, viewport.southwest.lng);
+
+    return (
+      latitude &gt;&#x3D; minLat &amp;&amp;
+      latitude &lt;&#x3D; maxLat &amp;&amp;
+      longitude &gt;&#x3D; minLng &amp;&amp;
+      longitude &lt;&#x3D; maxLng
+    );
+  }
+
+  /** Calcula distancia aproximada entre dos puntos usando Haversine. */
+  private distanceKm(
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number,
+  ): number {
+    const earthRadiusKm &#x3D; 6371;
+    const deltaLat &#x3D; this.toRadians(lat2 - lat1);
+    const deltaLon &#x3D; this.toRadians(lon2 - lon1);
+    const a &#x3D;
+      Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+      Math.cos(this.toRadians(lat1)) *
+        Math.cos(this.toRadians(lat2)) *
+        Math.sin(deltaLon / 2) *
+        Math.sin(deltaLon / 2);
+    const c &#x3D; 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return earthRadiusKm * c;
+  }
+
+  /** Convierte grados a radianes. */
+  private toRadians(value: number): number {
+    return (value * Math.PI) / 180;
+  }
+
+  /** Radio de busqueda por defecto cuando no hay viewport exacto. */
+  private readonly searchRadiusKm &#x3D; 25;
+
+  /** Enriquece actividades con ubicacion resuelta para busqueda/filtros. */
+  private enrichActivitiesWithLocation(
+    activities: Activity[],
+  ): Observable&lt;ActivitySearchItem[]&gt; {
+    if (!activities.length) {
+      return of([]);
+    }
+
+    return forkJoin(
+      activities.map((activity) &#x3D;&gt;
+        this.resolveActivityLocation(activity).pipe(
+          map((resolvedLocation) &#x3D;&gt; ({
+            ...activity,
+            resolvedLocation,
+          })),
+        ),
+      ),
+    );
+  }
+
+  /**
+   * Resuelve una ubicacion legible para una actividad.
+   * Usa campos explicitos y cae a reverse geocoding por coordenadas.
+   */
+  private resolveActivityLocation(activity: Activity): Observable&lt;string&gt; {
+    const value &#x3D; activity as unknown as Record&lt;string, unknown&gt;;
+    const explicitLocation &#x3D; this.pickStringField(value, [
+      &#x27;location&#x27;,
+      &#x27;locationText&#x27;,
+      &#x27;address&#x27;,
+      &#x27;city&#x27;,
+      &#x27;region&#x27;,
+      &#x27;place&#x27;,
+      &#x27;fullAddress&#x27;,
+    ]);
+
+    if (explicitLocation) {
+      return of(explicitLocation);
+    }
+
+    const latitude &#x3D; this.pickNumberField(value, [&#x27;latitude&#x27;, &#x27;lat&#x27;]);
+    const longitude &#x3D; this.pickNumberField(value, [&#x27;longitude&#x27;, &#x27;lng&#x27;, &#x27;lon&#x27;]);
+
+    if (typeof latitude !&#x3D;&#x3D; &#x27;number&#x27; || typeof longitude !&#x3D;&#x3D; &#x27;number&#x27;) {
+      return of(&#x27;&#x27;);
+    }
+
+    const cacheKey &#x3D; &#x60;${latitude.toFixed(5)},${longitude.toFixed(5)}&#x60;;
+    const cachedLocation &#x3D; this.locationCache.get(cacheKey);
+    if (cachedLocation) {
+      return of(cachedLocation);
+    }
+
+    return this.mapsService.getAddress(latitude, longitude).pipe(
+      map((location) &#x3D;&gt; {
+        const normalizedLocation &#x3D; this.normalizeSearchText(location);
+        if (normalizedLocation) {
+          this.locationCache.set(cacheKey, normalizedLocation);
+        }
+        return normalizedLocation;
+      }),
+    );
+  }
+
+  /** Devuelve el primer campo string valido encontrado en la lista de claves. */
+  private pickStringField(
+    source: Record&lt;string, unknown&gt;,
+    keys: string[],
+  ): string {
+    for (const key of keys) {
+      const value &#x3D; source[key];
+      if (typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; value.trim()) {
+        return value.trim();
+      }
+    }
+
+    return &#x27;&#x27;;
+  }
+
+  /** Devuelve el primer campo numerico valido encontrado en la lista de claves. */
+  private pickNumberField(
+    source: Record&lt;string, unknown&gt;,
+    keys: string[],
+  ): number | undefined {
+    for (const key of keys) {
+      const value &#x3D; source[key];
+      if (typeof value &#x3D;&#x3D;&#x3D; &#x27;number&#x27; &amp;&amp; Number.isFinite(value)) {
+        return value;
+      }
+      if (typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+        const parsed &#x3D; Number(value.replace(&#x27;,&#x27;, &#x27;.&#x27;).trim());
+        if (Number.isFinite(parsed)) {
+          return parsed;
+        }
+      }
+    }
+
+    return undefined;
+  }
+
+  /** Normaliza texto para comparaciones flexibles sin acentos ni mayusculas. */
+  private normalizeSearchText(value: string): string {
+    return (value || &#x27;&#x27;)
+      .trim()
+      .toLowerCase()
+      .normalize(&#x27;NFD&#x27;)
+      .replace(/[\u0300-\u036f]/g, &#x27;&#x27;);
+  }
+}</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ActivitySearchItem-1.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

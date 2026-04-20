@@ -409,6 +409,14 @@ vía <code>environment</code>.</p>
       &#x27;IA_FALLBACK_MODELS&#x27;,
     ),
   },
+  maps: {
+    apiKey: readEnv(
+      &#x27;NG_APP_MAPS_API_KEY&#x27;,
+      &#x27;MAPS_API_KEY&#x27;,
+      &#x27;NG_APP_GOOGLE_MAPS_API_KEY&#x27;,
+      &#x27;GOOGLE_MAPS_API_KEY&#x27;,
+    ),
+  },
   firebase: {
     apiKey: readFirebaseEnv(
       &#x27;apiKey&#x27;,
@@ -890,17 +898,20 @@ real de la misma (runtime env, environment, etc.).</p>
   { path: &#x27;signup&#x27;, component: SignupComponent, canActivate: [guestGuard] },
   { path: &#x27;about&#x27;, loadComponent: () &#x3D;&gt; &quot;import(&#x27;./features/about/about.component&#x27;).then(m &#x3D;&gt; m.AboutComponent)&quot; },
   { path: &#x27;dashboard&#x27;, component: DashboardComponent, canActivate: [adminGuard] },
+  { path: &#x27;admin/reports&#x27;, component: ReportsModerationComponent, canActivate: [adminGuard] },
   {path: &#x27;activitiesCreation&#x27;, component: ActivitiesCreationComponent, canActivate: [authGuard]},
   {path: &#x27;plansDetail/:id&#x27;, component: PlansComponent, canActivate: [authGuard]},
   {path: &#x27;activityTypeDetail/:id&#x27;, component: ActivityTypesDetailComponent, canActivate: [adminGuard]},
   {path: &#x27;activityTypesUpdate/:id&#x27;, component: ActivityTypesUpdateComponent, canActivate: [adminGuard]},
   {path: &#x27;planDetail/:id&#x27;, component: PlansComponent, canActivate: [authGuard]},
   {path: &#x27;profile&#x27;, component: ProfileComponent, canActivate: [authGuard]},
+  {path: &#x27;profile/edit&#x27;, component: ProfileEditComponent, canActivate: [authGuard]},
   {path: &#x27;activityTypesCreation&#x27;, component: ActivityTypesCreationComponent, canActivate: [adminGuard]},
   {path: &#x27;activityTypesList&#x27;, component: ActivityTypesListComponent, canActivate: [adminGuard]},
   {path: &#x27;plansCreation&#x27;, component: PlansCreationComponent, canActivate: [authGuard]},
   {path: &#x27;plansList&#x27;, component: PlansListComponent, canActivate: [authGuard]},
-  { path: &#x27;&#x27;, redirectTo: &#x27;landingPage&#x27;, pathMatch: &#x27;full&#x27; }
+  { path: &#x27;&#x27;, redirectTo: &#x27;landingPage&#x27;, pathMatch: &#x27;full&#x27; },
+  { path: &#x27;**&#x27;, redirectTo: &#x27;landingPage&#x27; }
 ]</code>
                     </td>
                 </tr>

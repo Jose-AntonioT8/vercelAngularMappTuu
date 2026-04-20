@@ -50,10 +50,15 @@ export class OptionsComponent {
   activity?: Activity;
   /** Control del modal de reporte. */
   isReportModalOpen = false;
+  /** Motivo seleccionado para el reporte. */
   reportReason: ReportReason = 'spam';
+  /** Detalle libre opcional que acompana el reporte. */
   reportDetails = '';
+  /** Clave i18n para mostrar feedback de envio. */
   reportToastKey = '';
+  /** Tipo visual del toast de reporte. */
   reportToastType: 'success' | 'error' = 'success';
+  /** Temporizador para ocultar automaticamente el toast. */
   private reportToastTimer: ReturnType<typeof setTimeout> | null = null;
 
   /** Carga la actividad según el `id` de ruta. */
@@ -92,6 +97,7 @@ export class OptionsComponent {
     this.isReportModalOpen = true;
   }
 
+  /** Cierra el modal de reporte sin enviar cambios. */
   closeReportModal() {
     this.isReportModalOpen = false;
   }
@@ -125,6 +131,7 @@ export class OptionsComponent {
     }
   }
 
+  /** Muestra un toast temporal de resultado para el flujo de reporte. */
   private showReportToast(
     translationKey: string,
     type: 'success' | 'error' = 'success'

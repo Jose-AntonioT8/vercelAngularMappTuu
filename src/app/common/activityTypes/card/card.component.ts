@@ -23,8 +23,16 @@ export class CardComponent implements  OnChanges {
 
   /** Color derivado del tipo (normalizado a hex cuando aplica). */
   activityTypeColor = '';
+  /** Router para navegación al detalle del tipo. */
+  private router: Router;
 
-  constructor(private router: Router) {}
+  /**
+   * Crea la card de tipo con acceso a navegación.
+   * @param router Router para navegación al detalle del tipo.
+   */
+  constructor(router: Router) {
+    this.router = router;
+  }
 
   /** Recalcula el color cuando cambia el input. */
   ngOnChanges(changes: SimpleChanges): void {
@@ -34,7 +42,7 @@ export class CardComponent implements  OnChanges {
   
 
   /** Navega a la pantalla de detalle del tipo. */
-  redirectToDetail() {
+  redirectToDetail(): void {
     this.router.navigate(['/activityTypeDetail', this.activityType.id]);
   }
 

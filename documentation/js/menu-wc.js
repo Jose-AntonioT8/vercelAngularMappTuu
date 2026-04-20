@@ -186,6 +186,15 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/ProfileComponent.html" data-type="entity-link" >ProfileComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/ProfileEditComponent.html" data-type="entity-link" >ProfileEditComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/ReportModalComponent.html" data-type="entity-link" >ReportModalComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/ReportsModerationComponent.html" data-type="entity-link" >ReportsModerationComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ReviewModalComponent.html" data-type="entity-link" >ReviewModalComponent</a>
                             </li>
                             <li class="link">
@@ -212,6 +221,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <ul class="links collapse " ${ isNormalMode ? 'id="directives-links"' : 'id="xs-directives-links"' }>
                                 <li class="link">
                                     <a href="directives/DefaultAvatarDirective.html" data-type="entity-link" >DefaultAvatarDirective</a>
+                                </li>
+                                <li class="link">
+                                    <a href="directives/HighlightDirective.html" data-type="entity-link" >HighlightDirective</a>
                                 </li>
                                 <li class="link">
                                     <a href="directives/Tilt3DDirective.html" data-type="entity-link" >Tilt3DDirective</a>
@@ -261,6 +273,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/PlanService.html" data-type="entity-link" >PlanService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/ReportingService.html" data-type="entity-link" >ReportingService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/TranslationService.html" data-type="entity-link" >TranslationService</a>
                                 </li>
                                 <li class="link">
@@ -292,10 +307,22 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/ActivityFilterState-2.html" data-type="entity-link" >ActivityFilterState</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/ActivityReport.html" data-type="entity-link" >ActivityReport</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ActivitySearchItem.html" data-type="entity-link" >ActivitySearchItem</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ActivitySearchItem-1.html" data-type="entity-link" >ActivitySearchItem</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/ActivityType.html" data-type="entity-link" >ActivityType</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Coordinates.html" data-type="entity-link" >Coordinates</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/CreateActivityReportPayload.html" data-type="entity-link" >CreateActivityReportPayload</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/FilterItem.html" data-type="entity-link" >FilterItem</a>
@@ -305,6 +332,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/FilterItem-2.html" data-type="entity-link" >FilterItem</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/GeocodedLocation.html" data-type="entity-link" >GeocodedLocation</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/IaChatMessage.html" data-type="entity-link" >IaChatMessage</a>
@@ -328,10 +358,22 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/Plan.html" data-type="entity-link" >Plan</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/ReportQueryFilters.html" data-type="entity-link" >ReportQueryFilters</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ResolveReportPayload.html" data-type="entity-link" >ResolveReportPayload</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Review.html" data-type="entity-link" >Review</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Review-1.html" data-type="entity-link" >Review</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SearchQueryState.html" data-type="entity-link" >SearchQueryState</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SearchQueryState-1.html" data-type="entity-link" >SearchQueryState</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/SelectableItem.html" data-type="entity-link" >SelectableItem</a>

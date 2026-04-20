@@ -10,12 +10,17 @@ import { Activity } from '../../models/activity.model';
 import { CardComponent } from '../card/card.component';
 import { ActivityFilterState as ActivityListFilterState } from '../filter/filter.component';
 
+/** Actividad enriquecida con ubicación resuelta para búsquedas por texto. */
 interface ActivitySearchItem extends Activity {
+  /** Ubicación textual derivada de reverse geocoding. */
   resolvedLocation: string;
 }
 
+/** Estado intermedio de búsqueda: término normalizado + posible geocodificación. */
 interface SearchQueryState {
+  /** Término de búsqueda normalizado para comparar. */
   normalizedTerm: string;
+  /** Resultado geocodificado del término, si aplica. */
   geoLocation: GeocodedLocation | null;
 }
 
@@ -100,6 +105,9 @@ export class ListComponent implements OnInit {
     this.activityTypeService.getActivitiesType();
   }
 
+  /**
+   * Aplica filtros combinados de texto, geolocalizacion, tipo y valoracion.
+   */
   private filterByTerm(
     activities: ActivitySearchItem[],
     query: SearchQueryState,
@@ -126,6 +134,7 @@ export class ListComponent implements OnInit {
     });
   }
 
+  /** Construye el texto indexable principal de una actividad. */
   private getSearchableText(activity: ActivitySearchItem): string {
     const value = activity as unknown as Record<string, unknown>;
     const fields = [
@@ -148,6 +157,7 @@ export class ListComponent implements OnInit {
       .join(' ');
   }
 
+  /** Construye el texto indexable asociado unicamente a la ubicacion. */
   private getLocationSearchText(activity: ActivitySearchItem): string {
     const value = activity as unknown as Record<string, unknown>;
     const fields = [
@@ -167,6 +177,7 @@ export class ListComponent implements OnInit {
       .join(' ');
   }
 
+  /** Evalua el filtro de ubicacion textual del panel. */
   private matchesLocationFilter(
     activity: ActivitySearchItem,
     location: string | null,
@@ -179,6 +190,7 @@ export class ListComponent implements OnInit {
     return this.getLocationSearchText(activity).includes(normalizedLocation);
   }
 
+  /** Evalua el filtro por tipo de actividad (id o nombre normalizado). */
   private matchesActivityTypeFilter(
     activity: ActivitySearchItem,
     selectedType: string | null,
@@ -222,6 +234,7 @@ export class ListComponent implements OnInit {
     return activityTypeKey === normalizedSelectedType;
   }
 
+  /** Evalua el filtro por valoracion minima. */
   private matchesRatingFilter(
     activity: ActivitySearchItem,
     ratingMin: number,
@@ -233,6 +246,7 @@ export class ListComponent implements OnInit {
     return (activity.rating ?? 0) >= ratingMin;
   }
 
+  /** Enriquece cada actividad con su ubicacion resuelta para busqueda. */
   private enrichActivitiesWithLocation(
     activities: Activity[],
   ): Observable<ActivitySearchItem[]> {
@@ -252,6 +266,10 @@ export class ListComponent implements OnInit {
     );
   }
 
+  /**
+   * Resuelve una ubicacion legible para una actividad.
+   * Usa campos explicitos y cae a reverse geocoding por coordenadas.
+   */
   private resolveActivityLocation(activity: Activity): Observable<string> {
     const value = activity as unknown as Record<string, unknown>;
     const explicitLocation = this.pickStringField(value, [
@@ -292,6 +310,7 @@ export class ListComponent implements OnInit {
     );
   }
 
+  /** Resuelve el termino de busqueda y su posible geocodificacion. */
   private resolveSearchQuery(term: string): Observable<SearchQueryState> {
     const normalizedTerm = this.normalizeSearchText(term);
     if (!normalizedTerm) {
@@ -314,6 +333,7 @@ export class ListComponent implements OnInit {
     );
   }
 
+  /** Comprueba si la actividad coincide con el filtro geoespacial. */
   private matchesGeoFilter(
     activity: ActivitySearchItem,
     geoLocation: GeocodedLocation,
@@ -344,6 +364,7 @@ export class ListComponent implements OnInit {
     ) <= this.searchRadiusKm;
   }
 
+  /** Valida si un punto cae dentro del viewport geocodificado. */
   private isInsideViewport(
     latitude: number,
     longitude: number,
@@ -362,6 +383,7 @@ export class ListComponent implements OnInit {
     );
   }
 
+  /** Calcula distancia aproximada entre dos puntos usando Haversine. */
   private distanceKm(
     lat1: number,
     lon1: number,
@@ -381,12 +403,15 @@ export class ListComponent implements OnInit {
     return earthRadiusKm * c;
   }
 
+  /** Convierte grados a radianes. */
   private toRadians(value: number): number {
     return (value * Math.PI) / 180;
   }
 
+  /** Radio de busqueda por defecto cuando no hay viewport exacto. */
   private readonly searchRadiusKm = 25;
 
+  /** Devuelve el primer campo string valido encontrado en la lista de claves. */
   private pickStringField(
     source: Record<string, unknown>,
     keys: string[],
@@ -401,6 +426,7 @@ export class ListComponent implements OnInit {
     return '';
   }
 
+  /** Devuelve el primer campo numerico valido encontrado en la lista de claves. */
   private pickNumberField(
     source: Record<string, unknown>,
     keys: string[],
@@ -421,6 +447,7 @@ export class ListComponent implements OnInit {
     return undefined;
   }
 
+  /** Normaliza texto para comparaciones flexibles sin acentos ni mayusculas. */
   private normalizeSearchText(value: string): string {
     return (value || '')
       .trim()

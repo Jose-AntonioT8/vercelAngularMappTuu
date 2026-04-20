@@ -26,16 +26,22 @@ export class Tilt3DDirective implements OnInit, OnDestroy {
   /** Opacidad máxima del glare. */
   @Input() glareMaxOpacity: number = 0.3;
 
+  /** Elemento DOM del glare cuando esta habilitado. */
   private glareElement?: HTMLElement;
+  /** Wrapper logico para preservar perspectiva y borde redondeado. */
   private wrapper?: HTMLElement;
 
+  /**
+   * @param el Referencia al host donde se aplica el efecto 3D.
+   * @param renderer Renderer de Angular para manipular estilos de forma segura.
+   */
   constructor(
     private el: ElementRef<HTMLElement>,
     private renderer: Renderer2
   ) {}
 
   /** Inicializa wrapper/estilos y (opcionalmente) el glare. */
-  ngOnInit() {
+  ngOnInit(): void {
     this.wrapElement();
     this.setupStyles();
     if (this.glareEnabled) {
@@ -44,14 +50,14 @@ export class Tilt3DDirective implements OnInit, OnDestroy {
   }
 
   /** Limpia el glare si fue creado. */
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.glareElement) {
       this.glareElement.remove();
     }
   }
 
   /** Configura estilos base necesarios para el efecto (perspective/clip). */
-  private wrapElement() {
+  private wrapElement(): void {
     const element = this.el.nativeElement;
     const computedStyle = window.getComputedStyle(element);
     const borderRadius = computedStyle.borderRadius || '0px';
@@ -72,7 +78,7 @@ export class Tilt3DDirective implements OnInit, OnDestroy {
   }
 
   /** Aplica estilos de transición/optimizaciones para animación. */
-  private setupStyles() {
+  private setupStyles(): void {
     const element = this.el.nativeElement;
     element.style.transformStyle = 'flat';
     element.style.transition = `transform ${this.tiltSpeed}ms cubic-bezier(0.03, 0.98, 0.52, 0.99)`;
@@ -80,7 +86,7 @@ export class Tilt3DDirective implements OnInit, OnDestroy {
   }
 
   /** Crea y añade la capa de brillo (glare) si está habilitada. */
-  private createGlare() {
+  private createGlare(): void {
     const element = this.el.nativeElement;
     const computedStyle = window.getComputedStyle(element);
     const borderRadius = computedStyle.borderRadius || '0px';
@@ -107,14 +113,14 @@ export class Tilt3DDirective implements OnInit, OnDestroy {
 
   /** Ajusta transición al entrar con el mouse. */
   @HostListener('mouseenter')
-  onMouseEnter() {
+  onMouseEnter(): void {
     const element = this.el.nativeElement;
     element.style.transition = `transform ${this.tiltSpeed}ms cubic-bezier(0.03, 0.98, 0.52, 0.99)`;
   }
 
   /** Calcula rotación/escala según posición del mouse y actualiza glare. */
   @HostListener('mousemove', ['$event'])
-  onMouseMove(event: MouseEvent) {
+  onMouseMove(event: MouseEvent): void {
     const element = this.el.nativeElement;
     const rect = element.getBoundingClientRect();
 
@@ -151,7 +157,7 @@ export class Tilt3DDirective implements OnInit, OnDestroy {
 
   /** Resetea transform y oculta glare al salir con el mouse. */
   @HostListener('mouseleave')
-  onMouseLeave() {
+  onMouseLeave(): void {
     const element = this.el.nativeElement;
     element.style.transition = `transform ${this.tiltSpeed}ms cubic-bezier(0.03, 0.98, 0.52, 0.99)`;
     element.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';

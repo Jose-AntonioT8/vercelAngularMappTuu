@@ -2,12 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
 import { environment } from '../../../app/environment/environment';
+
+/** Resultado geocodificado normalizado para consumir en UI y filtros. */
 export interface GeocodedLocation {
+  /** Dirección legible para mostrar en UI. */
   formattedAddress: string;
+  /** Latitud central del resultado geocodificado. */
   latitude: number;
+  /** Longitud central del resultado geocodificado. */
   longitude: number;
+  /** Viewport recomendado por el proveedor para centrar mapa. */
   viewport?: {
+    /** Esquina noreste del viewport. */
     northeast: { lat: number; lng: number };
+    /** Esquina suroeste del viewport. */
     southwest: { lat: number; lng: number };
   };
 }
@@ -23,7 +31,15 @@ export interface GeocodedLocation {
  */
 export class MapsService{
     /** Cliente HTTP usado para consultar el proveedor de geocodificación. */
-    constructor(private http: HttpClient) {}
+    private http: HttpClient;
+
+    /**
+     * Crea el servicio de mapas y geocodificación.
+     * @param http Cliente HTTP para consultas al proveedor.
+     */
+    constructor(http: HttpClient) {
+      this.http = http;
+    }
 
     /** Geocodifica un texto de ubicación en coordenadas y viewport. */
     geocodeLocation(query: string): Observable<GeocodedLocation | null> {
@@ -78,6 +94,10 @@ export class MapsService{
       return `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(query)}&language=es&key=${encodeURIComponent(apiKey)}`;
     }
 
+    /**
+     * Extrae una localidad legible desde respuestas geocoding no-Google.
+     * Mantiene compatibilidad con proveedores alternativos usados previamente.
+     */
     pickBestLocality(response: any): string {
       if (response?.status && response.status !== 'OK' && response.status !== 'SUCCESS') {
         return 'Ubicación desconocida';

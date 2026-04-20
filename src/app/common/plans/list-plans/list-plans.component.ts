@@ -11,12 +11,17 @@ import { GeocodedLocation, MapsService } from '../../../core/services/maps.servi
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityFilterState as PlanFilterState } from '../filter-plans/filter-plans.component';
 
+/** Actividad enriquecida con ubicación resuelta para filtros de planes. */
 interface ActivitySearchItem extends Activity {
+  /** Ubicación textual derivada de reverse geocoding. */
   resolvedLocation: string;
 }
 
+/** Estado intermedio de búsqueda: término normalizado + posible geocodificación. */
 interface SearchQueryState {
+  /** Término de búsqueda normalizado para comparar. */
   normalizedTerm: string;
+  /** Resultado geocodificado del término, si aplica. */
   geoLocation: GeocodedLocation | null;
 }
 
@@ -102,6 +107,9 @@ export class ListPlansComponent implements OnInit {
     );
   }
 
+  /**
+   * Aplica filtros combinados de texto, geolocalizacion, actividad y valoracion.
+   */
   private filterByTerm(
     plans: Plan[],
     activities: ActivitySearchItem[],
@@ -132,6 +140,7 @@ export class ListPlansComponent implements OnInit {
     });
   }
 
+  /** Construye el texto indexable de un plan y de sus actividades relacionadas. */
   private getSearchableText(
     plan: Plan,
     activitiesById: Map<string, ActivitySearchItem>,
@@ -165,6 +174,7 @@ export class ListPlansComponent implements OnInit {
       .join(' ');
   }
 
+  /** Extrae un array de strings desde un conjunto de claves candidatas. */
   private getStringArrayField(
     source: Record<string, unknown>,
     keys: string[],
@@ -179,6 +189,7 @@ export class ListPlansComponent implements OnInit {
     return [];
   }
 
+  /** Resuelve el termino de busqueda y su posible geocodificacion. */
   private resolveSearchQuery(term: string): Observable<SearchQueryState> {
     const normalizedTerm = this.normalizeSearchText(term);
     if (!normalizedTerm) {
@@ -198,6 +209,7 @@ export class ListPlansComponent implements OnInit {
     );
   }
 
+  /** Valida coincidencia geografica de un plan en base a sus actividades. */
   private matchesPlanGeoFilter(
     plan: Plan,
     activitiesById: Map<string, ActivitySearchItem>,
@@ -214,6 +226,7 @@ export class ListPlansComponent implements OnInit {
     });
   }
 
+  /** Valida coincidencia por actividad seleccionada en el filtro del panel. */
   private matchesPlanActivityFilter(
     plan: Plan,
     activitiesById: Map<string, ActivitySearchItem>,
@@ -242,6 +255,7 @@ export class ListPlansComponent implements OnInit {
     });
   }
 
+  /** Valida coincidencia por valoracion minima del plan. */
   private matchesPlanRatingFilter(plan: Plan, ratingMin: number): boolean {
     if (!ratingMin || ratingMin <= 0) {
       return true;
@@ -250,6 +264,7 @@ export class ListPlansComponent implements OnInit {
     return (plan.rating ?? 0) >= ratingMin;
   }
 
+  /** Comprueba si una actividad coincide con el filtro geoespacial. */
   private matchesGeoFilter(
     activity: ActivitySearchItem,
     geoLocation: GeocodedLocation,
@@ -280,6 +295,7 @@ export class ListPlansComponent implements OnInit {
     ) <= this.searchRadiusKm;
   }
 
+  /** Valida si un punto cae dentro del viewport geocodificado. */
   private isInsideViewport(
     latitude: number,
     longitude: number,
@@ -298,6 +314,7 @@ export class ListPlansComponent implements OnInit {
     );
   }
 
+  /** Calcula distancia aproximada entre dos puntos usando Haversine. */
   private distanceKm(
     lat1: number,
     lon1: number,
@@ -317,12 +334,15 @@ export class ListPlansComponent implements OnInit {
     return earthRadiusKm * c;
   }
 
+  /** Convierte grados a radianes. */
   private toRadians(value: number): number {
     return (value * Math.PI) / 180;
   }
 
+  /** Radio de busqueda por defecto cuando no hay viewport exacto. */
   private readonly searchRadiusKm = 25;
 
+  /** Enriquece actividades con ubicacion resuelta para busqueda/filtros. */
   private enrichActivitiesWithLocation(
     activities: Activity[],
   ): Observable<ActivitySearchItem[]> {
@@ -342,6 +362,10 @@ export class ListPlansComponent implements OnInit {
     );
   }
 
+  /**
+   * Resuelve una ubicacion legible para una actividad.
+   * Usa campos explicitos y cae a reverse geocoding por coordenadas.
+   */
   private resolveActivityLocation(activity: Activity): Observable<string> {
     const value = activity as unknown as Record<string, unknown>;
     const explicitLocation = this.pickStringField(value, [
@@ -382,6 +406,7 @@ export class ListPlansComponent implements OnInit {
     );
   }
 
+  /** Devuelve el primer campo string valido encontrado en la lista de claves. */
   private pickStringField(
     source: Record<string, unknown>,
     keys: string[],
@@ -396,6 +421,7 @@ export class ListPlansComponent implements OnInit {
     return '';
   }
 
+  /** Devuelve el primer campo numerico valido encontrado en la lista de claves. */
   private pickNumberField(
     source: Record<string, unknown>,
     keys: string[],
@@ -416,6 +442,7 @@ export class ListPlansComponent implements OnInit {
     return undefined;
   }
 
+  /** Normaliza texto para comparaciones flexibles sin acentos ni mayusculas. */
   private normalizeSearchText(value: string): string {
     return (value || '')
       .trim()

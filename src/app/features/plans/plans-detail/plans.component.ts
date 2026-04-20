@@ -37,6 +37,10 @@ import { UserService } from '../../../core/services/user.service';
   styleUrl: './plans.component.scss',
 })
 export class PlansComponent implements OnInit {
+  /**
+   * @param userService Servicio de usuario para guardados y perfil.
+   * @param auth Servicio de autenticacion para token del usuario actual.
+   */
   constructor(private userService: UserService, private auth: AuthService) {}
   /** Indica si el plan está guardado por el usuario actual. */
   isPlanSaved = false;
@@ -50,18 +54,23 @@ export class PlansComponent implements OnInit {
   isReviewModalOpen = false;
   /** Reseña del usuario actual (si existe). */
   userReview: Review | null = null;
+  /** Detector manual para refrescar vista tras callbacks async. */
   private cdr = inject(ChangeDetectorRef);
   /** Controla el modal con la lista de reseñas. */
   isReviewsListModalOpen = false;
+  /** Servicio de actividades para resolver IDs asociados al plan. */
   private activityService = inject(ActivityService);
+  /** Servicio de planes para carga, guardado y valoraciones. */
   private planService = inject(PlanService);
+  /** Ruta activa para resolver el identificador del plan. */
   private route = inject(ActivatedRoute);
+  /** Router para navegación de retorno. */
   private router = inject(Router);
   /** Servicio de auth expuesto al template. */
   public authService = inject(AuthService);
 
   /** Carga el plan y sus actividades asociadas. */
-  ngOnInit() {
+  ngOnInit(): void {
     const idUrl = this.route.snapshot.paramMap.get('id');
     this.planService.getPlanId(idUrl!).subscribe({
       next: (data) => {
@@ -124,20 +133,20 @@ export class PlansComponent implements OnInit {
   }
 
   /** Abre el modal de lista de reseñas. */
-  openReviewsListModal() {
+  openReviewsListModal(): void {
     this.isReviewsListModalOpen = true;
   }
 
   /** Cierra el modal de lista de reseñas. */
-  closeReviewsListModal() {
+  closeReviewsListModal(): void {
     this.isReviewsListModalOpen = false;
   }
   /** Navega de vuelta al listado de planes. */
-  goBack() {
+  goBack(): void {
     this.router.navigate(['/plansList']);
   }
   /** Guarda el plan en el perfil del usuario actual. */
-  async savePlan() {
+  async savePlan(): Promise<void> {
     if (this.isPlanSaved) return; // Evitar guardar si ya está guardado
 
     const user = this.auth.currentUser;
@@ -246,17 +255,17 @@ export class PlansComponent implements OnInit {
   }
 
   /** Abre el modal de reseña. */
-  openReviewModal() {
+  openReviewModal(): void {
     this.isReviewModalOpen = true;
   }
 
   /** Cierra el modal de reseña. */
-  closeReviewModal() {
+  closeReviewModal(): void {
     this.isReviewModalOpen = false;
   }
 
   /** Emite la reseña al backend y sincroniza el plan con la respuesta. */
-  handleReviewSubmit(review: Review) {
+  handleReviewSubmit(review: Review): void {
     if (!this.plan) return;
 
     try {

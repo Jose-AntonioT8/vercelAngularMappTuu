@@ -28,7 +28,13 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
   styles: [],
 })
 export class PlansListComponent {
-  constructor(private route: Router) {}
+  /** Router para navegación a creación de plan. */
+  private route: Router;
+
+  /** @param route Router para navegación entre pantallas. */
+  constructor(route: Router) {
+    this.route = route;
+  }
   /** Texto de búsqueda para filtrar planes por nombre. */
   searchTerm = '';
   /** Estado del panel de filtros de planes. */
@@ -40,27 +46,27 @@ export class PlansListComponent {
   isFilterOpen = false;
 
   /** En desktop (>= 1024px) abre filtros por defecto. */
-  ngOnInit() {
+  ngOnInit(): void {
     if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
       this.isFilterOpen = true;
     }
   }
   /** Navega a la pantalla de creación de plan. */
-  goCreatePlan() {
+  goCreatePlan(): void {
     this.route.navigate(['/plansCreation']);
   }
   /** Alterna el panel de filtros. */
-  toggleFilter() {
+  toggleFilter(): void {
     this.isFilterOpen = !this.isFilterOpen;
   }
 
   /** Actualiza el estado de filtros desde el panel lateral. */
-  onFilterChanged(filterState: PlanFilterState) {
+  onFilterChanged(filterState: PlanFilterState): void {
     this.planFilters = filterState;
   }
 
   /** Cierra filtros en pantallas pequeñas. */
-  closeFilter() {
+  closeFilter(): void {
     if (typeof window !== 'undefined' && window.innerWidth < 1024) {
       this.isFilterOpen = false;
     }

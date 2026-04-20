@@ -31,8 +31,21 @@ export class CardComponent implements OnInit, OnChanges {
   activityColor = '';
   /** Dirección/resumen de ubicación derivada por reverse geocoding. */
   location?: string;
+  /** Router para navegación al detalle de actividad. */
+  private router: Router;
+  /** Servicio de mapas para resolver ubicación legible. */
+  private mapService: MapsService;
 
-  constructor(private router: Router, private mapService: MapsService) {}
+  /**
+   * Crea la card de actividad con navegación y geocodificación.
+   *
+   * @param router Router para navegar al detalle de actividad.
+   * @param mapService Servicio de mapas para resolver ubicacion legible.
+   */
+  constructor(router: Router, mapService: MapsService) {
+    this.router = router;
+    this.mapService = mapService;
+  }
 
   /** Recalcula color cuando cambia `activity` o `activityTypes`. */
   ngOnChanges(changes: SimpleChanges): void {
@@ -54,7 +67,7 @@ export class CardComponent implements OnInit, OnChanges {
   }
 
   /** Navega a la pantalla de detalle de la actividad. */
-  redirectToDetail() {
+  redirectToDetail(): void {
     this.router.navigate(['/activityDetail', this.activity.id]);
   }
 

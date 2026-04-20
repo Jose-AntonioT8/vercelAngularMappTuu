@@ -181,6 +181,7 @@ En desktop, el panel de filtros se muestra abierto.</p>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
                                 <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
                                 <code><a href="../components/HeaderComponent.html" target="_self" >HeaderComponent</a></code>
                                 <code><a href="../components/FilterComponent.html" target="_self" >FilterComponent</a></code>
                                 <code><a href="../components/ListComponent.html" target="_self" >ListComponent</a></code>
@@ -221,7 +222,17 @@ En desktop, el panel de filtros se muestra abierto.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#activityFilters" >activityFilters</a>
+                            </li>
+                            <li>
                                 <a href="#isFilterOpen" >isFilterOpen</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                <a href="#searchTerm" >searchTerm</a>
                             </li>
                         </ul>
                     </td>
@@ -243,6 +254,9 @@ En desktop, el panel de filtros se muestra abierto.</p>
                             </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onFilterChanged" >onFilterChanged</a>
                             </li>
                             <li>
                                 <a href="#toggleFilter" >toggleFilter</a>
@@ -270,7 +284,7 @@ En desktop, el panel de filtros se muestra abierto.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:35</a></div>
                             </td>
                         </tr>
 
@@ -284,6 +298,7 @@ En desktop, el panel de filtros se muestra abierto.</p>
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -298,6 +313,10 @@ En desktop, el panel de filtros se muestra abierto.</p>
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <p>Router para navegar entre pantallas.</p>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -337,8 +356,8 @@ En desktop, el panel de filtros se muestra abierto.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:72</a></div>
                         </td>
                     </tr>
 
@@ -376,8 +395,8 @@ En desktop, el panel de filtros se muestra abierto.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="48"
-                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:48</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -415,8 +434,8 @@ En desktop, el panel de filtros se muestra abierto.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -430,6 +449,75 @@ En desktop, el panel de filtros se muestra abierto.</p>
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFilterChanged"></a>
+                    <span class="name">
+                        <span ><b>onFilterChanged</b></span>
+                        <a href="#onFilterChanged"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onFilterChanged(filterState: <a href="../interfaces/ActivityFilterState.html" target="_self">ActivityFilterState</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Actualiza el estado de filtros desde el panel lateral.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>filterState</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ActivityFilterState.html" target="_self" >ActivityFilterState</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -454,8 +542,8 @@ En desktop, el panel de filtros se muestra abierto.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="44"
-                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:44</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -483,6 +571,47 @@ En desktop, el panel de filtros se muestra abierto.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="activityFilters"></a>
+                    <span class="name">
+                        <span ><b>activityFilters</b></span>
+                        <a href="#activityFilters"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ActivityFilterState.html" target="_self" >ActivityFilterState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    activityType: null,
+    location: null,
+    ratingMin: 0,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Estado del panel de filtros de actividades.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="isFilterOpen"></a>
                     <span class="name">
                         <span ><b>isFilterOpen</b></span>
@@ -503,13 +632,83 @@ En desktop, el panel de filtros se muestra abierto.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:50</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Estado del panel de filtros (mobile).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Router para navegación a creación de actividad.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchTerm"></a>
+                    <span class="name">
+                        <span ><b>searchTerm</b></span>
+                        <a href="#searchTerm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/activities/list-activities/list-activities.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Texto de búsqueda para filtrar actividades por nombre.</p>
 </div>
                 </td>
             </tr>
@@ -524,8 +723,9 @@ En desktop, el panel de filtros se muestra abierto.</p>
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Component } from &#x27;@angular/core&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
-import { FilterComponent } from &#x27;../../../common/activities/filter/filter.component&#x27;;
+import { ActivityFilterState, FilterComponent } from &#x27;../../../common/activities/filter/filter.component&#x27;;
 import { ListComponent } from &#x27;../../../common/activities/list/list.component&#x27;;
 import { HeaderComponent } from &#x27;../../../common/header/header.component&#x27;;
 import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
@@ -543,6 +743,7 @@ import { RouterModule } from &#x27;@angular/router&#x27;;
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     HeaderComponent,
     FilterComponent,
     ListComponent,
@@ -553,27 +754,45 @@ import { RouterModule } from &#x27;@angular/router&#x27;;
   styles: [],
 })
 export class ListActivitiesComponent {
-  constructor(private route: Router) {}
+  /** Router para navegación a creación de actividad. */
+  private route: Router;
+
+  /** @param route Router para navegar entre pantallas. */
+  constructor(route: Router) {
+    this.route &#x3D; route;
+  }
+  /** Texto de búsqueda para filtrar actividades por nombre. */
+  searchTerm &#x3D; &#x27;&#x27;;
+  /** Estado del panel de filtros de actividades. */
+  activityFilters: ActivityFilterState &#x3D; {
+    activityType: null,
+    location: null,
+    ratingMin: 0,
+  };
   /** Estado del panel de filtros (mobile). */
   isFilterOpen &#x3D; false;
 
   /** En desktop (&gt;&#x3D; 1024px) abre filtros por defecto. */
-  ngOnInit() {
+  ngOnInit(): void {
     if (typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; window.innerWidth &gt;&#x3D; 1024) {
       this.isFilterOpen &#x3D; true;
     }
   }
 
   /** Alterna el panel de filtros. */
-  toggleFilter() {
+  toggleFilter(): void {
     this.isFilterOpen &#x3D; !this.isFilterOpen;
   }
+  /** Actualiza el estado de filtros desde el panel lateral. */
+  onFilterChanged(filterState: ActivityFilterState): void {
+    this.activityFilters &#x3D; filterState;
+  }
   /** Navega a la pantalla de creación de actividad. */
-  goCreateActivity() {
+  goCreateActivity(): void {
     this.route.navigate([&#x27;/activitiesCreation&#x27;]);
   }
   /** Cierra filtros en pantallas pequeñas. */
-  closeFilter() {
+  closeFilter(): void {
     if (window.innerWidth &lt; 1024) {
       this.isFilterOpen &#x3D; false;
     }
@@ -588,7 +807,7 @@ export class ListActivitiesComponent {
 &lt;/header&gt;
 
 &lt;div class&#x3D;&quot;bg-white border-b shadow-sm&quot;&gt;
-  &lt;div class&#x3D;&quot;px-4 py-3 flex items-center justify-center&quot;&gt;
+  &lt;div class&#x3D;&quot;px-4 py-3 flex items-center justify-center gap-3&quot;&gt;
     &lt;div
       class&#x3D;&quot;flex items-center bg-gray-100 rounded-full px-4 py-2 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl transition-shadow focus-within:ring-2 focus-within:ring-blue-200 shadow-md&quot;
     &gt;
@@ -599,6 +818,7 @@ export class ListActivitiesComponent {
       /&gt;
       &lt;input
         type&#x3D;&quot;search&quot;
+        [(ngModel)]&#x3D;&quot;searchTerm&quot;
         [placeholder]&#x3D;&quot;&#x27;activities.searchPlaceholder&#x27; | translate&quot;
         class&#x3D;&quot;bg-transparent border-none outline-none w-full text-sm text-gray-700 placeholder-gray-400&quot;
       /&gt;
@@ -641,7 +861,7 @@ export class ListActivitiesComponent {
   &lt;div class&#x3D;&quot;hidden xl:block&quot;&gt;&lt;/div&gt;
 
   &lt;section class&#x3D;&quot;p-2.5 xl:p-6 xl:px-8 w-full&quot;&gt;
-    &lt;app-list&gt;&lt;/app-list&gt;
+    &lt;app-list [searchTerm]&#x3D;&quot;searchTerm&quot; [filterState]&#x3D;&quot;activityFilters&quot;&gt;&lt;/app-list&gt;
   &lt;/section&gt;
 
   &lt;div
@@ -671,7 +891,7 @@ export class ListActivitiesComponent {
       &lt;/button&gt;
     &lt;/div&gt;
     &lt;div class&#x3D;&quot;xl:px-4 xl:py-2&quot;&gt;
-      &lt;app-filter&gt;&lt;/app-filter&gt;
+      &lt;app-filter (filterChanged)&#x3D;&quot;onFilterChanged($event)&quot;&gt;&lt;/app-filter&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/section&gt;
@@ -713,9 +933,9 @@ export class ListActivitiesComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><header class="sticky top-0 z-50">  <app-header></app-header></header><div class="bg-white border-b shadow-sm">  <div class="px-4 py-3 flex items-center justify-center">    <div      class="flex items-center bg-gray-100 rounded-full px-4 py-2 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl transition-shadow focus-within:ring-2 focus-within:ring-blue-200 shadow-md"    >      <img        src="assets/icons/header/search.svg"        alt="Search"        class="w-4 h-4 opacity-50 mr-2"      />      <input        type="search"        [placeholder]="\'activities.searchPlaceholder\' | translate"        class="bg-transparent border-none outline-none w-full text-sm text-gray-700 placeholder-gray-400"      />    </div>    <button      (click)="goCreateActivity()"      class="flex items-center gap-20 px-4 py-2 rounded-full bg-[#5675AC] text-white hover:bg-[#4a6399] hover:text-white transition-all duration-200 text-sm font-medium"    >      {{ "dashboard.createActivities" | translate }}    </button>  </div></div><section  class="pb-5 block xl:grid xl:grid-cols-[20%_80%] xl:items-start w-full min-h-[80vh] relative">  <button    (click)="toggleFilter()"    class="xl:hidden fixed top-20 right-4 z-40 bg-[#5675AC] text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2 hover:bg-[#4a6399] transition-colors"  >    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">      <path        stroke-linecap="round"        stroke-linejoin="round"        stroke-width="2"        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"      ></path>    </svg>    {{ "activities.filters" | translate }}  </button>  <div    class="xl:hidden fixed inset-0 bg-black/50 z-30 transition-opacity"    [class.opacity-0]="!isFilterOpen"    [class.pointer-events-none]="!isFilterOpen"    [class.opacity-100]="isFilterOpen"    (click)="closeFilter()"  ></div>  <div class="hidden xl:block"></div>  <section class="p-2.5 xl:p-6 xl:px-8 w-full">    <app-list></app-list>  </section>  <div    class="fixed xl:fixed xl:top-[160px] xl:left-0 left-0 top-0 h-full xl:h-[calc(100vh-160px)] w-80 xl:w-[20%] max-h-screen xl:max-h-none overflow-y-auto z-40 xl:z-auto transform xl:translate-x-0 transition-transform duration-300 ease-in-out"    [class.-translate-x-full]="!isFilterOpen"    [class.translate-x-0]="isFilterOpen"    (click)="$event.stopPropagation()"  >    <div      class="xl:hidden flex justify-between items-center p-4 border-b bg-[#CFE8FF]"    >      <h2 class="text-xl font-bold">{{ "activities.filters" | translate }}</h2>      <button (click)="closeFilter()" class="text-gray-600 hover:text-gray-800">        <svg          class="w-6 h-6"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M6 18L18 6M6 6l12 12"          ></path>        </svg>      </button>    </div>    <div class="xl:px-4 xl:py-2">      <app-filter></app-filter>    </div>  </div></section><!--<ng-container *ngIf="activities$ | async as activities">    <section class="activity-list-content">    <section class="activities-list">        <app-activity-item *ngFor="let activity of activities" [activity]="activity"></app-activity-item>    </section>    </section></ng-container>--></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
-    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
+        var COMPONENT_TEMPLATE = '<div><header class="sticky top-0 z-50">  <app-header></app-header></header><div class="bg-white border-b shadow-sm">  <div class="px-4 py-3 flex items-center justify-center gap-3">    <div      class="flex items-center bg-gray-100 rounded-full px-4 py-2 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl transition-shadow focus-within:ring-2 focus-within:ring-blue-200 shadow-md"    >      <img        src="assets/icons/header/search.svg"        alt="Search"        class="w-4 h-4 opacity-50 mr-2"      />      <input        type="search"        [(ngModel)]="searchTerm"        [placeholder]="\'activities.searchPlaceholder\' | translate"        class="bg-transparent border-none outline-none w-full text-sm text-gray-700 placeholder-gray-400"      />    </div>    <button      (click)="goCreateActivity()"      class="flex items-center gap-20 px-4 py-2 rounded-full bg-[#5675AC] text-white hover:bg-[#4a6399] hover:text-white transition-all duration-200 text-sm font-medium"    >      {{ "dashboard.createActivities" | translate }}    </button>  </div></div><section  class="pb-5 block xl:grid xl:grid-cols-[20%_80%] xl:items-start w-full min-h-[80vh] relative">  <button    (click)="toggleFilter()"    class="xl:hidden fixed top-20 right-4 z-40 bg-[#5675AC] text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2 hover:bg-[#4a6399] transition-colors"  >    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">      <path        stroke-linecap="round"        stroke-linejoin="round"        stroke-width="2"        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"      ></path>    </svg>    {{ "activities.filters" | translate }}  </button>  <div    class="xl:hidden fixed inset-0 bg-black/50 z-30 transition-opacity"    [class.opacity-0]="!isFilterOpen"    [class.pointer-events-none]="!isFilterOpen"    [class.opacity-100]="isFilterOpen"    (click)="closeFilter()"  ></div>  <div class="hidden xl:block"></div>  <section class="p-2.5 xl:p-6 xl:px-8 w-full">    <app-list [searchTerm]="searchTerm" [filterState]="activityFilters"></app-list>  </section>  <div    class="fixed xl:fixed xl:top-[160px] xl:left-0 left-0 top-0 h-full xl:h-[calc(100vh-160px)] w-80 xl:w-[20%] max-h-screen xl:max-h-none overflow-y-auto z-40 xl:z-auto transform xl:translate-x-0 transition-transform duration-300 ease-in-out"    [class.-translate-x-full]="!isFilterOpen"    [class.translate-x-0]="isFilterOpen"    (click)="$event.stopPropagation()"  >    <div      class="xl:hidden flex justify-between items-center p-4 border-b bg-[#CFE8FF]"    >      <h2 class="text-xl font-bold">{{ "activities.filters" | translate }}</h2>      <button (click)="closeFilter()" class="text-gray-600 hover:text-gray-800">        <svg          class="w-6 h-6"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M6 18L18 6M6 6l12 12"          ></path>        </svg>      </button>    </div>    <div class="xl:px-4 xl:py-2">      <app-filter (filterChanged)="onFilterChanged($event)"></app-filter>    </div>  </div></section><!--<ng-container *ngIf="activities$ | async as activities">    <section class="activity-list-content">    <section class="activities-list">        <app-activity-item *ngFor="let activity of activities" [activity]="activity"></app-activity-item>    </section>    </section></ng-container>--></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
     var ACTUAL_COMPONENT = {'name': 'ListActivitiesComponent'};
 </script>
 <script src="../js/tree.js"></script>

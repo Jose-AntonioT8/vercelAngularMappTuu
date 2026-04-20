@@ -15,17 +15,34 @@ import {
   ResolveReportPayload,
 } from '../../common/models/reporting.types';
 
+/**
+ * Servicio de reportes y moderación.
+ *
+ * Centraliza llamadas al backend para:
+ * - crear reportes de actividad
+ * - listar reportes en panel admin
+ * - resolver y eliminar reportes
+ */
 @Injectable({ providedIn: 'root' })
 export class ReportingService {
+  /** Base API dinámica (proxy local en dev, URL API en producción). */
   private readonly apiBase =
     typeof window !== 'undefined' && window.location.hostname === 'localhost'
       ? '/api'
       : apiUrl;
+  /** Endpoint público de creación de reportes. */
   private readonly reportsUrl = `${this.apiBase}/reports`;
+  /** Endpoint admin de moderación de reportes. */
   private readonly adminReportsUrl = `${this.apiBase}/admin/reports`;
 
+  /** @param http Cliente HTTP de Angular. */
   constructor(private http: HttpClient) {}
 
+  /**
+   * Crea un reporte de actividad.
+   * @param payload Datos del reporte.
+   * @param token Bearer token del usuario autenticado.
+   */
   createReport(
     payload: CreateActivityReportPayload,
     token: string
@@ -37,6 +54,11 @@ export class ReportingService {
       .pipe(timeout(15000));
   }
 
+  /**
+   * Elimina un reporte desde panel de moderación.
+   * @param id ID del reporte.
+   * @param token Bearer token de admin.
+   */
   deleteReport(id: string, token: string): Observable<unknown> {
     const reportId = encodeURIComponent(id.trim());
     return this.http.delete(`${this.adminReportsUrl}/${reportId}`, {
@@ -44,6 +66,11 @@ export class ReportingService {
     });
   }
 
+  /**
+   * Obtiene reportes para administración con filtros opcionales.
+   * @param token Bearer token de admin.
+   * @param filters Filtros de estado/motivo/paginación.
+   */
   getAdminReports(
     token: string,
     filters: ReportQueryFilters = {}
@@ -62,6 +89,11 @@ export class ReportingService {
       .pipe(map((body) => this.normalizeAdminReportsList(body)));
   }
 
+  /**
+   * Resuelve un reporte (dismiss/delete_activity).
+   *
+   * Incluye fallback a `PUT` para backends que no soporten `PATCH`.
+   */
   resolveReport(
     reportId: string,
     payload: ResolveReportPayload,
@@ -82,6 +114,7 @@ export class ReportingService {
     );
   }
 
+  /** Normaliza respuesta arbitraria del backend a lista tipada de reportes. */
   private normalizeAdminReportsList(body: unknown): ActivityReport[] {
     const rawList = this.extractReportsArray(body);
     return rawList
@@ -89,6 +122,7 @@ export class ReportingService {
       .filter((r) => r.id.length > 0);
   }
 
+  /** Convierte motivo libre del backend al enum `ReportReason` permitido. */
   private normalizeReportReason(raw: string): ReportReason {
     const allowed: ReportReason[] = [
       'spam',
@@ -101,6 +135,7 @@ export class ReportingService {
     return 'other';
   }
 
+  /** Convierte estado libre del backend al enum `ReportStatus` permitido. */
   private normalizeReportStatus(raw: string): ReportStatus {
     const s = raw.trim().toLowerCase();
     const allowed: ReportStatus[] = [
@@ -115,6 +150,10 @@ export class ReportingService {
     return 'pending';
   }
 
+  /**
+   * Extrae un array de reportes desde diferentes formatos de respuesta.
+   * Soporta claves: `data`, `reports`, `items`, `results`, `rows`.
+   */
   private extractReportsArray(body: unknown): unknown[] {
     if (Array.isArray(body)) return body;
     if (body && typeof body === 'object') {
@@ -127,6 +166,7 @@ export class ReportingService {
     return [];
   }
 
+  /** Normaliza un elemento crudo del backend a `ActivityReport`. */
   private normalizeReportItem(raw: unknown): ActivityReport {
     if (!raw || typeof raw !== 'object') return this.emptyReport();
     const r = raw as Record<string, unknown>;
@@ -179,6 +219,7 @@ export class ReportingService {
     };
   }
 
+  /** Fallback vacío para elementos inválidos. */
   private emptyReport(): ActivityReport {
     return {
       id: '',
@@ -190,11 +231,13 @@ export class ReportingService {
     };
   }
 
+  /** Coerce opcional de fechas para campos que pueden ser undefined. */
   private coerceDateOptional(v: unknown): string | number | Date | undefined {
     if (v == null) return undefined;
     return this.coerceDateValue(v);
   }
 
+  /** Convierte distintos formatos de fecha/timestamp a un valor utilizable en UI. */
   private coerceDateValue(v: unknown): string | number | Date {
     if (v instanceof Date) return v;
     if (typeof v === 'number' && !Number.isNaN(v)) return v;

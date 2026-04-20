@@ -184,7 +184,7 @@ Incluye un mapeo de errores HTTP comunes para dar feedback útil en UI.</p>
                                 <code><a href="https://angular.io/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
                                 <code><a href="../components/HeaderComponent.html" target="_self" >HeaderComponent</a></code>
                             <code>TranslatePipe</code>
-                                <code><a href="../components/LanguageSelectorComponent.html" target="_self" >LanguageSelectorComponent</a></code>
+                                <code><a href="../directives/HighlightDirective.html" target="_self" >HighlightDirective</a></code>
                 </td>
             </tr>
 
@@ -227,7 +227,17 @@ Incluye un mapeo de errores HTTP comunes para dar feedback útil en UI.</p>
                                 <a href="#answer" >answer</a>
                             </li>
                             <li>
+                                <a href="#answerBullets" >answerBullets</a>
+                            </li>
+                            <li>
+                                <a href="#answerParagraphs" >answerParagraphs</a>
+                            </li>
+                            <li>
                                 <a href="#errorMessage" >errorMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#iaAssistantService" >iaAssistantService</a>
                             </li>
                             <li>
                                 <a href="#isLoading" >isLoading</a>
@@ -247,6 +257,10 @@ Incluye un mapeo de errores HTTP comunes para dar feedback útil en UI.</p>
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#applyAnswerFormatting" >applyAnswerFormatting</a>
+                            </li>
                             <li>
                                 <a href="#sendQuestion" >sendQuestion</a>
                             </li>
@@ -276,6 +290,77 @@ Incluye un mapeo de errores HTTP comunes para dar feedback útil en UI.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="applyAnswerFormatting"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>applyAnswerFormatting</b></span>
+                        <a href="#applyAnswerFormatting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>applyAnswerFormatting(rawAnswer: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/features/ia/ia/ia.component.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Convierte texto IA en párrafos y bullets para una lectura más clara.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>rawAnswer</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="sendQuestion"></a>
                     <span class="name">
                         <span ><b>sendQuestion</b></span>
@@ -292,8 +377,8 @@ Incluye un mapeo de errores HTTP comunes para dar feedback útil en UI.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/app/features/ia/ia/ia.component.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/app/features/ia/ia/ia.component.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -341,13 +426,87 @@ Incluye un mapeo de errores HTTP comunes para dar feedback útil en UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/ia/ia/ia.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/ia/ia/ia.component.ts:37</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Respuesta renderizada en UI.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="answerBullets"></a>
+                    <span class="name">
+                        <span ><b>answerBullets</b></span>
+                        <a href="#answerBullets"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/ia/ia/ia.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Elementos renderizados como lista para mayor legibilidad.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="answerParagraphs"></a>
+                    <span class="name">
+                        <span ><b>answerParagraphs</b></span>
+                        <a href="#answerParagraphs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/ia/ia/ia.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Párrafos renderizados de la respuesta.</p>
 </div>
                 </td>
             </tr>
@@ -378,13 +537,51 @@ Incluye un mapeo de errores HTTP comunes para dar feedback útil en UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/ia/ia/ia.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/ia/ia/ia.component.ts:39</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Mensaje de error para UI.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="iaAssistantService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>iaAssistantService</b></span>
+                        <a href="#iaAssistantService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(IaAssistantService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/ia/ia/ia.component.ts:32</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio IA para enviar prompts y recibir respuestas.</p>
 </div>
                 </td>
             </tr>
@@ -415,7 +612,7 @@ Incluye un mapeo de errores HTTP comunes para dar feedback útil en UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/ia/ia/ia.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/ia/ia/ia.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -452,7 +649,7 @@ Incluye un mapeo de errores HTTP comunes para dar feedback útil en UI.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/features/ia/ia/ia.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/ia/ia/ia.component.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -477,7 +674,7 @@ import { Component, inject } from &#x27;@angular/core&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
 import { catchError, finalize, of } from &#x27;rxjs&#x27;;
 import { HeaderComponent } from &#x27;../../../common/header/header.component&#x27;;
-import { LanguageSelectorComponent } from &#x27;../../../common/language-selector/language-selector.component&#x27;;
+import { HighlightDirective } from &#x27;../../../core/directives/highlight.directive&#x27;;
 import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
 import { IaAssistantService } from &#x27;../../../core/services/ia-assistant.service&#x27;;
 
@@ -490,11 +687,18 @@ import { IaAssistantService } from &#x27;../../../core/services/ia-assistant.ser
 @Component({
   selector: &#x27;app-ia&#x27;,
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent, TranslatePipe, LanguageSelectorComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HeaderComponent,
+    TranslatePipe,
+    HighlightDirective,
+  ],
   templateUrl: &#x27;./ia.component.html&#x27;,
   styleUrl: &#x27;./ia.component.scss&#x27;,
 })
 export class IaComponent {
+  /** Servicio IA para enviar prompts y recibir respuestas. */
   private iaAssistantService &#x3D; inject(IaAssistantService);
 
   /** Pregunta del usuario (input). */
@@ -503,6 +707,10 @@ export class IaComponent {
   answer &#x3D; &#x27;&#x27;;
   /** Mensaje de error para UI. */
   errorMessage &#x3D; &#x27;&#x27;;
+  /** Párrafos renderizados de la respuesta. */
+  answerParagraphs: string[] &#x3D; [];
+  /** Elementos renderizados como lista para mayor legibilidad. */
+  answerBullets: string[] &#x3D; [];
   /** Flag para evitar envíos concurrentes. */
   isLoading &#x3D; false;
 
@@ -515,6 +723,8 @@ export class IaComponent {
     this.isLoading &#x3D; true;
     this.errorMessage &#x3D; &#x27;&#x27;;
     this.answer &#x3D; &#x27;&#x27;;
+    this.answerParagraphs &#x3D; [];
+    this.answerBullets &#x3D; [];
 
     this.iaAssistantService
       .ask(this.question)
@@ -556,10 +766,30 @@ export class IaComponent {
         next: (response) &#x3D;&gt; {
           if (response &amp;&amp; response.trim()) {
             this.answer &#x3D; response;
+            this.applyAnswerFormatting(response);
             this.errorMessage &#x3D; &#x27;&#x27;;
           }
         },
       });
+  }
+
+  /** Convierte texto IA en párrafos y bullets para una lectura más clara. */
+  private applyAnswerFormatting(rawAnswer: string): void {
+    const lines &#x3D; rawAnswer
+      .split(&#x27;\n&#x27;)
+      .map((line) &#x3D;&gt; line.trim())
+      .filter(Boolean);
+
+    const bulletPattern &#x3D; /^(?:[-*•]\s+|\d+\.\s+)/;
+    const bullets &#x3D; lines
+      .filter((line) &#x3D;&gt; bulletPattern.test(line))
+      .map((line) &#x3D;&gt; line.replace(bulletPattern, &#x27;&#x27;).trim())
+      .filter(Boolean);
+
+    const paragraphs &#x3D; lines.filter((line) &#x3D;&gt; !bulletPattern.test(line));
+
+    this.answerBullets &#x3D; bullets;
+    this.answerParagraphs &#x3D; paragraphs;
   }
 }
 </code></pre>
@@ -606,10 +836,32 @@ export class IaComponent {
 
     &lt;article
       *ngIf&#x3D;&quot;answer&quot;
-      class&#x3D;&quot;mt-6 rounded-xl border border-slate-200 bg-slate-50 p-4&quot;
+      appHighlight
+      [appHighlight]&#x3D;&quot;&#x27;#fff7ed&#x27;&quot;
+      [highlightDefault]&#x3D;&quot;&#x27;#f8fafc&#x27;&quot;
+      class&#x3D;&quot;mt-6 rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors duration-200&quot;
     &gt;
       &lt;h2 class&#x3D;&quot;text-sm font-semibold text-slate-800 mb-2&quot;&gt;{{ &#x27;ia.answer&#x27; | translate }}&lt;/h2&gt;
-      &lt;p class&#x3D;&quot;text-slate-700 whitespace-pre-wrap&quot;&gt;{{ answer }}&lt;/p&gt;
+
+      &lt;div class&#x3D;&quot;space-y-3 text-slate-700&quot;&gt;
+        &lt;p
+          *ngFor&#x3D;&quot;let paragraph of answerParagraphs&quot;
+          class&#x3D;&quot;leading-relaxed whitespace-pre-wrap&quot;
+        &gt;
+          {{ paragraph }}
+        &lt;/p&gt;
+
+        &lt;ul *ngIf&#x3D;&quot;answerBullets.length&quot; class&#x3D;&quot;list-disc pl-5 space-y-1&quot;&gt;
+          &lt;li *ngFor&#x3D;&quot;let bullet of answerBullets&quot; class&#x3D;&quot;leading-relaxed&quot;&gt;{{ bullet }}&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;p
+          *ngIf&#x3D;&quot;!answerParagraphs.length &amp;&amp; !answerBullets.length&quot;
+          class&#x3D;&quot;leading-relaxed whitespace-pre-wrap&quot;
+        &gt;
+          {{ answer }}
+        &lt;/p&gt;
+      &lt;/div&gt;
     &lt;/article&gt;
   &lt;/section&gt;
 &lt;/main&gt;
@@ -642,9 +894,9 @@ export class IaComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><app-header></app-header><main class="min-h-screen bg-slate-50 py-8 px-4">  <section    class="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8"  >    <h1 class="text-2xl md:text-3xl font-bold text-slate-900">      {{ \'ia.title\' | translate }}    </h1>    <p class="mt-2 text-slate-600">      {{ \'ia.description\' | translate }}    </p>    <div class="mt-6 space-y-3">      <label for="ia-question" class="block text-sm font-medium text-slate-700"        >{{ \'ia.question\' | translate }}</label>      <textarea        id="ia-question"        [(ngModel)]="question"        [disabled]="isLoading"        rows="5"        [placeholder]="\'ia.questionPlaceholder\' | translate"        class="w-full rounded-xl border border-slate-300 focus:border-brand-primary focus:ring-brand-primary resize-y p-3 text-slate-900"      ></textarea>      <button        type="button"        (click)="sendQuestion()"        [disabled]="isLoading || !question.trim()"        class="inline-flex items-center justify-center rounded-xl px-5 py-2.5 font-semibold text-white bg-brand-primary hover:bg-brand-secondary disabled:opacity-50 disabled:cursor-not-allowed"      >      {{ (isLoading ? \'ia.asking\' : \'ia.ask\') | translate }}      </button>    </div>    <p *ngIf="errorMessage" class="mt-4 text-sm text-red-600">      {{ errorMessage }}    </p>    <article      *ngIf="answer"      class="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-4"    >      <h2 class="text-sm font-semibold text-slate-800 mb-2">{{ \'ia.answer\' | translate }}</h2>      <p class="text-slate-700 whitespace-pre-wrap">{{ answer }}</p>    </article>  </section></main></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
-    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
+        var COMPONENT_TEMPLATE = '<div><app-header></app-header><main class="min-h-screen bg-slate-50 py-8 px-4">  <section    class="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8"  >    <h1 class="text-2xl md:text-3xl font-bold text-slate-900">      {{ \'ia.title\' | translate }}    </h1>    <p class="mt-2 text-slate-600">      {{ \'ia.description\' | translate }}    </p>    <div class="mt-6 space-y-3">      <label for="ia-question" class="block text-sm font-medium text-slate-700"        >{{ \'ia.question\' | translate }}</label>      <textarea        id="ia-question"        [(ngModel)]="question"        [disabled]="isLoading"        rows="5"        [placeholder]="\'ia.questionPlaceholder\' | translate"        class="w-full rounded-xl border border-slate-300 focus:border-brand-primary focus:ring-brand-primary resize-y p-3 text-slate-900"      ></textarea>      <button        type="button"        (click)="sendQuestion()"        [disabled]="isLoading || !question.trim()"        class="inline-flex items-center justify-center rounded-xl px-5 py-2.5 font-semibold text-white bg-brand-primary hover:bg-brand-secondary disabled:opacity-50 disabled:cursor-not-allowed"      >      {{ (isLoading ? \'ia.asking\' : \'ia.ask\') | translate }}      </button>    </div>    <p *ngIf="errorMessage" class="mt-4 text-sm text-red-600">      {{ errorMessage }}    </p>    <article      *ngIf="answer"      appHighlight      [appHighlight]="\'#fff7ed\'"      [highlightDefault]="\'#f8fafc\'"      class="mt-6 rounded-xl border border-slate-200 bg-slate-50 p-4 transition-colors duration-200"    >      <h2 class="text-sm font-semibold text-slate-800 mb-2">{{ \'ia.answer\' | translate }}</h2>      <div class="space-y-3 text-slate-700">        <p          *ngFor="let paragraph of answerParagraphs"          class="leading-relaxed whitespace-pre-wrap"        >          {{ paragraph }}        </p>        <ul *ngIf="answerBullets.length" class="list-disc pl-5 space-y-1">          <li *ngFor="let bullet of answerBullets" class="leading-relaxed">{{ bullet }}</li>        </ul>        <p          *ngIf="!answerParagraphs.length && !answerBullets.length"          class="leading-relaxed whitespace-pre-wrap"        >          {{ answer }}        </p>      </div>    </article>  </section></main></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+    var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
     var ACTUAL_COMPONENT = {'name': 'IaComponent'};
 </script>
 <script src="../js/tree.js"></script>

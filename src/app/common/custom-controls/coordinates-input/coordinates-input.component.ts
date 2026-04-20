@@ -61,6 +61,7 @@ export class CoordinatesInputComponent implements ControlValueAccessor {
   /** Callback del formulario al marcar como tocado. */
   onTouched: any = () => {};
 
+  /** @param sanitizer Sanitiza la URL del mapa embebido. */
   constructor(private sanitizer: DomSanitizer) {}
 
   /** Sincroniza el valor externo (form) hacia el control. */
@@ -74,6 +75,7 @@ export class CoordinatesInputComponent implements ControlValueAccessor {
     }
   }
 
+  /** Registra el callback de cambio del formulario padre. */
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
