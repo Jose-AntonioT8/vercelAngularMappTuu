@@ -1,6 +1,6 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { User } from '@angular/fire/auth';
+import { User as FirebaseUser } from '@angular/fire/auth';
 import { Router, RouterModule } from '@angular/router';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { DefaultAvatarDirective } from '../../../core/directives/default-avatar.directive';
@@ -8,6 +8,7 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { AuthService } from '../../../core/services/auth.service';
 import { CloudinaryService } from '../../../core/services/firebase-media.service';
 import { TranslationService } from '../../../core/services/translation.service';
+import { UserService } from '../../../core/services/user.service';
 
 /**
  * Pantalla de perfil de usuario.
@@ -30,18 +31,16 @@ export class ProfileComponent implements OnInit {
   @ViewChild('avatarInput') avatarInput!: ElementRef<HTMLInputElement>;
 
   /** Usuario autenticado actual (Firebase Auth). */
-  user: User | null = null;
+  user: FirebaseUser | null = null;
   /** Flag de subida de avatar en curso. */
   isUploadingAvatar = false;
   /** Preview local del avatar antes de subir (data URL). */
   avatarPreview: string | null = null;
 
-  /** Estadísticas (placeholder) para tarjetas de perfil. */
-  stats = {
-    activitiesVisited: 12,
-    plansCreated: 5,
-    favorites: 8,
-  };
+  /** Total de actividades guardadas por el usuario. */
+  savedActivitiesCount = 0;
+  /** Total de planes guardados por el usuario. */
+  savedPlansCount = 0;
 
   /** Logros (placeholder) renderizados en UI. */
   achievements = [
@@ -109,6 +108,11 @@ export class ProfileComponent implements OnInit {
     return this.achievements.filter((a) => a.unlocked).length;
   }
 
+  /** Total de favoritos (actividades + planes guardados). */
+  get favoritesCount(): number {
+    return this.savedActivitiesCount + this.savedPlansCount;
+  }
+
   /** Controla qué sección está expandida en UI. */
   expandedSection: 'achievements' | 'recent' | 'actions' | null = null;
   /** Controla el modal de reset de contraseña. */
@@ -124,7 +128,8 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private location: Location,
     private translationService: TranslationService,
-    private mediaService: CloudinaryService
+    private mediaService: CloudinaryService,
+    private userService: UserService
   ) {}
 
   /** Envía email de restablecimiento de contraseña (si hay email). */
@@ -228,7 +233,19 @@ export class ProfileComponent implements OnInit {
       this.user = user;
       if (!user) {
         this.router.navigate(['/login']);
+        return;
       }
+
+      this.userService.getUserId(user.uid).subscribe({
+        next: (profile) => {
+          this.savedActivitiesCount = profile.savedActivities?.length || 0;
+          this.savedPlansCount = profile.savedPlans?.length || 0;
+        },
+        error: () => {
+          this.savedActivitiesCount = 0;
+          this.savedPlansCount = 0;
+        },
+      });
     });
   }
 
