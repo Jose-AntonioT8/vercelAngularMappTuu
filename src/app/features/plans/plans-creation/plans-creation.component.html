@@ -330,9 +330,9 @@
                 />
               </svg>
               @if (isGeneratingDescription) {
-                {{ "messages.generatingWithAI" | translate }}
+                {{ "messages.generatingWithAI" | translate : "generando con ia..." }}
               } @else {
-                {{ "messages.autocompleteWithAI" | translate }}
+                {{ "messages.autocompleteWithAI" | translate : "autocompletar con ia" }}
               }
             </button>
           </div>

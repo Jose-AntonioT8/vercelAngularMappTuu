@@ -365,8 +365,8 @@ export class PlansCreationComponent implements OnInit {
       new Set(
         selectedActivities
           .map((activity) => {
-            const lat = (activity.latitude || '').trim();
-            const lng = (activity.longitude || '').trim();
+            const lat = String(activity.latitude ?? '').trim();
+            const lng = String(activity.longitude ?? '').trim();
             return lat && lng ? `${lat}, ${lng}` : '';
           })
           .filter(Boolean),
