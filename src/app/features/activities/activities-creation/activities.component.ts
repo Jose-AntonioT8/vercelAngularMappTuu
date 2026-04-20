@@ -11,6 +11,7 @@ import { firstValueFrom } from 'rxjs';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 import { MapPreviewComponent } from '../../../common/maps/map-preview.component';
 import { ActivityType } from '../../../common/models/activityType.models';
+import { HighlightDirective } from '../../../core/directives/highlight.directive';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
 import { ActivityTypeService } from '../../../core/services/activitytype.service';
@@ -36,6 +37,7 @@ import { UserService } from '../../../core/services/user.service';
     RouterModule,
     ReactiveFormsModule,
     TranslatePipe,
+    HighlightDirective,
     MapPreviewComponent,
     LanguageSelectorComponent,
   ],

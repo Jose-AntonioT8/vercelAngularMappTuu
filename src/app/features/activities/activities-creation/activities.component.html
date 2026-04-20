@@ -51,15 +51,19 @@
             (click)="triggerFileInput()"
             class="w-full h-full rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 bg-white cursor-pointer relative"
           >
+            @if (currentImage) {
             <img
-              [src]="
-                currentImage ||
-                'https://via.placeholder.com/600x800?text=No+Image'
-              "
+              [src]="currentImage"
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               alt="Activity Preview"
-              onerror="this.src='https://via.placeholder.com/600x800?text=Invalid+URL'"
             />
+            } @else {
+            <div
+              class="w-full h-full bg-slate-100 text-slate-400 text-sm font-medium flex items-center justify-center"
+            >
+              {{ "activities.uploadImage" | translate }}
+            </div>
+            }
 
             <div
               class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center"
@@ -317,6 +321,9 @@
           </div>
           <textarea
             formControlName="description"
+            appHighlight
+            [appHighlight]="'#fff7ed'"
+            [highlightDefault]="'#ffffff'"
             rows="4"
             class="w-full bg-white border border-slate-200 rounded-2xl p-5 text-slate-700 leading-relaxed outline-none resize-none transition-all shadow-sm"
             onfocus="this.style.borderColor='#5675AC'; this.style.boxShadow='0 0 0 4px rgba(86, 117, 172, 0.1)'"

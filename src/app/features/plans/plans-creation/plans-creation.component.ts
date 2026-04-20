@@ -5,6 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 import { Activity } from '../../../common/models/activity.model';
+import { HighlightDirective } from '../../../core/directives/highlight.directive';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
 import { AuthService } from '../../../core/services/auth.service';
@@ -28,6 +29,7 @@ import { UserService } from '../../../core/services/user.service';
     RouterModule,
     ReactiveFormsModule,
     TranslatePipe,
+    HighlightDirective,
     LanguageSelectorComponent,
   ],
   templateUrl: './plans-creation.component.html',
