@@ -5,10 +5,8 @@ import { Router, RouterModule } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 import { Activity } from '../../../common/models/activity.model';
-import { ActivityType } from '../../../common/models/activityType.models';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
-import { ActivityTypeService } from '../../../core/services/activitytype.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { CloudinaryService } from '../../../core/services/firebase-media.service';
 import { IaAssistantService } from '../../../core/services/ia-assistant.service';
@@ -57,8 +55,6 @@ export class PlansCreationComponent implements OnInit {
   imagePreview: string | null = null;
   /** Estado de subida (para deshabilitar UI/mostrar spinner). */
   isUploading = false;
-  /** Catálogo de tipos de actividad para inferir categorías del plan. */
-  activityTypes: ActivityType[] = [];
   /** Flag para evitar generar descripciones en paralelo. */
   isGeneratingDescription = false;
 
@@ -70,7 +66,6 @@ export class PlansCreationComponent implements OnInit {
     private planService: PlanService,
     private activityService: ActivityService,
     private mediaService: CloudinaryService,
-    private activityTypeService: ActivityTypeService,
     private iaAssistantService: IaAssistantService,
     private translationService: TranslationService
   ) {
@@ -96,10 +91,6 @@ export class PlansCreationComponent implements OnInit {
         console.error('Error cargando actividades', err);
       }
     );
-
-    this.activityTypeService.getActivitiesType().subscribe((res: ActivityType[]) => {
-      this.activityTypes = res;
-    });
   }
 
   /** Abre el selector de archivo nativo. */
@@ -334,8 +325,8 @@ export class PlansCreationComponent implements OnInit {
   }
 
   /**
-   * Genera una descripción de plan con IA tomando nombre, actividades,
-   * categorías, ubicaciones y precio estimado (gratis si no hay precio).
+    * Genera una descripción de plan con IA usando nombre del plan,
+    * actividades seleccionadas y sus descripciones (si existen).
    */
   async autocompleteDescriptionWithIA(): Promise<void> {
     if (this.isGeneratingDescription) {
@@ -349,31 +340,7 @@ export class PlansCreationComponent implements OnInit {
       selectedActivityNames.includes(activity.name),
     );
 
-    const activityTypeMap = new Map(
-      this.activityTypes.map((type) => [type.id, type.name]),
-    );
-
-    const categories = Array.from(
-      new Set(
-        selectedActivities
-          .map((activity) => activityTypeMap.get(activity.IdTypeActivity) || '')
-          .filter(Boolean),
-      ),
-    );
-
-    const locations = Array.from(
-      new Set(
-        selectedActivities
-          .map((activity) => {
-            const lat = String(activity.latitude ?? '').trim();
-            const lng = String(activity.longitude ?? '').trim();
-            return lat && lng ? `${lat}, ${lng}` : '';
-          })
-          .filter(Boolean),
-      ),
-    );
-
-    if (!planName || categories.length === 0 || locations.length === 0) {
+    if (!planName || selectedActivities.length === 0) {
       this.error = this.translationService.get(
         'messages.completeFieldsBeforeDescription',
         'Escriba el resto de campos antes de generar la descripcion',
@@ -393,17 +360,27 @@ export class PlansCreationComponent implements OnInit {
     const freeText = this.translationService.get('activities.free', 'Gratis');
     const priceText = totalPrice > 0 ? `${totalPrice.toFixed(2)} EUR` : freeText;
 
+    const activitiesContext = selectedActivities
+      .map((activity, index) => {
+        const activityName = String(activity.name || '').trim();
+        const activityDescription = String((activity as any).description ?? '').trim();
+
+        return activityDescription
+          ? `${index + 1}. ${activityName}: ${activityDescription}`
+          : `${index + 1}. ${activityName}: (sin descripcion)`;
+      })
+      .join('\n');
+
     const prompt = [
       'Necesito que redactes una descripcion para un plan en MappTuu.',
       `Nombre del plan: ${planName}`,
-      `Actividades incluidas: ${selectedActivityNames.join(', ') || 'No especificadas'}`,
-      `Categorias del plan: ${categories.join(', ')}`,
-      `Ubicaciones de referencia (coordenadas): ${locations.join(' | ')}`,
+      'Actividades seleccionadas con su contexto:',
+      activitiesContext,
       `Precio estimado del plan: ${priceText}`,
       currentDescription
         ? `Texto escrito por el usuario para tener en cuenta: ${currentDescription}`
         : 'No hay descripcion previa escrita por el usuario.',
-      'Genera una descripcion natural, atractiva y clara en 3-5 frases. Si no hay precio, menciona que es gratis.',
+      'Genera una descripcion natural, atractiva y clara en 3-5 frases usando los nombres y descripciones de actividades. Si no hay precio, menciona que es gratis.',
       'No uses listas ni encabezados.',
     ].join('\n');
 
