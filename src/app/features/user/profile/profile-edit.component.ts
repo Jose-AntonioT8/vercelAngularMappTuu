@@ -20,10 +20,7 @@ export class ProfileEditComponent implements OnInit {
   error = '';
   success = '';
 
-  form = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(3)]],
-    email: ['', [Validators.required, Validators.email]],
-  });
+  form;
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +29,12 @@ export class ProfileEditComponent implements OnInit {
     private translationService: TranslationService,
     private router: Router,
     private location: Location,
-  ) {}
+  ) {
+    this.form = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+    });
+  }
 
   ngOnInit(): void {
     this.authService.user$.subscribe((user) => {
