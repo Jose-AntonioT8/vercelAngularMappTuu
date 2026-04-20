@@ -1,5 +1,5 @@
 import { CommonModule, Location } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { User as FirebaseUser } from '@angular/fire/auth';
 import { Router, RouterModule } from '@angular/router';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
@@ -36,6 +36,8 @@ export class ProfileComponent implements OnInit {
   isUploadingAvatar = false;
   /** Preview local del avatar antes de subir (data URL). */
   avatarPreview: string | null = null;
+  /** Controla visibilidad del menú de ajustes. */
+  isSettingsMenuOpen = false;
 
   /** Total de actividades guardadas por el usuario. */
   savedActivitiesCount = 0;
@@ -131,6 +133,25 @@ export class ProfileComponent implements OnInit {
     private mediaService: CloudinaryService,
     private userService: UserService
   ) {}
+
+  /** Abre/cierra el menú de ajustes de perfil. */
+  toggleSettingsMenu(event: MouseEvent): void {
+    event.stopPropagation();
+    this.isSettingsMenuOpen = !this.isSettingsMenuOpen;
+  }
+
+  /** Cierra el menú de ajustes si se hace click fuera. */
+  @HostListener('document:click')
+  closeSettingsMenu(): void {
+    this.isSettingsMenuOpen = false;
+  }
+
+  /** Navega al formulario de edición de perfil. */
+  goToEditProfile(event: MouseEvent): void {
+    event.stopPropagation();
+    this.isSettingsMenuOpen = false;
+    this.router.navigate(['/profile/edit']);
+  }
 
   /** Envía email de restablecimiento de contraseña (si hay email). */
   async sendPasswordReset(): Promise<void> {

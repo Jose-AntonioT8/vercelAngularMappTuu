@@ -24,6 +24,7 @@ import { PlansUpdateComponent } from './features/plans/plans-update/plans-update
 import { SavedPlansComponent } from './features/plans/saved-plans/saved-plans.component';
 import { ReportsModerationComponent } from './features/reports/reports-moderation/reports-moderation.component';
 import { LoginComponent } from './features/user/login/login.component';
+import { ProfileEditComponent } from './features/user/profile/profile-edit.component';
 import { ProfileComponent } from './features/user/profile/profile.component';
 import { SignupComponent } from './features/user/sign-up/sign-up.component';
 // prettier-ignore
@@ -63,6 +64,7 @@ export const routes: Routes = [
   {path: 'activityTypesUpdate/:id', component: ActivityTypesUpdateComponent, canActivate: [adminGuard]},
   {path: 'planDetail/:id', component: PlansComponent, canActivate: [authGuard]},
   {path: 'profile', component: ProfileComponent, canActivate: [authGuard]},
+  {path: 'profile/edit', component: ProfileEditComponent, canActivate: [authGuard]},
   {path: 'activityTypesCreation', component: ActivityTypesCreationComponent, canActivate: [adminGuard]},
   {path: 'activityTypesList', component: ActivityTypesListComponent, canActivate: [adminGuard]},
   {path: 'plansCreation', component: PlansCreationComponent, canActivate: [authGuard]},

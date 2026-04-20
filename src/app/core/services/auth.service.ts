@@ -6,6 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
+  updateEmail,
   User,
   GoogleAuthProvider,
   GithubAuthProvider,
@@ -176,5 +177,29 @@ export class AuthService {
       await updateProfile(user, { photoURL });
       this.userSubject.next(user);
     }
+  }
+
+  /**
+   * Actualiza nombre visible y/o email del usuario autenticado.
+   * Nota: actualizar email puede requerir reautenticación reciente.
+   */
+  async updateUserProfileData(displayName: string, email: string): Promise<void> {
+    const user = this.auth.currentUser;
+    if (!user) {
+      throw new Error('No authenticated user');
+    }
+
+    const normalizedName = displayName.trim();
+    const normalizedEmail = email.trim();
+
+    if (normalizedName && user.displayName !== normalizedName) {
+      await updateProfile(user, { displayName: normalizedName });
+    }
+
+    if (normalizedEmail && user.email !== normalizedEmail) {
+      await updateEmail(user, normalizedEmail);
+    }
+
+    this.userSubject.next(this.auth.currentUser);
   }
 }

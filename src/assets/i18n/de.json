@@ -196,7 +196,8 @@
     "verified": "Verifiziert",
     "achievements": "Erfolge",
     "recentActivity": "Letzte Aktivität",
-    "changePassword": "Passwort ändern"
+    "changePassword": "Passwort ändern",
+    "reloginRequired": "Sie müssen sich erneut anmelden, um Ihre E-Mail zu ändern."
   },
   "dashboard": {
     "title": "MappTuu verwalten",
