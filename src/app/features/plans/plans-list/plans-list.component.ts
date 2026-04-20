@@ -45,12 +45,6 @@ export class PlansListComponent {
   /** Estado del panel de filtros (principalmente para mobile). */
   isFilterOpen = false;
 
-  /** En desktop (>= 1024px) abre filtros por defecto. */
-  ngOnInit(): void {
-    if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
-      this.isFilterOpen = true;
-    }
-  }
   /** Navega a la pantalla de creación de plan. */
   goCreatePlan(): void {
     this.route.navigate(['/plansCreation']);

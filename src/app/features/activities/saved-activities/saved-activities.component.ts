@@ -54,11 +54,8 @@ export class SavedActivitiesComponent implements OnInit {
   /** Usuario autenticado actual (si existe). */
   private user = this.authService.currentUser;
 
-  /** Inicializa streams y abre filtros por defecto en desktop. */
+  /** Inicializa streams de actividades guardadas y tipos. */
   ngOnInit() {
-    if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
-      this.isFilterOpen = true;
-    }
     this.userService.getUserId(this.user!.uid).subscribe((user) => {
       if (user.savedActivities && user.savedActivities.length > 0) {
         const activityObservables = user.savedActivities.map((activityId) =>

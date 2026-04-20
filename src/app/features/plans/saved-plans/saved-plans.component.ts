@@ -63,11 +63,8 @@ export class SavedPlansComponent implements OnInit {
   /** Usuario autenticado actual (si existe). */
   private user = this.authService.currentUser;
 
-  /** Inicializa streams y abre el filtro en desktop. */
+  /** Inicializa streams de planes guardados, actividades y tipos. */
   ngOnInit() {
-    if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
-      this.isFilterOpen = true;
-    }
     this.activity$ = this.activityService.getActivities();
 
     this.userService.getUserId(this.user!.uid).subscribe((user) => {

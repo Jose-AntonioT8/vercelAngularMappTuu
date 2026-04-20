@@ -49,13 +49,6 @@ export class ListActivitiesComponent {
   /** Estado del panel de filtros (mobile). */
   isFilterOpen = false;
 
-  /** En desktop (>= 1024px) abre filtros por defecto. */
-  ngOnInit(): void {
-    if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
-      this.isFilterOpen = true;
-    }
-  }
-
   /** Alterna el panel de filtros. */
   toggleFilter(): void {
     this.isFilterOpen = !this.isFilterOpen;
