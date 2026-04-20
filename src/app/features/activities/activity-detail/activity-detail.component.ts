@@ -388,12 +388,15 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
       return;
     }
     const token = await user.getIdToken();
-    console.log(this.activity!.id);
-    console.log(token);
-    console.log(user.uid);
+    this.isActivitySaved = true;
     this.userService
       .saveActivity(user.uid, this.activity!.id, token)
-      .subscribe();
+      .subscribe({
+        error: (err) => {
+          console.error('Error al guardar la actividad en favoritos:', err);
+          this.isActivitySaved = false;
+        },
+      });
   }
 
   /** Emite la reseña al backend y sincroniza la actividad con la respuesta. */

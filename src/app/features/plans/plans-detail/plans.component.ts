@@ -146,10 +146,13 @@ export class PlansComponent implements OnInit {
       return;
     }
     const token = await user.getIdToken();
-    console.log(this.plan!.id);
-    console.log(token);
-    console.log(user.uid);
-    this.userService.savePlan(user.uid, this.plan!.id, token).subscribe();
+    this.isPlanSaved = true;
+    this.userService.savePlan(user.uid, this.plan!.id, token).subscribe({
+      error: (err) => {
+        console.error('Error al guardar el plan en favoritos:', err);
+        this.isPlanSaved = false;
+      },
+    });
   }
 
   /** Formatea un Timestamp de Firebase a `dd/mm/yyyy`. */
