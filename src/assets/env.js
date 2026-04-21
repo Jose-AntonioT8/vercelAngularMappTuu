@@ -1,4 +1,4 @@
-window.__env__ = {
+Object.assign(window, {
   "NG_APP_CLOUDINARY_CLOUD_NAME": "",
   "NG_APP_UPLOAD_PRESET": "",
   "NG_APP_CLOUDINARY_API_KEY": "",
@@ -14,5 +14,4 @@ window.__env__ = {
   "NG_APP_MESSAGING_SENDER_ID": "",
   "NG_APP_APP_ID": "",
   "NG_APP_MEASUREMENT_ID": ""
-};
-Object.assign(window, window.__env__);
+});

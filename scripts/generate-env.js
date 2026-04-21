@@ -46,7 +46,7 @@ const env = {
     "",
 };
 
-const output = `window.__env__ = ${JSON.stringify(env, null, 2)};\nObject.assign(window, window.__env__);\n`;
+const output = `Object.assign(window, ${JSON.stringify(env, null, 2)});\n`;
 const outputPath = path.resolve(__dirname, "../src/assets/env.js");
 
 fs.writeFileSync(outputPath, output, "utf8");
