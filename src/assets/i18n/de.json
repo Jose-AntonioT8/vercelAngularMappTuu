@@ -230,7 +230,7 @@
   },
   "activities": {
     "title": "Aktivitäten",
-    "searchPlaceholder": "Aktivitäten, Pläne suchen...",
+    "searchPlaceholder": "Aktivitäten suchen...",
     "create": "Aktivität erstellen",
     "viewReviews": "Bewertungen anzeigen",
     "name": "Name",
@@ -326,7 +326,7 @@
     "review": "Rezension schreiben",
     "viewReviews": "Bewertungen anzeigen",
     "title": "Pläne",
-    "searchPlaceholder": "Pläne, Aktivitäten suchen...",
+    "searchPlaceholder": "Pläne suchen...",
     "name": "Name",
     "namePlaceholder": "Name des Plans",
     "description": "Beschreibung",

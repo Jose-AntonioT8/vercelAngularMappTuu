@@ -229,7 +229,7 @@
   "activities": {
     "viewReviews": "Ver reseñas",
     "title": "Actividades",
-    "searchPlaceholder": "Buscar Actividades, planes...",
+    "searchPlaceholder": "Buscar actividades...",
     "create": "Crear Actividad",
     "createTitle": "Creación de actividad",
     "update": "Editar Actividad",
@@ -323,7 +323,7 @@
     "review": "Escribir reseña",
     "viewReviews": "Ver reseñas",
     "title": "Planes",
-    "searchPlaceholder": "Buscar Planes, actividades...",
+    "searchPlaceholder": "Buscar planes...",
     "createTitle": "Creación de plan",
     "updateTitle": "Editar Plan",
     "name": "Nombre",

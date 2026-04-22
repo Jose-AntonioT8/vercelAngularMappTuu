@@ -230,7 +230,7 @@
   },
   "activities": {
     "title": "Activities",
-    "searchPlaceholder": "Search Activities, plans...",
+    "searchPlaceholder": "Search activities...",
     "create": "Create Activity",
     "viewReviews": "View reviews",
     "name": "Name",
@@ -326,7 +326,7 @@
     "review": "Writte review",
     "viewReviews": "View reviews",
     "title": "Plans",
-    "searchPlaceholder": "Search Plans, activities...",
+    "searchPlaceholder": "Search plans...",
     "name": "Name",
     "namePlaceholder": "Plan name",
     "description": "Description",
