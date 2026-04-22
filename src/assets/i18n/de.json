@@ -58,6 +58,16 @@
     "searchButtonToLogin": "Zum Suchen anmelden...",
     "aboutUs": "Über uns"
   },
+  "searchResults": {
+    "title": "Suchergebnisse",
+    "searchPlaceholder": "Aktivitaten oder Plane suchen...",
+    "totalResults": "Ergebnisse",
+    "noResults": "Keine Aktivitaten oder Plane gefunden",
+    "type": {
+      "activity": "Aktivitat",
+      "plan": "Plan"
+    }
+  },
   "auth": {
     "login": {
       "title": "Willkommen zurück!",

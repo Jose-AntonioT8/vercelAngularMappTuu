@@ -3,6 +3,7 @@ import{ Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '../../core/pipes/translate.pipe';
 import { LanguageSelectorComponent } from '../../common/language-selector/language-selector.component';
 
@@ -16,7 +17,7 @@ import { LanguageSelectorComponent } from '../../common/language-selector/langua
 @Component({
   selector: 'app-landing-page',
   standalone: true, 
-  imports: [CommonModule, RouterModule, TranslatePipe, LanguageSelectorComponent],
+  imports: [CommonModule, RouterModule, FormsModule, TranslatePipe, LanguageSelectorComponent],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss'
 })
@@ -24,6 +25,9 @@ import { LanguageSelectorComponent } from '../../common/language-selector/langua
   
 
 export class LandingPageComponent {
+  /** Texto del buscador principal del landing. */
+  landingSearchTerm = '';
+
   /** Servicio de autenticación para estado de sesión y rol. */
   private auth: AuthService;
   /** Router para navegación entre pantallas públicas/protegidas. */
@@ -83,6 +87,23 @@ export class LandingPageComponent {
   logOut(): void {
      this.route.navigate(['/landingPage'])
     this.auth.logout()
+  }
+
+  /**
+   * Ejecuta la busqueda global desde el landing.
+   * - Si no hay sesion, redirige a login.
+   * - Si hay sesion, navega a la nueva pagina protegida de resultados.
+   */
+  handleLandingSearch(): void {
+    if (!this.isAuthenticated()) {
+      this.route.navigate(['/login']);
+      return;
+    }
+
+    const query = this.landingSearchTerm.trim();
+    this.route.navigate(['/search'], {
+      queryParams: query ? { q: query } : {},
+    });
   }
 }
 

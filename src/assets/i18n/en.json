@@ -58,6 +58,16 @@
     "searchButtonToLogin": "Login to search activities or plans...",
     "aboutUs": "About us"
   },
+  "searchResults": {
+    "title": "Search results",
+    "searchPlaceholder": "Search activities or plans...",
+    "totalResults": "Results",
+    "noResults": "No activities or plans found",
+    "type": {
+      "activity": "Activity",
+      "plan": "Plan"
+    }
+  },
   "auth": {
     "login": {
       "title": "Welcome back!",

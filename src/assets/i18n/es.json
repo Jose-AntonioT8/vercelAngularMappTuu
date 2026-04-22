@@ -56,6 +56,16 @@
     "searchButtonToLogin": "Inicia sesión para buscar actividades o planes ...",
     "aboutUs": "Sobre nosotros"
   },
+  "searchResults": {
+    "title": "Resultados de busqueda",
+    "searchPlaceholder": "Buscar actividades o planes...",
+    "totalResults": "Resultados",
+    "noResults": "No se encontraron actividades ni planes",
+    "type": {
+      "activity": "Actividad",
+      "plan": "Plan"
+    }
+  },
   "auth": {
     "login": {
       "title": "¡Bienvenido de nuevo!",

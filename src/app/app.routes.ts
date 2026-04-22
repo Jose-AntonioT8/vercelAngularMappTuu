@@ -23,6 +23,7 @@ import { PlansListComponent } from './features/plans/plans-list/plans-list.compo
 import { PlansUpdateComponent } from './features/plans/plans-update/plans-update.component';
 import { SavedPlansComponent } from './features/plans/saved-plans/saved-plans.component';
 import { ReportsModerationComponent } from './features/reports/reports-moderation/reports-moderation.component';
+import { GlobalSearchComponent } from './features/search/global-search/global-search.component';
 import { LoginComponent } from './features/user/login/login.component';
 import { ProfileEditComponent } from './features/user/profile/profile-edit.component';
 import { ProfileComponent } from './features/user/profile/profile.component';
@@ -49,6 +50,7 @@ export const routes: Routes = [
   {path : 'maps', component: MapsComponent},
   {path : 'updatePlan/:id', component: PlansUpdateComponent, canActivate: [authGuard]},
   {path : 'landingPage', component: LandingPageComponent},
+  {path : 'search', component: GlobalSearchComponent, canActivate: [authGuard]},
   { path: 'activitiesList', component: ListActivitiesComponent},
   { path: 'createdActivities', component: CreatedActivitiesComponent},
   { path: 'activityDetail/:id', component: ActivityDetailComponent},
