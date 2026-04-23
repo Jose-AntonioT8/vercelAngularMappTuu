@@ -35,73 +35,168 @@
 /* Dark mode styles */
 .dark {
     /* Fondo general */
-    @apply bg-slate-950;
-    
-    /* Texto por defecto */
-    @apply text-slate-100;
+    background-color: rgb(3, 7, 18) !important;
+    color: rgb(241, 245, 250) !important;
 
-    /* Fondos secundarios */
-    main, section {
-        @apply bg-gradient-to-br from-slate-900 via-slate-900/95 to-slate-800/90 !important;
+    /* Todo el texto debe ser claro */
+    * {
+        color: rgb(241, 245, 250) !important;
     }
 
-    /* Inputs y controles */
-    input, textarea, select {
-        @apply bg-slate-800 text-slate-100 border-slate-700 !important;
+    /* Fondos secundarios */
+    main, section, header, footer, div {
+        background-color: inherit;
+    }
+
+    main {
+        background: linear-gradient(to bottom right, rgb(15, 23, 42), rgb(15, 23, 42)) !important;
+    }
+
+    /* Inputs, inputs de búsqueda, textareas, selects */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="search"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select {
+        background-color: rgb(30, 41, 59) !important;
+        color: rgb(241, 245, 250) !important;
+        border-color: rgb(51, 65, 85) !important;
         
         &::placeholder {
-            @apply text-slate-400 !important;
+            color: rgb(148, 163, 184) !important;
         }
 
         &:focus {
-            @apply border-slate-600 !important;
+            border-color: rgb(71, 85, 105) !important;
+            color: rgb(241, 245, 250) !important;
         }
     }
 
-    /* Botones */
-    button {
-        @apply border-slate-700 !important;
+    /* Inputs de búsqueda específicamente */
+    input[type="search"] {
+        background-color: rgb(30, 41, 59) !important;
+        color: rgb(241, 245, 250) !important;
+        border: 1px solid rgb(51, 65, 85) !important;
 
-        &:hover {
-            @apply bg-slate-800 !important;
+        &::placeholder {
+            color: rgb(148, 163, 184) !important;
         }
     }
 
-    /* Menús y dropdowns */
+    /* Fondos blancos deben ser oscuros */
     .bg-white {
-        @apply bg-slate-800 !important;
+        background-color: rgb(30, 41, 59) !important;
+        color: rgb(241, 245, 250) !important;
     }
 
-    /* Bordes */
+    .bg-slate-50 {
+        background-color: rgb(30, 41, 59) !important;
+        color: rgb(241, 245, 250) !important;
+    }
+
+    .bg-slate-100 {
+        background-color: rgb(30, 41, 59) !important;
+        color: rgb(241, 245, 250) !important;
+    }
+
+    .bg-slate-200 {
+        background-color: rgb(30, 41, 59) !important;
+        color: rgb(241, 245, 250) !important;
+    }
+
+    /* Bordes claros deben ser oscuros */
     .border-slate-200 {
-        @apply border-slate-700 !important;
+        border-color: rgb(51, 65, 85) !important;
     }
 
     .border-slate-100 {
-        @apply border-slate-700 !important;
+        border-color: rgb(51, 65, 85) !important;
     }
 
-    /* Texto de inputs deshabilitados */
+    .border-slate-300 {
+        border-color: rgb(51, 65, 85) !important;
+    }
+
+    /* Texto específico */
     .text-slate-600 {
-        @apply text-slate-400 !important;
+        color: rgb(203, 213, 225) !important;
     }
 
     .text-slate-700 {
-        @apply text-slate-300 !important;
+        color: rgb(203, 213, 225) !important;
     }
 
-    /* Hovers en elementos light */
+    .text-slate-500 {
+        color: rgb(148, 163, 184) !important;
+    }
+
+    .text-gray-600 {
+        color: rgb(203, 213, 225) !important;
+    }
+
+    .text-gray-700 {
+        color: rgb(203, 213, 225) !important;
+    }
+
+    /* Hovers */
     .hover\:bg-slate-50:hover {
-        @apply bg-slate-700 !important;
+        background-color: rgb(51, 65, 85) !important;
     }
 
-    /* Fondos de cards y paneles */
-    .bg-slate-100 {
-        @apply bg-slate-800 !important;
+    .hover\:bg-white:hover {
+        background-color: rgb(51, 65, 85) !important;
     }
 
-    /* Overlay y sombras */
-    .shadow-xl, .shadow-lg, .shadow-md {
-        @apply shadow-slate-900/50 !important;
+    .hover\:bg-gray-50:hover {
+        background-color: rgb(51, 65, 85) !important;
+    }
+
+    /* Sombras */
+    .shadow-xl, .shadow-lg, .shadow-md, .shadow {
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    /* Headers y content */
+    header {
+        background-color: rgb(15, 23, 42) !important;
+    }
+
+    /* Botones específicos */
+    .bg-brand-primary {
+        background-color: rgb(86, 117, 172) !important;
+    }
+
+    button {
+        color: rgb(241, 245, 250) !important;
+        border-color: rgb(51, 65, 85) !important;
+
+        &:hover {
+            background-color: rgb(51, 65, 85) !important;
+        }
+    }
+
+    /* Cards y paneles */
+    .rounded-xl {
+        background-color: rgb(30, 41, 59) !important;
+        color: rgb(241, 245, 250) !important;
+    }
+
+    /* Links */
+    a {
+        color: rgb(96, 165, 250) !important;
+    }
+
+    /* Labels */
+    label {
+        color: rgb(241, 245, 250) !important;
+    }
+
+    /* Placeholder styles */
+    ::placeholder {
+        color: rgb(148, 163, 184) !important;
     }
 }
+

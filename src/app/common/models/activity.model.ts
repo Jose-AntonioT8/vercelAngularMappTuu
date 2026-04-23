@@ -9,6 +9,8 @@ export interface Review {
   id?: string;
   /** ID del usuario autor de la reseña. */
   userId: string;
+  /** Nombre del usuario autor de la reseña (se resuelve desde el servicio). */
+  userName?: string;
   /** Puntuación numérica (por ejemplo 1-5). */
   rating: number;
   /** Comentario de texto libre. */

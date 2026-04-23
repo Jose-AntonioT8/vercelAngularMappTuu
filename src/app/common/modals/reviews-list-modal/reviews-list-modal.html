@@ -102,7 +102,7 @@
         </p>
         <!-- Usuario y Fecha -->
         <div class="text-xs text-gray-500">
-          <span>{{ "reviews.by" | translate }} {{ review.userId }}</span>
+          <span>{{ "reviews.by" | translate }} {{ getUserDisplayName(review) }}</span>
           <!-- Si tienes nombre de usuario, reemplaza -->
           <span *ngIf="review.createdAt" class="ml-4"
             >{{ "reviews.date" | translate }} {{
