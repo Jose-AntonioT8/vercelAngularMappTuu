@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as L from 'leaflet';
+import { Subscription } from 'rxjs';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 import { ReviewModalComponent } from '../../../common/modals/review-modal/review-modal.component';
 import { ReviewsListModalComponent } from '../../../common/modals/reviews-list-modal/reviews-list-modal'; // Ajusta ruta
@@ -45,6 +46,15 @@ import { UserService } from '../../../core/services/user.service';
 })
 export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
   constructor(private userService: UserService, private auth: AuthService) {}
+  /** Subscripciones activas del componente. */
+  private readonly subscriptions = new Subscription();
+  /** Todas las actividades disponibles para calcular recomendaciones. */
+  private allActivities: Activity[] = [];
+  /** Limite de recomendaciones por seccion. */
+  private readonly maxRecommendations = 4;
+  /** Radio maximo para sugerencias cercanas (km). */
+  private readonly nearbyRadiusKm = 30;
+
   /** Controla el modal con la lista de reseñas. */
   isReviewsListModalOpen = false;
   /** Indica si la actividad está guardada por el usuario actual. */
@@ -65,6 +75,10 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
   isReviewModalOpen = false;
   /** Reseña del usuario actual (si existe). */
   userReview: Review | null = null;
+  /** Actividades del mismo tipo para descubrir alternativas. */
+  similarActivities: Activity[] = [];
+  /** Actividades dentro del radio cercano a la actual. */
+  nearbyActivities: Activity[] = [];
 
   /** Servicio de actividades para lecturas y rating. */
   private activityService = inject(ActivityService);
@@ -83,8 +97,29 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
 
   /** Carga actividad, dirección, reseña del usuario y estado de guardado. */
   ngOnInit() {
-    const idUrl = this.route.snapshot.paramMap.get('id');
-    this.activityService.getActivityId(idUrl!).subscribe((data) => {
+    this.subscriptions.add(
+      this.route.paramMap.subscribe((params) => {
+        const idUrl = params.get('id');
+        if (!idUrl) {
+          return;
+        }
+        this.loadActivityDetail(idUrl);
+      })
+    );
+
+    this.subscriptions.add(
+      this.activityService.getActivities().subscribe((activities) => {
+        this.allActivities = (activities || []) as Activity[];
+        this.updateRecommendations();
+      })
+    );
+  }
+
+  /** Carga el detalle de la actividad actual y sincroniza elementos dependientes. */
+  private loadActivityDetail(idUrl: string): void {
+    this.resetDetailState();
+
+    this.subscriptions.add(this.activityService.getActivityId(idUrl).subscribe((data) => {
       this.activity = data;
       this.activityDescription = (data as any).description;
 
@@ -99,6 +134,7 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
         // Buscar si el usuario actual tiene una reseña para esta actividad
         this.loadUserReview();
         this.checkIfActivitySaved();
+        this.updateRecommendations();
 
         this.mapService
           .getAddress(
@@ -114,7 +150,23 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
           this.initMap();
         }, 300);
       }
-    });
+    }));
+  }
+
+  /** Reinicia estado dependiente al cambiar de actividad en la misma vista. */
+  private resetDetailState(): void {
+    this.location = undefined;
+    this.userReview = null;
+    this.isActivitySaved = false;
+    this.similarActivities = [];
+    this.nearbyActivities = [];
+
+    if (this.map) {
+      this.map.remove();
+      this.map = undefined;
+      this.marker = undefined;
+      this.mapInitialized = false;
+    }
   }
 
   /** Verifica en el perfil del usuario si la actividad ya está guardada. */
@@ -201,11 +253,139 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
 
   /** Limpia recursos (mapa Leaflet) al destruir el componente. */
   ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+
     // Limpiar el mapa cuando se destruye el componente
     if (this.map) {
       this.map.remove();
       this.map = undefined;
     }
+  }
+
+  /** Navega al detalle de la actividad seleccionada desde recomendaciones. */
+  goToActivityDetail(activityId: string): void {
+    if (!activityId || activityId === this.activity?.id) {
+      return;
+    }
+
+    this.router.navigate(['/activityDetail', activityId]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /** Calcula recomendaciones de actividades parecidas y cercanas. */
+  private updateRecommendations(): void {
+    if (!this.activity) {
+      this.similarActivities = [];
+      this.nearbyActivities = [];
+      return;
+    }
+
+    const currentActivity = this.activity;
+    const candidates = this.allActivities.filter(
+      (activity) => activity?.id && activity.id !== currentActivity.id,
+    );
+
+    const currentType = this.extractActivityTypeKey(currentActivity);
+    this.similarActivities = candidates
+      .filter(
+        (activity) =>
+          !!currentType &&
+          this.extractActivityTypeKey(activity) === currentType,
+      )
+      .sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))
+      .slice(0, this.maxRecommendations);
+
+    const usedIds = new Set(this.similarActivities.map((activity) => activity.id));
+    const currentCoords = this.extractCoordinates(currentActivity);
+    if (!currentCoords) {
+      this.nearbyActivities = [];
+      return;
+    }
+
+    this.nearbyActivities = candidates
+      .filter((activity) => !usedIds.has(activity.id))
+      .map((activity) => ({
+        activity,
+        distance: this.getDistanceFromCurrent(currentCoords, activity),
+      }))
+      .filter(
+        (entry): entry is { activity: Activity; distance: number } =>
+          entry.distance !== null && entry.distance <= this.nearbyRadiusKm,
+      )
+      .sort((a, b) => a.distance - b.distance)
+      .slice(0, this.maxRecommendations)
+      .map((entry) => entry.activity);
+  }
+
+  /** Extrae una clave normalizada del tipo de actividad para comparar similitud. */
+  private extractActivityTypeKey(activity: Activity): string {
+    const rawType =
+      (activity as any).IdTypeActivity ??
+      (activity as any).activityTypeId ??
+      (activity as any).typeId ??
+      (activity as any).activityType ??
+      '';
+
+    return String(rawType).trim().toLowerCase();
+  }
+
+  /** Convierte coordenadas string/number de una actividad en valores numéricos. */
+  private extractCoordinates(
+    activity: Activity,
+  ): { latitude: number; longitude: number } | null {
+    const latitude = Number((activity as any).latitude);
+    const longitude = Number((activity as any).longitude);
+
+    if (Number.isNaN(latitude) || Number.isNaN(longitude)) {
+      return null;
+    }
+
+    return { latitude, longitude };
+  }
+
+  /** Calcula distancia en km desde la actividad actual a una candidata. */
+  private getDistanceFromCurrent(
+    currentCoords: { latitude: number; longitude: number },
+    candidate: Activity,
+  ): number | null {
+    const candidateCoords = this.extractCoordinates(candidate);
+    if (!candidateCoords) {
+      return null;
+    }
+
+    return this.distanceKm(
+      currentCoords.latitude,
+      currentCoords.longitude,
+      candidateCoords.latitude,
+      candidateCoords.longitude,
+    );
+  }
+
+  /** Distancia Haversine entre dos coordenadas geográficas en kilómetros. */
+  private distanceKm(
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number,
+  ): number {
+    const earthRadiusKm = 6371;
+    const deltaLat = this.toRadians(lat2 - lat1);
+    const deltaLon = this.toRadians(lon2 - lon1);
+
+    const a =
+      Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+      Math.cos(this.toRadians(lat1)) *
+        Math.cos(this.toRadians(lat2)) *
+        Math.sin(deltaLon / 2) *
+        Math.sin(deltaLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return earthRadiusKm * c;
+  }
+
+  /** Convierte grados a radianes. */
+  private toRadians(value: number): number {
+    return (value * Math.PI) / 180;
   }
 
   /**
@@ -373,6 +553,15 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
   /** Precio de la actividad, si el modelo lo expone. */
   get activityPrice(): number | null {
     return (this.activity as any)?.price ?? null;
+  }
+
+  /** Obtiene una URL de imagen robusta para tarjetas de recomendaciones. */
+  getActivityImage(activity: Activity): string {
+    return (
+      (activity as any).imageURL ||
+      (activity as any).imageRef ||
+      'assets/logo/logo.png'
+    );
   }
 
   /** Abre el modal de reseña. */

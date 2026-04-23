@@ -1,7 +1,7 @@
 import { CommonModule, Location } from '@angular/common';
-import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { forkJoin, of } from 'rxjs';
+import { Subscription, forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 import { ReviewModalComponent } from '../../../common/modals/review-modal/review-modal.component';
@@ -36,12 +36,19 @@ import { UserService } from '../../../core/services/user.service';
   templateUrl: './plans.component.html',
   styleUrl: './plans.component.scss',
 })
-export class PlansComponent implements OnInit {
+export class PlansComponent implements OnInit, OnDestroy {
   /**
    * @param userService Servicio de usuario para guardados y perfil.
    * @param auth Servicio de autenticacion para token del usuario actual.
    */
   constructor(private userService: UserService, private auth: AuthService) {}
+  /** Subscripciones activas del componente. */
+  private readonly subscriptions = new Subscription();
+  /** Todos los planes disponibles para construir recomendaciones. */
+  private allPlans: Plan[] = [];
+  /** Límite de recomendaciones por bloque. */
+  private readonly maxRelatedPlans = 4;
+
   /** Indica si el plan está guardado por el usuario actual. */
   isPlanSaved = false;
   /** Plan cargado desde API. */
@@ -54,6 +61,8 @@ export class PlansComponent implements OnInit {
   isReviewModalOpen = false;
   /** Reseña del usuario actual (si existe). */
   userReview: Review | null = null;
+  /** Planes recomendados por actividades coincidentes. */
+  relatedPlans: Plan[] = [];
   /** Detector manual para refrescar vista tras callbacks async. */
   private cdr = inject(ChangeDetectorRef);
   /** Controla el modal con la lista de reseñas. */
@@ -73,43 +82,131 @@ export class PlansComponent implements OnInit {
 
   /** Carga el plan y sus actividades asociadas. */
   ngOnInit(): void {
-    const idUrl = this.route.snapshot.paramMap.get('id');
-    this.planService.getPlanId(idUrl!).subscribe({
-      next: (data) => {
-        this.plan = data;
-        this.planDescription = (data as any).description ?? '';
-
-        const ids = this.plan?.activitiesIds ?? [];
-        if (ids.length > 0) {
-          this.activities = []; // limpiar antes
-          forkJoin(
-            ids.map((id) =>
-              this.activityService.getActivityId(id).pipe(
-                catchError((err) => {
-                  console.warn(`Actividad ${id} no encontrada`, err);
-                  return of(null);
-                })
-              )
-            )
-          ).subscribe({
-            next: (results) => {
-              this.activities = results.filter((r) => r !== null) as Activity[];
-            },
-            error: (err) => {
-              console.error('Error cargando actividades del plan', err);
-            },
-          });
+    this.subscriptions.add(
+      this.route.paramMap.subscribe((params) => {
+        const idUrl = params.get('id');
+        if (!idUrl) {
+          return;
         }
 
-        if (this.plan) {
-          this.loadUserReview();
-          this.checkIfPlanSaved(); // Verificar si el plan ya está guardado
+        this.loadPlanDetail(idUrl);
+      })
+    );
+
+    this.subscriptions.add(
+      this.planService.getPlans().subscribe((plans) => {
+        this.allPlans = plans || [];
+        this.updateRelatedPlans();
+      })
+    );
+  }
+
+  /** Carga un plan por id y sincroniza estado dependiente. */
+  private loadPlanDetail(planId: string): void {
+    this.resetDetailState();
+
+    this.subscriptions.add(
+      this.planService.getPlanId(planId).subscribe({
+        next: (data) => {
+          this.plan = data;
+          this.planDescription = (data as any).description ?? '';
+
+          const ids = this.plan?.activitiesIds ?? [];
+          if (ids.length > 0) {
+            this.activities = [];
+            this.subscriptions.add(
+              forkJoin(
+                ids.map((id) =>
+                  this.activityService.getActivityId(id).pipe(
+                    catchError((err) => {
+                      console.warn(`Actividad ${id} no encontrada`, err);
+                      return of(null);
+                    })
+                  )
+                )
+              ).subscribe({
+                next: (results) => {
+                  this.activities = results.filter(
+                    (r) => r !== null
+                  ) as Activity[];
+                },
+                error: (err) => {
+                  console.error('Error cargando actividades del plan', err);
+                },
+              })
+            );
+          }
+
+          if (this.plan) {
+            this.loadUserReview();
+            this.checkIfPlanSaved();
+            this.updateRelatedPlans();
+          }
+        },
+        error: (err) => {
+          console.error('Error cargando plan', err);
+        },
+      })
+    );
+  }
+
+  /** Resetea estado dependiente al cambiar de plan en la misma vista. */
+  private resetDetailState(): void {
+    this.plan = undefined;
+    this.planDescription = '';
+    this.activities = [];
+    this.userReview = null;
+    this.isPlanSaved = false;
+    this.relatedPlans = [];
+  }
+
+  /** Calcula planes relacionados por número de actividades coincidentes. */
+  private updateRelatedPlans(): void {
+    if (!this.plan) {
+      this.relatedPlans = [];
+      return;
+    }
+
+    const currentActivityIds = new Set(this.plan.activitiesIds || []);
+    if (!currentActivityIds.size) {
+      this.relatedPlans = [];
+      return;
+    }
+
+    this.relatedPlans = this.allPlans
+      .filter((candidate) => candidate.id !== this.plan?.id)
+      .map((candidate) => {
+        const overlapCount = (candidate.activitiesIds || []).filter((id) =>
+          currentActivityIds.has(id)
+        ).length;
+
+        return { candidate, overlapCount };
+      })
+      .filter((item) => item.overlapCount > 0)
+      .sort((a, b) => {
+        if (b.overlapCount !== a.overlapCount) {
+          return b.overlapCount - a.overlapCount;
         }
-      },
-      error: (err) => {
-        console.error('Error cargando plan', err);
-      },
-    });
+
+        return (b.candidate.rating ?? 0) - (a.candidate.rating ?? 0);
+      })
+      .slice(0, this.maxRelatedPlans)
+      .map((item) => item.candidate);
+  }
+
+  /** Navega al detalle de un plan recomendado. */
+  goToPlanDetail(planId: string): void {
+    if (!planId || planId === this.plan?.id) {
+      return;
+    }
+
+    this.router.navigate(['/plansDetail', planId]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /** Obtiene una URL robusta para imagen de plan recomendado. */
+  getPlanImage(plan: Plan): string {
+    return plan.imgRef || 'assets/logo/logo.png';
   }
 
   /** Verifica en el perfil del usuario si el plan ya está guardado. */
@@ -330,5 +427,10 @@ export class PlansComponent implements OnInit {
     } catch (err: any) {
       console.error('Error de autenticación:', err);
     }
+  }
+
+  /** Libera subscripciones activas del componente. */
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

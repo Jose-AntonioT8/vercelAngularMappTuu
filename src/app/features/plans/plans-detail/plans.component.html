@@ -233,6 +233,7 @@
               <a
                 *ngFor="let activity of activities"
                 [routerLink]="['/activityDetail', activity.id]"
+                tabindex="0"
                 class="flex items-center gap-4 p-3 bg-slate-50 rounded-xl border border-slate-100 hover:border-[#5675AC]/30 hover:shadow-md hover:bg-white transition-all duration-300 group cursor-pointer"
               >
                 <div
@@ -413,6 +414,38 @@
             </p>
           </div>
         </div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-slate-100">
+        <h3 class="text-xl font-bold text-slate-900 mb-4">
+          {{ "plans.relatedPlansByActivities" | translate }}
+        </h3>
+
+        @if (relatedPlans.length > 0) {
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <button
+            *ngFor="let related of relatedPlans"
+            type="button"
+            (click)="goToPlanDetail(related.id)"
+            class="text-left rounded-xl overflow-hidden border border-slate-200 bg-white hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+          >
+            <img
+              [src]="getPlanImage(related)"
+              [alt]="related.name"
+              class="w-full h-28 object-cover"
+              onerror="this.src='assets/logo/logo.png';"
+            />
+            <div class="p-3">
+              <p class="font-semibold text-slate-800 line-clamp-2">{{ related.name }}</p>
+              <p class="text-sm text-slate-500 mt-1">
+                {{ "plans.activities" | translate }}: {{ related.activitiesIds?.length || 0 }}
+              </p>
+            </div>
+          </button>
+        </div>
+        } @else {
+        <p class="text-slate-500">{{ "plans.noRelatedPlans" | translate }}</p>
+        }
       </div>
     </div>
   </div>

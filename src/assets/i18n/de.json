@@ -291,7 +291,11 @@
     "comment": "Kommentar",
     "commentPlaceholder": "Teile dein Erlebnis mit dieser Aktivität...",
     "submit": "Absenden",
-    "update": "Aktualisieren"
+    "update": "Aktualisieren",
+    "similarActivities": "Ähnliche Aktivitäten",
+    "nearbyActivities": "Aktivitäten in der Nähe",
+    "noSimilarActivities": "Derzeit sind keine ähnlichen Aktivitäten verfügbar",
+    "noNearbyActivities": "Derzeit sind keine Aktivitäten in der Nähe verfügbar"
   },
   "activityTypes": {
     "title": "Aktivitätstypen",
@@ -371,7 +375,9 @@
     "filterActivitiesLabel": "Aktivitäten",
     "filterAllActivities": "Alle Aktivitäten",
     "filterRatingLabel": "Bewertung",
-    "clear": "Zurücksetzen"
+    "clear": "Zurücksetzen",
+    "relatedPlansByActivities": "Pläne mit übereinstimmenden Aktivitäten",
+    "noRelatedPlans": "Derzeit sind keine ähnlichen Pläne verfügbar"
   },
   "maps": {
     "title": "Karte",

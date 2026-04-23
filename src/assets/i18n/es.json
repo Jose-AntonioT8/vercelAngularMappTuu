@@ -289,7 +289,11 @@
     "writeReview": "Escribir una reseña",
     "editReview": "Editar mi reseña",
     "comment": "Comentario",
-    "commentPlaceholder": "Comparte tu experiencia con esta actividad..."
+    "commentPlaceholder": "Comparte tu experiencia con esta actividad...",
+    "similarActivities": "Actividades parecidas",
+    "nearbyActivities": "Actividades cercanas",
+    "noSimilarActivities": "No hay actividades parecidas disponibles ahora mismo",
+    "noNearbyActivities": "No hay actividades cercanas disponibles ahora mismo"
   },
   "activityTypes": {
     "title": "Tipos de Actividades",
@@ -368,7 +372,9 @@
     "filterActivitiesLabel": "Actividades",
     "filterAllActivities": "Todas las actividades",
     "filterRatingLabel": "Valoración",
-    "clear": "Limpiar"
+    "clear": "Limpiar",
+    "relatedPlansByActivities": "Planes con actividades coincidentes",
+    "noRelatedPlans": "No hay planes relacionados disponibles ahora mismo"
   },
   "maps": {
     "title": "Mapa",

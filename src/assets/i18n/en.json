@@ -291,7 +291,11 @@
     "editReview": "Edit my review",
     "comment": "Comment",
     "commentPlaceholder": "Share your experience with this activity...",
-    "update": "Update"
+    "update": "Update",
+    "similarActivities": "Similar activities",
+    "nearbyActivities": "Nearby activities",
+    "noSimilarActivities": "No similar activities available right now",
+    "noNearbyActivities": "No nearby activities available right now"
   },
   "activityTypes": {
     "title": "Activity Types",
@@ -371,7 +375,9 @@
     "filterActivitiesLabel": "Activities",
     "filterAllActivities": "All Activities",
     "filterRatingLabel": "Rating",
-    "clear": "Clear"
+    "clear": "Clear",
+    "relatedPlansByActivities": "Plans with matching activities",
+    "noRelatedPlans": "No related plans available right now"
   },
   "maps": {
     "title": "Map",
