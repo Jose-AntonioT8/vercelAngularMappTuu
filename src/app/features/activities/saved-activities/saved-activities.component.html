@@ -78,15 +78,15 @@
   </section>
 
   <div
-    class="fixed xl:fixed xl:top-[160px] xl:left-0 left-0 top-0 h-full xl:h-[calc(100vh-160px)] w-80 xl:w-[20%] max-h-screen xl:max-h-none overflow-y-auto z-40 xl:z-auto transform xl:translate-x-0 transition-transform duration-300 ease-in-out"
+    class="fixed xl:fixed xl:top-[160px] xl:left-0 left-0 top-0 h-full xl:h-[calc(100vh-160px)] w-80 xl:w-[20%] max-h-screen xl:max-h-none overflow-y-auto z-40 xl:z-auto transform xl:translate-x-0 transition-transform duration-300 ease-in-out bg-white/80 xl:bg-transparent backdrop-blur-md xl:backdrop-blur-0 border-r border-slate-200/70 xl:border-r-0"
     [class.-translate-x-full]="!isFilterOpen"
     [class.translate-x-0]="isFilterOpen"
     (click)="$event.stopPropagation()"
   >
     <div
-      class="xl:hidden flex justify-between items-center p-4 border-b bg-[#CFE8FF]"
+      class="xl:hidden flex justify-between items-center p-4 border-b border-slate-200/80 bg-gradient-to-r from-[#dff0ff] to-[#cfe8ff]"
     >
-      <h2 class="text-xl font-bold">{{ "activities.filters" | translate }}</h2>
+      <h2 class="text-xl font-extrabold tracking-tight text-slate-800">{{ "activities.filters" | translate }}</h2>
       <button (click)="closeFilter()" class="text-gray-600 hover:text-gray-800">
         <svg
           class="w-6 h-6"
@@ -103,7 +103,7 @@
         </svg>
       </button>
     </div>
-    <div class="xl:px-4 xl:py-2">
+    <div class="px-3 py-3 xl:px-4 xl:py-2">
       <app-filter></app-filter>
     </div>
   </div>
