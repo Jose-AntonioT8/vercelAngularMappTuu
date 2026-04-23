@@ -5,7 +5,7 @@ import { PlanService } from '../../../core/services/plan.service';
 import { CardPlansComponent } from '../card-plans/card-plans.component';
 import { ActivityService } from '../../../core/services/activity.service';
 import { Activity } from '../../models/activity.model';
-import { BehaviorSubject, Observable, combineLatest, debounceTime, distinctUntilChanged, forkJoin, map, of, shareReplay, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, distinctUntilChanged, forkJoin, map, of, shareReplay, switchMap } from 'rxjs';
 import { Plan } from '../../models/plan.model';
 import { GeocodedLocation, MapsService } from '../../../core/services/maps.service';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
@@ -63,7 +63,6 @@ export class ListPlansComponent implements OnInit {
   private readonly searchTerm$ = new BehaviorSubject<string>('');
   /** Stream de consulta geocodificada derivada del buscador. */
   private readonly searchQuery$ = this.searchTerm$.pipe(
-    debounceTime(250),
     distinctUntilChanged(),
     switchMap((term) => this.resolveSearchQuery(term)),
     shareReplay({ bufferSize: 1, refCount: true }),

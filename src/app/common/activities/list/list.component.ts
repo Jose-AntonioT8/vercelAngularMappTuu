@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { BehaviorSubject, Observable, combineLatest, debounceTime, distinctUntilChanged, forkJoin, map, of, shareReplay, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, distinctUntilChanged, forkJoin, map, of, shareReplay, switchMap } from 'rxjs';
 import { ActivityService } from '../../../core/services/activity.service';
 import { ActivityTypeService } from '../../../core/services/activitytype.service';
 import { GeocodedLocation, MapsService } from '../../../core/services/maps.service';
@@ -68,7 +68,6 @@ export class ListComponent implements OnInit {
   private readonly searchTerm$ = new BehaviorSubject<string>('');
   /** Stream de consulta geocodificada derivada del buscador. */
   private readonly searchQuery$ = this.searchTerm$.pipe(
-    debounceTime(250),
     distinctUntilChanged(),
     switchMap((term) => this.resolveSearchQuery(term)),
     shareReplay({ bufferSize: 1, refCount: true }),
