@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { forkJoin, of } from 'rxjs';
@@ -66,6 +66,8 @@ export class PlansComponent implements OnInit {
   private route = inject(ActivatedRoute);
   /** Router para navegación de retorno. */
   private router = inject(Router);
+  /** Servicio Location para volver en historial del navegador. */
+  private browserLocation = inject(Location);
   /** Servicio de auth expuesto al template. */
   public authService = inject(AuthService);
 
@@ -141,8 +143,13 @@ export class PlansComponent implements OnInit {
   closeReviewsListModal(): void {
     this.isReviewsListModalOpen = false;
   }
-  /** Navega de vuelta al listado de planes. */
+  /** Vuelve a la página anterior con fallback al listado de planes. */
   goBack(): void {
+    if (window.history.length > 1) {
+      this.browserLocation.back();
+      return;
+    }
+
     this.router.navigate(['/plansList']);
   }
   /** Guarda el plan en el perfil del usuario actual. */

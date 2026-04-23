@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ActivityTypeService } from '../../../core/services/activitytype.service';
 import { ActivityType } from '../../../common/models/activityType.models';
@@ -26,6 +26,8 @@ export class ActivityTypesDetailComponent {
   private route = inject(ActivatedRoute);
   /** Router para navegación. */
   private router = inject(Router);
+  /** Servicio Location para volver en historial del navegador. */
+  private browserLocation = inject(Location);
   /** Servicio de tipos para cargar el detalle. */
   private service = inject(ActivityTypeService);
 
@@ -38,8 +40,13 @@ export class ActivityTypesDetailComponent {
     });
   }
 
-  /** Vuelve al listado de tipos. */
+  /** Vuelve a la página anterior con fallback al listado de tipos. */
   goBack() {
+    if (window.history.length > 1) {
+      this.browserLocation.back();
+      return;
+    }
+
     this.router.navigate(['/activityTypesList']);
   }
 }

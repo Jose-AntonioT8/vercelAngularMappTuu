@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -72,6 +72,8 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
   private route = inject(ActivatedRoute);
   /** Router para navegación (volver). */
   private router = inject(Router);
+  /** Servicio Location para volver en historial del navegador. */
+  private browserLocation = inject(Location);
   /** Servicio de mapas para reverse geocoding. */
   private mapService = inject(MapsService);
   /** ChangeDetector para refrescar UI tras callbacks externos. */
@@ -288,8 +290,13 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
     }, 200);
   }
 
-  /** Navega de vuelta al listado de actividades. */
+  /** Vuelve a la página anterior con fallback al listado de actividades. */
   goBack() {
+    if (window.history.length > 1) {
+      this.browserLocation.back();
+      return;
+    }
+
     this.router.navigate(['/activitiesList']);
   }
 
