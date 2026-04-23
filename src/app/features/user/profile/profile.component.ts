@@ -7,6 +7,7 @@ import { DefaultAvatarDirective } from '../../../core/directives/default-avatar.
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { AuthService } from '../../../core/services/auth.service';
 import { CloudinaryService } from '../../../core/services/firebase-media.service';
+import { ThemeService } from '../../../core/services/theme.service';
 import { TranslationService } from '../../../core/services/translation.service';
 import { UserService } from '../../../core/services/user.service';
 
@@ -133,7 +134,8 @@ export class ProfileComponent implements OnInit {
     private location: Location,
     private translationService: TranslationService,
     private mediaService: CloudinaryService,
-    private userService: UserService
+    private userService: UserService,
+    private themeService: ThemeService
   ) {}
 
   /** Abre/cierra el menú de ajustes de perfil. */
@@ -321,5 +323,15 @@ export class ProfileComponent implements OnInit {
   /** Navega hacia atrás usando el historial. */
   goBack(): void {
     this.location.back();
+  }
+
+  /** Alterna entre modo claro y oscuro. */
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
+
+  /** Obtiene el tema actual ('light' o 'dark'). */
+  get currentTheme(): 'light' | 'dark' {
+    return this.themeService.getTheme();
   }
 }

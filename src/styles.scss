@@ -31,3 +31,77 @@
         transform: translateY(0) scale(1);
     }
 }
+
+/* Dark mode styles */
+.dark {
+    /* Fondo general */
+    @apply bg-slate-950;
+    
+    /* Texto por defecto */
+    @apply text-slate-100;
+
+    /* Fondos secundarios */
+    main, section {
+        @apply bg-gradient-to-br from-slate-900 via-slate-900/95 to-slate-800/90 !important;
+    }
+
+    /* Inputs y controles */
+    input, textarea, select {
+        @apply bg-slate-800 text-slate-100 border-slate-700 !important;
+        
+        &::placeholder {
+            @apply text-slate-400 !important;
+        }
+
+        &:focus {
+            @apply border-slate-600 !important;
+        }
+    }
+
+    /* Botones */
+    button {
+        @apply border-slate-700 !important;
+
+        &:hover {
+            @apply bg-slate-800 !important;
+        }
+    }
+
+    /* Menús y dropdowns */
+    .bg-white {
+        @apply bg-slate-800 !important;
+    }
+
+    /* Bordes */
+    .border-slate-200 {
+        @apply border-slate-700 !important;
+    }
+
+    .border-slate-100 {
+        @apply border-slate-700 !important;
+    }
+
+    /* Texto de inputs deshabilitados */
+    .text-slate-600 {
+        @apply text-slate-400 !important;
+    }
+
+    .text-slate-700 {
+        @apply text-slate-300 !important;
+    }
+
+    /* Hovers en elementos light */
+    .hover\:bg-slate-50:hover {
+        @apply bg-slate-700 !important;
+    }
+
+    /* Fondos de cards y paneles */
+    .bg-slate-100 {
+        @apply bg-slate-800 !important;
+    }
+
+    /* Overlay y sombras */
+    .shadow-xl, .shadow-lg, .shadow-md {
+        @apply shadow-slate-900/50 !important;
+    }
+}

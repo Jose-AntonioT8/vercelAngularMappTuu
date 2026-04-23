@@ -59,6 +59,26 @@
         >
           {{ "profile.editProfile" | translate }}
         </button>
+        <div class="border-t border-slate-100"></div>
+        <button
+          (click)="toggleTheme(); isSettingsMenuOpen = false"
+          class="w-full text-left px-4 py-3 text-sm text-slate-700 hover:bg-slate-50 transition-colors flex items-center justify-between"
+        >
+          <span>
+            @if (currentTheme === 'light') {
+              {{ "common.darkMode" | translate }}
+            } @else {
+              {{ "common.lightMode" | translate }}
+            }
+          </span>
+          <span class="text-lg">
+            @if (currentTheme === 'light') {
+              🌙
+            } @else {
+              ☀️
+            }
+          </span>
+        </button>
       </div>
     }
   </div>

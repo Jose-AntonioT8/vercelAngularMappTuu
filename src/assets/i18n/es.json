@@ -17,7 +17,9 @@
     "logout": "Cerrar sesión",
     "language": "Idioma",
     "cancel": "Cancelar",
-    "stars": "estrellas"
+    "stars": "estrellas",
+    "darkMode": "Modo oscuro",
+    "lightMode": "Modo claro"
   },
   "reviews": {
     "title": "Reseñas de la actividad",

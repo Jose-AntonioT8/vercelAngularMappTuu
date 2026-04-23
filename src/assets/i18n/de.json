@@ -19,7 +19,9 @@
     "loading": "Wird geladen...",
     "noData": "Keine Daten verfügbar",
     "cancel": "Abbrechen",
-    "stars": "Sterne"
+    "stars": "Sterne",
+    "darkMode": "Dunkler Modus",
+    "lightMode": "Heller Modus"
   },
   "reviews": {
     "title": "Aktivitätsbewertungen",
