@@ -34,8 +34,9 @@
     "ia":"KI",
     "loginButton": "Anmelden",
     "home": "Startseite",
-    "explore": "Entdecken",
-    "list": "Liste",
+    "global": "Global",
+    "listActivities": "Aktivitätenliste",
+    "listPlans": "Liste der Pläne",
     "aboutUs": "Über uns",
     "contact": "Kontakt"
   },

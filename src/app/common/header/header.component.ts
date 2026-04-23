@@ -23,16 +23,15 @@ import { LanguageSelectorComponent } from '../../common/language-selector/langua
 export class HeaderComponent implements OnInit, OnDestroy {
   /** Estado del menú móvil (hamburger). */
   isMobileMenuOpen = false;
-  /** `true` cuando la ruta actual está en `/maps` (para cambiar CTA). */
-  isOnMapView = false;
+  /** `true` cuando la ruta actual está en `/activitiesList` o `/plansList`. */
+  isOnListPage = false;
   /** Subscription a eventos del router (se limpia en destroy). */
   private routeSub?: Subscription;
 
   /** Router para navegación y detección de ruta actual. */
   constructor(private router: Router) {}
 
-  /** Suscripción a cambios de navegación para derivar `isOnMapView`. */
-  /** Inicia el listener de navegación para sincronizar `isOnMapView`. */
+  /** Inicia el listener de navegación para sincronizar `isOnListPage`. */
   ngOnInit() {
     this.checkRoute(this.router.url);
     this.routeSub = this.router.events.pipe(
@@ -47,19 +46,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.routeSub?.unsubscribe();
   }
 
-  /** Deriva si estamos en vista mapa en base a la URL actual. */
+  /** Deriva si estamos en página de lista en base a la URL actual. */
   private checkRoute(url: string): void {
-    this.isOnMapView = url === '/maps' || url.startsWith('/maps?');
+    this.isOnListPage = url === '/activitiesList' || url.startsWith('/activitiesList?') ||
+                        url === '/plansList' || url.startsWith('/plansList?');
   }
 
-  /** Ruta dinámica para el CTA del header (explorar o listar). */
-  get exploreRoute(): string {
-    return this.isOnMapView ? '/activitiesList' : '/maps';
+  /** Detecta si estamos específicamente en la lista de actividades. */
+  private isOnActivitiesList(): boolean {
+    const url = this.router.url;
+    return url === '/activitiesList' || url.startsWith('/activitiesList?');
   }
 
-  /** i18n key del label del CTA dinámico. */
-  get exploreLabel(): string {
-    return this.isOnMapView ? 'header.list' : 'header.explore';
+  /** Ruta dinámica para el botón de toggle entre lista de actividades y planes. */
+  get toggleListRoute(): string {
+    return this.isOnActivitiesList() ? '/plansList' : '/activitiesList';
+  }
+
+  /** i18n key del label del botón de toggle. */
+  get toggleListLabel(): string {
+    return this.isOnActivitiesList() ? 'header.listPlans' : 'header.listActivities';
   }
 
   /** Alterna el menú móvil. */

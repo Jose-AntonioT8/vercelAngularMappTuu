@@ -32,8 +32,9 @@
     "ia":"IA",
     "loginButton": "Iniciar sesión",
     "home": "Inicio",
-    "explore": "Explorar",
-    "list": "Lista",
+    "global": "Global",
+    "listActivities": "Lista de actividades",
+    "listPlans": "Lista de planes",
     "aboutUs": "Sobre nosotros",
     "contact": "Contacto"
   },

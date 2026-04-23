@@ -34,8 +34,9 @@
     "ia":"AI",
     "loginButton": "Sign In",
     "home": "Home",
-    "explore": "Explore",
-    "list": "List",
+    "global": "Global",
+    "listActivities": "List of activities",
+    "listPlans": "List of plans",
     "aboutUs": "About us",
     "contact": "Contact"
   },

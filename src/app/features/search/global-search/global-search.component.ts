@@ -106,16 +106,20 @@ export class GlobalSearchComponent implements OnInit {
     term: string,
   ): SearchCardItem[] {
     const allItems = [...activities, ...plans];
-    const normalizedTerm = this.normalizeText(term);
+    const normalizedTerm = this.normalizeText(term).trim();
 
-    const filtered = normalizedTerm
-      ? allItems.filter((item) => {
-          const searchableText = this.normalizeText(
-            `${item.name} ${item.description} ${item.id}`,
-          );
-          return searchableText.includes(normalizedTerm);
-        })
-      : allItems;
+    // Si no hay término de búsqueda, devolver todos los elementos ordenados por rating
+    if (!normalizedTerm) {
+      return allItems.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+    }
+
+    // Si hay término de búsqueda, filtrar los elementos
+    const filtered = allItems.filter((item) => {
+      const searchableText = this.normalizeText(
+        `${item.name} ${item.description} ${item.id}`,
+      );
+      return searchableText.includes(normalizedTerm);
+    });
 
     return filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
   }
