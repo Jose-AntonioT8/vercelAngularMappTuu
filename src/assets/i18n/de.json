@@ -1,6 +1,6 @@
 {
-  "ia":{
-   "title": "KI-Assistent für Pläne und Aktivitäten",
+  "ia": {
+    "title": "KI-Assistent für Pläne und Aktivitäten",
     "description": "Willkommen bei MappTuu, deinem KI-Assistenten, frag mich nach interessanten Plänen und Aktivitäten",
     "question": "Deine Frage...",
     "answer": "Antwort",
@@ -33,7 +33,7 @@
     "date": "Datum: "
   },
   "header": {
-    "ia":"KI",
+    "ia": "KI",
     "loginButton": "Anmelden",
     "home": "Startseite",
     "global": "Global",
@@ -487,6 +487,28 @@
         "sessionFailed": "Sitzung konnte nicht bestätigt werden.",
         "actionFailed": "Moderationsaktion konnte nicht ausgeführt werden."
       }
+    }
+  },
+  "contact": {
+    "title": "Kontakt",
+    "description": "MappTuu ist ein Projekt, das darauf ausgerichtet ist, Menschen dabei zu helfen, Aktivitäten und Pläne einfach zu entdecken, zu erstellen und zu speichern. Die Idee ist, Menschen mit nahegelegenen Erlebnissen zu verbinden – mit einem visuellen, praktischen Ansatz für den Alltag.",
+    "emailLabel": "E-Mail",
+    "linkedinLabel": "LinkedIn",
+    "founder1": {
+      "photoPlaceholder": "Platzhalter für das Foto von Jose Antonio Dominguez Gonzalez",
+      "name": "Jose Antonio Dominguez Gonzalez",
+      "roleCity": "Mitgründer · Málaga",
+      "education": "Er hat den Höheren Abschluss in Multiplattform-Anwendungsentwicklung (DAM) am CPIFP Alan Turing absolviert.",
+      "email": "joseantdominguezgonzalez@gmail.com",
+      "linkedin": "Profil von Jose Antonio"
+    },
+    "founder2": {
+      "photoPlaceholder": "Platzhalter für das Foto von Ezequiel Vargas Berrocal",
+      "name": "Ezequiel Vargas Berrocal",
+      "roleCity": "Mitgründer · Málaga",
+      "education": "Er hat den Höheren Abschluss in Multiplattform-Anwendungsentwicklung (DAM) am CPIFP Alan Turing absolviert.",
+      "email": "correoezequiel@gmail.com",
+      "linkedin": "Profil von Ezequiel"
     }
   }
 }

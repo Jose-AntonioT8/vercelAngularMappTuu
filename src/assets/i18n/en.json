@@ -1,5 +1,5 @@
 {
-  "ia":{
+  "ia": {
     "title": "AI Assistant for plans and activities",
     "description": "Welcome to MappTuu, your AI assistant, ask me about interesting plans and activities to do",
     "question": "Your question...",
@@ -33,7 +33,7 @@
     "date": "Date: "
   },
   "header": {
-    "ia":"AI",
+    "ia": "AI",
     "loginButton": "Sign In",
     "home": "Home",
     "global": "Global",
@@ -487,6 +487,28 @@
         "sessionFailed": "Could not validate session.",
         "actionFailed": "Could not apply moderation action."
       }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "MappTuu is a project focused on helping people discover, create and save activities and plans in a simple way. The idea is to connect people with nearby experiences, with a visual, practical approach designed for everyday life.",
+    "emailLabel": "Email",
+    "linkedinLabel": "LinkedIn",
+    "founder1": {
+      "photoPlaceholder": "Photo placeholder for Jose Antonio Dominguez Gonzalez",
+      "name": "Jose Antonio Dominguez Gonzalez",
+      "roleCity": "Co-founder · Málaga",
+      "education": "He studied the Higher Degree in Multiplatform Application Development (DAM) at CPIFP Alan Turing.",
+      "email": "joseantdominguezgonzalez@gmail.com",
+      "linkedin": "Jose Antonio's profile"
+    },
+    "founder2": {
+      "photoPlaceholder": "Photo placeholder for Ezequiel Vargas Berrocal",
+      "name": "Ezequiel Vargas Berrocal",
+      "roleCity": "Co-founder · Málaga",
+      "education": "He studied the Higher Degree in Multiplatform Application Development (DAM) at CPIFP Alan Turing.",
+      "email": "correoezequiel@gmail.com",
+      "linkedin": "Ezequiel's profile"
     }
   }
 }

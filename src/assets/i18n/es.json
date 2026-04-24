@@ -484,5 +484,27 @@
         "actionFailed": "No se pudo aplicar la acción de moderación."
       }
     }
+  },
+  "contact": {
+    "title": "Contacto",
+    "description": "MappTuu es un proyecto centrado en ayudar a descubrir, crear y guardar actividades y planes de forma sencilla. La idea es conectar personas con experiencias cercanas, con un enfoque visual, práctico y pensado para el día a día.",
+    "emailLabel": "Email",
+    "linkedinLabel": "LinkedIn",
+    "founder1": {
+      "photoPlaceholder": "Espacio para foto de Jose Antonio Dominguez Gonzalez",
+      "name": "Jose Antonio Dominguez Gonzalez",
+      "roleCity": "Co-founder · Málaga",
+      "education": "Ha estudiado el Grado Superior de Desarrollo de Aplicaciones Multiplataforma (DAM) en el CPIFP Alan Turing.",
+      "email": "joseantdominguezgonzalez@gmail.com",
+      "linkedin": "Perfil de Jose Antonio"
+    },
+    "founder2": {
+      "photoPlaceholder": "Espacio para foto de Ezequiel Vargas Berrocal",
+      "name": "Ezequiel Vargas Berrocal",
+      "roleCity": "Co-founder · Málaga",
+      "education": "Ha estudiado el Grado Superior de Desarrollo de Aplicaciones Multiplataforma (DAM) en el CPIFP Alan Turing.",
+      "email": "correoezequiel@gmail.com",
+      "linkedin": "Perfil de Ezequiel"
+    }
   }
 }
