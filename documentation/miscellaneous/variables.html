@@ -347,14 +347,36 @@ vía <code>environment</code>.</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>() &#x3D;&gt; {
+                        <i>Default value : </i><code>async () &#x3D;&gt; {
   const auth &#x3D; inject(AuthService);
   const router &#x3D; inject(Router);
+  const userService &#x3D; inject(UserService);
 
-  if (auth.isAuthenticated()) {
-    return true;
-  } else {
+  if (!auth.isAuthenticated()) {
     router.navigate([&#x27;/landingPage&#x27;]);
+    return false;
+  }
+
+  try {
+    const uid &#x3D; auth.currentUser?.uid;
+    if (!uid) {
+      await auth.logout();
+      return false;
+    }
+
+    const profile &#x3D; await firstValueFrom(userService.getUserId(uid));
+    const resolvedAge &#x3D; typeof profile.birthDate &#x3D;&#x3D;&#x3D; &#x27;string&#x27;
+      ? calculateAgeFromBirthDate(profile.birthDate)
+      : profile.age;
+
+    if (typeof resolvedAge &#x3D;&#x3D;&#x3D; &#x27;number&#x27; &amp;&amp; resolvedAge &lt; 14) {
+      await auth.logout();
+      return false;
+    }
+
+    return true;
+  } catch {
+    await auth.logout();
     return false;
   }
 }</code>
@@ -890,6 +912,7 @@ real de la misma (runtime env, environment, etc.).</p>
   {path : &#x27;maps&#x27;, component: MapsComponent},
   {path : &#x27;updatePlan/:id&#x27;, component: PlansUpdateComponent, canActivate: [authGuard]},
   {path : &#x27;landingPage&#x27;, component: LandingPageComponent},
+  {path : &#x27;search&#x27;, component: GlobalSearchComponent, canActivate: [authGuard]},
   { path: &#x27;activitiesList&#x27;, component: ListActivitiesComponent},
   { path: &#x27;createdActivities&#x27;, component: CreatedActivitiesComponent},
   { path: &#x27;activityDetail/:id&#x27;, component: ActivityDetailComponent},
@@ -897,6 +920,7 @@ real de la misma (runtime env, environment, etc.).</p>
   { path: &#x27;login&#x27;, component: LoginComponent, canActivate: [guestGuard] },
   { path: &#x27;signup&#x27;, component: SignupComponent, canActivate: [guestGuard] },
   { path: &#x27;about&#x27;, loadComponent: () &#x3D;&gt; &quot;import(&#x27;./features/about/about.component&#x27;).then(m &#x3D;&gt; m.AboutComponent)&quot; },
+  { path: &#x27;contact&#x27;, loadComponent: () &#x3D;&gt; &quot;import(&#x27;./features/contact/contact.component&#x27;).then(m &#x3D;&gt; m.ContactComponent)&quot; },
   { path: &#x27;dashboard&#x27;, component: DashboardComponent, canActivate: [adminGuard] },
   { path: &#x27;admin/reports&#x27;, component: ReportsModerationComponent, canActivate: [adminGuard] },
   {path: &#x27;activitiesCreation&#x27;, component: ActivitiesCreationComponent, canActivate: [authGuard]},

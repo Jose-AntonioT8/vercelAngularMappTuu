@@ -134,7 +134,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/common/activityTypes/list/list.component.ts</code>
+    <code>src/app/common/activities/list/list.component.ts</code>
 </p>
 
 
@@ -142,9 +142,12 @@
         <h3>Description</h3>
     </p>
     <p class="comment">
-        <p>Listado de tipos de actividad (componente común).</p>
-<p>Se alimenta del stream <code>activities$</code> del <code>ActivityTypeService</code> y dispara
-la carga inicial en <code>ngOnInit</code>.</p>
+        <p>Listado de actividades.</p>
+<p>Orquesta la carga inicial:</p>
+<ul>
+<li>Actividades (desde <code>ActivityService</code>)</li>
+<li>Tipos de actividad (desde <code>ActivityTypeService</code>)</li>
+</ul>
 
     </p>
 
@@ -224,11 +227,58 @@ la carga inicial en <code>ngOnInit</code>.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#activities$" >activities$</a>
+                            </li>
+                            <li>
+                                <a href="#activitiesWithLocation$" >activitiesWithLocation$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#activityService" >activityService</a>
+                            </li>
+                            <li>
                                 <a href="#activityTypes$" >activityTypes$</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#activityTypeService" >activityTypeService</a>
+                            </li>
+                            <li>
+                                <a href="#filteredActivities$" >filteredActivities$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#filterState$" >filterState$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#locationCache" >locationCache</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#mapsService" >mapsService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#searchGeoCache" >searchGeoCache</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#searchQuery$" >searchQuery$</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#searchRadiusKm" >searchRadiusKm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#searchTerm$" >searchTerm$</a>
                             </li>
                         </ul>
                     </td>
@@ -243,7 +293,89 @@ la carga inicial en <code>ngOnInit</code>.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#distanceKm" >distanceKm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#enrichActivitiesWithLocation" >enrichActivitiesWithLocation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#filterByTerm" >filterByTerm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getLocationSearchText" >getLocationSearchText</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getSearchableText" >getSearchableText</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isInsideViewport" >isInsideViewport</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#matchesActivityTypeFilter" >matchesActivityTypeFilter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#matchesGeoFilter" >matchesGeoFilter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#matchesLocationFilter" >matchesLocationFilter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#matchesRatingFilter" >matchesRatingFilter</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#normalizeSearchText" >normalizeSearchText</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#pickNumberField" >pickNumberField</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#pickStringField" >pickStringField</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#resolveActivityLocation" >resolveActivityLocation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#resolveSearchQuery" >resolveSearchQuery</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#toRadians" >toRadians</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#filterState" >filterState</a>
+                            </li>
+                            <li>
+                                <a href="#searchTerm" >searchTerm</a>
                             </li>
                         </ul>
                     </td>
@@ -252,13 +384,85 @@ la carga inicial en <code>ngOnInit</code>.</p>
 
 
 
-
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#searchTerm" >searchTerm</a>
+                                </li>
+                                <li>
+                                    <a href="#filterState" >filterState</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
         </tbody>
     </table>
 </section>
 
 
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filterState"></a>
+                        <b>filterState</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Activity.html" target="_self" >ActivityListFilterState | null</a></code>
 
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/common/activities/list/list.component.ts:93</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Estado del panel de filtros (tipo, ubicación y rating).</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchTerm"></a>
+                        <b>searchTerm</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/common/activities/list/list.component.ts:88</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Término de búsqueda externo para filtrar por nombre de actividad.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
 
 
@@ -267,6 +471,872 @@ la carga inicial en <code>ngOnInit</code>.</p>
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="distanceKm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>distanceKm</b></span>
+                        <a href="#distanceKm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>distanceKm(lat1: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, lon1: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, lat2: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, lon2: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="386"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:386</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Calcula distancia aproximada entre dos puntos usando Haversine.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>lat1</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>lon1</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>lat2</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>lon2</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="enrichActivitiesWithLocation"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>enrichActivitiesWithLocation</b></span>
+                        <a href="#enrichActivitiesWithLocation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>enrichActivitiesWithLocation(activities: <a href="../interfaces/Activity.html" target="_self">Activity[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="249"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:249</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Enriquece cada actividad con su ubicacion resuelta para busqueda.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>activities</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Activity.html" target="_self" >Activity[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;ActivitySearchItem[]&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterByTerm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>filterByTerm</b></span>
+                        <a href="#filterByTerm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>filterByTerm(activities: ActivitySearchItem[], query: <a href="../interfaces/SearchQueryState.html" target="_self">SearchQueryState</a>, filterState: <a href="../interfaces/Activity.html" target="_self">ActivityListFilterState</a>, activityTypes: ActivityType[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:110</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Aplica filtros combinados de texto, geolocalizacion, tipo y valoracion.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>activities</td>
+                                            <td>
+                                                        <code>ActivitySearchItem[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>query</td>
+                                            <td>
+                                                            <code><a href="../interfaces/SearchQueryState.html" target="_self" >SearchQueryState</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>filterState</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Activity.html" target="_self" >ActivityListFilterState</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>activityTypes</td>
+                                            <td>
+                                                        <code>ActivityType[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Activity.html" target="_self" >Activity[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getLocationSearchText"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getLocationSearchText</b></span>
+                        <a href="#getLocationSearchText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getLocationSearchText(activity: <a href="../interfaces/ActivitySearchItem.html" target="_self">ActivitySearchItem</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="160"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:160</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Construye el texto indexable asociado unicamente a la ubicacion.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>activity</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ActivitySearchItem.html" target="_self" >ActivitySearchItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSearchableText"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getSearchableText</b></span>
+                        <a href="#getSearchableText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getSearchableText(activity: <a href="../interfaces/ActivitySearchItem.html" target="_self">ActivitySearchItem</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="137"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:137</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Construye el texto indexable principal de una actividad.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>activity</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ActivitySearchItem.html" target="_self" >ActivitySearchItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isInsideViewport"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isInsideViewport</b></span>
+                        <a href="#isInsideViewport"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isInsideViewport(latitude: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, longitude: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, viewport: NonNullable<unknown>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="367"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:367</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Valida si un punto cae dentro del viewport geocodificado.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>latitude</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>longitude</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>viewport</td>
+                                            <td>
+                                                        <code>NonNullable&lt;unknown&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="matchesActivityTypeFilter"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>matchesActivityTypeFilter</b></span>
+                        <a href="#matchesActivityTypeFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>matchesActivityTypeFilter(activity: <a href="../interfaces/ActivitySearchItem.html" target="_self">ActivitySearchItem</a>, selectedType: string | null, activityTypes: ActivityType[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:193</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Evalua el filtro por tipo de actividad (id o nombre normalizado).</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>activity</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ActivitySearchItem.html" target="_self" >ActivitySearchItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>selectedType</td>
+                                            <td>
+                                                        <code>string | null</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>activityTypes</td>
+                                            <td>
+                                                        <code>ActivityType[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="matchesGeoFilter"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>matchesGeoFilter</b></span>
+                        <a href="#matchesGeoFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>matchesGeoFilter(activity: <a href="../interfaces/ActivitySearchItem.html" target="_self">ActivitySearchItem</a>, geoLocation: <a href="../interfaces/GeocodedLocation.html" target="_self">GeocodedLocation</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="336"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:336</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Comprueba si la actividad coincide con el filtro geoespacial.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>activity</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ActivitySearchItem.html" target="_self" >ActivitySearchItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>geoLocation</td>
+                                            <td>
+                                                            <code><a href="../interfaces/GeocodedLocation.html" target="_self" >GeocodedLocation</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="matchesLocationFilter"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>matchesLocationFilter</b></span>
+                        <a href="#matchesLocationFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>matchesLocationFilter(activity: <a href="../interfaces/ActivitySearchItem.html" target="_self">ActivitySearchItem</a>, location: string | null)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:180</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Evalua el filtro de ubicacion textual del panel.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>activity</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ActivitySearchItem.html" target="_self" >ActivitySearchItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>location</td>
+                                            <td>
+                                                        <code>string | null</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="matchesRatingFilter"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>matchesRatingFilter</b></span>
+                        <a href="#matchesRatingFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>matchesRatingFilter(activity: <a href="../interfaces/ActivitySearchItem.html" target="_self">ActivitySearchItem</a>, ratingMin: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="237"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:237</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Evalua el filtro por valoracion minima.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>activity</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ActivitySearchItem.html" target="_self" >ActivitySearchItem</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>ratingMin</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -287,15 +1357,15 @@ la carga inicial en <code>ngOnInit</code>.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="29"
-                                    class="link-to-prism">src/app/common/activityTypes/list/list.component.ts:29</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:102</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Dispara la carga/listener del servicio.</p>
+                        <div class="io-description"><p>Dispara cargas iniciales necesarias para el listado.</p>
 </div>
 
                         <div class="io-description">
@@ -306,12 +1376,577 @@ la carga inicial en <code>ngOnInit</code>.</p>
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="normalizeSearchText"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>normalizeSearchText</b></span>
+                        <a href="#normalizeSearchText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>normalizeSearchText(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="450"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:450</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Normaliza texto para comparaciones flexibles sin acentos ni mayusculas.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pickNumberField"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>pickNumberField</b></span>
+                        <a href="#pickNumberField"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>pickNumberField(source: Record<string | unknown>, keys: string[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="429"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:429</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Devuelve el primer campo numerico valido encontrado en la lista de claves.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>source</td>
+                                            <td>
+                                                        <code>Record&lt;string | unknown&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>keys</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>number | undefined</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pickStringField"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>pickStringField</b></span>
+                        <a href="#pickStringField"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>pickStringField(source: Record<string | unknown>, keys: string[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="414"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:414</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Devuelve el primer campo string valido encontrado en la lista de claves.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>source</td>
+                                            <td>
+                                                        <code>Record&lt;string | unknown&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>keys</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resolveActivityLocation"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>resolveActivityLocation</b></span>
+                        <a href="#resolveActivityLocation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resolveActivityLocation(activity: <a href="../interfaces/Activity.html" target="_self">Activity</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="272"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:272</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Resuelve una ubicacion legible para una actividad.
+Usa campos explicitos y cae a reverse geocoding por coordenadas.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>activity</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Activity.html" target="_self" >Activity</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;string&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resolveSearchQuery"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>resolveSearchQuery</b></span>
+                        <a href="#resolveSearchQuery"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resolveSearchQuery(term: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="313"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:313</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Resuelve el termino de busqueda y su posible geocodificacion.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>term</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Observable&lt;SearchQueryState&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toRadians"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>toRadians</b></span>
+                        <a href="#toRadians"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toRadians(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="406"
+                                    class="link-to-prism">src/app/common/activities/list/list.component.ts:406</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Convierte grados a radianes.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
     <section data-compodoc="block-properties">
     
     <h3 id="inputs">
         Properties
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activities$"></a>
+                    <span class="name">
+                        <span ><b>activities$</b></span>
+                        <a href="#activities$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.activityService.activities$</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/common/activities/list/list.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Stream reactivo de actividades para renderizar el listado.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activitiesWithLocation$"></a>
+                    <span class="name">
+                        <span ><b>activitiesWithLocation$</b></span>
+                        <a href="#activitiesWithLocation$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.activities$.pipe(
+    switchMap((activities) &#x3D;&gt; this.enrichActivitiesWithLocation(activities || [])),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/common/activities/list/list.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Stream de actividades enriquecidas con ubicación textual resuelta.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activityService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>activityService</b></span>
+                        <a href="#activityService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivityService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/common/activities/list/list.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio de actividades para alimentar el stream del listado.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -336,13 +1971,13 @@ la carga inicial en <code>ngOnInit</code>.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/common/activityTypes/list/list.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/common/activities/list/list.component.ts:66</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Stream reactivo de tipos de actividad para la UI.</p>
+                    <div class="io-description"><p>Stream de tipos usado por las cards para colorear/etiquetar.</p>
 </div>
                 </td>
             </tr>
@@ -374,13 +2009,339 @@ la carga inicial en <code>ngOnInit</code>.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/common/activityTypes/list/list.component.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/common/activities/list/list.component.ts:45</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Servicio de tipos de actividad (stream + carga).</p>
+                    <div class="io-description"><p>Servicio de tipos para enriquecer cards (labels/colores).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredActivities$"></a>
+                    <span class="name">
+                        <span ><b>filteredActivities$</b></span>
+                        <a href="#filteredActivities$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>combineLatest([
+    this.activitiesWithLocation$,
+    this.searchQuery$,
+    this.filterState$,
+    this.activityTypes$,
+  ]).pipe(
+    map(([activities, query, filterState, activityTypes]) &#x3D;&gt;
+      this.filterByTerm(activities || [], query, filterState, activityTypes || []),
+    ),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/common/activities/list/list.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Stream final de actividades filtradas por búsqueda y panel de filtros.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterState$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>filterState$</b></span>
+                        <a href="#filterState$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;ActivityListFilterState&gt;({
+    activityType: null,
+    location: null,
+    ratingMin: 0,
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/common/activities/list/list.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Estado reactivo del panel de filtros de actividades.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="locationCache"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>locationCache</b></span>
+                        <a href="#locationCache"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Map&lt;string, string&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/common/activities/list/list.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Caché de ubicaciones resueltas por coordenadas.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mapsService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>mapsService</b></span>
+                        <a href="#mapsService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(MapsService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/common/activities/list/list.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio de mapas para reverse geocoding de coordenadas.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchGeoCache"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>searchGeoCache</b></span>
+                        <a href="#searchGeoCache"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Map&lt;string, GeocodedLocation | null&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/common/activities/list/list.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Caché de geocodificación de términos de búsqueda.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchQuery$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>searchQuery$</b></span>
+                        <a href="#searchQuery$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.searchTerm$.pipe(
+    distinctUntilChanged(),
+    switchMap((term) &#x3D;&gt; this.resolveSearchQuery(term)),
+    shareReplay({ bufferSize: 1, refCount: true }),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/common/activities/list/list.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Stream de consulta geocodificada derivada del buscador.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchRadiusKm"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>searchRadiusKm</b></span>
+                        <a href="#searchRadiusKm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>25</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="411" class="link-to-prism">src/app/common/activities/list/list.component.ts:411</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Radio de busqueda por defecto cuando no hay viewport exacto.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchTerm$"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>searchTerm$</b></span>
+                        <a href="#searchTerm$"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new BehaviorSubject&lt;string&gt;(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/common/activities/list/list.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Stream de búsqueda por nombre desde la pantalla padre.</p>
 </div>
                 </td>
             </tr>
@@ -389,21 +2350,165 @@ la carga inicial en <code>ngOnInit</code>.</p>
     </table>
 </section>
 
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="searchTerm"></a>
+                        <span class="name"><b>searchTerm</b><a href="#searchTerm"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>searchTerm(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/common/activities/list/list.component.ts:88</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Término de búsqueda externo para filtrar por nombre de actividad.</p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="filterState"></a>
+                        <span class="name"><b>filterState</b><a href="#filterState"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>filterState(value: <a href="../interfaces/Activity.html" target="_self">ActivityListFilterState | null</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/common/activities/list/list.component.ts:93</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Estado del panel de filtros (tipo, ubicación y rating).</p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>value</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="../interfaces/Activity.html" target="_self" >ActivityListFilterState | null</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
-import { Component, OnInit, inject } from &#x27;@angular/core&#x27;;
-import { CardComponent } from &#x27;../card/card.component&#x27;;
+import { Component, Input, OnInit, inject } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject, Observable, combineLatest, distinctUntilChanged, forkJoin, map, of, shareReplay, switchMap } from &#x27;rxjs&#x27;;
+import { ActivityService } from &#x27;../../../core/services/activity.service&#x27;;
 import { ActivityTypeService } from &#x27;../../../core/services/activitytype.service&#x27;;
+import { GeocodedLocation, MapsService } from &#x27;../../../core/services/maps.service&#x27;;
 import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
+import { ActivityType } from &#x27;../../models/activityType.models&#x27;;
+import { Activity } from &#x27;../../models/activity.model&#x27;;
+import { CardComponent } from &#x27;../card/card.component&#x27;;
+import { ActivityFilterState as ActivityListFilterState } from &#x27;../filter/filter.component&#x27;;
+
+/** Actividad enriquecida con ubicación resuelta para búsquedas por texto. */
+interface ActivitySearchItem extends Activity {
+  /** Ubicación textual derivada de reverse geocoding. */
+  resolvedLocation: string;
+}
+
+/** Estado intermedio de búsqueda: término normalizado + posible geocodificación. */
+interface SearchQueryState {
+  /** Término de búsqueda normalizado para comparar. */
+  normalizedTerm: string;
+  /** Resultado geocodificado del término, si aplica. */
+  geoLocation: GeocodedLocation | null;
+}
 
 /**
- * Listado de tipos de actividad (componente común).
+ * Listado de actividades.
  *
- * Se alimenta del stream &#x60;activities$&#x60; del &#x60;ActivityTypeService&#x60; y dispara
- * la carga inicial en &#x60;ngOnInit&#x60;.
+ * Orquesta la carga inicial:
+ * - Actividades (desde &#x60;ActivityService&#x60;)
+ * - Tipos de actividad (desde &#x60;ActivityTypeService&#x60;)
  */
 @Component({
   selector: &#x27;app-list&#x27;,
@@ -413,34 +2518,440 @@ import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
   styles: [],
 })
 export class ListComponent implements OnInit {
-  
-  /** Servicio de tipos de actividad (stream + carga). */
+  /** Servicio de actividades para alimentar el stream del listado. */
+  private activityService &#x3D; inject(ActivityService);
+  /** Servicio de tipos para enriquecer cards (labels/colores). */
   private activityTypeService &#x3D; inject(ActivityTypeService);
+  /** Servicio de mapas para reverse geocoding de coordenadas. */
+  private mapsService &#x3D; inject(MapsService);
+  /** Caché de ubicaciones resueltas por coordenadas. */
+  private readonly locationCache &#x3D; new Map&lt;string, string&gt;();
+  /** Caché de geocodificación de términos de búsqueda. */
+  private readonly searchGeoCache &#x3D; new Map&lt;string, GeocodedLocation | null&gt;();
+  /** Estado reactivo del panel de filtros de actividades. */
+  private readonly filterState$ &#x3D; new BehaviorSubject&lt;ActivityListFilterState&gt;({
+    activityType: null,
+    location: null,
+    ratingMin: 0,
+  });
 
-  /** Stream reactivo de tipos de actividad para la UI. */
+  /** Stream reactivo de actividades para renderizar el listado. */
+  activities$ &#x3D; this.activityService.activities$;
+  /** Stream de actividades enriquecidas con ubicación textual resuelta. */
+  activitiesWithLocation$ &#x3D; this.activities$.pipe(
+    switchMap((activities) &#x3D;&gt; this.enrichActivitiesWithLocation(activities || [])),
+  );
+  /** Stream de tipos usado por las cards para colorear/etiquetar. */
   activityTypes$ &#x3D; this.activityTypeService.activities$;
+  /** Stream de búsqueda por nombre desde la pantalla padre. */
+  private readonly searchTerm$ &#x3D; new BehaviorSubject&lt;string&gt;(&#x27;&#x27;);
+  /** Stream de consulta geocodificada derivada del buscador. */
+  private readonly searchQuery$ &#x3D; this.searchTerm$.pipe(
+    distinctUntilChanged(),
+    switchMap((term) &#x3D;&gt; this.resolveSearchQuery(term)),
+    shareReplay({ bufferSize: 1, refCount: true }),
+  );
+  /** Stream final de actividades filtradas por búsqueda y panel de filtros. */
+  filteredActivities$ &#x3D; combineLatest([
+    this.activitiesWithLocation$,
+    this.searchQuery$,
+    this.filterState$,
+    this.activityTypes$,
+  ]).pipe(
+    map(([activities, query, filterState, activityTypes]) &#x3D;&gt;
+      this.filterByTerm(activities || [], query, filterState, activityTypes || []),
+    ),
+  );
 
-  /** Dispara la carga/listener del servicio. */
+  /** Término de búsqueda externo para filtrar por nombre de actividad. */
+  @Input() set searchTerm(value: string) {
+    this.searchTerm$.next((value || &#x27;&#x27;).trim());
+  }
+
+  /** Estado del panel de filtros (tipo, ubicación y rating). */
+  @Input() set filterState(value: ActivityListFilterState | null) {
+    this.filterState$.next({
+      activityType: value?.activityType ?? null,
+      location: value?.location ?? null,
+      ratingMin: value?.ratingMin ?? 0,
+    });
+  }
+
+  /** Dispara cargas iniciales necesarias para el listado. */
   ngOnInit(): void {
+    this.activityService.getActivities();
     this.activityTypeService.getActivitiesType();
   }
-}</code></pre>
+
+  /**
+   * Aplica filtros combinados de texto, geolocalizacion, tipo y valoracion.
+   */
+  private filterByTerm(
+    activities: ActivitySearchItem[],
+    query: SearchQueryState,
+    filterState: ActivityListFilterState,
+    activityTypes: ActivityType[],
+  ): Activity[] {
+    return activities.filter((activity) &#x3D;&gt; {
+      const normalizedTerm &#x3D; query.normalizedTerm;
+      const textMatch &#x3D; normalizedTerm
+        ? this.getSearchableText(activity).includes(normalizedTerm)
+        : true;
+      const geoMatch &#x3D; query.geoLocation
+        ? this.matchesGeoFilter(activity, query.geoLocation)
+        : true;
+      const typeMatch &#x3D; this.matchesActivityTypeFilter(
+        activity,
+        filterState.activityType,
+        activityTypes,
+      );
+      const locationMatch &#x3D; this.matchesLocationFilter(activity, filterState.location);
+      const ratingMatch &#x3D; this.matchesRatingFilter(activity, filterState.ratingMin);
+
+      return (textMatch || geoMatch) &amp;&amp; typeMatch &amp;&amp; locationMatch &amp;&amp; ratingMatch;
+    });
+  }
+
+  /** Construye el texto indexable principal de una actividad. */
+  private getSearchableText(activity: ActivitySearchItem): string {
+    const value &#x3D; activity as unknown as Record&lt;string, unknown&gt;;
+    const fields &#x3D; [
+      value[&#x27;name&#x27;],
+      value[&#x27;title&#x27;],
+      value[&#x27;location&#x27;],
+      value[&#x27;locationText&#x27;],
+      value[&#x27;address&#x27;],
+      value[&#x27;city&#x27;],
+      value[&#x27;region&#x27;],
+      value[&#x27;place&#x27;],
+      value[&#x27;fullAddress&#x27;],
+      value[&#x27;description&#x27;],
+      activity.resolvedLocation,
+    ];
+
+    return fields
+      .filter((field): field is string &#x3D;&gt; typeof field &#x3D;&#x3D;&#x3D; &#x27;string&#x27;)
+      .map((field) &#x3D;&gt; this.normalizeSearchText(field))
+      .join(&#x27; &#x27;);
+  }
+
+  /** Construye el texto indexable asociado unicamente a la ubicacion. */
+  private getLocationSearchText(activity: ActivitySearchItem): string {
+    const value &#x3D; activity as unknown as Record&lt;string, unknown&gt;;
+    const fields &#x3D; [
+      value[&#x27;location&#x27;],
+      value[&#x27;locationText&#x27;],
+      value[&#x27;address&#x27;],
+      value[&#x27;city&#x27;],
+      value[&#x27;region&#x27;],
+      value[&#x27;place&#x27;],
+      value[&#x27;fullAddress&#x27;],
+      activity.resolvedLocation,
+    ];
+
+    return fields
+      .filter((field): field is string &#x3D;&gt; typeof field &#x3D;&#x3D;&#x3D; &#x27;string&#x27;)
+      .map((field) &#x3D;&gt; this.normalizeSearchText(field))
+      .join(&#x27; &#x27;);
+  }
+
+  /** Evalua el filtro de ubicacion textual del panel. */
+  private matchesLocationFilter(
+    activity: ActivitySearchItem,
+    location: string | null,
+  ): boolean {
+    const normalizedLocation &#x3D; this.normalizeSearchText(location || &#x27;&#x27;);
+    if (!normalizedLocation) {
+      return true;
+    }
+
+    return this.getLocationSearchText(activity).includes(normalizedLocation);
+  }
+
+  /** Evalua el filtro por tipo de actividad (id o nombre normalizado). */
+  private matchesActivityTypeFilter(
+    activity: ActivitySearchItem,
+    selectedType: string | null,
+    activityTypes: ActivityType[],
+  ): boolean {
+    const normalizedSelectedType &#x3D; this.normalizeSearchText(selectedType || &#x27;&#x27;);
+    if (!normalizedSelectedType) {
+      return true;
+    }
+
+    const activityTypeKey &#x3D; this.normalizeSearchText(
+      this.pickStringField(activity as unknown as Record&lt;string, unknown&gt;, [
+        &#x27;activityTypeId&#x27;,
+        &#x27;IdTypeActivity&#x27;,
+        &#x27;typeId&#x27;,
+        &#x27;activityType&#x27;,
+        &#x27;type&#x27;,
+        &#x27;activityTypeName&#x27;,
+      ]),
+    );
+
+    if (!activityTypeKey) {
+      return false;
+    }
+
+    const catalogMatch &#x3D; activityTypes.find((activityType) &#x3D;&gt; {
+      const normalizedId &#x3D; this.normalizeSearchText(activityType.id);
+      const normalizedName &#x3D; this.normalizeSearchText(activityType.name);
+      return normalizedId &#x3D;&#x3D;&#x3D; normalizedSelectedType || normalizedName &#x3D;&#x3D;&#x3D; normalizedSelectedType;
+    });
+
+    if (catalogMatch) {
+      const normalizedCatalogId &#x3D; this.normalizeSearchText(catalogMatch.id);
+      const normalizedCatalogName &#x3D; this.normalizeSearchText(catalogMatch.name);
+      return (
+        activityTypeKey &#x3D;&#x3D;&#x3D; normalizedCatalogId ||
+        activityTypeKey &#x3D;&#x3D;&#x3D; normalizedCatalogName
+      );
+    }
+
+    return activityTypeKey &#x3D;&#x3D;&#x3D; normalizedSelectedType;
+  }
+
+  /** Evalua el filtro por valoracion minima. */
+  private matchesRatingFilter(
+    activity: ActivitySearchItem,
+    ratingMin: number,
+  ): boolean {
+    if (!ratingMin || ratingMin &lt;&#x3D; 0) {
+      return true;
+    }
+
+    return (activity.rating ?? 0) &gt;&#x3D; ratingMin;
+  }
+
+  /** Enriquece cada actividad con su ubicacion resuelta para busqueda. */
+  private enrichActivitiesWithLocation(
+    activities: Activity[],
+  ): Observable&lt;ActivitySearchItem[]&gt; {
+    if (!activities.length) {
+      return of([]);
+    }
+
+    return forkJoin(
+      activities.map((activity) &#x3D;&gt;
+        this.resolveActivityLocation(activity).pipe(
+          map((resolvedLocation) &#x3D;&gt; ({
+            ...activity,
+            resolvedLocation,
+          })),
+        ),
+      ),
+    );
+  }
+
+  /**
+   * Resuelve una ubicacion legible para una actividad.
+   * Usa campos explicitos y cae a reverse geocoding por coordenadas.
+   */
+  private resolveActivityLocation(activity: Activity): Observable&lt;string&gt; {
+    const value &#x3D; activity as unknown as Record&lt;string, unknown&gt;;
+    const explicitLocation &#x3D; this.pickStringField(value, [
+      &#x27;location&#x27;,
+      &#x27;locationText&#x27;,
+      &#x27;address&#x27;,
+      &#x27;city&#x27;,
+      &#x27;region&#x27;,
+      &#x27;place&#x27;,
+      &#x27;fullAddress&#x27;,
+    ]);
+
+    if (explicitLocation) {
+      return of(explicitLocation);
+    }
+
+    const latitude &#x3D; this.pickNumberField(value, [&#x27;latitude&#x27;, &#x27;lat&#x27;]);
+    const longitude &#x3D; this.pickNumberField(value, [&#x27;longitude&#x27;, &#x27;lng&#x27;, &#x27;lon&#x27;]);
+
+    if (typeof latitude !&#x3D;&#x3D; &#x27;number&#x27; || typeof longitude !&#x3D;&#x3D; &#x27;number&#x27;) {
+      return of(&#x27;&#x27;);
+    }
+
+    const cacheKey &#x3D; &#x60;${latitude.toFixed(5)},${longitude.toFixed(5)}&#x60;;
+    const cachedLocation &#x3D; this.locationCache.get(cacheKey);
+    if (cachedLocation) {
+      return of(cachedLocation);
+    }
+
+    return this.mapsService.getAddress(latitude, longitude).pipe(
+      map((location) &#x3D;&gt; {
+        const normalizedLocation &#x3D; this.normalizeSearchText(location);
+        if (normalizedLocation) {
+          this.locationCache.set(cacheKey, normalizedLocation);
+        }
+        return normalizedLocation;
+      }),
+    );
+  }
+
+  /** Resuelve el termino de busqueda y su posible geocodificacion. */
+  private resolveSearchQuery(term: string): Observable&lt;SearchQueryState&gt; {
+    const normalizedTerm &#x3D; this.normalizeSearchText(term);
+    if (!normalizedTerm) {
+      return of({ normalizedTerm: &#x27;&#x27;, geoLocation: null });
+    }
+
+    const cachedGeoLocation &#x3D; this.searchGeoCache.get(normalizedTerm);
+    if (cachedGeoLocation !&#x3D;&#x3D; undefined) {
+      return of({ normalizedTerm, geoLocation: cachedGeoLocation });
+    }
+
+    return this.mapsService.geocodeLocation(term).pipe(
+      map((geoLocation) &#x3D;&gt; {
+        this.searchGeoCache.set(normalizedTerm, geoLocation);
+        return {
+          normalizedTerm,
+          geoLocation,
+        };
+      }),
+    );
+  }
+
+  /** Comprueba si la actividad coincide con el filtro geoespacial. */
+  private matchesGeoFilter(
+    activity: ActivitySearchItem,
+    geoLocation: GeocodedLocation,
+  ): boolean {
+    const latitude &#x3D; this.pickNumberField(activity as unknown as Record&lt;string, unknown&gt;, [
+      &#x27;latitude&#x27;,
+      &#x27;lat&#x27;,
+    ]);
+    const longitude &#x3D; this.pickNumberField(activity as unknown as Record&lt;string, unknown&gt;, [
+      &#x27;longitude&#x27;,
+      &#x27;lng&#x27;,
+      &#x27;lon&#x27;,
+    ]);
+
+    if (typeof latitude !&#x3D;&#x3D; &#x27;number&#x27; || typeof longitude !&#x3D;&#x3D; &#x27;number&#x27;) {
+      return false;
+    }
+
+    if (geoLocation.viewport) {
+      return this.isInsideViewport(latitude, longitude, geoLocation.viewport);
+    }
+
+    return this.distanceKm(
+      latitude,
+      longitude,
+      geoLocation.latitude,
+      geoLocation.longitude,
+    ) &lt;&#x3D; this.searchRadiusKm;
+  }
+
+  /** Valida si un punto cae dentro del viewport geocodificado. */
+  private isInsideViewport(
+    latitude: number,
+    longitude: number,
+    viewport: NonNullable&lt;GeocodedLocation[&#x27;viewport&#x27;]&gt;,
+  ): boolean {
+    const minLat &#x3D; Math.min(viewport.northeast.lat, viewport.southwest.lat);
+    const maxLat &#x3D; Math.max(viewport.northeast.lat, viewport.southwest.lat);
+    const minLng &#x3D; Math.min(viewport.northeast.lng, viewport.southwest.lng);
+    const maxLng &#x3D; Math.max(viewport.northeast.lng, viewport.southwest.lng);
+
+    return (
+      latitude &gt;&#x3D; minLat &amp;&amp;
+      latitude &lt;&#x3D; maxLat &amp;&amp;
+      longitude &gt;&#x3D; minLng &amp;&amp;
+      longitude &lt;&#x3D; maxLng
+    );
+  }
+
+  /** Calcula distancia aproximada entre dos puntos usando Haversine. */
+  private distanceKm(
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number,
+  ): number {
+    const earthRadiusKm &#x3D; 6371;
+    const deltaLat &#x3D; this.toRadians(lat2 - lat1);
+    const deltaLon &#x3D; this.toRadians(lon2 - lon1);
+    const a &#x3D;
+      Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+      Math.cos(this.toRadians(lat1)) *
+        Math.cos(this.toRadians(lat2)) *
+        Math.sin(deltaLon / 2) *
+        Math.sin(deltaLon / 2);
+    const c &#x3D; 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return earthRadiusKm * c;
+  }
+
+  /** Convierte grados a radianes. */
+  private toRadians(value: number): number {
+    return (value * Math.PI) / 180;
+  }
+
+  /** Radio de busqueda por defecto cuando no hay viewport exacto. */
+  private readonly searchRadiusKm &#x3D; 25;
+
+  /** Devuelve el primer campo string valido encontrado en la lista de claves. */
+  private pickStringField(
+    source: Record&lt;string, unknown&gt;,
+    keys: string[],
+  ): string {
+    for (const key of keys) {
+      const value &#x3D; source[key];
+      if (typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; value.trim()) {
+        return value.trim();
+      }
+    }
+
+    return &#x27;&#x27;;
+  }
+
+  /** Devuelve el primer campo numerico valido encontrado en la lista de claves. */
+  private pickNumberField(
+    source: Record&lt;string, unknown&gt;,
+    keys: string[],
+  ): number | undefined {
+    for (const key of keys) {
+      const value &#x3D; source[key];
+      if (typeof value &#x3D;&#x3D;&#x3D; &#x27;number&#x27; &amp;&amp; Number.isFinite(value)) {
+        return value;
+      }
+      if (typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+        const parsed &#x3D; Number(value.replace(&#x27;,&#x27;, &#x27;.&#x27;).trim());
+        if (Number.isFinite(parsed)) {
+          return parsed;
+        }
+      }
+    }
+
+    return undefined;
+  }
+
+  /** Normaliza texto para comparaciones flexibles sin acentos ni mayusculas. */
+  private normalizeSearchText(value: string): string {
+    return (value || &#x27;&#x27;)
+      .trim()
+      .toLowerCase()
+      .normalize(&#x27;NFD&#x27;)
+      .replace(/[\u0300-\u036f]/g, &#x27;&#x27;);
+  }
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;ng-container *ngIf&#x3D;&quot;{ list: activityTypes$ | async } as vm&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div *ngIf&#x3D;&quot;{ list: filteredActivities$ | async, types: activityTypes$ | async } as vm&quot;&gt;
   
     &lt;section class&#x3D;&quot;grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full&quot;&gt;
       &lt;app-card 
-        *ngFor&#x3D;&quot;let activityType of vm.list&quot; 
-        [activityType]&#x3D;&quot;activityType&quot;&gt; &lt;/app-card&gt;
+        *ngFor&#x3D;&quot;let activity of vm.list&quot; 
+        [activity]&#x3D;&quot;activity&quot;
+        [activityTypes]&#x3D;&quot;vm.types || []&quot;&gt; &lt;/app-card&gt;
     &lt;/section&gt;
   
     &lt;div *ngIf&#x3D;&quot;vm.list?.length &#x3D;&#x3D;&#x3D; 0&quot; class&#x3D;&quot;text-center py-8&quot;&gt;
-      &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;{{ &#x27;activityTypes.noTypes&#x27; | translate }}&lt;/p&gt;
+      &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;{{ &#x27;activities.noActivities&#x27; | translate }}&lt;/p&gt;
     &lt;/div&gt;
   
-  &lt;/ng-container&gt;</code></pre>
+  &lt;/div&gt;</code></pre>
     </div>
 
 
@@ -469,8 +2980,8 @@ export class ListComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ng-container *ngIf="{ list: activityTypes$ | async } as vm">      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">      <app-card         *ngFor="let activityType of vm.list"         [activityType]="activityType"> </app-card>    </section>      <div *ngIf="vm.list?.length === 0" class="text-center py-8">      <p class="text-gray-600">{{ \'activityTypes.noTypes\' | translate }}</p>    </div>    </ng-container></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+        var COMPONENT_TEMPLATE = '<div><div *ngIf="{ list: filteredActivities$ | async, types: activityTypes$ | async } as vm">      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">      <app-card         *ngFor="let activity of vm.list"         [activity]="activity"        [activityTypes]="vm.types || []"> </app-card>    </section>      <div *ngIf="vm.list?.length === 0" class="text-center py-8">      <p class="text-gray-600">{{ \'activities.noActivities\' | translate }}</p>    </div>    </div></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GlobalSearchComponent', 'selector': 'app-global-search'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
     var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
     var ACTUAL_COMPONENT = {'name': 'ListComponent'};
 </script>

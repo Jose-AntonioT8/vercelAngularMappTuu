@@ -233,7 +233,7 @@
                                 <a href="#isMobileMenuOpen" >isMobileMenuOpen</a>
                             </li>
                             <li>
-                                <a href="#isOnMapView" >isOnMapView</a>
+                                <a href="#isOnListPage" >isOnListPage</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -258,6 +258,10 @@
                             </li>
                             <li>
                                 <a href="#closeMobileMenu" >closeMobileMenu</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isOnActivitiesList" >isOnActivitiesList</a>
                             </li>
                             <li>
                                 <a href="#ngOnDestroy" >ngOnDestroy</a>
@@ -285,10 +289,10 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                    <a href="#exploreRoute" >exploreRoute</a>
+                                    <a href="#toggleListRoute" >toggleListRoute</a>
                                 </li>
                                 <li>
-                                    <a href="#exploreLabel" >exploreLabel</a>
+                                    <a href="#toggleListLabel" >toggleListLabel</a>
                                 </li>
                             </ul>
                         </td>
@@ -379,15 +383,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/app/common/header/header.component.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">src/app/common/header/header.component.ts:50</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Deriva si estamos en vista mapa en base a la URL actual.</p>
+                        <div class="io-description"><p>Deriva si estamos en página de lista en base a la URL actual.</p>
 </div>
 
                             <div class="io-description">
@@ -448,8 +452,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="71"
-                                    class="link-to-prism">src/app/common/header/header.component.ts:71</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/app/common/header/header.component.ts:77</a></div>
                         </td>
                     </tr>
 
@@ -461,6 +465,47 @@
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isOnActivitiesList"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isOnActivitiesList</b></span>
+                        <a href="#isOnActivitiesList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isOnActivitiesList()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="56"
+                                    class="link-to-prism">src/app/common/header/header.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Detecta si estamos específicamente en la lista de actividades.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                         </div>
                 </td>
@@ -487,8 +532,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="46"
-                                    class="link-to-prism">src/app/common/header/header.component.ts:46</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="45"
+                                    class="link-to-prism">src/app/common/header/header.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -526,15 +571,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="36"
-                                    class="link-to-prism">src/app/common/header/header.component.ts:36</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/common/header/header.component.ts:35</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Inicia el listener de navegación para sincronizar <code>isOnMapView</code>.</p>
+                        <div class="io-description"><p>Inicia el listener de navegación para sincronizar <code>isOnListPage</code>.</p>
 </div>
 
                         <div class="io-description">
@@ -565,8 +610,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/common/header/header.component.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/common/header/header.component.ts:72</a></div>
                         </td>
                     </tr>
 
@@ -631,10 +676,10 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="isOnMapView"></a>
+                    <a name="isOnListPage"></a>
                     <span class="name">
-                        <span ><b>isOnMapView</b></span>
-                        <a href="#isOnMapView"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>isOnListPage</b></span>
+                        <a href="#isOnListPage"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -657,7 +702,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p><code>true</code> cuando la ruta actual está en <code>/maps</code> (para cambiar CTA).</p>
+                    <div class="io-description"><p><code>true</code> cuando la ruta actual está en <code>/activitiesList</code> o <code>/plansList</code>.</p>
 </div>
                 </td>
             </tr>
@@ -708,24 +753,24 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="exploreRoute"></a>
-                        <span class="name"><b>exploreRoute</b><a href="#exploreRoute"><span class="icon ion-ios-link"></span></a></span>
+                        <a name="toggleListRoute"></a>
+                        <span class="name"><b>toggleListRoute</b><a href="#toggleListRoute"><span class="icon ion-ios-link"></span></a></span>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>exploreRoute()</code></span>
+                        <span class="accessor"><b>get</b><code>toggleListRoute()</code></span>
                     </td>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/common/header/header.component.ts:56</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/common/header/header.component.ts:62</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Ruta dinámica para el CTA del header (explorar o listar).</p>
+                                <div class="io-description"><p>Ruta dinámica para el botón de toggle entre lista de actividades y planes.</p>
 </div>
 
                                 <div class="io-description">
@@ -741,24 +786,24 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="exploreLabel"></a>
-                        <span class="name"><b>exploreLabel</b><a href="#exploreLabel"><span class="icon ion-ios-link"></span></a></span>
+                        <a name="toggleListLabel"></a>
+                        <span class="name"><b>toggleListLabel</b><a href="#toggleListLabel"><span class="icon ion-ios-link"></span></a></span>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>exploreLabel()</code></span>
+                        <span class="accessor"><b>get</b><code>toggleListLabel()</code></span>
                     </td>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/common/header/header.component.ts:61</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/common/header/header.component.ts:67</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>i18n key del label del CTA dinámico.</p>
+                                <div class="io-description"><p>i18n key del label del botón de toggle.</p>
 </div>
 
                                 <div class="io-description">
@@ -800,16 +845,15 @@ import { LanguageSelectorComponent } from &#x27;../../common/language-selector/l
 export class HeaderComponent implements OnInit, OnDestroy {
   /** Estado del menú móvil (hamburger). */
   isMobileMenuOpen &#x3D; false;
-  /** &#x60;true&#x60; cuando la ruta actual está en &#x60;/maps&#x60; (para cambiar CTA). */
-  isOnMapView &#x3D; false;
+  /** &#x60;true&#x60; cuando la ruta actual está en &#x60;/activitiesList&#x60; o &#x60;/plansList&#x60;. */
+  isOnListPage &#x3D; false;
   /** Subscription a eventos del router (se limpia en destroy). */
   private routeSub?: Subscription;
 
   /** Router para navegación y detección de ruta actual. */
   constructor(private router: Router) {}
 
-  /** Suscripción a cambios de navegación para derivar &#x60;isOnMapView&#x60;. */
-  /** Inicia el listener de navegación para sincronizar &#x60;isOnMapView&#x60;. */
+  /** Inicia el listener de navegación para sincronizar &#x60;isOnListPage&#x60;. */
   ngOnInit() {
     this.checkRoute(this.router.url);
     this.routeSub &#x3D; this.router.events.pipe(
@@ -824,19 +868,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.routeSub?.unsubscribe();
   }
 
-  /** Deriva si estamos en vista mapa en base a la URL actual. */
+  /** Deriva si estamos en página de lista en base a la URL actual. */
   private checkRoute(url: string): void {
-    this.isOnMapView &#x3D; url &#x3D;&#x3D;&#x3D; &#x27;/maps&#x27; || url.startsWith(&#x27;/maps?&#x27;);
+    this.isOnListPage &#x3D; url &#x3D;&#x3D;&#x3D; &#x27;/activitiesList&#x27; || url.startsWith(&#x27;/activitiesList?&#x27;) ||
+                        url &#x3D;&#x3D;&#x3D; &#x27;/plansList&#x27; || url.startsWith(&#x27;/plansList?&#x27;);
   }
 
-  /** Ruta dinámica para el CTA del header (explorar o listar). */
-  get exploreRoute(): string {
-    return this.isOnMapView ? &#x27;/activitiesList&#x27; : &#x27;/maps&#x27;;
+  /** Detecta si estamos específicamente en la lista de actividades. */
+  private isOnActivitiesList(): boolean {
+    const url &#x3D; this.router.url;
+    return url &#x3D;&#x3D;&#x3D; &#x27;/activitiesList&#x27; || url.startsWith(&#x27;/activitiesList?&#x27;);
   }
 
-  /** i18n key del label del CTA dinámico. */
-  get exploreLabel(): string {
-    return this.isOnMapView ? &#x27;header.list&#x27; : &#x27;header.explore&#x27;;
+  /** Ruta dinámica para el botón de toggle entre lista de actividades y planes. */
+  get toggleListRoute(): string {
+    return this.isOnActivitiesList() ? &#x27;/plansList&#x27; : &#x27;/activitiesList&#x27;;
+  }
+
+  /** i18n key del label del botón de toggle. */
+  get toggleListLabel(): string {
+    return this.isOnActivitiesList() ? &#x27;header.listPlans&#x27; : &#x27;header.listActivities&#x27;;
   }
 
   /** Alterna el menú móvil. */
@@ -897,44 +948,48 @@ export class HeaderComponent implements OnInit, OnDestroy {
       {{ &quot;header.home&quot; | translate }}
     &lt;/a&gt;
     &lt;a
-      [routerLink]&#x3D;&quot;exploreRoute&quot;
+      routerLink&#x3D;&quot;/search&quot;
+      routerLinkActive&#x3D;&quot;!bg-white !text-brand-primary shadow-md&quot;
+      class&#x3D;&quot;flex items-center gap-2 px-4 py-2 rounded-full text-white/80 hover:bg-white/20 hover:text-white transition-all duration-200 text-sm font-medium&quot;
+    &gt;
+      &lt;svg
+        class&#x3D;&quot;w-4 h-4&quot;
+        fill&#x3D;&quot;none&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          stroke-width&#x3D;&quot;2&quot;
+          d&#x3D;&quot;M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z&quot;
+        &gt;&lt;/path&gt;
+      &lt;/svg&gt;
+      {{ &quot;header.global&quot; | translate }}
+    &lt;/a&gt;
+    &lt;a
+      [routerLink]&#x3D;&quot;toggleListRoute&quot;
       [ngClass]&#x3D;&quot;
-        isOnMapView
+        isOnListPage
           ? &#x27;bg-white text-brand-primary shadow-md&#x27;
           : &#x27;text-white/80 hover:bg-white/20 hover:text-white&#x27;
       &quot;
       class&#x3D;&quot;flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium&quot;
     &gt;
-      @if (!isOnMapView) {
-        &lt;svg
-          class&#x3D;&quot;w-4 h-4&quot;
-          fill&#x3D;&quot;none&quot;
-          stroke&#x3D;&quot;currentColor&quot;
-          viewBox&#x3D;&quot;0 0 24 24&quot;
-        &gt;
-          &lt;path
-            stroke-linecap&#x3D;&quot;round&quot;
-            stroke-linejoin&#x3D;&quot;round&quot;
-            stroke-width&#x3D;&quot;2&quot;
-            d&#x3D;&quot;M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7&quot;
-          &gt;&lt;/path&gt;
-        &lt;/svg&gt;
-      } @else {
-        &lt;svg
-          class&#x3D;&quot;w-4 h-4&quot;
-          fill&#x3D;&quot;none&quot;
-          stroke&#x3D;&quot;currentColor&quot;
-          viewBox&#x3D;&quot;0 0 24 24&quot;
-        &gt;
-          &lt;path
-            stroke-linecap&#x3D;&quot;round&quot;
-            stroke-linejoin&#x3D;&quot;round&quot;
-            stroke-width&#x3D;&quot;2&quot;
-            d&#x3D;&quot;M4 6h16M4 10h16M4 14h16M4 18h16&quot;
-          &gt;&lt;/path&gt;
-        &lt;/svg&gt;
-      }
-      {{ exploreLabel | translate }}
+      &lt;svg
+        class&#x3D;&quot;w-4 h-4&quot;
+        fill&#x3D;&quot;none&quot;
+        stroke&#x3D;&quot;currentColor&quot;
+        viewBox&#x3D;&quot;0 0 24 24&quot;
+      &gt;
+        &lt;path
+          stroke-linecap&#x3D;&quot;round&quot;
+          stroke-linejoin&#x3D;&quot;round&quot;
+          stroke-width&#x3D;&quot;2&quot;
+          d&#x3D;&quot;M4 6h16M4 10h16M4 14h16M4 18h16&quot;
+        &gt;&lt;/path&gt;
+      &lt;/svg&gt;
+      {{ toggleListLabel | translate }}
     &lt;/a&gt;
     &lt;a
       routerLink&#x3D;&quot;/about&quot;
@@ -1111,10 +1166,39 @@ export class HeaderComponent implements OnInit, OnDestroy {
       &lt;/a&gt;
 
       &lt;a
-        [routerLink]&#x3D;&quot;exploreRoute&quot;
+        routerLink&#x3D;&quot;/globalSearch&quot;
+        (click)&#x3D;&quot;closeMobileMenu()&quot;
+        routerLinkActive&#x3D;&quot;!bg-brand-primary !text-white&quot;
+        class&#x3D;&quot;px-4 py-3.5 rounded-xl text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all duration-200 text-base font-medium flex items-center gap-4&quot;
+      &gt;
+        &lt;div
+          class&#x3D;&quot;w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center&quot;
+        &gt;
+          &lt;svg
+            class&#x3D;&quot;w-5 h-5 text-blue-600&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+          &gt;
+            &lt;path
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+              stroke-width&#x3D;&quot;2&quot;
+              d&#x3D;&quot;M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z&quot;
+            &gt;&lt;/path&gt;
+          &lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;flex flex-col&quot;&gt;
+          &lt;span class&#x3D;&quot;font-semibold&quot;&gt;{{ &quot;header.global&quot; | translate }}&lt;/span&gt;
+          &lt;span class&#x3D;&quot;text-xs text-gray-500&quot;&gt;Buscar en todo&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/a&gt;
+
+      &lt;a
+        [routerLink]&#x3D;&quot;toggleListRoute&quot;
         (click)&#x3D;&quot;closeMobileMenu()&quot;
         [ngClass]&#x3D;&quot;
-          isOnMapView
+          isOnListPage
             ? &#x27;bg-brand-primary text-white&#x27;
             : &#x27;text-gray-700 bg-gray-50 hover:bg-gray-100&#x27;
         &quot;
@@ -1122,44 +1206,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
       &gt;
         &lt;div
           class&#x3D;&quot;w-10 h-10 rounded-full flex items-center justify-center&quot;
-          [ngClass]&#x3D;&quot;isOnMapView ? &#x27;bg-white/20&#x27; : &#x27;bg-green-100&#x27;&quot;
+          [ngClass]&#x3D;&quot;isOnListPage ? &#x27;bg-white/20&#x27; : &#x27;bg-green-100&#x27;&quot;
         &gt;
-          @if (!isOnMapView) {
-            &lt;svg
-              class&#x3D;&quot;w-5 h-5 text-green-600&quot;
-              fill&#x3D;&quot;none&quot;
-              stroke&#x3D;&quot;currentColor&quot;
-              viewBox&#x3D;&quot;0 0 24 24&quot;
-            &gt;
-              &lt;path
-                stroke-linecap&#x3D;&quot;round&quot;
-                stroke-linejoin&#x3D;&quot;round&quot;
-                stroke-width&#x3D;&quot;2&quot;
-                d&#x3D;&quot;M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7&quot;
-              &gt;&lt;/path&gt;
-            &lt;/svg&gt;
-          } @else {
-            &lt;svg
-              class&#x3D;&quot;w-5 h-5 text-white&quot;
-              fill&#x3D;&quot;none&quot;
-              stroke&#x3D;&quot;currentColor&quot;
-              viewBox&#x3D;&quot;0 0 24 24&quot;
-            &gt;
-              &lt;path
-                stroke-linecap&#x3D;&quot;round&quot;
-                stroke-linejoin&#x3D;&quot;round&quot;
-                stroke-width&#x3D;&quot;2&quot;
-                d&#x3D;&quot;M4 6h16M4 10h16M4 14h16M4 18h16&quot;
-              &gt;&lt;/path&gt;
-            &lt;/svg&gt;
-          }
+          &lt;svg
+            class&#x3D;&quot;w-5 h-5&quot;
+            [ngClass]&#x3D;&quot;isOnListPage ? &#x27;text-white&#x27; : &#x27;text-green-600&#x27;&quot;
+            fill&#x3D;&quot;none&quot;
+            stroke&#x3D;&quot;currentColor&quot;
+            viewBox&#x3D;&quot;0 0 24 24&quot;
+          &gt;
+            &lt;path
+              stroke-linecap&#x3D;&quot;round&quot;
+              stroke-linejoin&#x3D;&quot;round&quot;
+              stroke-width&#x3D;&quot;2&quot;
+              d&#x3D;&quot;M4 6h16M4 10h16M4 14h16M4 18h16&quot;
+            &gt;&lt;/path&gt;
+          &lt;/svg&gt;
         &lt;/div&gt;
         &lt;div class&#x3D;&quot;flex flex-col&quot;&gt;
-          &lt;span class&#x3D;&quot;font-semibold&quot;&gt;{{ exploreLabel | translate }}&lt;/span&gt;
-          @if (!isOnMapView) {
-            &lt;span class&#x3D;&quot;text-xs text-gray-500&quot;&gt;Mapa y actividades&lt;/span&gt;
+          &lt;span class&#x3D;&quot;font-semibold&quot;&gt;{{ toggleListLabel | translate }}&lt;/span&gt;
+          @if (!isOnListPage) {
+            &lt;span class&#x3D;&quot;text-xs text-gray-500&quot;&gt;Listar actividades o planes&lt;/span&gt;
           } @else {
-            &lt;span class&#x3D;&quot;text-xs text-white/70&quot;&gt;Ver lista de actividades&lt;/span&gt;
+            &lt;span class&#x3D;&quot;text-xs text-white/70&quot;&gt;Cambiar vista de lista&lt;/span&gt;
           }
         &lt;/div&gt;
       &lt;/a&gt;
@@ -1270,8 +1339,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><header  class="flex justify-between items-center px-4 lg:px-8 py-3 bg-gradient-to-r from-brand-primary to-brand-secondary shadow-lg w-full sticky top-0 z-50 h-[70px]">  <!-- Logo -->  <a    routerLink="/landingPage"    class="flex items-center gap-2.5 hover:opacity-80 transition-opacity flex-shrink-0 group"  >    <img      src="assets/logo/logo.png"      [attr.alt]="\'common.appName\' | translate"      class="h-11 w-auto group-hover:scale-105 transition-transform"    />    <span class="font-bold text-xl text-white tracking-tight hidden sm:block">      {{ "common.appName" | translate }}    </span>  </a>  <!-- Navegación principal (Desktop) -->  <nav    class="hidden lg:flex items-center bg-white/10 backdrop-blur-sm rounded-full px-2 py-1.5 gap-1"  >    <a      routerLink="/landingPage"      routerLinkActive="!bg-white !text-brand-primary shadow-md"      [routerLinkActiveOptions]="{ exact: true }"      class="flex items-center gap-2 px-4 py-2 rounded-full text-white/80 hover:bg-white/20 hover:text-white transition-all duration-200 text-sm font-medium"    >      <svg        class="w-4 h-4"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"        ></path>      </svg>      {{ "header.home" | translate }}    </a>    <a      [routerLink]="exploreRoute"      [ngClass]="        isOnMapView          ? \'bg-white text-brand-primary shadow-md\'          : \'text-white/80 hover:bg-white/20 hover:text-white\'      "      class="flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium"    >      @if (!isOnMapView) {        <svg          class="w-4 h-4"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"          ></path>        </svg>      } @else {        <svg          class="w-4 h-4"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M4 6h16M4 10h16M4 14h16M4 18h16"          ></path>        </svg>      }      {{ exploreLabel | translate }}    </a>    <a      routerLink="/about"      routerLinkActive="!bg-white !text-brand-primary shadow-md"      class="flex items-center gap-2 px-4 py-2 rounded-full text-white/80 hover:bg-white/20 hover:text-white transition-all duration-200 text-sm font-medium"    >      <svg        class="w-4 h-4"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"        ></path>      </svg>      {{ "header.aboutUs" | translate }}    </a>    <a      routerLink="/contact"      routerLinkActive="!bg-white !text-brand-primary shadow-md"      class="flex items-center gap-2 px-4 py-2 rounded-full text-white/80 hover:bg-white/20 hover:text-white transition-all duration-200 text-sm font-medium"    >      <svg        class="w-4 h-4"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"        ></path>      </svg>      {{ "header.contact" | translate }}    </a>    <a      routerLink="/ia"      routerLinkActive="!bg-white !text-brand-primary shadow-md"      class="flex items-center gap-2 px-4 py-2 rounded-full text-white/80 hover:bg-white/20 hover:text-white transition-all duration-200 text-sm font-medium"    >      <svg        class="w-4 h-4"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"        version="1.1"        id="Layer_1"        xmlns="http://www.w3.org/2000/svg"        xmlns:xlink="http://www.w3.org/1999/xlink"        viewBox="0 0 512 512"        xml:space="preserve"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M434.863,126.093V77.137h-48.956V0h-33.391v77.137h-42.083V0h-33.391v77.137h-42.083V0h-33.391v77.137h-42.083V0h-33.391			v77.137H77.137v48.956H0v33.391h77.137v42.083H0v33.391h77.137v42.083H0v33.391h77.137v42.083H0v33.391h77.137v48.956h48.956V512			h33.391v-77.137h42.083V512h33.391v-77.137h42.083V512h33.391v-77.137h42.083V512h33.391v-77.137h48.956v-48.956H512v-33.391			h-77.137v-42.083H512v-33.391h-77.137v-42.083H512v-33.391h-77.137v-42.083H512v-33.39H434.863z M401.473,401.471h-0.001H110.529			V110.529h290.944V401.471z"        />      </svg>      {{ "header.ia" | translate }}    </a>  </nav>  <!-- Sección derecha -->  <div class="flex items-center gap-3">    <!-- Selector de idioma -->    <div class="relative z-50 hidden sm:block">      <app-language-selector></app-language-selector>    </div>    <!-- Menú hamburguesa (Mobile) -->    <button      (click)="toggleMobileMenu()"      class="lg:hidden p-2.5 rounded-xl bg-white/20 hover:bg-white/30 transition-all duration-200 flex items-center justify-center"    >      @if (!isMobileMenuOpen) {        <svg          class="w-5 h-5 text-white"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M4 6h16M4 12h16M4 18h16"          ></path>        </svg>      } @else {        <svg          class="w-5 h-5 text-white"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M6 18L18 6M6 6l12 12"          ></path>        </svg>      }    </button>    <!-- Perfil -->    <a      routerLink="/profile"      class="p-2.5 rounded-xl bg-white/20 hover:bg-white/30 transition-all duration-200 flex items-center justify-center group"    >      <svg        class="w-5 h-5 text-white group-hover:scale-110 transition-transform"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"        ></path>      </svg>    </a>  </div></header><!-- Menú móvil desplegable -->@if (isMobileMenuOpen) {  <div    class="lg:hidden fixed inset-x-0 top-[70px] bg-white shadow-2xl z-40 border-t border-gray-100 animate-slideDown rounded-b-2xl mx-2"  >    <nav class="flex flex-col p-3 gap-1">      <!-- Links principales -->      <a        routerLink="/landingPage"        (click)="closeMobileMenu()"        routerLinkActive="!bg-brand-primary !text-white"        [routerLinkActiveOptions]="{ exact: true }"        class="px-4 py-3.5 rounded-xl text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all duration-200 text-base font-medium flex items-center gap-4"      >        <div          class="w-10 h-10 rounded-full bg-brand-primary/10 flex items-center justify-center"        >          <svg            class="w-5 h-5 text-brand-primary"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"            ></path>          </svg>        </div>        <div class="flex flex-col">          <span class="font-semibold">{{ "header.home" | translate }}</span>          <span class="text-xs text-gray-500">Página principal</span>        </div>      </a>      <a        [routerLink]="exploreRoute"        (click)="closeMobileMenu()"        [ngClass]="          isOnMapView            ? \'bg-brand-primary text-white\'            : \'text-gray-700 bg-gray-50 hover:bg-gray-100\'        "        class="px-4 py-3.5 rounded-xl transition-all duration-200 text-base font-medium flex items-center gap-4"      >        <div          class="w-10 h-10 rounded-full flex items-center justify-center"          [ngClass]="isOnMapView ? \'bg-white/20\' : \'bg-green-100\'"        >          @if (!isOnMapView) {            <svg              class="w-5 h-5 text-green-600"              fill="none"              stroke="currentColor"              viewBox="0 0 24 24"            >              <path                stroke-linecap="round"                stroke-linejoin="round"                stroke-width="2"                d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"              ></path>            </svg>          } @else {            <svg              class="w-5 h-5 text-white"              fill="none"              stroke="currentColor"              viewBox="0 0 24 24"            >              <path                stroke-linecap="round"                stroke-linejoin="round"                stroke-width="2"                d="M4 6h16M4 10h16M4 14h16M4 18h16"              ></path>            </svg>          }        </div>        <div class="flex flex-col">          <span class="font-semibold">{{ exploreLabel | translate }}</span>          @if (!isOnMapView) {            <span class="text-xs text-gray-500">Mapa y actividades</span>          } @else {            <span class="text-xs text-white/70">Ver lista de actividades</span>          }        </div>      </a>      <a        routerLink="/about"        (click)="closeMobileMenu()"        routerLinkActive="!bg-brand-primary !text-white"        class="px-4 py-3.5 rounded-xl text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all duration-200 text-base font-medium flex items-center gap-4"      >        <div          class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center"        >          <svg            class="w-5 h-5 text-purple-600"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"            ></path>          </svg>        </div>        <div class="flex flex-col">          <span class="font-semibold">{{ "header.aboutUs" | translate }}</span>          <span class="text-xs text-gray-500">Conoce MappTuu</span>        </div>      </a>      <a        routerLink="/contact"        (click)="closeMobileMenu()"        routerLinkActive="!bg-brand-primary !text-white"        class="px-4 py-3.5 rounded-xl text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all duration-200 text-base font-medium flex items-center gap-4"      >        <div          class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center"        >          <svg            class="w-5 h-5 text-orange-600"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"            ></path>          </svg>        </div>        <div class="flex flex-col">          <span class="font-semibold">{{ "header.contact" | translate }}</span>          <span class="text-xs text-gray-500">Escríbenos</span>        </div>      </a>      <!-- Separador -->      <div class="h-px bg-gray-200 my-2"></div>      <!-- Selector de idioma en móvil -->      <div class="px-4 py-2 flex items-center justify-between">        <span class="text-sm text-gray-500 font-medium">{{          "common.language" | translate        }}</span>        <app-language-selector></app-language-selector>      </div>    </nav>  </div>  <!-- Overlay para cerrar menú móvil -->  <div    (click)="closeMobileMenu()"    class="lg:hidden fixed inset-0 top-[70px] bg-black/30 z-30 backdrop-blur-sm"  ></div>}</div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+        var COMPONENT_TEMPLATE = '<div><header  class="flex justify-between items-center px-4 lg:px-8 py-3 bg-gradient-to-r from-brand-primary to-brand-secondary shadow-lg w-full sticky top-0 z-50 h-[70px]">  <!-- Logo -->  <a    routerLink="/landingPage"    class="flex items-center gap-2.5 hover:opacity-80 transition-opacity flex-shrink-0 group"  >    <img      src="assets/logo/logo.png"      [attr.alt]="\'common.appName\' | translate"      class="h-11 w-auto group-hover:scale-105 transition-transform"    />    <span class="font-bold text-xl text-white tracking-tight hidden sm:block">      {{ "common.appName" | translate }}    </span>  </a>  <!-- Navegación principal (Desktop) -->  <nav    class="hidden lg:flex items-center bg-white/10 backdrop-blur-sm rounded-full px-2 py-1.5 gap-1"  >    <a      routerLink="/landingPage"      routerLinkActive="!bg-white !text-brand-primary shadow-md"      [routerLinkActiveOptions]="{ exact: true }"      class="flex items-center gap-2 px-4 py-2 rounded-full text-white/80 hover:bg-white/20 hover:text-white transition-all duration-200 text-sm font-medium"    >      <svg        class="w-4 h-4"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"        ></path>      </svg>      {{ "header.home" | translate }}    </a>    <a      routerLink="/search"      routerLinkActive="!bg-white !text-brand-primary shadow-md"      class="flex items-center gap-2 px-4 py-2 rounded-full text-white/80 hover:bg-white/20 hover:text-white transition-all duration-200 text-sm font-medium"    >      <svg        class="w-4 h-4"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"        ></path>      </svg>      {{ "header.global" | translate }}    </a>    <a      [routerLink]="toggleListRoute"      [ngClass]="        isOnListPage          ? \'bg-white text-brand-primary shadow-md\'          : \'text-white/80 hover:bg-white/20 hover:text-white\'      "      class="flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 text-sm font-medium"    >      <svg        class="w-4 h-4"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M4 6h16M4 10h16M4 14h16M4 18h16"        ></path>      </svg>      {{ toggleListLabel | translate }}    </a>    <a      routerLink="/about"      routerLinkActive="!bg-white !text-brand-primary shadow-md"      class="flex items-center gap-2 px-4 py-2 rounded-full text-white/80 hover:bg-white/20 hover:text-white transition-all duration-200 text-sm font-medium"    >      <svg        class="w-4 h-4"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"        ></path>      </svg>      {{ "header.aboutUs" | translate }}    </a>    <a      routerLink="/contact"      routerLinkActive="!bg-white !text-brand-primary shadow-md"      class="flex items-center gap-2 px-4 py-2 rounded-full text-white/80 hover:bg-white/20 hover:text-white transition-all duration-200 text-sm font-medium"    >      <svg        class="w-4 h-4"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"        ></path>      </svg>      {{ "header.contact" | translate }}    </a>    <a      routerLink="/ia"      routerLinkActive="!bg-white !text-brand-primary shadow-md"      class="flex items-center gap-2 px-4 py-2 rounded-full text-white/80 hover:bg-white/20 hover:text-white transition-all duration-200 text-sm font-medium"    >      <svg        class="w-4 h-4"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"        version="1.1"        id="Layer_1"        xmlns="http://www.w3.org/2000/svg"        xmlns:xlink="http://www.w3.org/1999/xlink"        viewBox="0 0 512 512"        xml:space="preserve"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M434.863,126.093V77.137h-48.956V0h-33.391v77.137h-42.083V0h-33.391v77.137h-42.083V0h-33.391v77.137h-42.083V0h-33.391			v77.137H77.137v48.956H0v33.391h77.137v42.083H0v33.391h77.137v42.083H0v33.391h77.137v42.083H0v33.391h77.137v48.956h48.956V512			h33.391v-77.137h42.083V512h33.391v-77.137h42.083V512h33.391v-77.137h42.083V512h33.391v-77.137h48.956v-48.956H512v-33.391			h-77.137v-42.083H512v-33.391h-77.137v-42.083H512v-33.391h-77.137v-42.083H512v-33.39H434.863z M401.473,401.471h-0.001H110.529			V110.529h290.944V401.471z"        />      </svg>      {{ "header.ia" | translate }}    </a>  </nav>  <!-- Sección derecha -->  <div class="flex items-center gap-3">    <!-- Selector de idioma -->    <div class="relative z-50 hidden sm:block">      <app-language-selector></app-language-selector>    </div>    <!-- Menú hamburguesa (Mobile) -->    <button      (click)="toggleMobileMenu()"      class="lg:hidden p-2.5 rounded-xl bg-white/20 hover:bg-white/30 transition-all duration-200 flex items-center justify-center"    >      @if (!isMobileMenuOpen) {        <svg          class="w-5 h-5 text-white"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M4 6h16M4 12h16M4 18h16"          ></path>        </svg>      } @else {        <svg          class="w-5 h-5 text-white"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M6 18L18 6M6 6l12 12"          ></path>        </svg>      }    </button>    <!-- Perfil -->    <a      routerLink="/profile"      class="p-2.5 rounded-xl bg-white/20 hover:bg-white/30 transition-all duration-200 flex items-center justify-center group"    >      <svg        class="w-5 h-5 text-white group-hover:scale-110 transition-transform"        fill="none"        stroke="currentColor"        viewBox="0 0 24 24"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          stroke-width="2"          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"        ></path>      </svg>    </a>  </div></header><!-- Menú móvil desplegable -->@if (isMobileMenuOpen) {  <div    class="lg:hidden fixed inset-x-0 top-[70px] bg-white shadow-2xl z-40 border-t border-gray-100 animate-slideDown rounded-b-2xl mx-2"  >    <nav class="flex flex-col p-3 gap-1">      <!-- Links principales -->      <a        routerLink="/landingPage"        (click)="closeMobileMenu()"        routerLinkActive="!bg-brand-primary !text-white"        [routerLinkActiveOptions]="{ exact: true }"        class="px-4 py-3.5 rounded-xl text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all duration-200 text-base font-medium flex items-center gap-4"      >        <div          class="w-10 h-10 rounded-full bg-brand-primary/10 flex items-center justify-center"        >          <svg            class="w-5 h-5 text-brand-primary"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"            ></path>          </svg>        </div>        <div class="flex flex-col">          <span class="font-semibold">{{ "header.home" | translate }}</span>          <span class="text-xs text-gray-500">Página principal</span>        </div>      </a>      <a        routerLink="/globalSearch"        (click)="closeMobileMenu()"        routerLinkActive="!bg-brand-primary !text-white"        class="px-4 py-3.5 rounded-xl text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all duration-200 text-base font-medium flex items-center gap-4"      >        <div          class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center"        >          <svg            class="w-5 h-5 text-blue-600"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"            ></path>          </svg>        </div>        <div class="flex flex-col">          <span class="font-semibold">{{ "header.global" | translate }}</span>          <span class="text-xs text-gray-500">Buscar en todo</span>        </div>      </a>      <a        [routerLink]="toggleListRoute"        (click)="closeMobileMenu()"        [ngClass]="          isOnListPage            ? \'bg-brand-primary text-white\'            : \'text-gray-700 bg-gray-50 hover:bg-gray-100\'        "        class="px-4 py-3.5 rounded-xl transition-all duration-200 text-base font-medium flex items-center gap-4"      >        <div          class="w-10 h-10 rounded-full flex items-center justify-center"          [ngClass]="isOnListPage ? \'bg-white/20\' : \'bg-green-100\'"        >          <svg            class="w-5 h-5"            [ngClass]="isOnListPage ? \'text-white\' : \'text-green-600\'"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M4 6h16M4 10h16M4 14h16M4 18h16"            ></path>          </svg>        </div>        <div class="flex flex-col">          <span class="font-semibold">{{ toggleListLabel | translate }}</span>          @if (!isOnListPage) {            <span class="text-xs text-gray-500">Listar actividades o planes</span>          } @else {            <span class="text-xs text-white/70">Cambiar vista de lista</span>          }        </div>      </a>      <a        routerLink="/about"        (click)="closeMobileMenu()"        routerLinkActive="!bg-brand-primary !text-white"        class="px-4 py-3.5 rounded-xl text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all duration-200 text-base font-medium flex items-center gap-4"      >        <div          class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center"        >          <svg            class="w-5 h-5 text-purple-600"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"            ></path>          </svg>        </div>        <div class="flex flex-col">          <span class="font-semibold">{{ "header.aboutUs" | translate }}</span>          <span class="text-xs text-gray-500">Conoce MappTuu</span>        </div>      </a>      <a        routerLink="/contact"        (click)="closeMobileMenu()"        routerLinkActive="!bg-brand-primary !text-white"        class="px-4 py-3.5 rounded-xl text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all duration-200 text-base font-medium flex items-center gap-4"      >        <div          class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center"        >          <svg            class="w-5 h-5 text-orange-600"            fill="none"            stroke="currentColor"            viewBox="0 0 24 24"          >            <path              stroke-linecap="round"              stroke-linejoin="round"              stroke-width="2"              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"            ></path>          </svg>        </div>        <div class="flex flex-col">          <span class="font-semibold">{{ "header.contact" | translate }}</span>          <span class="text-xs text-gray-500">Escríbenos</span>        </div>      </a>      <!-- Separador -->      <div class="h-px bg-gray-200 my-2"></div>      <!-- Selector de idioma en móvil -->      <div class="px-4 py-2 flex items-center justify-between">        <span class="text-sm text-gray-500 font-medium">{{          "common.language" | translate        }}</span>        <app-language-selector></app-language-selector>      </div>    </nav>  </div>  <!-- Overlay para cerrar menú móvil -->  <div    (click)="closeMobileMenu()"    class="lg:hidden fixed inset-0 top-[70px] bg-black/30 z-30 backdrop-blur-sm"  ></div>}</div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GlobalSearchComponent', 'selector': 'app-global-search'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
     var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
     var ACTUAL_COMPONENT = {'name': 'HeaderComponent'};
 </script>

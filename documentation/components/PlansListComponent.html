@@ -252,9 +252,6 @@ En desktop, el panel de filtros arranca abierto.</p>
                                 <a href="#goCreatePlan" >goCreatePlan</a>
                             </li>
                             <li>
-                                <a href="#ngOnInit" >ngOnInit</a>
-                            </li>
-                            <li>
                                 <a href="#onFilterChanged" >onFilterChanged</a>
                             </li>
                             <li>
@@ -355,8 +352,8 @@ En desktop, el panel de filtros arranca abierto.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="69"
-                                    class="link-to-prism">src/app/features/plans/plans-list/plans-list.component.ts:69</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/app/features/plans/plans-list/plans-list.component.ts:63</a></div>
                         </td>
                     </tr>
 
@@ -394,45 +391,6 @@ En desktop, el panel de filtros arranca abierto.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">src/app/features/plans/plans-list/plans-list.component.ts:55</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Navega a la pantalla de creación de plan.</p>
-</div>
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnInit"></a>
-                    <span class="name">
-                        <span ><b>ngOnInit</b></span>
-                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngOnInit()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
                             <div class="io-line">Defined in <a href="" data-line="49"
                                     class="link-to-prism">src/app/features/plans/plans-list/plans-list.component.ts:49</a></div>
                         </td>
@@ -441,7 +399,7 @@ En desktop, el panel de filtros arranca abierto.</p>
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>En desktop (&gt;= 1024px) abre filtros por defecto.</p>
+                        <div class="io-description"><p>Navega a la pantalla de creación de plan.</p>
 </div>
 
                         <div class="io-description">
@@ -472,8 +430,8 @@ En desktop, el panel de filtros arranca abierto.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="64"
-                                    class="link-to-prism">src/app/features/plans/plans-list/plans-list.component.ts:64</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/app/features/plans/plans-list/plans-list.component.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -541,8 +499,8 @@ En desktop, el panel de filtros arranca abierto.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="59"
-                                    class="link-to-prism">src/app/features/plans/plans-list/plans-list.component.ts:59</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/app/features/plans/plans-list/plans-list.component.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -766,12 +724,6 @@ export class PlansListComponent {
   /** Estado del panel de filtros (principalmente para mobile). */
   isFilterOpen &#x3D; false;
 
-  /** En desktop (&gt;&#x3D; 1024px) abre filtros por defecto. */
-  ngOnInit(): void {
-    if (typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; window.innerWidth &gt;&#x3D; 1024) {
-      this.isFilterOpen &#x3D; true;
-    }
-  }
   /** Navega a la pantalla de creación de plan. */
   goCreatePlan(): void {
     this.route.navigate([&#x27;/plansCreation&#x27;]);
@@ -801,6 +753,7 @@ export class PlansListComponent {
   &lt;app-header&gt;&lt;/app-header&gt;
 &lt;/header&gt;
 
+&lt;div class&#x3D;&quot;motion-safe:animate-[pageEnter_.32s_ease-out]&quot;&gt;
 &lt;div class&#x3D;&quot;bg-white border-b shadow-sm&quot;&gt;
   &lt;div class&#x3D;&quot;px-4 py-3 flex items-center justify-center gap-3&quot;&gt;
     &lt;div
@@ -860,15 +813,15 @@ export class PlansListComponent {
   &lt;/section&gt;
 
   &lt;div
-    class&#x3D;&quot;fixed xl:fixed xl:top-[130px] xl:left-0 left-0 top-0 h-full xl:h-[calc(100vh-130px)] w-80 xl:w-[20%] max-h-screen xl:max-h-none overflow-y-auto z-40 xl:z-auto transform xl:translate-x-0 transition-transform duration-300 ease-in-out&quot;
+    class&#x3D;&quot;fixed xl:fixed xl:top-[130px] xl:left-0 left-0 top-0 h-full xl:h-[calc(100vh-130px)] w-80 xl:w-[20%] max-h-screen xl:max-h-none overflow-y-auto z-40 xl:z-auto transform xl:translate-x-0 transition-transform duration-300 ease-in-out bg-white/80 xl:bg-transparent backdrop-blur-md xl:backdrop-blur-0 border-r border-slate-200/70 xl:border-r-0&quot;
     [class.-translate-x-full]&#x3D;&quot;!isFilterOpen&quot;
     [class.translate-x-0]&#x3D;&quot;isFilterOpen&quot;
     (click)&#x3D;&quot;$event.stopPropagation()&quot;
   &gt;
     &lt;div
-      class&#x3D;&quot;xl:hidden flex justify-between items-center p-4 border-b bg-[#CFE8FF]&quot;
+      class&#x3D;&quot;xl:hidden flex justify-between items-center p-4 border-b border-slate-200/80 bg-gradient-to-r from-[#dff0ff] to-[#cfe8ff]&quot;
     &gt;
-      &lt;h2 class&#x3D;&quot;text-xl font-bold&quot;&gt;{{ &quot;plans.filters&quot; | translate }}&lt;/h2&gt;
+      &lt;h2 class&#x3D;&quot;text-xl font-extrabold tracking-tight text-slate-800&quot;&gt;{{ &quot;plans.filters&quot; | translate }}&lt;/h2&gt;
       &lt;button (click)&#x3D;&quot;closeFilter()&quot; class&#x3D;&quot;text-gray-600 hover:text-gray-800&quot;&gt;
         &lt;svg
           class&#x3D;&quot;w-6 h-6&quot;
@@ -885,11 +838,13 @@ export class PlansListComponent {
         &lt;/svg&gt;
       &lt;/button&gt;
     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;xl:px-4 xl:py-2&quot;&gt;
+    &lt;div class&#x3D;&quot;px-3 py-3 xl:px-4 xl:py-2&quot;&gt;
       &lt;app-filter-plans (filterChanged)&#x3D;&quot;onFilterChanged($event)&quot;&gt;&lt;/app-filter-plans&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/section&gt;
+
+&lt;/div&gt;
 </code></pre>
     </div>
 
@@ -919,8 +874,8 @@ export class PlansListComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><header class="sticky top-0 z-50">  <app-header></app-header></header><div class="bg-white border-b shadow-sm">  <div class="px-4 py-3 flex items-center justify-center gap-3">    <div      class="flex items-center bg-gray-100 rounded-full px-4 py-2 w-full sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl transition-shadow focus-within:ring-2 focus-within:ring-blue-200 shadow-md"    >      <img        src="assets/icons/header/search.svg"        alt="Search"        class="w-4 h-4 opacity-50 mr-2"      />      <input        type="search"        [(ngModel)]="searchTerm"        [placeholder]="\'plans.searchPlaceholder\' | translate"        class="bg-transparent border-none outline-none w-full text-sm text-gray-700 placeholder-gray-400"      />    </div>    <button      (click)="goCreatePlan()"      class="flex items-center gap-20 px-4 py-2 rounded-full bg-[#5675AC] text-white hover:bg-[#4a6399] hover:text-white transition-all duration-200 text-sm font-medium"    >      {{ "dashboard.createPlans" | translate }}    </button>  </div></div><section  class="pb-5 block xl:grid xl:grid-cols-[20%_80%] xl:items-start w-full min-h-[80vh] relative">  <button    (click)="toggleFilter()"    class="xl:hidden fixed top-20 right-4 z-40 bg-[#5675AC] text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2 hover:bg-[#4a6399] transition-colors"  >    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">      <path        stroke-linecap="round"        stroke-linejoin="round"        stroke-width="2"        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"      ></path>    </svg>    {{ "plans.filters" | translate }}  </button>  <div    class="xl:hidden fixed inset-0 bg-black/50 z-30 transition-opacity"    [class.opacity-0]="!isFilterOpen"    [class.pointer-events-none]="!isFilterOpen"    [class.opacity-100]="isFilterOpen"    (click)="closeFilter()"  ></div>  <div class="hidden xl:block"></div>  <section class="p-2.5 xl:p-6 xl:px-8 w-full">    <app-list-plans [searchTerm]="searchTerm" [filterState]="planFilters"></app-list-plans>  </section>  <div    class="fixed xl:fixed xl:top-[130px] xl:left-0 left-0 top-0 h-full xl:h-[calc(100vh-130px)] w-80 xl:w-[20%] max-h-screen xl:max-h-none overflow-y-auto z-40 xl:z-auto transform xl:translate-x-0 transition-transform duration-300 ease-in-out"    [class.-translate-x-full]="!isFilterOpen"    [class.translate-x-0]="isFilterOpen"    (click)="$event.stopPropagation()"  >    <div      class="xl:hidden flex justify-between items-center p-4 border-b bg-[#CFE8FF]"    >      <h2 class="text-xl font-bold">{{ "plans.filters" | translate }}</h2>      <button (click)="closeFilter()" class="text-gray-600 hover:text-gray-800">        <svg          class="w-6 h-6"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M6 18L18 6M6 6l12 12"          ></path>        </svg>      </button>    </div>    <div class="xl:px-4 xl:py-2">      <app-filter-plans (filterChanged)="onFilterChanged($event)"></app-filter-plans>    </div>  </div></section></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+        var COMPONENT_TEMPLATE = '<div><header class="sticky top-0 z-50">  <app-header></app-header></header><div class="motion-safe:animate-[pageEnter_.32s_ease-out]"><div class="bg-white border-b shadow-sm">  <div class="px-4 py-3 flex items-center justify-center gap-3">    <div      class="flex items-center bg-gray-100 rounded-full px-4 py-2 w-full sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl transition-shadow focus-within:ring-2 focus-within:ring-blue-200 shadow-md"    >      <img        src="assets/icons/header/search.svg"        alt="Search"        class="w-4 h-4 opacity-50 mr-2"      />      <input        type="search"        [(ngModel)]="searchTerm"        [placeholder]="\'plans.searchPlaceholder\' | translate"        class="bg-transparent border-none outline-none w-full text-sm text-gray-700 placeholder-gray-400"      />    </div>    <button      (click)="goCreatePlan()"      class="flex items-center gap-20 px-4 py-2 rounded-full bg-[#5675AC] text-white hover:bg-[#4a6399] hover:text-white transition-all duration-200 text-sm font-medium"    >      {{ "dashboard.createPlans" | translate }}    </button>  </div></div><section  class="pb-5 block xl:grid xl:grid-cols-[20%_80%] xl:items-start w-full min-h-[80vh] relative">  <button    (click)="toggleFilter()"    class="xl:hidden fixed top-20 right-4 z-40 bg-[#5675AC] text-white px-4 py-2 rounded-full shadow-lg flex items-center gap-2 hover:bg-[#4a6399] transition-colors"  >    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">      <path        stroke-linecap="round"        stroke-linejoin="round"        stroke-width="2"        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"      ></path>    </svg>    {{ "plans.filters" | translate }}  </button>  <div    class="xl:hidden fixed inset-0 bg-black/50 z-30 transition-opacity"    [class.opacity-0]="!isFilterOpen"    [class.pointer-events-none]="!isFilterOpen"    [class.opacity-100]="isFilterOpen"    (click)="closeFilter()"  ></div>  <div class="hidden xl:block"></div>  <section class="p-2.5 xl:p-6 xl:px-8 w-full">    <app-list-plans [searchTerm]="searchTerm" [filterState]="planFilters"></app-list-plans>  </section>  <div    class="fixed xl:fixed xl:top-[130px] xl:left-0 left-0 top-0 h-full xl:h-[calc(100vh-130px)] w-80 xl:w-[20%] max-h-screen xl:max-h-none overflow-y-auto z-40 xl:z-auto transform xl:translate-x-0 transition-transform duration-300 ease-in-out bg-white/80 xl:bg-transparent backdrop-blur-md xl:backdrop-blur-0 border-r border-slate-200/70 xl:border-r-0"    [class.-translate-x-full]="!isFilterOpen"    [class.translate-x-0]="isFilterOpen"    (click)="$event.stopPropagation()"  >    <div      class="xl:hidden flex justify-between items-center p-4 border-b border-slate-200/80 bg-gradient-to-r from-[#dff0ff] to-[#cfe8ff]"    >      <h2 class="text-xl font-extrabold tracking-tight text-slate-800">{{ "plans.filters" | translate }}</h2>      <button (click)="closeFilter()" class="text-gray-600 hover:text-gray-800">        <svg          class="w-6 h-6"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M6 18L18 6M6 6l12 12"          ></path>        </svg>      </button>    </div>    <div class="px-3 py-3 xl:px-4 xl:py-2">      <app-filter-plans (filterChanged)="onFilterChanged($event)"></app-filter-plans>    </div>  </div></section></div></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GlobalSearchComponent', 'selector': 'app-global-search'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
     var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
     var ACTUAL_COMPONENT = {'name': 'PlansListComponent'};
 </script>

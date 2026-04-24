@@ -10,18 +10,40 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
 import { PlanService } from '../../../core/services/plan.service';
 
+/**
+ * Tipo de resultado mostrado por la búsqueda global.
+ *
+ * - `activity`: resultado proveniente del catálogo de actividades.
+ * - `plan`: resultado proveniente del catálogo de planes.
+ */
 type SearchItemType = 'activity' | 'plan';
 
+/**
+ * Elemento normalizado para renderizar tarjetas de búsqueda en la UI.
+ */
 interface SearchCardItem {
+  /** Identificador único del recurso. */
   id: string;
+  /** Título principal que se muestra en la tarjeta. */
   name: string;
+  /** Descripción resumida usada para búsqueda y presentación. */
   description: string;
+  /** URL/ref de imagen a mostrar; usa fallback cuando falta. */
   image: string;
+  /** Puntuación media para ordenar relevancia visual. */
   rating: number;
+  /** Tipo de recurso (actividad o plan). */
   itemType: SearchItemType;
+  /** Ruta de navegación al detalle del recurso. */
   route: string[];
 }
 
+/**
+ * Pantalla de búsqueda global.
+ *
+ * Une resultados de actividades y planes, normaliza su estructura,
+ * aplica filtro por término de búsqueda y ordena por valoración.
+ */
 @Component({
   selector: 'app-global-search',
   standalone: true,
@@ -30,14 +52,23 @@ interface SearchCardItem {
   styleUrl: './global-search.component.scss',
 })
 export class GlobalSearchComponent implements OnInit {
+  /** Servicio de actividades para obtener el stream de datos. */
   private readonly activityService = inject(ActivityService);
+  /** Servicio de planes para obtener el stream de datos. */
   private readonly planService = inject(PlanService);
+  /** Ruta activa para leer y sincronizar query params. */
   private readonly route = inject(ActivatedRoute);
+  /** Router para actualizar URL tras ejecutar búsqueda. */
   private readonly router = inject(Router);
 
+  /** Término visible en el input de búsqueda. */
   searchTerm = '';
+  /** Término reactivo interno que dispara el filtrado. */
   private readonly searchTerm$ = new BehaviorSubject<string>('');
 
+  /**
+   * Resultados reactivos combinando actividades, planes y término actual.
+   */
   readonly searchResults$ = combineLatest([
     this.activityService.activities$,
     this.planService.plans$,
@@ -52,6 +83,9 @@ export class GlobalSearchComponent implements OnInit {
     ),
   );
 
+  /**
+   * Inicializa fuentes de datos y sincroniza el término con `?q=`.
+   */
   ngOnInit(): void {
     this.activityService.getActivities();
     this.planService.getPlans();
@@ -63,6 +97,9 @@ export class GlobalSearchComponent implements OnInit {
     });
   }
 
+  /**
+   * Ejecuta la búsqueda actualizando stream y query param en URL.
+   */
   runSearch(): void {
     const query = this.searchTerm.trim();
     this.searchTerm$.next(query);
@@ -73,6 +110,10 @@ export class GlobalSearchComponent implements OnInit {
     });
   }
 
+  /**
+   * Convierte actividades a tarjetas de búsqueda homogéneas.
+   * @param activities Lista de actividades en bruto.
+   */
   private toActivityCards(activities: Activity[]): SearchCardItem[] {
     return activities.map((activity) => {
       const payload = activity as unknown as Record<string, unknown>;
@@ -88,6 +129,10 @@ export class GlobalSearchComponent implements OnInit {
     });
   }
 
+  /**
+   * Convierte planes a tarjetas de búsqueda homogéneas.
+   * @param plans Lista de planes en bruto.
+   */
   private toPlanCards(plans: Plan[]): SearchCardItem[] {
     return plans.map((plan) => ({
       id: plan.id,
@@ -100,6 +145,12 @@ export class GlobalSearchComponent implements OnInit {
     }));
   }
 
+  /**
+   * Filtra y ordena elementos por término normalizado y rating.
+   * @param activities Tarjetas de actividad.
+   * @param plans Tarjetas de plan.
+   * @param term Texto de búsqueda.
+   */
   private filterItems(
     activities: SearchCardItem[],
     plans: SearchCardItem[],
@@ -124,6 +175,10 @@ export class GlobalSearchComponent implements OnInit {
     return filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
   }
 
+  /**
+   * Normaliza texto para búsqueda tolerante a mayúsculas y acentos.
+   * @param value Texto de entrada.
+   */
   private normalizeText(value: string): string {
     return (value || '')
       .toLowerCase()
@@ -131,6 +186,10 @@ export class GlobalSearchComponent implements OnInit {
       .replace(/[\u0300-\u036f]/g, '');
   }
 
+  /**
+   * Convierte valores desconocidos a string seguro.
+   * @param value Valor de entrada.
+   */
   private toString(value: unknown): string {
     return typeof value === 'string' ? value : '';
   }

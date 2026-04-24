@@ -144,11 +144,19 @@
     <p class="comment">
         <p>Modal para mostrar una lista de reseñas.</p>
 <p>Es un modal presentacional: recibe <code>reviews</code> y emite <code>onClose</code> cuando se cierra.
-Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.</p>
+Incluye helpers para pintar estrellas, formatear fechas de Firebase Timestamp,
+y resolver nombres de usuarios mediante el pipe <code>userName</code>.</p>
 
     </p>
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -156,6 +164,10 @@ Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.<
     <table class="table table-sm table-hover metadata">
         <tbody>
 
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
 
 
 
@@ -182,6 +194,7 @@ Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.<
                 <td class="col-md-9">
                                 <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
                             <code>TranslatePipe</code>
+                                <code><a href="../interfaces/User.html" target="_self" >UserNamePipe</a></code>
                 </td>
             </tr>
 
@@ -233,6 +246,12 @@ Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.<
                             <li>
                                 <a href="#getStarState" >getStarState</a>
                             </li>
+                            <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -279,6 +298,54 @@ Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.<
     </table>
 </section>
 
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(cdr: <a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank">ChangeDetectorRef</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:30</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>cdr</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ChangeDetectorRef" target="_blank" >ChangeDetectorRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
     <section data-compodoc="block-inputs">
     <h3 id="inputs">Inputs</h3>
@@ -303,7 +370,7 @@ Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.<
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:21</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:24</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -335,7 +402,7 @@ Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.<
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:23</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:26</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -367,7 +434,7 @@ Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.<
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:28</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -397,7 +464,7 @@ Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.<
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:27</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:30</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -436,8 +503,8 @@ Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:30</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -475,8 +542,8 @@ Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:72</a></div>
                         </td>
                     </tr>
 
@@ -545,8 +612,8 @@ Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="46"
-                                    class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:46</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="63"
+                                    class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:63</a></div>
                         </td>
                     </tr>
 
@@ -584,8 +651,8 @@ Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.<
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -646,6 +713,114 @@ Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.<
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="40"
+                                    class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Detecta cambios en las reseñas.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>changes</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/common/modals/reviews-list-modal/reviews-list-modal.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Inicializa el componente.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
 </div>
@@ -653,24 +828,27 @@ Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.<
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
-import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
 import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
+import { UserNamePipe } from &#x27;../../../core/pipes/username.pipe&#x27;;
 import { Review } from &#x27;../../models/activity.model&#x27;; // Asumiendo que Review es compartido
 
 /**
  * Modal para mostrar una lista de reseñas.
  *
  * Es un modal presentacional: recibe &#x60;reviews&#x60; y emite &#x60;onClose&#x60; cuando se cierra.
- * Incluye helpers para pintar estrellas y formatear fechas de Firebase Timestamp.
+ * Incluye helpers para pintar estrellas, formatear fechas de Firebase Timestamp,
+ * y resolver nombres de usuarios mediante el pipe &#x60;userName&#x60;.
  */
 @Component({
   selector: &#x27;app-reviews-list-modal&#x27;,
   standalone: true,
-  imports: [CommonModule, TranslatePipe],
+  imports: [CommonModule, TranslatePipe, UserNamePipe],
   templateUrl: &#x27;./reviews-list-modal.html&#x27;,
   styleUrl: &#x27;./reviews-list-modal.component.scss&#x27;,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReviewsListModalComponent {
+export class ReviewsListModalComponent implements OnInit, OnChanges {
   /** Controla si el modal está visible. */
   @Input() isOpen &#x3D; false;
   /** Lista de reseñas a renderizar. */
@@ -679,6 +857,20 @@ export class ReviewsListModalComponent {
   @Input() title &#x3D; &#x27;Reseñas&#x27;; // Título dinámico, ej. &quot;Reseñas de la Actividad&quot;
   /** Evento de cierre hacia el padre. */
   @Output() onClose &#x3D; new EventEmitter&lt;void&gt;();
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  /** Inicializa el componente. */
+  ngOnInit(): void {
+    this.cdr.markForCheck();
+  }
+
+  /** Detecta cambios en las reseñas. */
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes[&#x27;reviews&#x27;]) {
+      this.cdr.markForCheck();
+    }
+  }
 
   /** Cierra el modal notificando al padre. */
   closeModal() {
@@ -709,7 +901,7 @@ export class ReviewsListModalComponent {
   formatDate(firebaseTimestamp: any): string {
     // Convierte el Timestamp de Firebase a un objeto Date de JavaScript.
     // Esto puede causar una pérdida de precisión a milisegundos.
-    const date &#x3D; firebaseTimestamp.toDate();
+    const date &#x3D; firebaseTimestamp.toDate?.() || new Date(firebaseTimestamp);
 
     // Obtiene el día, mes y año.
     const day &#x3D; String(date.getDate()).padStart(2, &#x27;0&#x27;);
@@ -828,7 +1020,7 @@ export class ReviewsListModalComponent {
         &lt;/p&gt;
         &lt;!-- Usuario y Fecha --&gt;
         &lt;div class&#x3D;&quot;text-xs text-gray-500&quot;&gt;
-          &lt;span&gt;{{ &quot;reviews.by&quot; | translate }} {{ review.userId }}&lt;/span&gt;
+          &lt;span&gt;{{ &quot;reviews.by&quot; | translate }} {{ review.userName || (review.userId | userName | async) }}&lt;/span&gt;
           &lt;!-- Si tienes nombre de usuario, reemplaza --&gt;
           &lt;span *ngIf&#x3D;&quot;review.createdAt&quot; class&#x3D;&quot;ml-4&quot;
             &gt;{{ &quot;reviews.date&quot; | translate }} {{
@@ -868,8 +1060,8 @@ export class ReviewsListModalComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div  *ngIf="isOpen"  class="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000] p-4">  <div    class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden animate-fade-in"  >    <!-- Header -->    <div      class="px-6 py-4 border-b border-gray-200 flex justify-between items-center"    >      <h2 class="text-xl font-bold text-gray-900">        {{ "reviews.title" | translate }}      </h2>      <button        (click)="closeModal()"        class="text-gray-500 hover:text-gray-700 transition-colors"      >        <svg          class="w-6 h-6"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M6 18L18 6M6 6l12 12"          ></path>        </svg>      </button>    </div>    <!-- Body -->    <div class="px-6 py-6 max-h-[60vh] overflow-y-auto">      <div *ngIf="reviews.length === 0" class="text-center text-gray-500">        <p>{{ "reviews.noReviews" | translate }}</p>      </div>      <div        *ngFor="let review of reviews"        class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200"      >        <!-- Estrellas -->        <div class="flex items-center gap-2 mb-2">          <div class="flex items-center gap-1">            <ng-container              *ngFor="let starIndex of getStarsArray(); let i = index"            >              <svg                *ngIf="getStarState(review.rating, i) === \'full\'"                class="w-5 h-5 text-yellow-400 fill-current"                viewBox="0 0 20 20"              >                <path                  d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"                />              </svg>              <div                *ngIf="getStarState(review.rating, i) === \'half\'"                class="relative w-5 h-5"              >                <svg                  class="absolute inset-0 w-5 h-5 text-gray-300 fill-current"                  viewBox="0 0 20 20"                >                  <path                    d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"                  />                </svg>                <svg                  class="absolute inset-0 w-5 h-5 text-yellow-400 fill-current"                  viewBox="0 0 20 20"                  style="clip-path: inset(0 50% 0 0)"                >                  <path                    d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"                  />                </svg>              </div>              <svg                *ngIf="getStarState(review.rating, i) === \'empty\'"                class="w-5 h-5 text-gray-300 fill-current"                viewBox="0 0 20 20"              >                <path                  d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"                />              </svg>            </ng-container>          </div>          <span class="text-sm font-semibold text-gray-700"            >{{ review.rating }}/5</span          >        </div>        <!-- Comentario -->        <p *ngIf="review.comment" class="text-gray-700 mb-2">          {{ review.comment }}        </p>        <p *ngIf="!review.comment" class="text-gray-400 italic">          {{ "reviews.noComment" | translate }}        </p>        <!-- Usuario y Fecha -->        <div class="text-xs text-gray-500">          <span>{{ "reviews.by" | translate }} {{ review.userId }}</span>          <!-- Si tienes nombre de usuario, reemplaza -->          <span *ngIf="review.createdAt" class="ml-4"            >{{ "reviews.date" | translate }} {{            formatDate(review.createdAt)}}</span          >        </div>      </div>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
+        var COMPONENT_TEMPLATE = '<div><div  *ngIf="isOpen"  class="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000] p-4">  <div    class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden animate-fade-in"  >    <!-- Header -->    <div      class="px-6 py-4 border-b border-gray-200 flex justify-between items-center"    >      <h2 class="text-xl font-bold text-gray-900">        {{ "reviews.title" | translate }}      </h2>      <button        (click)="closeModal()"        class="text-gray-500 hover:text-gray-700 transition-colors"      >        <svg          class="w-6 h-6"          fill="none"          stroke="currentColor"          viewBox="0 0 24 24"        >          <path            stroke-linecap="round"            stroke-linejoin="round"            stroke-width="2"            d="M6 18L18 6M6 6l12 12"          ></path>        </svg>      </button>    </div>    <!-- Body -->    <div class="px-6 py-6 max-h-[60vh] overflow-y-auto">      <div *ngIf="reviews.length === 0" class="text-center text-gray-500">        <p>{{ "reviews.noReviews" | translate }}</p>      </div>      <div        *ngFor="let review of reviews"        class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200"      >        <!-- Estrellas -->        <div class="flex items-center gap-2 mb-2">          <div class="flex items-center gap-1">            <ng-container              *ngFor="let starIndex of getStarsArray(); let i = index"            >              <svg                *ngIf="getStarState(review.rating, i) === \'full\'"                class="w-5 h-5 text-yellow-400 fill-current"                viewBox="0 0 20 20"              >                <path                  d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"                />              </svg>              <div                *ngIf="getStarState(review.rating, i) === \'half\'"                class="relative w-5 h-5"              >                <svg                  class="absolute inset-0 w-5 h-5 text-gray-300 fill-current"                  viewBox="0 0 20 20"                >                  <path                    d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"                  />                </svg>                <svg                  class="absolute inset-0 w-5 h-5 text-yellow-400 fill-current"                  viewBox="0 0 20 20"                  style="clip-path: inset(0 50% 0 0)"                >                  <path                    d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"                  />                </svg>              </div>              <svg                *ngIf="getStarState(review.rating, i) === \'empty\'"                class="w-5 h-5 text-gray-300 fill-current"                viewBox="0 0 20 20"              >                <path                  d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"                />              </svg>            </ng-container>          </div>          <span class="text-sm font-semibold text-gray-700"            >{{ review.rating }}/5</span          >        </div>        <!-- Comentario -->        <p *ngIf="review.comment" class="text-gray-700 mb-2">          {{ review.comment }}        </p>        <p *ngIf="!review.comment" class="text-gray-400 italic">          {{ "reviews.noComment" | translate }}        </p>        <!-- Usuario y Fecha -->        <div class="text-xs text-gray-500">          <span>{{ "reviews.by" | translate }} {{ review.userName || (review.userId | userName | async) }}</span>          <!-- Si tienes nombre de usuario, reemplaza -->          <span *ngIf="review.createdAt" class="ml-4"            >{{ "reviews.date" | translate }} {{            formatDate(review.createdAt)}}</span          >        </div>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GlobalSearchComponent', 'selector': 'app-global-search'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
     var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
     var ACTUAL_COMPONENT = {'name': 'ReviewsListModalComponent'};
 </script>

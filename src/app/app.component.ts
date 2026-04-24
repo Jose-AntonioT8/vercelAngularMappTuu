@@ -23,7 +23,17 @@ export class AppComponent {
   /** Título de la app (usado principalmente como señal/ejemplo). */
   title = signal('mapTuu');
 
-  constructor(private themeService: ThemeService) {
+  /**
+   * Servicio de tema para aplicar preferencias al inicio.
+   */
+  private readonly themeService: ThemeService;
+
+  /**
+   * Crea el componente raíz e inicializa el sistema de tema.
+   * @param themeService Servicio que aplica tema guardado o preferencia del sistema.
+   */
+  constructor(themeService: ThemeService) {
+    this.themeService = themeService;
     // El servicio de tema se inyecta para que se inicialice
     // y aplique la preferencia guardada o la del sistema
   }

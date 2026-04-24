@@ -96,6 +96,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/CardPlansComponent.html" data-type="entity-link" >CardPlansComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/ContactComponent.html" data-type="entity-link" >ContactComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/CoordinatesInputComponent.html" data-type="entity-link" >CoordinatesInputComponent</a>
                             </li>
                             <li class="link">
@@ -121,6 +124,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="components/FooterComponent.html" data-type="entity-link" >FooterComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/GlobalSearchComponent.html" data-type="entity-link" >GlobalSearchComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/HeaderComponent.html" data-type="entity-link" >HeaderComponent</a>
@@ -276,6 +282,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/ReportingService.html" data-type="entity-link" >ReportingService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/ThemeService.html" data-type="entity-link" >ThemeService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/TranslationService.html" data-type="entity-link" >TranslationService</a>
                                 </li>
                                 <li class="link">
@@ -370,6 +379,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/Review-1.html" data-type="entity-link" >Review</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/SearchCardItem.html" data-type="entity-link" >SearchCardItem</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/SearchQueryState.html" data-type="entity-link" >SearchQueryState</a>
                             </li>
                             <li class="link">
@@ -396,6 +408,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                                 <li class="link">
                                     <a href="pipes/TranslatePipe.html" data-type="entity-link" >TranslatePipe</a>
+                                </li>
+                                <li class="link">
+                                    <a href="pipes/UserNamePipe.html" data-type="entity-link" >UserNamePipe</a>
                                 </li>
                             </ul>
                         </li>

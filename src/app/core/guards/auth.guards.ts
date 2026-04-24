@@ -4,6 +4,11 @@ import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 
+/**
+ * Calcula la edad a partir de una fecha de nacimiento (ISO/string parseable).
+ * @param birthDate Fecha de nacimiento.
+ * @returns Edad en años completos.
+ */
 function calculateAgeFromBirthDate(birthDate: string): number {
   const today = new Date();
   const dob = new Date(birthDate);

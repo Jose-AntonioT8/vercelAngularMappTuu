@@ -234,7 +234,7 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Component, Input, OnInit, inject } from &#x27;@angular/core&#x27;;
-import { BehaviorSubject, Observable, combineLatest, debounceTime, distinctUntilChanged, forkJoin, map, of, shareReplay, switchMap } from &#x27;rxjs&#x27;;
+import { BehaviorSubject, Observable, combineLatest, distinctUntilChanged, forkJoin, map, of, shareReplay, switchMap } from &#x27;rxjs&#x27;;
 import { ActivityService } from &#x27;../../../core/services/activity.service&#x27;;
 import { ActivityTypeService } from &#x27;../../../core/services/activitytype.service&#x27;;
 import { GeocodedLocation, MapsService } from &#x27;../../../core/services/maps.service&#x27;;
@@ -302,7 +302,6 @@ export class ListComponent implements OnInit {
   private readonly searchTerm$ &#x3D; new BehaviorSubject&lt;string&gt;(&#x27;&#x27;);
   /** Stream de consulta geocodificada derivada del buscador. */
   private readonly searchQuery$ &#x3D; this.searchTerm$.pipe(
-    debounceTime(250),
     distinctUntilChanged(),
     switchMap((term) &#x3D;&gt; this.resolveSearchQuery(term)),
     shareReplay({ bufferSize: 1, refCount: true }),
