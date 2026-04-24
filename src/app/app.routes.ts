@@ -58,6 +58,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
   { path: 'signup', component: SignupComponent, canActivate: [guestGuard] },
   { path: 'about', loadComponent: () => import('./features/about/about.component').then(m => m.AboutComponent) },
+  { path: 'contact', loadComponent: () => import('./features/contact/contact.component').then(m => m.ContactComponent) },
   { path: 'dashboard', component: DashboardComponent, canActivate: [adminGuard] },
   { path: 'admin/reports', component: ReportsModerationComponent, canActivate: [adminGuard] },
   {path: 'activitiesCreation', component: ActivitiesCreationComponent, canActivate: [authGuard]},

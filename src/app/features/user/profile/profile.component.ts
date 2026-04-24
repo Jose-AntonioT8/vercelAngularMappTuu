@@ -1,4 +1,4 @@
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { User as FirebaseUser } from '@angular/fire/auth';
 import { Router, RouterModule } from '@angular/router';
@@ -136,7 +136,6 @@ export class ProfileComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private location: Location,
     private translationService: TranslationService,
     private mediaService: CloudinaryService,
     private userService: UserService,
@@ -361,7 +360,7 @@ export class ProfileComponent implements OnInit {
 
   /** Navega hacia atrás usando el historial. */
   goBack(): void {
-    this.location.back();
+    this.router.navigate(['/landingPage']);
   }
 
   /** Alterna entre modo claro y oscuro. */
