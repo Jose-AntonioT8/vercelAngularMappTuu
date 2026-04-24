@@ -539,6 +539,36 @@
           </svg>
           {{ "common.logout" | translate }}
         </button>
+
+        <button
+          (click)="deleteAccount()"
+          [disabled]="isDeletingAccount"
+          class="flex items-center justify-center gap-2 w-full py-3.5 bg-red-600 border-2 border-red-600 text-white font-semibold rounded-xl hover:bg-red-700 hover:border-red-700 hover:shadow-md transition-all duration-200 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M6 2a1 1 0 00-1 1v1H3.5a1 1 0 000 2h.638l.748 9.735A2 2 0 006.88 17h6.24a2 2 0 001.994-1.265L15.862 6H16.5a1 1 0 100-2H15V3a1 1 0 00-1-1H6zm2 2V3h4v1H8zm1 4a1 1 0 112 0v6a1 1 0 11-2 0V8z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          @if (isDeletingAccount) {
+            {{ "profile.deleting" | translate }}
+          } @else {
+            {{ "profile.deleteAccount" | translate }}
+          }
+        </button>
+
+        @if (deleteAccountError) {
+          <div class="w-full py-2 px-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
+            {{ deleteAccountError }}
+          </div>
+        }
       </div>
 
       <p class="text-center text-xs text-gray-400 pt-4">MappTuu v1.0.0</p>

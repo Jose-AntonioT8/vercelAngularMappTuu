@@ -226,7 +226,11 @@
     "achievements": "Logros",
     "recentActivity": "Actividad reciente",
     "changePassword": "Cambiar contraseña",
-    "reloginRequired": "Debes volver a iniciar sesion para cambiar el correo."
+    "reloginRequired": "Debes volver a iniciar sesion para cambiar el correo.",
+    "deleteAccount": "Eliminar cuenta",
+    "deleting": "Eliminando cuenta...",
+    "deleteConfirm": "Esta accion eliminara tu usuario y no se puede deshacer. ¿Deseas continuar?",
+    "deleteError": "No se pudo eliminar la cuenta. Intentalo de nuevo."
   },
   "dashboard": {
     "title": "Gestionar MappTuu",

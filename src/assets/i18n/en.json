@@ -229,7 +229,11 @@
     "achievements": "Achievements",
     "recentActivity": "Recent activity",
     "changePassword": "Change password",
-    "reloginRequired": "You need to sign in again to change your email."
+    "reloginRequired": "You need to sign in again to change your email.",
+    "deleteAccount": "Delete account",
+    "deleting": "Deleting account...",
+    "deleteConfirm": "This action will delete your user and cannot be undone. Do you want to continue?",
+    "deleteError": "The account could not be deleted. Please try again."
   },
   "dashboard": {
     "title": "Manage MappTuu",

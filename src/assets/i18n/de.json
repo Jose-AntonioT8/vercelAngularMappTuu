@@ -229,7 +229,11 @@
     "achievements": "Erfolge",
     "recentActivity": "Letzte Aktivität",
     "changePassword": "Passwort ändern",
-    "reloginRequired": "Sie müssen sich erneut anmelden, um Ihre E-Mail zu ändern."
+    "reloginRequired": "Sie müssen sich erneut anmelden, um Ihre E-Mail zu ändern.",
+    "deleteAccount": "Konto löschen",
+    "deleting": "Konto wird gelöscht...",
+    "deleteConfirm": "Diese Aktion löscht deinen Benutzer und kann nicht rückgängig gemacht werden. Möchtest du fortfahren?",
+    "deleteError": "Das Konto konnte nicht gelöscht werden. Bitte versuche es erneut."
   },
   "dashboard": {
     "title": "MappTuu verwalten",

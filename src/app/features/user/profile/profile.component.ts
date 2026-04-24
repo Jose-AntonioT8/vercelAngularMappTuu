@@ -3,6 +3,7 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { User as FirebaseUser } from '@angular/fire/auth';
 import { Router, RouterModule } from '@angular/router';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import { firstValueFrom } from 'rxjs';
 import { DefaultAvatarDirective } from '../../../core/directives/default-avatar.directive';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { AuthService } from '../../../core/services/auth.service';
@@ -122,6 +123,10 @@ export class ProfileComponent implements OnInit {
   expandedSection: 'achievements' | 'recent' | 'actions' | null = null;
   /** Controla el modal de reset de contraseña. */
   showResetModal = false;
+  /** Estado para prevenir dobles clics al borrar la cuenta. */
+  isDeletingAccount = false;
+  /** Error visible al intentar eliminar la cuenta. */
+  deleteAccountError = '';
 
   /** Alterna la sección expandida en UI. */
   toggleSection(section: 'achievements' | 'recent' | 'actions'): void {
@@ -318,6 +323,40 @@ export class ProfileComponent implements OnInit {
   /** Cierra sesión. */
   logout(): void {
     this.authService.logout();
+  }
+
+  /** Elimina la cuenta del usuario actual en backend y cierra sesión. */
+  async deleteAccount(): Promise<void> {
+    if (!this.user || this.isDeletingAccount) {
+      return;
+    }
+
+    const confirmed = window.confirm(
+      this.translationService.get(
+        'profile.deleteConfirm',
+        'Esta accion eliminara tu usuario y no se puede deshacer. ¿Deseas continuar?',
+      ),
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    this.isDeletingAccount = true;
+    this.deleteAccountError = '';
+
+    try {
+      const token = await this.user.getIdToken(true);
+      await firstValueFrom(this.userService.deleteUser(this.user.uid, token));
+      await this.authService.logout();
+    } catch (error) {
+      this.deleteAccountError = this.translationService.get(
+        'profile.deleteError',
+        'No se pudo eliminar la cuenta. Intentalo de nuevo.',
+      );
+    } finally {
+      this.isDeletingAccount = false;
+    }
   }
 
   /** Navega hacia atrás usando el historial. */
