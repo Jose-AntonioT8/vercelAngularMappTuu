@@ -4,6 +4,19 @@ import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 
+function calculateAgeFromBirthDate(birthDate: string): number {
+  const today = new Date();
+  const dob = new Date(birthDate);
+  let age = today.getFullYear() - dob.getFullYear();
+  const monthDiff = today.getMonth() - dob.getMonth();
+
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+    age--;
+  }
+
+  return age;
+}
+
 /**
  * Guard de autenticación.
  *
@@ -27,7 +40,11 @@ export const authGuard: CanActivateFn = async () => {
     }
 
     const profile = await firstValueFrom(userService.getUserId(uid));
-    if (typeof profile.age === 'number' && profile.age < 14) {
+    const resolvedAge = typeof profile.birthDate === 'string'
+      ? calculateAgeFromBirthDate(profile.birthDate)
+      : profile.age;
+
+    if (typeof resolvedAge === 'number' && resolvedAge < 14) {
       await auth.logout();
       return false;
     }

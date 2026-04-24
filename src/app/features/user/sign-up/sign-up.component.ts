@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
@@ -43,6 +50,28 @@ export class SignupComponent {
   /** FormGroup tipado en runtime por FormBuilder. */
   formSignup;
 
+  private minimumAgeValidator(minAge: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (!value) return null;
+
+      const birthDate = new Date(value);
+      if (Number.isNaN(birthDate.getTime())) {
+        return { invalidBirthDate: true };
+      }
+
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      return age >= minAge ? null : { minAge: true };
+    };
+  }
+
   constructor(
     private formSvc: FormBuilder,
     private auth: AuthService,
@@ -53,9 +82,10 @@ export class SignupComponent {
     this.formSignup = this.formSvc.group(
       {
         email: ['', [Validators.required, Validators.email]],
+        firstName: ['', [Validators.required, Validators.minLength(2)]],
         name: ['', [Validators.required, Validators.minLength(3)]],
         lastName: ['', [Validators.required, Validators.minLength(2)]],
-        age: [null, [Validators.required, Validators.min(14), Validators.max(120)]],
+        birthDate: ['', [Validators.required, this.minimumAgeValidator(14)]],
         password: [
           '',
           [
@@ -131,6 +161,14 @@ export class SignupComponent {
           return this.translation.instant('auth.signup.nameMinLength');
         }
         break;
+      case 'firstName':
+        if (this.formSignup.controls.firstName.errors?.['required']) {
+          return this.translation.instant('auth.signup.firstNameRequired');
+        }
+        if (this.formSignup.controls.firstName.errors?.['minlength']) {
+          return this.translation.instant('auth.signup.firstNameMinLength');
+        }
+        break;
       case 'password':
         const passwordErrors = this.formSignup.controls.password.errors;
         if (passwordErrors?.['required']) {
@@ -151,15 +189,15 @@ export class SignupComponent {
           return this.translation.instant('auth.signup.lastNameMinLength');
         }
         break;
-      case 'age':
-        if (this.formSignup.controls.age.errors?.['required']) {
-          return this.translation.instant('auth.signup.ageRequired');
+      case 'birthDate':
+        if (this.formSignup.controls.birthDate.errors?.['required']) {
+          return this.translation.instant('auth.signup.birthDateRequired');
         }
-        if (this.formSignup.controls.age.errors?.['min']) {
-          return this.translation.instant('auth.signup.ageMin');
+        if (this.formSignup.controls.birthDate.errors?.['invalidBirthDate']) {
+          return this.translation.instant('auth.signup.birthDateInvalid');
         }
-        if (this.formSignup.controls.age.errors?.['max']) {
-          return this.translation.instant('auth.signup.ageMax');
+        if (this.formSignup.controls.birthDate.errors?.['minAge']) {
+          return this.translation.instant('auth.signup.birthDateMin');
         }
         break;
     }
@@ -241,9 +279,10 @@ export class SignupComponent {
           {
             id: this.auth.currentUser?.uid,
             email: this.formSignup.controls.email.value!,
+            firstName: this.formSignup.controls.firstName.value!,
             name: this.formSignup.controls.name.value!,
             lastName: this.formSignup.controls.lastName.value!,
-            age: Number(this.formSignup.controls.age.value),
+            birthDate: this.formSignup.controls.birthDate.value!,
             createdAt: new Date(),
           },
           token

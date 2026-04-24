@@ -32,13 +32,49 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
       <div>
         <label class="block text-sm font-semibold text-slate-700 mb-2">
-          {{ "profile.name" | translate }}
+          {{ "profile.firstName" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="firstName"
+          class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#5675AC]/30 focus:border-[#5675AC]"
+          [placeholder]="'auth.signup.firstNamePlaceholder' | translate"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-2">
+          {{ "profile.username" | translate }}
         </label>
         <input
           type="text"
           formControlName="name"
           class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#5675AC]/30 focus:border-[#5675AC]"
           [placeholder]="'auth.signup.namePlaceholder' | translate"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-2">
+          {{ "profile.lastName" | translate }}
+        </label>
+        <input
+          type="text"
+          formControlName="lastName"
+          class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#5675AC]/30 focus:border-[#5675AC]"
+          [placeholder]="'auth.signup.lastNamePlaceholder' | translate"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-2">
+          {{ "profile.birthDate" | translate }}
+        </label>
+        <input
+          type="date"
+          formControlName="birthDate"
+          max="9999-12-31"
+          class="w-full rounded-xl border border-slate-200 px-4 py-3 text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#5675AC]/30 focus:border-[#5675AC]"
         />
       </div>
 

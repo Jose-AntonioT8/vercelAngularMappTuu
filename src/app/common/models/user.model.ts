@@ -11,9 +11,13 @@ export interface User {
   id: string;
   /** Nombre visible del usuario. */
   name: string;
+  /** Nombre real del usuario. */
+  firstName?: string;
   /** Apellidos del usuario. */
   lastName?: string;
-  /** Edad del usuario. */
+  /** Fecha de nacimiento en formato YYYY-MM-DD. */
+  birthDate?: string;
+  /** Edad del usuario (compatibilidad con registros antiguos). */
   age?: number;
   /** Fecha de alta/creación del registro. */
   createdAt: Date;

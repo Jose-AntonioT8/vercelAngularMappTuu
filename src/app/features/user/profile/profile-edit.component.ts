@@ -1,6 +1,13 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
@@ -31,6 +38,28 @@ export class ProfileEditComponent implements OnInit {
 
   /** Formulario reactivo de edición de perfil. */
   form;
+
+  private minimumAgeValidator(minAge: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      if (!value) return null;
+
+      const birthDate = new Date(value);
+      if (Number.isNaN(birthDate.getTime())) {
+        return { invalidBirthDate: true };
+      }
+
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      return age >= minAge ? null : { minAge: true };
+    };
+  }
 
   /** Servicio constructor de formularios. */
   private fb: FormBuilder;
@@ -68,7 +97,10 @@ export class ProfileEditComponent implements OnInit {
     this.router = router;
     this.location = location;
     this.form = this.fb.group({
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
       name: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      birthDate: ['', [Validators.required, this.minimumAgeValidator(14)]],
       email: ['', [Validators.required, Validators.email]],
     });
   }
@@ -82,8 +114,23 @@ export class ProfileEditComponent implements OnInit {
       }
 
       this.form.patchValue({
+        firstName: '',
         name: user.displayName || user.email?.split('@')[0] || '',
+        lastName: '',
+        birthDate: '',
         email: user.email || '',
+      });
+
+      this.userService.getUserId(user.uid).subscribe({
+        next: (profile) => {
+          this.form.patchValue({
+            firstName: profile.firstName || '',
+            name: profile.name || user.displayName || user.email?.split('@')[0] || '',
+            lastName: profile.lastName || '',
+            birthDate: profile.birthDate || '',
+            email: profile.email || user.email || '',
+          });
+        },
       });
     });
   }
@@ -113,7 +160,10 @@ export class ProfileEditComponent implements OnInit {
       return;
     }
 
+    const firstName = (this.form.value.firstName || '').trim();
     const name = (this.form.value.name || '').trim();
+    const lastName = (this.form.value.lastName || '').trim();
+    const birthDate = this.form.value.birthDate || '';
     const email = (this.form.value.email || '').trim();
 
     this.isSaving = true;
@@ -127,7 +177,7 @@ export class ProfileEditComponent implements OnInit {
       await firstValueFrom(
         this.userService.updateUser(
           user.uid,
-          { name, email },
+          { firstName, name, lastName, birthDate, email },
           token,
         ),
       );
@@ -145,6 +195,11 @@ export class ProfileEditComponent implements OnInit {
         this.error = this.translationService.get(
           'profile.reloginRequired',
           'Debes volver a iniciar sesion para cambiar el correo.',
+        );
+      } else if (err?.error?.message === 'Usuario menor de 14 años') {
+        this.error = this.translationService.get(
+          'auth.signup.underageBlocked',
+          'Si eres menor de 14 años no puedes acceder a la aplicación',
         );
       } else {
         this.error = this.translationService.get(
