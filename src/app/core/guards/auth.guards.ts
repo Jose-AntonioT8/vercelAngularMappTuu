@@ -27,10 +27,11 @@ function calculateAgeFromBirthDate(birthDate: string): number {
  *
  * Permite acceso solo si hay sesión activa; en caso contrario redirige al landing.
  */
-export const authGuard: CanActivateFn = async () => {
+export const authGuard: CanActivateFn = async (_route, state) => {
   const auth = inject(AuthService);
   const router = inject(Router);
   const userService = inject(UserService);
+  const isProfileRoute = state.url.startsWith('/profile');
 
   if (!auth.isAuthenticated()) {
     router.navigate(['/landingPage']);
@@ -49,13 +50,29 @@ export const authGuard: CanActivateFn = async () => {
       ? calculateAgeFromBirthDate(profile.birthDate)
       : profile.age;
 
-    if (typeof resolvedAge === 'number' && resolvedAge < 14) {
+    // Usuarios OAuth pueden no tener perfil aún: mantener sesión y pedir completar datos.
+    if (typeof resolvedAge !== 'number' || Number.isNaN(resolvedAge)) {
+      if (isProfileRoute) {
+        return true;
+      }
+      await router.navigate(['/profile/edit']);
+      return false;
+    }
+
+    if (resolvedAge < 14) {
       await auth.logout();
       return false;
     }
 
     return true;
-  } catch {
+  } catch (error: any) {
+    if (error?.message === 'User not found') {
+      if (isProfileRoute) {
+        return true;
+      }
+      await router.navigate(['/profile/edit']);
+      return false;
+    }
     await auth.logout();
     return false;
   }
