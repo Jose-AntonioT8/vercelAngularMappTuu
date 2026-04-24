@@ -54,6 +54,8 @@ export class SignupComponent {
       {
         email: ['', [Validators.required, Validators.email]],
         name: ['', [Validators.required, Validators.minLength(3)]],
+        lastName: ['', [Validators.required, Validators.minLength(2)]],
+        age: [null, [Validators.required, Validators.min(14), Validators.max(120)]],
         password: [
           '',
           [
@@ -141,6 +143,25 @@ export class SignupComponent {
           return this.translation.instant('auth.signup.passwordPattern');
         }
         break;
+      case 'lastName':
+        if (this.formSignup.controls.lastName.errors?.['required']) {
+          return this.translation.instant('auth.signup.lastNameRequired');
+        }
+        if (this.formSignup.controls.lastName.errors?.['minlength']) {
+          return this.translation.instant('auth.signup.lastNameMinLength');
+        }
+        break;
+      case 'age':
+        if (this.formSignup.controls.age.errors?.['required']) {
+          return this.translation.instant('auth.signup.ageRequired');
+        }
+        if (this.formSignup.controls.age.errors?.['min']) {
+          return this.translation.instant('auth.signup.ageMin');
+        }
+        if (this.formSignup.controls.age.errors?.['max']) {
+          return this.translation.instant('auth.signup.ageMax');
+        }
+        break;
     }
     return '';
   }
@@ -221,6 +242,8 @@ export class SignupComponent {
             id: this.auth.currentUser?.uid,
             email: this.formSignup.controls.email.value!,
             name: this.formSignup.controls.name.value!,
+            lastName: this.formSignup.controls.lastName.value!,
+            age: Number(this.formSignup.controls.age.value),
             createdAt: new Date(),
           },
           token
@@ -228,13 +251,20 @@ export class SignupComponent {
         .subscribe({
           next: (res) => {
             this.success = 'Plan creado con éxito';
+            this.isLoading = false;
             setTimeout(() => {
               this.route.navigate(['/plansList']);
             }, 1000);
           },
           error: (err) => {
             console.error('create error', err);
-            this.error = 'Error al crear el plan.';
+            this.isLoading = false;
+            const backendMessage = err?.error?.message;
+            if (backendMessage === 'Usuario menor de 14 años') {
+              this.error = this.translation.instant('auth.signup.underageBlocked');
+              return;
+            }
+            this.error = backendMessage || this.translation.instant('auth.signup.signupGenericError');
           },
         });
 
