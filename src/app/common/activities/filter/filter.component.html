@@ -1,4 +1,4 @@
-<form class="w-full rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/95 dark:bg-slate-900 shadow-[0_12px_28px_rgba(15,23,42,0.12)] dark:shadow-[0_10px_24px_rgba(0,0,0,0.45)] p-5 md:p-6 flex flex-col gap-1 backdrop-blur-sm dark:backdrop-blur-0">
+<form class="w-full rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/95 dark:bg-slate-900 shadow-[0_12px_28px_rgba(15,23,42,0.12)] dark:shadow-none p-5 md:p-6 flex flex-col gap-1 backdrop-blur-sm dark:backdrop-blur-0">
   
   <div class="mb-4 border-b border-slate-200 dark:border-slate-700 pb-4">
     <h2 class="text-center text-xl md:text-2xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">{{ 'common.filters' | translate }}</h2>
@@ -11,7 +11,7 @@
             <select [(ngModel)]="activityType" 
               name="activityTypeInput" 
               (change)="emitCurrentFilterState()" 
-              class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-100 shadow-sm transition-all duration-200 focus:border-[#5675AC] focus:outline-none focus:ring-4 focus:ring-[#5675AC]/15">
+              class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-100 shadow-sm dark:shadow-none transition-all duration-200 focus:border-[#5675AC] focus:outline-none focus:ring-4 focus:ring-[#5675AC]/15">
         
         <option [ngValue]="null">{{ 'activityTypes.filterAllTypes' | translate }}</option>
         
@@ -28,7 +28,7 @@
            name="locationInput" 
            (blur)="emitCurrentFilterState()" 
            [placeholder]="'activities.filterLocationPlaceholder' | translate" 
-           class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 shadow-sm transition-all duration-200 focus:border-[#5675AC] focus:outline-none focus:ring-4 focus:ring-[#5675AC]/15">
+           class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 shadow-sm dark:shadow-none transition-all duration-200 focus:border-[#5675AC] focus:outline-none focus:ring-4 focus:ring-[#5675AC]/15">
   </div>
   
   <div class="mb-6 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 p-3">
@@ -46,6 +46,6 @@
     </div>
   </div>
 
-  <button type="button" (click)="resetFilters()" class="mt-auto w-full p-3 bg-[#5675AC] text-white border-none rounded-xl cursor-pointer text-base font-semibold shadow-md shadow-[#5675AC]/30 transition-all duration-200 hover:bg-[#4a6399] hover:shadow-lg">{{ 'activities.clear' | translate }}</button>
+  <button type="button" (click)="resetFilters()" class="mt-auto w-full p-3 bg-[#5675AC] text-white border-none rounded-xl cursor-pointer text-base font-semibold shadow-md shadow-[#5675AC]/30 dark:shadow-none transition-all duration-200 hover:bg-[#4a6399] hover:shadow-lg dark:hover:shadow-none">{{ 'activities.clear' | translate }}</button>
 
 </form>
