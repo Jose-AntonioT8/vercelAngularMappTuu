@@ -32,186 +32,224 @@
     }
 }
 
-/* Dark mode - Sistema refinado basado en clases específicas */
+:root {
+    --app-bg: #f1f5f9;
+    --app-bg-soft: #e2e8f0;
+    --app-surface: #ffffff;
+    --app-surface-soft: #f8fafc;
+    --app-surface-strong: #e2e8f0;
+    --app-text: #0f172a;
+    --app-text-muted: #475569;
+    --app-border: #cbd5e1;
+    --app-ring: #60a5fa;
+}
+
+html,
+body {
+    min-height: 100%;
+    background: var(--app-bg);
+    color: var(--app-text);
+}
+
+* {
+    transition: background-color .22s ease, border-color .22s ease, color .22s ease, box-shadow .22s ease, filter .22s ease;
+}
+
 .dark {
+    --app-bg: #020617;
+    --app-bg-soft: #0b1220;
+    --app-surface: #111827;
+    --app-surface-soft: #1f2937;
+    --app-surface-strong: #334155;
+    --app-text: #e2e8f0;
+    --app-text-muted: #94a3b8;
+    --app-border: #334155;
+    --app-ring: #7dd3fc;
+
     color-scheme: dark;
-    background-color: rgb(15, 23, 42);
-    color: rgb(226, 232, 240);
+    background: var(--app-bg);
+    color: var(--app-text);
 
-    /* Backgrounds claros -> oscuros */
+    body,
+    main,
+    section,
+    article,
+    aside {
+        background-color: transparent;
+        color: var(--app-text);
+    }
+
     .bg-white,
-    .bg-slate-50,
-    .bg-gray-50 {
-        background-color: rgb(30, 41, 59);
+    .bg-gray-50,
+    .bg-slate-50 {
+        background-color: var(--app-surface) !important;
     }
 
-    .bg-slate-100,
-    .bg-gray-100 {
-        background-color: rgb(45, 60, 80);
+    .bg-gray-100,
+    .bg-slate-100 {
+        background-color: var(--app-surface-soft) !important;
     }
 
-    .bg-slate-200,
-    .bg-gray-200 {
-        background-color: rgb(55, 70, 90);
+    .bg-gray-200,
+    .bg-slate-200 {
+        background-color: var(--app-surface-strong) !important;
     }
 
-    /* Fondos de componentes principales */
-    main {
-        background: linear-gradient(135deg, rgb(15, 23, 42) 0%, rgb(20, 30, 48) 100%) !important;
+    .from-slate-200,
+    .from-slate-300\/50,
+    .to-brand-muted\/30 {
+        --tw-gradient-from: #0b1220 var(--tw-gradient-from-position) !important;
+        --tw-gradient-to: rgb(11 18 32 / 0) var(--tw-gradient-to-position) !important;
+        --tw-gradient-stops: var(--tw-gradient-from), #111827 55%, #0f172a var(--tw-gradient-to-position) !important;
     }
 
-    header {
-        background-color: rgb(15, 23, 42) !important;
+    .from-blue-100,
+    .from-purple-100,
+    .from-pink-100,
+    .from-green-100,
+    .to-blue-200\/80,
+    .to-purple-200\/80,
+    .to-pink-200\/80,
+    .to-green-200\/80 {
+        --tw-gradient-from: #1e293b var(--tw-gradient-from-position) !important;
+        --tw-gradient-to: rgb(51 65 85 / 0) var(--tw-gradient-to-position) !important;
+        --tw-gradient-stops: var(--tw-gradient-from), #334155 var(--tw-gradient-to-position) !important;
     }
 
-    section {
-        background-color: inherit;
-    }
-
-    /* Bordes claros -> oscuros */
-    .border-gray-100,
-    .border-gray-200,
-    .border-slate-100,
-    .border-slate-200 {
-        border-color: rgb(51, 65, 85);
-    }
-
-    .border-gray-300,
-    .border-slate-300 {
-        border-color: rgb(71, 85, 105);
-    }
-
-    /* Inputs con estilo apropiado */
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    input[type="search"],
-    input[type="number"],
-    input[type="date"],
-    textarea,
-    select {
-        background-color: rgb(30, 41, 59);
-        color: rgb(226, 232, 240);
-        border-color: rgb(51, 65, 85);
-
-        &::placeholder {
-            color: rgb(148, 163, 184);
-        }
-
-        &:focus {
-            border-color: rgb(100, 150, 200);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(100, 150, 200, 0.1);
-        }
-    }
-
-    /* Texto en diferentes tonalidades */
+    .text-gray-400,
+    .text-slate-400,
     .text-gray-500,
-    .text-slate-500 {
-        color: rgb(148, 163, 184);
-    }
-
+    .text-slate-500,
     .text-gray-600,
     .text-slate-600 {
-        color: rgb(203, 213, 225);
+        color: var(--app-text-muted) !important;
     }
 
     .text-gray-700,
-    .text-slate-700 {
-        color: rgb(226, 232, 240);
-    }
-
+    .text-slate-700,
     .text-gray-800,
-    .text-slate-800 {
-        color: rgb(241, 245, 250);
+    .text-slate-800,
+    .text-gray-900,
+    .text-slate-900 {
+        color: var(--app-text) !important;
     }
 
-    .text-gray-900 {
-        color: rgb(226, 232, 240);
+    .border-gray-100,
+    .border-gray-200,
+    .border-gray-300,
+    .border-slate-100,
+    .border-slate-200,
+    .border-slate-300,
+    .divide-gray-100,
+    .divide-gray-200,
+    .divide-slate-100,
+    .divide-slate-200 {
+        border-color: var(--app-border) !important;
     }
 
-    /* Hovers en botones y elementos interactivos */
-    button:not(.bg-brand-primary):hover {
-        background-color: rgb(45, 60, 80);
+    .ring-black\/5,
+    .ring-gray-100,
+    .ring-slate-100 {
+        --tw-ring-color: rgb(148 163 184 / 0.15) !important;
     }
 
-    .hover\:bg-gray-50:hover,
-    .hover\:bg-slate-50:hover,
-    .hover\:bg-white:hover {
-        background-color: rgb(45, 60, 80);
-    }
-
-    .hover\:bg-gray-100:hover,
-    .hover\:bg-slate-100:hover {
-        background-color: rgb(55, 70, 90);
-    }
-
-    /* Links */
-    a:not(.text-white) {
-        color: rgb(96, 165, 250);
-
-        &:hover {
-            color: rgb(147, 197, 253);
-        }
-    }
-
-    /* Labels y placeholders */
-    label {
-        color: rgb(226, 232, 240);
-    }
-
-    ::placeholder {
-        color: rgb(148, 163, 184);
-    }
-
-    /* Modales y overlays */
-    .bg-black\/50 {
-        background-color: rgba(0, 0, 0, 0.7);
-    }
-
-    /* Cards redondeadas */
-    .rounded-lg,
-    .rounded-xl,
-    .rounded-2xl {
-        background-color: rgb(30, 41, 59);
-    }
-
-    /* Sombras sutiles */
+    .shadow-sm,
     .shadow,
     .shadow-md,
     .shadow-lg,
-    .shadow-xl {
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    .shadow-xl,
+    .shadow-2xl {
+        box-shadow: 0 12px 30px rgb(0 0 0 / 0.35) !important;
     }
 
-    /* Focus rings */
-    .focus\:ring-offset-0:focus {
-        outline: none;
+    input,
+    textarea,
+    select {
+        background-color: var(--app-surface) !important;
+        color: var(--app-text) !important;
+        border-color: var(--app-border) !important;
+
+        &::placeholder {
+            color: var(--app-text-muted) !important;
+        }
+
+        &:focus {
+            border-color: var(--app-ring) !important;
+            box-shadow: 0 0 0 3px rgb(125 211 252 / 0.2) !important;
+            outline: none;
+        }
     }
 
-    /* Texto contraseña y código */
+    .hover\:bg-gray-50:hover,
+    .hover\:bg-gray-100:hover,
+    .hover\:bg-slate-50:hover,
+    .hover\:bg-slate-100:hover,
+    .hover\:bg-white:hover {
+        background-color: #334155 !important;
+    }
+
+    .focus\:ring-blue-200:focus,
+    .focus\:ring-white\/50:focus {
+        --tw-ring-color: rgb(125 211 252 / 0.35) !important;
+    }
+
+    .bg-black\/30,
+    .bg-black\/40,
+    .bg-black\/50 {
+        background-color: rgb(0 0 0 / 0.65) !important;
+    }
+
+    a:not(.text-white):not(.text-brand-primary) {
+        color: #93c5fd;
+
+        &:hover {
+            color: #bfdbfe;
+        }
+    }
+
     code,
     pre {
-        background-color: rgb(30, 41, 59);
-        color: rgb(226, 232, 240);
+        background-color: #0f172a;
+        color: #e2e8f0;
     }
 
-    /* Scroll */
+    .bg-cover,
+    [style*="background-image"] {
+        filter: brightness(0.74) saturate(0.9);
+    }
+
+    img[src*="assets/icons/"] {
+        filter: brightness(1.2) contrast(1.05);
+    }
+
+    .leaflet-control-zoom a,
+    .leaflet-popup-content-wrapper,
+    .leaflet-popup-tip {
+        background: #1f2937 !important;
+        color: #e2e8f0 !important;
+        border-color: #334155 !important;
+    }
+
+    .leaflet-container {
+        background: #0b1220 !important;
+    }
+
     ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+        width: 9px;
+        height: 9px;
     }
 
     ::-webkit-scrollbar-track {
-        background-color: rgb(20, 30, 48);
+        background-color: #0b1220;
     }
 
     ::-webkit-scrollbar-thumb {
-        background-color: rgb(71, 85, 105);
-        border-radius: 4px;
+        background-color: #475569;
+        border-radius: 999px;
+        border: 2px solid #0b1220;
 
         &:hover {
-            background-color: rgb(100, 120, 150);
+            background-color: #64748b;
         }
     }
 }
