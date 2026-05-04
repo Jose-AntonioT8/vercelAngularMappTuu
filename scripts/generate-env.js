@@ -1,6 +1,27 @@
 const fs = require("fs");
 const path = require("path");
 
+const envFilePath = path.resolve(__dirname, "../.env");
+if (fs.existsSync(envFilePath)) {
+  const rawEnv = fs.readFileSync(envFilePath, "utf8");
+  rawEnv
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith("#"))
+    .forEach((line) => {
+      const separatorIndex = line.indexOf("=");
+      if (separatorIndex <= 0) return;
+      const key = line.slice(0, separatorIndex).trim();
+      const value = line
+        .slice(separatorIndex + 1)
+        .trim()
+        .replace(/^['"]|['"]$/g, "");
+      if (!(key in process.env)) {
+        process.env[key] = value;
+      }
+    });
+}
+
 const env = {
   NG_APP_CLOUDINARY_CLOUD_NAME: process.env.NG_APP_CLOUDINARY_CLOUD_NAME || "",
   NG_APP_UPLOAD_PRESET: process.env.NG_APP_UPLOAD_PRESET || "",

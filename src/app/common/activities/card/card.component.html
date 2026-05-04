@@ -11,10 +11,10 @@
     
     <div class="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200">
         <img 
-            [src]="activity.imageURL" 
+            [src]="activity.imageURL || fallbackImage" 
             alt="{{activity.name}} Image" 
             class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
-            onerror="this.src='assets/logo/logo.png';"/>
+            (error)="onImgError($event)"/>
         
         <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80"></div>
     </div>
@@ -54,6 +54,12 @@
         </div>
         
         <div>
+            <span
+                *ngIf="moderationStatusLabel"
+                class="inline-flex items-center rounded-full bg-amber-100 text-amber-800 px-2 py-1 text-xs font-semibold mb-2"
+            >
+                {{ moderationStatusLabel }}
+            </span>
             <h3 class="text-xl font-bold mb-2 line-clamp-2 drop-shadow-lg">
                 {{ activity.name }}
             </h3>

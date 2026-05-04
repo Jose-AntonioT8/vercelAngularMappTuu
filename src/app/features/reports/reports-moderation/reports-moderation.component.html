@@ -102,10 +102,10 @@
         [routerLink]="['/activityDetail', report.activityId]"
       >
         <img
-          [src]="report.activityImageURL || 'assets/logo/logo.png'"
+          [src]="report.activityImageURL || fallbackImage"
           [alt]="report.activityName || ('reports.moderation.activityAlt' | translate)"
           class="w-full h-full object-cover"
-          onerror="this.src='assets/logo/logo.png';"
+          (error)="onImgError($event)"
         />
       </a>
 

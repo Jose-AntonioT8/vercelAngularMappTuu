@@ -420,6 +420,31 @@
     "invalid": "El formato es inválido",
     "tryAgain": "Por favor, inténtalo de nuevo"
   },
+  "moderation": {
+    "blockedContent": "Se detectó contenido no apropiado en texto o imagen.",
+    "blockedImage": "La imagen parece no apropiada y no se puede publicar.",
+    "warningContent": "Contenido potencialmente sensible detectado. Pasará a revisión manual.",
+    "warningImage": "La imagen parece sospechosa y podría ser revisada por moderación.",
+    "backendMissingModeration": "No se pudo validar la moderación del contenido. Revisa los datos e inténtalo de nuevo.",
+    "conflictStatus": "La actividad cambió de estado de moderación. Recarga e inténtalo de nuevo.",
+    "admin": {
+      "title": "Moderación de actividades",
+      "subtitle": "Revisa y decide sobre actividades en estado pendiente.",
+      "viewPending": "Ver pendientes",
+      "loading": "Cargando actividades pendientes...",
+      "empty": "No hay actividades pendientes de revisión.",
+      "approve": "Aprobar",
+      "reject": "Rechazar",
+      "errors": {
+        "notAuthenticated": "No autenticado.",
+        "sessionFailed": "No se pudo validar la sesión.",
+        "forbidden": "No tienes permisos para moderar actividades.",
+        "notFound": "La actividad ya no existe.",
+        "conflict": "La actividad ya no está pendiente de revisión.",
+        "actionFailed": "No se pudo aplicar la acción de moderación."
+      }
+    }
+  },
   "reports": {
     "dashboard": {
       "sectionTitle": "Moderación",

@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 import { MapPreviewComponent } from '../../../common/maps/map-preview.component';
 import { ActivityType } from '../../../common/models/activityType.models';
@@ -18,6 +19,7 @@ import { ActivityTypeService } from '../../../core/services/activitytype.service
 import { AuthService } from '../../../core/services/auth.service';
 import { CloudinaryService } from '../../../core/services/firebase-media.service';
 import { IaAssistantService } from '../../../core/services/ia-assistant.service';
+import { ContentModerationService } from '../../../core/services/content-moderation.service';
 import { TranslationService } from '../../../core/services/translation.service';
 import { UserService } from '../../../core/services/user.service';
 
@@ -52,6 +54,8 @@ export class ActivitiesCreationComponent {
   error = '';
   /** Mensaje de éxito para UI. */
   success = '';
+  /** Aviso moderado para UI. */
+  warning = '';
   /** Formulario reactivo de creación. */
   formActivityCreation: FormGroup;
   /** Catálogo de tipos (para selects). */
@@ -89,6 +93,8 @@ export class ActivitiesCreationComponent {
     private mediaService: CloudinaryService,
     /** Servicio IA para autocompletar descripciones. */
     private iaAssistantService: IaAssistantService,
+    /** Servicio de moderación de contenido básico. */
+    private moderationService: ContentModerationService,
     /** Servicio de traducción runtime para mensajes en TS. */
     private translationService: TranslationService
   ) {
@@ -167,6 +173,24 @@ export class ActivitiesCreationComponent {
         this.error = 'La imagen no debe superar los 5MB';
         return;
       }
+      const imageModeration = this.moderationService.moderateImageFile(file);
+      if (imageModeration.blocked) {
+        this.error = this.translationService.get(
+          'moderation.blockedImage',
+          'La imagen parece no apropiada y no se puede publicar.'
+        );
+        this.selectedFile = null;
+        this.imagePreview = null;
+        return;
+      }
+      if (imageModeration.warning) {
+        this.warning = this.translationService.get(
+          'moderation.warningImage',
+          'La imagen parece sospechosa y podria ser revisada por moderacion.'
+        );
+      } else {
+        this.warning = '';
+      }
       this.selectedFile = file;
       this.error = '';
       const reader = new FileReader();
@@ -214,6 +238,26 @@ export class ActivitiesCreationComponent {
       this.formActivityCreation.markAllAsTouched();
       return;
     }
+    this.warning = '';
+
+    const moderation = this.moderationService.moderateActivityInput(
+      this.formActivityCreation.value.name,
+      this.formActivityCreation.value.description,
+      this.selectedFile
+    );
+    if (moderation.blocked) {
+      this.error = this.translationService.get(
+        'moderation.blockedContent',
+        'Se detecto contenido no apropiado en texto o imagen.'
+      );
+      return;
+    }
+    if (moderation.warning) {
+      this.warning = this.translationService.get(
+        'moderation.warningContent',
+        'Contenido potencialmente sensible detectado. Pasara a revision manual.'
+      );
+    }
 
     const selectedActivityType = this.activityTypes.find(
       (type: ActivityType) =>
@@ -223,17 +267,30 @@ export class ActivitiesCreationComponent {
     const imageUrl = await this.uploadImage();
     if (!imageUrl) return;
 
+    const latitude = Number(this.formActivityCreation.value.latitude);
+    const longitude = Number(this.formActivityCreation.value.longitude);
+    if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+      this.error = 'Latitud/longitud no validas';
+      return;
+    }
+
     const activityData = {
       name: this.formActivityCreation.value.name,
       description: this.formActivityCreation.value.description,
-      latitude: this.formActivityCreation.value.latitude,
-      longitude: this.formActivityCreation.value.longitude,
+      latitude,
+      longitude,
       imageRef: imageUrl,
       activityTypeId: selectedActivityType ? selectedActivityType.id : null,
       createdAt: Date.now(),
       ownerId: this.auth.currentUser,
       rating: 0,
       price: parseFloat(this.formActivityCreation.value.price) || 0,
+      moderationResult: {
+        blocked: moderation.blocked,
+        warning: moderation.warning,
+        score: moderation.score,
+        reasons: moderation.reasons,
+      },
     };
 
     try {
@@ -250,14 +307,37 @@ export class ActivitiesCreationComponent {
           }, 1000);
         },
         error: (err) => {
-          this.error =
-            'Error al crear la actividad. Por favor, intenta nuevamente.';
+          this.error = this.mapCreateError(err);
         },
       });
     } catch (err) {
       this.error =
         'Error de autenticación. Por favor, inicia sesión nuevamente.';
     }
+  }
+
+  private mapCreateError(error: unknown): string {
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 400) {
+        return this.translationService.get(
+          'moderation.backendMissingModeration',
+          'No se pudo validar la moderacion del contenido. Revisa los datos e intenta de nuevo.'
+        );
+      }
+      if (error.status === 422) {
+        return this.translationService.get(
+          'moderation.blockedContent',
+          'Se detecto contenido no apropiado en texto o imagen.'
+        );
+      }
+      if (error.status === 401 || error.status === 403) {
+        return this.translationService.get(
+          'messages.sessionExpired',
+          'Tu sesion no tiene permisos para esta accion.'
+        );
+      }
+    }
+    return 'Error al crear la actividad. Por favor, intenta nuevamente.';
   }
 
   /**

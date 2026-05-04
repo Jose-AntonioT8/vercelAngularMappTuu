@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 import { MapPreviewComponent } from '../../../common/maps/map-preview.component';
@@ -9,7 +10,9 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { ActivityService } from '../../../core/services/activity.service';
 import { ActivityTypeService } from '../../../core/services/activitytype.service';
 import { AuthService } from '../../../core/services/auth.service';
+import { ContentModerationService } from '../../../core/services/content-moderation.service';
 import { CloudinaryService } from '../../../core/services/firebase-media.service';
+import { TranslationService } from '../../../core/services/translation.service';
 
 /**
  * Pantalla de edición de actividad.
@@ -27,10 +30,13 @@ import { CloudinaryService } from '../../../core/services/firebase-media.service
   styleUrl: './activity-update.component.scss',
 })
 export class ActivitiesUpdateComponent {
+  readonly fallbackImage = 'assets/images/placeholder.svg';
   /** Mensaje de error para UI. */
   error = '';
   /** Mensaje de éxito para UI. */
   success = '';
+  /** Aviso de moderación no bloqueante. */
+  warning = '';
   /** Formulario reactivo de edición. */
   formActivityUpdate: FormGroup;
   /** Catálogo de tipos de actividad. */
@@ -60,7 +66,11 @@ export class ActivitiesUpdateComponent {
     /** Servicio de tipos para catálogo. */
     private ActivityTypeService: ActivityTypeService,
     /** Servicio de media (Cloudinary). */
-    private mediaService: CloudinaryService
+    private mediaService: CloudinaryService,
+    /** Servicio de moderación de contenido básico. */
+    private moderationService: ContentModerationService,
+    /** Servicio de traducción runtime para mensajes en TS. */
+    private translationService: TranslationService
   ) {
     this.formActivityUpdate = this.formSvc.group({
       name: ['', [Validators.required]],
@@ -129,6 +139,15 @@ export class ActivitiesUpdateComponent {
     return existingImage || '';
   }
 
+  onImgError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    if (!img.src.includes(this.fallbackImage)) {
+      img.src = this.fallbackImage;
+      return;
+    }
+    img.onerror = null;
+  }
+
   /** Valida y previsualiza un fichero de imagen seleccionado. */
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -141,6 +160,24 @@ export class ActivitiesUpdateComponent {
       if (file.size > 5 * 1024 * 1024) {
         this.error = 'La imagen no debe superar los 5MB';
         return;
+      }
+      const imageModeration = this.moderationService.moderateImageFile(file);
+      if (imageModeration.blocked) {
+        this.error = this.translationService.get(
+          'moderation.blockedImage',
+          'La imagen parece no apropiada y no se puede publicar.'
+        );
+        this.selectedFile = null;
+        this.imagePreview = null;
+        return;
+      }
+      if (imageModeration.warning) {
+        this.warning = this.translationService.get(
+          'moderation.warningImage',
+          'La imagen parece sospechosa y podria ser revisada por moderacion.'
+        );
+      } else {
+        this.warning = '';
       }
       this.selectedFile = file;
       this.error = '';
@@ -178,6 +215,26 @@ export class ActivitiesUpdateComponent {
       this.formActivityUpdate.markAllAsTouched();
       return;
     }
+    this.warning = '';
+
+    const moderation = this.moderationService.moderateActivityInput(
+      this.formActivityUpdate.value.name,
+      this.formActivityUpdate.value.description,
+      this.selectedFile
+    );
+    if (moderation.blocked) {
+      this.error = this.translationService.get(
+        'moderation.blockedContent',
+        'Se detecto contenido no apropiado en texto o imagen.'
+      );
+      return;
+    }
+    if (moderation.warning) {
+      this.warning = this.translationService.get(
+        'moderation.warningContent',
+        'Contenido potencialmente sensible detectado. Pasara a revision manual.'
+      );
+    }
 
     const selectedActivityType = this.activityTypes.find(
       (type: ActivityType) => type.name === this.formActivityUpdate.value.activityType
@@ -203,6 +260,12 @@ export class ActivitiesUpdateComponent {
       imageRef: imageUrl,
       activityTypeId: selectedActivityType ? selectedActivityType.id : undefined,
       price: parseFloat(this.formActivityUpdate.value.price) || 0,
+      moderationResult: {
+        blocked: moderation.blocked,
+        warning: moderation.warning,
+        score: moderation.score,
+        reasons: moderation.reasons,
+      },
     };
 
     console.log('📦 Datos enviados al backend:', activityData);
@@ -220,11 +283,41 @@ export class ActivitiesUpdateComponent {
           }, 1000);
         },
         error: (err) => {
-          this.error = 'Error al guardar los cambios.';
+          this.error = this.mapUpdateError(err);
         }
       });
     } catch (err) {
       this.error = 'Error de autenticación. Por favor, inicia sesión nuevamente.';
     }
+  }
+
+  private mapUpdateError(error: unknown): string {
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 400) {
+        return this.translationService.get(
+          'moderation.backendMissingModeration',
+          'No se pudo validar la moderacion del contenido. Revisa los datos e intenta de nuevo.'
+        );
+      }
+      if (error.status === 422) {
+        return this.translationService.get(
+          'moderation.blockedContent',
+          'Se detecto contenido no apropiado en texto o imagen.'
+        );
+      }
+      if (error.status === 401 || error.status === 403) {
+        return this.translationService.get(
+          'messages.sessionExpired',
+          'Tu sesion no tiene permisos para esta accion.'
+        );
+      }
+      if (error.status === 409) {
+        return this.translationService.get(
+          'moderation.conflictStatus',
+          'La actividad cambio de estado de moderacion. Recarga e intenta de nuevo.'
+        );
+      }
+    }
+    return 'Error al guardar los cambios.';
   }
 }

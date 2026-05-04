@@ -45,6 +45,7 @@ import { UserService } from '../../../core/services/user.service';
   styleUrl: './activity-detail.component.scss',
 })
 export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
+  readonly fallbackImage = 'assets/images/placeholder.svg';
   constructor(private userService: UserService, private auth: AuthService) {}
   /** Subscripciones activas del componente. */
   private readonly subscriptions = new Subscription();
@@ -560,8 +561,17 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
     return (
       (activity as any).imageURL ||
       (activity as any).imageRef ||
-      'assets/logo/logo.png'
+      this.fallbackImage
     );
+  }
+
+  onImgError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    if (!img.src.includes(this.fallbackImage)) {
+      img.src = this.fallbackImage;
+      return;
+    }
+    img.onerror = null;
   }
 
   /** Abre el modal de reseña. */

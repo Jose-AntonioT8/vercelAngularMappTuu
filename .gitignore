@@ -28,6 +28,9 @@ yarn-error.log
 !.vscode/extensions.json
 .history/*
 
+# Local env (secrets); use .env.example for templates
+.env
+
 # Miscellaneous
 /.angular/cache
 .sass-cache/

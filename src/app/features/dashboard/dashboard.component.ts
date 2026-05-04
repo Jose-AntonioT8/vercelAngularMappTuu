@@ -74,4 +74,9 @@ export class DashboardComponent {
   viewReportsModeration(): void {
     this.route.navigate(['/admin/reports'])
   }
+
+  /** Navega al panel de moderación de actividades pendientes. */
+  viewActivitiesModeration(): void {
+    this.route.navigate(['/admin/activities/moderation']);
+  }
 }

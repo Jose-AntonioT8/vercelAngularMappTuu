@@ -19,6 +19,20 @@ export interface Review {
   createdAt?: Date;
 }
 
+/** Estados de moderación de actividad expuestos por backend. */
+export type ActivityModerationStatus =
+  | 'approved'
+  | 'pending_review'
+  | 'rejected';
+
+/** Resultado de moderación que frontend envía en create/update. */
+export interface ActivityModerationResult {
+  blocked: boolean;
+  warning: boolean;
+  score: number;
+  reasons: string[];
+}
+
 /**
  * Modelo base de Actividad usado por la UI.
  *
@@ -48,4 +62,14 @@ export interface Activity {
   numRatings: number;
   /** Lista de reseñas, si se carga junto a la actividad. */
   reviews?: Review[];
+  /** Estado de moderación de la actividad. */
+  moderationStatus?: ActivityModerationStatus;
+  /** Score numérico de moderación. */
+  moderationScore?: number | null;
+  /** Motivos detectados por la moderación. */
+  moderationReasons?: string[];
+  /** Fecha de moderación (si existe). */
+  moderatedAt?: string | number | Date | null;
+  /** ID del admin/moderador que tomó decisión manual. */
+  moderatedBy?: string | null;
 }

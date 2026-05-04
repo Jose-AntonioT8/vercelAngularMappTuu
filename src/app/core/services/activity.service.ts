@@ -36,6 +36,8 @@ export class ActivityService {
       : apiUrl;
   /** URL completa del recurso de actividades en la API. */
   private url = `${this.apiBase}/activities`;
+  /** URL base de endpoints admin de moderación de actividades. */
+  private adminModerationUrl = `${this.apiBase}/activities/admin`;
   /** Instancia de Firestore (compat firebase/firestore). */
   private db: FirestoreType = inject(Firestore); 
   /** Zona para re-entrar a Angular desde callbacks externos. */
@@ -87,6 +89,31 @@ export class ActivityService {
    */
   updateActivity(id: string, activityData: any, token: any): Observable<any> {
     return this.http.patch(`${this.url}/${id}`, activityData, { headers: { Authorization: `Bearer ${token}` } });
+  }
+
+  /** Lista actividades pendientes de revisión para panel admin. */
+  getPendingActivities(token: string): Observable<ActivityDetail[]> {
+    return this.http.get<ActivityDetail[]>(`${this.adminModerationUrl}/pending`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+
+  /** Aprueba una actividad pendiente desde panel admin. */
+  approvePendingActivity(id: string, token: string): Observable<any> {
+    return this.http.patch(
+      `${this.adminModerationUrl}/${encodeURIComponent(id)}/approve`,
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+  }
+
+  /** Rechaza una actividad pendiente desde panel admin. */
+  rejectPendingActivity(id: string, token: string): Observable<any> {
+    return this.http.patch(
+      `${this.adminModerationUrl}/${encodeURIComponent(id)}/reject`,
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
   }
 
   /**

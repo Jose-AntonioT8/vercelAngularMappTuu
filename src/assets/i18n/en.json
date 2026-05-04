@@ -424,6 +424,31 @@
     "invalid": "Invalid format",
     "tryAgain": "Please, try again"
   },
+  "moderation": {
+    "blockedContent": "Inappropriate content was detected in text or image.",
+    "blockedImage": "The image seems inappropriate and cannot be published.",
+    "warningContent": "Potentially sensitive content detected. It may go to manual review.",
+    "warningImage": "The image looks suspicious and may be reviewed by moderation.",
+    "backendMissingModeration": "Content moderation could not be validated. Please review your data and try again.",
+    "conflictStatus": "The activity moderation status changed. Refresh and try again.",
+    "admin": {
+      "title": "Activity moderation",
+      "subtitle": "Review and decide on pending activities.",
+      "viewPending": "View pending",
+      "loading": "Loading pending activities...",
+      "empty": "There are no pending activities to review.",
+      "approve": "Approve",
+      "reject": "Reject",
+      "errors": {
+        "notAuthenticated": "Not authenticated.",
+        "sessionFailed": "Session validation failed.",
+        "forbidden": "You do not have permission to moderate activities.",
+        "notFound": "The activity no longer exists.",
+        "conflict": "The activity is no longer pending review.",
+        "actionFailed": "The moderation action could not be applied."
+      }
+    }
+  },
   "reports": {
     "dashboard": {
       "sectionTitle": "Moderation",

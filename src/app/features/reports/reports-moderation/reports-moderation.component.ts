@@ -35,6 +35,7 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
   styleUrl: './reports-moderation.component.scss',
 })
 export class ReportsModerationComponent implements OnInit {
+  readonly fallbackImage = 'assets/images/placeholder.svg';
   /** Servicio de autenticación para recuperar sesión/token actual. */
   private authService = inject(AuthService);
   /** Servicio de reportes para acciones de moderación. */
@@ -326,5 +327,14 @@ export class ReportsModerationComponent implements OnInit {
     }
 
     return 'pending';
+  }
+
+  onImgError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    if (!img.src.includes(this.fallbackImage)) {
+      img.src = this.fallbackImage;
+      return;
+    }
+    img.onerror = null;
   }
 }

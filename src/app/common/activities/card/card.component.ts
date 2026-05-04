@@ -21,6 +21,7 @@ import { Tilt3DDirective } from '../../../core/directives/tilt3d.directive';
   styles: []
 })
 export class CardComponent implements OnInit, OnChanges {
+  readonly fallbackImage = 'assets/images/placeholder.svg';
 
   /** Actividad a renderizar. */
   @Input() activity!: Activity;
@@ -120,5 +121,21 @@ export class CardComponent implements OnInit, OnChanges {
   /** Helper para iterar 5 estrellas en template. */
   getStarsArray(): number[] {
     return [0, 1, 2, 3, 4];
+  }
+
+  get moderationStatusLabel(): string {
+    const status = (this.activity as any)?.moderationStatus;
+    if (status === 'pending_review') return 'Pendiente de revisi?n';
+    if (status === 'rejected') return 'Rechazada';
+    return '';
+  }
+
+  onImgError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    if (!img.src.includes(this.fallbackImage)) {
+      img.src = this.fallbackImage;
+      return;
+    }
+    img.onerror = null;
   }
 }

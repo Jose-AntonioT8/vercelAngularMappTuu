@@ -424,6 +424,31 @@
     "invalid": "Ungültiges Format",
     "tryAgain": "Bitte versuchen Sie es noch einmal"
   },
+  "moderation": {
+    "blockedContent": "Unangemessener Inhalt im Text oder Bild wurde erkannt.",
+    "blockedImage": "Das Bild wirkt unangemessen und kann nicht veröffentlicht werden.",
+    "warningContent": "Möglicherweise sensibler Inhalt erkannt. Er kann manuell geprüft werden.",
+    "warningImage": "Das Bild wirkt verdächtig und könnte von der Moderation geprüft werden.",
+    "backendMissingModeration": "Die Inhaltsmoderation konnte nicht validiert werden. Bitte prüfen Sie die Daten und versuchen Sie es erneut.",
+    "conflictStatus": "Der Moderationsstatus der Aktivität hat sich geändert. Bitte neu laden und erneut versuchen.",
+    "admin": {
+      "title": "Aktivitätsmoderation",
+      "subtitle": "Prüfen und entscheiden Sie über ausstehende Aktivitäten.",
+      "viewPending": "Ausstehende anzeigen",
+      "loading": "Ausstehende Aktivitäten werden geladen...",
+      "empty": "Keine ausstehenden Aktivitäten zur Prüfung.",
+      "approve": "Freigeben",
+      "reject": "Ablehnen",
+      "errors": {
+        "notAuthenticated": "Nicht authentifiziert.",
+        "sessionFailed": "Sitzung konnte nicht validiert werden.",
+        "forbidden": "Sie haben keine Berechtigung zur Moderation von Aktivitäten.",
+        "notFound": "Die Aktivität existiert nicht mehr.",
+        "conflict": "Die Aktivität ist nicht mehr ausstehend.",
+        "actionFailed": "Die Moderationsaktion konnte nicht ausgeführt werden."
+      }
+    }
+  },
   "reports": {
     "dashboard": {
       "sectionTitle": "Moderation",
