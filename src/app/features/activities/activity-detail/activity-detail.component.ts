@@ -137,14 +137,19 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
         this.checkIfActivitySaved();
         this.updateRecommendations();
 
-        this.mapService
-          .getAddress(
-            parseFloat(this.activity.latitude),
-            parseFloat(this.activity.longitude)
-          )
-          .subscribe((address) => {
-            this.location = address;
-          });
+        const storedLocation = ((this.activity as any).location || '').trim();
+        if (storedLocation) {
+          this.location = storedLocation;
+        } else {
+          this.mapService
+            .getAddress(
+              parseFloat(this.activity.latitude),
+              parseFloat(this.activity.longitude)
+            )
+            .subscribe((address) => {
+              this.location = address;
+            });
+        }
 
         // Inicializar el mapa después de que la actividad esté cargada
         setTimeout(() => {

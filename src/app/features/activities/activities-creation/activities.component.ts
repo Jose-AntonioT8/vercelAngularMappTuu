@@ -19,6 +19,7 @@ import { ActivityTypeService } from '../../../core/services/activitytype.service
 import { AuthService } from '../../../core/services/auth.service';
 import { CloudinaryService } from '../../../core/services/firebase-media.service';
 import { IaAssistantService } from '../../../core/services/ia-assistant.service';
+import { MapsService } from '../../../core/services/maps.service';
 import { ContentModerationService } from '../../../core/services/content-moderation.service';
 import { TranslationService } from '../../../core/services/translation.service';
 import { UserService } from '../../../core/services/user.service';
@@ -93,6 +94,8 @@ export class ActivitiesCreationComponent {
     private mediaService: CloudinaryService,
     /** Servicio IA para autocompletar descripciones. */
     private iaAssistantService: IaAssistantService,
+    /** Servicio de geocodificación base. */
+    private mapsService: MapsService,
     /** Servicio de moderación de contenido básico. */
     private moderationService: ContentModerationService,
     /** Servicio de traducción runtime para mensajes en TS. */
@@ -273,12 +276,14 @@ export class ActivitiesCreationComponent {
       this.error = 'Latitud/longitud no validas';
       return;
     }
+    const location = await this.resolveLocationFromCoordinates(latitude, longitude);
 
     const activityData = {
       name: this.formActivityCreation.value.name,
       description: this.formActivityCreation.value.description,
       latitude,
       longitude,
+      location,
       imageRef: imageUrl,
       activityTypeId: selectedActivityType ? selectedActivityType.id : null,
       createdAt: Date.now(),
@@ -313,6 +318,25 @@ export class ActivitiesCreationComponent {
     } catch (err) {
       this.error =
         'Error de autenticación. Por favor, inicia sesión nuevamente.';
+    }
+  }
+
+  private async resolveLocationFromCoordinates(latitude: number, longitude: number): Promise<string> {
+    try {
+      const geocodedAddress = await firstValueFrom(
+        this.mapsService.getAddress(latitude, longitude),
+      );
+      const fallbackAddress = (geocodedAddress || '').trim() || `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
+      const aiLocation = await firstValueFrom(
+        this.iaAssistantService.suggestLocationLabelQueued(
+          fallbackAddress,
+          latitude,
+          longitude,
+        ),
+      );
+      return (aiLocation || '').trim() || fallbackAddress;
+    } catch {
+      return `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
     }
   }
 

@@ -56,6 +56,8 @@ export interface Activity {
   longitude: string;
   /** Latitud en formato string (por compatibilidad con formularios/UI). */
   latitude: string;
+  /** Ubicación legible de la actividad (ciudad/zona). */
+  location?: string;
   /** Rating agregado de la actividad. */
   rating: number;
   /** Número total de valoraciones usadas para `rating`. */
