@@ -271,6 +271,71 @@ export class IaAssistantService {
   }
 
   /**
+   * Genera una etiqueta corta de ubicación a partir de geocoding + coordenadas.
+   * Usa el proveedor IA configurado y, si falla, devuelve `fallbackAddress`.
+   */
+  suggestLocationLabel(
+    fallbackAddress: string,
+    latitude: number,
+    longitude: number,
+  ): Observable<string> {
+    const model = environment.ia.model?.trim();
+    const apiKey = environment.ia.apiKey?.trim();
+    const rawApiUrl = environment.ia.apiUrl?.trim();
+    const apiUrl = this.resolveChatCompletionsUrl(rawApiUrl);
+
+    const cleanAddress = (fallbackAddress || '').trim();
+    if (!model || !apiKey || !apiUrl) {
+      return of(cleanAddress);
+    }
+
+    const messages: IaChatMessage[] = [
+      {
+        role: 'system',
+        content:
+          'Eres un asistente de geolocalización. Devuelve solo una etiqueta corta de ubicación humana en español (máximo 5 palabras), por ejemplo "Málaga centro" o "Sevilla, Triana". No uses emojis, ni explicaciones, ni prefijos.',
+      },
+      {
+        role: 'user',
+        content: [
+          `Direccion base geocodificada: ${cleanAddress || 'sin direccion'}`,
+          `Latitud: ${latitude}`,
+          `Longitud: ${longitude}`,
+          'Devuelve solo la mejor etiqueta corta.',
+        ].join('\n'),
+      },
+    ];
+
+    const candidateModels = [
+      model,
+      ...(environment.ia.fallbackModels || []),
+    ].filter(
+      (candidate, index, all) =>
+        !!candidate && all.indexOf(candidate) === index,
+    );
+    const availableCandidateModels = candidateModels.filter(
+      (candidate) => !this.unavailableModels.has(candidate),
+    );
+    const modelsToTry = (
+      availableCandidateModels.length > 0
+        ? availableCandidateModels
+        : candidateModels
+    ).slice(0, this.maxModelAttempts);
+
+    return this.requestWithModelChain(modelsToTry, messages, apiKey, apiUrl).pipe(
+      map((text) => {
+        const normalized = (text || '').trim().replace(/^["']|["']$/g, '');
+        if (!normalized) {
+          return cleanAddress;
+        }
+        const firstLine = normalized.split('\n')[0]?.trim() || cleanAddress;
+        return firstLine || cleanAddress;
+      }),
+      catchError(() => of(cleanAddress)),
+    );
+  }
+
+  /**
    * Ejecuta la petición probando modelos en cadena (principal + fallbacks).
    *
    * @param models Lista de modelos a intentar, en orden.

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Activity } from '../../models/activity.model';
 import { ActivityType } from '../../models/activityType.models';
 import { MapsService } from '../../../core/services/maps.service';
+import { IaAssistantService } from '../../../core/services/ia-assistant.service';
 import { Tilt3DDirective } from '../../../core/directives/tilt3d.directive';
 
 /**
@@ -36,6 +37,8 @@ export class CardComponent implements OnInit, OnChanges {
   private router: Router;
   /** Servicio de mapas para resolver ubicaci?n legible. */
   private mapService: MapsService;
+  /** Servicio IA para generar etiqueta de ubicaci?n. */
+  private iaAssistantService: IaAssistantService;
 
   /**
    * Crea la card de actividad con navegaci?n y geocodificaci?n.
@@ -43,9 +46,14 @@ export class CardComponent implements OnInit, OnChanges {
    * @param router Router para navegar al detalle de actividad.
    * @param mapService Servicio de mapas para resolver ubicacion legible.
    */
-  constructor(router: Router, mapService: MapsService) {
+  constructor(
+    router: Router,
+    mapService: MapsService,
+    iaAssistantService: IaAssistantService,
+  ) {
     this.router = router;
     this.mapService = mapService;
+    this.iaAssistantService = iaAssistantService;
   }
 
   /** Recalcula color cuando cambia `activity` o `activityTypes`. */
@@ -78,9 +86,16 @@ export class CardComponent implements OnInit, OnChanges {
         normalizedAddress.includes('desconocida') ||
         normalizedAddress.includes('no disponible');
 
-      this.location = isUnknownAddress
+      const geocodedLabel = isUnknownAddress
         ? this.formatCoordinates(latitude, longitude)
         : address;
+
+      this.iaAssistantService
+        .suggestLocationLabel(geocodedLabel, latitude, longitude)
+        .subscribe((aiLocation) => {
+          const normalizedAiLocation = (aiLocation || '').trim();
+          this.location = normalizedAiLocation || geocodedLabel;
+        });
     });
   }
 
