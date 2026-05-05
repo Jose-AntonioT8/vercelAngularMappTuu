@@ -167,6 +167,8 @@ export class IaAssistantService {
   private readonly maxReverseGeocodingLookups = 10;
   /** Cola para peticiones de etiqueta de ubicación (evita sobrecarga de IA). */
   private readonly locationLabelQueue$ = new Subject<LocationLabelTask>();
+  /** Cache en memoria (vive hasta reinicio de app) para etiquetas de ubicación IA. */
+  private readonly locationLabelCache = new Map<string, string>();
 
   /** Regex de “tema permitido” para limitar el dominio del asistente. */
   private readonly allowedTopicPattern =
@@ -391,6 +393,16 @@ export class IaAssistantService {
     latitude: number,
     longitude: number,
   ): Observable<string> {
+    const cacheKey = this.buildLocationLabelCacheKey(
+      fallbackAddress,
+      latitude,
+      longitude,
+    );
+    const cachedValue = this.locationLabelCache.get(cacheKey);
+    if (cachedValue) {
+      return of(cachedValue);
+    }
+
     const response$ = new Subject<string>();
     this.locationLabelQueue$.next({
       fallbackAddress,
@@ -398,7 +410,25 @@ export class IaAssistantService {
       longitude,
       response$,
     });
-    return response$.asObservable();
+    return response$.asObservable().pipe(
+      map((value) => {
+        const normalized = (value || '').trim();
+        const resolved = normalized || fallbackAddress;
+        this.locationLabelCache.set(cacheKey, resolved);
+        return resolved;
+      }),
+    );
+  }
+
+  private buildLocationLabelCacheKey(
+    fallbackAddress: string,
+    latitude: number,
+    longitude: number,
+  ): string {
+    const normalizedAddress = (fallbackAddress || '').trim().toLowerCase();
+    const lat = Number.isFinite(latitude) ? latitude.toFixed(5) : 'nan';
+    const lon = Number.isFinite(longitude) ? longitude.toFixed(5) : 'nan';
+    return `${normalizedAddress}|${lat}|${lon}`;
   }
 
   /**
