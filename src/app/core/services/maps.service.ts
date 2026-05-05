@@ -46,8 +46,20 @@ export class MapsService{
         const normalizedQuery = query.trim();
         const googleApiKey = environment.maps.apiKey?.trim();
 
-        if (!normalizedQuery || !googleApiKey) {
+        if (!normalizedQuery) {
           return of(null);
+        }
+
+        if (!googleApiKey) {
+          return this.http
+            .get<any[]>(this.buildNominatimGeocodeUrl(normalizedQuery))
+            .pipe(
+              map((response) => this.pickBestGeocodedLocationFromNominatim(response)),
+              catchError((error) => {
+                console.warn('[Maps] Nominatim forward geocoding failed:', error);
+                return of(null);
+              }),
+            );
         }
 
         return this.http
@@ -56,7 +68,12 @@ export class MapsService{
             map((response) => this.pickBestGeocodedLocation(response)),
             catchError((error) => {
               console.warn('[Maps] Google forward geocoding failed:', error);
-              return of(null);
+              return this.http
+                .get<any[]>(this.buildNominatimGeocodeUrl(normalizedQuery))
+                .pipe(
+                  map((fallback) => this.pickBestGeocodedLocationFromNominatim(fallback)),
+                  catchError(() => of(null)),
+                );
             }),
           );
       }
@@ -74,12 +91,25 @@ export class MapsService{
               map((response) => this.pickBestLocalityFromGoogle(response)),
               catchError((error) => {
                 console.warn('[Maps] Google reverse geocoding failed:', error);
-                return of(this.fallbackLocation());
+                return this.http
+                  .get<any>(this.buildNominatimReverseGeocodeUrl(normalizedLat, normalizedLon))
+                  .pipe(
+                    map((fallback) => this.pickBestLocalityFromNominatim(fallback)),
+                    catchError(() => of(this.fallbackLocation())),
+                  );
               }),
             );
         }
 
-        return of(this.fallbackLocation());
+        return this.http
+          .get<any>(this.buildNominatimReverseGeocodeUrl(normalizedLat, normalizedLon))
+          .pipe(
+            map((response) => this.pickBestLocalityFromNominatim(response)),
+            catchError((error) => {
+              console.warn('[Maps] Nominatim reverse geocoding failed:', error);
+              return of(this.fallbackLocation());
+            }),
+          );
       }
 
     /**
@@ -92,6 +122,16 @@ export class MapsService{
     /** Construye URL de geocoding directo para una ubicación textual. */
     buildGoogleGeocodeUrl(query: string, apiKey: string): string {
       return `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(query)}&language=es&key=${encodeURIComponent(apiKey)}`;
+    }
+
+    /** Construye URL de reverse geocoding de Nominatim (OpenStreetMap). */
+    buildNominatimReverseGeocodeUrl(lat: number, lon: number): string {
+      return `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&accept-language=es`;
+    }
+
+    /** Construye URL de geocoding directo de Nominatim (OpenStreetMap). */
+    buildNominatimGeocodeUrl(query: string): string {
+      return `https://nominatim.openstreetmap.org/search?format=jsonv2&q=${encodeURIComponent(query)}&limit=1&addressdetails=1&accept-language=es`;
     }
 
     /**
@@ -156,6 +196,32 @@ export class MapsService{
       return result.formatted_address || 'Ubicación desconocida';
     }
 
+    /** Extrae una localidad legible desde respuesta reverse de Nominatim. */
+    pickBestLocalityFromNominatim(response: any): string {
+      const address = response?.address || {};
+      const locality =
+        address.city ||
+        address.town ||
+        address.village ||
+        address.municipality ||
+        address.suburb ||
+        '';
+      const province = address.state || address.county || '';
+
+      if (locality && province && locality !== province) {
+        return `${locality}, ${province}`;
+      }
+      if (locality) {
+        return locality;
+      }
+      if (province) {
+        return province;
+      }
+
+      const displayName = typeof response?.display_name === 'string' ? response.display_name.trim() : '';
+      return displayName || 'Ubicación desconocida';
+    }
+
     /** Convierte una respuesta de geocoding directo a coordenadas + viewport. */
     pickBestGeocodedLocation(response: any): GeocodedLocation | null {
       const result = response?.results?.[0];
@@ -200,6 +266,25 @@ export class MapsService{
                   },
                 }
               : undefined,
+      };
+    }
+
+    /** Convierte respuesta de búsqueda Nominatim a GeocodedLocation. */
+    pickBestGeocodedLocationFromNominatim(response: any[]): GeocodedLocation | null {
+      const first = Array.isArray(response) ? response[0] : null;
+      if (!first) {
+        return null;
+      }
+      const lat = Number(first.lat);
+      const lon = Number(first.lon);
+      if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+        return null;
+      }
+
+      return {
+        formattedAddress: (first.display_name || '').trim(),
+        latitude: lat,
+        longitude: lon,
       };
     }
 
