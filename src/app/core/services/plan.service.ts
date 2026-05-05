@@ -90,6 +90,18 @@ export class PlanService {
    * Mantiene un listener único (se reutiliza si ya existe).
    */
   getPlans(): Observable<Plan[]> {
+    // En despliegues evitamos listeners Firestore (canal Listen) y usamos API HTTP.
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+      this.http.get<Plan[]>(this.url).subscribe({
+        next: (plans) => this.plans.next(plans || []),
+        error: (error) => {
+          console.error('Error cargando planes por API:', error);
+          this.plans.next([]);
+        },
+      });
+      return this.plans$;
+    }
+
     if (this.unsubscribeListener) {
       return this.plans$;
     }
