@@ -4,6 +4,7 @@ import { Firestore } from '@angular/fire/firestore';
 import { collection, getDocs } from 'firebase/firestore';
 import {
   Observable,
+  Subject,
   catchError,
   firstValueFrom,
   from,
@@ -38,6 +39,13 @@ interface IaChatResponse {
       content?: string;
     };
   }>;
+}
+
+interface LocationLabelTask {
+  fallbackAddress: string;
+  latitude: number;
+  longitude: number;
+  response$: Subject<string>;
 }
 
 /**
@@ -151,10 +159,33 @@ export class IaAssistantService {
   private readonly maxFirebaseJsonChars = 15000;
   /** Límite de reverse geocoding por pregunta para evitar latencia excesiva. */
   private readonly maxReverseGeocodingLookups = 10;
+  /** Cola para peticiones de etiqueta de ubicación (evita sobrecarga de IA). */
+  private readonly locationLabelQueue$ = new Subject<LocationLabelTask>();
 
   /** Regex de “tema permitido” para limitar el dominio del asistente. */
   private readonly allowedTopicPattern =
     /(plan|planes|actividad|actividades|activity|activities|activitytype|activity type|tipo|tipos|ruta|rutas|itinerario|itinerarios)/i;
+
+  constructor() {
+    this.locationLabelQueue$
+      .pipe(
+        concatMap((task) =>
+          this.suggestLocationLabel(
+            task.fallbackAddress,
+            task.latitude,
+            task.longitude,
+          ).pipe(
+            map((value) => ({ task, value })),
+            catchError(() => of({ task, value: task.fallbackAddress })),
+            switchMap((payload) => timer(350).pipe(map(() => payload))),
+          ),
+        ),
+      )
+      .subscribe(({ task, value }) => {
+        task.response$.next(value);
+        task.response$.complete();
+      });
+  }
 
   /**
    * Punto de entrada del asistente.
@@ -333,6 +364,24 @@ export class IaAssistantService {
       }),
       catchError(() => of(cleanAddress)),
     );
+  }
+
+  /**
+   * Igual que `suggestLocationLabel`, pero en cola secuencial para evitar ráfagas.
+   */
+  suggestLocationLabelQueued(
+    fallbackAddress: string,
+    latitude: number,
+    longitude: number,
+  ): Observable<string> {
+    const response$ = new Subject<string>();
+    this.locationLabelQueue$.next({
+      fallbackAddress,
+      latitude,
+      longitude,
+      response$,
+    });
+    return response$.asObservable();
   }
 
   /**

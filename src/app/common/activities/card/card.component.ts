@@ -90,8 +90,16 @@ export class CardComponent implements OnInit, OnChanges {
         ? this.formatCoordinates(latitude, longitude)
         : address;
 
+      // 1) Prioriza geocoding API y pinta primero ese resultado.
+      this.location = geocodedLabel;
+
+      // 2) Solo si geocoding falla/viene vacio, intenta refinar con IA en cola.
+      if (this.isGeocodingValid(address)) {
+        return;
+      }
+
       this.iaAssistantService
-        .suggestLocationLabel(geocodedLabel, latitude, longitude)
+        .suggestLocationLabelQueued(geocodedLabel, latitude, longitude)
         .subscribe((aiLocation) => {
           const normalizedAiLocation = (aiLocation || '').trim();
           this.location = normalizedAiLocation || geocodedLabel;
@@ -199,6 +207,15 @@ export class CardComponent implements OnInit, OnChanges {
 
   private formatCoordinates(latitude: number, longitude: number): string {
     return `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
+  }
+
+  private isGeocodingValid(address: string): boolean {
+    const normalized = (address || '').trim().toLowerCase();
+    if (!normalized) return false;
+    if (normalized.includes('desconocida') || normalized.includes('no disponible')) {
+      return false;
+    }
+    return true;
   }
 
   private pickCoordinate(source: Record<string, unknown>, keys: string[]): number {
