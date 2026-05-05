@@ -9,6 +9,8 @@ import { Activity } from '../../../common/models/activity.model';
 import { RouterModule } from '@angular/router';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
+import { ContentModerationService } from '../../../core/services/content-moderation.service';
+import { TranslationService } from '../../../core/services/translation.service';
 
 /**
  * Pantalla de edición de un plan existente.
@@ -30,6 +32,8 @@ export class PlansUpdateComponent implements OnInit {
   error = '';
   /** Mensaje de éxito para UI. */
   success = '';
+  /** Aviso de moderación no bloqueante. */
+  warning = '';
   /** Formulario reactivo de edición del plan. */
   formPlanUpdate: FormGroup;
   /** Snapshot del plan cargado (no tipado). */
@@ -53,7 +57,11 @@ export class PlansUpdateComponent implements OnInit {
     /** Servicio de planes (lectura puntual + mutación). */
     private planService: PlanService,
     /** Servicio de actividades (catálogo). */
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    /** Servicio de moderación de contenido básico. */
+    private moderationService: ContentModerationService,
+    /** Servicio de traducción runtime para mensajes en TS. */
+    private translationService: TranslationService
   ) {
     this.formPlanUpdate = this.formSvc.group({
       name: [''],
@@ -146,6 +154,7 @@ export class PlansUpdateComponent implements OnInit {
    * - Adjunta token Bearer del usuario autenticado
    */
   async onUpdate() {
+    this.warning = '';
     const selectedActivityNames: string[] = this.formPlanUpdate.value.activitiesIds || [];
     const selectedActivityIds: string[] = this.activities
       .filter((act: Activity) => selectedActivityNames.includes(act.name))
@@ -169,6 +178,31 @@ export class PlansUpdateComponent implements OnInit {
       planData.activitiesIds = selectedActivityIds;
     }
     planData.visibility = this.formPlanUpdate.value.visibility;
+
+    const moderation = this.moderationService.moderatePlanInput(
+      this.formPlanUpdate.value.name || this.planData?.name || '',
+      this.formPlanUpdate.value.description || this.planData?.description || '',
+      this.formPlanUpdate.value.imageRef || this.planData?.imageRef || this.planData?.imgRef || ''
+    );
+    if (moderation.blocked) {
+      this.error = this.translationService.get(
+        'moderation.blockedContent',
+        'Se detecto contenido no apropiado en texto o imagen.'
+      );
+      return;
+    }
+    if (moderation.warning) {
+      this.warning = this.translationService.get(
+        'moderation.warningContent',
+        'Contenido potencialmente sensible detectado. Pasara a revision manual.'
+      );
+    }
+    planData.moderationResult = {
+      blocked: moderation.blocked,
+      warning: moderation.warning,
+      score: moderation.score,
+      reasons: moderation.reasons,
+    };
 
     console.log('Datos del plan a actualizar:', planData);
 

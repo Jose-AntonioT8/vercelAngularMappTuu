@@ -12,6 +12,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { CloudinaryService } from '../../../core/services/firebase-media.service';
 import { IaAssistantService } from '../../../core/services/ia-assistant.service';
 import { PlanService } from '../../../core/services/plan.service';
+import { ContentModerationService } from '../../../core/services/content-moderation.service';
 import { TranslationService } from '../../../core/services/translation.service';
 import { UserService } from '../../../core/services/user.service';
 /**
@@ -43,6 +44,8 @@ export class PlansCreationComponent implements OnInit {
   error = '';
   /** Mensaje de éxito para la UI. */
   success = '';
+  /** Aviso de moderación no bloqueante. */
+  warning = '';
   /** Formulario reactivo de creación del plan. */
   formPlanCreation;
   /** Payload auxiliar (no tipado) usado por la pantalla. */
@@ -69,6 +72,7 @@ export class PlansCreationComponent implements OnInit {
     private activityService: ActivityService,
     private mediaService: CloudinaryService,
     private iaAssistantService: IaAssistantService,
+    private moderationService: ContentModerationService,
     private translationService: TranslationService
   ) {
     // Inicialización del FormGroup en el constructor
@@ -119,6 +123,24 @@ export class PlansCreationComponent implements OnInit {
       if (file.size > 5 * 1024 * 1024) {
         this.error = 'La imagen no debe superar los 5MB';
         return;
+      }
+      const imageModeration = this.moderationService.moderateImageFile(file);
+      if (imageModeration.blocked) {
+        this.error = this.translationService.get(
+          'moderation.blockedImage',
+          'La imagen parece no apropiada y no se puede publicar.'
+        );
+        this.selectedFile = null;
+        this.imagePreview = null;
+        return;
+      }
+      if (imageModeration.warning) {
+        this.warning = this.translationService.get(
+          'moderation.warningImage',
+          'La imagen parece sospechosa y podria ser revisada por moderacion.'
+        );
+      } else {
+        this.warning = '';
       }
       this.selectedFile = file;
       this.error = '';
@@ -212,6 +234,7 @@ export class PlansCreationComponent implements OnInit {
       this.formPlanCreation.markAllAsTouched();
       return;
     }
+    this.warning = '';
 
     const selectedActivityNames: string[] =
       this.formPlanCreation.value.activitiesIds || [];
@@ -226,6 +249,25 @@ export class PlansCreationComponent implements OnInit {
     }
 
     const imageUrl = await this.uploadImage();
+    const moderation = this.moderationService.moderatePlanInput(
+      this.formPlanCreation.value.name,
+      this.formPlanCreation.value.description,
+      imageUrl,
+      this.selectedFile
+    );
+    if (moderation.blocked) {
+      this.error = this.translationService.get(
+        'moderation.blockedContent',
+        'Se detecto contenido no apropiado en texto o imagen.'
+      );
+      return;
+    }
+    if (moderation.warning) {
+      this.warning = this.translationService.get(
+        'moderation.warningContent',
+        'Contenido potencialmente sensible detectado. Pasara a revision manual.'
+      );
+    }
 
     const planData = {
       name: this.formPlanCreation.value.name,
@@ -233,9 +275,16 @@ export class PlansCreationComponent implements OnInit {
       activitiesIds: selectedActivityIds,
       visibility: this.formPlanCreation.value.visibility,
       imgRef: imageUrl || '',
+      imageRef: imageUrl || '',
       createdAt: Date.now(),
       ownerId: this.auth.currentUser,
       rating: 0,
+      moderationResult: {
+        blocked: moderation.blocked,
+        warning: moderation.warning,
+        score: moderation.score,
+        reasons: moderation.reasons,
+      },
     };
 
     try {

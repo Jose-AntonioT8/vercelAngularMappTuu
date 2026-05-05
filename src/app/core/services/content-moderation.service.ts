@@ -175,6 +175,45 @@ export class ContentModerationService {
     };
   }
 
+  moderatePlanInput(
+    name: string,
+    description: string,
+    imageRef?: string | null,
+    file?: File | null
+  ): ModerationResult {
+    const baseResult = this.moderateActivityInput(name, description, file);
+    const imageRefResult = this.moderateImageReference(imageRef);
+
+    const score = Math.min(1, baseResult.score + imageRefResult.score * 0.7);
+    const blocked = baseResult.blocked || imageRefResult.blocked || score >= this.blockThreshold;
+    const warning =
+      !blocked && (baseResult.warning || imageRefResult.warning || score >= this.warningThreshold);
+
+    return {
+      blocked,
+      warning,
+      score,
+      reasons: [...new Set([...baseResult.reasons, ...imageRefResult.reasons])],
+    };
+  }
+
+  moderateImageReference(imageRef?: string | null): ModerationResult {
+    const ref = this.normalizeText(imageRef || '');
+    if (!ref) {
+      return { blocked: false, warning: false, score: 0, reasons: [] };
+    }
+
+    const suspiciousHits = this.countHits(ref, this.suspiciousImageTerms);
+    const score = suspiciousHits > 0 ? Math.min(0.95, 0.6 + suspiciousHits * 0.15) : 0;
+
+    return {
+      blocked: score >= this.blockThreshold,
+      warning: score >= this.warningThreshold && score < this.blockThreshold,
+      score,
+      reasons: suspiciousHits > 0 ? ['moderation.suspiciousImageDetected'] : [],
+    };
+  }
+
   moderateImageFile(file: File): ModerationResult {
     const reasons: string[] = [];
     let score = 0;
