@@ -33,6 +33,8 @@ export const authGuard: CanActivateFn = async (_route, state) => {
   const userService = inject(UserService);
   const isProfileRoute = state.url.startsWith('/profile');
 
+  await auth.waitForAuthInitialization();
+
   if (!auth.isAuthenticated()) {
     router.navigate(['/login']);
     return false;

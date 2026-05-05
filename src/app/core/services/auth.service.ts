@@ -36,14 +36,31 @@ export class AuthService {
   private userSubject = new BehaviorSubject<User | null>(null);
   /** Stream reactivo del usuario autenticado (o `null` si no hay sesión). */
   user$ = this.userSubject.asObservable();
+  /** Flag para saber si Firebase ya resolvió el estado inicial de sesión. */
+  private authInitialized = false;
+  /** Resolver de la promesa de inicialización. */
+  private resolveAuthInitialized!: () => void;
+  /** Promesa que se cumple cuando `onAuthStateChanged` emite por primera vez. */
+  private readonly authInitializedPromise = new Promise<void>((resolve) => {
+    this.resolveAuthInitialized = resolve;
+  });
 
   /** Se suscribe a `onAuthStateChanged` para mantener `user$` sincronizado. */
   constructor(private router: Router) {
     onAuthStateChanged(this.auth, user => {
       this.ngZone.run(() => {
       this.userSubject.next(user);
+      if (!this.authInitialized) {
+        this.authInitialized = true;
+        this.resolveAuthInitialized();
+      }
       });
     });
+  }
+
+  /** Espera a que Firebase resuelva el estado inicial de autenticación. */
+  async waitForAuthInitialization(): Promise<void> {
+    await this.authInitializedPromise;
   }
 
   /**
