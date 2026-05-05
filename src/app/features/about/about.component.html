@@ -243,12 +243,23 @@
                 {{ 'about.ctaDescription' | translate }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                routerLink="/activitiesList"
-                class="px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg"
-              >
-                {{ 'about.ctaButton1' | translate }}
-              </a>
+              @if (isLoggedIn) {
+                <a
+                  routerLink="/activitiesList"
+                  class="px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg"
+                >
+                  {{ 'about.ctaButton1' | translate }}
+                </a>
+              } @else {
+                <a
+                  href="/documentation/index.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg"
+                >
+                  {{ 'about.documentation' | translate }}
+                </a>
+              }
 
               @if (isLoggedIn) {
                 <a
@@ -256,6 +267,14 @@
                   class="px-8 py-4 bg-white/20 text-white font-bold rounded-full hover:bg-white/30 transition-colors backdrop-blur-sm border border-white/30"
                 >
                   {{ 'about.ctaButtonPlans' | translate }}
+                </a>
+                <a
+                  href="/documentation/index.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-8 py-4 bg-white/20 text-white font-bold rounded-full hover:bg-white/30 transition-colors backdrop-blur-sm border border-white/30"
+                >
+                  {{ 'about.documentation' | translate }}
                 </a>
               } @else {
                 <a
