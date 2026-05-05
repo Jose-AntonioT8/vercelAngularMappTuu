@@ -193,7 +193,8 @@
     "ctaTitle": "Ready to explore?",
     "ctaDescription": "Join thousands of users already discovering incredible experiences with MappTuu.",
     "ctaButton1": "Explore activities",
-    "ctaButton2": "Create free account"
+    "ctaButton2": "Create free account",
+    "ctaButtonPlans": "Explore plans"
   },
   "profile": {
     "title": "My Profile",

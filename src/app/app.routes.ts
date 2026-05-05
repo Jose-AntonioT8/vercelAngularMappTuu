@@ -54,7 +54,7 @@ export const routes: Routes = [
   {path : 'search', component: GlobalSearchComponent, canActivate: [authGuard]},
   { path: 'activitiesList', component: ListActivitiesComponent},
   { path: 'createdActivities', component: CreatedActivitiesComponent},
-  { path: 'activityDetail/:id', component: ActivityDetailComponent},
+  { path: 'activityDetail/:id', component: ActivityDetailComponent, canActivate: [authGuard]},
   { path: 'updateActivity/:id', component: ActivitiesUpdateComponent},
   { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
   { path: 'signup', component: SignupComponent, canActivate: [guestGuard] },

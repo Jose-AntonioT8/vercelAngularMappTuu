@@ -190,7 +190,8 @@
     "ctaTitle": "¿Listo para explorar?",
     "ctaDescription": "Únete a miles de usuarios que ya están descubriendo experiencias increíbles con MappTuu.",
     "ctaButton1": "Explorar actividades",
-    "ctaButton2": "Crear cuenta gratis"
+    "ctaButton2": "Crear cuenta gratis",
+    "ctaButtonPlans": "Explorar planes"
   },
   "profile": {
     "title": "Mi Perfil",

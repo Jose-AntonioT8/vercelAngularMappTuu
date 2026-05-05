@@ -25,7 +25,7 @@ function calculateAgeFromBirthDate(birthDate: string): number {
 /**
  * Guard de autenticación.
  *
- * Permite acceso solo si hay sesión activa; en caso contrario redirige al landing.
+ * Permite acceso solo si hay sesión activa; en caso contrario redirige a login.
  */
 export const authGuard: CanActivateFn = async (_route, state) => {
   const auth = inject(AuthService);
@@ -34,7 +34,7 @@ export const authGuard: CanActivateFn = async (_route, state) => {
   const isProfileRoute = state.url.startsWith('/profile');
 
   if (!auth.isAuthenticated()) {
-    router.navigate(['/landingPage']);
+    router.navigate(['/login']);
     return false;
   }
 

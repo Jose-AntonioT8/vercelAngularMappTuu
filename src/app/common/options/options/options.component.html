@@ -16,17 +16,17 @@
       <button 
         (click)="toggleMenu()" 
         type="button" 
-        class="bg-white/90 backdrop-blur-sm rounded-full p-2 hover:bg-gray-100 shadow-sm transition-colors border border-gray-100"
+        class="bg-white/90 backdrop-blur-sm rounded-full p-2 hover:bg-gray-100 shadow-sm transition-colors border border-gray-100 dark:bg-slate-800/95 dark:border-slate-700 dark:hover:bg-slate-700"
         aria-label="Opciones">
         
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-700 dark:text-slate-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
         </svg>
       </button>
     
       @if (isMenuOpen) {
         <div 
-          class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 focus:outline-none" 
+          class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 focus:outline-none dark:bg-slate-800 dark:ring-slate-700" 
           role="menu">
           
           <div class="py-1">

@@ -193,7 +193,8 @@
     "ctaTitle": "Bereit zum Entdecken?",
     "ctaDescription": "Schließe dich Tausenden von Nutzern an, die bereits mit MappTuu großartige Erlebnisse entdecken.",
     "ctaButton1": "Aktivitäten erkunden",
-    "ctaButton2": "Kostenloses Konto erstellen"
+    "ctaButton2": "Kostenloses Konto erstellen",
+    "ctaButtonPlans": "Pläne erkunden"
   },
   "profile": {
     "title": "Mein Profil",

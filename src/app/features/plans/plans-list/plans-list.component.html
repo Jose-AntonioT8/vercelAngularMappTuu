@@ -1,6 +1,4 @@
-<header class="sticky top-0 z-50">
-  <app-header></app-header>
-</header>
+<app-header></app-header>
 
 <div class="motion-safe:animate-[pageEnter_.32s_ease-out]">
 <div class="bg-gradient-to-r from-brand-primary to-brand-secondary shadow-lg py-5 px-4">
@@ -31,7 +29,7 @@
       </div>
       <button
         (click)="goCreatePlan()"
-        class="shrink-0 px-5 py-3 rounded-full bg-white/95 text-brand-primary hover:bg-white transition-colors text-sm font-semibold shadow-lg"
+        class="shrink-0 px-5 py-3 rounded-full bg-white/95 text-brand-primary hover:bg-white dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700 transition-colors text-sm font-semibold shadow-lg"
       >
         {{ "dashboard.createPlans" | translate }}
       </button>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslatePipe } from '../../core/pipes/translate.pipe';
 import { HeaderComponent } from '../../common/header/header.component';
+import { AuthService } from '../../core/services/auth.service';
 
 /**
  * Pantalla “Acerca de”.
@@ -16,4 +17,10 @@ import { HeaderComponent } from '../../common/header/header.component';
   imports: [CommonModule, RouterModule, TranslatePipe, HeaderComponent],
   templateUrl: './about.component.html'
 })
-export class AboutComponent {}
+export class AboutComponent {
+  constructor(private authService: AuthService) {}
+
+  get isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
+  }
+}
