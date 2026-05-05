@@ -9,9 +9,9 @@ import { Tilt3DDirective } from '../../../core/directives/tilt3d.directive';
 /**
  * Card de actividad para listados.
  *
- * - Muestra información resumida (imagen, nombre, rating, tipo).
+ * - Muestra informaci?n resumida (imagen, nombre, rating, tipo).
  * - Deriva color del tipo de actividad para UI.
- * - Resuelve una dirección aproximada a partir de lat/lng (si existen).
+ * - Resuelve una direcci?n aproximada a partir de lat/lng (si existen).
  */
 @Component({
   selector: 'app-card',
@@ -25,20 +25,20 @@ export class CardComponent implements OnInit, OnChanges {
 
   /** Actividad a renderizar. */
   @Input() activity!: Activity;
-  /** Catálogo de tipos para resolver nombre/color del tipo asociado. */
+  /** Cat?logo de tipos para resolver nombre/color del tipo asociado. */
   @Input() activityTypes: ActivityType[] = [];
 
   /** Color de UI derivado del tipo de actividad. */
   activityColor = '';
-  /** Dirección/resumen de ubicación derivada por reverse geocoding. */
+  /** Direcci?n/resumen de ubicaci?n derivada por reverse geocoding. */
   location?: string;
-  /** Router para navegación al detalle de actividad. */
+  /** Router para navegaci?n al detalle de actividad. */
   private router: Router;
-  /** Servicio de mapas para resolver ubicación legible. */
+  /** Servicio de mapas para resolver ubicaci?n legible. */
   private mapService: MapsService;
 
   /**
-   * Crea la card de actividad con navegación y geocodificación.
+   * Crea la card de actividad con navegaci?n y geocodificaci?n.
    *
    * @param router Router para navegar al detalle de actividad.
    * @param mapService Servicio de mapas para resolver ubicacion legible.
@@ -55,16 +55,33 @@ export class CardComponent implements OnInit, OnChanges {
     }
   }
 
-  /** Obtiene dirección si hay coordenadas disponibles. */
+  /** Obtiene direcci?n si hay coordenadas disponibles. */
   ngOnInit(): void {
-    if (this.activity?.latitude && this.activity?.longitude) {
-        this.mapService.getAddress(
-          parseFloat(this.activity.latitude), 
-          parseFloat(this.activity.longitude)
-        ).subscribe(address => {
-          this.location = address;
-        });
+    const explicitLocation = this.getExplicitLocation();
+    if (explicitLocation) {
+      this.location = explicitLocation;
+      return;
     }
+
+    const source = this.activity as any;
+    const latitude = this.pickCoordinate(source, ['latitude', 'lat']);
+    const longitude = this.pickCoordinate(source, ['longitude', 'lng', 'lon']);
+    if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+      this.location = 'Ubicaci?n no disponible';
+      return;
+    }
+
+    this.mapService.getAddress(latitude, longitude).subscribe((address) => {
+      const normalizedAddress = (address || '').trim().toLowerCase();
+      const isUnknownAddress =
+        !normalizedAddress ||
+        normalizedAddress.includes('desconocida') ||
+        normalizedAddress.includes('no disponible');
+
+      this.location = isUnknownAddress
+        ? this.formatCoordinates(latitude, longitude)
+        : address;
+    });
   }
 
   /** Navega a la pantalla de detalle de la actividad. */
@@ -75,7 +92,7 @@ export class CardComponent implements OnInit, OnChanges {
   /**
    * Deriva el color de la actividad basado en el tipo asociado.
    *
-   * El código tolera varias posibles claves (por evolución de modelos):
+   * El c?digo tolera varias posibles claves (por evoluci?n de modelos):
    * `activityTypeId`, `IdTypeActivity`, `typeId`, etc.
    */
   private updateActivityColor(): void {
@@ -108,7 +125,7 @@ export class CardComponent implements OnInit, OnChanges {
     }
   }
 
-  /** Devuelve el estado de una estrella (full/half/empty) para un índice 0..4. */
+  /** Devuelve el estado de una estrella (full/half/empty) para un ?ndice 0..4. */
   getStarState(index: number): 'full' | 'half' | 'empty' {
     if (!this.activity) return 'empty';
     const rating = this.activity.rating;
@@ -137,5 +154,51 @@ export class CardComponent implements OnInit, OnChanges {
       return;
     }
     img.onerror = null;
+  }
+
+  private getExplicitLocation(): string {
+    const source = this.activity as any;
+    const candidates = [
+      source?.resolvedLocation,
+      source?.location,
+      source?.locationText,
+      source?.address,
+      source?.city,
+      source?.region,
+      source?.fullAddress,
+      source?.formattedAddress,
+    ];
+
+    const value = candidates.find(
+      (item) => typeof item === 'string' && item.trim().length > 0,
+    );
+    const normalizedValue = value ? String(value).trim() : '';
+    const normalizedLower = normalizedValue.toLowerCase();
+    const isUnknownLocation =
+      normalizedLower.includes('desconocida') ||
+      normalizedLower.includes('no disponible') ||
+      normalizedLower === '...';
+
+    return isUnknownLocation ? '' : normalizedValue;
+  }
+
+  private formatCoordinates(latitude: number, longitude: number): string {
+    return `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
+  }
+
+  private pickCoordinate(source: Record<string, unknown>, keys: string[]): number {
+    for (const key of keys) {
+      const value = source[key];
+      if (typeof value === 'number' && Number.isFinite(value)) {
+        return value;
+      }
+      if (typeof value === 'string') {
+        const parsed = Number(value.replace(',', '.').trim());
+        if (Number.isFinite(parsed)) {
+          return parsed;
+        }
+      }
+    }
+    return Number.NaN;
   }
 }
