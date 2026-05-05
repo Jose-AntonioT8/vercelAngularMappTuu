@@ -305,6 +305,7 @@ export class ActivitiesCreationComponent {
 
       this.activityService.createActivity(activityData, token).subscribe({
         next: (res) => {
+          console.log('[createActivity] Respuesta servidor (success):', res);
           this.userService.createActivity(user.uid, res.id, token).subscribe();
           this.success = 'Actividad creada con éxito';
           setTimeout(() => {
@@ -312,6 +313,12 @@ export class ActivitiesCreationComponent {
           }, 1000);
         },
         error: (err) => {
+          console.log('[createActivity] Respuesta servidor (error):', {
+            status: err?.status,
+            message: err?.error?.message,
+            errors: err?.error?.errors,
+            raw: err,
+          });
           this.error = this.mapCreateError(err);
         },
       });
