@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Activity } from '../../models/activity.model';
 import { ActivityType } from '../../models/activityType.models';
 import { MapsService } from '../../../core/services/maps.service';
-import { IaAssistantService } from '../../../core/services/ia-assistant.service';
 import { Tilt3DDirective } from '../../../core/directives/tilt3d.directive';
 
 /**
@@ -37,8 +36,6 @@ export class CardComponent implements OnInit, OnChanges {
   private router: Router;
   /** Servicio de mapas para resolver ubicaci?n legible. */
   private mapService: MapsService;
-  /** Servicio IA para generar etiqueta de ubicaci?n. */
-  private iaAssistantService: IaAssistantService;
 
   /**
    * Crea la card de actividad con navegaci?n y geocodificaci?n.
@@ -49,11 +46,9 @@ export class CardComponent implements OnInit, OnChanges {
   constructor(
     router: Router,
     mapService: MapsService,
-    iaAssistantService: IaAssistantService,
   ) {
     this.router = router;
     this.mapService = mapService;
-    this.iaAssistantService = iaAssistantService;
   }
 
   /** Recalcula color cuando cambia `activity` o `activityTypes`. */
@@ -92,18 +87,6 @@ export class CardComponent implements OnInit, OnChanges {
 
       // 1) Prioriza geocoding API y pinta primero ese resultado.
       this.location = geocodedLabel;
-
-      // 2) Solo si geocoding falla/viene vacio, intenta refinar con IA en cola.
-      if (this.isGeocodingValid(address)) {
-        return;
-      }
-
-      this.iaAssistantService
-        .suggestLocationLabelQueued(geocodedLabel, latitude, longitude)
-        .subscribe((aiLocation) => {
-          const normalizedAiLocation = (aiLocation || '').trim();
-          this.location = normalizedAiLocation || geocodedLabel;
-        });
     });
   }
 
@@ -207,15 +190,6 @@ export class CardComponent implements OnInit, OnChanges {
 
   private formatCoordinates(latitude: number, longitude: number): string {
     return `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
-  }
-
-  private isGeocodingValid(address: string): boolean {
-    const normalized = (address || '').trim().toLowerCase();
-    if (!normalized) return false;
-    if (normalized.includes('desconocida') || normalized.includes('no disponible')) {
-      return false;
-    }
-    return true;
   }
 
   private pickCoordinate(source: Record<string, unknown>, keys: string[]): number {
