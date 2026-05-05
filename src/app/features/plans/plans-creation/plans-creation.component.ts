@@ -250,8 +250,8 @@ export class PlansCreationComponent implements OnInit {
 
     const imageUrl = await this.uploadImage();
     const moderation = this.moderationService.moderatePlanInput(
-      this.formPlanCreation.value.name,
-      this.formPlanCreation.value.description,
+      this.formPlanCreation.value.name ?? '',
+      this.formPlanCreation.value.description ?? '',
       imageUrl,
       this.selectedFile
     );
