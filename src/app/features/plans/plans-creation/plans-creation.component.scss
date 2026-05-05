@@ -1,0 +1,31 @@
+// Estilos para modo oscuro en el componente de creación de planes
+
+:host-context(.dark) {
+  textarea,
+  input[type="text"],
+  input[type="number"],
+  select {
+    &:focus {
+      border-color: #7dd3fc !important;
+      box-shadow: 0 0 0 4px rgba(125, 211, 252, 0.15) !important;
+    }
+  }
+}
+
+// Estilos generales para el textarea
+textarea {
+  &::placeholder {
+    color: inherit;
+    opacity: 0.7;
+  }
+}
+
+// Animación shimmer para el botón
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
