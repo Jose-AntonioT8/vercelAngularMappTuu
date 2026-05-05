@@ -5,6 +5,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import {
   Observable,
   Subject,
+  concatMap,
   catchError,
   firstValueFrom,
   from,
@@ -46,6 +47,11 @@ interface LocationLabelTask {
   latitude: number;
   longitude: number;
   response$: Subject<string>;
+}
+
+interface LocationLabelQueueResult {
+  task: LocationLabelTask;
+  value: string;
 }
 
 /**
@@ -169,19 +175,30 @@ export class IaAssistantService {
   constructor() {
     this.locationLabelQueue$
       .pipe(
-        concatMap((task) =>
+        concatMap((task: LocationLabelTask) =>
           this.suggestLocationLabel(
             task.fallbackAddress,
             task.latitude,
             task.longitude,
           ).pipe(
-            map((value) => ({ task, value })),
-            catchError(() => of({ task, value: task.fallbackAddress })),
+            map(
+              (value): LocationLabelQueueResult => ({
+                task,
+                value,
+              }),
+            ),
+            catchError(() =>
+              of<LocationLabelQueueResult>({
+                task,
+                value: task.fallbackAddress,
+              }),
+            ),
             switchMap((payload) => timer(350).pipe(map(() => payload))),
           ),
         ),
       )
-      .subscribe(({ task, value }) => {
+      .subscribe((result: LocationLabelQueueResult) => {
+        const { task, value } = result;
         task.response$.next(value);
         task.response$.complete();
       });
