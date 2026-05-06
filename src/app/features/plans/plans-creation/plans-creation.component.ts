@@ -248,13 +248,47 @@ export class PlansCreationComponent implements OnInit {
       return;
     }
 
-    const imageUrl = await this.uploadImage();
-    const moderation = this.moderationService.moderatePlanInput(
+    const baseModeration = this.moderationService.moderatePlanInput(
       this.formPlanCreation.value.name ?? '',
       this.formPlanCreation.value.description ?? '',
-      imageUrl,
-      this.selectedFile
+      // Antes de subir a Cloudinary, moderamos con el fichero local si existe.
+      null,
+      this.selectedFile,
     );
+    if (baseModeration.blocked) {
+      this.error = this.translationService.get(
+        'moderation.blockedContent',
+        'Se detecto contenido no apropiado en texto o imagen.'
+      );
+      return;
+    }
+
+    const imgRefValue: string = this.formPlanCreation.value.imgRef || '';
+
+    // Moderación Groq de la imagen (si hay fichero local, mejor; si no, usamos la URL pegada).
+    let groqModeration = {
+      blocked: false,
+      warning: false,
+      score: 0,
+      reasons: [] as string[],
+    };
+    if (this.selectedFile) {
+      groqModeration = await firstValueFrom(
+        this.iaAssistantService.moderateImageFileWithGroq(this.selectedFile),
+      );
+    } else if (imgRefValue) {
+      groqModeration = await firstValueFrom(
+        this.iaAssistantService.moderateImageUrlWithGroq(imgRefValue),
+      );
+    }
+
+    const moderation = {
+      blocked: baseModeration.blocked || groqModeration.blocked,
+      warning: baseModeration.warning || groqModeration.warning,
+      score: Math.min(1, Math.max(baseModeration.score, groqModeration.score)),
+      reasons: [...new Set([...baseModeration.reasons, ...groqModeration.reasons])],
+    };
+
     if (moderation.blocked) {
       this.error = this.translationService.get(
         'moderation.blockedContent',
@@ -265,9 +299,12 @@ export class PlansCreationComponent implements OnInit {
     if (moderation.warning) {
       this.warning = this.translationService.get(
         'moderation.warningContent',
-        'Contenido potencialmente sensible detectado. Pasara a revision manual.'
+        'Contenido potencialmente sensible detectado. Pasara a revision manual.',
       );
     }
+
+    const imageUrl = await this.uploadImage();
+    if (!imageUrl) return;
 
     const planData = {
       name: this.formPlanCreation.value.name,

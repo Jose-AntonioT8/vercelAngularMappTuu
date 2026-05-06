@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
 import { PlanService } from '../../../core/services/plan.service';
 import { ActivityService } from '../../../core/services/activity.service';
@@ -11,6 +12,7 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 import { ContentModerationService } from '../../../core/services/content-moderation.service';
 import { TranslationService } from '../../../core/services/translation.service';
+import { IaAssistantService } from '../../../core/services/ia-assistant.service';
 
 /**
  * Pantalla de edición de un plan existente.
@@ -60,6 +62,7 @@ export class PlansUpdateComponent implements OnInit {
     private activityService: ActivityService,
     /** Servicio de moderación de contenido básico. */
     private moderationService: ContentModerationService,
+    private iaAssistantService: IaAssistantService,
     /** Servicio de traducción runtime para mensajes en TS. */
     private translationService: TranslationService
   ) {
@@ -179,11 +182,32 @@ export class PlansUpdateComponent implements OnInit {
     }
     planData.visibility = this.formPlanUpdate.value.visibility;
 
-    const moderation = this.moderationService.moderatePlanInput(
+    const imageRefValue: string =
+      this.formPlanUpdate.value.imageRef ||
+      this.planData?.imageRef ||
+      this.planData?.imgRef ||
+      '';
+
+    const baseModeration = this.moderationService.moderatePlanInput(
       this.formPlanUpdate.value.name || this.planData?.name || '',
       this.formPlanUpdate.value.description || this.planData?.description || '',
-      this.formPlanUpdate.value.imageRef || this.planData?.imageRef || this.planData?.imgRef || ''
+      imageRefValue || '',
+      null,
     );
+
+    const groqModeration = imageRefValue
+      ? await firstValueFrom(
+          this.iaAssistantService.moderateImageUrlWithGroq(imageRefValue),
+        )
+      : { blocked: false, warning: false, score: 0, reasons: [] as string[] };
+
+    const moderation = {
+      blocked: baseModeration.blocked || groqModeration.blocked,
+      warning: baseModeration.warning || groqModeration.warning,
+      score: Math.min(1, Math.max(baseModeration.score, groqModeration.score)),
+      reasons: [...new Set([...baseModeration.reasons, ...groqModeration.reasons])],
+    };
+
     if (moderation.blocked) {
       this.error = this.translationService.get(
         'moderation.blockedContent',
