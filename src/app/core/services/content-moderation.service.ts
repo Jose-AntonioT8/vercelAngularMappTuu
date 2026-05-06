@@ -1,14 +1,28 @@
 import { Injectable } from '@angular/core';
 
+/**
+ * Resultado agregado del análisis de moderación en frontend.
+ */
 export interface ModerationResult {
+  /** `true` cuando el contenido debe bloquearse. */
   blocked: boolean;
+  /** `true` cuando el contenido requiere advertencia/revisión. */
   warning: boolean;
+  /** Score agregado de riesgo (0..1). */
   score: number;
+  /** Claves de motivos detectados durante el análisis. */
   reasons: string[];
 }
 
+/**
+ * Servicio de moderación heurística en frontend.
+ *
+ * Evalúa texto e imagen con reglas locales para generar un resultado de riesgo
+ * previo a envío al backend/publicación.
+ */
 @Injectable({ providedIn: 'root' })
 export class ContentModerationService {
+  /** Términos de severidad alta que bloquean directamente. */
   private readonly severeBlockTerms = [
     'puto',
     'puta',
@@ -20,6 +34,7 @@ export class ContentModerationService {
     'nigger',
   ];
 
+  /** Términos de lenguaje malsonante/profanidad para scoring incremental. */
   private readonly profanityTerms = [
     'idiota',
     'imbecil',
@@ -45,6 +60,7 @@ export class ContentModerationService {
     'moron',
   ];
 
+  /** Términos de contenido sexual explícito. */
   private readonly sexualTerms = [
     'porn',
     'porno',
@@ -61,6 +77,7 @@ export class ContentModerationService {
     'onlyfans',
   ];
 
+  /** Términos asociados a violencia explícita. */
   private readonly violenceTerms = [
     'gore',
     'blood',
@@ -77,6 +94,7 @@ export class ContentModerationService {
     'nazi',
   ];
 
+  /** Términos de odio/discriminación para elevar riesgo. */
   private readonly hateTerms = [
     'maricon',
     'marica',
@@ -89,6 +107,7 @@ export class ContentModerationService {
     'kike',
   ];
 
+  /** Patrones de amenaza directa en texto natural. */
   private readonly threatPatterns: RegExp[] = [
     /\b(te|os|les)\s+voy\s+a\s+matar\b/i,
     /\bvoy\s+a\s+matar(te|los|les)?\b/i,
@@ -96,6 +115,7 @@ export class ContentModerationService {
     /\bi(?:'|\s)?ll\s+kill\s+you\b/i,
   ];
 
+  /** Términos sospechosos aplicados a nombres/refs de imágenes. */
   private readonly suspiciousImageTerms = [
     ...this.sexualTerms,
     ...this.violenceTerms,
@@ -103,9 +123,14 @@ export class ContentModerationService {
     'childporn',
   ];
 
+  /** Umbral a partir del cual se bloquea publicación. */
   private readonly blockThreshold = 0.8;
+  /** Umbral intermedio para advertencia sin bloqueo. */
   private readonly warningThreshold = 0.45;
 
+  /**
+   * Modera entrada de una actividad (texto + fichero opcional).
+   */
   moderateActivityInput(
     name: string,
     description: string,
@@ -175,6 +200,9 @@ export class ContentModerationService {
     };
   }
 
+  /**
+   * Modera entrada de un plan combinando texto, URL de imagen y fichero opcional.
+   */
   moderatePlanInput(
     name: string,
     description: string,
@@ -197,6 +225,9 @@ export class ContentModerationService {
     };
   }
 
+  /**
+   * Modera una referencia textual de imagen (URL/path).
+   */
   moderateImageReference(imageRef?: string | null): ModerationResult {
     const ref = this.normalizeText(imageRef || '');
     if (!ref) {
@@ -214,6 +245,9 @@ export class ContentModerationService {
     };
   }
 
+  /**
+   * Modera metadatos de un fichero de imagen (nombre, tipo y tamaño).
+   */
   moderateImageFile(file: File): ModerationResult {
     const reasons: string[] = [];
     let score = 0;
@@ -244,6 +278,7 @@ export class ContentModerationService {
     };
   }
 
+  /** Cuenta coincidencias de términos normalizados dentro de un texto. */
   private countHits(text: string, terms: string[]): number {
     return terms.reduce((total, term) => {
       if (this.containsTerm(text, this.normalizeText(term))) {
@@ -253,6 +288,7 @@ export class ContentModerationService {
     }, 0);
   }
 
+  /** Comprueba si un término concreto existe como palabra/patrón en el texto. */
   private containsTerm(text: string, term: string): boolean {
     if (!term) return false;
     const escaped = this.escapeRegex(term).replace(/\s+/g, '\\s+');
@@ -260,6 +296,7 @@ export class ContentModerationService {
     return regex.test(text);
   }
 
+  /** Normaliza texto (acentos, leetspeak, repetición y caracteres especiales). */
   private normalizeText(value: string): string {
     const leetMap: Record<string, string> = {
       '0': 'o',
@@ -291,6 +328,7 @@ export class ContentModerationService {
       .trim();
   }
 
+  /** Escapa caracteres especiales para construir regex segura. */
   private escapeRegex(value: string): string {
     return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }

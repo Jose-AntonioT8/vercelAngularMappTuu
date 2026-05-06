@@ -1,6 +1,7 @@
 /** Motivos válidos para reportar una actividad. */
 export type ReportReason = 'spam' | 'inappropriate' | 'fraud' | 'other';
 
+/** Tipo de entidad reportable en el sistema de reportes. */
 export type TargetType = 'activity' | 'plan';
 
 /** Estados válidos de un reporte en moderación. */

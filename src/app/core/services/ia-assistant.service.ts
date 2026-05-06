@@ -42,22 +42,41 @@ interface IaChatResponse {
   }>;
 }
 
+/**
+ * Resultado normalizado de moderación de imagen en frontend.
+ */
 export interface IaImageModerationResult {
+  /** `true` cuando la imagen debe bloquearse. */
   blocked: boolean;
+  /** `true` cuando la imagen es dudosa pero no bloqueada. */
   warning: boolean;
+  /** Score normalizado 0..1 calculado por moderación. */
   score: number;
+  /** Razones técnicas/funcionales detectadas por la moderación. */
   reasons: string[];
 }
 
+/**
+ * Tarea encolada para resolver etiqueta de ubicación con IA.
+ */
 interface LocationLabelTask {
+  /** Dirección base obtenida por geocoding para usar como fallback. */
   fallbackAddress: string;
+  /** Latitud de la ubicación a etiquetar. */
   latitude: number;
+  /** Longitud de la ubicación a etiquetar. */
   longitude: number;
+  /** Subject donde se emite la etiqueta final resuelta. */
   response$: Subject<string>;
 }
 
+/**
+ * Resultado interno de una tarea procesada en la cola de etiquetas.
+ */
 interface LocationLabelQueueResult {
+  /** Tarea original que se está resolviendo. */
   task: LocationLabelTask;
+  /** Valor final de etiqueta resultante. */
   value: string;
 }
 
@@ -181,6 +200,7 @@ export class IaAssistantService {
   private readonly allowedTopicPattern =
     /(plan|planes|actividad|actividades|activity|activities|activitytype|activity type|tipo|tipos|ruta|rutas|itinerario|itinerarios)/i;
 
+  /** Inicializa la cola secuencial de resolución de etiquetas de ubicación. */
   constructor() {
     this.locationLabelQueue$
       .pipe(
@@ -427,6 +447,7 @@ export class IaAssistantService {
     );
   }
 
+  /** Modera una imagen remota (URL/data URL) usando modelos de visión de Groq. */
   moderateImageUrlWithGroq(imageUrl: string): Observable<IaImageModerationResult> {
     const apiKey = environment.ia.apiKey?.trim();
     const rawApiUrl = environment.ia.apiUrl?.trim();
@@ -466,6 +487,7 @@ export class IaAssistantService {
     );
   }
 
+  /** Modera un archivo de imagen local transformándolo a data URL antes de enviar a IA. */
   moderateImageFileWithGroq(file: File): Observable<IaImageModerationResult> {
     return from(this.fileToDataUrl(file)).pipe(
       switchMap((dataUrl) => this.moderateImageUrlWithGroq(dataUrl)),
@@ -480,6 +502,7 @@ export class IaAssistantService {
     );
   }
 
+  /** Construye una clave de cache estable para etiqueta de ubicación. */
   private buildLocationLabelCacheKey(
     fallbackAddress: string,
     latitude: number,
@@ -618,6 +641,7 @@ export class IaAssistantService {
       );
   }
 
+  /** Ejecuta moderación de imagen con fallback de modelos en cadena. */
   private requestImageModerationWithModelChain(
     models: string[],
     imageUrl: string,
@@ -666,6 +690,7 @@ export class IaAssistantService {
     );
   }
 
+  /** Llama al endpoint de visión para moderar una imagen con un modelo concreto. */
   private requestImageModerationWithModel(
     model: string,
     imageUrl: string,
@@ -730,6 +755,7 @@ export class IaAssistantService {
       );
   }
 
+  /** Convierte un archivo de imagen a data URL base64 válida para input multimodal. */
   private fileToDataUrl(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -746,6 +772,7 @@ export class IaAssistantService {
     });
   }
 
+  /** Parsea y valida el JSON devuelto por el modelo de visión para moderación. */
   private parseImageModerationJson(rawContent: string): {
     safe?: boolean;
     reason?: string;

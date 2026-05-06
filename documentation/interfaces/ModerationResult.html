@@ -144,6 +144,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Resultado agregado del análisis de moderación en frontend.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -224,6 +231,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p><code>true</code> cuando el contenido debe bloquearse.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -257,6 +270,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Claves de motivos detectados durante el análisis.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -290,6 +309,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Score agregado de riesgo (0..1).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -323,6 +348,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p><code>true</code> cuando el contenido requiere advertencia/revisión.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -332,15 +363,29 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 
+/**
+ * Resultado agregado del análisis de moderación en frontend.
+ */
 export interface ModerationResult {
+  /** &#x60;true&#x60; cuando el contenido debe bloquearse. */
   blocked: boolean;
+  /** &#x60;true&#x60; cuando el contenido requiere advertencia/revisión. */
   warning: boolean;
+  /** Score agregado de riesgo (0..1). */
   score: number;
+  /** Claves de motivos detectados durante el análisis. */
   reasons: string[];
 }
 
+/**
+ * Servicio de moderación heurística en frontend.
+ *
+ * Evalúa texto e imagen con reglas locales para generar un resultado de riesgo
+ * previo a envío al backend/publicación.
+ */
 @Injectable({ providedIn: &#x27;root&#x27; })
 export class ContentModerationService {
+  /** Términos de severidad alta que bloquean directamente. */
   private readonly severeBlockTerms &#x3D; [
     &#x27;puto&#x27;,
     &#x27;puta&#x27;,
@@ -352,6 +397,7 @@ export class ContentModerationService {
     &#x27;nigger&#x27;,
   ];
 
+  /** Términos de lenguaje malsonante/profanidad para scoring incremental. */
   private readonly profanityTerms &#x3D; [
     &#x27;idiota&#x27;,
     &#x27;imbecil&#x27;,
@@ -377,6 +423,7 @@ export class ContentModerationService {
     &#x27;moron&#x27;,
   ];
 
+  /** Términos de contenido sexual explícito. */
   private readonly sexualTerms &#x3D; [
     &#x27;porn&#x27;,
     &#x27;porno&#x27;,
@@ -393,6 +440,7 @@ export class ContentModerationService {
     &#x27;onlyfans&#x27;,
   ];
 
+  /** Términos asociados a violencia explícita. */
   private readonly violenceTerms &#x3D; [
     &#x27;gore&#x27;,
     &#x27;blood&#x27;,
@@ -409,6 +457,7 @@ export class ContentModerationService {
     &#x27;nazi&#x27;,
   ];
 
+  /** Términos de odio/discriminación para elevar riesgo. */
   private readonly hateTerms &#x3D; [
     &#x27;maricon&#x27;,
     &#x27;marica&#x27;,
@@ -421,6 +470,7 @@ export class ContentModerationService {
     &#x27;kike&#x27;,
   ];
 
+  /** Patrones de amenaza directa en texto natural. */
   private readonly threatPatterns: RegExp[] &#x3D; [
     /\b(te|os|les)\s+voy\s+a\s+matar\b/i,
     /\bvoy\s+a\s+matar(te|los|les)?\b/i,
@@ -428,6 +478,7 @@ export class ContentModerationService {
     /\bi(?:&#x27;|\s)?ll\s+kill\s+you\b/i,
   ];
 
+  /** Términos sospechosos aplicados a nombres/refs de imágenes. */
   private readonly suspiciousImageTerms &#x3D; [
     ...this.sexualTerms,
     ...this.violenceTerms,
@@ -435,9 +486,14 @@ export class ContentModerationService {
     &#x27;childporn&#x27;,
   ];
 
+  /** Umbral a partir del cual se bloquea publicación. */
   private readonly blockThreshold &#x3D; 0.8;
+  /** Umbral intermedio para advertencia sin bloqueo. */
   private readonly warningThreshold &#x3D; 0.45;
 
+  /**
+   * Modera entrada de una actividad (texto + fichero opcional).
+   */
   moderateActivityInput(
     name: string,
     description: string,
@@ -507,6 +563,9 @@ export class ContentModerationService {
     };
   }
 
+  /**
+   * Modera entrada de un plan combinando texto, URL de imagen y fichero opcional.
+   */
   moderatePlanInput(
     name: string,
     description: string,
@@ -529,6 +588,9 @@ export class ContentModerationService {
     };
   }
 
+  /**
+   * Modera una referencia textual de imagen (URL/path).
+   */
   moderateImageReference(imageRef?: string | null): ModerationResult {
     const ref &#x3D; this.normalizeText(imageRef || &#x27;&#x27;);
     if (!ref) {
@@ -546,6 +608,9 @@ export class ContentModerationService {
     };
   }
 
+  /**
+   * Modera metadatos de un fichero de imagen (nombre, tipo y tamaño).
+   */
   moderateImageFile(file: File): ModerationResult {
     const reasons: string[] &#x3D; [];
     let score &#x3D; 0;
@@ -576,6 +641,7 @@ export class ContentModerationService {
     };
   }
 
+  /** Cuenta coincidencias de términos normalizados dentro de un texto. */
   private countHits(text: string, terms: string[]): number {
     return terms.reduce((total, term) &#x3D;&gt; {
       if (this.containsTerm(text, this.normalizeText(term))) {
@@ -585,6 +651,7 @@ export class ContentModerationService {
     }, 0);
   }
 
+  /** Comprueba si un término concreto existe como palabra/patrón en el texto. */
   private containsTerm(text: string, term: string): boolean {
     if (!term) return false;
     const escaped &#x3D; this.escapeRegex(term).replace(/\s+/g, &#x27;\\s+&#x27;);
@@ -592,6 +659,7 @@ export class ContentModerationService {
     return regex.test(text);
   }
 
+  /** Normaliza texto (acentos, leetspeak, repetición y caracteres especiales). */
   private normalizeText(value: string): string {
     const leetMap: Record&lt;string, string&gt; &#x3D; {
       &#x27;0&#x27;: &#x27;o&#x27;,
@@ -623,6 +691,7 @@ export class ContentModerationService {
       .trim();
   }
 
+  /** Escapa caracteres especiales para construir regex segura. */
   private escapeRegex(value: string): string {
     return value.replace(/[.*+?^${}()|[\]\\]/g, &#x27;\\$&amp;&#x27;);
   }

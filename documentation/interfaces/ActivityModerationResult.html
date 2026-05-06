@@ -231,6 +231,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p><code>true</code> cuando el contenido debe bloquearse.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -264,6 +270,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Lista de motivos detectados durante la moderación.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -297,6 +309,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Score de riesgo normalizado (0..1).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -330,6 +348,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p><code>true</code> cuando el contenido requiere advertencia/revisión.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -360,9 +384,13 @@ export type ActivityModerationStatus &#x3D;
 
 /** Resultado de moderación que frontend envía en create/update. */
 export interface ActivityModerationResult {
+  /** &#x60;true&#x60; cuando el contenido debe bloquearse. */
   blocked: boolean;
+  /** &#x60;true&#x60; cuando el contenido requiere advertencia/revisión. */
   warning: boolean;
+  /** Score de riesgo normalizado (0..1). */
   score: number;
+  /** Lista de motivos detectados durante la moderación. */
   reasons: string[];
 }
 

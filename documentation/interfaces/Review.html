@@ -494,9 +494,13 @@ export type ActivityModerationStatus &#x3D;
 
 /** Resultado de moderación que frontend envía en create/update. */
 export interface ActivityModerationResult {
+  /** &#x60;true&#x60; cuando el contenido debe bloquearse. */
   blocked: boolean;
+  /** &#x60;true&#x60; cuando el contenido requiere advertencia/revisión. */
   warning: boolean;
+  /** Score de riesgo normalizado (0..1). */
   score: number;
+  /** Lista de motivos detectados durante la moderación. */
   reasons: string[];
 }
 
