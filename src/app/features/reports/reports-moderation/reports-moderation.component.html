@@ -105,28 +105,30 @@
         </div>
       </div>
 
-      <a
-        class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden border border-gray-200 bg-gray-50 flex-shrink-0 relative"
-        tabindex="0"
-        [routerLink]="
-          getTargetType(report) === 'plan'
-            ? ['/plansDetail', report.targetId || report.activityId]
-            : ['/activityDetail', report.targetId || report.activityId]
-        "
-      >
-        <img
-          [src]="report.activityImageURL || fallbackImage"
-          [alt]="report.activityName || ('reports.moderation.activityAlt' | translate)"
-          class="w-full h-full object-cover"
-          (error)="onImgError($event)"
-        />
+      <div class="flex-shrink-0 flex flex-col gap-2">
         <span
-          class="absolute top-1.5 left-1.5 inline-flex items-center px-3 py-1 rounded-full text-sm font-bold shadow-md border-2"
+          class="inline-flex w-fit items-center px-3 py-1 rounded-full text-sm font-bold shadow-md border-2"
           [ngClass]="targetTypeClass(report)"
         >
           {{ targetTypeLabel(report) }}
         </span>
-      </a>
+        <a
+          class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden border border-gray-200 bg-gray-50"
+          tabindex="0"
+          [routerLink]="
+            getTargetType(report) === 'plan'
+              ? ['/plansDetail', report.targetId || report.activityId]
+              : ['/activityDetail', report.targetId || report.activityId]
+          "
+        >
+          <img
+            [src]="report.activityImageURL || fallbackImage"
+            [alt]="report.activityName || ('reports.moderation.activityAlt' | translate)"
+            class="w-full h-full object-cover"
+            (error)="onImgError($event)"
+          />
+        </a>
+      </div>
 
       <div class="flex-1 min-w-0">
         <div class="flex flex-wrap items-center gap-2 mb-2">
