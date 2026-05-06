@@ -428,13 +428,15 @@ export class IaAssistantService {
   }
 
   moderateImageUrlWithGroq(imageUrl: string): Observable<IaImageModerationResult> {
-    const model = environment.ia.model?.trim();
     const apiKey = environment.ia.apiKey?.trim();
     const rawApiUrl = environment.ia.apiUrl?.trim();
     const apiUrl = this.resolveChatCompletionsUrl(rawApiUrl);
     const cleanUrl = (imageUrl || '').trim();
 
-    if (!cleanUrl || !model || !apiKey || !apiUrl) {
+    // Modelo fijo de visión para imágenes, independiente del modelo de texto configurado.
+    const visionModel = 'meta-llama/llama-4-scout-17b-16e-instruct';
+
+    if (!cleanUrl || !apiKey || !apiUrl) {
       return of({
         blocked: false,
         warning: true,
@@ -443,17 +445,8 @@ export class IaAssistantService {
       });
     }
 
-    const candidateModels = [model, ...(environment.ia.fallbackModels || [])].filter(
-      (candidate, index, all) => !!candidate && all.indexOf(candidate) === index,
-    );
-    const availableCandidateModels = candidateModels.filter(
-      (candidate) => !this.unavailableModels.has(candidate),
-    );
-    const modelsToTry = (
-      availableCandidateModels.length > 0 ? availableCandidateModels : candidateModels
-    ).slice(0, this.maxModelAttempts);
-
-    return this.requestImageModerationWithModelChain(modelsToTry, cleanUrl, apiKey, apiUrl).pipe(
+    // Para moderación de imagen usamos solo el modelo de visión fijo.
+    return this.requestImageModerationWithModel(visionModel, cleanUrl, apiKey, apiUrl).pipe(
       catchError(() =>
         of({
           blocked: false,
@@ -662,6 +655,10 @@ export class IaAssistantService {
     const body = {
       model,
       temperature: 0,
+      max_completion_tokens: 256,
+      top_p: 1,
+      stream: false,
+      stop: null as null | string | string[],
       messages: [
         {
           role: 'user',
