@@ -267,11 +267,8 @@ export class ActivitiesCreationComponent {
         type.name === this.formActivityCreation.value.activityType
     );
 
-    const imageUrl = await this.uploadImage();
-    if (!imageUrl) return;
-
     const groqImageModeration = await firstValueFrom(
-      this.iaAssistantService.moderateImageUrlWithGroq(imageUrl),
+      this.iaAssistantService.moderateImageFileWithGroq(this.selectedFile),
     );
     if (groqImageModeration.blocked) {
       this.error = this.translationService.get(
@@ -286,6 +283,9 @@ export class ActivitiesCreationComponent {
         'No se pudo validar la imagen completamente con IA. Se publicara con controles basicos.',
       );
     }
+
+    const imageUrl = await this.uploadImage();
+    if (!imageUrl) return;
 
     const latitude = Number(this.formActivityCreation.value.latitude);
     const longitude = Number(this.formActivityCreation.value.longitude);

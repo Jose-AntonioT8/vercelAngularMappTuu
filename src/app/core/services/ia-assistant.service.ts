@@ -465,6 +465,20 @@ export class IaAssistantService {
     );
   }
 
+  moderateImageFileWithGroq(file: File): Observable<IaImageModerationResult> {
+    return from(this.fileToDataUrl(file)).pipe(
+      switchMap((dataUrl) => this.moderateImageUrlWithGroq(dataUrl)),
+      catchError(() =>
+        of({
+          blocked: false,
+          warning: true,
+          score: 0.5,
+          reasons: ['groq_moderation_file_encoding_failed'],
+        }),
+      ),
+    );
+  }
+
   private buildLocationLabelCacheKey(
     fallbackAddress: string,
     latitude: number,
@@ -701,6 +715,22 @@ export class IaAssistantService {
           };
         }),
       );
+  }
+
+  private fileToDataUrl(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = typeof reader.result === 'string' ? reader.result : '';
+        if (!result.startsWith('data:image/')) {
+          reject(new Error('invalid_image_data_url'));
+          return;
+        }
+        resolve(result);
+      };
+      reader.onerror = () => reject(new Error('file_reader_error'));
+      reader.readAsDataURL(file);
+    });
   }
 
   private parseImageModerationJson(rawContent: string): {
