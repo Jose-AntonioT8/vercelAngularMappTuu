@@ -230,12 +230,30 @@ export class PlansCreationComponent implements OnInit {
    * Valida formulario, mapea nombres→ids, sube imagen si aplica, obtiene token y llama al API.
    */
   async onCreate() {
-    if (this.formPlanCreation.invalid) {
+    this.formPlanCreation.updateValueAndValidity({ onlySelf: false, emitEvent: false });
+    const name = (this.formPlanCreation.value.name || '').toString().trim();
+    const description = (this.formPlanCreation.value.description || '').toString().trim();
+    const imgRefValue: string = (this.formPlanCreation.value.imgRef || '').toString().trim();
+
+    const validationIssues: string[] = [];
+    if (!name) validationIssues.push('name_required');
+    if (name.length > 100) validationIssues.push('name_max_100');
+    if (!description) validationIssues.push('description_required');
+    if (description.length > 250) validationIssues.push('description_max_250');
+
+    if (validationIssues.length > 0) {
       this.formPlanCreation.markAllAsTouched();
       this.error = this.translationService.get(
         'messages.completeFieldsBeforeContinue',
         'Completa los campos obligatorios antes de continuar.',
       );
+      console.warn('[plans-create] validation_issues', validationIssues, {
+        formValue: this.formPlanCreation.value,
+        formErrors: this.formPlanCreation.errors,
+        controls: Object.fromEntries(
+          Object.entries(this.formPlanCreation.controls).map(([k, c]) => [k, c.errors]),
+        ),
+      });
       return;
     }
     this.warning = '';
@@ -252,7 +270,6 @@ export class PlansCreationComponent implements OnInit {
       return;
     }
 
-    const imgRefValue: string = this.formPlanCreation.value.imgRef || '';
     if (!this.selectedFile && !imgRefValue) {
       this.error = this.translationService.get(
         'moderation.blockedImage',
