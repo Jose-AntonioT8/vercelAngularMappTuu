@@ -39,6 +39,10 @@ export class ProfileEditComponent implements OnInit {
   /** Formulario reactivo de edición de perfil. */
   form;
 
+  /**
+   * Validador de edad mínima para fecha de nacimiento.
+   * @param minAge Edad mínima requerida.
+   */
   private minimumAgeValidator(minAge: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
@@ -74,6 +78,7 @@ export class ProfileEditComponent implements OnInit {
   /** Servicio de historial para volver atrás. */
   private location: Location;
 
+  /** Construye el componente y define la estructura inicial del formulario. */
   /**
    * @param fb Constructor de formularios reactivos.
    * @param authService Servicio de autenticación.

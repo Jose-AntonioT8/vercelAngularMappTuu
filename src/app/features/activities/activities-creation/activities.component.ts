@@ -73,10 +73,14 @@ export class ActivitiesCreationComponent {
   isGeneratingDescription = false;
 
   /** Abre el selector de archivo para subir imagen. */
+  /** Abre el selector de archivo para subir imagen. */
   triggerFileInput(): void {
     this.fileInput.nativeElement.click();
   }
 
+  /**
+   * Crea el componente de alta y prepara el formulario de creación.
+   */
   constructor(
     /** Constructor de formularios. */
     private formSvc: FormBuilder,
@@ -345,6 +349,7 @@ export class ActivitiesCreationComponent {
     }
   }
 
+  /** Resuelve una etiqueta textual de ubicación a partir de coordenadas. */
   private async resolveLocationFromCoordinates(latitude: number, longitude: number): Promise<string> {
     try {
       const geocodedAddress = await firstValueFrom(
@@ -364,6 +369,7 @@ export class ActivitiesCreationComponent {
     }
   }
 
+  /** Traduce errores HTTP de creación a mensajes de UI legibles. */
   private mapCreateError(error: unknown): string {
     if (error instanceof HttpErrorResponse) {
       if (error.status === 400) {

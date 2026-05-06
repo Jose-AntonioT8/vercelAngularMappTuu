@@ -21,6 +21,7 @@ import { Tilt3DDirective } from '../../../core/directives/tilt3d.directive';
   styles: []
 })
 export class CardComponent implements OnInit, OnChanges {
+  /** Imagen fallback usada cuando la URL principal falla. */
   readonly fallbackImage = 'assets/images/placeholder.svg';
 
   /** Actividad a renderizar. */
@@ -146,6 +147,7 @@ export class CardComponent implements OnInit, OnChanges {
     return [0, 1, 2, 3, 4];
   }
 
+  /** Etiqueta legible de estado de moderación para mostrar en la tarjeta. */
   get moderationStatusLabel(): string {
     const status = (this.activity as any)?.moderationStatus;
     if (status === 'pending_review') return 'Pendiente de revisi?n';
@@ -153,6 +155,7 @@ export class CardComponent implements OnInit, OnChanges {
     return '';
   }
 
+  /** Fallback visual cuando falla la carga de la miniatura. */
   onImgError(event: Event): void {
     const img = event.target as HTMLImageElement;
     if (!img.src.includes(this.fallbackImage)) {
@@ -162,6 +165,7 @@ export class CardComponent implements OnInit, OnChanges {
     img.onerror = null;
   }
 
+  /** Obtiene la mejor ubicación textual disponible en el modelo de actividad. */
   private getExplicitLocation(): string {
     const source = this.activity as any;
     const candidates = [
@@ -188,10 +192,12 @@ export class CardComponent implements OnInit, OnChanges {
     return isUnknownLocation ? '' : normalizedValue;
   }
 
+  /** Formatea lat/lng como string corto cuando no hay dirección geocodificada. */
   private formatCoordinates(latitude: number, longitude: number): string {
     return `${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
   }
 
+  /** Extrae una coordenada numérica buscando en varias claves candidatas. */
   private pickCoordinate(source: Record<string, unknown>, keys: string[]): number {
     for (const key of keys) {
       const value = source[key];

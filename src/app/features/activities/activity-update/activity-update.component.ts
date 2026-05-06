@@ -32,6 +32,7 @@ import { TranslationService } from '../../../core/services/translation.service';
   styleUrl: './activity-update.component.scss',
 })
 export class ActivitiesUpdateComponent {
+  /** Imagen fallback para previews rotas o inexistentes. */
   readonly fallbackImage = 'assets/images/placeholder.svg';
   /** Mensaje de error para UI. */
   error = '';
@@ -54,6 +55,9 @@ export class ActivitiesUpdateComponent {
   /** Flag de subida en curso (para deshabilitar UI). */
   isUploading = false;
 
+  /**
+   * Crea el componente de actualización y configura el formulario base.
+   */
   constructor(
     /** Constructor de formularios. */
     private formSvc: FormBuilder,
@@ -143,6 +147,7 @@ export class ActivitiesUpdateComponent {
     return existingImage || '';
   }
 
+  /** Fallback visual cuando falla la imagen del preview. */
   onImgError(event: Event): void {
     const img = event.target as HTMLImageElement;
     if (!img.src.includes(this.fallbackImage)) {
@@ -322,6 +327,7 @@ export class ActivitiesUpdateComponent {
     }
   }
 
+  /** Traduce errores HTTP de actualización a mensajes de UI legibles. */
   private mapUpdateError(error: unknown): string {
     if (error instanceof HttpErrorResponse) {
       if (error.status === 400) {

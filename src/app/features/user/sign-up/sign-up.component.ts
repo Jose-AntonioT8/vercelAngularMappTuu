@@ -50,6 +50,10 @@ export class SignupComponent {
   /** FormGroup tipado en runtime por FormBuilder. */
   formSignup;
 
+  /**
+   * Validador de edad mínima para la fecha de nacimiento.
+   * @param minAge Edad mínima permitida para registro.
+   */
   private minimumAgeValidator(minAge: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
@@ -72,6 +76,14 @@ export class SignupComponent {
     };
   }
 
+  /** Construye el componente y registra validaciones del formulario de alta. */
+  /**
+   * @param formSvc Constructor de formularios reactivos.
+   * @param auth Servicio de autenticación.
+   * @param route Router para navegación.
+   * @param translation Servicio de traducción.
+   * @param userService Servicio de usuario de dominio.
+   */
   constructor(
     private formSvc: FormBuilder,
     private auth: AuthService,
