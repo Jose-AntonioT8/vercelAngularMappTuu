@@ -433,8 +433,12 @@ export class IaAssistantService {
     const apiUrl = this.resolveChatCompletionsUrl(rawApiUrl);
     const cleanUrl = (imageUrl || '').trim();
 
-    // Modelo fijo de visión para imágenes, independiente del modelo de texto configurado.
-    const visionModel = 'meta-llama/llama-4-scout-17b-16e-instruct';
+    // Modelos de visión (primer intento: el que mencionas en Groq).
+    const visionModels = [
+      'meta-llama/llama-4-scout-17b-16e-instruct',
+      'meta-llama/llama-4-maverick-17b-128e-instruct',
+      'llama-3.2-90b-vision-preview',
+    ];
 
     if (!cleanUrl || !apiKey || !apiUrl) {
       return of({
@@ -445,8 +449,12 @@ export class IaAssistantService {
       });
     }
 
-    // Para moderación de imagen usamos solo el modelo de visión fijo.
-    return this.requestImageModerationWithModel(visionModel, cleanUrl, apiKey, apiUrl).pipe(
+    return this.requestImageModerationWithModelChain(
+      visionModels,
+      cleanUrl,
+      apiKey,
+      apiUrl,
+    ).pipe(
       catchError(() =>
         of({
           blocked: false,
@@ -624,10 +632,22 @@ export class IaAssistantService {
 
     return this.requestImageModerationWithModel(currentModel, imageUrl, apiKey, apiUrl).pipe(
       catchError((error: any) => {
-        const shouldTryNext = error?.status === 402 || error?.status === 404;
+        const status = error?.status;
+        const maybeMessage =
+          error?.error?.error?.message ||
+          error?.error?.message ||
+          error?.message ||
+          'unknown_error';
+        console.warn('[Groq vision] error', { model: currentModel, status, maybeMessage });
+        // 403: sin acceso al modelo (p.ej. cuenta sin permiso). También intentamos fallback.
+        const shouldTryNext = error?.status === 402 || error?.status === 403 || error?.status === 404;
         const nextModel = models[index + 1];
 
         if (error?.status === 404) {
+          this.unavailableModels.add(currentModel);
+        }
+
+        if (error?.status === 403) {
           this.unavailableModels.add(currentModel);
         }
 
@@ -706,6 +726,7 @@ export class IaAssistantService {
             reasons: [`groq_image_blocked:${reason}`],
           };
         }),
+        // En errores (403/400/...), no suprimimos aquí: lo gestiona el call-stack.
       );
   }
 
