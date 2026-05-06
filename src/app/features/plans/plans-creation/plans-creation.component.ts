@@ -248,6 +248,15 @@ export class PlansCreationComponent implements OnInit {
       return;
     }
 
+    const imgRefValue: string = this.formPlanCreation.value.imgRef || '';
+    if (!this.selectedFile && !imgRefValue) {
+      this.error = this.translationService.get(
+        'moderation.blockedImage',
+        'Debes subir una imagen o indicar una URL de imagen.',
+      );
+      return;
+    }
+
     const baseModeration = this.moderationService.moderatePlanInput(
       this.formPlanCreation.value.name ?? '',
       this.formPlanCreation.value.description ?? '',
@@ -262,8 +271,6 @@ export class PlansCreationComponent implements OnInit {
       );
       return;
     }
-
-    const imgRefValue: string = this.formPlanCreation.value.imgRef || '';
 
     // Moderación Groq de la imagen (si hay fichero local, mejor; si no, usamos la URL pegada).
     let groqModeration = {
@@ -304,7 +311,13 @@ export class PlansCreationComponent implements OnInit {
     }
 
     const imageUrl = await this.uploadImage();
-    if (!imageUrl) return;
+    if (!imageUrl) {
+      this.error = this.translationService.get(
+        'moderation.blockedImage',
+        'No se pudo obtener la URL de la imagen. Intenta de nuevo.',
+      );
+      return;
+    }
 
     const planData = {
       name: this.formPlanCreation.value.name,
