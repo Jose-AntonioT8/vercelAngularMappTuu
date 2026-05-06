@@ -311,7 +311,9 @@ export class PlansCreationComponent implements OnInit {
     }
 
     const moderation = {
-      blocked: baseModeration.blocked || groqModeration.blocked,
+      // Si Groq pudo decidir (warning=false), confiamos en Groq para el "blocked"
+      // y evitamos falsos positivos del heurístico local.
+      blocked: !groqModeration.warning ? groqModeration.blocked : baseModeration.blocked,
       warning: baseModeration.warning || groqModeration.warning,
       score: Math.min(1, Math.max(baseModeration.score, groqModeration.score)),
       reasons: [...new Set([...baseModeration.reasons, ...groqModeration.reasons])],

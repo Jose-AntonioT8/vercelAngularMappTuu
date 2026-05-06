@@ -286,7 +286,7 @@ export class PlansUpdateComponent implements OnInit {
     }
 
     const moderation = {
-      blocked: baseModeration.blocked || groqModeration.blocked,
+      blocked: !groqModeration.warning ? groqModeration.blocked : baseModeration.blocked,
       warning: baseModeration.warning || groqModeration.warning,
       score: Math.min(1, Math.max(baseModeration.score, groqModeration.score)),
       reasons: [...new Set([...baseModeration.reasons, ...groqModeration.reasons])],
