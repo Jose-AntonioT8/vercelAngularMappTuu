@@ -473,6 +473,27 @@
         "other": "Otro"
       }
     },
+    "reportPlan": {
+      "menuItem": "Reportar plan",
+      "modalTitle": "Reportar plan",
+      "reasonLabel": "Motivo",
+      "detailLabel": "Detalle (opcional)",
+      "detailPlaceholder": "Cuéntanos qué problema has detectado en este plan",
+      "submit": "Enviar reporte",
+      "errors": {
+        "planUnknown": "No se pudo identificar el plan.",
+        "reasonRequired": "Selecciona un motivo.",
+        "detailsTooLong": "El detalle no puede superar 500 caracteres."
+      },
+      "toastSuccess": "Reporte enviado correctamente.",
+      "toastError": "No se pudo enviar el reporte.",
+      "reasons": {
+        "spam": "Spam",
+        "inappropriate": "Contenido inapropiado",
+        "fraud": "Fraude / estafa",
+        "other": "Otro"
+      }
+    },
     "moderation": {
       "title": "Moderación de reportes",
       "subtitle": "Gestiona incidencias de actividades reportadas por usuarios.",

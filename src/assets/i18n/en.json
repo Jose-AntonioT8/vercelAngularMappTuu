@@ -477,6 +477,27 @@
         "other": "Other"
       }
     },
+    "reportPlan": {
+      "menuItem": "Report plan",
+      "modalTitle": "Report plan",
+      "reasonLabel": "Reason",
+      "detailLabel": "Details (optional)",
+      "detailPlaceholder": "Tell us what issue you found in this plan",
+      "submit": "Submit report",
+      "errors": {
+        "planUnknown": "Could not identify the plan.",
+        "reasonRequired": "Please select a reason.",
+        "detailsTooLong": "Details cannot exceed 500 characters."
+      },
+      "toastSuccess": "Report submitted successfully.",
+      "toastError": "Could not submit the report.",
+      "reasons": {
+        "spam": "Spam",
+        "inappropriate": "Inappropriate content",
+        "fraud": "Fraud / scam",
+        "other": "Other"
+      }
+    },
     "moderation": {
       "title": "Report moderation",
       "subtitle": "Manage activity reports submitted by users.",

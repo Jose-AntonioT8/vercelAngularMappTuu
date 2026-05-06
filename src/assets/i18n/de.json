@@ -477,6 +477,27 @@
         "other": "Sonstiges"
       }
     },
+    "reportPlan": {
+      "menuItem": "Plan melden",
+      "modalTitle": "Plan melden",
+      "reasonLabel": "Grund",
+      "detailLabel": "Details (optional)",
+      "detailPlaceholder": "Beschreiben Sie das Problem in diesem Plan",
+      "submit": "Meldung senden",
+      "errors": {
+        "planUnknown": "Plan konnte nicht identifiziert werden.",
+        "reasonRequired": "Bitte wählen Sie einen Grund.",
+        "detailsTooLong": "Details dürfen 500 Zeichen nicht überschreiten."
+      },
+      "toastSuccess": "Meldung erfolgreich gesendet.",
+      "toastError": "Meldung konnte nicht gesendet werden.",
+      "reasons": {
+        "spam": "Spam",
+        "inappropriate": "Unangemessener Inhalt",
+        "fraud": "Betrug / Abzocke",
+        "other": "Sonstiges"
+      }
+    },
     "moderation": {
       "title": "Meldungsmoderation",
       "subtitle": "Verwalten Sie von Nutzern gemeldete Aktivitäten.",

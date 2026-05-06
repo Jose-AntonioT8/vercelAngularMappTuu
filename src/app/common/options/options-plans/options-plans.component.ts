@@ -115,16 +115,18 @@ export class OptionsPlansComponent {
         this.route.navigate(['/login']);
         return;
       }
-      if (!this.plan?.id) {
+      const routePlanId = this.router.snapshot.paramMap.get('id') || '';
+      const planId = (this.plan?.id || routePlanId || '').trim();
+      if (!planId) {
         this.reportErrorKey =
-          'reports.reportActivity.errors.activityUnknown';
+          'reports.reportPlan.errors.planUnknown';
         return;
       }
 
       const details = this.reportDetails.trim();
       const payload: CreateActivityReportPayload = {
         targetType: 'plan',
-        planId: this.plan.id,
+        planId,
         reason: this.reportReason,
         details: details || undefined,
       };
@@ -134,7 +136,7 @@ export class OptionsPlansComponent {
 
       this.closeReportModal();
     } catch {
-      this.reportErrorKey = 'reports.reportActivity.toastError';
+      this.reportErrorKey = 'reports.reportPlan.toastError';
     }
   }
 

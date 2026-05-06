@@ -51,7 +51,7 @@
                   d="M12 9v4m0 4h.01"
                 />
               </svg>
-              {{ 'reports.reportActivity.menuItem' | translate }}
+              {{ 'reports.reportPlan.menuItem' | translate }}
             </button>
     
             <button 
@@ -129,7 +129,7 @@
           <div class="flex items-start justify-between mb-4">
             <div>
               <h3 class="text-xl font-bold text-gray-900">
-                {{ 'reports.reportActivity.modalTitle' | translate }}
+                {{ 'reports.reportPlan.modalTitle' | translate }}
               </h3>
               <p class="text-sm text-gray-500" *ngIf="plan?.name">
                 {{ plan?.name }}
@@ -147,7 +147,7 @@
           <div class="space-y-4">
             <label class="block">
               <span class="text-sm font-medium text-gray-700">
-                {{ 'reports.reportActivity.reasonLabel' | translate }}
+                {{ 'reports.reportPlan.reasonLabel' | translate }}
               </span>
               <select
                 [(ngModel)]="reportReason"
@@ -172,7 +172,7 @@
 
             <label class="block">
               <span class="text-sm font-medium text-gray-700">
-                {{ 'reports.reportActivity.detailLabel' | translate }}
+                {{ 'reports.reportPlan.detailLabel' | translate }}
               </span>
               <textarea
                 [(ngModel)]="reportDetails"
@@ -180,7 +180,7 @@
                 maxlength="500"
                 class="mt-1 w-full rounded-lg border border-gray-300 p-2.5"
                 [placeholder]="
-                  'reports.reportActivity.detailPlaceholder' | translate
+                  'reports.reportPlan.detailPlaceholder' | translate
                 "
               ></textarea>
               <span class="text-xs text-gray-500">{{
@@ -206,7 +206,7 @@
               class="px-4 py-2 rounded-lg bg-[#5675AC] text-white hover:bg-[#4a6399]"
               (click)="submitReport()"
             >
-              {{ 'reports.reportActivity.submit' | translate }}
+              {{ 'reports.reportPlan.submit' | translate }}
             </button>
           </div>
         </div>
