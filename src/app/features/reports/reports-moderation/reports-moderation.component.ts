@@ -165,8 +165,8 @@ export class ReportsModerationComponent implements OnInit {
   /** Clases visuales para etiqueta de tipo reportado. */
   targetTypeClass(report: ActivityReport): string {
     return this.getTargetType(report) === 'plan'
-      ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
-      : 'bg-sky-50 text-sky-700 border border-sky-200';
+      ? 'bg-indigo-600/95 text-white border-indigo-200'
+      : 'bg-sky-600/95 text-white border-sky-200';
   }
 
   /** Indica si el reporte admite acciones de moderación. */

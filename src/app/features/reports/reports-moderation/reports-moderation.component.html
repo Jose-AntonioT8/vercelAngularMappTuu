@@ -106,7 +106,7 @@
       </div>
 
       <a
-        class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden border border-gray-200 bg-gray-50 flex-shrink-0"
+        class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden border border-gray-200 bg-gray-50 flex-shrink-0 relative"
         tabindex="0"
         [routerLink]="
           getTargetType(report) === 'plan'
@@ -120,6 +120,12 @@
           class="w-full h-full object-cover"
           (error)="onImgError($event)"
         />
+        <span
+          class="absolute top-1.5 left-1.5 inline-flex items-center px-3 py-1 rounded-full text-sm font-bold shadow-md border-2"
+          [ngClass]="targetTypeClass(report)"
+        >
+          {{ targetTypeLabel(report) }}
+        </span>
       </a>
 
       <div class="flex-1 min-w-0">
@@ -131,12 +137,6 @@
             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200"
           >
             {{ ('reports.moderation.reasons.' + report.reason) | translate }}
-          </span>
-          <span
-            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-            [ngClass]="targetTypeClass(report)"
-          >
-            {{ targetTypeLabel(report) }}
           </span>
           <span
             class="inline-flex items-center px-2 py-0.5 rounded-md text-xs"
