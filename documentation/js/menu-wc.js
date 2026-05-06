@@ -270,6 +270,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/CloudinaryService.html" data-type="entity-link" >CloudinaryService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/ContentModerationService.html" data-type="entity-link" >ContentModerationService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/IaAssistantService.html" data-type="entity-link" >IaAssistantService</a>
                                 </li>
                                 <li class="link">
@@ -316,6 +319,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/ActivityFilterState-2.html" data-type="entity-link" >ActivityFilterState</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/ActivityModerationResult.html" data-type="entity-link" >ActivityModerationResult</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/ActivityReport.html" data-type="entity-link" >ActivityReport</a>
                             </li>
                             <li class="link">
@@ -355,13 +361,25 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/IaFirebaseData.html" data-type="entity-link" >IaFirebaseData</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/IaImageModerationResult.html" data-type="entity-link" >IaImageModerationResult</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/IaRelationalContext.html" data-type="entity-link" >IaRelationalContext</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/LocationLabelQueueResult.html" data-type="entity-link" >LocationLabelQueueResult</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/LocationLabelTask.html" data-type="entity-link" >LocationLabelTask</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/MapMarkerData.html" data-type="entity-link" >MapMarkerData</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/MapMarkerData-1.html" data-type="entity-link" >MapMarkerData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ModerationResult.html" data-type="entity-link" >ModerationResult</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Plan.html" data-type="entity-link" >Plan</a>

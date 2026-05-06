@@ -144,9 +144,9 @@
     <p class="comment">
         <p>Card de actividad para listados.</p>
 <ul>
-<li>Muestra información resumida (imagen, nombre, rating, tipo).</li>
+<li>Muestra informaci?n resumida (imagen, nombre, rating, tipo).</li>
 <li>Deriva color del tipo de actividad para UI.</li>
-<li>Resuelve una dirección aproximada a partir de lat/lng (si existen).</li>
+<li>Resuelve una direcci?n aproximada a partir de lat/lng (si existen).</li>
 </ul>
 
     </p>
@@ -230,6 +230,10 @@
                                 <a href="#activityColor" >activityColor</a>
                             </li>
                             <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fallbackImage" >fallbackImage</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Optional</span>
                                 <a href="#location" >location</a>
                             </li>
@@ -254,6 +258,14 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#formatCoordinates" >formatCoordinates</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getExplicitLocation" >getExplicitLocation</a>
+                            </li>
+                            <li>
                                 <a href="#getStarsArray" >getStarsArray</a>
                             </li>
                             <li>
@@ -264,6 +276,13 @@
                             </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onImgError" >onImgError</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#pickCoordinate" >pickCoordinate</a>
                             </li>
                             <li>
                                 <a href="#redirectToDetail" >redirectToDetail</a>
@@ -297,6 +316,20 @@
 
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#moderationStatusLabel" >moderationStatusLabel</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
         </tbody>
     </table>
 </section>
@@ -312,13 +345,13 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/common/activities/card/card.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/common/activities/card/card.component.ts:38</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
-                            <div class="io-description"><p>Crea la card de actividad con navegación y geocodificación.</p>
+                            <div class="io-description"><p>Crea la card de actividad con navegaci?n y geocodificaci?n.</p>
 </div>
                             <div>
                                     <b>Parameters :</b>
@@ -391,7 +424,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/common/activities/card/card.component.ts:26</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/common/activities/card/card.component.ts:27</a></div>
                             </td>
                         </tr>
                 <tr>
@@ -423,12 +456,12 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/common/activities/card/card.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/common/activities/card/card.component.ts:29</a></div>
                             </td>
                         </tr>
                 <tr>
                     <td class="col-md-4">
-                        <div class="io-description"><p>Catálogo de tipos para resolver nombre/color del tipo asociado.</p>
+                        <div class="io-description"><p>Cat?logo de tipos para resolver nombre/color del tipo asociado.</p>
 </div>
                     </td>
                 </tr>
@@ -443,6 +476,126 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatCoordinates"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>formatCoordinates</b></span>
+                        <a href="#formatCoordinates"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>formatCoordinates(latitude: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, longitude: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="191"
+                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:191</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>latitude</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>longitude</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getExplicitLocation"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getExplicitLocation</b></span>
+                        <a href="#getExplicitLocation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getExplicitLocation()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="165"
+                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:165</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -463,8 +616,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="121"
-                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:121</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="145"
+                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:145</a></div>
                         </td>
                     </tr>
 
@@ -502,15 +655,15 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="111"
-                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:111</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="135"
+                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:135</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Devuelve el estado de una estrella (full/half/empty) para un índice 0..4.</p>
+                        <div class="io-description"><p>Devuelve el estado de una estrella (full/half/empty) para un ?ndice 0..4.</p>
 </div>
 
                             <div class="io-description">
@@ -571,8 +724,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -640,21 +793,169 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:58</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:62</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Obtiene dirección si hay coordenadas disponibles.</p>
+                        <div class="io-description"><p>Obtiene direcci?n si hay coordenadas disponibles.</p>
 </div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onImgError"></a>
+                    <span class="name">
+                        <span ><b>onImgError</b></span>
+                        <a href="#onImgError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onImgError(event: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pickCoordinate"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>pickCoordinate</b></span>
+                        <a href="#pickCoordinate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>pickCoordinate(source: Record<string | unknown>, keys: string[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="195"
+                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:195</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>source</td>
+                                            <td>
+                                                        <code>Record&lt;string | unknown&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>keys</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -679,8 +980,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="70"
-                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:70</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="94"
+                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:94</a></div>
                         </td>
                     </tr>
 
@@ -720,8 +1021,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="80"
-                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:80</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/common/activities/card/card.component.ts:104</a></div>
                         </td>
                     </tr>
 
@@ -729,7 +1030,7 @@
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Deriva el color de la actividad basado en el tipo asociado.</p>
-<p>El código tolera varias posibles claves (por evolución de modelos):
+<p>El c?digo tolera varias posibles claves (por evoluci?n de modelos):
 <code>activityTypeId</code>, <code>IdTypeActivity</code>, <code>typeId</code>, etc.</p>
 </div>
 
@@ -771,7 +1072,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/common/activities/card/card.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/common/activities/card/card.component.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -781,6 +1082,38 @@
 </div>
                 </td>
             </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fallbackImage"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fallbackImage</b></span>
+                        <a href="#fallbackImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;assets/images/placeholder.svg&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/common/activities/card/card.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
 
         </tbody>
     </table>
@@ -804,13 +1137,13 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/common/activities/card/card.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/common/activities/card/card.component.ts:34</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Dirección/resumen de ubicación derivada por reverse geocoding.</p>
+                    <div class="io-description"><p>Direcci?n/resumen de ubicaci?n derivada por reverse geocoding.</p>
 </div>
                 </td>
             </tr>
@@ -837,13 +1170,13 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/common/activities/card/card.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/common/activities/card/card.component.ts:38</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Servicio de mapas para resolver ubicación legible.</p>
+                    <div class="io-description"><p>Servicio de mapas para resolver ubicaci?n legible.</p>
 </div>
                 </td>
             </tr>
@@ -870,13 +1203,13 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/common/activities/card/card.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/common/activities/card/card.component.ts:36</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Router para navegación al detalle de actividad.</p>
+                    <div class="io-description"><p>Router para navegaci?n al detalle de actividad.</p>
 </div>
                 </td>
             </tr>
@@ -885,6 +1218,33 @@
     </table>
 </section>
 
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="moderationStatusLabel"></a>
+                        <span class="name"><b>moderationStatusLabel</b><a href="#moderationStatusLabel"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>moderationStatusLabel()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">src/app/common/activities/card/card.component.ts:149</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
 </div>
 
 
@@ -900,9 +1260,9 @@ import { Tilt3DDirective } from &#x27;../../../core/directives/tilt3d.directive&
 /**
  * Card de actividad para listados.
  *
- * - Muestra información resumida (imagen, nombre, rating, tipo).
+ * - Muestra informaci?n resumida (imagen, nombre, rating, tipo).
  * - Deriva color del tipo de actividad para UI.
- * - Resuelve una dirección aproximada a partir de lat/lng (si existen).
+ * - Resuelve una direcci?n aproximada a partir de lat/lng (si existen).
  */
 @Component({
   selector: &#x27;app-card&#x27;,
@@ -912,28 +1272,32 @@ import { Tilt3DDirective } from &#x27;../../../core/directives/tilt3d.directive&
   styles: []
 })
 export class CardComponent implements OnInit, OnChanges {
+  readonly fallbackImage &#x3D; &#x27;assets/images/placeholder.svg&#x27;;
 
   /** Actividad a renderizar. */
   @Input() activity!: Activity;
-  /** Catálogo de tipos para resolver nombre/color del tipo asociado. */
+  /** Cat?logo de tipos para resolver nombre/color del tipo asociado. */
   @Input() activityTypes: ActivityType[] &#x3D; [];
 
   /** Color de UI derivado del tipo de actividad. */
   activityColor &#x3D; &#x27;&#x27;;
-  /** Dirección/resumen de ubicación derivada por reverse geocoding. */
+  /** Direcci?n/resumen de ubicaci?n derivada por reverse geocoding. */
   location?: string;
-  /** Router para navegación al detalle de actividad. */
+  /** Router para navegaci?n al detalle de actividad. */
   private router: Router;
-  /** Servicio de mapas para resolver ubicación legible. */
+  /** Servicio de mapas para resolver ubicaci?n legible. */
   private mapService: MapsService;
 
   /**
-   * Crea la card de actividad con navegación y geocodificación.
+   * Crea la card de actividad con navegaci?n y geocodificaci?n.
    *
    * @param router Router para navegar al detalle de actividad.
    * @param mapService Servicio de mapas para resolver ubicacion legible.
    */
-  constructor(router: Router, mapService: MapsService) {
+  constructor(
+    router: Router,
+    mapService: MapsService,
+  ) {
     this.router &#x3D; router;
     this.mapService &#x3D; mapService;
   }
@@ -945,16 +1309,36 @@ export class CardComponent implements OnInit, OnChanges {
     }
   }
 
-  /** Obtiene dirección si hay coordenadas disponibles. */
+  /** Obtiene direcci?n si hay coordenadas disponibles. */
   ngOnInit(): void {
-    if (this.activity?.latitude &amp;&amp; this.activity?.longitude) {
-        this.mapService.getAddress(
-          parseFloat(this.activity.latitude), 
-          parseFloat(this.activity.longitude)
-        ).subscribe(address &#x3D;&gt; {
-          this.location &#x3D; address;
-        });
+    const explicitLocation &#x3D; this.getExplicitLocation();
+    if (explicitLocation) {
+      this.location &#x3D; explicitLocation;
+      return;
     }
+
+    const source &#x3D; this.activity as any;
+    const latitude &#x3D; this.pickCoordinate(source, [&#x27;latitude&#x27;, &#x27;lat&#x27;]);
+    const longitude &#x3D; this.pickCoordinate(source, [&#x27;longitude&#x27;, &#x27;lng&#x27;, &#x27;lon&#x27;]);
+    if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+      this.location &#x3D; &#x27;Ubicaci?n no disponible&#x27;;
+      return;
+    }
+
+    this.mapService.getAddress(latitude, longitude).subscribe((address) &#x3D;&gt; {
+      const normalizedAddress &#x3D; (address || &#x27;&#x27;).trim().toLowerCase();
+      const isUnknownAddress &#x3D;
+        !normalizedAddress ||
+        normalizedAddress.includes(&#x27;desconocida&#x27;) ||
+        normalizedAddress.includes(&#x27;no disponible&#x27;);
+
+      const geocodedLabel &#x3D; isUnknownAddress
+        ? this.formatCoordinates(latitude, longitude)
+        : address;
+
+      // 1) Prioriza geocoding API y pinta primero ese resultado.
+      this.location &#x3D; geocodedLabel;
+    });
   }
 
   /** Navega a la pantalla de detalle de la actividad. */
@@ -965,7 +1349,7 @@ export class CardComponent implements OnInit, OnChanges {
   /**
    * Deriva el color de la actividad basado en el tipo asociado.
    *
-   * El código tolera varias posibles claves (por evolución de modelos):
+   * El c?digo tolera varias posibles claves (por evoluci?n de modelos):
    * &#x60;activityTypeId&#x60;, &#x60;IdTypeActivity&#x60;, &#x60;typeId&#x60;, etc.
    */
   private updateActivityColor(): void {
@@ -998,7 +1382,7 @@ export class CardComponent implements OnInit, OnChanges {
     }
   }
 
-  /** Devuelve el estado de una estrella (full/half/empty) para un índice 0..4. */
+  /** Devuelve el estado de una estrella (full/half/empty) para un ?ndice 0..4. */
   getStarState(index: number): &#x27;full&#x27; | &#x27;half&#x27; | &#x27;empty&#x27; {
     if (!this.activity) return &#x27;empty&#x27;;
     const rating &#x3D; this.activity.rating;
@@ -1011,6 +1395,68 @@ export class CardComponent implements OnInit, OnChanges {
   /** Helper para iterar 5 estrellas en template. */
   getStarsArray(): number[] {
     return [0, 1, 2, 3, 4];
+  }
+
+  get moderationStatusLabel(): string {
+    const status &#x3D; (this.activity as any)?.moderationStatus;
+    if (status &#x3D;&#x3D;&#x3D; &#x27;pending_review&#x27;) return &#x27;Pendiente de revisi?n&#x27;;
+    if (status &#x3D;&#x3D;&#x3D; &#x27;rejected&#x27;) return &#x27;Rechazada&#x27;;
+    return &#x27;&#x27;;
+  }
+
+  onImgError(event: Event): void {
+    const img &#x3D; event.target as HTMLImageElement;
+    if (!img.src.includes(this.fallbackImage)) {
+      img.src &#x3D; this.fallbackImage;
+      return;
+    }
+    img.onerror &#x3D; null;
+  }
+
+  private getExplicitLocation(): string {
+    const source &#x3D; this.activity as any;
+    const candidates &#x3D; [
+      source?.resolvedLocation,
+      source?.location,
+      source?.locationText,
+      source?.address,
+      source?.city,
+      source?.region,
+      source?.fullAddress,
+      source?.formattedAddress,
+    ];
+
+    const value &#x3D; candidates.find(
+      (item) &#x3D;&gt; typeof item &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; item.trim().length &gt; 0,
+    );
+    const normalizedValue &#x3D; value ? String(value).trim() : &#x27;&#x27;;
+    const normalizedLower &#x3D; normalizedValue.toLowerCase();
+    const isUnknownLocation &#x3D;
+      normalizedLower.includes(&#x27;desconocida&#x27;) ||
+      normalizedLower.includes(&#x27;no disponible&#x27;) ||
+      normalizedLower &#x3D;&#x3D;&#x3D; &#x27;...&#x27;;
+
+    return isUnknownLocation ? &#x27;&#x27; : normalizedValue;
+  }
+
+  private formatCoordinates(latitude: number, longitude: number): string {
+    return &#x60;${latitude.toFixed(5)}, ${longitude.toFixed(5)}&#x60;;
+  }
+
+  private pickCoordinate(source: Record&lt;string, unknown&gt;, keys: string[]): number {
+    for (const key of keys) {
+      const value &#x3D; source[key];
+      if (typeof value &#x3D;&#x3D;&#x3D; &#x27;number&#x27; &amp;&amp; Number.isFinite(value)) {
+        return value;
+      }
+      if (typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+        const parsed &#x3D; Number(value.replace(&#x27;,&#x27;, &#x27;.&#x27;).trim());
+        if (Number.isFinite(parsed)) {
+          return parsed;
+        }
+      }
+    }
+    return Number.NaN;
   }
 }</code></pre>
     </div>
@@ -1029,10 +1475,10 @@ export class CardComponent implements OnInit, OnChanges {
     
     &lt;div class&#x3D;&quot;absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200&quot;&gt;
         &lt;img 
-            [src]&#x3D;&quot;activity.imageURL&quot; 
+            [src]&#x3D;&quot;activity.imageURL || fallbackImage&quot; 
             alt&#x3D;&quot;{{activity.name}} Image&quot; 
             class&#x3D;&quot;w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700&quot;
-            onerror&#x3D;&quot;this.src&#x3D;&#x27;assets/logo/logo.png&#x27;;&quot;/&gt;
+            (error)&#x3D;&quot;onImgError($event)&quot;/&gt;
         
         &lt;div class&#x3D;&quot;absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80&quot;&gt;&lt;/div&gt;
     &lt;/div&gt;
@@ -1072,6 +1518,12 @@ export class CardComponent implements OnInit, OnChanges {
         &lt;/div&gt;
         
         &lt;div&gt;
+            &lt;span
+                *ngIf&#x3D;&quot;moderationStatusLabel&quot;
+                class&#x3D;&quot;inline-flex items-center rounded-full bg-amber-100 text-amber-800 px-2 py-1 text-xs font-semibold mb-2&quot;
+            &gt;
+                {{ moderationStatusLabel }}
+            &lt;/span&gt;
             &lt;h3 class&#x3D;&quot;text-xl font-bold mb-2 line-clamp-2 drop-shadow-lg&quot;&gt;
                 {{ activity.name }}
             &lt;/h3&gt;
@@ -1116,7 +1568,7 @@ export class CardComponent implements OnInit, OnChanges {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><section     appTilt3D     [tiltMaxX]="8"     [tiltMaxY]="8"     [tiltScale]="1.02"    [glareEnabled]="true"    class="group relative rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden w-full cursor-pointer min-h-[280px]">    <button    class="block w-full h-full text-left relative"    (click)="redirectToDetail()">        <div class="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200">        <img             [src]="activity.imageURL"             alt="{{activity.name}} Image"             class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700"            onerror="this.src=\'assets/logo/logo.png\';"/>                <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80"></div>    </div>        <div class="relative h-full flex flex-col justify-between p-5 text-white z-10 min-h-[280px]">                <div class="flex items-start justify-between">                        <div class="flex items-center gap-1 bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full">                <div class="flex items-center gap-0.5">                    <ng-container *ngFor="let starIndex of getStarsArray(); let i = index">                        <svg *ngIf="getStarState(i) === \'full\'" class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>                        </svg>                        <div *ngIf="getStarState(i) === \'half\'" class="relative w-4 h-4">                            <svg class="absolute inset-0 w-4 h-4 text-gray-300 fill-current" viewBox="0 0 20 20">                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>                            </svg>                            <svg class="absolute inset-0 w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20" style="clip-path: inset(0 50% 0 0);">                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>                            </svg>                        </div>                        <svg *ngIf="getStarState(i) === \'empty\'" class="w-4 h-4 text-gray-300 fill-current" viewBox="0 0 20 20">                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>                        </svg>                    </ng-container>                </div>                <span class="text-sm font-bold ml-1">{{ activity.rating }}</span>            </div>                        <div                 *ngIf="activityColor"                class="w-8 h-8 rounded-full border-2 border-white shadow-lg flex-shrink-0"                 [style.background-color]="activityColor">            </div>        </div>                <div>            <h3 class="text-xl font-bold mb-2 line-clamp-2 drop-shadow-lg">                {{ activity.name }}            </h3>                        <div class="flex items-center gap-2 text-sm font-medium">                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>                </svg>                <span>{{ location || \'...\' }}</span>            </div>        </div>    </div>        </button></section></div>'
+        var COMPONENT_TEMPLATE = '<div><section     appTilt3D     [tiltMaxX]="8"     [tiltMaxY]="8"     [tiltScale]="1.02"    [glareEnabled]="true"    class="group relative rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden w-full cursor-pointer min-h-[280px]">    <button    class="block w-full h-full text-left relative"    (click)="redirectToDetail()">        <div class="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200">        <img             [src]="activity.imageURL || fallbackImage"             alt="{{activity.name}} Image"             class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700"            (error)="onImgError($event)"/>                <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80"></div>    </div>        <div class="relative h-full flex flex-col justify-between p-5 text-white z-10 min-h-[280px]">                <div class="flex items-start justify-between">                        <div class="flex items-center gap-1 bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full">                <div class="flex items-center gap-0.5">                    <ng-container *ngFor="let starIndex of getStarsArray(); let i = index">                        <svg *ngIf="getStarState(i) === \'full\'" class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>                        </svg>                        <div *ngIf="getStarState(i) === \'half\'" class="relative w-4 h-4">                            <svg class="absolute inset-0 w-4 h-4 text-gray-300 fill-current" viewBox="0 0 20 20">                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>                            </svg>                            <svg class="absolute inset-0 w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20" style="clip-path: inset(0 50% 0 0);">                                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>                            </svg>                        </div>                        <svg *ngIf="getStarState(i) === \'empty\'" class="w-4 h-4 text-gray-300 fill-current" viewBox="0 0 20 20">                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>                        </svg>                    </ng-container>                </div>                <span class="text-sm font-bold ml-1">{{ activity.rating }}</span>            </div>                        <div                 *ngIf="activityColor"                class="w-8 h-8 rounded-full border-2 border-white shadow-lg flex-shrink-0"                 [style.background-color]="activityColor">            </div>        </div>                <div>            <span                *ngIf="moderationStatusLabel"                class="inline-flex items-center rounded-full bg-amber-100 text-amber-800 px-2 py-1 text-xs font-semibold mb-2"            >                {{ moderationStatusLabel }}            </span>            <h3 class="text-xl font-bold mb-2 line-clamp-2 drop-shadow-lg">                {{ activity.name }}            </h3>                        <div class="flex items-center gap-2 text-sm font-medium">                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>                </svg>                <span>{{ location || \'...\' }}</span>            </div>        </div>    </div>        </button></section></div>'
     var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GlobalSearchComponent', 'selector': 'app-global-search'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
     var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
     var ACTUAL_COMPONENT = {'name': 'CardComponent'};

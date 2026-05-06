@@ -183,13 +183,28 @@ export class ReportingService {
 
     const actionRaw = pickStr('resolutionAction', 'resolution_action');
     const resolutionAction =
-      actionRaw === 'dismiss' || actionRaw === 'delete_activity'
+      actionRaw === 'dismiss' ||
+      actionRaw === 'delete_activity' ||
+      actionRaw === 'delete_plan'
         ? actionRaw
         : undefined;
 
+    const targetTypeRaw = pickStr('targetType', 'target_type');
+    const targetType =
+      targetTypeRaw === 'plan'
+        ? 'plan'
+        : targetTypeRaw === 'activity'
+          ? 'activity'
+          : undefined;
+
+    const activityId = pickStr('activityId', 'activity_id');
+    const targetId = pickStr('targetId', 'target_id') || activityId;
+
     return {
       id: pickStr('id', '_id'),
-      activityId: pickStr('activityId', 'activity_id'),
+      targetType,
+      targetId,
+      activityId,
       reporterUserId: pickStr(
         'reporterUserId',
         'reporter_user_id',

@@ -180,6 +180,7 @@
                 <td class="col-md-9">
                                 <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
                                 <code><a href="../components/HeaderComponent.html" target="_self" >HeaderComponent</a></code>
+                            <code>TranslatePipe</code>
                 </td>
             </tr>
 
@@ -217,6 +218,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
 import { Component } from &#x27;@angular/core&#x27;;
 import { HeaderComponent } from &#x27;../../common/header/header.component&#x27;;
+import { TranslatePipe } from &#x27;../../core/pipes/translate.pipe&#x27;;
 
 /**
  * Pantalla de contacto y presentación de co-founders.
@@ -224,7 +226,7 @@ import { HeaderComponent } from &#x27;../../common/header/header.component&#x27;
 @Component({
   selector: &#x27;app-contact&#x27;,
   standalone: true,
-  imports: [CommonModule, HeaderComponent],
+  imports: [CommonModule, HeaderComponent, TranslatePipe],
   templateUrl: &#x27;./contact.component.html&#x27;,
 })
 export class ContactComponent {}
@@ -234,22 +236,21 @@ export class ContactComponent {}
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;app-header&gt;&lt;/app-header&gt;
 
-&lt;main class&#x3D;&quot;min-h-screen bg-gradient-to-b from-slate-50 to-white motion-safe:animate-[pageEnter_.36s_ease-out]&quot;&gt;
-  &lt;section class&#x3D;&quot;relative overflow-hidden bg-gradient-to-br from-brand-primary via-brand-secondary to-brand-accent py-20 lg:py-28&quot;&gt;
+&lt;main class&#x3D;&quot;min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 motion-safe:animate-[pageEnter_.36s_ease-out]&quot;&gt;
+  &lt;section class&#x3D;&quot;relative overflow-hidden bg-gradient-to-br from-brand-primary via-brand-secondary to-brand-accent py-20 lg:py-28 border-b border-slate-200/40 dark:border-slate-700/40&quot;&gt;
     &lt;div class&#x3D;&quot;absolute top-6 left-8 w-28 h-28 bg-white/10 rounded-full blur-xl&quot;&gt;&lt;/div&gt;
     &lt;div class&#x3D;&quot;absolute bottom-8 right-10 w-36 h-36 bg-white/10 rounded-full blur-2xl&quot;&gt;&lt;/div&gt;
 
     &lt;div class&#x3D;&quot;max-w-6xl mx-auto px-4 relative z-10 text-center&quot;&gt;
-      &lt;h1 class&#x3D;&quot;text-4xl md:text-5xl font-bold text-white mb-5&quot;&gt;Contacto&lt;/h1&gt;
-      &lt;p class&#x3D;&quot;text-white/85 max-w-3xl mx-auto text-lg leading-relaxed&quot;&gt;
-        MappTuu es un proyecto centrado en ayudar a descubrir, crear y guardar actividades y planes de forma sencilla.
-        La idea es conectar personas con experiencias cercanas, con un enfoque visual, práctico y pensado para el día a día.
+      &lt;h1 class&#x3D;&quot;text-4xl md:text-5xl font-bold text-white mb-5&quot;&gt;{{ &#x27;contact.title&#x27; | translate }}&lt;/h1&gt;
+      &lt;p class&#x3D;&quot;text-white/85 max-w-3xl mx-auto text-base md:text-lg leading-relaxed&quot;&gt;
+        {{ &#x27;contact.description&#x27; | translate }}
       &lt;/p&gt;
     &lt;/div&gt;
 
     &lt;div class&#x3D;&quot;absolute bottom-0 left-0 right-0&quot;&gt;
-      &lt;svg viewBox&#x3D;&quot;0 0 1440 120&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
-        &lt;path d&#x3D;&quot;M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z&quot; fill&#x3D;&quot;#f8fafc&quot;/&gt;
+      &lt;svg viewBox&#x3D;&quot;0 0 1440 120&quot; class&#x3D;&quot;text-slate-50 dark:text-slate-950&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
+        &lt;path d&#x3D;&quot;M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z&quot; fill&#x3D;&quot;currentColor&quot;/&gt;
       &lt;/svg&gt;
     &lt;/div&gt;
   &lt;/section&gt;
@@ -257,39 +258,43 @@ export class ContactComponent {}
   &lt;section class&#x3D;&quot;py-14 lg:py-20&quot;&gt;
     &lt;div class&#x3D;&quot;max-w-6xl mx-auto px-4&quot;&gt;
       &lt;div class&#x3D;&quot;grid md:grid-cols-2 gap-8&quot;&gt;
-        &lt;article class&#x3D;&quot;bg-white rounded-2xl border border-slate-200 shadow-lg p-7&quot;&gt;
-          &lt;div class&#x3D;&quot;mb-5 rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 h-56 flex items-center justify-center text-slate-500 text-sm&quot;&gt;
-            Espacio para foto de Jose Antonio Dominguez Gonzalez
+        &lt;article class&#x3D;&quot;bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg p-7&quot;&gt;
+          &lt;div class&#x3D;&quot;mb-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 h-56 flex flex-col items-center justify-center text-slate-500 dark:text-slate-300 text-sm&quot;&gt;
+            &lt;svg class&#x3D;&quot;w-9 h-9 mb-2 opacity-70&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;1.8&quot; d&#x3D;&quot;M17 20h5V10a2 2 0 00-2-2h-3M9 20H4a2 2 0 01-2-2V10a2 2 0 012-2h3m6 12v-6a3 3 0 00-6 0v6m6 0H7&quot; /&gt;
+            &lt;/svg&gt;
+            {{ &#x27;contact.founder1.photoPlaceholder&#x27; | translate }}
           &lt;/div&gt;
 
-          &lt;h2 class&#x3D;&quot;text-2xl font-bold text-slate-900&quot;&gt;Jose Antonio Dominguez Gonzalez&lt;/h2&gt;
-          &lt;p class&#x3D;&quot;text-slate-600 mt-2&quot;&gt;Co-founder · Malaga&lt;/p&gt;
-          &lt;p class&#x3D;&quot;text-slate-700 mt-4 leading-relaxed&quot;&gt;
-            Ha estudiado el Grado Superior de Desarrollo de Aplicaciones Multiplataforma (DAM)
-            en el CPIFP Alan Turing.
+          &lt;h2 class&#x3D;&quot;text-2xl font-bold text-slate-900 dark:text-slate-100&quot;&gt;{{ &#x27;contact.founder1.name&#x27; | translate }}&lt;/h2&gt;
+          &lt;p class&#x3D;&quot;text-slate-600 dark:text-slate-300 mt-2&quot;&gt;{{ &#x27;contact.founder1.roleCity&#x27; | translate }}&lt;/p&gt;
+          &lt;p class&#x3D;&quot;text-slate-700 dark:text-slate-200 mt-4 leading-relaxed&quot;&gt;
+            {{ &#x27;contact.founder1.education&#x27; | translate }}
           &lt;/p&gt;
 
           &lt;div class&#x3D;&quot;mt-5 space-y-2 text-sm&quot;&gt;
-            &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;&lt;span class&#x3D;&quot;font-semibold&quot;&gt;Email:&lt;/span&gt; &lt;a class&#x3D;&quot;text-brand-primary hover:underline&quot; href&#x3D;&quot;mailto:joseantdominguezgonzalez@gmail.com&quot;&gt;joseantdominguezgonzalez&amp;#64;gmail.com&lt;/a&gt;&lt;/p&gt;
-            &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;&lt;span class&#x3D;&quot;font-semibold&quot;&gt;LinkedIn:&lt;/span&gt; &lt;a class&#x3D;&quot;text-brand-primary hover:underline&quot; href&#x3D;&quot;https://www.linkedin.com/in/jose-antonio-dominguez-gonzalez&quot; target&#x3D;&quot;_blank&quot; rel&#x3D;&quot;noopener noreferrer&quot;&gt;Perfil de Jose Antonio&lt;/a&gt;&lt;/p&gt;
+            &lt;p class&#x3D;&quot;text-slate-700 dark:text-slate-200&quot;&gt;&lt;span class&#x3D;&quot;font-semibold&quot;&gt;{{ &#x27;contact.emailLabel&#x27; | translate }}:&lt;/span&gt; &lt;a class&#x3D;&quot;text-brand-primary hover:underline&quot; href&#x3D;&quot;mailto:joseantdominguezgonzalez@gmail.com&quot;&gt;{{ &#x27;contact.founder1.email&#x27; | translate }}&lt;/a&gt;&lt;/p&gt;
+            &lt;p class&#x3D;&quot;text-slate-700 dark:text-slate-200&quot;&gt;&lt;span class&#x3D;&quot;font-semibold&quot;&gt;{{ &#x27;contact.linkedinLabel&#x27; | translate }}:&lt;/span&gt; &lt;a class&#x3D;&quot;text-brand-primary hover:underline&quot; href&#x3D;&quot;https://www.linkedin.com/in/jose-antonio-dominguez-gonzalez&quot; target&#x3D;&quot;_blank&quot; rel&#x3D;&quot;noopener noreferrer&quot;&gt;{{ &#x27;contact.founder1.linkedin&#x27; | translate }}&lt;/a&gt;&lt;/p&gt;
           &lt;/div&gt;
         &lt;/article&gt;
 
-        &lt;article class&#x3D;&quot;bg-white rounded-2xl border border-slate-200 shadow-lg p-7&quot;&gt;
-          &lt;div class&#x3D;&quot;mb-5 rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 h-56 flex items-center justify-center text-slate-500 text-sm&quot;&gt;
-            Espacio para foto de Ezequiel Vargas Berrocal
+        &lt;article class&#x3D;&quot;bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg p-7&quot;&gt;
+          &lt;div class&#x3D;&quot;mb-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 h-56 flex flex-col items-center justify-center text-slate-500 dark:text-slate-300 text-sm&quot;&gt;
+            &lt;svg class&#x3D;&quot;w-9 h-9 mb-2 opacity-70&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
+              &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;1.8&quot; d&#x3D;&quot;M17 20h5V10a2 2 0 00-2-2h-3M9 20H4a2 2 0 01-2-2V10a2 2 0 012-2h3m6 12v-6a3 3 0 00-6 0v6m6 0H7&quot; /&gt;
+            &lt;/svg&gt;
+            {{ &#x27;contact.founder2.photoPlaceholder&#x27; | translate }}
           &lt;/div&gt;
 
-          &lt;h2 class&#x3D;&quot;text-2xl font-bold text-slate-900&quot;&gt;Ezequiel Vargas Berrocal&lt;/h2&gt;
-          &lt;p class&#x3D;&quot;text-slate-600 mt-2&quot;&gt;Co-founder · Malaga&lt;/p&gt;
-          &lt;p class&#x3D;&quot;text-slate-700 mt-4 leading-relaxed&quot;&gt;
-            Ha estudiado el Grado Superior de Desarrollo de Aplicaciones Multiplataforma (DAM)
-            en el CPIFP Alan Turing.
+          &lt;h2 class&#x3D;&quot;text-2xl font-bold text-slate-900 dark:text-slate-100&quot;&gt;{{ &#x27;contact.founder2.name&#x27; | translate }}&lt;/h2&gt;
+          &lt;p class&#x3D;&quot;text-slate-600 dark:text-slate-300 mt-2&quot;&gt;{{ &#x27;contact.founder2.roleCity&#x27; | translate }}&lt;/p&gt;
+          &lt;p class&#x3D;&quot;text-slate-700 dark:text-slate-200 mt-4 leading-relaxed&quot;&gt;
+            {{ &#x27;contact.founder2.education&#x27; | translate }}
           &lt;/p&gt;
 
           &lt;div class&#x3D;&quot;mt-5 space-y-2 text-sm&quot;&gt;
-            &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;&lt;span class&#x3D;&quot;font-semibold&quot;&gt;Email:&lt;/span&gt; &lt;a class&#x3D;&quot;text-brand-primary hover:underline&quot; href&#x3D;&quot;mailto:correoezequiel@gmail.com&quot;&gt;correoezequiel&amp;#64;gmail.com&lt;/a&gt;&lt;/p&gt;
-            &lt;p class&#x3D;&quot;text-slate-700&quot;&gt;&lt;span class&#x3D;&quot;font-semibold&quot;&gt;LinkedIn:&lt;/span&gt; &lt;a class&#x3D;&quot;text-brand-primary hover:underline&quot; href&#x3D;&quot;https://www.linkedin.com/in/ezequiel-vargas-berrocal&quot; target&#x3D;&quot;_blank&quot; rel&#x3D;&quot;noopener noreferrer&quot;&gt;Perfil de Ezequiel&lt;/a&gt;&lt;/p&gt;
+            &lt;p class&#x3D;&quot;text-slate-700 dark:text-slate-200&quot;&gt;&lt;span class&#x3D;&quot;font-semibold&quot;&gt;{{ &#x27;contact.emailLabel&#x27; | translate }}:&lt;/span&gt; &lt;a class&#x3D;&quot;text-brand-primary hover:underline&quot; href&#x3D;&quot;mailto:correoezequiel@gmail.com&quot;&gt;{{ &#x27;contact.founder2.email&#x27; | translate }}&lt;/a&gt;&lt;/p&gt;
+            &lt;p class&#x3D;&quot;text-slate-700 dark:text-slate-200&quot;&gt;&lt;span class&#x3D;&quot;font-semibold&quot;&gt;{{ &#x27;contact.linkedinLabel&#x27; | translate }}:&lt;/span&gt; &lt;a class&#x3D;&quot;text-brand-primary hover:underline&quot; href&#x3D;&quot;https://www.linkedin.com/in/ezequiel-vargas-berrocal&quot; target&#x3D;&quot;_blank&quot; rel&#x3D;&quot;noopener noreferrer&quot;&gt;{{ &#x27;contact.founder2.linkedin&#x27; | translate }}&lt;/a&gt;&lt;/p&gt;
           &lt;/div&gt;
         &lt;/article&gt;
       &lt;/div&gt;
@@ -325,7 +330,7 @@ export class ContactComponent {}
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><app-header></app-header><main class="min-h-screen bg-gradient-to-b from-slate-50 to-white motion-safe:animate-[pageEnter_.36s_ease-out]">  <section class="relative overflow-hidden bg-gradient-to-br from-brand-primary via-brand-secondary to-brand-accent py-20 lg:py-28">    <div class="absolute top-6 left-8 w-28 h-28 bg-white/10 rounded-full blur-xl"></div>    <div class="absolute bottom-8 right-10 w-36 h-36 bg-white/10 rounded-full blur-2xl"></div>    <div class="max-w-6xl mx-auto px-4 relative z-10 text-center">      <h1 class="text-4xl md:text-5xl font-bold text-white mb-5">Contacto</h1>      <p class="text-white/85 max-w-3xl mx-auto text-lg leading-relaxed">        MappTuu es un proyecto centrado en ayudar a descubrir, crear y guardar actividades y planes de forma sencilla.        La idea es conectar personas con experiencias cercanas, con un enfoque visual, práctico y pensado para el día a día.      </p>    </div>    <div class="absolute bottom-0 left-0 right-0">      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">        <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f8fafc"/>      </svg>    </div>  </section>  <section class="py-14 lg:py-20">    <div class="max-w-6xl mx-auto px-4">      <div class="grid md:grid-cols-2 gap-8">        <article class="bg-white rounded-2xl border border-slate-200 shadow-lg p-7">          <div class="mb-5 rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 h-56 flex items-center justify-center text-slate-500 text-sm">            Espacio para foto de Jose Antonio Dominguez Gonzalez          </div>          <h2 class="text-2xl font-bold text-slate-900">Jose Antonio Dominguez Gonzalez</h2>          <p class="text-slate-600 mt-2">Co-founder · Malaga</p>          <p class="text-slate-700 mt-4 leading-relaxed">            Ha estudiado el Grado Superior de Desarrollo de Aplicaciones Multiplataforma (DAM)            en el CPIFP Alan Turing.          </p>          <div class="mt-5 space-y-2 text-sm">            <p class="text-slate-700"><span class="font-semibold">Email:</span> <a class="text-brand-primary hover:underline" href="mailto:joseantdominguezgonzalez@gmail.com">joseantdominguezgonzalez&#64;gmail.com</a></p>            <p class="text-slate-700"><span class="font-semibold">LinkedIn:</span> <a class="text-brand-primary hover:underline" href="https://www.linkedin.com/in/jose-antonio-dominguez-gonzalez" target="_blank" rel="noopener noreferrer">Perfil de Jose Antonio</a></p>          </div>        </article>        <article class="bg-white rounded-2xl border border-slate-200 shadow-lg p-7">          <div class="mb-5 rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 h-56 flex items-center justify-center text-slate-500 text-sm">            Espacio para foto de Ezequiel Vargas Berrocal          </div>          <h2 class="text-2xl font-bold text-slate-900">Ezequiel Vargas Berrocal</h2>          <p class="text-slate-600 mt-2">Co-founder · Malaga</p>          <p class="text-slate-700 mt-4 leading-relaxed">            Ha estudiado el Grado Superior de Desarrollo de Aplicaciones Multiplataforma (DAM)            en el CPIFP Alan Turing.          </p>          <div class="mt-5 space-y-2 text-sm">            <p class="text-slate-700"><span class="font-semibold">Email:</span> <a class="text-brand-primary hover:underline" href="mailto:correoezequiel@gmail.com">correoezequiel&#64;gmail.com</a></p>            <p class="text-slate-700"><span class="font-semibold">LinkedIn:</span> <a class="text-brand-primary hover:underline" href="https://www.linkedin.com/in/ezequiel-vargas-berrocal" target="_blank" rel="noopener noreferrer">Perfil de Ezequiel</a></p>          </div>        </article>      </div>    </div>  </section></main></div>'
+        var COMPONENT_TEMPLATE = '<div><app-header></app-header><main class="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 motion-safe:animate-[pageEnter_.36s_ease-out]">  <section class="relative overflow-hidden bg-gradient-to-br from-brand-primary via-brand-secondary to-brand-accent py-20 lg:py-28 border-b border-slate-200/40 dark:border-slate-700/40">    <div class="absolute top-6 left-8 w-28 h-28 bg-white/10 rounded-full blur-xl"></div>    <div class="absolute bottom-8 right-10 w-36 h-36 bg-white/10 rounded-full blur-2xl"></div>    <div class="max-w-6xl mx-auto px-4 relative z-10 text-center">      <h1 class="text-4xl md:text-5xl font-bold text-white mb-5">{{ \'contact.title\' | translate }}</h1>      <p class="text-white/85 max-w-3xl mx-auto text-base md:text-lg leading-relaxed">        {{ \'contact.description\' | translate }}      </p>    </div>    <div class="absolute bottom-0 left-0 right-0">      <svg viewBox="0 0 1440 120" class="text-slate-50 dark:text-slate-950" fill="none" xmlns="http://www.w3.org/2000/svg">        <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="currentColor"/>      </svg>    </div>  </section>  <section class="py-14 lg:py-20">    <div class="max-w-6xl mx-auto px-4">      <div class="grid md:grid-cols-2 gap-8">        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg p-7">          <div class="mb-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 h-56 flex flex-col items-center justify-center text-slate-500 dark:text-slate-300 text-sm">            <svg class="w-9 h-9 mb-2 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5V10a2 2 0 00-2-2h-3M9 20H4a2 2 0 01-2-2V10a2 2 0 012-2h3m6 12v-6a3 3 0 00-6 0v6m6 0H7" />            </svg>            {{ \'contact.founder1.photoPlaceholder\' | translate }}          </div>          <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100">{{ \'contact.founder1.name\' | translate }}</h2>          <p class="text-slate-600 dark:text-slate-300 mt-2">{{ \'contact.founder1.roleCity\' | translate }}</p>          <p class="text-slate-700 dark:text-slate-200 mt-4 leading-relaxed">            {{ \'contact.founder1.education\' | translate }}          </p>          <div class="mt-5 space-y-2 text-sm">            <p class="text-slate-700 dark:text-slate-200"><span class="font-semibold">{{ \'contact.emailLabel\' | translate }}:</span> <a class="text-brand-primary hover:underline" href="mailto:joseantdominguezgonzalez@gmail.com">{{ \'contact.founder1.email\' | translate }}</a></p>            <p class="text-slate-700 dark:text-slate-200"><span class="font-semibold">{{ \'contact.linkedinLabel\' | translate }}:</span> <a class="text-brand-primary hover:underline" href="https://www.linkedin.com/in/jose-antonio-dominguez-gonzalez" target="_blank" rel="noopener noreferrer">{{ \'contact.founder1.linkedin\' | translate }}</a></p>          </div>        </article>        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg p-7">          <div class="mb-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 h-56 flex flex-col items-center justify-center text-slate-500 dark:text-slate-300 text-sm">            <svg class="w-9 h-9 mb-2 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5V10a2 2 0 00-2-2h-3M9 20H4a2 2 0 01-2-2V10a2 2 0 012-2h3m6 12v-6a3 3 0 00-6 0v6m6 0H7" />            </svg>            {{ \'contact.founder2.photoPlaceholder\' | translate }}          </div>          <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100">{{ \'contact.founder2.name\' | translate }}</h2>          <p class="text-slate-600 dark:text-slate-300 mt-2">{{ \'contact.founder2.roleCity\' | translate }}</p>          <p class="text-slate-700 dark:text-slate-200 mt-4 leading-relaxed">            {{ \'contact.founder2.education\' | translate }}          </p>          <div class="mt-5 space-y-2 text-sm">            <p class="text-slate-700 dark:text-slate-200"><span class="font-semibold">{{ \'contact.emailLabel\' | translate }}:</span> <a class="text-brand-primary hover:underline" href="mailto:correoezequiel@gmail.com">{{ \'contact.founder2.email\' | translate }}</a></p>            <p class="text-slate-700 dark:text-slate-200"><span class="font-semibold">{{ \'contact.linkedinLabel\' | translate }}:</span> <a class="text-brand-primary hover:underline" href="https://www.linkedin.com/in/ezequiel-vargas-berrocal" target="_blank" rel="noopener noreferrer">{{ \'contact.founder2.linkedin\' | translate }}</a></p>          </div>        </article>      </div>    </div>  </section></main></div>'
     var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GlobalSearchComponent', 'selector': 'app-global-search'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
     var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
     var ACTUAL_COMPONENT = {'name': 'ContactComponent'};

@@ -1,6 +1,8 @@
 /** Motivos válidos para reportar una actividad. */
 export type ReportReason = 'spam' | 'inappropriate' | 'fraud' | 'other';
 
+export type TargetType = 'activity' | 'plan';
+
 /** Estados válidos de un reporte en moderación. */
 export type ReportStatus = 'pending' | 'reviewed' | 'dismissed' | 'resolved';
 
@@ -10,6 +12,12 @@ export type ReportStatus = 'pending' | 'reviewed' | 'dismissed' | 'resolved';
 export interface ActivityReport {
   /** Identificador único del reporte. */
   id: string;
+
+  /** Tipo de entidad reportada. */
+  targetType?: TargetType;
+  /** ID real de la entidad reportada. */
+  targetId?: string;
+
   /** ID de la actividad reportada. */
   activityId: string;
   /** ID del usuario que reporta. */
@@ -31,7 +39,7 @@ export interface ActivityReport {
   /** Nota opcional de resolución. */
   resolutionNote?: string;
   /** Acción aplicada al resolver. */
-  resolutionAction?: 'dismiss' | 'delete_activity';
+  resolutionAction?: 'dismiss' | 'delete_activity' | 'delete_plan';
   /** Nombre de la actividad reportada. */
   activityName?: string;
   /** Imagen de la actividad reportada. */
@@ -42,8 +50,13 @@ export interface ActivityReport {
 
 /** Payload para crear un nuevo reporte de actividad. */
 export interface CreateActivityReportPayload {
-  /** ID de la actividad a reportar. */
-  activityId: string;
+  /** ID de la actividad a reportar (legacy / compatibilidad). */
+  activityId?: string;
+  /** ID del plan a reportar. */
+  planId?: string;
+  /** Tipo de target reportado. Si no viene, el backend lo deduce. */
+  targetType?: TargetType;
+
   /** Motivo seleccionado por el usuario. */
   reason: ReportReason;
   /** Detalle opcional del reporte. */
@@ -65,7 +78,7 @@ export interface ReportQueryFilters {
 /** Payload para resolver un reporte desde moderación. */
 export interface ResolveReportPayload {
   /** Acción de resolución seleccionada por moderación. */
-  action: 'dismiss' | 'delete_activity';
+  action: 'dismiss' | 'delete_activity' | 'delete_plan';
   /** Nota opcional para auditar la resolución. */
   resolutionNote?: string;
 }

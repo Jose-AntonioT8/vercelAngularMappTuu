@@ -116,7 +116,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  IaChatMessage</li>
+  IaImageModerationResult</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -144,13 +144,6 @@
         </p>
 
 
-            <p class="comment">
-                <h3>Description</h3>
-            </p>
-            <p class="comment">
-                <p>Mensaje en formato chat enviado al proveedor de IA.</p>
-
-            </p>
 
 
         <section data-compodoc="block-index">
@@ -166,15 +159,27 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#content" 
+                                        <a href="#blocked" 
 >
-                                            content
+                                            blocked
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#role" 
+                                        <a href="#reasons" 
 >
-                                            role
+                                            reasons
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#score" 
+>
+                                            score
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#warning" 
+>
+                                            warning
                                         </a>
                                 </li>
                             </ul>
@@ -192,9 +197,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="content"></a>
-                                        <span class="name "><b>content</b>
-                                            <a href="#content">
+                                        <a name="blocked"></a>
+                                        <span class="name "><b>blocked</b>
+                                            <a href="#blocked">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -202,7 +207,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>content:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>blocked:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -210,7 +215,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                                         </td>
                                     </tr>
@@ -219,21 +224,15 @@
 
 
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Contenido textual del mensaje.</p>
-</div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="role"></a>
-                                        <span class="name "><b>role</b>
-                                            <a href="#role">
+                                        <a name="reasons"></a>
+                                        <span class="name "><b>reasons</b>
+                                            <a href="#reasons">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -241,7 +240,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>role:     <code>&quot;system&quot; | &quot;user&quot;</code>
+                                        <code>reasons:     <code>string[]</code>
 </code>
                                     </td>
                                 </tr>
@@ -249,7 +248,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>&quot;system&quot; | &quot;user&quot;</code>
+                                            <i>Type : </i>    <code>string[]</code>
 
                                         </td>
                                     </tr>
@@ -258,12 +257,72 @@
 
 
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Rol del mensaje (system/user).</p>
-</div>
-                                </td>
-                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="score"></a>
+                                        <span class="name "><b>score</b>
+                                            <a href="#score">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>score:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="warning"></a>
+                                        <span class="name "><b>warning</b>
+                                            <a href="#warning">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>warning:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
                         </tbody>
                     </table>
             </section>
@@ -1640,7 +1699,7 @@ export class IaAssistantService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'IaChatMessage.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'IaImageModerationResult.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -260,6 +260,9 @@
                             <li>
                                 <a href="#success" >success</a>
                             </li>
+                            <li>
+                                <a href="#warning" >warning</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -277,6 +280,10 @@
                                 <a href="#autocompleteDescriptionWithIA" >autocompleteDescriptionWithIA</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#mapCreateError" >mapCreateError</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
@@ -288,6 +295,11 @@
                             </li>
                             <li>
                                 <a href="#onMapCoordinatesChange" >onMapCoordinatesChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#resolveLocationFromCoordinates" >resolveLocationFromCoordinates</a>
                             </li>
                             <li>
                                 <a href="#triggerFileInput" >triggerFileInput</a>
@@ -334,12 +346,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(formSvc: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, auth: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, activityService: <a href="../injectables/ActivityService.html" target="_self">ActivityService</a>, ActivityTypeService: <a href="../injectables/ActivityTypeService.html" target="_self">ActivityTypeService</a>, mediaService: <a href="../injectables/CloudinaryService.html" target="_self">CloudinaryService</a>, iaAssistantService: <a href="../injectables/IaAssistantService.html" target="_self">IaAssistantService</a>, translationService: <a href="../injectables/TranslationService.html" target="_self">TranslationService</a>)</code>
+<code>constructor(formSvc: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, auth: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, activityService: <a href="../injectables/ActivityService.html" target="_self">ActivityService</a>, ActivityTypeService: <a href="../injectables/ActivityTypeService.html" target="_self">ActivityTypeService</a>, mediaService: <a href="../injectables/CloudinaryService.html" target="_self">CloudinaryService</a>, iaAssistantService: <a href="../injectables/IaAssistantService.html" target="_self">IaAssistantService</a>, mapsService: <a href="../injectables/MapsService.html" target="_self">MapsService</a>, moderationService: <a href="../injectables/ContentModerationService.html" target="_self">ContentModerationService</a>, translationService: <a href="../injectables/TranslationService.html" target="_self">TranslationService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:73</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:78</a></div>
                             </td>
                         </tr>
 
@@ -453,6 +465,30 @@
                                                     
                                                 </tr>
                                                 <tr>
+                                                        <td>mapsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MapsService.html" target="_self" >MapsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>moderationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ContentModerationService.html" target="_self" >ContentModerationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
                                                         <td>translationService</td>
                                                   
                                                         <td>
@@ -504,8 +540,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="267"
-                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:267</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="395"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:395</a></div>
                         </td>
                     </tr>
 
@@ -520,6 +556,75 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mapCreateError"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>mapCreateError</b></span>
+                        <a href="#mapCreateError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>mapCreateError(error: unknown)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="367"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:367</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>error</td>
+                                            <td>
+                                                        <code>unknown</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -544,8 +649,8 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="122"
-                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:122</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:131</a></div>
                         </td>
                     </tr>
 
@@ -585,8 +690,8 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="207"
-                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:207</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="234"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:234</a></div>
                         </td>
                     </tr>
 
@@ -624,8 +729,8 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="158"
-                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:158</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="167"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:167</a></div>
                         </td>
                     </tr>
 
@@ -693,8 +798,8 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="142"
-                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:142</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:151</a></div>
                         </td>
                     </tr>
 
@@ -746,6 +851,88 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="resolveLocationFromCoordinates"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>resolveLocationFromCoordinates</b></span>
+                        <a href="#resolveLocationFromCoordinates"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resolveLocationFromCoordinates(latitude: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, longitude: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="348"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:348</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>latitude</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>longitude</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="triggerFileInput"></a>
                     <span class="name">
                         <span ><b>triggerFileInput</b></span>
@@ -762,8 +949,8 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="71"
-                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:71</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -803,8 +990,8 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="181"
-                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:181</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="208"
+                                    class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:208</a></div>
                         </td>
                     </tr>
 
@@ -847,7 +1034,7 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:58</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:63</a></div>
                         </td>
                     </tr>
 
@@ -884,7 +1071,7 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:60</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -921,7 +1108,7 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -963,7 +1150,7 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -995,7 +1182,7 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -1032,7 +1219,7 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:69</a></div>
                         </td>
                     </tr>
 
@@ -1069,7 +1256,7 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -1106,7 +1293,7 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:66</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:71</a></div>
                         </td>
                     </tr>
 
@@ -1143,7 +1330,7 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:62</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:67</a></div>
                         </td>
                     </tr>
 
@@ -1180,13 +1367,50 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:57</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Mensaje de éxito para UI.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="warning"></a>
+                    <span class="name">
+                        <span ><b>warning</b></span>
+                        <a href="#warning"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Aviso moderado para UI.</p>
 </div>
                 </td>
             </tr>
@@ -1215,7 +1439,7 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:132</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:141</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1248,7 +1472,7 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:137</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:146</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1281,7 +1505,7 @@ Si ya hay texto en descripción, se usa como base para mejorar el resultado.</p>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="153" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:153</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/features/activities/activities-creation/activities.component.ts:162</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1313,6 +1537,7 @@ import {
 } from &#x27;@angular/forms&#x27;;
 import { Router, RouterModule } from &#x27;@angular/router&#x27;;
 import { firstValueFrom } from &#x27;rxjs&#x27;;
+import { HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
 import { LanguageSelectorComponent } from &#x27;../../../common/language-selector/language-selector.component&#x27;;
 import { MapPreviewComponent } from &#x27;../../../common/maps/map-preview.component&#x27;;
 import { ActivityType } from &#x27;../../../common/models/activityType.models&#x27;;
@@ -1323,6 +1548,8 @@ import { ActivityTypeService } from &#x27;../../../core/services/activitytype.se
 import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
 import { CloudinaryService } from &#x27;../../../core/services/firebase-media.service&#x27;;
 import { IaAssistantService } from &#x27;../../../core/services/ia-assistant.service&#x27;;
+import { MapsService } from &#x27;../../../core/services/maps.service&#x27;;
+import { ContentModerationService } from &#x27;../../../core/services/content-moderation.service&#x27;;
 import { TranslationService } from &#x27;../../../core/services/translation.service&#x27;;
 import { UserService } from &#x27;../../../core/services/user.service&#x27;;
 
@@ -1357,6 +1584,8 @@ export class ActivitiesCreationComponent {
   error &#x3D; &#x27;&#x27;;
   /** Mensaje de éxito para UI. */
   success &#x3D; &#x27;&#x27;;
+  /** Aviso moderado para UI. */
+  warning &#x3D; &#x27;&#x27;;
   /** Formulario reactivo de creación. */
   formActivityCreation: FormGroup;
   /** Catálogo de tipos (para selects). */
@@ -1394,6 +1623,10 @@ export class ActivitiesCreationComponent {
     private mediaService: CloudinaryService,
     /** Servicio IA para autocompletar descripciones. */
     private iaAssistantService: IaAssistantService,
+    /** Servicio de geocodificación base. */
+    private mapsService: MapsService,
+    /** Servicio de moderación de contenido básico. */
+    private moderationService: ContentModerationService,
     /** Servicio de traducción runtime para mensajes en TS. */
     private translationService: TranslationService
   ) {
@@ -1472,6 +1705,24 @@ export class ActivitiesCreationComponent {
         this.error &#x3D; &#x27;La imagen no debe superar los 5MB&#x27;;
         return;
       }
+      const imageModeration &#x3D; this.moderationService.moderateImageFile(file);
+      if (imageModeration.blocked) {
+        this.error &#x3D; this.translationService.get(
+          &#x27;moderation.blockedImage&#x27;,
+          &#x27;La imagen parece no apropiada y no se puede publicar.&#x27;
+        );
+        this.selectedFile &#x3D; null;
+        this.imagePreview &#x3D; null;
+        return;
+      }
+      if (imageModeration.warning) {
+        this.warning &#x3D; this.translationService.get(
+          &#x27;moderation.warningImage&#x27;,
+          &#x27;La imagen parece sospechosa y podria ser revisada por moderacion.&#x27;
+        );
+      } else {
+        this.warning &#x3D; &#x27;&#x27;;
+      }
       this.selectedFile &#x3D; file;
       this.error &#x3D; &#x27;&#x27;;
       const reader &#x3D; new FileReader();
@@ -1519,26 +1770,78 @@ export class ActivitiesCreationComponent {
       this.formActivityCreation.markAllAsTouched();
       return;
     }
+    this.warning &#x3D; &#x27;&#x27;;
+
+    const moderation &#x3D; this.moderationService.moderateActivityInput(
+      this.formActivityCreation.value.name,
+      this.formActivityCreation.value.description,
+      this.selectedFile
+    );
+    if (moderation.blocked) {
+      this.error &#x3D; this.translationService.get(
+        &#x27;moderation.blockedContent&#x27;,
+        &#x27;Se detecto contenido no apropiado en texto o imagen.&#x27;
+      );
+      return;
+    }
+    if (moderation.warning) {
+      this.warning &#x3D; this.translationService.get(
+        &#x27;moderation.warningContent&#x27;,
+        &#x27;Contenido potencialmente sensible detectado. Pasara a revision manual.&#x27;
+      );
+    }
 
     const selectedActivityType &#x3D; this.activityTypes.find(
       (type: ActivityType) &#x3D;&gt;
         type.name &#x3D;&#x3D;&#x3D; this.formActivityCreation.value.activityType
     );
 
+    const groqImageModeration &#x3D; await firstValueFrom(
+      this.iaAssistantService.moderateImageFileWithGroq(this.selectedFile),
+    );
+    if (groqImageModeration.blocked) {
+      this.error &#x3D; this.translationService.get(
+        &#x27;moderation.blockedImage&#x27;,
+        &#x27;La imagen parece no apropiada y no se puede publicar.&#x27;,
+      );
+      return;
+    }
+    if (groqImageModeration.warning) {
+      this.warning &#x3D; this.translationService.get(
+        &#x27;moderation.warningImage&#x27;,
+        &#x27;No se pudo validar la imagen completamente con IA. Se publicara con controles basicos.&#x27;,
+      );
+    }
+
     const imageUrl &#x3D; await this.uploadImage();
     if (!imageUrl) return;
+
+    const latitude &#x3D; Number(this.formActivityCreation.value.latitude);
+    const longitude &#x3D; Number(this.formActivityCreation.value.longitude);
+    if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+      this.error &#x3D; &#x27;Latitud/longitud no validas&#x27;;
+      return;
+    }
+    const location &#x3D; await this.resolveLocationFromCoordinates(latitude, longitude);
 
     const activityData &#x3D; {
       name: this.formActivityCreation.value.name,
       description: this.formActivityCreation.value.description,
-      latitude: this.formActivityCreation.value.latitude,
-      longitude: this.formActivityCreation.value.longitude,
+      latitude,
+      longitude,
+      location,
       imageRef: imageUrl,
       activityTypeId: selectedActivityType ? selectedActivityType.id : null,
       createdAt: Date.now(),
       ownerId: this.auth.currentUser,
       rating: 0,
       price: parseFloat(this.formActivityCreation.value.price) || 0,
+      moderationResult: {
+        blocked: moderation.blocked || groqImageModeration.blocked,
+        warning: moderation.warning || groqImageModeration.warning,
+        score: Math.min(1, Math.max(moderation.score, groqImageModeration.score)),
+        reasons: [...new Set([...moderation.reasons, ...groqImageModeration.reasons])],
+      },
     };
 
     try {
@@ -1548,6 +1851,7 @@ export class ActivitiesCreationComponent {
 
       this.activityService.createActivity(activityData, token).subscribe({
         next: (res) &#x3D;&gt; {
+          console.log(&#x27;[createActivity] Respuesta servidor (success):&#x27;, res);
           this.userService.createActivity(user.uid, res.id, token).subscribe();
           this.success &#x3D; &#x27;Actividad creada con éxito&#x27;;
           setTimeout(() &#x3D;&gt; {
@@ -1555,14 +1859,62 @@ export class ActivitiesCreationComponent {
           }, 1000);
         },
         error: (err) &#x3D;&gt; {
-          this.error &#x3D;
-            &#x27;Error al crear la actividad. Por favor, intenta nuevamente.&#x27;;
+          console.log(&#x27;[createActivity] Respuesta servidor (error):&#x27;, {
+            status: err?.status,
+            message: err?.error?.message,
+            errors: err?.error?.errors,
+            raw: err,
+          });
+          this.error &#x3D; this.mapCreateError(err);
         },
       });
     } catch (err) {
       this.error &#x3D;
         &#x27;Error de autenticación. Por favor, inicia sesión nuevamente.&#x27;;
     }
+  }
+
+  private async resolveLocationFromCoordinates(latitude: number, longitude: number): Promise&lt;string&gt; {
+    try {
+      const geocodedAddress &#x3D; await firstValueFrom(
+        this.mapsService.getAddress(latitude, longitude),
+      );
+      const fallbackAddress &#x3D; (geocodedAddress || &#x27;&#x27;).trim() || &#x60;${latitude.toFixed(5)}, ${longitude.toFixed(5)}&#x60;;
+      const aiLocation &#x3D; await firstValueFrom(
+        this.iaAssistantService.suggestLocationLabelQueued(
+          fallbackAddress,
+          latitude,
+          longitude,
+        ),
+      );
+      return (aiLocation || &#x27;&#x27;).trim() || fallbackAddress;
+    } catch {
+      return &#x60;${latitude.toFixed(5)}, ${longitude.toFixed(5)}&#x60;;
+    }
+  }
+
+  private mapCreateError(error: unknown): string {
+    if (error instanceof HttpErrorResponse) {
+      if (error.status &#x3D;&#x3D;&#x3D; 400) {
+        return this.translationService.get(
+          &#x27;moderation.backendMissingModeration&#x27;,
+          &#x27;No se pudo validar la moderacion del contenido. Revisa los datos e intenta de nuevo.&#x27;
+        );
+      }
+      if (error.status &#x3D;&#x3D;&#x3D; 422) {
+        return this.translationService.get(
+          &#x27;moderation.blockedContent&#x27;,
+          &#x27;Se detecto contenido no apropiado en texto o imagen.&#x27;
+        );
+      }
+      if (error.status &#x3D;&#x3D;&#x3D; 401 || error.status &#x3D;&#x3D;&#x3D; 403) {
+        return this.translationService.get(
+          &#x27;messages.sessionExpired&#x27;,
+          &#x27;Tu sesion no tiene permisos para esta accion.&#x27;
+        );
+      }
+    }
+    return &#x27;Error al crear la actividad. Por favor, intenta nuevamente.&#x27;;
   }
 
   /**
@@ -1934,11 +2286,11 @@ export class ActivitiesCreationComponent {
         &lt;/div&gt;
       &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;px-6 md:px-10 py-8 bg-slate-50/50 border-t border-slate-100&quot;&gt;
+      &lt;div class&#x3D;&quot;px-6 md:px-10 py-8 bg-slate-50/50 dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800&quot;&gt;
         &lt;div class&#x3D;&quot;mb-8&quot;&gt;
           &lt;div class&#x3D;&quot;flex items-center justify-between gap-3 mb-3 ml-1&quot;&gt;
             &lt;label
-              class&#x3D;&quot;block text-xs font-bold text-brand-primary uppercase tracking-wider&quot;
+              class&#x3D;&quot;block text-xs font-bold text-brand-primary dark:text-slate-400 uppercase tracking-wider&quot;
               &gt;{{ &quot;activities.aboutThisActivity&quot; | translate }}&lt;/label
             &gt;
             &lt;button
@@ -1971,7 +2323,7 @@ export class ActivitiesCreationComponent {
             [appHighlight]&#x3D;&quot;&#x27;#fff7ed&#x27;&quot;
             [highlightDefault]&#x3D;&quot;&#x27;#ffffff&#x27;&quot;
             rows&#x3D;&quot;4&quot;
-            class&#x3D;&quot;w-full bg-white border border-slate-200 rounded-2xl p-5 text-slate-700 leading-relaxed outline-none resize-none transition-all shadow-sm&quot;
+            class&#x3D;&quot;w-full bg-white dark:bg-slate-950 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 text-slate-700 leading-relaxed outline-none resize-none transition-all shadow-sm placeholder-slate-400 dark:placeholder-slate-400&quot;
             onfocus&#x3D;&quot;this.style.borderColor&#x3D;&#x27;#5675AC&#x27;; this.style.boxShadow&#x3D;&#x27;0 0 0 4px rgba(86, 117, 172, 0.1)&#x27;&quot;
             onblur&#x3D;&quot;this.style.borderColor&#x3D;&#x27;#e2e8f0&#x27;; this.style.boxShadow&#x3D;&#x27;none&#x27;&quot;
             [placeholder]&#x3D;&quot;&#x27;activities.describeTheExperience&#x27; | translate&quot;
@@ -2047,6 +2399,24 @@ export class ActivitiesCreationComponent {
           &lt;/svg&gt;
           {{ success }}
         &lt;/div&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;warning&quot;
+          class&#x3D;&quot;mt-4 p-3 bg-amber-50 text-amber-700 text-sm font-medium rounded-lg text-center border border-amber-200 flex items-center justify-center gap-2&quot;
+        &gt;
+          &lt;svg
+            xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+            viewBox&#x3D;&quot;0 0 20 20&quot;
+            fill&#x3D;&quot;currentColor&quot;
+            class&#x3D;&quot;w-4 h-4&quot;
+          &gt;
+            &lt;path
+              fill-rule&#x3D;&quot;evenodd&quot;
+              d&#x3D;&quot;M18 10A8 8 0 112 10a8 8 0 0116 0zm-8-4a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 6zm0 7a1 1 0 100 2 1 1 0 000-2z&quot;
+              clip-rule&#x3D;&quot;evenodd&quot;
+            /&gt;
+          &lt;/svg&gt;
+          {{ warning }}
+        &lt;/div&gt;
       &lt;/div&gt;
     &lt;/form&gt;
   &lt;/div&gt;
@@ -2080,7 +2450,7 @@ export class ActivitiesCreationComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><header  class="bg-brand-primary px-4 flex justify-between items-center h-16 sticky top-0 z-50 shadow-md">  <div class="flex items-center gap-4">    <a      routerLink="/activitiesList"      aria-label="Volver atrás"      class="text-white hover:text-gray-200 transition-colors"    >      <svg        xmlns="http://www.w3.org/2000/svg"        fill="none"        viewBox="0 0 24 24"        stroke-width="2.5"        stroke="currentColor"        class="w-8 h-8"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h17.5"        />      </svg>    </a>    <div class="text-white font-semibold text-lg">      {{ "activities.createTitle" | translate }}    </div>  </div>  <div class="relative z-50">    <app-language-selector></app-language-selector>  </div></header><main  class="flex-grow flex justify-center items-start pt-10 px-4 pb-10 min-h-screen bg-gradient-to-br from-slate-200 via-slate-300/50 to-brand-muted/30 motion-safe:animate-[pageSoft_.42s_ease-out]">  <div    class="bg-white w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden border border-slate-300 ring-1 ring-black/10"  >    <form      [formGroup]="formActivityCreation"      (submit)="onCreate()"      class="flex flex-col"    >      <div class="grid grid-cols-1 lg:grid-cols-5 h-full">        <div          class="lg:col-span-2 relative min-h-[350px] lg:min-h-full group overflow-hidden bg-slate-100 p-4 lg:p-5"        >          <div            (click)="triggerFileInput()"            class="w-full h-full rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 bg-white cursor-pointer relative"          >            @if (currentImage) {            <img              [src]="currentImage"              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"              alt="Activity Preview"            />            } @else {            <div              class="w-full h-full bg-slate-100 text-slate-400 text-sm font-medium flex items-center justify-center"            >              {{ "activities.uploadImage" | translate }}            </div>            }            <div              class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center"            >              <div                class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center"              >                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-12 w-12 mx-auto mb-2"                  fill="none"                  viewBox="0 0 24 24"                  stroke="currentColor"                  stroke-width="1.5"                >                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"                  />                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"                  />                </svg>                <p class="text-sm font-medium">                  {{ "activities.uploadImage" | translate }}                </p>              </div>            </div>          </div>          <input            #fileInput            type="file"            accept="image/*"            (change)="onFileSelected($event)"            class="hidden"          />          @if(isUploading) {          <div            class="absolute bottom-6 left-6 right-6 lg:bottom-7 lg:left-7 lg:right-7 z-10"          >            <div              class="bg-white/90 backdrop-blur-md p-3 rounded-2xl border border-white/40 shadow-lg"            >              <p                class="text-xs text-blue-600 flex items-center justify-center gap-2"              >                <svg                  class="animate-spin h-4 w-4"                  xmlns="http://www.w3.org/2000/svg"                  fill="none"                  viewBox="0 0 24 24"                >                  <circle                    class="opacity-25"                    cx="12"                    cy="12"                    r="10"                    stroke="currentColor"                    stroke-width="4"                  ></circle>                  <path                    class="opacity-75"                    fill="currentColor"                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"                  ></path>                </svg>                {{ "messages.loading" | translate }}...              </p>            </div>          </div>          }        </div>        <div class="lg:col-span-3 p-6 md:p-10 flex flex-col gap-8">          <div class="relative group">            <label              class="absolute -top-2.5 left-3 bg-white px-2 text-xs font-bold uppercase tracking-wider"              style="color: #5675ac"              >{{ "activities.activityName" | translate }}</label            >            <input              type="text"              formControlName="name"              class="w-full bg-white border-2 border-slate-100 rounded-xl px-4 py-4 text-xl font-bold text-slate-800 placeholder-slate-300 focus:outline-none focus:ring-4 transition-all"              style="border-color: transparent; outline: none"              [style.borderColor]="\'#e2e8f0\'"              onfocus="this.style.borderColor=\'#5675AC\'; this.style.boxShadow=\'0 0 0 4px rgba(86, 117, 172, 0.1)\'"              onblur="this.style.borderColor=\'#e2e8f0\'; this.style.boxShadow=\'none\'"              [placeholder]="\'activities.activityNamePlaceholder\' | translate"            />          </div>          <div class="grid grid-cols-2 gap-4">            <div>              <label                class="block text-xs font-bold text-brand-primary uppercase tracking-wider mb-2 ml-1"                >{{ "activities.category" | translate }}</label              >              <div class="relative">                <select                  formControlName="activityType"                  class="appearance-none w-full bg-slate-50 border border-slate-200 text-slate-700 font-medium rounded-xl px-4 py-3 pr-10 focus:outline-none focus:bg-white transition-colors cursor-pointer"                  onfocus="this.style.borderColor=\'#5675AC\'"                  onblur="this.style.borderColor=\'#e2e8f0\'"                >                  <option *ngFor="let name of activityTypesName" [value]="name">                    {{ name }}                  </option>                </select>                <div                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500"                >                  <svg                    xmlns="http://www.w3.org/2000/svg"                    viewBox="0 0 20 20"                    fill="currentColor"                    class="w-5 h-5"                  >                    <path                      fill-rule="evenodd"                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"                      clip-rule="evenodd"                    />                  </svg>                </div>              </div>            </div>            <div>              <label                class="block text-xs font-bold text-brand-primary uppercase tracking-wider mb-2 ml-1"                >{{ "activities.price" | translate }}</label              >              <div class="relative">                <span                  class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium"                  >€</span                >                <input                  type="number"                  formControlName="price"                  class="w-full bg-slate-50 border border-slate-200 text-slate-700 font-medium rounded-xl pl-8 pr-4 py-3 focus:outline-none focus:bg-white transition-colors"                  onfocus="this.style.borderColor=\'#5675AC\'"                  onblur="this.style.borderColor=\'#e2e8f0\'"                  [placeholder]="\'activities.pricePlaceholder\' | translate"                  min="0"                  step="0.01"                />              </div>            </div>          </div>          <div class="bg-slate-50 rounded-2xl p-1 border border-slate-100">            <div class="p-3 pb-0 flex items-center gap-2 mb-3">              <div                class="p-1.5 rounded-lg text-white"                style="background-color: #5675ac"              >                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-4 w-4"                  viewBox="0 0 20 20"                  fill="currentColor"                >                  <path                    fill-rule="evenodd"                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"                    clip-rule="evenodd"                  />                </svg>              </div>              <span                class="text-xs font-bold text-brand-primary uppercase tracking-wider"                >{{ "activities.location" | translate }}</span              >            </div>            <div class="grid grid-cols-2 gap-4 px-3 mb-3">              <div>                <input                  type="text"                  formControlName="latitude"                  [placeholder]="\'activities.latitude\' | translate"                  class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono text-slate-600 focus:outline-none transition-colors"                  onfocus="this.style.borderColor=\'#5675AC\'"                  onblur="this.style.borderColor=\'#e2e8f0\'"                />              </div>              <div>                <input                  type="text"                  formControlName="longitude"                  [placeholder]="\'activities.longitude\' | translate"                  class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono text-slate-600 focus:outline-none transition-colors"                  onfocus="this.style.borderColor=\'#5675AC\'"                  onblur="this.style.borderColor=\'#e2e8f0\'"                />              </div>            </div>            <div              class="relative h-48 rounded-xl overflow-hidden border border-white shadow-sm mx-1 mb-1 bg-slate-200"            >              <app-map-preview                [latitude]="mapLatitude"                [longitude]="mapLongitude"                [interactive]="true"                markerColor="#5675AC"                (coordinatesChange)="onMapCoordinatesChange($event)"              >              </app-map-preview>            </div>            <p class="text-[10px] text-slate-400 text-center mt-1 mx-1">              {{ "activities.clickMapToSetLocation" | translate }}            </p>          </div>        </div>      </div>      <div class="px-6 md:px-10 py-8 bg-slate-50/50 border-t border-slate-100">        <div class="mb-8">          <div class="flex items-center justify-between gap-3 mb-3 ml-1">            <label              class="block text-xs font-bold text-brand-primary uppercase tracking-wider"              >{{ "activities.aboutThisActivity" | translate }}</label            >            <button              type="button"              (click)="autocompleteDescriptionWithIA()"              [disabled]="isGeneratingDescription"              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#5675AC] text-white text-xs font-semibold hover:bg-[#4a6399] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"            >              <svg                xmlns="http://www.w3.org/2000/svg"                viewBox="0 0 20 20"                fill="currentColor"                class="w-4 h-4"              >                <path                  d="M10.428 1.151a.75.75 0 00-1.356 0L6.933 5.429 2.655 7.568a.75.75 0 000 1.342l4.278 2.139 2.139 4.278a.75.75 0 001.356 0l2.139-4.278 4.278-2.139a.75.75 0 000-1.342l-4.278-2.139-2.139-4.278z"                />                <path                  d="M16.5 13.5a.75.75 0 00-1.5 0v1.25h-1.25a.75.75 0 000 1.5H15V17.5a.75.75 0 001.5 0v-1.25h1.25a.75.75 0 000-1.5H16.5V13.5z"                />              </svg>              @if(isGeneratingDescription) {              {{ "messages.generatingWithAI" | translate : "generando con ia..." }} } @else {              {{ "messages.autocompleteWithAI" | translate : "autocompletar con ia" }} }            </button>          </div>          <textarea            formControlName="description"            appHighlight            [appHighlight]="\'#fff7ed\'"            [highlightDefault]="\'#ffffff\'"            rows="4"            class="w-full bg-white border border-slate-200 rounded-2xl p-5 text-slate-700 leading-relaxed outline-none resize-none transition-all shadow-sm"            onfocus="this.style.borderColor=\'#5675AC\'; this.style.boxShadow=\'0 0 0 4px rgba(86, 117, 172, 0.1)\'"            onblur="this.style.borderColor=\'#e2e8f0\'; this.style.boxShadow=\'none\'"            [placeholder]="\'activities.describeTheExperience\' | translate"          ></textarea>        </div>        <button          type="submit"          [disabled]="formActivityCreation.invalid || isUploading"          class="group w-full relative text-white font-bold py-4 rounded-xl text-lg shadow-xl transition-all transform hover:-translate-y-0.5 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none overflow-hidden"          style="            background-color: #5675ac;            box-shadow: 0 10px 15px -3px rgba(86, 117, 172, 0.3);          "        >          <div            class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"          ></div>          <span class="flex items-center justify-center gap-2 relative z-10">            <svg              xmlns="http://www.w3.org/2000/svg"              viewBox="0 0 20 20"              fill="currentColor"              class="w-5 h-5"            >              <path                fill-rule="evenodd"                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"                clip-rule="evenodd"              />            </svg>            @if(isUploading) {            {{ "messages.loading" | translate }}... } @else {            {{ "activities.create" | translate }}            }          </span>        </button>        <div          *ngIf="error"          class="mt-4 p-3 bg-red-50 text-red-600 text-sm font-medium rounded-lg text-center border border-red-100 flex items-center justify-center gap-2 animate-pulse"        >          <svg            xmlns="http://www.w3.org/2000/svg"            viewBox="0 0 20 20"            fill="currentColor"            class="w-4 h-4"          >            <path              fill-rule="evenodd"              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"              clip-rule="evenodd"            />          </svg>          {{ error }}        </div>        <div          *ngIf="success"          class="mt-4 p-3 bg-green-50 text-green-700 text-sm font-medium rounded-lg text-center border border-green-100 flex items-center justify-center gap-2"        >          <svg            xmlns="http://www.w3.org/2000/svg"            viewBox="0 0 20 20"            fill="currentColor"            class="w-4 h-4"          >            <path              fill-rule="evenodd"              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"              clip-rule="evenodd"            />          </svg>          {{ success }}        </div>      </div>    </form>  </div></main></div>'
+        var COMPONENT_TEMPLATE = '<div><header  class="bg-brand-primary px-4 flex justify-between items-center h-16 sticky top-0 z-50 shadow-md">  <div class="flex items-center gap-4">    <a      routerLink="/activitiesList"      aria-label="Volver atrás"      class="text-white hover:text-gray-200 transition-colors"    >      <svg        xmlns="http://www.w3.org/2000/svg"        fill="none"        viewBox="0 0 24 24"        stroke-width="2.5"        stroke="currentColor"        class="w-8 h-8"      >        <path          stroke-linecap="round"          stroke-linejoin="round"          d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h17.5"        />      </svg>    </a>    <div class="text-white font-semibold text-lg">      {{ "activities.createTitle" | translate }}    </div>  </div>  <div class="relative z-50">    <app-language-selector></app-language-selector>  </div></header><main  class="flex-grow flex justify-center items-start pt-10 px-4 pb-10 min-h-screen bg-gradient-to-br from-slate-200 via-slate-300/50 to-brand-muted/30 motion-safe:animate-[pageSoft_.42s_ease-out]">  <div    class="bg-white w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden border border-slate-300 ring-1 ring-black/10"  >    <form      [formGroup]="formActivityCreation"      (submit)="onCreate()"      class="flex flex-col"    >      <div class="grid grid-cols-1 lg:grid-cols-5 h-full">        <div          class="lg:col-span-2 relative min-h-[350px] lg:min-h-full group overflow-hidden bg-slate-100 p-4 lg:p-5"        >          <div            (click)="triggerFileInput()"            class="w-full h-full rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 bg-white cursor-pointer relative"          >            @if (currentImage) {            <img              [src]="currentImage"              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"              alt="Activity Preview"            />            } @else {            <div              class="w-full h-full bg-slate-100 text-slate-400 text-sm font-medium flex items-center justify-center"            >              {{ "activities.uploadImage" | translate }}            </div>            }            <div              class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center"            >              <div                class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center"              >                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-12 w-12 mx-auto mb-2"                  fill="none"                  viewBox="0 0 24 24"                  stroke="currentColor"                  stroke-width="1.5"                >                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"                  />                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"                  />                </svg>                <p class="text-sm font-medium">                  {{ "activities.uploadImage" | translate }}                </p>              </div>            </div>          </div>          <input            #fileInput            type="file"            accept="image/*"            (change)="onFileSelected($event)"            class="hidden"          />          @if(isUploading) {          <div            class="absolute bottom-6 left-6 right-6 lg:bottom-7 lg:left-7 lg:right-7 z-10"          >            <div              class="bg-white/90 backdrop-blur-md p-3 rounded-2xl border border-white/40 shadow-lg"            >              <p                class="text-xs text-blue-600 flex items-center justify-center gap-2"              >                <svg                  class="animate-spin h-4 w-4"                  xmlns="http://www.w3.org/2000/svg"                  fill="none"                  viewBox="0 0 24 24"                >                  <circle                    class="opacity-25"                    cx="12"                    cy="12"                    r="10"                    stroke="currentColor"                    stroke-width="4"                  ></circle>                  <path                    class="opacity-75"                    fill="currentColor"                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"                  ></path>                </svg>                {{ "messages.loading" | translate }}...              </p>            </div>          </div>          }        </div>        <div class="lg:col-span-3 p-6 md:p-10 flex flex-col gap-8">          <div class="relative group">            <label              class="absolute -top-2.5 left-3 bg-white px-2 text-xs font-bold uppercase tracking-wider"              style="color: #5675ac"              >{{ "activities.activityName" | translate }}</label            >            <input              type="text"              formControlName="name"              class="w-full bg-white border-2 border-slate-100 rounded-xl px-4 py-4 text-xl font-bold text-slate-800 placeholder-slate-300 focus:outline-none focus:ring-4 transition-all"              style="border-color: transparent; outline: none"              [style.borderColor]="\'#e2e8f0\'"              onfocus="this.style.borderColor=\'#5675AC\'; this.style.boxShadow=\'0 0 0 4px rgba(86, 117, 172, 0.1)\'"              onblur="this.style.borderColor=\'#e2e8f0\'; this.style.boxShadow=\'none\'"              [placeholder]="\'activities.activityNamePlaceholder\' | translate"            />          </div>          <div class="grid grid-cols-2 gap-4">            <div>              <label                class="block text-xs font-bold text-brand-primary uppercase tracking-wider mb-2 ml-1"                >{{ "activities.category" | translate }}</label              >              <div class="relative">                <select                  formControlName="activityType"                  class="appearance-none w-full bg-slate-50 border border-slate-200 text-slate-700 font-medium rounded-xl px-4 py-3 pr-10 focus:outline-none focus:bg-white transition-colors cursor-pointer"                  onfocus="this.style.borderColor=\'#5675AC\'"                  onblur="this.style.borderColor=\'#e2e8f0\'"                >                  <option *ngFor="let name of activityTypesName" [value]="name">                    {{ name }}                  </option>                </select>                <div                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500"                >                  <svg                    xmlns="http://www.w3.org/2000/svg"                    viewBox="0 0 20 20"                    fill="currentColor"                    class="w-5 h-5"                  >                    <path                      fill-rule="evenodd"                      d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"                      clip-rule="evenodd"                    />                  </svg>                </div>              </div>            </div>            <div>              <label                class="block text-xs font-bold text-brand-primary uppercase tracking-wider mb-2 ml-1"                >{{ "activities.price" | translate }}</label              >              <div class="relative">                <span                  class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium"                  >€</span                >                <input                  type="number"                  formControlName="price"                  class="w-full bg-slate-50 border border-slate-200 text-slate-700 font-medium rounded-xl pl-8 pr-4 py-3 focus:outline-none focus:bg-white transition-colors"                  onfocus="this.style.borderColor=\'#5675AC\'"                  onblur="this.style.borderColor=\'#e2e8f0\'"                  [placeholder]="\'activities.pricePlaceholder\' | translate"                  min="0"                  step="0.01"                />              </div>            </div>          </div>          <div class="bg-slate-50 rounded-2xl p-1 border border-slate-100">            <div class="p-3 pb-0 flex items-center gap-2 mb-3">              <div                class="p-1.5 rounded-lg text-white"                style="background-color: #5675ac"              >                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-4 w-4"                  viewBox="0 0 20 20"                  fill="currentColor"                >                  <path                    fill-rule="evenodd"                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"                    clip-rule="evenodd"                  />                </svg>              </div>              <span                class="text-xs font-bold text-brand-primary uppercase tracking-wider"                >{{ "activities.location" | translate }}</span              >            </div>            <div class="grid grid-cols-2 gap-4 px-3 mb-3">              <div>                <input                  type="text"                  formControlName="latitude"                  [placeholder]="\'activities.latitude\' | translate"                  class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono text-slate-600 focus:outline-none transition-colors"                  onfocus="this.style.borderColor=\'#5675AC\'"                  onblur="this.style.borderColor=\'#e2e8f0\'"                />              </div>              <div>                <input                  type="text"                  formControlName="longitude"                  [placeholder]="\'activities.longitude\' | translate"                  class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm font-mono text-slate-600 focus:outline-none transition-colors"                  onfocus="this.style.borderColor=\'#5675AC\'"                  onblur="this.style.borderColor=\'#e2e8f0\'"                />              </div>            </div>            <div              class="relative h-48 rounded-xl overflow-hidden border border-white shadow-sm mx-1 mb-1 bg-slate-200"            >              <app-map-preview                [latitude]="mapLatitude"                [longitude]="mapLongitude"                [interactive]="true"                markerColor="#5675AC"                (coordinatesChange)="onMapCoordinatesChange($event)"              >              </app-map-preview>            </div>            <p class="text-[10px] text-slate-400 text-center mt-1 mx-1">              {{ "activities.clickMapToSetLocation" | translate }}            </p>          </div>        </div>      </div>      <div class="px-6 md:px-10 py-8 bg-slate-50/50 dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">        <div class="mb-8">          <div class="flex items-center justify-between gap-3 mb-3 ml-1">            <label              class="block text-xs font-bold text-brand-primary dark:text-slate-400 uppercase tracking-wider"              >{{ "activities.aboutThisActivity" | translate }}</label            >            <button              type="button"              (click)="autocompleteDescriptionWithIA()"              [disabled]="isGeneratingDescription"              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#5675AC] text-white text-xs font-semibold hover:bg-[#4a6399] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"            >              <svg                xmlns="http://www.w3.org/2000/svg"                viewBox="0 0 20 20"                fill="currentColor"                class="w-4 h-4"              >                <path                  d="M10.428 1.151a.75.75 0 00-1.356 0L6.933 5.429 2.655 7.568a.75.75 0 000 1.342l4.278 2.139 2.139 4.278a.75.75 0 001.356 0l2.139-4.278 4.278-2.139a.75.75 0 000-1.342l-4.278-2.139-2.139-4.278z"                />                <path                  d="M16.5 13.5a.75.75 0 00-1.5 0v1.25h-1.25a.75.75 0 000 1.5H15V17.5a.75.75 0 001.5 0v-1.25h1.25a.75.75 0 000-1.5H16.5V13.5z"                />              </svg>              @if(isGeneratingDescription) {              {{ "messages.generatingWithAI" | translate : "generando con ia..." }} } @else {              {{ "messages.autocompleteWithAI" | translate : "autocompletar con ia" }} }            </button>          </div>          <textarea            formControlName="description"            appHighlight            [appHighlight]="\'#fff7ed\'"            [highlightDefault]="\'#ffffff\'"            rows="4"            class="w-full bg-white dark:bg-slate-950 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 text-slate-700 leading-relaxed outline-none resize-none transition-all shadow-sm placeholder-slate-400 dark:placeholder-slate-400"            onfocus="this.style.borderColor=\'#5675AC\'; this.style.boxShadow=\'0 0 0 4px rgba(86, 117, 172, 0.1)\'"            onblur="this.style.borderColor=\'#e2e8f0\'; this.style.boxShadow=\'none\'"            [placeholder]="\'activities.describeTheExperience\' | translate"          ></textarea>        </div>        <button          type="submit"          [disabled]="formActivityCreation.invalid || isUploading"          class="group w-full relative text-white font-bold py-4 rounded-xl text-lg shadow-xl transition-all transform hover:-translate-y-0.5 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none overflow-hidden"          style="            background-color: #5675ac;            box-shadow: 0 10px 15px -3px rgba(86, 117, 172, 0.3);          "        >          <div            class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"          ></div>          <span class="flex items-center justify-center gap-2 relative z-10">            <svg              xmlns="http://www.w3.org/2000/svg"              viewBox="0 0 20 20"              fill="currentColor"              class="w-5 h-5"            >              <path                fill-rule="evenodd"                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"                clip-rule="evenodd"              />            </svg>            @if(isUploading) {            {{ "messages.loading" | translate }}... } @else {            {{ "activities.create" | translate }}            }          </span>        </button>        <div          *ngIf="error"          class="mt-4 p-3 bg-red-50 text-red-600 text-sm font-medium rounded-lg text-center border border-red-100 flex items-center justify-center gap-2 animate-pulse"        >          <svg            xmlns="http://www.w3.org/2000/svg"            viewBox="0 0 20 20"            fill="currentColor"            class="w-4 h-4"          >            <path              fill-rule="evenodd"              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z"              clip-rule="evenodd"            />          </svg>          {{ error }}        </div>        <div          *ngIf="success"          class="mt-4 p-3 bg-green-50 text-green-700 text-sm font-medium rounded-lg text-center border border-green-100 flex items-center justify-center gap-2"        >          <svg            xmlns="http://www.w3.org/2000/svg"            viewBox="0 0 20 20"            fill="currentColor"            class="w-4 h-4"          >            <path              fill-rule="evenodd"              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"              clip-rule="evenodd"            />          </svg>          {{ success }}        </div>        <div          *ngIf="warning"          class="mt-4 p-3 bg-amber-50 text-amber-700 text-sm font-medium rounded-lg text-center border border-amber-200 flex items-center justify-center gap-2"        >          <svg            xmlns="http://www.w3.org/2000/svg"            viewBox="0 0 20 20"            fill="currentColor"            class="w-4 h-4"          >            <path              fill-rule="evenodd"              d="M18 10A8 8 0 112 10a8 8 0 0116 0zm-8-4a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 6zm0 7a1 1 0 100 2 1 1 0 000-2z"              clip-rule="evenodd"            />          </svg>          {{ warning }}        </div>      </div>    </form>  </div></main></div>'
     var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GlobalSearchComponent', 'selector': 'app-global-search'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
     var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
     var ACTUAL_COMPONENT = {'name': 'ActivitiesCreationComponent'};

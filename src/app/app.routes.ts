@@ -8,7 +8,7 @@ import { ActivitiesUpdateComponent } from './features/activities/activity-update
 import { CreatedActivitiesComponent } from './features/activities/created-activities/created-activities.component';
 import { ListActivitiesComponent } from './features/activities/list-activities/list-activities.component';
 import { SavedActivitiesComponent } from './features/activities/saved-activities/saved-activities.component';
-import { ActivitiesModerationComponent } from './features/activities/activities-moderation/activities-moderation.component';
+// ActivitiesModerationComponent eliminado (moderación pendiente deshabilitada)
 import { ActivityTypesCreationComponent } from './features/activity-type/activity-types-creation/activity-types-creation.component';
 import { ActivityTypesDetailComponent } from './features/activity-type/activity-types-detail/activity-types-detail.component';
 import { ActivityTypesListComponent } from './features/activity-type/activity-types-list/activity-types-list.component';
@@ -62,7 +62,7 @@ export const routes: Routes = [
   { path: 'contact', loadComponent: () => import('./features/contact/contact.component').then(m => m.ContactComponent) },
   { path: 'dashboard', component: DashboardComponent, canActivate: [adminGuard] },
   { path: 'admin/reports', component: ReportsModerationComponent, canActivate: [adminGuard] },
-  { path: 'admin/activities/moderation', component: ActivitiesModerationComponent, canActivate: [adminGuard] },
+  // Actividades: moderación pendiente deshabilitada
   {path: 'activitiesCreation', component: ActivitiesCreationComponent, canActivate: [authGuard]},
   {path: 'plansDetail/:id', component: PlansComponent, canActivate: [authGuard]},
   {path: 'activityTypeDetail/:id', component: ActivityTypesDetailComponent, canActivate: [adminGuard]},

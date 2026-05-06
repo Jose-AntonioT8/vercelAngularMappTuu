@@ -329,8 +329,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="235"
-                                    class="link-to-prism">src/app/core/services/reporting.service.ts:235</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="250"
+                                    class="link-to-prism">src/app/core/services/reporting.service.ts:250</a></div>
                         </td>
                     </tr>
 
@@ -400,8 +400,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="241"
-                                    class="link-to-prism">src/app/core/services/reporting.service.ts:241</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="256"
+                                    class="link-to-prism">src/app/core/services/reporting.service.ts:256</a></div>
                         </td>
                     </tr>
 
@@ -651,8 +651,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="223"
-                                    class="link-to-prism">src/app/core/services/reporting.service.ts:223</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="238"
+                                    class="link-to-prism">src/app/core/services/reporting.service.ts:238</a></div>
                         </td>
                     </tr>
 
@@ -1532,13 +1532,28 @@ export class ReportingService {
 
     const actionRaw &#x3D; pickStr(&#x27;resolutionAction&#x27;, &#x27;resolution_action&#x27;);
     const resolutionAction &#x3D;
-      actionRaw &#x3D;&#x3D;&#x3D; &#x27;dismiss&#x27; || actionRaw &#x3D;&#x3D;&#x3D; &#x27;delete_activity&#x27;
+      actionRaw &#x3D;&#x3D;&#x3D; &#x27;dismiss&#x27; ||
+      actionRaw &#x3D;&#x3D;&#x3D; &#x27;delete_activity&#x27; ||
+      actionRaw &#x3D;&#x3D;&#x3D; &#x27;delete_plan&#x27;
         ? actionRaw
         : undefined;
 
+    const targetTypeRaw &#x3D; pickStr(&#x27;targetType&#x27;, &#x27;target_type&#x27;);
+    const targetType &#x3D;
+      targetTypeRaw &#x3D;&#x3D;&#x3D; &#x27;plan&#x27;
+        ? &#x27;plan&#x27;
+        : targetTypeRaw &#x3D;&#x3D;&#x3D; &#x27;activity&#x27;
+          ? &#x27;activity&#x27;
+          : undefined;
+
+    const activityId &#x3D; pickStr(&#x27;activityId&#x27;, &#x27;activity_id&#x27;);
+    const targetId &#x3D; pickStr(&#x27;targetId&#x27;, &#x27;target_id&#x27;) || activityId;
+
     return {
       id: pickStr(&#x27;id&#x27;, &#x27;_id&#x27;),
-      activityId: pickStr(&#x27;activityId&#x27;, &#x27;activity_id&#x27;),
+      targetType,
+      targetId,
+      activityId,
       reporterUserId: pickStr(
         &#x27;reporterUserId&#x27;,
         &#x27;reporter_user_id&#x27;,

@@ -502,6 +502,8 @@ import { Firestore } from &#x27;@angular/fire/firestore&#x27;;
 import { collection, getDocs } from &#x27;firebase/firestore&#x27;;
 import {
   Observable,
+  Subject,
+  concatMap,
   catchError,
   firstValueFrom,
   from,
@@ -536,6 +538,25 @@ interface IaChatResponse {
       content?: string;
     };
   }&gt;;
+}
+
+export interface IaImageModerationResult {
+  blocked: boolean;
+  warning: boolean;
+  score: number;
+  reasons: string[];
+}
+
+interface LocationLabelTask {
+  fallbackAddress: string;
+  latitude: number;
+  longitude: number;
+  response$: Subject&lt;string&gt;;
+}
+
+interface LocationLabelQueueResult {
+  task: LocationLabelTask;
+  value: string;
 }
 
 /**
@@ -649,10 +670,46 @@ export class IaAssistantService {
   private readonly maxFirebaseJsonChars &#x3D; 15000;
   /** Límite de reverse geocoding por pregunta para evitar latencia excesiva. */
   private readonly maxReverseGeocodingLookups &#x3D; 10;
+  /** Cola para peticiones de etiqueta de ubicación (evita sobrecarga de IA). */
+  private readonly locationLabelQueue$ &#x3D; new Subject&lt;LocationLabelTask&gt;();
+  /** Cache en memoria (vive hasta reinicio de app) para etiquetas de ubicación IA. */
+  private readonly locationLabelCache &#x3D; new Map&lt;string, string&gt;();
 
   /** Regex de “tema permitido” para limitar el dominio del asistente. */
   private readonly allowedTopicPattern &#x3D;
     /(plan|planes|actividad|actividades|activity|activities|activitytype|activity type|tipo|tipos|ruta|rutas|itinerario|itinerarios)/i;
+
+  constructor() {
+    this.locationLabelQueue$
+      .pipe(
+        concatMap((task: LocationLabelTask) &#x3D;&gt;
+          this.suggestLocationLabel(
+            task.fallbackAddress,
+            task.latitude,
+            task.longitude,
+          ).pipe(
+            map(
+              (value): LocationLabelQueueResult &#x3D;&gt; ({
+                task,
+                value,
+              }),
+            ),
+            catchError(() &#x3D;&gt;
+              of&lt;LocationLabelQueueResult&gt;({
+                task,
+                value: task.fallbackAddress,
+              }),
+            ),
+            switchMap((payload) &#x3D;&gt; timer(350).pipe(map(() &#x3D;&gt; payload))),
+          ),
+        ),
+      )
+      .subscribe((result: LocationLabelQueueResult) &#x3D;&gt; {
+        const { task, value } &#x3D; result;
+        task.response$.next(value);
+        task.response$.complete();
+      });
+  }
 
   /**
    * Punto de entrada del asistente.
@@ -766,6 +823,170 @@ export class IaAssistantService {
         );
       }),
     );
+  }
+
+  /**
+   * Genera una etiqueta corta de ubicación a partir de geocoding + coordenadas.
+   * Usa el proveedor IA configurado y, si falla, devuelve &#x60;fallbackAddress&#x60;.
+   */
+  suggestLocationLabel(
+    fallbackAddress: string,
+    latitude: number,
+    longitude: number,
+  ): Observable&lt;string&gt; {
+    const model &#x3D; environment.ia.model?.trim();
+    const apiKey &#x3D; environment.ia.apiKey?.trim();
+    const rawApiUrl &#x3D; environment.ia.apiUrl?.trim();
+    const apiUrl &#x3D; this.resolveChatCompletionsUrl(rawApiUrl);
+
+    const cleanAddress &#x3D; (fallbackAddress || &#x27;&#x27;).trim();
+    if (!model || !apiKey || !apiUrl) {
+      return of(cleanAddress);
+    }
+
+    const messages: IaChatMessage[] &#x3D; [
+      {
+        role: &#x27;system&#x27;,
+        content:
+          &#x27;Eres un asistente de geolocalización. Devuelve solo una etiqueta corta de ubicación humana en español (máximo 5 palabras), por ejemplo &quot;Málaga centro&quot; o &quot;Sevilla, Triana&quot;. No uses emojis, ni explicaciones, ni prefijos.&#x27;,
+      },
+      {
+        role: &#x27;user&#x27;,
+        content: [
+          &#x60;Direccion base geocodificada: ${cleanAddress || &#x27;sin direccion&#x27;}&#x60;,
+          &#x60;Latitud: ${latitude}&#x60;,
+          &#x60;Longitud: ${longitude}&#x60;,
+          &#x27;Devuelve solo la mejor etiqueta corta.&#x27;,
+        ].join(&#x27;\n&#x27;),
+      },
+    ];
+
+    const candidateModels &#x3D; [
+      model,
+      ...(environment.ia.fallbackModels || []),
+    ].filter(
+      (candidate, index, all) &#x3D;&gt;
+        !!candidate &amp;&amp; all.indexOf(candidate) &#x3D;&#x3D;&#x3D; index,
+    );
+    const availableCandidateModels &#x3D; candidateModels.filter(
+      (candidate) &#x3D;&gt; !this.unavailableModels.has(candidate),
+    );
+    const modelsToTry &#x3D; (
+      availableCandidateModels.length &gt; 0
+        ? availableCandidateModels
+        : candidateModels
+    ).slice(0, this.maxModelAttempts);
+
+    return this.requestWithModelChain(modelsToTry, messages, apiKey, apiUrl).pipe(
+      map((text) &#x3D;&gt; {
+        const normalized &#x3D; (text || &#x27;&#x27;).trim().replace(/^[&quot;&#x27;]|[&quot;&#x27;]$/g, &#x27;&#x27;);
+        if (!normalized) {
+          return cleanAddress;
+        }
+        const firstLine &#x3D; normalized.split(&#x27;\n&#x27;)[0]?.trim() || cleanAddress;
+        return firstLine || cleanAddress;
+      }),
+      catchError(() &#x3D;&gt; of(cleanAddress)),
+    );
+  }
+
+  /**
+   * Igual que &#x60;suggestLocationLabel&#x60;, pero en cola secuencial para evitar ráfagas.
+   */
+  suggestLocationLabelQueued(
+    fallbackAddress: string,
+    latitude: number,
+    longitude: number,
+  ): Observable&lt;string&gt; {
+    const cacheKey &#x3D; this.buildLocationLabelCacheKey(
+      fallbackAddress,
+      latitude,
+      longitude,
+    );
+    const cachedValue &#x3D; this.locationLabelCache.get(cacheKey);
+    if (cachedValue) {
+      return of(cachedValue);
+    }
+
+    const response$ &#x3D; new Subject&lt;string&gt;();
+    this.locationLabelQueue$.next({
+      fallbackAddress,
+      latitude,
+      longitude,
+      response$,
+    });
+    return response$.asObservable().pipe(
+      map((value) &#x3D;&gt; {
+        const normalized &#x3D; (value || &#x27;&#x27;).trim();
+        const resolved &#x3D; normalized || fallbackAddress;
+        this.locationLabelCache.set(cacheKey, resolved);
+        return resolved;
+      }),
+    );
+  }
+
+  moderateImageUrlWithGroq(imageUrl: string): Observable&lt;IaImageModerationResult&gt; {
+    const apiKey &#x3D; environment.ia.apiKey?.trim();
+    const rawApiUrl &#x3D; environment.ia.apiUrl?.trim();
+    const apiUrl &#x3D; this.resolveChatCompletionsUrl(rawApiUrl);
+    const cleanUrl &#x3D; (imageUrl || &#x27;&#x27;).trim();
+
+    // Modelos de visión (primer intento: el que mencionas en Groq).
+    const visionModels &#x3D; [
+      &#x27;meta-llama/llama-4-scout-17b-16e-instruct&#x27;,
+      &#x27;meta-llama/llama-4-maverick-17b-128e-instruct&#x27;,
+      &#x27;llama-3.2-90b-vision-preview&#x27;,
+    ];
+
+    if (!cleanUrl || !apiKey || !apiUrl) {
+      return of({
+        blocked: false,
+        warning: true,
+        score: 0.5,
+        reasons: [&#x27;groq_moderation_unavailable&#x27;],
+      });
+    }
+
+    return this.requestImageModerationWithModelChain(
+      visionModels,
+      cleanUrl,
+      apiKey,
+      apiUrl,
+    ).pipe(
+      catchError(() &#x3D;&gt;
+        of({
+          blocked: false,
+          warning: true,
+          score: 0.5,
+          reasons: [&#x27;groq_moderation_request_failed&#x27;],
+        }),
+      ),
+    );
+  }
+
+  moderateImageFileWithGroq(file: File): Observable&lt;IaImageModerationResult&gt; {
+    return from(this.fileToDataUrl(file)).pipe(
+      switchMap((dataUrl) &#x3D;&gt; this.moderateImageUrlWithGroq(dataUrl)),
+      catchError(() &#x3D;&gt;
+        of({
+          blocked: false,
+          warning: true,
+          score: 0.5,
+          reasons: [&#x27;groq_moderation_file_encoding_failed&#x27;],
+        }),
+      ),
+    );
+  }
+
+  private buildLocationLabelCacheKey(
+    fallbackAddress: string,
+    latitude: number,
+    longitude: number,
+  ): string {
+    const normalizedAddress &#x3D; (fallbackAddress || &#x27;&#x27;).trim().toLowerCase();
+    const lat &#x3D; Number.isFinite(latitude) ? latitude.toFixed(5) : &#x27;nan&#x27;;
+    const lon &#x3D; Number.isFinite(longitude) ? longitude.toFixed(5) : &#x27;nan&#x27;;
+    return &#x60;${normalizedAddress}|${lat}|${lon}&#x60;;
   }
 
   /**
@@ -893,6 +1114,162 @@ export class IaAssistantService {
           return &#x60;[Usando modelo fallback: ${model}]\n\n${enrichedContent}&#x60;;
         }),
       );
+  }
+
+  private requestImageModerationWithModelChain(
+    models: string[],
+    imageUrl: string,
+    apiKey: string,
+    apiUrl: string,
+    index &#x3D; 0,
+  ): Observable&lt;IaImageModerationResult&gt; {
+    const currentModel &#x3D; models[index];
+    if (!currentModel) {
+      return throwError(() &#x3D;&gt; new Error(&#x27;No hay modelos disponibles para moderar imagen.&#x27;));
+    }
+
+    return this.requestImageModerationWithModel(currentModel, imageUrl, apiKey, apiUrl).pipe(
+      catchError((error: any) &#x3D;&gt; {
+        const status &#x3D; error?.status;
+        const maybeMessage &#x3D;
+          error?.error?.error?.message ||
+          error?.error?.message ||
+          error?.message ||
+          &#x27;unknown_error&#x27;;
+        console.warn(&#x27;[Groq vision] error&#x27;, { model: currentModel, status, maybeMessage });
+        // 403: sin acceso al modelo (p.ej. cuenta sin permiso). También intentamos fallback.
+        const shouldTryNext &#x3D; error?.status &#x3D;&#x3D;&#x3D; 402 || error?.status &#x3D;&#x3D;&#x3D; 403 || error?.status &#x3D;&#x3D;&#x3D; 404;
+        const nextModel &#x3D; models[index + 1];
+
+        if (error?.status &#x3D;&#x3D;&#x3D; 404) {
+          this.unavailableModels.add(currentModel);
+        }
+
+        if (error?.status &#x3D;&#x3D;&#x3D; 403) {
+          this.unavailableModels.add(currentModel);
+        }
+
+        if (!shouldTryNext || !nextModel) {
+          return throwError(() &#x3D;&gt; error);
+        }
+
+        return this.requestImageModerationWithModelChain(
+          models,
+          imageUrl,
+          apiKey,
+          apiUrl,
+          index + 1,
+        );
+      }),
+    );
+  }
+
+  private requestImageModerationWithModel(
+    model: string,
+    imageUrl: string,
+    apiKey: string,
+    apiUrl: string,
+  ): Observable&lt;IaImageModerationResult&gt; {
+    const body &#x3D; {
+      model,
+      temperature: 0,
+      max_completion_tokens: 256,
+      top_p: 1,
+      stream: false,
+      stop: null as null | string | string[],
+      messages: [
+        {
+          role: &#x27;user&#x27;,
+          content: [
+            {
+              type: &#x27;text&#x27;,
+              text: &#x27;Analiza esta imagen y responde SOLO JSON con esta forma exacta: {&quot;safe&quot;: boolean, &quot;reason&quot;: string, &quot;sexual&quot;: boolean, &quot;nudity&quot;: boolean, &quot;violence&quot;: boolean, &quot;minor_risk&quot;: boolean}. safe&#x3D;true solo si TODOS esos campos de riesgo son false.&#x27;,
+            },
+            {
+              type: &#x27;image_url&#x27;,
+              image_url: { url: imageUrl },
+            },
+          ],
+        },
+      ],
+    };
+
+    return this.http
+      .post&lt;IaChatResponse&gt;(apiUrl, body, {
+        headers: new HttpHeaders({
+          Authorization: &#x60;Bearer ${apiKey}&#x60;,
+          &#x27;Content-Type&#x27;: &#x27;application/json&#x27;,
+        }),
+      })
+      .pipe(
+        map((response) &#x3D;&gt; {
+          const raw &#x3D; response.choices?.[0]?.message?.content?.trim() || &#x27;&#x27;;
+          const parsed &#x3D; this.parseImageModerationJson(raw);
+          const explicitRisk &#x3D;
+            parsed.sexual &#x3D;&#x3D;&#x3D; true ||
+            parsed.nudity &#x3D;&#x3D;&#x3D; true ||
+            parsed.violence &#x3D;&#x3D;&#x3D; true ||
+            parsed.minor_risk &#x3D;&#x3D;&#x3D; true;
+          const safe &#x3D; parsed.safe &#x3D;&#x3D;&#x3D; true &amp;&amp; !explicitRisk;
+
+          if (safe) {
+            return { blocked: false, warning: false, score: 0, reasons: [] };
+          }
+
+          const reason &#x3D; (parsed.reason || &#x27;image_flagged_by_groq&#x27;).trim();
+          return {
+            blocked: true,
+            warning: false,
+            score: 1,
+            reasons: [&#x60;groq_image_blocked:${reason}&#x60;],
+          };
+        }),
+        // En errores (403/400/...), no suprimimos aquí: lo gestiona el call-stack.
+      );
+  }
+
+  private fileToDataUrl(file: File): Promise&lt;string&gt; {
+    return new Promise((resolve, reject) &#x3D;&gt; {
+      const reader &#x3D; new FileReader();
+      reader.onload &#x3D; () &#x3D;&gt; {
+        const result &#x3D; typeof reader.result &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? reader.result : &#x27;&#x27;;
+        if (!result.startsWith(&#x27;data:image/&#x27;)) {
+          reject(new Error(&#x27;invalid_image_data_url&#x27;));
+          return;
+        }
+        resolve(result);
+      };
+      reader.onerror &#x3D; () &#x3D;&gt; reject(new Error(&#x27;file_reader_error&#x27;));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  private parseImageModerationJson(rawContent: string): {
+    safe?: boolean;
+    reason?: string;
+    sexual?: boolean;
+    nudity?: boolean;
+    violence?: boolean;
+    minor_risk?: boolean;
+  } {
+    const raw &#x3D; (rawContent || &#x27;&#x27;).trim();
+    if (!raw) {
+      throw new Error(&#x27;groq_empty_response&#x27;);
+    }
+
+    try {
+      const jsonText &#x3D; raw.match(/\{[\s\S]*\}/)?.[0] ?? raw;
+      return JSON.parse(jsonText) as {
+        safe?: boolean;
+        reason?: string;
+        sexual?: boolean;
+        nudity?: boolean;
+        violence?: boolean;
+        minor_risk?: boolean;
+      };
+    } catch {
+      throw new Error(&#x27;groq_invalid_json&#x27;);
+    }
   }
 
   /**

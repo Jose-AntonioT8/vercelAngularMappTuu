@@ -387,6 +387,10 @@ export class ListComponent implements OnInit {
     activityTypes: ActivityType[],
   ): Activity[] {
     return activities.filter((activity) &#x3D;&gt; {
+      const moderationStatus &#x3D; String((activity as any).moderationStatus || &#x27;&#x27;).trim().toLowerCase();
+      if (moderationStatus &amp;&amp; moderationStatus !&#x3D;&#x3D; &#x27;approved&#x27;) {
+        return false;
+      }
       const normalizedTerm &#x3D; query.normalizedTerm;
       const textMatch &#x3D; normalizedTerm
         ? this.getSearchableText(activity).includes(normalizedTerm)

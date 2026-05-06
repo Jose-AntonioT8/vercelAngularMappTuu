@@ -1,10 +1,18 @@
 
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Plan } from '../../models/plan.model';
 import { PlanService } from '../../../core/services/plan.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { TranslatePipe } from '../../../core/pipes/translate.pipe';
+import { ReportingService } from '../../../core/services/reporting.service';
+import type {
+  CreateActivityReportPayload,
+  ReportReason,
+} from '../../models/reporting.types';
+import { firstValueFrom } from 'rxjs';
 
 /**
  * Menú de opciones para un plan (editar/eliminar).
@@ -14,7 +22,7 @@ import { TranslatePipe } from '../../../core/pipes/translate.pipe';
  */
 @Component({
   selector: 'app-options-plans',
-  imports: [TranslatePipe],
+  imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './options-plans.component.html',
  // styleUrl: './options-plans.component.scss'
 })
@@ -29,6 +37,8 @@ export class OptionsPlansComponent {
   private router = inject(ActivatedRoute)
   /** Auth para obtener token del usuario actual. */
   private auth = inject(AuthService)
+  /** Servicio de reportes. */
+  private reportService = inject(ReportingService);
 
   /** Estado del dropdown/menú. */
   isMenuOpen: boolean = false;
@@ -36,6 +46,15 @@ export class OptionsPlansComponent {
   showDeleteModal = false;
   /** Plan cargado desde el servicio. */
   plan?: Plan;
+
+  /** Control del modal de reporte. */
+  isReportModalOpen = false;
+  /** Motivo seleccionado para el reporte. */
+  reportReason: ReportReason = 'spam';
+  /** Detalle libre opcional del reporte. */
+  reportDetails = '';
+  /** Clave i18n de error de validación. */
+  reportErrorKey = '';
 
   /** Carga el plan correspondiente al `id` de la URL. */
   ngOnInit(){
@@ -65,6 +84,58 @@ export class OptionsPlansComponent {
   /** Cancela el modal de borrado. */
   cancelDelete() {
     this.showDeleteModal = false;
+  }
+
+  /** Abre modal para reportar el plan. */
+  openReportModal(): void {
+    const user = this.auth.currentUser ?? this.auth.firebaseCurrentUser;
+    if (!user) {
+      this.route.navigate(['/login']);
+      return;
+    }
+
+    this.isMenuOpen = false;
+    this.reportErrorKey = '';
+    this.isReportModalOpen = true;
+  }
+
+  /** Cierra el modal de reporte y resetea estado. */
+  closeReportModal(): void {
+    this.isReportModalOpen = false;
+    this.reportReason = 'spam';
+    this.reportDetails = '';
+    this.reportErrorKey = '';
+  }
+
+  /** Envía el reporte al backend. */
+  async submitReport(): Promise<void> {
+    try {
+      const user = this.auth.currentUser ?? this.auth.firebaseCurrentUser;
+      if (!user) {
+        this.route.navigate(['/login']);
+        return;
+      }
+      if (!this.plan?.id) {
+        this.reportErrorKey =
+          'reports.reportActivity.errors.activityUnknown';
+        return;
+      }
+
+      const details = this.reportDetails.trim();
+      const payload: CreateActivityReportPayload = {
+        targetType: 'plan',
+        planId: this.plan.id,
+        reason: this.reportReason,
+        details: details || undefined,
+      };
+
+      const token = await user.getIdToken();
+      await firstValueFrom(this.reportService.createReport(payload, token));
+
+      this.closeReportModal();
+    } catch {
+      this.reportErrorKey = 'reports.reportActivity.toastError';
+    }
   }
 
   /**

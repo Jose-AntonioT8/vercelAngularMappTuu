@@ -486,6 +486,20 @@ comentario y fecha de creación.</p>
   createdAt?: Date;
 }
 
+/** Estados de moderación de actividad expuestos por backend. */
+export type ActivityModerationStatus &#x3D;
+  | &#x27;approved&#x27;
+  | &#x27;pending_review&#x27;
+  | &#x27;rejected&#x27;;
+
+/** Resultado de moderación que frontend envía en create/update. */
+export interface ActivityModerationResult {
+  blocked: boolean;
+  warning: boolean;
+  score: number;
+  reasons: string[];
+}
+
 /**
  * Modelo base de Actividad usado por la UI.
  *
@@ -509,12 +523,24 @@ export interface Activity {
   longitude: string;
   /** Latitud en formato string (por compatibilidad con formularios/UI). */
   latitude: string;
+  /** Ubicación legible de la actividad (ciudad/zona). */
+  location?: string;
   /** Rating agregado de la actividad. */
   rating: number;
   /** Número total de valoraciones usadas para &#x60;rating&#x60;. */
   numRatings: number;
   /** Lista de reseñas, si se carga junto a la actividad. */
   reviews?: Review[];
+  /** Estado de moderación de la actividad. */
+  moderationStatus?: ActivityModerationStatus;
+  /** Score numérico de moderación. */
+  moderationScore?: number | null;
+  /** Motivos detectados por la moderación. */
+  moderationReasons?: string[];
+  /** Fecha de moderación (si existe). */
+  moderatedAt?: string | number | Date | null;
+  /** ID del admin/moderador que tomó decisión manual. */
+  moderatedBy?: string | null;
 }
 </code></pre>
     </div>

@@ -13,7 +13,7 @@
   </div>
 
   <div class="bg-white rounded-xl border border-gray-200 p-4 mb-4">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
       <select
         [(ngModel)]="statusFilter"
         class="rounded-lg border border-gray-300 p-2.5 text-sm"
@@ -33,6 +33,15 @@
         <option value="inappropriate">{{ 'reports.moderation.reasons.inappropriate' | translate }}</option>
         <option value="fraud">{{ 'reports.moderation.reasons.fraud' | translate }}</option>
         <option value="other">{{ 'reports.moderation.reasons.other' | translate }}</option>
+      </select>
+
+      <select
+        [(ngModel)]="targetTypeFilter"
+        class="rounded-lg border border-gray-300 p-2.5 text-sm"
+      >
+        <option value="">Todos los tipos</option>
+        <option value="activity">Actividades</option>
+        <option value="plan">Planes</option>
       </select>
 
       <input
@@ -99,7 +108,11 @@
       <a
         class="w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden border border-gray-200 bg-gray-50 flex-shrink-0"
         tabindex="0"
-        [routerLink]="['/activityDetail', report.activityId]"
+        [routerLink]="
+          getTargetType(report) === 'plan'
+            ? ['/plansDetail', report.targetId || report.activityId]
+            : ['/activityDetail', report.targetId || report.activityId]
+        "
       >
         <img
           [src]="report.activityImageURL || fallbackImage"
@@ -118,6 +131,12 @@
             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200"
           >
             {{ ('reports.moderation.reasons.' + report.reason) | translate }}
+          </span>
+          <span
+            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+            [ngClass]="targetTypeClass(report)"
+          >
+            {{ targetTypeLabel(report) }}
           </span>
           <span
             class="inline-flex items-center px-2 py-0.5 rounded-md text-xs"
@@ -143,7 +162,7 @@
 
         <div class="text-xs text-gray-500 flex flex-wrap gap-x-4 gap-y-1">
           <span>{{ report.createdAt | date: 'short' }}</span>
-          <span>{{ 'reports.moderation.activityIdLabel' | translate }}: {{ report.activityId }}</span>
+          <span>{{ 'reports.moderation.activityIdLabel' | translate }}: {{ report.targetId || report.activityId }}</span>
         </div>
       </div>
     </li>
@@ -183,7 +202,7 @@
       <button
         type="button"
         class="w-full text-left px-4 py-3 rounded-xl border-2 border-red-200 bg-red-50 text-red-900 text-sm hover:bg-red-100"
-        (click)="confirmResolveChoice('delete_activity')"
+        (click)="confirmResolveChoice('delete')"
       >
         {{ 'reports.moderation.deleteActivity' | translate }}
       </button>

@@ -206,6 +206,82 @@ y reutiliza el header + traducciones.</p>
     </table>
 </section>
 
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#isLoggedIn" >isLoggedIn</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/features/about/about.component.ts:20</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
 
 
 
@@ -213,7 +289,33 @@ y reutiliza el header + traducciones.</p>
 
 
 
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isLoggedIn"></a>
+                        <span class="name"><b>isLoggedIn</b><a href="#isLoggedIn"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>isLoggedIn()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/features/about/about.component.ts:23</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
 </div>
 
 
@@ -223,6 +325,7 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 import { RouterModule } from &#x27;@angular/router&#x27;;
 import { TranslatePipe } from &#x27;../../core/pipes/translate.pipe&#x27;;
 import { HeaderComponent } from &#x27;../../common/header/header.component&#x27;;
+import { AuthService } from &#x27;../../core/services/auth.service&#x27;;
 
 /**
  * Pantalla “Acerca de”.
@@ -236,17 +339,23 @@ import { HeaderComponent } from &#x27;../../common/header/header.component&#x27;
   imports: [CommonModule, RouterModule, TranslatePipe, HeaderComponent],
   templateUrl: &#x27;./about.component.html&#x27;
 })
-export class AboutComponent {}
+export class AboutComponent {
+  constructor(private authService: AuthService) {}
+
+  get isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
+  }
+}
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;app-header&gt;&lt;/app-header&gt;
 
-&lt;main class&#x3D;&quot;min-h-screen bg-gradient-to-b from-slate-50 to-white motion-safe:animate-[pageEnter_.36s_ease-out]&quot;&gt;
+&lt;main class&#x3D;&quot;min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 motion-safe:animate-[pageEnter_.36s_ease-out]&quot;&gt;
     
     &lt;!-- Hero Section --&gt;
-    &lt;section class&#x3D;&quot;relative overflow-hidden bg-gradient-to-br from-brand-primary via-brand-secondary to-brand-accent py-20 lg:py-32&quot;&gt;
+    &lt;section class&#x3D;&quot;relative overflow-hidden bg-gradient-to-br from-brand-primary via-brand-secondary to-brand-accent py-20 lg:py-32 border-b border-slate-200/40 dark:border-slate-700/40&quot;&gt;
         &lt;!-- Decorative circles --&gt;
         &lt;div class&#x3D;&quot;absolute top-10 left-10 w-32 h-32 bg-white/5 rounded-full blur-xl&quot;&gt;&lt;/div&gt;
         &lt;div class&#x3D;&quot;absolute top-40 right-20 w-48 h-48 bg-white/5 rounded-full blur-2xl&quot;&gt;&lt;/div&gt;
@@ -271,8 +380,8 @@ export class AboutComponent {}
         
         &lt;!-- Wave decoration --&gt;
         &lt;div class&#x3D;&quot;absolute bottom-0 left-0 right-0&quot;&gt;
-            &lt;svg viewBox&#x3D;&quot;0 0 1440 120&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
-                &lt;path d&#x3D;&quot;M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z&quot; fill&#x3D;&quot;#f8fafc&quot;/&gt;
+            &lt;svg viewBox&#x3D;&quot;0 0 1440 120&quot; class&#x3D;&quot;text-slate-50 dark:text-slate-950&quot; fill&#x3D;&quot;none&quot; xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;&gt;
+                &lt;path d&#x3D;&quot;M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z&quot; fill&#x3D;&quot;currentColor&quot;/&gt;
             &lt;/svg&gt;
         &lt;/div&gt;
     &lt;/section&gt;
@@ -280,22 +389,22 @@ export class AboutComponent {}
     &lt;!-- Stats Section --&gt;
     &lt;section class&#x3D;&quot;py-12 -mt-8 relative z-20&quot;&gt;
         &lt;div class&#x3D;&quot;max-w-6xl mx-auto px-4&quot;&gt;
-            &lt;div class&#x3D;&quot;bg-white rounded-2xl shadow-xl p-8 grid grid-cols-2 md:grid-cols-4 gap-6&quot;&gt;
+            &lt;div class&#x3D;&quot;bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 p-8 grid grid-cols-2 md:grid-cols-4 gap-6&quot;&gt;
                 &lt;div class&#x3D;&quot;text-center&quot;&gt;
                     &lt;div class&#x3D;&quot;text-3xl md:text-4xl font-bold text-brand-primary mb-1&quot;&gt;500+&lt;/div&gt;
-                    &lt;div class&#x3D;&quot;text-gray-600 text-sm&quot;&gt;{{ &#x27;about.stats.activities&#x27; | translate }}&lt;/div&gt;
+                    &lt;div class&#x3D;&quot;text-gray-600 dark:text-slate-300 text-sm&quot;&gt;{{ &#x27;about.stats.activities&#x27; | translate }}&lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class&#x3D;&quot;text-center&quot;&gt;
                     &lt;div class&#x3D;&quot;text-3xl md:text-4xl font-bold text-brand-secondary mb-1&quot;&gt;1000+&lt;/div&gt;
-                    &lt;div class&#x3D;&quot;text-gray-600 text-sm&quot;&gt;{{ &#x27;about.stats.users&#x27; | translate }}&lt;/div&gt;
+                    &lt;div class&#x3D;&quot;text-gray-600 dark:text-slate-300 text-sm&quot;&gt;{{ &#x27;about.stats.users&#x27; | translate }}&lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class&#x3D;&quot;text-center&quot;&gt;
                     &lt;div class&#x3D;&quot;text-3xl md:text-4xl font-bold text-brand-accent mb-1&quot;&gt;50+&lt;/div&gt;
-                    &lt;div class&#x3D;&quot;text-gray-600 text-sm&quot;&gt;{{ &#x27;about.stats.cities&#x27; | translate }}&lt;/div&gt;
+                    &lt;div class&#x3D;&quot;text-gray-600 dark:text-slate-300 text-sm&quot;&gt;{{ &#x27;about.stats.cities&#x27; | translate }}&lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class&#x3D;&quot;text-center&quot;&gt;
                     &lt;div class&#x3D;&quot;text-3xl md:text-4xl font-bold text-green-500 mb-1&quot;&gt;4.8&lt;/div&gt;
-                    &lt;div class&#x3D;&quot;text-gray-600 text-sm&quot;&gt;{{ &#x27;about.stats.rating&#x27; | translate }}&lt;/div&gt;
+                    &lt;div class&#x3D;&quot;text-gray-600 dark:text-slate-300 text-sm&quot;&gt;{{ &#x27;about.stats.rating&#x27; | translate }}&lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
         &lt;/div&gt;
@@ -307,10 +416,10 @@ export class AboutComponent {}
             &lt;div class&#x3D;&quot;grid lg:grid-cols-2 gap-12 items-center&quot;&gt;
                 &lt;div&gt;
                     &lt;span class&#x3D;&quot;text-brand-primary font-semibold text-sm uppercase tracking-wider&quot;&gt;{{ &#x27;about.missionLabel&#x27; | translate }}&lt;/span&gt;
-                    &lt;h2 class&#x3D;&quot;text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6&quot;&gt;
+                    &lt;h2 class&#x3D;&quot;text-3xl md:text-4xl font-bold text-gray-900 dark:text-slate-100 mt-2 mb-6&quot;&gt;
                         {{ &#x27;about.missionTitle&#x27; | translate }}
                     &lt;/h2&gt;
-                    &lt;p class&#x3D;&quot;text-gray-600 leading-relaxed mb-6&quot;&gt;
+                    &lt;p class&#x3D;&quot;text-gray-600 dark:text-slate-300 leading-relaxed mb-6&quot;&gt;
                         {{ &#x27;about.missionDescription&#x27; | translate }}
                     &lt;/p&gt;
                     &lt;div class&#x3D;&quot;space-y-4&quot;&gt;
@@ -320,7 +429,7 @@ export class AboutComponent {}
                                     &lt;path fill-rule&#x3D;&quot;evenodd&quot; d&#x3D;&quot;M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z&quot; clip-rule&#x3D;&quot;evenodd&quot;/&gt;
                                 &lt;/svg&gt;
                             &lt;/div&gt;
-                            &lt;p class&#x3D;&quot;text-gray-700&quot;&gt;{{ &#x27;about.missionPoint1&#x27; | translate }}&lt;/p&gt;
+                            &lt;p class&#x3D;&quot;text-gray-700 dark:text-slate-200&quot;&gt;{{ &#x27;about.missionPoint1&#x27; | translate }}&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div class&#x3D;&quot;flex items-start gap-3&quot;&gt;
                             &lt;div class&#x3D;&quot;w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5&quot;&gt;
@@ -328,7 +437,7 @@ export class AboutComponent {}
                                     &lt;path fill-rule&#x3D;&quot;evenodd&quot; d&#x3D;&quot;M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z&quot; clip-rule&#x3D;&quot;evenodd&quot;/&gt;
                                 &lt;/svg&gt;
                             &lt;/div&gt;
-                            &lt;p class&#x3D;&quot;text-gray-700&quot;&gt;{{ &#x27;about.missionPoint2&#x27; | translate }}&lt;/p&gt;
+                            &lt;p class&#x3D;&quot;text-gray-700 dark:text-slate-200&quot;&gt;{{ &#x27;about.missionPoint2&#x27; | translate }}&lt;/p&gt;
                         &lt;/div&gt;
                         &lt;div class&#x3D;&quot;flex items-start gap-3&quot;&gt;
                             &lt;div class&#x3D;&quot;w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5&quot;&gt;
@@ -336,12 +445,12 @@ export class AboutComponent {}
                                     &lt;path fill-rule&#x3D;&quot;evenodd&quot; d&#x3D;&quot;M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z&quot; clip-rule&#x3D;&quot;evenodd&quot;/&gt;
                                 &lt;/svg&gt;
                             &lt;/div&gt;
-                            &lt;p class&#x3D;&quot;text-gray-700&quot;&gt;{{ &#x27;about.missionPoint3&#x27; | translate }}&lt;/p&gt;
+                            &lt;p class&#x3D;&quot;text-gray-700 dark:text-slate-200&quot;&gt;{{ &#x27;about.missionPoint3&#x27; | translate }}&lt;/p&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
                 &lt;div class&#x3D;&quot;relative&quot;&gt;
-                    &lt;div class&#x3D;&quot;aspect-square rounded-2xl bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 p-8 flex items-center justify-center&quot;&gt;
+                    &lt;div class&#x3D;&quot;aspect-square rounded-2xl bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 dark:from-slate-800 dark:to-slate-700 border border-slate-200 dark:border-slate-700 p-8 flex items-center justify-center&quot;&gt;
                         &lt;img src&#x3D;&quot;assets/logo/logo.png&quot; alt&#x3D;&quot;MappTuu&quot; class&#x3D;&quot;w-48 h-48 object-contain&quot;/&gt;
                     &lt;/div&gt;
                     &lt;div class&#x3D;&quot;absolute -bottom-4 -right-4 w-24 h-24 bg-brand-accent rounded-2xl -z-10&quot;&gt;&lt;/div&gt;
@@ -352,81 +461,81 @@ export class AboutComponent {}
     &lt;/section&gt;
 
     &lt;!-- Features Section --&gt;
-    &lt;section class&#x3D;&quot;py-16 lg:py-24 bg-gray-50&quot;&gt;
+    &lt;section class&#x3D;&quot;py-16 lg:py-24 bg-gray-50 dark:bg-slate-950/70&quot;&gt;
         &lt;div class&#x3D;&quot;max-w-6xl mx-auto px-4&quot;&gt;
             &lt;div class&#x3D;&quot;text-center mb-12&quot;&gt;
                 &lt;span class&#x3D;&quot;text-brand-primary font-semibold text-sm uppercase tracking-wider&quot;&gt;{{ &#x27;about.featuresLabel&#x27; | translate }}&lt;/span&gt;
-                &lt;h2 class&#x3D;&quot;text-3xl md:text-4xl font-bold text-gray-900 mt-2&quot;&gt;
+                &lt;h2 class&#x3D;&quot;text-3xl md:text-4xl font-bold text-gray-900 dark:text-slate-100 mt-2&quot;&gt;
                     {{ &#x27;about.featuresTitle&#x27; | translate }}
                 &lt;/h2&gt;
             &lt;/div&gt;
             
             &lt;div class&#x3D;&quot;grid md:grid-cols-2 lg:grid-cols-3 gap-8&quot;&gt;
                 &lt;!-- Feature 1 --&gt;
-                &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300&quot;&gt;
+                &lt;div class&#x3D;&quot;bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300&quot;&gt;
                     &lt;div class&#x3D;&quot;w-12 h-12 rounded-xl bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center mb-4&quot;&gt;
                         &lt;svg class&#x3D;&quot;w-6 h-6 text-white&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
                             &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z&quot;/&gt;
                             &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M15 11a3 3 0 11-6 0 3 3 0 016 0z&quot;/&gt;
                         &lt;/svg&gt;
                     &lt;/div&gt;
-                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 mb-2&quot;&gt;{{ &#x27;about.feature1Title&#x27; | translate }}&lt;/h3&gt;
-                    &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;{{ &#x27;about.feature1Desc&#x27; | translate }}&lt;/p&gt;
+                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 dark:text-slate-100 mb-2&quot;&gt;{{ &#x27;about.feature1Title&#x27; | translate }}&lt;/h3&gt;
+                    &lt;p class&#x3D;&quot;text-gray-600 dark:text-slate-300&quot;&gt;{{ &#x27;about.feature1Desc&#x27; | translate }}&lt;/p&gt;
                 &lt;/div&gt;
 
                 &lt;!-- Feature 2 --&gt;
-                &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300&quot;&gt;
+                &lt;div class&#x3D;&quot;bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300&quot;&gt;
                     &lt;div class&#x3D;&quot;w-12 h-12 rounded-xl bg-gradient-to-br from-brand-secondary to-brand-accent flex items-center justify-center mb-4&quot;&gt;
                         &lt;svg class&#x3D;&quot;w-6 h-6 text-white&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
                             &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01&quot;/&gt;
                         &lt;/svg&gt;
                     &lt;/div&gt;
-                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 mb-2&quot;&gt;{{ &#x27;about.feature2Title&#x27; | translate }}&lt;/h3&gt;
-                    &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;{{ &#x27;about.feature2Desc&#x27; | translate }}&lt;/p&gt;
+                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 dark:text-slate-100 mb-2&quot;&gt;{{ &#x27;about.feature2Title&#x27; | translate }}&lt;/h3&gt;
+                    &lt;p class&#x3D;&quot;text-gray-600 dark:text-slate-300&quot;&gt;{{ &#x27;about.feature2Desc&#x27; | translate }}&lt;/p&gt;
                 &lt;/div&gt;
 
                 &lt;!-- Feature 3 --&gt;
-                &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300&quot;&gt;
+                &lt;div class&#x3D;&quot;bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300&quot;&gt;
                     &lt;div class&#x3D;&quot;w-12 h-12 rounded-xl bg-gradient-to-br from-brand-accent to-brand-muted flex items-center justify-center mb-4&quot;&gt;
                         &lt;svg class&#x3D;&quot;w-6 h-6 text-white&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
                             &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z&quot;/&gt;
                         &lt;/svg&gt;
                     &lt;/div&gt;
-                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 mb-2&quot;&gt;{{ &#x27;about.feature3Title&#x27; | translate }}&lt;/h3&gt;
-                    &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;{{ &#x27;about.feature3Desc&#x27; | translate }}&lt;/p&gt;
+                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 dark:text-slate-100 mb-2&quot;&gt;{{ &#x27;about.feature3Title&#x27; | translate }}&lt;/h3&gt;
+                    &lt;p class&#x3D;&quot;text-gray-600 dark:text-slate-300&quot;&gt;{{ &#x27;about.feature3Desc&#x27; | translate }}&lt;/p&gt;
                 &lt;/div&gt;
 
                 &lt;!-- Feature 4 --&gt;
-                &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300&quot;&gt;
+                &lt;div class&#x3D;&quot;bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300&quot;&gt;
                     &lt;div class&#x3D;&quot;w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4&quot;&gt;
                         &lt;svg class&#x3D;&quot;w-6 h-6 text-white&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
                             &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129&quot;/&gt;
                         &lt;/svg&gt;
                     &lt;/div&gt;
-                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 mb-2&quot;&gt;{{ &#x27;about.feature4Title&#x27; | translate }}&lt;/h3&gt;
-                    &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;{{ &#x27;about.feature4Desc&#x27; | translate }}&lt;/p&gt;
+                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 dark:text-slate-100 mb-2&quot;&gt;{{ &#x27;about.feature4Title&#x27; | translate }}&lt;/h3&gt;
+                    &lt;p class&#x3D;&quot;text-gray-600 dark:text-slate-300&quot;&gt;{{ &#x27;about.feature4Desc&#x27; | translate }}&lt;/p&gt;
                 &lt;/div&gt;
 
                 &lt;!-- Feature 5 --&gt;
-                &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300&quot;&gt;
+                &lt;div class&#x3D;&quot;bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300&quot;&gt;
                     &lt;div class&#x3D;&quot;w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center mb-4&quot;&gt;
                         &lt;svg class&#x3D;&quot;w-6 h-6 text-white&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
                             &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z&quot;/&gt;
                         &lt;/svg&gt;
                     &lt;/div&gt;
-                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 mb-2&quot;&gt;{{ &#x27;about.feature5Title&#x27; | translate }}&lt;/h3&gt;
-                    &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;{{ &#x27;about.feature5Desc&#x27; | translate }}&lt;/p&gt;
+                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 dark:text-slate-100 mb-2&quot;&gt;{{ &#x27;about.feature5Title&#x27; | translate }}&lt;/h3&gt;
+                    &lt;p class&#x3D;&quot;text-gray-600 dark:text-slate-300&quot;&gt;{{ &#x27;about.feature5Desc&#x27; | translate }}&lt;/p&gt;
                 &lt;/div&gt;
 
                 &lt;!-- Feature 6 --&gt;
-                &lt;div class&#x3D;&quot;bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300&quot;&gt;
+                &lt;div class&#x3D;&quot;bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300&quot;&gt;
                     &lt;div class&#x3D;&quot;w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center mb-4&quot;&gt;
                         &lt;svg class&#x3D;&quot;w-6 h-6 text-white&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; viewBox&#x3D;&quot;0 0 24 24&quot;&gt;
                             &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z&quot;/&gt;
                         &lt;/svg&gt;
                     &lt;/div&gt;
-                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 mb-2&quot;&gt;{{ &#x27;about.feature6Title&#x27; | translate }}&lt;/h3&gt;
-                    &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;{{ &#x27;about.feature6Desc&#x27; | translate }}&lt;/p&gt;
+                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 dark:text-slate-100 mb-2&quot;&gt;{{ &#x27;about.feature6Title&#x27; | translate }}&lt;/h3&gt;
+                    &lt;p class&#x3D;&quot;text-gray-600 dark:text-slate-300&quot;&gt;{{ &#x27;about.feature6Desc&#x27; | translate }}&lt;/p&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
         &lt;/div&gt;
@@ -437,7 +546,7 @@ export class AboutComponent {}
         &lt;div class&#x3D;&quot;max-w-6xl mx-auto px-4&quot;&gt;
             &lt;div class&#x3D;&quot;text-center mb-12&quot;&gt;
                 &lt;span class&#x3D;&quot;text-brand-primary font-semibold text-sm uppercase tracking-wider&quot;&gt;{{ &#x27;about.valuesLabel&#x27; | translate }}&lt;/span&gt;
-                &lt;h2 class&#x3D;&quot;text-3xl md:text-4xl font-bold text-gray-900 mt-2&quot;&gt;
+                &lt;h2 class&#x3D;&quot;text-3xl md:text-4xl font-bold text-gray-900 dark:text-slate-100 mt-2&quot;&gt;
                     {{ &#x27;about.valuesTitle&#x27; | translate }}
                 &lt;/h2&gt;
             &lt;/div&gt;
@@ -449,8 +558,8 @@ export class AboutComponent {}
                             &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M13 10V3L4 14h7v7l9-11h-7z&quot;/&gt;
                         &lt;/svg&gt;
                     &lt;/div&gt;
-                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 mb-2&quot;&gt;{{ &#x27;about.value1Title&#x27; | translate }}&lt;/h3&gt;
-                    &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;{{ &#x27;about.value1Desc&#x27; | translate }}&lt;/p&gt;
+                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 dark:text-slate-100 mb-2&quot;&gt;{{ &#x27;about.value1Title&#x27; | translate }}&lt;/h3&gt;
+                    &lt;p class&#x3D;&quot;text-gray-600 dark:text-slate-300&quot;&gt;{{ &#x27;about.value1Desc&#x27; | translate }}&lt;/p&gt;
                 &lt;/div&gt;
                 
                 &lt;div class&#x3D;&quot;text-center&quot;&gt;
@@ -459,8 +568,8 @@ export class AboutComponent {}
                             &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z&quot;/&gt;
                         &lt;/svg&gt;
                     &lt;/div&gt;
-                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 mb-2&quot;&gt;{{ &#x27;about.value2Title&#x27; | translate }}&lt;/h3&gt;
-                    &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;{{ &#x27;about.value2Desc&#x27; | translate }}&lt;/p&gt;
+                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 dark:text-slate-100 mb-2&quot;&gt;{{ &#x27;about.value2Title&#x27; | translate }}&lt;/h3&gt;
+                    &lt;p class&#x3D;&quot;text-gray-600 dark:text-slate-300&quot;&gt;{{ &#x27;about.value2Desc&#x27; | translate }}&lt;/p&gt;
                 &lt;/div&gt;
                 
                 &lt;div class&#x3D;&quot;text-center&quot;&gt;
@@ -469,8 +578,8 @@ export class AboutComponent {}
                             &lt;path stroke-linecap&#x3D;&quot;round&quot; stroke-linejoin&#x3D;&quot;round&quot; stroke-width&#x3D;&quot;2&quot; d&#x3D;&quot;M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z&quot;/&gt;
                         &lt;/svg&gt;
                     &lt;/div&gt;
-                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 mb-2&quot;&gt;{{ &#x27;about.value3Title&#x27; | translate }}&lt;/h3&gt;
-                    &lt;p class&#x3D;&quot;text-gray-600&quot;&gt;{{ &#x27;about.value3Desc&#x27; | translate }}&lt;/p&gt;
+                    &lt;h3 class&#x3D;&quot;text-xl font-bold text-gray-900 dark:text-slate-100 mb-2&quot;&gt;{{ &#x27;about.value3Title&#x27; | translate }}&lt;/h3&gt;
+                    &lt;p class&#x3D;&quot;text-gray-600 dark:text-slate-300&quot;&gt;{{ &#x27;about.value3Desc&#x27; | translate }}&lt;/p&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
         &lt;/div&gt;
@@ -486,24 +595,48 @@ export class AboutComponent {}
                 {{ &#x27;about.ctaDescription&#x27; | translate }}
             &lt;/p&gt;
             &lt;div class&#x3D;&quot;flex flex-col sm:flex-row gap-4 justify-center&quot;&gt;
-                &lt;a routerLink&#x3D;&quot;/activities&quot; 
-                   class&#x3D;&quot;px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg&quot;&gt;
+              @if (isLoggedIn) {
+                &lt;a
+                  routerLink&#x3D;&quot;/activitiesList&quot;
+                  class&#x3D;&quot;inline-flex justify-center min-w-[230px] px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg&quot;
+                &gt;
                   {{ &#x27;about.ctaButton1&#x27; | translate }}
                 &lt;/a&gt;
-                &lt;a routerLink&#x3D;&quot;/signup&quot; 
-                   class&#x3D;&quot;px-8 py-4 bg-white/20 text-white font-bold rounded-full hover:bg-white/30 transition-colors backdrop-blur-sm border border-white/30&quot;&gt;
-                  {{ &#x27;about.ctaButton2&#x27; | translate }}
-                &lt;/a&gt;
-              &lt;/div&gt;
-              &lt;div class&#x3D;&quot;mt-6&quot;&gt;
+              } @else {
                 &lt;a
                   href&#x3D;&quot;/documentation/index.html&quot;
                   target&#x3D;&quot;_blank&quot;
                   rel&#x3D;&quot;noopener noreferrer&quot;
-                  class&#x3D;&quot;inline-block px-8 py-4 bg-white/20 text-white font-bold rounded-full hover:bg-white/30 transition-colors backdrop-blur-sm border border-white/30&quot;&gt;
+                  class&#x3D;&quot;inline-flex justify-center min-w-[230px] px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg&quot;
+                &gt;
                   {{ &#x27;about.documentation&#x27; | translate }}
                 &lt;/a&gt;
-              &lt;/div&gt;
+              }
+
+              @if (isLoggedIn) {
+                &lt;a
+                  routerLink&#x3D;&quot;/plansList&quot;
+                  class&#x3D;&quot;inline-flex justify-center min-w-[230px] px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg&quot;
+                &gt;
+                  {{ &#x27;about.ctaButtonPlans&#x27; | translate }}
+                &lt;/a&gt;
+                &lt;a
+                  href&#x3D;&quot;/documentation/index.html&quot;
+                  target&#x3D;&quot;_blank&quot;
+                  rel&#x3D;&quot;noopener noreferrer&quot;
+                  class&#x3D;&quot;inline-flex justify-center min-w-[230px] px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg&quot;
+                &gt;
+                  {{ &#x27;about.documentation&#x27; | translate }}
+                &lt;/a&gt;
+              } @else {
+                &lt;a
+                  routerLink&#x3D;&quot;/signup&quot;
+                  class&#x3D;&quot;inline-flex justify-center min-w-[230px] px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg&quot;
+                &gt;
+                  {{ &#x27;about.ctaButton2&#x27; | translate }}
+                &lt;/a&gt;
+              }
+            &lt;/div&gt;
         &lt;/div&gt;
     &lt;/section&gt;
 
@@ -537,7 +670,7 @@ export class AboutComponent {}
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><app-header></app-header><main class="min-h-screen bg-gradient-to-b from-slate-50 to-white motion-safe:animate-[pageEnter_.36s_ease-out]">        <!-- Hero Section -->    <section class="relative overflow-hidden bg-gradient-to-br from-brand-primary via-brand-secondary to-brand-accent py-20 lg:py-32">        <!-- Decorative circles -->        <div class="absolute top-10 left-10 w-32 h-32 bg-white/5 rounded-full blur-xl"></div>        <div class="absolute top-40 right-20 w-48 h-48 bg-white/5 rounded-full blur-2xl"></div>        <div class="absolute bottom-20 left-1/4 w-24 h-24 bg-white/10 rounded-full blur-lg"></div>                <div class="max-w-6xl mx-auto px-4 relative z-10">            <div class="text-center">                <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-white/90 text-sm font-medium mb-6">                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>                    </svg>                    {{ \'about.tagline\' | translate }}                </div>                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">                    {{ \'about.heroTitle\' | translate }}                </h1>                <p class="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">                    {{ \'about.heroDescription\' | translate }}                </p>            </div>        </div>                <!-- Wave decoration -->        <div class="absolute bottom-0 left-0 right-0">            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">                <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f8fafc"/>            </svg>        </div>    </section>    <!-- Stats Section -->    <section class="py-12 -mt-8 relative z-20">        <div class="max-w-6xl mx-auto px-4">            <div class="bg-white rounded-2xl shadow-xl p-8 grid grid-cols-2 md:grid-cols-4 gap-6">                <div class="text-center">                    <div class="text-3xl md:text-4xl font-bold text-brand-primary mb-1">500+</div>                    <div class="text-gray-600 text-sm">{{ \'about.stats.activities\' | translate }}</div>                </div>                <div class="text-center">                    <div class="text-3xl md:text-4xl font-bold text-brand-secondary mb-1">1000+</div>                    <div class="text-gray-600 text-sm">{{ \'about.stats.users\' | translate }}</div>                </div>                <div class="text-center">                    <div class="text-3xl md:text-4xl font-bold text-brand-accent mb-1">50+</div>                    <div class="text-gray-600 text-sm">{{ \'about.stats.cities\' | translate }}</div>                </div>                <div class="text-center">                    <div class="text-3xl md:text-4xl font-bold text-green-500 mb-1">4.8</div>                    <div class="text-gray-600 text-sm">{{ \'about.stats.rating\' | translate }}</div>                </div>            </div>        </div>    </section>    <!-- Mission Section -->    <section class="py-16 lg:py-24">        <div class="max-w-6xl mx-auto px-4">            <div class="grid lg:grid-cols-2 gap-12 items-center">                <div>                    <span class="text-brand-primary font-semibold text-sm uppercase tracking-wider">{{ \'about.missionLabel\' | translate }}</span>                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">                        {{ \'about.missionTitle\' | translate }}                    </h2>                    <p class="text-gray-600 leading-relaxed mb-6">                        {{ \'about.missionDescription\' | translate }}                    </p>                    <div class="space-y-4">                        <div class="flex items-start gap-3">                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">                                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>                                </svg>                            </div>                            <p class="text-gray-700">{{ \'about.missionPoint1\' | translate }}</p>                        </div>                        <div class="flex items-start gap-3">                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">                                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>                                </svg>                            </div>                            <p class="text-gray-700">{{ \'about.missionPoint2\' | translate }}</p>                        </div>                        <div class="flex items-start gap-3">                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">                                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>                                </svg>                            </div>                            <p class="text-gray-700">{{ \'about.missionPoint3\' | translate }}</p>                        </div>                    </div>                </div>                <div class="relative">                    <div class="aspect-square rounded-2xl bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 p-8 flex items-center justify-center">                        <img src="assets/logo/logo.png" alt="MappTuu" class="w-48 h-48 object-contain"/>                    </div>                    <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-brand-accent rounded-2xl -z-10"></div>                    <div class="absolute -top-4 -left-4 w-16 h-16 bg-brand-primary rounded-xl -z-10"></div>                </div>            </div>        </div>    </section>    <!-- Features Section -->    <section class="py-16 lg:py-24 bg-gray-50">        <div class="max-w-6xl mx-auto px-4">            <div class="text-center mb-12">                <span class="text-brand-primary font-semibold text-sm uppercase tracking-wider">{{ \'about.featuresLabel\' | translate }}</span>                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">                    {{ \'about.featuresTitle\' | translate }}                </h2>            </div>                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">                <!-- Feature 1 -->                <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center mb-4">                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ \'about.feature1Title\' | translate }}</h3>                    <p class="text-gray-600">{{ \'about.feature1Desc\' | translate }}</p>                </div>                <!-- Feature 2 -->                <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-secondary to-brand-accent flex items-center justify-center mb-4">                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ \'about.feature2Title\' | translate }}</h3>                    <p class="text-gray-600">{{ \'about.feature2Desc\' | translate }}</p>                </div>                <!-- Feature 3 -->                <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-accent to-brand-muted flex items-center justify-center mb-4">                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ \'about.feature3Title\' | translate }}</h3>                    <p class="text-gray-600">{{ \'about.feature3Desc\' | translate }}</p>                </div>                <!-- Feature 4 -->                <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4">                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ \'about.feature4Title\' | translate }}</h3>                    <p class="text-gray-600">{{ \'about.feature4Desc\' | translate }}</p>                </div>                <!-- Feature 5 -->                <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center mb-4">                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ \'about.feature5Title\' | translate }}</h3>                    <p class="text-gray-600">{{ \'about.feature5Desc\' | translate }}</p>                </div>                <!-- Feature 6 -->                <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center mb-4">                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ \'about.feature6Title\' | translate }}</h3>                    <p class="text-gray-600">{{ \'about.feature6Desc\' | translate }}</p>                </div>            </div>        </div>    </section>    <!-- Team / Values Section -->    <section class="py-16 lg:py-24">        <div class="max-w-6xl mx-auto px-4">            <div class="text-center mb-12">                <span class="text-brand-primary font-semibold text-sm uppercase tracking-wider">{{ \'about.valuesLabel\' | translate }}</span>                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">                    {{ \'about.valuesTitle\' | translate }}                </h2>            </div>                        <div class="grid md:grid-cols-3 gap-8">                <div class="text-center">                    <div class="w-16 h-16 mx-auto rounded-full bg-blue-100 flex items-center justify-center mb-4">                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ \'about.value1Title\' | translate }}</h3>                    <p class="text-gray-600">{{ \'about.value1Desc\' | translate }}</p>                </div>                                <div class="text-center">                    <div class="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center mb-4">                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ \'about.value2Title\' | translate }}</h3>                    <p class="text-gray-600">{{ \'about.value2Desc\' | translate }}</p>                </div>                                <div class="text-center">                    <div class="w-16 h-16 mx-auto rounded-full bg-purple-100 flex items-center justify-center mb-4">                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ \'about.value3Title\' | translate }}</h3>                    <p class="text-gray-600">{{ \'about.value3Desc\' | translate }}</p>                </div>            </div>        </div>    </section>    <!-- CTA Section -->    <section class="py-16 lg:py-24 bg-gradient-to-br from-brand-primary to-brand-secondary">        <div class="max-w-4xl mx-auto px-4 text-center">            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">                {{ \'about.ctaTitle\' | translate }}            </h2>            <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">                {{ \'about.ctaDescription\' | translate }}            </p>            <div class="flex flex-col sm:flex-row gap-4 justify-center">                <a routerLink="/activities"                    class="px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg">                  {{ \'about.ctaButton1\' | translate }}                </a>                <a routerLink="/signup"                    class="px-8 py-4 bg-white/20 text-white font-bold rounded-full hover:bg-white/30 transition-colors backdrop-blur-sm border border-white/30">                  {{ \'about.ctaButton2\' | translate }}                </a>              </div>              <div class="mt-6">                <a                  href="/documentation/index.html"                  target="_blank"                  rel="noopener noreferrer"                  class="inline-block px-8 py-4 bg-white/20 text-white font-bold rounded-full hover:bg-white/30 transition-colors backdrop-blur-sm border border-white/30">                  {{ \'about.documentation\' | translate }}                </a>              </div>        </div>    </section></main></div>'
+        var COMPONENT_TEMPLATE = '<div><app-header></app-header><main class="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-950 dark:to-slate-900 motion-safe:animate-[pageEnter_.36s_ease-out]">        <!-- Hero Section -->    <section class="relative overflow-hidden bg-gradient-to-br from-brand-primary via-brand-secondary to-brand-accent py-20 lg:py-32 border-b border-slate-200/40 dark:border-slate-700/40">        <!-- Decorative circles -->        <div class="absolute top-10 left-10 w-32 h-32 bg-white/5 rounded-full blur-xl"></div>        <div class="absolute top-40 right-20 w-48 h-48 bg-white/5 rounded-full blur-2xl"></div>        <div class="absolute bottom-20 left-1/4 w-24 h-24 bg-white/10 rounded-full blur-lg"></div>                <div class="max-w-6xl mx-auto px-4 relative z-10">            <div class="text-center">                <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-white/90 text-sm font-medium mb-6">                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>                    </svg>                    {{ \'about.tagline\' | translate }}                </div>                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">                    {{ \'about.heroTitle\' | translate }}                </h1>                <p class="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">                    {{ \'about.heroDescription\' | translate }}                </p>            </div>        </div>                <!-- Wave decoration -->        <div class="absolute bottom-0 left-0 right-0">            <svg viewBox="0 0 1440 120" class="text-slate-50 dark:text-slate-950" fill="none" xmlns="http://www.w3.org/2000/svg">                <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="currentColor"/>            </svg>        </div>    </section>    <!-- Stats Section -->    <section class="py-12 -mt-8 relative z-20">        <div class="max-w-6xl mx-auto px-4">            <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 p-8 grid grid-cols-2 md:grid-cols-4 gap-6">                <div class="text-center">                    <div class="text-3xl md:text-4xl font-bold text-brand-primary mb-1">500+</div>                    <div class="text-gray-600 dark:text-slate-300 text-sm">{{ \'about.stats.activities\' | translate }}</div>                </div>                <div class="text-center">                    <div class="text-3xl md:text-4xl font-bold text-brand-secondary mb-1">1000+</div>                    <div class="text-gray-600 dark:text-slate-300 text-sm">{{ \'about.stats.users\' | translate }}</div>                </div>                <div class="text-center">                    <div class="text-3xl md:text-4xl font-bold text-brand-accent mb-1">50+</div>                    <div class="text-gray-600 dark:text-slate-300 text-sm">{{ \'about.stats.cities\' | translate }}</div>                </div>                <div class="text-center">                    <div class="text-3xl md:text-4xl font-bold text-green-500 mb-1">4.8</div>                    <div class="text-gray-600 dark:text-slate-300 text-sm">{{ \'about.stats.rating\' | translate }}</div>                </div>            </div>        </div>    </section>    <!-- Mission Section -->    <section class="py-16 lg:py-24">        <div class="max-w-6xl mx-auto px-4">            <div class="grid lg:grid-cols-2 gap-12 items-center">                <div>                    <span class="text-brand-primary font-semibold text-sm uppercase tracking-wider">{{ \'about.missionLabel\' | translate }}</span>                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-slate-100 mt-2 mb-6">                        {{ \'about.missionTitle\' | translate }}                    </h2>                    <p class="text-gray-600 dark:text-slate-300 leading-relaxed mb-6">                        {{ \'about.missionDescription\' | translate }}                    </p>                    <div class="space-y-4">                        <div class="flex items-start gap-3">                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">                                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>                                </svg>                            </div>                            <p class="text-gray-700 dark:text-slate-200">{{ \'about.missionPoint1\' | translate }}</p>                        </div>                        <div class="flex items-start gap-3">                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">                                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>                                </svg>                            </div>                            <p class="text-gray-700 dark:text-slate-200">{{ \'about.missionPoint2\' | translate }}</p>                        </div>                        <div class="flex items-start gap-3">                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">                                <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>                                </svg>                            </div>                            <p class="text-gray-700 dark:text-slate-200">{{ \'about.missionPoint3\' | translate }}</p>                        </div>                    </div>                </div>                <div class="relative">                    <div class="aspect-square rounded-2xl bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 dark:from-slate-800 dark:to-slate-700 border border-slate-200 dark:border-slate-700 p-8 flex items-center justify-center">                        <img src="assets/logo/logo.png" alt="MappTuu" class="w-48 h-48 object-contain"/>                    </div>                    <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-brand-accent rounded-2xl -z-10"></div>                    <div class="absolute -top-4 -left-4 w-16 h-16 bg-brand-primary rounded-xl -z-10"></div>                </div>            </div>        </div>    </section>    <!-- Features Section -->    <section class="py-16 lg:py-24 bg-gray-50 dark:bg-slate-950/70">        <div class="max-w-6xl mx-auto px-4">            <div class="text-center mb-12">                <span class="text-brand-primary font-semibold text-sm uppercase tracking-wider">{{ \'about.featuresLabel\' | translate }}</span>                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-slate-100 mt-2">                    {{ \'about.featuresTitle\' | translate }}                </h2>            </div>                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">                <!-- Feature 1 -->                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center mb-4">                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100 mb-2">{{ \'about.feature1Title\' | translate }}</h3>                    <p class="text-gray-600 dark:text-slate-300">{{ \'about.feature1Desc\' | translate }}</p>                </div>                <!-- Feature 2 -->                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-secondary to-brand-accent flex items-center justify-center mb-4">                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100 mb-2">{{ \'about.feature2Title\' | translate }}</h3>                    <p class="text-gray-600 dark:text-slate-300">{{ \'about.feature2Desc\' | translate }}</p>                </div>                <!-- Feature 3 -->                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-accent to-brand-muted flex items-center justify-center mb-4">                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100 mb-2">{{ \'about.feature3Title\' | translate }}</h3>                    <p class="text-gray-600 dark:text-slate-300">{{ \'about.feature3Desc\' | translate }}</p>                </div>                <!-- Feature 4 -->                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4">                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100 mb-2">{{ \'about.feature4Title\' | translate }}</h3>                    <p class="text-gray-600 dark:text-slate-300">{{ \'about.feature4Desc\' | translate }}</p>                </div>                <!-- Feature 5 -->                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center mb-4">                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100 mb-2">{{ \'about.feature5Title\' | translate }}</h3>                    <p class="text-gray-600 dark:text-slate-300">{{ \'about.feature5Desc\' | translate }}</p>                </div>                <!-- Feature 6 -->                <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm hover:shadow-lg transition-shadow duration-300">                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center mb-4">                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100 mb-2">{{ \'about.feature6Title\' | translate }}</h3>                    <p class="text-gray-600 dark:text-slate-300">{{ \'about.feature6Desc\' | translate }}</p>                </div>            </div>        </div>    </section>    <!-- Team / Values Section -->    <section class="py-16 lg:py-24">        <div class="max-w-6xl mx-auto px-4">            <div class="text-center mb-12">                <span class="text-brand-primary font-semibold text-sm uppercase tracking-wider">{{ \'about.valuesLabel\' | translate }}</span>                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-slate-100 mt-2">                    {{ \'about.valuesTitle\' | translate }}                </h2>            </div>                        <div class="grid md:grid-cols-3 gap-8">                <div class="text-center">                    <div class="w-16 h-16 mx-auto rounded-full bg-blue-100 flex items-center justify-center mb-4">                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100 mb-2">{{ \'about.value1Title\' | translate }}</h3>                    <p class="text-gray-600 dark:text-slate-300">{{ \'about.value1Desc\' | translate }}</p>                </div>                                <div class="text-center">                    <div class="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center mb-4">                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100 mb-2">{{ \'about.value2Title\' | translate }}</h3>                    <p class="text-gray-600 dark:text-slate-300">{{ \'about.value2Desc\' | translate }}</p>                </div>                                <div class="text-center">                    <div class="w-16 h-16 mx-auto rounded-full bg-purple-100 flex items-center justify-center mb-4">                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>                        </svg>                    </div>                    <h3 class="text-xl font-bold text-gray-900 dark:text-slate-100 mb-2">{{ \'about.value3Title\' | translate }}</h3>                    <p class="text-gray-600 dark:text-slate-300">{{ \'about.value3Desc\' | translate }}</p>                </div>            </div>        </div>    </section>    <!-- CTA Section -->    <section class="py-16 lg:py-24 bg-gradient-to-br from-brand-primary to-brand-secondary">        <div class="max-w-4xl mx-auto px-4 text-center">            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">                {{ \'about.ctaTitle\' | translate }}            </h2>            <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">                {{ \'about.ctaDescription\' | translate }}            </p>            <div class="flex flex-col sm:flex-row gap-4 justify-center">              @if (isLoggedIn) {                <a                  routerLink="/activitiesList"                  class="inline-flex justify-center min-w-[230px] px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg"                >                  {{ \'about.ctaButton1\' | translate }}                </a>              } @else {                <a                  href="/documentation/index.html"                  target="_blank"                  rel="noopener noreferrer"                  class="inline-flex justify-center min-w-[230px] px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg"                >                  {{ \'about.documentation\' | translate }}                </a>              }              @if (isLoggedIn) {                <a                  routerLink="/plansList"                  class="inline-flex justify-center min-w-[230px] px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg"                >                  {{ \'about.ctaButtonPlans\' | translate }}                </a>                <a                  href="/documentation/index.html"                  target="_blank"                  rel="noopener noreferrer"                  class="inline-flex justify-center min-w-[230px] px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg"                >                  {{ \'about.documentation\' | translate }}                </a>              } @else {                <a                  routerLink="/signup"                  class="inline-flex justify-center min-w-[230px] px-8 py-4 bg-white text-brand-primary font-bold rounded-full hover:bg-gray-100 transition-colors shadow-lg"                >                  {{ \'about.ctaButton2\' | translate }}                </a>              }            </div>        </div>    </section></main></div>'
     var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GlobalSearchComponent', 'selector': 'app-global-search'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
     var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
     var ACTUAL_COMPONENT = {'name': 'AboutComponent'};

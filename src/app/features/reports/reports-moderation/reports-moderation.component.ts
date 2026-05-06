@@ -61,6 +61,8 @@ export class ReportsModerationComponent implements OnInit {
   statusFilter: 'pending' | 'resolved' | 'deleted' | '' = '';
   /** Filtro de motivo seleccionado en UI. */
   reasonFilter: ReportReason | '' = '';
+  /** Filtro de tipo reportado (actividad/plan). */
+  targetTypeFilter: 'activity' | 'plan' | '' = '';
   /** Página actual de paginación. */
   page = 1;
   /** Límite por página para consulta admin. */
@@ -79,7 +81,10 @@ export class ReportsModerationComponent implements OnInit {
       const reasonMatch = this.reasonFilter
         ? report.reason === this.reasonFilter
         : true;
-      return statusMatch && reasonMatch;
+      const typeMatch = this.targetTypeFilter
+        ? this.getTargetType(report) === this.targetTypeFilter
+        : true;
+      return statusMatch && reasonMatch && typeMatch;
     });
   }
 
@@ -145,6 +150,23 @@ export class ReportsModerationComponent implements OnInit {
       return 'bg-green-100 text-green-700 border border-green-200';
     }
     return 'bg-amber-100 text-amber-800 border border-amber-200';
+  }
+
+  /** Normaliza tipo reportado para UI. */
+  getTargetType(report: ActivityReport): 'activity' | 'plan' {
+    return report.targetType === 'plan' ? 'plan' : 'activity';
+  }
+
+  /** Etiqueta visible de tipo reportado. */
+  targetTypeLabel(report: ActivityReport): string {
+    return this.getTargetType(report) === 'plan' ? 'Plan' : 'Actividad';
+  }
+
+  /** Clases visuales para etiqueta de tipo reportado. */
+  targetTypeClass(report: ActivityReport): string {
+    return this.getTargetType(report) === 'plan'
+      ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+      : 'bg-sky-50 text-sky-700 border border-sky-200';
   }
 
   /** Indica si el reporte admite acciones de moderación. */
@@ -222,18 +244,18 @@ export class ReportsModerationComponent implements OnInit {
 
   /** Confirma acción elegida en modal y aplica resolución. */
   async confirmResolveChoice(
-    action: 'dismiss' | 'delete_activity' | 'resolve'
+    action: 'dismiss' | 'delete' | 'resolve'
   ): Promise<void> {
     const report = this.resolveModalReport;
     if (!report) return;
     this.closeResolveModal();
-    await this.applyAction(report.id, action);
+    await this.applyAction(report, action);
   }
 
   /** Aplica una acción de moderación sobre un reporte. */
   async applyAction(
-    reportId: string,
-    action: 'dismiss' | 'delete_activity' | 'resolve'
+    report: ActivityReport,
+    action: 'dismiss' | 'delete' | 'resolve'
   ): Promise<void> {
     try {
       const user =
@@ -245,14 +267,17 @@ export class ReportsModerationComponent implements OnInit {
         return;
       }
       const token = await user.getIdToken();
+      const reportId = report.id;
+      const deleteAction =
+        report.targetType === 'plan' ? ('delete_plan' as const) : ('delete_activity' as const);
       const payload =
         action === 'resolve'
           ? {
               action: 'dismiss' as const,
               resolutionNote: this.keepActivityResolvedNote,
             }
-          : action === 'delete_activity'
-            ? { action: 'delete_activity' as const }
+          : action === 'delete'
+            ? { action: deleteAction }
             : { action: 'dismiss' as const };
 
       this.reportService.resolveReport(reportId, payload, token).subscribe({
@@ -318,7 +343,11 @@ export class ReportsModerationComponent implements OnInit {
   ): 'pending' | 'resolved' | 'deleted' {
     const status = String(report.status || '').trim().toLowerCase();
 
-    if (status === 'resolved' && report.resolutionAction === 'delete_activity') {
+    if (
+      status === 'resolved' &&
+      (report.resolutionAction === 'delete_activity' ||
+        report.resolutionAction === 'delete_plan')
+    ) {
       return 'deleted';
     }
 

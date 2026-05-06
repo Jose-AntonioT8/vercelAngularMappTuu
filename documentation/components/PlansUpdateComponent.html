@@ -250,13 +250,29 @@
                                 <a href="#error" >error</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
+                                <a href="#fileInput" >fileInput</a>
+                            </li>
+                            <li>
                                 <a href="#formPlanUpdate" >formPlanUpdate</a>
+                            </li>
+                            <li>
+                                <a href="#imagePreview" >imagePreview</a>
+                            </li>
+                            <li>
+                                <a href="#isUploading" >isUploading</a>
                             </li>
                             <li>
                                 <a href="#planData" >planData</a>
                             </li>
                             <li>
+                                <a href="#selectedFile" >selectedFile</a>
+                            </li>
+                            <li>
                                 <a href="#success" >success</a>
+                            </li>
+                            <li>
+                                <a href="#warning" >warning</a>
                             </li>
                         </ul>
                     </td>
@@ -280,11 +296,21 @@
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
+                                <a href="#onFileSelected" >onFileSelected</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Async</span>
                                 <a href="#onUpdate" >onUpdate</a>
                             </li>
                             <li>
                                 <a href="#toggleActivitySelection" >toggleActivitySelection</a>
+                            </li>
+                            <li>
+                                <a href="#triggerFileInput" >triggerFileInput</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#uploadImage" >uploadImage</a>
                             </li>
                         </ul>
                     </td>
@@ -318,12 +344,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(formSvc: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, router: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, auth: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, planService: <a href="../injectables/PlanService.html" target="_self">PlanService</a>, activityService: <a href="../injectables/ActivityService.html" target="_self">ActivityService</a>)</code>
+<code>constructor(formSvc: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, route: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, router: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, auth: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, planService: <a href="../injectables/PlanService.html" target="_self">PlanService</a>, activityService: <a href="../injectables/ActivityService.html" target="_self">ActivityService</a>, moderationService: <a href="../injectables/ContentModerationService.html" target="_self">ContentModerationService</a>, iaAssistantService: <a href="../injectables/IaAssistantService.html" target="_self">IaAssistantService</a>, mediaService: <a href="../injectables/CloudinaryService.html" target="_self">CloudinaryService</a>, translationService: <a href="../injectables/TranslationService.html" target="_self">TranslationService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:57</a></div>
                             </td>
                         </tr>
 
@@ -412,6 +438,54 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>moderationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ContentModerationService.html" target="_self" >ContentModerationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>iaAssistantService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/IaAssistantService.html" target="_self" >IaAssistantService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>mediaService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CloudinaryService.html" target="_self" >CloudinaryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>translationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/TranslationService.html" target="_self" >TranslationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -450,8 +524,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="122"
-                                    class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:122</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="212"
+                                    class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:212</a></div>
                         </td>
                     </tr>
 
@@ -519,8 +593,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="85"
-                                    class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:85</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -558,8 +632,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:89</a></div>
                         </td>
                     </tr>
 
@@ -573,6 +647,75 @@
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFileSelected"></a>
+                    <span class="name">
+                        <span ><b>onFileSelected</b></span>
+                        <a href="#onFileSelected"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onFileSelected(event: <a href="https://angular.io/api/router/Event" target="_blank">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="151"
+                                    class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:151</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Valida y previsualiza un fichero de imagen seleccionado.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/router/Event" target="_blank" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -599,8 +742,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="148"
-                                    class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:148</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="238"
+                                    class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:238</a></div>
                         </td>
                     </tr>
 
@@ -643,8 +786,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="128"
-                                    class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:128</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="218"
+                                    class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:218</a></div>
                         </td>
                     </tr>
 
@@ -692,6 +835,86 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="triggerFileInput"></a>
+                    <span class="name">
+                        <span ><b>triggerFileInput</b></span>
+                        <a href="#triggerFileInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>triggerFileInput()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="144"
+                                    class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:144</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Abre el selector de archivo nativo.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadImage"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>uploadImage</b></span>
+                        <a href="#uploadImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>uploadImage()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="192"
+                                    class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:192</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sube la imagen seleccionada a Cloudinary y devuelve la URL.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;string | null&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
     <section data-compodoc="block-properties">
     
@@ -722,7 +945,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -759,7 +982,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -796,7 +1019,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -833,13 +1056,55 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:37</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Mensaje de error para UI.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fileInput"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>fileInput</b></span>
+                        <a href="#fileInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>ElementRef&lt;HTMLInputElement&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChild(&#x27;fileInput&#x27;)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Input file nativo (para subir nueva imagen).</p>
 </div>
                 </td>
             </tr>
@@ -865,13 +1130,87 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:43</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Formulario reactivo de edición del plan.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imagePreview"></a>
+                    <span class="name">
+                        <span ><b>imagePreview</b></span>
+                        <a href="#imagePreview"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Preview local de imagen (data URL).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isUploading"></a>
+                    <span class="name">
+                        <span ><b>isUploading</b></span>
+                        <a href="#isUploading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Flag de subida en curso.</p>
 </div>
                 </td>
             </tr>
@@ -897,13 +1236,50 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:45</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Snapshot del plan cargado (no tipado).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedFile"></a>
+                    <span class="name">
+                        <span ><b>selectedFile</b></span>
+                        <a href="#selectedFile"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>File | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Archivo de imagen seleccionado (opcional).</p>
 </div>
                 </td>
             </tr>
@@ -934,13 +1310,50 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:39</a></div>
                         </td>
                     </tr>
 
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Mensaje de éxito para UI.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="warning"></a>
+                    <span class="name">
+                        <span ><b>warning</b></span>
+                        <a href="#warning"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Aviso de moderación no bloqueante.</p>
 </div>
                 </td>
             </tr>
@@ -969,7 +1382,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:117</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">src/app/features/plans/plans-update/plans-update.component.ts:138</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -991,10 +1404,11 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ElementRef, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { FormBuilder, FormGroup, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { firstValueFrom } from &#x27;rxjs&#x27;;
 import { AuthService } from &#x27;../../../core/services/auth.service&#x27;;
 import { PlanService } from &#x27;../../../core/services/plan.service&#x27;;
 import { ActivityService } from &#x27;../../../core/services/activity.service&#x27;;
@@ -1002,6 +1416,10 @@ import { Activity } from &#x27;../../../common/models/activity.model&#x27;;
 import { RouterModule } from &#x27;@angular/router&#x27;;
 import { TranslatePipe } from &#x27;../../../core/pipes/translate.pipe&#x27;;
 import { LanguageSelectorComponent } from &#x27;../../../common/language-selector/language-selector.component&#x27;;
+import { ContentModerationService } from &#x27;../../../core/services/content-moderation.service&#x27;;
+import { TranslationService } from &#x27;../../../core/services/translation.service&#x27;;
+import { IaAssistantService } from &#x27;../../../core/services/ia-assistant.service&#x27;;
+import { CloudinaryService } from &#x27;../../../core/services/firebase-media.service&#x27;;
 
 /**
  * Pantalla de edición de un plan existente.
@@ -1019,10 +1437,14 @@ import { LanguageSelectorComponent } from &#x27;../../../common/language-selecto
   styleUrls: [&#x27;./plans-update.component.scss&#x27;]
 })
 export class PlansUpdateComponent implements OnInit {
+  /** Input file nativo (para subir nueva imagen). */
+  @ViewChild(&#x27;fileInput&#x27;) fileInput!: ElementRef&lt;HTMLInputElement&gt;;
   /** Mensaje de error para UI. */
   error &#x3D; &#x27;&#x27;;
   /** Mensaje de éxito para UI. */
   success &#x3D; &#x27;&#x27;;
+  /** Aviso de moderación no bloqueante. */
+  warning &#x3D; &#x27;&#x27;;
   /** Formulario reactivo de edición del plan. */
   formPlanUpdate: FormGroup;
   /** Snapshot del plan cargado (no tipado). */
@@ -1033,6 +1455,12 @@ export class PlansUpdateComponent implements OnInit {
   activities: Activity[] &#x3D; [];
   /** Lista de nombres (derivada) para UI. */
   activitiesName: string[] &#x3D; [];
+  /** Archivo de imagen seleccionado (opcional). */
+  selectedFile: File | null &#x3D; null;
+  /** Preview local de imagen (data URL). */
+  imagePreview: string | null &#x3D; null;
+  /** Flag de subida en curso. */
+  isUploading &#x3D; false;
 
   constructor(
     /** Constructor de formularios. */
@@ -1046,7 +1474,13 @@ export class PlansUpdateComponent implements OnInit {
     /** Servicio de planes (lectura puntual + mutación). */
     private planService: PlanService,
     /** Servicio de actividades (catálogo). */
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    /** Servicio de moderación de contenido básico. */
+    private moderationService: ContentModerationService,
+    private iaAssistantService: IaAssistantService,
+    private mediaService: CloudinaryService,
+    /** Servicio de traducción runtime para mensajes en TS. */
+    private translationService: TranslationService
   ) {
     this.formPlanUpdate &#x3D; this.formSvc.group({
       name: [&#x27;&#x27;],
@@ -1108,7 +1542,76 @@ export class PlansUpdateComponent implements OnInit {
 
   /** Imagen actual del formulario (para preview). */
   get currentImage(): string {
+    if (this.imagePreview) return this.imagePreview;
     return this.formPlanUpdate.get(&#x27;imageRef&#x27;)?.value || &#x27;&#x27;;
+  }
+
+  /** Abre el selector de archivo nativo. */
+  triggerFileInput(): void {
+    if (this.fileInput?.nativeElement) {
+      this.fileInput.nativeElement.click();
+    }
+  }
+
+  /** Valida y previsualiza un fichero de imagen seleccionado. */
+  onFileSelected(event: Event): void {
+    const input &#x3D; event.target as HTMLInputElement;
+    if (input.files &amp;&amp; input.files[0]) {
+      const file &#x3D; input.files[0];
+      if (!file.type.startsWith(&#x27;image/&#x27;)) {
+        this.error &#x3D; &#x27;Por favor, selecciona un archivo de imagen válido&#x27;;
+        return;
+      }
+      if (file.size &gt; 5 * 1024 * 1024) {
+        this.error &#x3D; &#x27;La imagen no debe superar los 5MB&#x27;;
+        return;
+      }
+      const imageModeration &#x3D; this.moderationService.moderateImageFile(file);
+      if (imageModeration.blocked) {
+        this.error &#x3D; this.translationService.get(
+          &#x27;moderation.blockedImage&#x27;,
+          &#x27;La imagen parece no apropiada y no se puede publicar.&#x27;,
+        );
+        this.selectedFile &#x3D; null;
+        this.imagePreview &#x3D; null;
+        return;
+      }
+      if (imageModeration.warning) {
+        this.warning &#x3D; this.translationService.get(
+          &#x27;moderation.warningImage&#x27;,
+          &#x27;La imagen parece sospechosa y podria ser revisada por moderacion.&#x27;,
+        );
+      } else {
+        this.warning &#x3D; &#x27;&#x27;;
+      }
+      this.selectedFile &#x3D; file;
+      this.error &#x3D; &#x27;&#x27;;
+      const reader &#x3D; new FileReader();
+      reader.onload &#x3D; (e: any) &#x3D;&gt; {
+        this.imagePreview &#x3D; e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  /** Sube la imagen seleccionada a Cloudinary y devuelve la URL. */
+  async uploadImage(): Promise&lt;string | null&gt; {
+    if (!this.selectedFile) return null;
+    this.isUploading &#x3D; true;
+    this.error &#x3D; &#x27;&#x27;;
+    try {
+      const blob &#x3D; new Blob([this.selectedFile], { type: this.selectedFile.type });
+      const urls &#x3D; await this.mediaService.upload(blob, &#x27;plans&#x27;).toPromise();
+      if (urls &amp;&amp; urls.length &gt; 0) {
+        this.isUploading &#x3D; false;
+        return urls[0];
+      }
+      throw new Error(&#x27;No se obtuvo URL de la imagen subida&#x27;);
+    } catch (err: any) {
+      this.isUploading &#x3D; false;
+      this.error &#x3D; err.message || &#x27;Error al subir la imagen.&#x27;;
+      return null;
+    }
   }
 
   /** Devuelve si un nombre de actividad está seleccionado en el form. */
@@ -1139,6 +1642,7 @@ export class PlansUpdateComponent implements OnInit {
    * - Adjunta token Bearer del usuario autenticado
    */
   async onUpdate() {
+    this.warning &#x3D; &#x27;&#x27;;
     const selectedActivityNames: string[] &#x3D; this.formPlanUpdate.value.activitiesIds || [];
     const selectedActivityIds: string[] &#x3D; this.activities
       .filter((act: Activity) &#x3D;&gt; selectedActivityNames.includes(act.name))
@@ -1162,6 +1666,67 @@ export class PlansUpdateComponent implements OnInit {
       planData.activitiesIds &#x3D; selectedActivityIds;
     }
     planData.visibility &#x3D; this.formPlanUpdate.value.visibility;
+
+    const imageRefValue: string &#x3D;
+      this.formPlanUpdate.value.imageRef ||
+      this.planData?.imageRef ||
+      this.planData?.imgRef ||
+      &#x27;&#x27;;
+
+    const baseModeration &#x3D; this.moderationService.moderatePlanInput(
+      this.formPlanUpdate.value.name || this.planData?.name || &#x27;&#x27;,
+      this.formPlanUpdate.value.description || this.planData?.description || &#x27;&#x27;,
+      imageRefValue || &#x27;&#x27;,
+      this.selectedFile,
+    );
+
+    let groqModeration &#x3D; { blocked: false, warning: false, score: 0, reasons: [] as string[] };
+    if (this.selectedFile) {
+      groqModeration &#x3D; await firstValueFrom(
+        this.iaAssistantService.moderateImageFileWithGroq(this.selectedFile),
+      );
+    } else if (imageRefValue) {
+      groqModeration &#x3D; await firstValueFrom(
+        this.iaAssistantService.moderateImageUrlWithGroq(imageRefValue),
+      );
+    }
+
+    const moderation &#x3D; {
+      blocked: !groqModeration.warning ? groqModeration.blocked : baseModeration.blocked,
+      warning: baseModeration.warning || groqModeration.warning,
+      score: Math.min(1, Math.max(baseModeration.score, groqModeration.score)),
+      reasons: [...new Set([...baseModeration.reasons, ...groqModeration.reasons])],
+    };
+
+    if (moderation.blocked) {
+      this.error &#x3D; this.translationService.get(
+        &#x27;moderation.blockedContent&#x27;,
+        &#x27;Se detecto contenido no apropiado en texto o imagen.&#x27;
+      );
+      return;
+    }
+    if (moderation.warning) {
+      this.warning &#x3D; this.translationService.get(
+        &#x27;moderation.warningContent&#x27;,
+        &#x27;Contenido potencialmente sensible detectado. Pasara a revision manual.&#x27;
+      );
+    }
+    planData.moderationResult &#x3D; {
+      blocked: moderation.blocked,
+      warning: moderation.warning,
+      score: moderation.score,
+      reasons: moderation.reasons,
+    };
+
+    // Si hay nueva imagen seleccionada, subirla y actualizar imageRef.
+    if (this.selectedFile) {
+      const uploadedUrl &#x3D; await this.uploadImage();
+      if (!uploadedUrl) {
+        return;
+      }
+      planData.imageRef &#x3D; uploadedUrl;
+      this.formPlanUpdate.patchValue({ imageRef: uploadedUrl });
+    }
 
     console.log(&#x27;Datos del plan a actualizar:&#x27;, planData);
 
@@ -1208,22 +1773,68 @@ export class PlansUpdateComponent implements OnInit {
 &lt;/div&gt;
 &lt;/header&gt;
 
-&lt;div class&#x3D;&quot;bg-gray-50 min-h-[calc(100vh-73px)] flex justify-center items-start pt-8 pb-12 px-4 sm:px-6 motion-safe:animate-[pageSoft_.42s_ease-out]&quot;&gt;
+&lt;div class&#x3D;&quot;bg-gray-50 dark:bg-slate-950 min-h-[calc(100vh-73px)] flex justify-center items-start pt-8 pb-12 px-4 sm:px-6 motion-safe:animate-[pageSoft_.42s_ease-out]&quot;&gt;
   
-  &lt;div class&#x3D;&quot;bg-white w-full max-w-5xl rounded-3xl shadow-xl overflow-hidden border border-white&quot;&gt;
+  &lt;div class&#x3D;&quot;bg-white dark:bg-slate-900 w-full max-w-5xl rounded-3xl shadow-xl overflow-hidden border border-white dark:border-slate-800&quot;&gt;
     
     &lt;form [formGroup]&#x3D;&quot;formPlanUpdate&quot; (submit)&#x3D;&quot;onUpdate()&quot; class&#x3D;&quot;flex flex-col&quot;&gt;
       
       &lt;div class&#x3D;&quot;grid grid-cols-1 lg:grid-cols-5 h-full&quot;&gt;
         
-        &lt;div class&#x3D;&quot;lg:col-span-2 relative bg-slate-100 min-h-[350px] lg:min-h-full group overflow-hidden&quot;&gt;
-          &lt;img [src]&#x3D;&quot;currentImage || &#x27;https://picsum.photos/800/600&#x27;&quot; 
-               class&#x3D;&quot;w-full h-full object-cover transition-transform duration-700 group-hover:scale-105&quot;
-               alt&#x3D;&quot;Plan Preview&quot;
-               onerror&#x3D;&quot;this.src&#x3D;&#x27;https://picsum.photos/800/600&#x27;&quot;&gt;
-          
+        &lt;div class&#x3D;&quot;lg:col-span-2 relative bg-slate-100 dark:bg-slate-950 min-h-[350px] lg:min-h-full group overflow-hidden p-4&quot;&gt;
+          &lt;div
+            (click)&#x3D;&quot;triggerFileInput()&quot;
+            class&#x3D;&quot;w-full h-full rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 bg-white cursor-pointer relative&quot;
+          &gt;
+            &lt;img
+              [src]&#x3D;&quot;currentImage || &#x27;https://picsum.photos/800/600&#x27;&quot;
+              class&#x3D;&quot;w-full h-full object-cover transition-transform duration-700 group-hover:scale-105&quot;
+              alt&#x3D;&quot;Plan Preview&quot;
+              onerror&#x3D;&quot;this.src&#x3D;&#x27;https://picsum.photos/800/600&#x27;&quot;
+            /&gt;
+
+            &lt;div
+              class&#x3D;&quot;absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center&quot;
+            &gt;
+              &lt;div
+                class&#x3D;&quot;opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center&quot;
+              &gt;
+                &lt;svg
+                  xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot;
+                  class&#x3D;&quot;h-10 w-10 mx-auto mb-2&quot;
+                  fill&#x3D;&quot;none&quot;
+                  viewBox&#x3D;&quot;0 0 24 24&quot;
+                  stroke&#x3D;&quot;currentColor&quot;
+                  stroke-width&#x3D;&quot;1.5&quot;
+                &gt;
+                  &lt;path
+                    stroke-linecap&#x3D;&quot;round&quot;
+                    stroke-linejoin&#x3D;&quot;round&quot;
+                    d&#x3D;&quot;M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z&quot;
+                  /&gt;
+                  &lt;path
+                    stroke-linecap&#x3D;&quot;round&quot;
+                    stroke-linejoin&#x3D;&quot;round&quot;
+                    d&#x3D;&quot;M15 13a3 3 0 11-6 0 3 3 0 016 0z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                &lt;p class&#x3D;&quot;text-xs font-medium&quot;&gt;
+                  {{ &#x27;activities.uploadImage&#x27; | translate }}
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;input
+            #fileInput
+            type&#x3D;&quot;file&quot;
+            accept&#x3D;&quot;image/*&quot;
+            class&#x3D;&quot;hidden&quot;
+            (change)&#x3D;&quot;onFileSelected($event)&quot;
+          /&gt;
+
           &lt;div class&#x3D;&quot;absolute bottom-4 left-4 right-4&quot;&gt;
-            &lt;div class&#x3D;&quot;bg-white/90 backdrop-blur-md p-3 rounded-2xl border border-white/40 shadow-lg&quot;&gt;
+            &lt;div class&#x3D;&quot;bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-3 rounded-2xl border border-white/40 dark:border-slate-700/60 shadow-lg&quot;&gt;
               &lt;label class&#x3D;&quot;text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1 block pl-1&quot;&gt;{{ &#x27;plans.imageSourceURL&#x27; | translate }}&lt;/label&gt;
               &lt;div class&#x3D;&quot;flex items-center gap-2&quot;&gt;
                 &lt;svg xmlns&#x3D;&quot;http://www.w3.org/2000/svg&quot; viewBox&#x3D;&quot;0 0 20 20&quot; fill&#x3D;&quot;currentColor&quot; class&#x3D;&quot;w-4 h-4 shrink-0&quot; style&#x3D;&quot;color: #5675AC;&quot;&gt;
@@ -1240,46 +1851,46 @@ export class PlansUpdateComponent implements OnInit {
         &lt;div class&#x3D;&quot;lg:col-span-3 p-6 md:p-10 flex flex-col gap-8&quot;&gt;
           
           &lt;div class&#x3D;&quot;relative group&quot;&gt;
-            &lt;label class&#x3D;&quot;absolute -top-2.5 left-3 bg-white px-2 text-xs font-bold uppercase tracking-wider&quot; style&#x3D;&quot;color: #5675AC;&quot;&gt;{{ &#x27;plans.planName&#x27; | translate }}&lt;/label&gt;
+            &lt;label class&#x3D;&quot;absolute -top-2.5 left-3 bg-white dark:bg-slate-900 px-2 text-xs font-bold uppercase tracking-wider&quot; style&#x3D;&quot;color: #5675AC;&quot;&gt;{{ &#x27;plans.planName&#x27; | translate }}&lt;/label&gt;
             &lt;input type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;name&quot; 
-                   class&#x3D;&quot;w-full bg-white border-2 rounded-xl px-4 py-4 text-xl font-bold text-slate-800 placeholder-slate-300 focus:outline-none focus:border-[#5675AC] focus:ring-4 focus:ring-[#5675AC]/10 transition-all border-slate-100&quot;
+                   class&#x3D;&quot;w-full bg-white dark:bg-slate-950 border-2 rounded-xl px-4 py-4 text-xl font-bold text-slate-800 dark:text-slate-100 placeholder-slate-300 dark:placeholder-slate-500 focus:outline-none focus:border-[#5675AC] focus:ring-4 focus:ring-[#5675AC]/10 transition-all border-slate-100 dark:border-slate-700&quot;
                    [placeholder]&#x3D;&quot;&#x27;plans.planNamePlaceholder&#x27; | translate&quot;&gt;
           &lt;/div&gt;
 
-          &lt;div class&#x3D;&quot;bg-slate-50/50 rounded-2xl p-6&quot;&gt;
-            &lt;label class&#x3D;&quot;block text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 ml-1&quot;&gt;{{ &#x27;plans.aboutThisPlan&#x27; | translate }}&lt;/label&gt;
+          &lt;div class&#x3D;&quot;bg-slate-50/50 dark:bg-slate-900/40 rounded-2xl p-6&quot;&gt;
+            &lt;label class&#x3D;&quot;block text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3 ml-1&quot;&gt;{{ &#x27;plans.aboutThisPlan&#x27; | translate }}&lt;/label&gt;
             &lt;textarea formControlName&#x3D;&quot;description&quot; rows&#x3D;&quot;6&quot; 
-                      class&#x3D;&quot;w-full bg-white border border-slate-200 rounded-2xl p-5 text-slate-700 leading-relaxed outline-none resize-none transition-all shadow-sm focus:border-[#5675AC] focus:ring-4 focus:ring-[#5675AC]/10&quot;
+                      class&#x3D;&quot;w-full bg-white dark:bg-slate-700 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-2xl p-5 text-slate-700 leading-relaxed outline-none resize-none transition-all shadow-sm focus:border-[#5675AC] focus:ring-4 focus:ring-[#5675AC]/10 placeholder-slate-400 dark:placeholder-slate-400&quot;
                       [placeholder]&#x3D;&quot;&#x27;plans.describeYourPlan&#x27; | translate&quot;&gt;&lt;/textarea&gt;
           &lt;/div&gt;
 
-          &lt;div class&#x3D;&quot;bg-slate-50/50 rounded-2xl p-6&quot;&gt;
-            &lt;label class&#x3D;&quot;block text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 ml-1&quot;&gt;{{ &#x27;plans.selectActivities&#x27; | translate }}&lt;/label&gt;
-            &lt;div class&#x3D;&quot;border border-slate-200 rounded-xl bg-white overflow-y-auto max-h-48 shadow-sm&quot;&gt;
+          &lt;div class&#x3D;&quot;bg-slate-50/50 dark:bg-slate-900/40 rounded-2xl p-6&quot;&gt;
+            &lt;label class&#x3D;&quot;block text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3 ml-1&quot;&gt;{{ &#x27;plans.selectActivities&#x27; | translate }}&lt;/label&gt;
+            &lt;div class&#x3D;&quot;border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-950 overflow-y-auto max-h-48 shadow-sm&quot;&gt;
               &lt;div *ngFor&#x3D;&quot;let activity of activities&quot; 
-                   class&#x3D;&quot;flex items-center p-3 hover:bg-slate-50 cursor-pointer transition-colors border-b border-slate-100 last:border-b-0&quot;
+                   class&#x3D;&quot;flex items-center p-3 hover:bg-slate-50 dark:hover:bg-slate-900 cursor-pointer transition-colors border-b border-slate-100 dark:border-slate-800 last:border-b-0&quot;
                    (click)&#x3D;&quot;toggleActivitySelection(activity.name)&quot;&gt;
                 &lt;input type&#x3D;&quot;checkbox&quot; 
                        [id]&#x3D;&quot;&#x27;activity-&#x27; + activity.id&quot;
                        [value]&#x3D;&quot;activity.name&quot;
                        [checked]&#x3D;&quot;isSelected(activity.name)&quot;
-                       class&#x3D;&quot;h-4 w-4 rounded border-gray-300 focus:ring-2 focus:ring-[#5675AC] cursor-pointer&quot;
+                       class&#x3D;&quot;h-4 w-4 rounded border-gray-300 dark:border-slate-600 focus:ring-2 focus:ring-[#5675AC] cursor-pointer&quot;
                        style&#x3D;&quot;accent-color: #5675AC;&quot;
                        (change)&#x3D;&quot;toggleActivitySelection(activity.name)&quot;&gt;
-                &lt;label [for]&#x3D;&quot;&#x27;activity-&#x27; + activity.id&quot; class&#x3D;&quot;ml-3 text-slate-700 flex-grow cursor-pointer font-medium&quot;&gt;
+                &lt;label [for]&#x3D;&quot;&#x27;activity-&#x27; + activity.id&quot; class&#x3D;&quot;ml-3 text-slate-700 dark:text-slate-100 flex-grow cursor-pointer font-medium&quot;&gt;
                   {{ activity.name }}
                 &lt;/label&gt;
               &lt;/div&gt;
             &lt;/div&gt;
           &lt;/div&gt;
 
-          &lt;div class&#x3D;&quot;flex items-center gap-3 bg-slate-50/50 rounded-xl p-4&quot;&gt;
+          &lt;div class&#x3D;&quot;flex items-center gap-3 bg-slate-50/50 dark:bg-slate-900/40 rounded-xl p-4&quot;&gt;
             &lt;input type&#x3D;&quot;checkbox&quot; 
                    formControlName&#x3D;&quot;visibility&quot; 
                    id&#x3D;&quot;visibility&quot;
-                   class&#x3D;&quot;h-5 w-5 rounded border-gray-300 focus:ring-2 focus:ring-[#5675AC] cursor-pointer&quot;
+                   class&#x3D;&quot;h-5 w-5 rounded border-gray-300 dark:border-slate-600 focus:ring-2 focus:ring-[#5675AC] cursor-pointer&quot;
                    style&#x3D;&quot;accent-color: #5675AC;&quot;&gt;
-            &lt;label for&#x3D;&quot;visibility&quot; class&#x3D;&quot;text-sm font-bold text-slate-700 cursor-pointer&quot;&gt;
+            &lt;label for&#x3D;&quot;visibility&quot; class&#x3D;&quot;text-sm font-bold text-slate-700 dark:text-slate-100 cursor-pointer&quot;&gt;
               {{ &#x27;plans.visibility&#x27; | translate }}
             &lt;/label&gt;
           &lt;/div&gt;
@@ -1287,7 +1898,7 @@ export class PlansUpdateComponent implements OnInit {
         &lt;/div&gt;
       &lt;/div&gt;
 
-      &lt;div class&#x3D;&quot;px-6 md:px-10 py-8 bg-slate-50/50 border-t border-slate-100&quot;&gt;
+      &lt;div class&#x3D;&quot;px-6 md:px-10 py-8 bg-slate-50/50 dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700&quot;&gt;
         
         &lt;button type&#x3D;&quot;submit&quot; 
                 [disabled]&#x3D;&quot;formPlanUpdate.invalid&quot;
@@ -1318,14 +1929,46 @@ export class PlansUpdateComponent implements OnInit {
 
     &lt;/form&gt;
   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="styleData">
                 <p class="comment">
                     <code>./plans-update.component.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <pre class="line-numbers"><code class="language-scss">// Estilos para modo oscuro en el componente de edición de planes
+
+:host-context(.dark) {
+  textarea,
+  input[type&#x3D;&quot;text&quot;],
+  input[type&#x3D;&quot;number&quot;],
+  select {
+    &amp;:focus {
+      border-color: #7dd3fc !important;
+      box-shadow: 0 0 0 4px rgba(125, 211, 252, 0.15) !important;
+    }
+  }
+}
+
+// Estilos generales para el textarea
+textarea {
+  &amp;::placeholder {
+    color: inherit;
+    opacity: 0.7;
+  }
+}
+
+// Animación shimmer para el botón
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="tree">
@@ -1353,7 +1996,7 @@ export class PlansUpdateComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><header class="sticky top-0 z-50 text-white p-4 flex items-center justify-between shadow-md" style="background-color: #5675AC;">  <div class="flex items-center gap-4">    <a routerLink="/plansList" class="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-white/30 bg-white/20 text-white cursor-pointer">      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />      </svg>    </a>    <h1 class="text-xl font-bold tracking-tight">{{ \'plans.updateTitle\' | translate }}</h1>  </div>  <div class="relative z-50">    <app-language-selector></app-language-selector></div></header><div class="bg-gray-50 min-h-[calc(100vh-73px)] flex justify-center items-start pt-8 pb-12 px-4 sm:px-6 motion-safe:animate-[pageSoft_.42s_ease-out]">    <div class="bg-white w-full max-w-5xl rounded-3xl shadow-xl overflow-hidden border border-white">        <form [formGroup]="formPlanUpdate" (submit)="onUpdate()" class="flex flex-col">            <div class="grid grid-cols-1 lg:grid-cols-5 h-full">                <div class="lg:col-span-2 relative bg-slate-100 min-h-[350px] lg:min-h-full group overflow-hidden">          <img [src]="currentImage || \'https://picsum.photos/800/600\'"                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"               alt="Plan Preview"               onerror="this.src=\'https://picsum.photos/800/600\'">                    <div class="absolute bottom-4 left-4 right-4">            <div class="bg-white/90 backdrop-blur-md p-3 rounded-2xl border border-white/40 shadow-lg">              <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1 block pl-1">{{ \'plans.imageSourceURL\' | translate }}</label>              <div class="flex items-center gap-2">                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 shrink-0" style="color: #5675AC;">                  <path fill-rule="evenodd" d="M1 5.25A2.25 2.25 0 013.25 3h13.5A2.25 2.25 0 0119 5.25v9.5A2.25 2.25 0 0116.75 17H3.25A2.25 2.25 0 011 14.75v-9.5zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 00.75-.75v-2.69l-2.22-2.219a.75.75 0 00-1.06 0l-1.91 1.909.47.47a.75.75 0 11-1.06 1.06L6.53 8.091a.75.75 0 00-1.06 0l-2.97 2.97zM12 7a1 1 0 11-2 0 1 1 0 012 0z" clip-rule="evenodd" />                </svg>                  <input type="text" formControlName="imageRef"                     class="w-full bg-transparent text-sm text-slate-800 font-medium focus:outline-none placeholder-slate-400"                    [placeholder]="\'plans.pasteURL\' | translate">              </div>            </div>          </div>        </div>        <div class="lg:col-span-3 p-6 md:p-10 flex flex-col gap-8">                    <div class="relative group">            <label class="absolute -top-2.5 left-3 bg-white px-2 text-xs font-bold uppercase tracking-wider" style="color: #5675AC;">{{ \'plans.planName\' | translate }}</label>            <input type="text" formControlName="name"                    class="w-full bg-white border-2 rounded-xl px-4 py-4 text-xl font-bold text-slate-800 placeholder-slate-300 focus:outline-none focus:border-[#5675AC] focus:ring-4 focus:ring-[#5675AC]/10 transition-all border-slate-100"                   [placeholder]="\'plans.planNamePlaceholder\' | translate">          </div>          <div class="bg-slate-50/50 rounded-2xl p-6">            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 ml-1">{{ \'plans.aboutThisPlan\' | translate }}</label>            <textarea formControlName="description" rows="6"                       class="w-full bg-white border border-slate-200 rounded-2xl p-5 text-slate-700 leading-relaxed outline-none resize-none transition-all shadow-sm focus:border-[#5675AC] focus:ring-4 focus:ring-[#5675AC]/10"                      [placeholder]="\'plans.describeYourPlan\' | translate"></textarea>          </div>          <div class="bg-slate-50/50 rounded-2xl p-6">            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 ml-1">{{ \'plans.selectActivities\' | translate }}</label>            <div class="border border-slate-200 rounded-xl bg-white overflow-y-auto max-h-48 shadow-sm">              <div *ngFor="let activity of activities"                    class="flex items-center p-3 hover:bg-slate-50 cursor-pointer transition-colors border-b border-slate-100 last:border-b-0"                   (click)="toggleActivitySelection(activity.name)">                <input type="checkbox"                        [id]="\'activity-\' + activity.id"                       [value]="activity.name"                       [checked]="isSelected(activity.name)"                       class="h-4 w-4 rounded border-gray-300 focus:ring-2 focus:ring-[#5675AC] cursor-pointer"                       style="accent-color: #5675AC;"                       (change)="toggleActivitySelection(activity.name)">                <label [for]="\'activity-\' + activity.id" class="ml-3 text-slate-700 flex-grow cursor-pointer font-medium">                  {{ activity.name }}                </label>              </div>            </div>          </div>          <div class="flex items-center gap-3 bg-slate-50/50 rounded-xl p-4">            <input type="checkbox"                    formControlName="visibility"                    id="visibility"                   class="h-5 w-5 rounded border-gray-300 focus:ring-2 focus:ring-[#5675AC] cursor-pointer"                   style="accent-color: #5675AC;">            <label for="visibility" class="text-sm font-bold text-slate-700 cursor-pointer">              {{ \'plans.visibility\' | translate }}            </label>          </div>        </div>      </div>      <div class="px-6 md:px-10 py-8 bg-slate-50/50 border-t border-slate-100">                <button type="submit"                 [disabled]="formPlanUpdate.invalid"                class="w-full relative bg-[#5675AC] text-white font-bold py-4 rounded-xl text-lg shadow-xl transition-all transform hover:-translate-y-0.5 hover:shadow-2xl active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none">                    <span class="flex items-center justify-center gap-2">            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />            </svg>            {{ \'plans.update\' | translate }}          </span>        </button>                <div *ngIf="error" class="mt-4 p-3 bg-red-50 text-red-600 text-sm font-medium rounded-lg text-center border border-red-100 flex items-center justify-center gap-2 animate-pulse">            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />            </svg>            {{ error }}        </div>        <div *ngIf="success" class="mt-4 p-3 bg-green-50 text-green-700 text-sm font-medium rounded-lg text-center border border-green-100 flex items-center justify-center gap-2">            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />            </svg>            {{ success }}        </div>      </div>    </form>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><header class="sticky top-0 z-50 text-white p-4 flex items-center justify-between shadow-md" style="background-color: #5675AC;">  <div class="flex items-center gap-4">    <a routerLink="/plansList" class="flex items-center justify-center w-10 h-10 rounded-full transition-colors hover:bg-white/30 bg-white/20 text-white cursor-pointer">      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />      </svg>    </a>    <h1 class="text-xl font-bold tracking-tight">{{ \'plans.updateTitle\' | translate }}</h1>  </div>  <div class="relative z-50">    <app-language-selector></app-language-selector></div></header><div class="bg-gray-50 dark:bg-slate-950 min-h-[calc(100vh-73px)] flex justify-center items-start pt-8 pb-12 px-4 sm:px-6 motion-safe:animate-[pageSoft_.42s_ease-out]">    <div class="bg-white dark:bg-slate-900 w-full max-w-5xl rounded-3xl shadow-xl overflow-hidden border border-white dark:border-slate-800">        <form [formGroup]="formPlanUpdate" (submit)="onUpdate()" class="flex flex-col">            <div class="grid grid-cols-1 lg:grid-cols-5 h-full">                <div class="lg:col-span-2 relative bg-slate-100 dark:bg-slate-950 min-h-[350px] lg:min-h-full group overflow-hidden p-4">          <div            (click)="triggerFileInput()"            class="w-full h-full rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/10 bg-white cursor-pointer relative"          >            <img              [src]="currentImage || \'https://picsum.photos/800/600\'"              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"              alt="Plan Preview"              onerror="this.src=\'https://picsum.photos/800/600\'"            />            <div              class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center"            >              <div                class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center"              >                <svg                  xmlns="http://www.w3.org/2000/svg"                  class="h-10 w-10 mx-auto mb-2"                  fill="none"                  viewBox="0 0 24 24"                  stroke="currentColor"                  stroke-width="1.5"                >                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"                  />                  <path                    stroke-linecap="round"                    stroke-linejoin="round"                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"                  />                </svg>                <p class="text-xs font-medium">                  {{ \'activities.uploadImage\' | translate }}                </p>              </div>            </div>          </div>          <input            #fileInput            type="file"            accept="image/*"            class="hidden"            (change)="onFileSelected($event)"          />          <div class="absolute bottom-4 left-4 right-4">            <div class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-3 rounded-2xl border border-white/40 dark:border-slate-700/60 shadow-lg">              <label class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1 block pl-1">{{ \'plans.imageSourceURL\' | translate }}</label>              <div class="flex items-center gap-2">                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 shrink-0" style="color: #5675AC;">                  <path fill-rule="evenodd" d="M1 5.25A2.25 2.25 0 013.25 3h13.5A2.25 2.25 0 0119 5.25v9.5A2.25 2.25 0 0116.75 17H3.25A2.25 2.25 0 011 14.75v-9.5zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 00.75-.75v-2.69l-2.22-2.219a.75.75 0 00-1.06 0l-1.91 1.909.47.47a.75.75 0 11-1.06 1.06L6.53 8.091a.75.75 0 00-1.06 0l-2.97 2.97zM12 7a1 1 0 11-2 0 1 1 0 012 0z" clip-rule="evenodd" />                </svg>                  <input type="text" formControlName="imageRef"                     class="w-full bg-transparent text-sm text-slate-800 font-medium focus:outline-none placeholder-slate-400"                    [placeholder]="\'plans.pasteURL\' | translate">              </div>            </div>          </div>        </div>        <div class="lg:col-span-3 p-6 md:p-10 flex flex-col gap-8">                    <div class="relative group">            <label class="absolute -top-2.5 left-3 bg-white dark:bg-slate-900 px-2 text-xs font-bold uppercase tracking-wider" style="color: #5675AC;">{{ \'plans.planName\' | translate }}</label>            <input type="text" formControlName="name"                    class="w-full bg-white dark:bg-slate-950 border-2 rounded-xl px-4 py-4 text-xl font-bold text-slate-800 dark:text-slate-100 placeholder-slate-300 dark:placeholder-slate-500 focus:outline-none focus:border-[#5675AC] focus:ring-4 focus:ring-[#5675AC]/10 transition-all border-slate-100 dark:border-slate-700"                   [placeholder]="\'plans.planNamePlaceholder\' | translate">          </div>          <div class="bg-slate-50/50 dark:bg-slate-900/40 rounded-2xl p-6">            <label class="block text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3 ml-1">{{ \'plans.aboutThisPlan\' | translate }}</label>            <textarea formControlName="description" rows="6"                       class="w-full bg-white dark:bg-slate-700 dark:text-slate-100 border border-slate-200 dark:border-slate-600 rounded-2xl p-5 text-slate-700 leading-relaxed outline-none resize-none transition-all shadow-sm focus:border-[#5675AC] focus:ring-4 focus:ring-[#5675AC]/10 placeholder-slate-400 dark:placeholder-slate-400"                      [placeholder]="\'plans.describeYourPlan\' | translate"></textarea>          </div>          <div class="bg-slate-50/50 dark:bg-slate-900/40 rounded-2xl p-6">            <label class="block text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3 ml-1">{{ \'plans.selectActivities\' | translate }}</label>            <div class="border border-slate-200 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-950 overflow-y-auto max-h-48 shadow-sm">              <div *ngFor="let activity of activities"                    class="flex items-center p-3 hover:bg-slate-50 dark:hover:bg-slate-900 cursor-pointer transition-colors border-b border-slate-100 dark:border-slate-800 last:border-b-0"                   (click)="toggleActivitySelection(activity.name)">                <input type="checkbox"                        [id]="\'activity-\' + activity.id"                       [value]="activity.name"                       [checked]="isSelected(activity.name)"                       class="h-4 w-4 rounded border-gray-300 dark:border-slate-600 focus:ring-2 focus:ring-[#5675AC] cursor-pointer"                       style="accent-color: #5675AC;"                       (change)="toggleActivitySelection(activity.name)">                <label [for]="\'activity-\' + activity.id" class="ml-3 text-slate-700 dark:text-slate-100 flex-grow cursor-pointer font-medium">                  {{ activity.name }}                </label>              </div>            </div>          </div>          <div class="flex items-center gap-3 bg-slate-50/50 dark:bg-slate-900/40 rounded-xl p-4">            <input type="checkbox"                    formControlName="visibility"                    id="visibility"                   class="h-5 w-5 rounded border-gray-300 dark:border-slate-600 focus:ring-2 focus:ring-[#5675AC] cursor-pointer"                   style="accent-color: #5675AC;">            <label for="visibility" class="text-sm font-bold text-slate-700 dark:text-slate-100 cursor-pointer">              {{ \'plans.visibility\' | translate }}            </label>          </div>        </div>      </div>      <div class="px-6 md:px-10 py-8 bg-slate-50/50 dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700">                <button type="submit"                 [disabled]="formPlanUpdate.invalid"                class="w-full relative bg-[#5675AC] text-white font-bold py-4 rounded-xl text-lg shadow-xl transition-all transform hover:-translate-y-0.5 hover:shadow-2xl active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none">                    <span class="flex items-center justify-center gap-2">            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />            </svg>            {{ \'plans.update\' | translate }}          </span>        </button>                <div *ngIf="error" class="mt-4 p-3 bg-red-50 text-red-600 text-sm font-medium rounded-lg text-center border border-red-100 flex items-center justify-center gap-2 animate-pulse">            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />            </svg>            {{ error }}        </div>        <div *ngIf="success" class="mt-4 p-3 bg-green-50 text-green-700 text-sm font-medium rounded-lg text-center border border-green-100 flex items-center justify-center gap-2">            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />            </svg>            {{ success }}        </div>      </div>    </form>  </div></div></div>'
     var COMPONENTS = [{'name': 'AboutComponent', 'selector': 'app-about'},{'name': 'ActivitiesCreationComponent', 'selector': 'app-activities'},{'name': 'ActivitiesUpdateComponent', 'selector': 'app-activity-update'},{'name': 'ActivityDetailComponent', 'selector': 'app-activity-detail'},{'name': 'ActivitySelectorComponent', 'selector': 'app-activity-selector'},{'name': 'ActivityTypesCreationComponent', 'selector': 'app-activity-types-creation'},{'name': 'ActivityTypesDetailComponent', 'selector': 'app-activity-types-detail'},{'name': 'ActivityTypesListComponent', 'selector': 'app-activity-types-list'},{'name': 'ActivityTypesUpdateComponent', 'selector': 'app-activity-types-update'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CardPlansComponent', 'selector': 'app-card-plans'},{'name': 'ContactComponent', 'selector': 'app-contact'},{'name': 'CoordinatesInputComponent', 'selector': 'app-coordinates-input'},{'name': 'CreatedActivitiesComponent', 'selector': 'app-created-activities'},{'name': 'CreatedPlansComponent', 'selector': 'app-created-plans'},{'name': 'CustomInputComponent', 'selector': 'app-custom-input'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterComponent', 'selector': 'app-filter'},{'name': 'FilterPlansComponent', 'selector': 'app-filter-plans'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'GlobalSearchComponent', 'selector': 'app-global-search'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IaComponent', 'selector': 'app-ia'},{'name': 'ImageUploadComponent', 'selector': 'app-image-upload'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LanguageSelectorComponent', 'selector': 'app-language-selector'},{'name': 'ListActivitiesComponent', 'selector': 'app-list-activities'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListComponent', 'selector': 'app-list'},{'name': 'ListPlansComponent', 'selector': 'app-list-plans'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MapComponent', 'selector': 'app-activity-map'},{'name': 'MapPreviewComponent', 'selector': 'app-map-preview'},{'name': 'MapsComponent', 'selector': 'app-maps'},{'name': 'OptionsActivityTypesComponent', 'selector': 'app-options-activity-types'},{'name': 'OptionsComponent', 'selector': 'app-options'},{'name': 'OptionsPlansComponent', 'selector': 'app-options-plans'},{'name': 'PlansComponent', 'selector': 'app-plans'},{'name': 'PlansCreationComponent', 'selector': 'app-plans-creation'},{'name': 'PlansListComponent', 'selector': 'app-plans-list'},{'name': 'PlansUpdateComponent', 'selector': 'app-plans-update'},{'name': 'ProfileComponent', 'selector': 'app-profile'},{'name': 'ProfileEditComponent', 'selector': 'app-profile-edit'},{'name': 'ReportModalComponent', 'selector': 'app-report-modal'},{'name': 'ReportsModerationComponent', 'selector': 'app-reports-moderation'},{'name': 'ReviewModalComponent', 'selector': 'app-review-modal'},{'name': 'ReviewsListModalComponent', 'selector': 'app-reviews-list-modal'},{'name': 'SavedActivitiesComponent', 'selector': 'app-saved-activities'},{'name': 'SavedPlansComponent', 'selector': 'app-saved-plans'},{'name': 'SignupComponent', 'selector': 'app-signup'}];
     var DIRECTIVES = [{'name': 'DefaultAvatarDirective', 'selector': '[appDefaultAvatar]'},{'name': 'HighlightDirective', 'selector': '[appHighlight]'},{'name': 'Tilt3DDirective', 'selector': '[appTilt3D]'}];
     var ACTUAL_COMPONENT = {'name': 'PlansUpdateComponent'};

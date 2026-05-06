@@ -27,6 +27,32 @@
               </svg>
               {{ 'plans.update' | translate }}
             </button>
+
+            <button
+              (click)="openReportModal()"
+              class="text-amber-600 hover:bg-amber-50 hover:text-amber-800 group flex items-center px-4 py-2 text-sm w-full text-left"
+            >
+              <svg
+                class="mr-3 h-5 w-5 text-amber-500 group-hover:text-amber-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3l-8.47-14.14a2 2 0 00-3.42 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 9v4m0 4h.01"
+                />
+              </svg>
+              {{ 'reports.reportActivity.menuItem' | translate }}
+            </button>
     
             <button 
               (click)="askToDelete()" 
@@ -86,6 +112,102 @@
                 {{ 'plans.cancel' | translate }}
               </button>
             </div>
+          </div>
+        </div>
+      </div>
+    }
+
+    @if (isReportModalOpen) {
+      <div
+        class="fixed inset-0 z-[1200] bg-black/50 flex items-center justify-center p-4"
+        (click)="closeReportModal()"
+      >
+        <div
+          class="w-full max-w-lg bg-white rounded-2xl shadow-xl p-6"
+          (click)="$event.stopPropagation()"
+        >
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">
+                {{ 'reports.reportActivity.modalTitle' | translate }}
+              </h3>
+              <p class="text-sm text-gray-500" *ngIf="plan?.name">
+                {{ plan?.name }}
+              </p>
+            </div>
+            <button
+              type="button"
+              class="text-gray-500 hover:text-gray-700"
+              (click)="closeReportModal()"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div class="space-y-4">
+            <label class="block">
+              <span class="text-sm font-medium text-gray-700">
+                {{ 'reports.reportActivity.reasonLabel' | translate }}
+              </span>
+              <select
+                [(ngModel)]="reportReason"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2.5"
+              >
+                <option value="spam">
+                  {{ 'reports.reportActivity.reasons.spam' | translate }}
+                </option>
+                <option value="inappropriate">
+                  {{
+                    'reports.reportActivity.reasons.inappropriate' | translate
+                  }}
+                </option>
+                <option value="fraud">
+                  {{ 'reports.reportActivity.reasons.fraud' | translate }}
+                </option>
+                <option value="other">
+                  {{ 'reports.reportActivity.reasons.other' | translate }}
+                </option>
+              </select>
+            </label>
+
+            <label class="block">
+              <span class="text-sm font-medium text-gray-700">
+                {{ 'reports.reportActivity.detailLabel' | translate }}
+              </span>
+              <textarea
+                [(ngModel)]="reportDetails"
+                rows="4"
+                maxlength="500"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2.5"
+                [placeholder]="
+                  'reports.reportActivity.detailPlaceholder' | translate
+                "
+              ></textarea>
+              <span class="text-xs text-gray-500">{{
+                reportDetails.length
+              }}/500</span>
+            </label>
+          </div>
+
+          <p *ngIf="reportErrorKey" class="text-sm text-red-600 mt-3">
+            {{ reportErrorKey | translate }}
+          </p>
+
+          <div class="mt-6 flex justify-end gap-3">
+            <button
+              type="button"
+              class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50"
+              (click)="closeReportModal()"
+            >
+              {{ 'common.cancel' | translate }}
+            </button>
+            <button
+              type="button"
+              class="px-4 py-2 rounded-lg bg-[#5675AC] text-white hover:bg-[#4a6399]"
+              (click)="submitReport()"
+            >
+              {{ 'reports.reportActivity.submit' | translate }}
+            </button>
           </div>
         </div>
       </div>

@@ -205,9 +205,51 @@ campos adicionales (descripción, precio, etc.).</p>
                                         </a>
                                 </li>
                                 <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#location" 
+>
+                                            location
+                                        </a>
+                                </li>
+                                <li>
                                         <a href="#longitude" 
 >
                                             longitude
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#moderatedAt" 
+>
+                                            moderatedAt
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#moderatedBy" 
+>
+                                            moderatedBy
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#moderationReasons" 
+>
+                                            moderationReasons
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#moderationScore" 
+>
+                                            moderationScore
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#moderationStatus" 
+>
+                                            moderationStatus
                                         </a>
                                 </li>
                                 <li>
@@ -489,6 +531,50 @@ campos adicionales (descripción, precio, etc.).</p>
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
+                                        <a name="location"></a>
+                                        <span class="name "><b>location</b>
+                                            <a href="#location">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>location:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Ubicación legible de la actividad (ciudad/zona).</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
                                         <a name="longitude"></a>
                                         <span class="name "><b>longitude</b>
                                             <a href="#longitude">
@@ -519,6 +605,226 @@ campos adicionales (descripción, precio, etc.).</p>
                             <tr>
                                 <td class="col-md-4">
                                     <div class="io-description"><p>Longitud en formato string (por compatibilidad con formularios/UI).</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="moderatedAt"></a>
+                                        <span class="name "><b>moderatedAt</b>
+                                            <a href="#moderatedAt">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>moderatedAt:     <code>string | number | Date | null</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>string | number | Date | null</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Fecha de moderación (si existe).</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="moderatedBy"></a>
+                                        <span class="name "><b>moderatedBy</b>
+                                            <a href="#moderatedBy">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>moderatedBy:     <code>string | null</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>string | null</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ID del admin/moderador que tomó decisión manual.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="moderationReasons"></a>
+                                        <span class="name "><b>moderationReasons</b>
+                                            <a href="#moderationReasons">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>moderationReasons:     <code>string[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>string[]</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Motivos detectados por la moderación.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="moderationScore"></a>
+                                        <span class="name "><b>moderationScore</b>
+                                            <a href="#moderationScore">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>moderationScore:     <code>number | null</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>number | null</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Score numérico de moderación.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="moderationStatus"></a>
+                                        <span class="name "><b>moderationStatus</b>
+                                            <a href="#moderationStatus">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>moderationStatus:         <code><a href="../miscellaneous/typealiases.html#ActivityModerationStatus" target="_self" >ActivityModerationStatus</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ActivityModerationStatus" target="_self" >ActivityModerationStatus</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Estado de moderación de la actividad.</p>
 </div>
                                 </td>
                             </tr>
@@ -705,6 +1011,20 @@ campos adicionales (descripción, precio, etc.).</p>
   createdAt?: Date;
 }
 
+/** Estados de moderación de actividad expuestos por backend. */
+export type ActivityModerationStatus &#x3D;
+  | &#x27;approved&#x27;
+  | &#x27;pending_review&#x27;
+  | &#x27;rejected&#x27;;
+
+/** Resultado de moderación que frontend envía en create/update. */
+export interface ActivityModerationResult {
+  blocked: boolean;
+  warning: boolean;
+  score: number;
+  reasons: string[];
+}
+
 /**
  * Modelo base de Actividad usado por la UI.
  *
@@ -728,12 +1048,24 @@ export interface Activity {
   longitude: string;
   /** Latitud en formato string (por compatibilidad con formularios/UI). */
   latitude: string;
+  /** Ubicación legible de la actividad (ciudad/zona). */
+  location?: string;
   /** Rating agregado de la actividad. */
   rating: number;
   /** Número total de valoraciones usadas para &#x60;rating&#x60;. */
   numRatings: number;
   /** Lista de reseñas, si se carga junto a la actividad. */
   reviews?: Review[];
+  /** Estado de moderación de la actividad. */
+  moderationStatus?: ActivityModerationStatus;
+  /** Score numérico de moderación. */
+  moderationScore?: number | null;
+  /** Motivos detectados por la moderación. */
+  moderationReasons?: string[];
+  /** Fecha de moderación (si existe). */
+  moderatedAt?: string | number | Date | null;
+  /** ID del admin/moderador que tomó decisión manual. */
+  moderatedBy?: string | null;
 }
 </code></pre>
     </div>

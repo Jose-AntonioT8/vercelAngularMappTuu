@@ -387,6 +387,8 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export type ReportReason &#x3D; &#x27;spam&#x27; | &#x27;inappropriate&#x27; | &#x27;fraud&#x27; | &#x27;other&#x27;;
 
+export type TargetType &#x3D; &#x27;activity&#x27; | &#x27;plan&#x27;;
+
 /** Estados válidos de un reporte en moderación. */
 export type ReportStatus &#x3D; &#x27;pending&#x27; | &#x27;reviewed&#x27; | &#x27;dismissed&#x27; | &#x27;resolved&#x27;;
 
@@ -396,6 +398,12 @@ export type ReportStatus &#x3D; &#x27;pending&#x27; | &#x27;reviewed&#x27; | &#x
 export interface ActivityReport {
   /** Identificador único del reporte. */
   id: string;
+
+  /** Tipo de entidad reportada. */
+  targetType?: TargetType;
+  /** ID real de la entidad reportada. */
+  targetId?: string;
+
   /** ID de la actividad reportada. */
   activityId: string;
   /** ID del usuario que reporta. */
@@ -417,7 +425,7 @@ export interface ActivityReport {
   /** Nota opcional de resolución. */
   resolutionNote?: string;
   /** Acción aplicada al resolver. */
-  resolutionAction?: &#x27;dismiss&#x27; | &#x27;delete_activity&#x27;;
+  resolutionAction?: &#x27;dismiss&#x27; | &#x27;delete_activity&#x27; | &#x27;delete_plan&#x27;;
   /** Nombre de la actividad reportada. */
   activityName?: string;
   /** Imagen de la actividad reportada. */
@@ -428,8 +436,13 @@ export interface ActivityReport {
 
 /** Payload para crear un nuevo reporte de actividad. */
 export interface CreateActivityReportPayload {
-  /** ID de la actividad a reportar. */
-  activityId: string;
+  /** ID de la actividad a reportar (legacy / compatibilidad). */
+  activityId?: string;
+  /** ID del plan a reportar. */
+  planId?: string;
+  /** Tipo de target reportado. Si no viene, el backend lo deduce. */
+  targetType?: TargetType;
+
   /** Motivo seleccionado por el usuario. */
   reason: ReportReason;
   /** Detalle opcional del reporte. */
@@ -451,7 +464,7 @@ export interface ReportQueryFilters {
 /** Payload para resolver un reporte desde moderación. */
 export interface ResolveReportPayload {
   /** Acción de resolución seleccionada por moderación. */
-  action: &#x27;dismiss&#x27; | &#x27;delete_activity&#x27;;
+  action: &#x27;dismiss&#x27; | &#x27;delete_activity&#x27; | &#x27;delete_plan&#x27;;
   /** Nota opcional para auditar la resolución. */
   resolutionNote?: string;
 }

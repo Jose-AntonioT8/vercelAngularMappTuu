@@ -482,8 +482,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="132"
-                                    class="link-to-prism">src/app/core/services/plan.service.ts:132</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="144"
+                                    class="link-to-prism">src/app/core/services/plan.service.ts:144</a></div>
                         </td>
                     </tr>
 
@@ -1128,6 +1128,18 @@ export class PlanService {
    * Mantiene un listener único (se reutiliza si ya existe).
    */
   getPlans(): Observable&lt;Plan[]&gt; {
+    // En despliegues evitamos listeners Firestore (canal Listen) y usamos API HTTP.
+    if (typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; window.location.hostname !&#x3D;&#x3D; &#x27;localhost&#x27;) {
+      this.http.get&lt;Plan[]&gt;(this.url).subscribe({
+        next: (plans) &#x3D;&gt; this.plans.next(plans || []),
+        error: (error) &#x3D;&gt; {
+          console.error(&#x27;Error cargando planes por API:&#x27;, error);
+          this.plans.next([]);
+        },
+      });
+      return this.plans$;
+    }
+
     if (this.unsubscribeListener) {
       return this.plans$;
     }

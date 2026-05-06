@@ -116,7 +116,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  ResolveReportPayload</li>
+  ActivityModerationResult</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -140,7 +140,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/common/models/reporting.types.ts</code>
+            <code>src/app/common/models/activity.model.ts</code>
         </p>
 
 
@@ -148,7 +148,7 @@
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Payload para resolver un reporte desde moderación.</p>
+                <p>Resultado de moderación que frontend envía en create/update.</p>
 
             </p>
 
@@ -166,16 +166,27 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#action" 
+                                        <a href="#blocked" 
 >
-                                            action
+                                            blocked
                                         </a>
                                 </li>
                                 <li>
-                                            <span class="modifier">Optional</span>
-                                        <a href="#resolutionNote" 
+                                        <a href="#reasons" 
 >
-                                            resolutionNote
+                                            reasons
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#score" 
+>
+                                            score
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#warning" 
+>
+                                            warning
                                         </a>
                                 </li>
                             </ul>
@@ -193,9 +204,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="action"></a>
-                                        <span class="name "><b>action</b>
-                                            <a href="#action">
+                                        <a name="blocked"></a>
+                                        <span class="name "><b>blocked</b>
+                                            <a href="#blocked">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -203,7 +214,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>action:     <code>&quot;dismiss&quot; | &quot;delete_activity&quot; | &quot;delete_plan&quot;</code>
+                                        <code>blocked:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -211,7 +222,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>&quot;dismiss&quot; | &quot;delete_activity&quot; | &quot;delete_plan&quot;</code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                                         </td>
                                     </tr>
@@ -220,21 +231,15 @@
 
 
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Acción de resolución seleccionada por moderación.</p>
-</div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="resolutionNote"></a>
-                                        <span class="name "><b>resolutionNote</b>
-                                            <a href="#resolutionNote">
+                                        <a name="reasons"></a>
+                                        <span class="name "><b>reasons</b>
+                                            <a href="#reasons">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -242,7 +247,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>resolutionNote:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>reasons:     <code>string[]</code>
 </code>
                                     </td>
                                 </tr>
@@ -250,26 +255,81 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            <i>Type : </i>    <code>string[]</code>
 
                                         </td>
                                     </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="score"></a>
+                                        <span class="name "><b>score</b>
+                                            <a href="#score">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>score:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Optional</i>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
                                         </td>
                                     </tr>
 
 
 
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-description"><p>Nota opcional para auditar la resolución.</p>
-</div>
-                                </td>
-                            </tr>
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="warning"></a>
+                                        <span class="name "><b>warning</b>
+                                            <a href="#warning">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>warning:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
                         </tbody>
                     </table>
             </section>
@@ -277,88 +337,76 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export type ReportReason &#x3D; &#x27;spam&#x27; | &#x27;inappropriate&#x27; | &#x27;fraud&#x27; | &#x27;other&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Review {
+  /** ID de la reseña (si viene de backend/Firestore). */
+  id?: string;
+  /** ID del usuario autor de la reseña. */
+  userId: string;
+  /** Nombre del usuario autor de la reseña (se resuelve desde el servicio). */
+  userName?: string;
+  /** Puntuación numérica (por ejemplo 1-5). */
+  rating: number;
+  /** Comentario de texto libre. */
+  comment: string;
+  /** Fecha de creación (si está disponible). */
+  createdAt?: Date;
+}
 
-export type TargetType &#x3D; &#x27;activity&#x27; | &#x27;plan&#x27;;
+/** Estados de moderación de actividad expuestos por backend. */
+export type ActivityModerationStatus &#x3D;
+  | &#x27;approved&#x27;
+  | &#x27;pending_review&#x27;
+  | &#x27;rejected&#x27;;
 
-/** Estados válidos de un reporte en moderación. */
-export type ReportStatus &#x3D; &#x27;pending&#x27; | &#x27;reviewed&#x27; | &#x27;dismissed&#x27; | &#x27;resolved&#x27;;
+/** Resultado de moderación que frontend envía en create/update. */
+export interface ActivityModerationResult {
+  blocked: boolean;
+  warning: boolean;
+  score: number;
+  reasons: string[];
+}
 
 /**
- * Entidad de reporte de actividad mostrada en UI y panel de moderación.
+ * Modelo base de Actividad usado por la UI.
+ *
+ * Nota: en algunas pantallas se extiende (ver &#x60;ActivityDetail&#x60;) para incluir
+ * campos adicionales (descripción, precio, etc.).
  */
-export interface ActivityReport {
-  /** Identificador único del reporte. */
+export interface Activity {
+  /** Fecha de creación (si la fuente de datos la aporta). */
+  createdAt?: Date;
+  /** ID único de la actividad. */
   id: string;
-
-  /** Tipo de entidad reportada. */
-  targetType?: TargetType;
-  /** ID real de la entidad reportada. */
-  targetId?: string;
-
-  /** ID de la actividad reportada. */
-  activityId: string;
-  /** ID del usuario que reporta. */
-  reporterUserId: string;
-  /** Motivo principal del reporte. */
-  reason: ReportReason;
-  /** Detalle opcional aportado por el usuario. */
-  details?: string;
-  /** Estado actual en el flujo de moderación. */
-  status: ReportStatus;
-  /** Fecha/hora de creación. */
-  createdAt: string | number | Date;
-  /** Fecha/hora de actualización. */
-  updatedAt?: string | number | Date;
-  /** Moderador que resolvió el reporte. */
-  resolvedBy?: string;
-  /** Fecha de resolución del reporte. */
-  resolvedAt?: string | number | Date;
-  /** Nota opcional de resolución. */
-  resolutionNote?: string;
-  /** Acción aplicada al resolver. */
-  resolutionAction?: &#x27;dismiss&#x27; | &#x27;delete_activity&#x27; | &#x27;delete_plan&#x27;;
-  /** Nombre de la actividad reportada. */
-  activityName?: string;
-  /** Imagen de la actividad reportada. */
-  activityImageURL?: string;
-  /** Nombre visible del usuario que reportó. */
-  reporterDisplay?: string;
-}
-
-/** Payload para crear un nuevo reporte de actividad. */
-export interface CreateActivityReportPayload {
-  /** ID de la actividad a reportar (legacy / compatibilidad). */
-  activityId?: string;
-  /** ID del plan a reportar. */
-  planId?: string;
-  /** Tipo de target reportado. Si no viene, el backend lo deduce. */
-  targetType?: TargetType;
-
-  /** Motivo seleccionado por el usuario. */
-  reason: ReportReason;
-  /** Detalle opcional del reporte. */
-  details?: string;
-}
-
-/** Filtros de consulta para listado de reportes en administración. */
-export interface ReportQueryFilters {
-  /** Filtro por estado del reporte. */
-  status?: ReportStatus;
-  /** Filtro por motivo del reporte. */
-  reason?: ReportReason;
-  /** Página (paginación). */
-  page?: number;
-  /** Límite de elementos por página. */
-  limit?: number;
-}
-
-/** Payload para resolver un reporte desde moderación. */
-export interface ResolveReportPayload {
-  /** Acción de resolución seleccionada por moderación. */
-  action: &#x27;dismiss&#x27; | &#x27;delete_activity&#x27; | &#x27;delete_plan&#x27;;
-  /** Nota opcional para auditar la resolución. */
-  resolutionNote?: string;
+  /** Nombre visible de la actividad. */
+  name: string;
+  /** URL de imagen principal. */
+  imageURL: string;
+  /** Indicador de favorito en UI (puede ser derivado por usuario). */
+  favorite: boolean;
+  /** ID del tipo de actividad asociado. */
+  IdTypeActivity: string;
+  /** Longitud en formato string (por compatibilidad con formularios/UI). */
+  longitude: string;
+  /** Latitud en formato string (por compatibilidad con formularios/UI). */
+  latitude: string;
+  /** Ubicación legible de la actividad (ciudad/zona). */
+  location?: string;
+  /** Rating agregado de la actividad. */
+  rating: number;
+  /** Número total de valoraciones usadas para &#x60;rating&#x60;. */
+  numRatings: number;
+  /** Lista de reseñas, si se carga junto a la actividad. */
+  reviews?: Review[];
+  /** Estado de moderación de la actividad. */
+  moderationStatus?: ActivityModerationStatus;
+  /** Score numérico de moderación. */
+  moderationScore?: number | null;
+  /** Motivos detectados por la moderación. */
+  moderationReasons?: string[];
+  /** Fecha de moderación (si existe). */
+  moderatedAt?: string | number | Date | null;
+  /** ID del admin/moderador que tomó decisión manual. */
+  moderatedBy?: string | null;
 }
 </code></pre>
     </div>
@@ -397,7 +445,7 @@ export interface ResolveReportPayload {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'ResolveReportPayload.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ActivityModerationResult.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

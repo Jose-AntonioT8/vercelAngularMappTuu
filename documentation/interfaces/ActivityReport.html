@@ -259,6 +259,20 @@
                                 </li>
                                 <li>
                                             <span class="modifier">Optional</span>
+                                        <a href="#targetId" 
+>
+                                            targetId
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#targetType" 
+>
+                                            targetType
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
                                         <a href="#updatedAt" 
 >
                                             updatedAt
@@ -660,7 +674,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>resolutionAction:     <code>&quot;dismiss&quot; | &quot;delete_activity&quot;</code>
+                                        <code>resolutionAction:     <code>&quot;dismiss&quot; | &quot;delete_activity&quot; | &quot;delete_plan&quot;</code>
 </code>
                                     </td>
                                 </tr>
@@ -668,7 +682,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>&quot;dismiss&quot; | &quot;delete_activity&quot;</code>
+                                            <i>Type : </i>    <code>&quot;dismiss&quot; | &quot;delete_activity&quot; | &quot;delete_plan&quot;</code>
 
                                         </td>
                                     </tr>
@@ -865,6 +879,94 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
+                                        <a name="targetId"></a>
+                                        <span class="name "><b>targetId</b>
+                                            <a href="#targetId">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>targetId:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ID real de la entidad reportada.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="targetType"></a>
+                                        <span class="name "><b>targetType</b>
+                                            <a href="#targetType">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>targetType:         <code><a href="../miscellaneous/typealiases.html#TargetType" target="_self" >TargetType</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#TargetType" target="_self" >TargetType</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Tipo de entidad reportada.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
                                         <a name="updatedAt"></a>
                                         <span class="name "><b>updatedAt</b>
                                             <a href="#updatedAt">
@@ -912,6 +1014,8 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export type ReportReason &#x3D; &#x27;spam&#x27; | &#x27;inappropriate&#x27; | &#x27;fraud&#x27; | &#x27;other&#x27;;
 
+export type TargetType &#x3D; &#x27;activity&#x27; | &#x27;plan&#x27;;
+
 /** Estados válidos de un reporte en moderación. */
 export type ReportStatus &#x3D; &#x27;pending&#x27; | &#x27;reviewed&#x27; | &#x27;dismissed&#x27; | &#x27;resolved&#x27;;
 
@@ -921,6 +1025,12 @@ export type ReportStatus &#x3D; &#x27;pending&#x27; | &#x27;reviewed&#x27; | &#x
 export interface ActivityReport {
   /** Identificador único del reporte. */
   id: string;
+
+  /** Tipo de entidad reportada. */
+  targetType?: TargetType;
+  /** ID real de la entidad reportada. */
+  targetId?: string;
+
   /** ID de la actividad reportada. */
   activityId: string;
   /** ID del usuario que reporta. */
@@ -942,7 +1052,7 @@ export interface ActivityReport {
   /** Nota opcional de resolución. */
   resolutionNote?: string;
   /** Acción aplicada al resolver. */
-  resolutionAction?: &#x27;dismiss&#x27; | &#x27;delete_activity&#x27;;
+  resolutionAction?: &#x27;dismiss&#x27; | &#x27;delete_activity&#x27; | &#x27;delete_plan&#x27;;
   /** Nombre de la actividad reportada. */
   activityName?: string;
   /** Imagen de la actividad reportada. */
@@ -953,8 +1063,13 @@ export interface ActivityReport {
 
 /** Payload para crear un nuevo reporte de actividad. */
 export interface CreateActivityReportPayload {
-  /** ID de la actividad a reportar. */
-  activityId: string;
+  /** ID de la actividad a reportar (legacy / compatibilidad). */
+  activityId?: string;
+  /** ID del plan a reportar. */
+  planId?: string;
+  /** Tipo de target reportado. Si no viene, el backend lo deduce. */
+  targetType?: TargetType;
+
   /** Motivo seleccionado por el usuario. */
   reason: ReportReason;
   /** Detalle opcional del reporte. */
@@ -976,7 +1091,7 @@ export interface ReportQueryFilters {
 /** Payload para resolver un reporte desde moderación. */
 export interface ResolveReportPayload {
   /** Acción de resolución seleccionada por moderación. */
-  action: &#x27;dismiss&#x27; | &#x27;delete_activity&#x27;;
+  action: &#x27;dismiss&#x27; | &#x27;delete_activity&#x27; | &#x27;delete_plan&#x27;;
   /** Nota opcional para auditar la resolución. */
   resolutionNote?: string;
 }

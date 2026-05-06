@@ -246,13 +246,15 @@ Si falla, redirige al dashboard.</p>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <i>Type : </i>    <code>unknown</code>
 
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;https://vercel-node-mapp-tuu.vercel.app/api&#x27;</code>
+                        <i>Default value : </i><code>typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; window.location.hostname &#x3D;&#x3D;&#x3D; &#x27;localhost&#x27;
+    ? &#x27;/api&#x27;
+    : &#x27;https://vercel-node-mapp-tuu.vercel.app/api&#x27;</code>
                     </td>
                 </tr>
 
@@ -347,13 +349,16 @@ vía <code>environment</code>.</p>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>async () &#x3D;&gt; {
+                        <i>Default value : </i><code>async (_route, state) &#x3D;&gt; {
   const auth &#x3D; inject(AuthService);
   const router &#x3D; inject(Router);
   const userService &#x3D; inject(UserService);
+  const isProfileRoute &#x3D; state.url.startsWith(&#x27;/profile&#x27;);
+
+  await auth.waitForAuthInitialization();
 
   if (!auth.isAuthenticated()) {
-    router.navigate([&#x27;/landingPage&#x27;]);
+    router.navigate([&#x27;/login&#x27;]);
     return false;
   }
 
@@ -369,13 +374,29 @@ vía <code>environment</code>.</p>
       ? calculateAgeFromBirthDate(profile.birthDate)
       : profile.age;
 
-    if (typeof resolvedAge &#x3D;&#x3D;&#x3D; &#x27;number&#x27; &amp;&amp; resolvedAge &lt; 14) {
+    // Usuarios OAuth pueden no tener perfil aún: mantener sesión y pedir completar datos.
+    if (typeof resolvedAge !&#x3D;&#x3D; &#x27;number&#x27; || Number.isNaN(resolvedAge)) {
+      if (isProfileRoute) {
+        return true;
+      }
+      await router.navigate([&#x27;/profile/edit&#x27;]);
+      return false;
+    }
+
+    if (resolvedAge &lt; 14) {
       await auth.logout();
       return false;
     }
 
     return true;
-  } catch {
+  } catch (error: any) {
+    if (error?.message &#x3D;&#x3D;&#x3D; &#x27;User not found&#x27;) {
+      if (isProfileRoute) {
+        return true;
+      }
+      await router.navigate([&#x27;/profile/edit&#x27;]);
+      return false;
+    }
     await auth.logout();
     return false;
   }
@@ -386,7 +407,7 @@ vía <code>environment</code>.</p>
             <tr>
                 <td class="col-md-4">
                     <div class="io-description"><p>Guard de autenticación.</p>
-<p>Permite acceso solo si hay sesión activa; en caso contrario redirige al landing.</p>
+<p>Permite acceso solo si hay sesión activa; en caso contrario redirige a login.</p>
 </div>
                 </td>
             </tr>
@@ -915,7 +936,7 @@ real de la misma (runtime env, environment, etc.).</p>
   {path : &#x27;search&#x27;, component: GlobalSearchComponent, canActivate: [authGuard]},
   { path: &#x27;activitiesList&#x27;, component: ListActivitiesComponent},
   { path: &#x27;createdActivities&#x27;, component: CreatedActivitiesComponent},
-  { path: &#x27;activityDetail/:id&#x27;, component: ActivityDetailComponent},
+  { path: &#x27;activityDetail/:id&#x27;, component: ActivityDetailComponent, canActivate: [authGuard]},
   { path: &#x27;updateActivity/:id&#x27;, component: ActivitiesUpdateComponent},
   { path: &#x27;login&#x27;, component: LoginComponent, canActivate: [guestGuard] },
   { path: &#x27;signup&#x27;, component: SignupComponent, canActivate: [guestGuard] },
@@ -923,6 +944,7 @@ real de la misma (runtime env, environment, etc.).</p>
   { path: &#x27;contact&#x27;, loadComponent: () &#x3D;&gt; &quot;import(&#x27;./features/contact/contact.component&#x27;).then(m &#x3D;&gt; m.ContactComponent)&quot; },
   { path: &#x27;dashboard&#x27;, component: DashboardComponent, canActivate: [adminGuard] },
   { path: &#x27;admin/reports&#x27;, component: ReportsModerationComponent, canActivate: [adminGuard] },
+  // Actividades: moderación pendiente deshabilitada
   {path: &#x27;activitiesCreation&#x27;, component: ActivitiesCreationComponent, canActivate: [authGuard]},
   {path: &#x27;plansDetail/:id&#x27;, component: PlansComponent, canActivate: [authGuard]},
   {path: &#x27;activityTypeDetail/:id&#x27;, component: ActivityTypesDetailComponent, canActivate: [adminGuard]},
