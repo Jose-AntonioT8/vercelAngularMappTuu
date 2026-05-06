@@ -42,6 +42,13 @@ interface IaChatResponse {
   }>;
 }
 
+export interface IaImageModerationResult {
+  blocked: boolean;
+  warning: boolean;
+  score: number;
+  reasons: string[];
+}
+
 interface LocationLabelTask {
   fallbackAddress: string;
   latitude: number;
@@ -420,6 +427,44 @@ export class IaAssistantService {
     );
   }
 
+  moderateImageUrlWithGroq(imageUrl: string): Observable<IaImageModerationResult> {
+    const model = environment.ia.model?.trim();
+    const apiKey = environment.ia.apiKey?.trim();
+    const rawApiUrl = environment.ia.apiUrl?.trim();
+    const apiUrl = this.resolveChatCompletionsUrl(rawApiUrl);
+    const cleanUrl = (imageUrl || '').trim();
+
+    if (!cleanUrl || !model || !apiKey || !apiUrl) {
+      return of({
+        blocked: false,
+        warning: true,
+        score: 0.5,
+        reasons: ['groq_moderation_unavailable'],
+      });
+    }
+
+    const candidateModels = [model, ...(environment.ia.fallbackModels || [])].filter(
+      (candidate, index, all) => !!candidate && all.indexOf(candidate) === index,
+    );
+    const availableCandidateModels = candidateModels.filter(
+      (candidate) => !this.unavailableModels.has(candidate),
+    );
+    const modelsToTry = (
+      availableCandidateModels.length > 0 ? availableCandidateModels : candidateModels
+    ).slice(0, this.maxModelAttempts);
+
+    return this.requestImageModerationWithModelChain(modelsToTry, cleanUrl, apiKey, apiUrl).pipe(
+      catchError(() =>
+        of({
+          blocked: false,
+          warning: true,
+          score: 0.5,
+          reasons: ['groq_moderation_request_failed'],
+        }),
+      ),
+    );
+  }
+
   private buildLocationLabelCacheKey(
     fallbackAddress: string,
     latitude: number,
@@ -556,6 +601,134 @@ export class IaAssistantService {
           return `[Usando modelo fallback: ${model}]\n\n${enrichedContent}`;
         }),
       );
+  }
+
+  private requestImageModerationWithModelChain(
+    models: string[],
+    imageUrl: string,
+    apiKey: string,
+    apiUrl: string,
+    index = 0,
+  ): Observable<IaImageModerationResult> {
+    const currentModel = models[index];
+    if (!currentModel) {
+      return throwError(() => new Error('No hay modelos disponibles para moderar imagen.'));
+    }
+
+    return this.requestImageModerationWithModel(currentModel, imageUrl, apiKey, apiUrl).pipe(
+      catchError((error: any) => {
+        const shouldTryNext = error?.status === 402 || error?.status === 404;
+        const nextModel = models[index + 1];
+
+        if (error?.status === 404) {
+          this.unavailableModels.add(currentModel);
+        }
+
+        if (!shouldTryNext || !nextModel) {
+          return throwError(() => error);
+        }
+
+        return this.requestImageModerationWithModelChain(
+          models,
+          imageUrl,
+          apiKey,
+          apiUrl,
+          index + 1,
+        );
+      }),
+    );
+  }
+
+  private requestImageModerationWithModel(
+    model: string,
+    imageUrl: string,
+    apiKey: string,
+    apiUrl: string,
+  ): Observable<IaImageModerationResult> {
+    const body = {
+      model,
+      temperature: 0,
+      messages: [
+        {
+          role: 'system',
+          content:
+            'Eres un moderador de contenido visual. Devuelve SOLO JSON con esta forma: {"safe": boolean, "reason": string, "sexual": boolean, "nudity": boolean, "violence": boolean, "minor_risk": boolean}.',
+        },
+        {
+          role: 'user',
+          content: [
+            {
+              type: 'text',
+              text: 'Analiza la imagen. Si hay duda razonable de sexual/desnudez/violencia/menores, marca safe=false. Devuelve solo JSON.',
+            },
+            {
+              type: 'image_url',
+              image_url: { url: imageUrl },
+            },
+          ],
+        },
+      ],
+    };
+
+    return this.http
+      .post<IaChatResponse>(apiUrl, body, {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        }),
+      })
+      .pipe(
+        map((response) => {
+          const raw = response.choices?.[0]?.message?.content?.trim() || '';
+          const parsed = this.parseImageModerationJson(raw);
+          const explicitRisk =
+            parsed.sexual === true ||
+            parsed.nudity === true ||
+            parsed.violence === true ||
+            parsed.minor_risk === true;
+          const safe = parsed.safe === true && !explicitRisk;
+
+          if (safe) {
+            return { blocked: false, warning: false, score: 0, reasons: [] };
+          }
+
+          const reason = (parsed.reason || 'image_flagged_by_groq').trim();
+          return {
+            blocked: true,
+            warning: false,
+            score: 1,
+            reasons: [`groq_image_blocked:${reason}`],
+          };
+        }),
+      );
+  }
+
+  private parseImageModerationJson(rawContent: string): {
+    safe?: boolean;
+    reason?: string;
+    sexual?: boolean;
+    nudity?: boolean;
+    violence?: boolean;
+    minor_risk?: boolean;
+  } {
+    const raw = (rawContent || '').trim();
+    if (!raw) {
+      throw new Error('groq_empty_response');
+    }
+
+    try {
+      const jsonText = raw.match(/\{[\s\S]*\}/)?.[0] ?? raw;
+      return JSON.parse(jsonText) as {
+        safe?: boolean;
+        reason?: string;
+        sexual?: boolean;
+        nudity?: boolean;
+        violence?: boolean;
+        minor_risk?: boolean;
+      };
+    } catch {
+      throw new Error('groq_invalid_json');
+    }
   }
 
   /**

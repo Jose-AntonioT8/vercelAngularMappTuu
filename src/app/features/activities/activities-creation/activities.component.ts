@@ -270,6 +270,23 @@ export class ActivitiesCreationComponent {
     const imageUrl = await this.uploadImage();
     if (!imageUrl) return;
 
+    const groqImageModeration = await firstValueFrom(
+      this.iaAssistantService.moderateImageUrlWithGroq(imageUrl),
+    );
+    if (groqImageModeration.blocked) {
+      this.error = this.translationService.get(
+        'moderation.blockedImage',
+        'La imagen parece no apropiada y no se puede publicar.',
+      );
+      return;
+    }
+    if (groqImageModeration.warning) {
+      this.warning = this.translationService.get(
+        'moderation.warningImage',
+        'No se pudo validar la imagen completamente con IA. Se publicara con controles basicos.',
+      );
+    }
+
     const latitude = Number(this.formActivityCreation.value.latitude);
     const longitude = Number(this.formActivityCreation.value.longitude);
     if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
@@ -291,10 +308,10 @@ export class ActivitiesCreationComponent {
       rating: 0,
       price: parseFloat(this.formActivityCreation.value.price) || 0,
       moderationResult: {
-        blocked: moderation.blocked,
-        warning: moderation.warning,
-        score: moderation.score,
-        reasons: moderation.reasons,
+        blocked: moderation.blocked || groqImageModeration.blocked,
+        warning: moderation.warning || groqImageModeration.warning,
+        score: Math.min(1, Math.max(moderation.score, groqImageModeration.score)),
+        reasons: [...new Set([...moderation.reasons, ...groqImageModeration.reasons])],
       },
     };
 
