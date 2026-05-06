@@ -232,6 +232,10 @@ export class PlansCreationComponent implements OnInit {
   async onCreate() {
     if (this.formPlanCreation.invalid) {
       this.formPlanCreation.markAllAsTouched();
+      this.error = this.translationService.get(
+        'messages.completeFieldsBeforeContinue',
+        'Completa los campos obligatorios antes de continuar.',
+      );
       return;
     }
     this.warning = '';
