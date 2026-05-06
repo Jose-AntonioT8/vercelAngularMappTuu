@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { LanguageSelectorComponent } from '../../../common/language-selector/language-selector.component';
 import { MapPreviewComponent } from '../../../common/maps/map-preview.component';
 import { ActivityType } from '../../../common/models/activityType.models';
@@ -12,6 +13,7 @@ import { ActivityTypeService } from '../../../core/services/activitytype.service
 import { AuthService } from '../../../core/services/auth.service';
 import { ContentModerationService } from '../../../core/services/content-moderation.service';
 import { CloudinaryService } from '../../../core/services/firebase-media.service';
+import { IaAssistantService } from '../../../core/services/ia-assistant.service';
 import { TranslationService } from '../../../core/services/translation.service';
 
 /**
@@ -69,6 +71,8 @@ export class ActivitiesUpdateComponent {
     private mediaService: CloudinaryService,
     /** Servicio de moderación de contenido básico. */
     private moderationService: ContentModerationService,
+    /** Servicio IA para moderación de imagen con Groq. */
+    private iaAssistantService: IaAssistantService,
     /** Servicio de traducción runtime para mensajes en TS. */
     private translationService: TranslationService
   ) {
@@ -217,11 +221,38 @@ export class ActivitiesUpdateComponent {
     }
     this.warning = '';
 
-    const moderation = this.moderationService.moderateActivityInput(
+    const baseModeration = this.moderationService.moderateActivityInput(
       this.formActivityUpdate.value.name,
       this.formActivityUpdate.value.description,
       this.selectedFile
     );
+
+    // Moderación de imagen con Groq (visión) antes de actualizar/guardar.
+    const existingImageRef: string | undefined = (this.formActivityUpdate as any).existingImageRef;
+    let groqModeration = {
+      blocked: false,
+      warning: false,
+      score: 0,
+      reasons: [] as string[],
+    };
+
+    if (this.selectedFile) {
+      groqModeration = await firstValueFrom(
+        this.iaAssistantService.moderateImageFileWithGroq(this.selectedFile),
+      );
+    } else if (existingImageRef) {
+      groqModeration = await firstValueFrom(
+        this.iaAssistantService.moderateImageUrlWithGroq(existingImageRef),
+      );
+    }
+
+    const moderation = {
+      blocked: baseModeration.blocked || groqModeration.blocked,
+      warning: baseModeration.warning || groqModeration.warning,
+      score: Math.min(1, Math.max(baseModeration.score, groqModeration.score)),
+      reasons: [...new Set([...baseModeration.reasons, ...groqModeration.reasons])],
+    };
+
     if (moderation.blocked) {
       this.error = this.translationService.get(
         'moderation.blockedContent',

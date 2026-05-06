@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,6 +13,7 @@ import { LanguageSelectorComponent } from '../../../common/language-selector/lan
 import { ContentModerationService } from '../../../core/services/content-moderation.service';
 import { TranslationService } from '../../../core/services/translation.service';
 import { IaAssistantService } from '../../../core/services/ia-assistant.service';
+import { CloudinaryService } from '../../../core/services/firebase-media.service';
 
 /**
  * Pantalla de edición de un plan existente.
@@ -30,6 +31,8 @@ import { IaAssistantService } from '../../../core/services/ia-assistant.service'
   styleUrls: ['./plans-update.component.scss']
 })
 export class PlansUpdateComponent implements OnInit {
+  /** Input file nativo (para subir nueva imagen). */
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   /** Mensaje de error para UI. */
   error = '';
   /** Mensaje de éxito para UI. */
@@ -46,6 +49,12 @@ export class PlansUpdateComponent implements OnInit {
   activities: Activity[] = [];
   /** Lista de nombres (derivada) para UI. */
   activitiesName: string[] = [];
+  /** Archivo de imagen seleccionado (opcional). */
+  selectedFile: File | null = null;
+  /** Preview local de imagen (data URL). */
+  imagePreview: string | null = null;
+  /** Flag de subida en curso. */
+  isUploading = false;
 
   constructor(
     /** Constructor de formularios. */
@@ -63,6 +72,7 @@ export class PlansUpdateComponent implements OnInit {
     /** Servicio de moderación de contenido básico. */
     private moderationService: ContentModerationService,
     private iaAssistantService: IaAssistantService,
+    private mediaService: CloudinaryService,
     /** Servicio de traducción runtime para mensajes en TS. */
     private translationService: TranslationService
   ) {
@@ -126,7 +136,76 @@ export class PlansUpdateComponent implements OnInit {
 
   /** Imagen actual del formulario (para preview). */
   get currentImage(): string {
+    if (this.imagePreview) return this.imagePreview;
     return this.formPlanUpdate.get('imageRef')?.value || '';
+  }
+
+  /** Abre el selector de archivo nativo. */
+  triggerFileInput(): void {
+    if (this.fileInput?.nativeElement) {
+      this.fileInput.nativeElement.click();
+    }
+  }
+
+  /** Valida y previsualiza un fichero de imagen seleccionado. */
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      if (!file.type.startsWith('image/')) {
+        this.error = 'Por favor, selecciona un archivo de imagen válido';
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        this.error = 'La imagen no debe superar los 5MB';
+        return;
+      }
+      const imageModeration = this.moderationService.moderateImageFile(file);
+      if (imageModeration.blocked) {
+        this.error = this.translationService.get(
+          'moderation.blockedImage',
+          'La imagen parece no apropiada y no se puede publicar.',
+        );
+        this.selectedFile = null;
+        this.imagePreview = null;
+        return;
+      }
+      if (imageModeration.warning) {
+        this.warning = this.translationService.get(
+          'moderation.warningImage',
+          'La imagen parece sospechosa y podria ser revisada por moderacion.',
+        );
+      } else {
+        this.warning = '';
+      }
+      this.selectedFile = file;
+      this.error = '';
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imagePreview = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  /** Sube la imagen seleccionada a Cloudinary y devuelve la URL. */
+  async uploadImage(): Promise<string | null> {
+    if (!this.selectedFile) return null;
+    this.isUploading = true;
+    this.error = '';
+    try {
+      const blob = new Blob([this.selectedFile], { type: this.selectedFile.type });
+      const urls = await this.mediaService.upload(blob, 'plans').toPromise();
+      if (urls && urls.length > 0) {
+        this.isUploading = false;
+        return urls[0];
+      }
+      throw new Error('No se obtuvo URL de la imagen subida');
+    } catch (err: any) {
+      this.isUploading = false;
+      this.error = err.message || 'Error al subir la imagen.';
+      return null;
+    }
   }
 
   /** Devuelve si un nombre de actividad está seleccionado en el form. */
@@ -192,14 +271,19 @@ export class PlansUpdateComponent implements OnInit {
       this.formPlanUpdate.value.name || this.planData?.name || '',
       this.formPlanUpdate.value.description || this.planData?.description || '',
       imageRefValue || '',
-      null,
+      this.selectedFile,
     );
 
-    const groqModeration = imageRefValue
-      ? await firstValueFrom(
-          this.iaAssistantService.moderateImageUrlWithGroq(imageRefValue),
-        )
-      : { blocked: false, warning: false, score: 0, reasons: [] as string[] };
+    let groqModeration = { blocked: false, warning: false, score: 0, reasons: [] as string[] };
+    if (this.selectedFile) {
+      groqModeration = await firstValueFrom(
+        this.iaAssistantService.moderateImageFileWithGroq(this.selectedFile),
+      );
+    } else if (imageRefValue) {
+      groqModeration = await firstValueFrom(
+        this.iaAssistantService.moderateImageUrlWithGroq(imageRefValue),
+      );
+    }
 
     const moderation = {
       blocked: baseModeration.blocked || groqModeration.blocked,
@@ -227,6 +311,16 @@ export class PlansUpdateComponent implements OnInit {
       score: moderation.score,
       reasons: moderation.reasons,
     };
+
+    // Si hay nueva imagen seleccionada, subirla y actualizar imageRef.
+    if (this.selectedFile) {
+      const uploadedUrl = await this.uploadImage();
+      if (!uploadedUrl) {
+        return;
+      }
+      planData.imageRef = uploadedUrl;
+      this.formPlanUpdate.patchValue({ imageRef: uploadedUrl });
+    }
 
     console.log('Datos del plan a actualizar:', planData);
 
