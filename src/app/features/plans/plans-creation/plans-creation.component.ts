@@ -78,7 +78,7 @@ export class PlansCreationComponent implements OnInit {
     // Inicialización del FormGroup en el constructor
     this.formPlanCreation = this.formSvc.group({
       name: ['', [Validators.required, Validators.maxLength(100)]],
-      description: ['', [Validators.required, Validators.maxLength(250)]],
+      description: ['', [Validators.required, Validators.maxLength(1000)]],
       // Control para el selector múltiple, inicializado con un ARRAY vacío
       activitiesIds: [[] as string[]],
       imgRef: [''],
@@ -239,7 +239,7 @@ export class PlansCreationComponent implements OnInit {
     if (!name) validationIssues.push('name_required');
     if (name.length > 100) validationIssues.push('name_max_100');
     if (!description) validationIssues.push('description_required');
-    if (description.length > 250) validationIssues.push('description_max_250');
+    if (description.length > 1000) validationIssues.push('description_max_1000');
 
     if (validationIssues.length > 0) {
       this.formPlanCreation.markAllAsTouched();
