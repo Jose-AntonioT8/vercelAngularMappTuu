@@ -664,16 +664,11 @@ export class IaAssistantService {
       temperature: 0,
       messages: [
         {
-          role: 'system',
-          content:
-            'Eres un moderador de contenido visual. Devuelve SOLO JSON con esta forma: {"safe": boolean, "reason": string, "sexual": boolean, "nudity": boolean, "violence": boolean, "minor_risk": boolean}.',
-        },
-        {
           role: 'user',
           content: [
             {
               type: 'text',
-              text: 'Analiza la imagen. Si hay duda razonable de sexual/desnudez/violencia/menores, marca safe=false. Devuelve solo JSON.',
+              text: 'Analiza esta imagen y responde SOLO JSON con esta forma exacta: {"safe": boolean, "reason": string, "sexual": boolean, "nudity": boolean, "violence": boolean, "minor_risk": boolean}. safe=true solo si TODOS esos campos de riesgo son false.',
             },
             {
               type: 'image_url',
