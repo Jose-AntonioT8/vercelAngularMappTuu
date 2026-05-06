@@ -62,6 +62,17 @@ export class OptionsPlansComponent {
     this.planService.getPlanId(idUrl!).subscribe(data =>
       this.plan = data)
     }
+
+  /** `true` cuando el usuario autenticado puede editar/eliminar el plan. */
+  get canManagePlan(): boolean {
+    if (this.auth.isAdmin()) {
+      return true;
+    }
+
+    const authenticatedUid = this.getUidValue(this.auth.currentUser ?? this.auth.firebaseCurrentUser);
+    const planOwnerUid = this.getUidValue(this.plan?.ownerId);
+    return !!authenticatedUid && authenticatedUid === planOwnerUid;
+  }
   
 
   /** Alterna el menú de opciones. */
@@ -71,12 +82,18 @@ export class OptionsPlansComponent {
 
   /** Navega a la pantalla de actualización del plan. */
   onUpdate(){
+    if (!this.canManagePlan) {
+      return;
+    }
     const idUrl = this.router.snapshot.paramMap.get('id');
     this.route.navigate(['/updatePlan/',idUrl]);
   }
 
   /** Abre el modal de confirmación de borrado. */
   askToDelete() {
+    if (!this.canManagePlan) {
+      return;
+    }
     this.isMenuOpen = false;
     this.showDeleteModal = true;
   }
@@ -147,6 +164,9 @@ export class OptionsPlansComponent {
    */
   async confirmDelete() {
     try {
+      if (!this.canManagePlan) {
+        return;
+      }
       const user = this.auth.currentUser;
       if (!user) throw new Error('No autenticado');
       const token = await user.getIdToken();
@@ -165,6 +185,23 @@ export class OptionsPlansComponent {
     }
     
     
+  }
+
+  /** Extrae un uid desde string u objeto de usuario/documento. */
+  private getUidValue(value: unknown): string | null {
+    if (typeof value === 'string') {
+      const normalized = value.trim();
+      return normalized ? normalized : null;
+    }
+
+    if (value && typeof value === 'object') {
+      const maybeUid = (value as { uid?: unknown }).uid;
+      if (typeof maybeUid === 'string' && maybeUid.trim()) {
+        return maybeUid.trim();
+      }
+    }
+
+    return null;
   }
 
 }

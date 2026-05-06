@@ -67,6 +67,17 @@ export class OptionsComponent {
     this.activityService.getActivityId(idUrl!).subscribe(data =>
       this.activity = data)
     }
+
+  /** `true` cuando el usuario autenticado puede editar/eliminar la actividad. */
+  get canManageActivity(): boolean {
+    if (this.auth.isAdmin()) {
+      return true;
+    }
+
+    const authenticatedUid = this.getUidValue(this.auth.currentUser ?? this.auth.firebaseCurrentUser);
+    const activityOwnerUid = this.getUidValue((this.activity as any)?.ownerId);
+    return !!authenticatedUid && authenticatedUid === activityOwnerUid;
+  }
   
 
   /** Abre/cierra el menú desplegable. */
@@ -76,12 +87,18 @@ export class OptionsComponent {
 
   /** Navega a la pantalla de actualización de actividad. */
   onUpdate(){
+    if (!this.canManageActivity) {
+      return;
+    }
     const idUrl = this.router.snapshot.paramMap.get('id');
     this.route.navigate(['/updateActivity/',idUrl]);
   }
 
   /** Abre modal de confirmación de borrado. */
   askToDelete() {
+    if (!this.canManageActivity) {
+      return;
+    }
     this.isMenuOpen = false;
     this.showDeleteModal = true;
   }
@@ -155,6 +172,9 @@ export class OptionsComponent {
   /** Confirma y ejecuta el borrado en backend. */
   async confirmDelete() {
     try {
+      if (!this.canManageActivity) {
+        return;
+      }
       const user = this.auth.currentUser;
       if (!user) throw new Error('No autenticado');
       const token = await user.getIdToken();
@@ -173,6 +193,23 @@ export class OptionsComponent {
     }
     
     
+  }
+
+  /** Extrae un uid desde string u objeto de usuario/documento. */
+  private getUidValue(value: unknown): string | null {
+    if (typeof value === 'string') {
+      const normalized = value.trim();
+      return normalized ? normalized : null;
+    }
+
+    if (value && typeof value === 'object') {
+      const maybeUid = (value as { uid?: unknown }).uid;
+      if (typeof maybeUid === 'string' && maybeUid.trim()) {
+        return maybeUid.trim();
+      }
+    }
+
+    return null;
   }
 
 }
