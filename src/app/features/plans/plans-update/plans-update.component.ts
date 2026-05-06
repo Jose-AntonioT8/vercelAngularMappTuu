@@ -55,6 +55,8 @@ export class PlansUpdateComponent implements OnInit {
   imagePreview: string | null = null;
   /** Flag de subida en curso. */
   isUploading = false;
+  /** Flag para evitar generar descripciones en paralelo. */
+  isGeneratingDescription = false;
 
   constructor(
     /** Constructor de formularios. */
@@ -347,6 +349,91 @@ export class PlansUpdateComponent implements OnInit {
     } catch (err) {
       console.error('Error de token:', err);
       this.error = 'Error de autenticación';
+    }
+  }
+
+  /**
+   * Genera una descripción de plan con IA usando nombre del plan,
+   * actividades seleccionadas y sus descripciones (si existen).
+   */
+  async autocompleteDescriptionWithIA(): Promise<void> {
+    if (this.isGeneratingDescription) {
+      return;
+    }
+
+    const planName = (this.formPlanUpdate.get('name')?.value || '').trim();
+    const selectedActivityNames: string[] =
+      this.formPlanUpdate.get('activitiesIds')?.value || [];
+    const selectedActivities = this.activities.filter((activity: Activity) =>
+      selectedActivityNames.includes(activity.name),
+    );
+
+    if (!planName || selectedActivities.length === 0) {
+      this.error = this.translationService.get(
+        'messages.completeFieldsBeforeDescription',
+        'Escriba el resto de campos antes de generar la descripcion',
+      );
+      return;
+    }
+
+    const currentDescription = (this.formPlanUpdate.get('description')?.value || '').trim();
+    const totalPrice = selectedActivities.reduce((sum, activity) => {
+      const value = Number((activity as any).price ?? 0);
+      return Number.isNaN(value) ? sum : sum + value;
+    }, 0);
+
+    const freeText = this.translationService.get('activities.free', 'Gratis');
+    const priceText = totalPrice > 0 ? `${totalPrice.toFixed(2)} EUR` : freeText;
+
+    const activitiesContext = selectedActivities
+      .map((activity, index) => {
+        const activityName = String(activity.name || '').trim();
+        const activityDescription = String((activity as any).description ?? '').trim();
+
+        return activityDescription
+          ? `${index + 1}. ${activityName}: ${activityDescription}`
+          : `${index + 1}. ${activityName}: (sin descripcion)`;
+      })
+      .join('\n');
+
+    const prompt = [
+      'Necesito que redactes una descripcion para un plan en MappTuu.',
+      `Nombre del plan: ${planName}`,
+      'Actividades seleccionadas con su contexto:',
+      activitiesContext,
+      `Precio estimado del plan: ${priceText}`,
+      currentDescription
+        ? `Texto escrito por el usuario para tener en cuenta: ${currentDescription}`
+        : 'No hay descripcion previa escrita por el usuario.',
+      'Genera una descripcion natural, atractiva y clara en 3-5 frases usando los nombres y descripciones de actividades. Si no hay precio, menciona que es gratis.',
+      'No uses listas ni encabezados.',
+    ].join('\n');
+
+    this.error = '';
+    this.isGeneratingDescription = true;
+
+    try {
+      const generatedDescription = await firstValueFrom(
+        this.iaAssistantService.ask(prompt),
+      );
+
+      if (generatedDescription && generatedDescription.trim()) {
+        this.formPlanUpdate.patchValue({
+          description: generatedDescription.trim(),
+        });
+      } else {
+        this.error = this.translationService.get(
+          'messages.descriptionGenerationFailed',
+          'No se pudo generar la descripcion. Intentalo de nuevo.',
+        );
+      }
+    } catch {
+      this.error = this.translationService.get(
+        'messages.descriptionGenerationFailed',
+        'No se pudo generar la descripcion. Intentalo de nuevo.',
+      );
+    } finally {
+      this.isGeneratingDescription = false;
     }
   }
 }

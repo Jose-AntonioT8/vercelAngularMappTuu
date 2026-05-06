@@ -54,6 +54,8 @@ export class ActivitiesUpdateComponent {
   imagePreview: string | null = null;
   /** Flag de subida en curso (para deshabilitar UI). */
   isUploading = false;
+  /** Flag para evitar generar descripciones en paralelo. */
+  isGeneratingDescription = false;
 
   /**
    * Crea el componente de actualización y configura el formulario base.
@@ -356,5 +358,74 @@ export class ActivitiesUpdateComponent {
       }
     }
     return 'Error al guardar los cambios.';
+  }
+
+  /**
+   * Genera una descripción con IA usando nombre, categoría, ubicación y precio.
+   * Si ya hay texto en descripción, se usa como base para mejorar el resultado.
+   */
+  async autocompleteDescriptionWithIA(): Promise<void> {
+    if (this.isGeneratingDescription) {
+      return;
+    }
+
+    const name = (this.formActivityUpdate.get('name')?.value || '').trim();
+    const activityType = (this.formActivityUpdate.get('activityType')?.value || '').trim();
+    const latitude = (this.formActivityUpdate.get('latitude')?.value || '').toString().trim();
+    const longitude = (this.formActivityUpdate.get('longitude')?.value || '').toString().trim();
+
+    if (!name || !activityType || !latitude || !longitude) {
+      this.error = this.translationService.get(
+        'messages.completeFieldsBeforeDescription',
+        'Escriba el resto de campos antes de generar la descripcion',
+      );
+      return;
+    }
+
+    const currentDescription = (this.formActivityUpdate.get('description')?.value || '').trim();
+    const rawPrice = this.formActivityUpdate.get('price')?.value;
+    const hasPrice = rawPrice !== null && rawPrice !== '' && !Number.isNaN(Number(rawPrice));
+    const freeText = this.translationService.get('activities.free', 'Gratis');
+    const priceText = hasPrice ? `${Number(rawPrice)} EUR` : freeText;
+
+    const prompt = [
+      'Necesito que redactes una descripcion para una actividad en MappTuu.',
+      `Nombre: ${name}`,
+      `Categoria: ${activityType}`,
+      `Ubicacion (coordenadas): ${latitude}, ${longitude}`,
+      `Precio: ${priceText}`,
+      currentDescription
+        ? `Texto escrito por el usuario para tener en cuenta: ${currentDescription}`
+        : 'No hay descripcion previa escrita por el usuario.',
+      'Genera una descripcion natural, atractiva y clara en 3-5 frases. Si el precio no existe, menciona que es gratis.',
+      'No uses listas ni encabezados.',
+    ].join('\n');
+
+    this.error = '';
+    this.isGeneratingDescription = true;
+
+    try {
+      const generatedDescription = await firstValueFrom(
+        this.iaAssistantService.ask(prompt),
+      );
+
+      if (generatedDescription && generatedDescription.trim()) {
+        this.formActivityUpdate.patchValue({
+          description: generatedDescription.trim(),
+        });
+      } else {
+        this.error = this.translationService.get(
+          'messages.descriptionGenerationFailed',
+          'No se pudo generar la descripcion. Intentalo de nuevo.',
+        );
+      }
+    } catch {
+      this.error = this.translationService.get(
+        'messages.descriptionGenerationFailed',
+        'No se pudo generar la descripcion. Intentalo de nuevo.',
+      );
+    } finally {
+      this.isGeneratingDescription = false;
+    }
   }
 }

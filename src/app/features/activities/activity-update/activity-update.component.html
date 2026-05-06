@@ -135,7 +135,34 @@
       <div class="px-6 md:px-10 py-8 bg-slate-50/50 dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
         
         <div class="mb-8">
-        <label class="block text-xs font-bold text-brand-primary dark:text-slate-400 uppercase tracking-wider mb-3 ml-1">{{ 'activities.aboutThisActivity' | translate }}</label>
+          <div class="flex items-center justify-between gap-3 mb-3 ml-1">
+            <label class="block text-xs font-bold text-brand-primary dark:text-slate-400 uppercase tracking-wider">{{ 'activities.aboutThisActivity' | translate }}</label>
+            <button
+              type="button"
+              (click)="autocompleteDescriptionWithIA()"
+              [disabled]="isGeneratingDescription"
+              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#5675AC] text-white text-xs font-semibold hover:bg-[#4a6399] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="w-4 h-4"
+              >
+                <path
+                  d="M10.428 1.151a.75.75 0 00-1.356 0L6.933 5.429 2.655 7.568a.75.75 0 000 1.342l4.278 2.139 2.139 4.278a.75.75 0 001.356 0l2.139-4.278 4.278-2.139a.75.75 0 000-1.342l-4.278-2.139-2.139-4.278z"
+                />
+                <path
+                  d="M16.5 13.5a.75.75 0 00-1.5 0v1.25h-1.25a.75.75 0 000 1.5H15V17.5a.75.75 0 001.5 0v-1.25h1.25a.75.75 0 000-1.5H16.5V13.5z"
+                />
+              </svg>
+              @if(isGeneratingDescription) {
+                {{ "messages.generatingWithAI" | translate : "generando con ia..." }}
+              } @else {
+                {{ "messages.autocompleteWithAI" | translate : "autocompletar con ia" }}
+              }
+            </button>
+          </div>
             <textarea formControlName="description" rows="4" 
               class="w-full bg-white dark:bg-slate-950 dark:text-slate-100 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 text-slate-700 leading-relaxed outline-none resize-none transition-all shadow-sm placeholder-slate-400 dark:placeholder-slate-400"
                       onfocus="this.style.borderColor='#5675AC'; this.style.boxShadow='0 0 0 4px rgba(86, 117, 172, 0.1)'"
