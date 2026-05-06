@@ -123,7 +123,7 @@
         >
           <img
             [src]="report.activityImageURL || fallbackImage"
-            [alt]="report.activityName || ('reports.moderation.activityAlt' | translate)"
+            [alt]="report.activityName || (targetAltKey(report) | translate)"
             class="w-full h-full object-cover"
             (error)="onImgError($event)"
           />
@@ -164,7 +164,7 @@
 
         <div class="text-xs text-gray-500 flex flex-wrap gap-x-4 gap-y-1">
           <span>{{ report.createdAt | date: 'short' }}</span>
-          <span>{{ 'reports.moderation.activityIdLabel' | translate }}: {{ report.targetId || report.activityId }}</span>
+          <span>{{ targetIdLabelKey(report) | translate }}: {{ report.targetId || report.activityId }}</span>
         </div>
       </div>
     </li>
@@ -191,7 +191,7 @@
       {{ 'reports.moderation.modalTitle' | translate }}
     </h3>
     <p class="text-sm text-gray-600 mb-6">
-      {{ resolveModalReport.activityName || ('reports.moderation.activityAlt' | translate) }}
+      {{ resolveModalReport.activityName || (targetAltKey(resolveModalReport) | translate) }}
     </p>
     <div class="space-y-3">
       <button
@@ -199,14 +199,14 @@
         class="w-full text-left px-4 py-3 rounded-xl border-2 border-green-200 bg-green-50 text-green-900 text-sm hover:bg-green-100"
         (click)="confirmResolveChoice('resolve')"
       >
-        {{ 'reports.moderation.keepActivity' | translate }}
+        {{ resolveKeepKey() | translate }}
       </button>
       <button
         type="button"
         class="w-full text-left px-4 py-3 rounded-xl border-2 border-red-200 bg-red-50 text-red-900 text-sm hover:bg-red-100"
         (click)="confirmResolveChoice('delete')"
       >
-        {{ 'reports.moderation.deleteActivity' | translate }}
+        {{ resolveDeleteKey() | translate }}
       </button>
       <button
         type="button"

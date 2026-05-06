@@ -169,6 +169,36 @@ export class ReportsModerationComponent implements OnInit {
       : 'bg-sky-600/95 text-white border-sky-200';
   }
 
+  /** Clave i18n del alt según entidad reportada. */
+  targetAltKey(report: ActivityReport): string {
+    return this.getTargetType(report) === 'plan'
+      ? 'reports.moderation.planAlt'
+      : 'reports.moderation.activityAlt';
+  }
+
+  /** Clave i18n de etiqueta ID según entidad reportada. */
+  targetIdLabelKey(report: ActivityReport): string {
+    return this.getTargetType(report) === 'plan'
+      ? 'reports.moderation.planIdLabel'
+      : 'reports.moderation.activityIdLabel';
+  }
+
+  /** Clave i18n para acción "mantener" en modal de resolución. */
+  resolveKeepKey(): string {
+    if (!this.resolveModalReport) return 'reports.moderation.keepActivity';
+    return this.getTargetType(this.resolveModalReport) === 'plan'
+      ? 'reports.moderation.keepPlan'
+      : 'reports.moderation.keepActivity';
+  }
+
+  /** Clave i18n para acción "eliminar" en modal de resolución. */
+  resolveDeleteKey(): string {
+    if (!this.resolveModalReport) return 'reports.moderation.deleteActivity';
+    return this.getTargetType(this.resolveModalReport) === 'plan'
+      ? 'reports.moderation.deletePlan'
+      : 'reports.moderation.deleteActivity';
+  }
+
   /** Indica si el reporte admite acciones de moderación. */
   isActionable(report: ActivityReport): boolean {
     const s = String(report.status || '').trim().toLowerCase();
