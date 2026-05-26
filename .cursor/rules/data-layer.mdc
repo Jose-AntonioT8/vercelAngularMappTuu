@@ -1,0 +1,34 @@
+---
+description: Capa de datos MapTuu — Firestore lecturas, API HTTP escrituras, servicios core
+globs: src/app/core/services/**/*.ts
+alwaysApply: false
+---
+
+# Data layer — MapTuu
+
+## Regla principal
+
+| Operación | Dónde | Cómo |
+|-----------|--------|------|
+| **Lecturas / listados en tiempo real** | Firestore | `onSnapshot` + `BehaviorSubject` / `Observable` |
+| **Create / update / delete / rating** | API HTTP | `HttpClient` + `Authorization: Bearer <token>` |
+| **Orquestación UI** | Componentes en `features/` o `common/` | Inyectan servicios; **sin** lógica de negocio duplicada |
+
+## Referencias en el repo
+
+- Actividades: `src/app/core/services/activity.service.ts` (colección `activities`, endpoints `/activities`)
+- Planes: `src/app/core/services/plan.service.ts` (colección `plans`, endpoints `${apiUrl}/plans`)
+- Base URL: `src/app/common/models/apiurl.model.ts` (`/api` en localhost)
+
+## Patrones obligatorios
+
+- Un listener Firestore activo por servicio cuando aplique; cancelar el anterior antes de crear otro (`unsubscribeListener`).
+- Re-entrar en Angular desde callbacks de Firestore con `NgZone.run()` cuando el servicio lo use.
+- Token de Firebase Auth en headers de mutaciones HTTP (patrón existente en `createActivity`, `createPlan`, etc.).
+- JSDoc en métodos públicos del servicio si añades API nueva.
+
+## Prohibido
+
+- `HttpClient.post/put/patch/delete` para sustituir listados que el resto del app lee por Firestore (salvo que el código existente ya use otro patrón documentado).
+- Acceso directo a Firestore desde componentes de `features/` (usar servicio en `core/services/`).
+- Inventar rutas o colecciones no usadas en servicios hermanos.

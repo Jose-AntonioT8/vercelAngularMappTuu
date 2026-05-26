@@ -1,0 +1,25 @@
+---
+description: Spec-Driven Development — leer specs y constitution antes de implementar
+alwaysApply: true
+---
+
+# Spec-Driven Development (MapTuu)
+
+Antes de implementar features o cambios de alcance:
+
+1. Lee `.specify/memory/constitution.md`.
+2. Si existe `specs/NNN-*` para la tarea, sigue `spec.md` → `plan.md` → `tasks.md`.
+3. No marques tareas como hechas sin código real correspondiente.
+
+## Flujo
+
+- **Specify**: qué y por qué (`spec.md`, user stories, FR-xxx).
+- **Plan**: cómo en Angular/Firebase/API (`plan.md`, `data-model.md`, `contracts/`).
+- **Tasks**: pasos con rutas de archivo (`tasks.md`).
+- **Implement**: `src/app/features|common|core` según convenciones del README.
+
+## MapTuu
+
+- Standalone components, Tailwind, i18n en `src/assets/i18n/`.
+- Firebase lecturas; API HTTP escrituras con Bearer token.
+- Nueva feature: `./scripts/create-spec-feature.sh 00X-slug`.
