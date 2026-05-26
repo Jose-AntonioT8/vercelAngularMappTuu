@@ -1,0 +1,25 @@
+---
+description: Internacionalización MapTuu — pipe translate y archivos i18n
+globs: src/assets/i18n/**,src/app/features/**/*.html,src/app/common/**/*.html
+alwaysApply: false
+---
+
+# i18n — MapTuu
+
+## Idiomas del proyecto
+
+`src/assets/i18n/es.json`, `en.json`, `de.json`
+
+## Reglas
+
+- Texto visible al usuario en plantillas: pipe **`translate`**, p. ej. `{{ "activities.filters" | translate }}` (ver `created-activities.component.html`).
+- Claves en notación por puntos coherente con el dominio (`activities.*`, `plans.*`, `reviews.*`, …).
+- Al añadir una clave nueva: actualizar **al menos** `es.json` y `en.json`; `de.json` si la cadena es UI global.
+- En componentes TS que construyen mensajes dinámicos: usar `TranslationService` (`src/app/core/services/translation.service.ts`), no strings fijos en español/inglés.
+- Importar `TranslatePipe` en componentes standalone que usen el pipe en template.
+
+## Prohibido
+
+- Hardcodear etiquetas, títulos, placeholders o mensajes de error de usuario en `.html` sin clave i18n.
+- Crear claves en JSON que ningún template o servicio consume.
+- Eliminar claves en un idioma dejando la misma clave sin traducción en los otros archivos del mismo feature.

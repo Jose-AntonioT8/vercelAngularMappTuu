@@ -1,0 +1,43 @@
+---
+description: Arquitectura MapTuu — capas Angular y organización del código
+globs: src/**/*.{ts,html,scss}
+alwaysApply: false
+---
+
+# Arquitectura — MapTuu
+
+## Capas (no mezclar responsabilidades)
+
+| Capa | Ruta | Responsabilidad |
+|------|------|-----------------|
+| Features | `src/app/features/` | Pantallas, orquestación UI |
+| Common | `src/app/common/` | UI reutilizable, modelos, modales, filtros |
+| Core | `src/app/core/` | Servicios, guards, pipes, directivas, validators |
+| Repositories | `src/app/repositories/` | Tokens (`repository.token.ts`) |
+
+- Componentes: renderizar y validar formularios.
+- Servicios en `core/services/`: reglas de uso e integraciones.
+- Config: `app.config.ts` · Rutas: `app.routes.ts` (ver `routes-guards.mdc`).
+
+## Reglas relacionadas (por tema)
+
+| Tema | Regla |
+|------|--------|
+| Firestore / API HTTP | `data-layer.mdc` |
+| Textos de UI | `i18n.mdc` |
+| Rutas y guards | `routes-guards.mdc` |
+| Tests | `testing.mdc` |
+| SDD | `spec-driven-development.mdc` |
+
+## Convenciones Angular
+
+- Componentes **standalone**; evitar NgModules nuevos.
+- Tailwind + SCSS por componente.
+- JSDoc en APIs públicas (Compodoc).
+- Environment: `src/app/environment/` + `scripts/generate-env.js`; nunca commitear `.env`.
+
+## Prohibido
+
+- Secretos en código o specs.
+- Lógica de negocio duplicada en varios componentes.
+- Strings de usuario sin i18n (ver `i18n.mdc`).

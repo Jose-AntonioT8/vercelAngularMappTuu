@@ -1,0 +1,84 @@
+:host {
+  display: block;
+}
+
+.activity-detail-map-shell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  height: 16rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.04);
+
+  @media (min-width: 768px) {
+    height: 20rem;
+  }
+
+  &.is-empty {
+    border-style: dashed;
+  }
+}
+
+.activity-detail-map {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  cursor: pointer;
+  z-index: 0;
+}
+
+.activity-detail-map-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #9ca3af;
+}
+
+.activity-detail-map-hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background: rgb(255 255 255 / 0.92);
+  color: #5675ac;
+  font-size: 0.875rem;
+  font-weight: 700;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.95);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.activity-detail-map-shell:hover .activity-detail-map-hint {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+:host ::ng-deep .activity-detail-map-shell .leaflet-container {
+  width: 100%;
+  height: 100%;
+  font: inherit;
+}
+
+:host ::ng-deep .activity-detail-map-shell .leaflet-pane,
+:host ::ng-deep .activity-detail-map-shell .leaflet-top,
+:host ::ng-deep .activity-detail-map-shell .leaflet-bottom {
+  z-index: auto;
+}
+
+:host ::ng-deep .activity-detail-map-shell .leaflet-control {
+  z-index: 400;
+}

@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "atlassian-rovo": {
+      "url": "https://mcp.atlassian.com/v1/mcp"
+    },
+    "github": {
+      "command": "/bin/zsh",
+      "args": [
+        "-ilc",
+        "npx -y @modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    }
+  }
+}

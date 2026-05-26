@@ -1,0 +1,44 @@
+---
+description: Tests unitarios MapTuu — Jasmine, Karma y patrones Angular
+globs: "**/*.spec.ts"
+alwaysApply: false
+---
+
+# Testing — MapTuu
+
+## Stack
+
+- **Runner**: Karma + Jasmine (`npm test` / `ng test`)
+- **Ubicación**: `*.spec.ts` junto al archivo bajo prueba.
+
+## Qué testear
+
+- Lógica en servicios (`core/services/`) cuando tenga ramas o transformaciones.
+- Pipes, validators y funciones puras.
+- Componentes con lógica no trivial (filtros, estados, handlers).
+- Regresiones críticas documentadas en `specs/NNN-*/spec.md`.
+
+## Qué no testear en exceso
+
+- Templates estáticos sin lógica.
+- Integración Firebase/API real (mockear `HttpClient`, servicios).
+
+## Patrones
+
+```typescript
+// Preferir TestBed para componentes standalone
+await TestBed.configureTestingModule({
+  imports: [MiComponente],
+  providers: [
+    { provide: ActivityService, useValue: jasmine.createSpyObj('ActivityService', ['getAll']) }
+  ]
+}).compileComponents();
+```
+
+- Mockear dependencias externas (Firebase, HTTP).
+- Un `describe` por unidad; `it` con descripción del comportamiento esperado.
+- Tras cambios relevantes: `npm test` y `npm run build` sin regresiones.
+
+## SDD
+
+Si existe `specs/NNN-*/tasks.md`, las tareas de test deben referenciar el archivo `*.spec.ts` concreto.

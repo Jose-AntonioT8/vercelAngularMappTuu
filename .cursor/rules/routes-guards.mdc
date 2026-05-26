@@ -1,0 +1,33 @@
+---
+description: Rutas y guards MapTuu — app.routes.ts como fuente de verdad
+globs: src/app/app.routes.ts,src/app/core/guards/**/*.ts,src/app/features/**/*.ts
+alwaysApply: false
+---
+
+# Rutas y guards — MapTuu
+
+## Fuente de verdad
+
+`src/app/app.routes.ts` — toda ruta nueva se registra aquí.
+
+## Guards (`src/app/core/guards/`)
+
+| Guard | Uso |
+|-------|-----|
+| `guestGuard` | Solo no autenticados (`login`, `signup`) |
+| `authGuard` | Requiere sesión (perfil, planes guardados, creación, etc.) |
+| `adminGuard` | Requiere rol admin (`dashboard`, `admin/reports`, activity types admin, …) |
+
+Rutas públicas sin guard: p. ej. `landingPage`, `maps`, `activitiesList`, `about`, `contact` (ver tabla actual en `app.routes.ts`).
+
+## Checklist al añadir pantalla
+
+1. Crear componente standalone en `src/app/features/<dominio>/`.
+2. Añadir `{ path, component, canActivate?: [...] }` en `app.routes.ts`.
+3. Elegir guard según convenciones del comentario en `app.routes.ts` (no dispersar lógica de acceso en el componente).
+4. Enlaces de navegación: usar el mismo `path` que en rutas.
+5. Si es feature de producto nueva: spec en `specs/NNN-*` (ver `spec-driven-development.mdc`).
+
+## Referencia
+
+Comentario de convenciones al inicio de `app.routes.ts` (públicas / guest / auth / admin).
