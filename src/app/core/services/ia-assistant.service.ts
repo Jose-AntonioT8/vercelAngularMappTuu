@@ -190,7 +190,7 @@ export class IaAssistantService {
   /** Límite duro de chars de JSON para evitar prompts gigantes. */
   private readonly maxFirebaseJsonChars = 15000;
   /** Límite de reverse geocoding por pregunta para evitar latencia excesiva. */
-  private readonly maxReverseGeocodingLookups = 20;
+  private readonly maxReverseGeocodingLookups = 10;
   /** Cola para peticiones de etiqueta de ubicación (evita sobrecarga de IA). */
   private readonly locationLabelQueue$ = new Subject<LocationLabelTask>();
   /** Cache en memoria (vive hasta reinicio de app) para etiquetas de ubicación IA. */
@@ -198,55 +198,7 @@ export class IaAssistantService {
 
   /** Regex de “tema permitido” para limitar el dominio del asistente. */
   private readonly allowedTopicPattern =
-    /(plan|planes|actividad|actividades|activity|activities|activitytype|activity type|tipo|tipos|ruta|rutas|itinerario|itinerarios|buscar|busca|precio|ubicaci[oó]n|recomend|donde|dónde|cu[aá]nto|gratis|ciudad|zona|lugar)/i;
-
-  /** Palabras que no aportan al filtrado por pregunta (p. ej. "actividades de" → queda "malaga"). */
-  private readonly searchStopWords = new Set([
-    'a',
-    'al',
-    'con',
-    'de',
-    'del',
-    'el',
-    'en',
-    'es',
-    'hay',
-    'la',
-    'las',
-    'lo',
-    'los',
-    'me',
-    'mi',
-    'que',
-    'qué',
-    'se',
-    'un',
-    'una',
-    'y',
-    'dime',
-    'diga',
-    'lista',
-    'listar',
-    'mostrar',
-    'muestra',
-    'busca',
-    'buscar',
-    'actividad',
-    'actividades',
-    'plan',
-    'planes',
-    'tipo',
-    'tipos',
-    'cuales',
-    'cuáles',
-    'cual',
-    'cuál',
-    'tienes',
-    'tengo',
-    'puedes',
-    'decir',
-    'decirme',
-  ]);
+    /(plan|planes|actividad|actividades|activity|activities|activitytype|activity type|tipo|tipos|ruta|rutas|itinerario|itinerarios)/i;
 
   /** Inicializa la cola secuencial de resolución de etiquetas de ubicación. */
   constructor() {
@@ -304,11 +256,7 @@ export class IaAssistantService {
       return of('Escribe una pregunta para poder ayudarte.');
     }
 
-    const searchTokens = this.extractSearchTokens(cleanQuestion);
-    if (
-      !this.allowedTopicPattern.test(cleanQuestion) &&
-      searchTokens.length === 0
-    ) {
+    if (!this.allowedTopicPattern.test(cleanQuestion)) {
       return of(
         'Solo puedo responder preguntas sobre planes, actividades o tipos de actividad.',
       );
@@ -343,14 +291,9 @@ export class IaAssistantService {
       (window as any)?.__env__?.NG_APP_IA_MODEL || '(vacío)',
     );
 
-    return from(this.getFirebaseData(cleanQuestion)).pipe(
+    return from(this.getFirebaseData()).pipe(
       switchMap((firebaseData) => {
-        const relevantFirebaseData = this.filterFirebaseDataByQuestion(
-          firebaseData,
-          searchTokens,
-        );
-        const compactFirebaseData =
-          this.compactFirebaseData(relevantFirebaseData);
+        const compactFirebaseData = this.compactFirebaseData(firebaseData);
         const relationalContext =
           this.buildRelationalContext(compactFirebaseData);
         const assistantContext = this.buildAssistantContext(relationalContext);
@@ -364,7 +307,7 @@ export class IaAssistantService {
           {
             role: 'system',
             content:
-              'Eres el asistente de MappTuu. Debes responder con tono amable, cercano, claro y algo más desarrollado que una respuesta telegráfica. Solo puedes responder con el contexto proporcionado (actividades y planes filtrados según la pregunta). Si preguntan por una ciudad o zona (por ejemplo Málaga), menciona solo actividades cuya ubicacion en el contexto encaje; si no hay ninguna, dilo con claridad y no inventes. Si preguntan algo fuera de planes/actividades/tipos/ubicaciones, responde brevemente que no tienes ese dato. Reglas estrictas: nunca muestres IDs; nunca muestres latitud/longitud; no inventes datos. Si el precio de una actividad existe, inclúyelo siempre. Si no hay precio disponible o es cero, di literalmente "Gratis". Cuando hables de actividades, explica qué es la actividad, su tipo, su precio, su ubicación descriptiva y, si existen, sus puntos destacados o descripción. Cuando hables de planes, indica el nombre del plan, las actividades por nombre, el precio total y una explicación breve de por qué puede interesar. Usa de 1 a 3 emojis por respuesta. Responde en 2 a 5 frases cuando sea posible.',
+              'Eres el asistente de MappTuu. Debes responder con tono amable, cercano, claro y algo más desarrollado que una respuesta telegráfica. Solo puedes responder con el contexto proporcionado. Si preguntan algo fuera de planes/actividades/tipos/ubicaciones, responde brevemente y con amabilidad que no tienes ese dato. Reglas estrictas: nunca muestres IDs; nunca muestres latitud/longitud; no inventes datos. Si el precio de una actividad existe, inclúyelo siempre. Si no hay precio disponible o es cero, di literalmente "Gratis". Cuando hables de actividades, explica qué es la actividad, su tipo, su precio, su ubicación descriptiva y, si existen, sus puntos destacados o descripción. Cuando hables de planes, indica el nombre del plan, las actividades por nombre, el precio total y una explicación breve de por qué puede interesar. Cuando hables de ubicaciones, usa solo texto descriptivo (por ejemplo "Málaga capital"). Usa de 1 a 3 emojis por respuesta, variados y relacionados con el contenido, evitando repetir siempre el mismo emoji. Responde en 2 a 5 frases cuando sea posible, sin ser excesivamente corto.',
           },
           {
             role: 'user',
@@ -876,7 +819,6 @@ export class IaAssistantService {
 
   /**
    * Reduce tamaño del dataset para mantener el prompt dentro de límites razonables.
-   * Debe recibir datos ya ordenados por relevancia (`filterFirebaseDataByQuestion`).
    */
   private compactFirebaseData(firebaseData: IaFirebaseData): IaFirebaseData {
     return {
@@ -887,237 +829,6 @@ export class IaAssistantService {
       ),
       plans: firebaseData.plans.slice(0, this.maxDocsPerCollection),
     };
-  }
-
-  /**
-   * Prioriza actividades/planes que encajan con la pregunta (p. ej. "Málaga").
-   */
-  private filterFirebaseDataByQuestion(
-    firebaseData: IaFirebaseData,
-    tokens: string[],
-  ): IaFirebaseData {
-    if (tokens.length === 0) {
-      return {
-        activity: this.sortRecordsByRating(firebaseData.activity),
-        activityType: firebaseData.activityType,
-        plans: this.sortRecordsByRating(firebaseData.plans),
-      };
-    }
-
-    const activityTypesById = new Map<string, Record<string, unknown>>();
-    for (const activityType of firebaseData.activityType) {
-      const id = this.getStringField(activityType, ['id']);
-      if (id) {
-        activityTypesById.set(id, activityType);
-      }
-    }
-
-    const activitiesById = new Map<string, Record<string, unknown>>();
-    const scoredActivities = firebaseData.activity.map((activity) => {
-      const id = this.getStringField(activity, ['id']);
-      if (id) {
-        activitiesById.set(id, activity);
-      }
-      const typeId = this.getActivityTypeId(activity);
-      const activityType = activityTypesById.get(typeId);
-      const score = this.scoreRecordForSearch(activity, tokens, [
-        this.getStringField(activityType, ['name']),
-      ]);
-      return { record: activity, score };
-    });
-
-    const scoredPlans = firebaseData.plans.map((plan) => {
-      const activityIds = this.getStringArrayField(plan, [
-        'activitiesIds',
-        'activityIds',
-      ]);
-      const linkedTexts = activityIds.flatMap((activityId) => {
-        const activity = activitiesById.get(activityId);
-        if (!activity) {
-          return [];
-        }
-        return [
-          this.getStringField(activity, ['name', 'title']),
-          this.getStringField(activity, [
-            'location',
-            'city',
-            'region',
-            'place',
-            'address',
-          ]),
-          this.getStringField(activity, ['description', 'details', 'summary']),
-        ];
-      });
-      return {
-        record: plan,
-        score: this.scoreRecordForSearch(plan, tokens, linkedTexts),
-        activityIds,
-      };
-    });
-
-    const hasActivityHits = scoredActivities.some((item) => item.score > 0);
-    const hasPlanHits = scoredPlans.some((item) => item.score > 0);
-
-    const selectedActivityIds = new Set<string>();
-    const selectedActivities = (
-      hasActivityHits
-        ? scoredActivities
-            .filter((item) => item.score > 0)
-            .sort((a, b) => b.score - a.score)
-        : this.sortRecordsByRating(firebaseData.activity).map((record) => ({
-            record,
-            score: 0,
-          }))
-    )
-      .slice(0, this.maxDocsPerCollection)
-      .map((item) => {
-        const id = this.getStringField(item.record, ['id']);
-        if (id) {
-          selectedActivityIds.add(id);
-        }
-        return item.record;
-      });
-
-    const selectedPlans = (
-      hasPlanHits
-        ? scoredPlans.filter((item) => item.score > 0).sort((a, b) => b.score - a.score)
-        : this.sortRecordsByRating(firebaseData.plans).map((record) => ({
-            record,
-            score: 0,
-            activityIds: this.getStringArrayField(record, [
-              'activitiesIds',
-              'activityIds',
-            ]),
-          }))
-    )
-      .slice(0, this.maxDocsPerCollection)
-      .map((item) => item.record);
-
-    for (const plan of selectedPlans) {
-      for (const activityId of this.getStringArrayField(plan, [
-        'activitiesIds',
-        'activityIds',
-      ])) {
-        if (selectedActivityIds.has(activityId)) {
-          continue;
-        }
-        const linked = activitiesById.get(activityId);
-        if (linked) {
-          selectedActivities.push(linked);
-          selectedActivityIds.add(activityId);
-        }
-      }
-    }
-
-    const usedTypeIds = new Set<string>();
-    for (const activity of selectedActivities) {
-      const typeId = this.getActivityTypeId(activity);
-      if (typeId) {
-        usedTypeIds.add(typeId);
-      }
-    }
-
-    const selectedActivityTypes = firebaseData.activityType.filter((type) => {
-      const typeId = this.getStringField(type, ['id']);
-      return !!typeId && (usedTypeIds.has(typeId) || this.scoreRecordForSearch(type, tokens) > 0);
-    });
-
-    return {
-      activity: selectedActivities.slice(0, this.maxDocsPerCollection),
-      activityType: selectedActivityTypes.slice(0, this.maxDocsPerCollection),
-      plans: selectedPlans,
-    };
-  }
-
-  private extractSearchTokens(question: string): string[] {
-    const normalized = this.normalizeSearchText(question);
-    return Array.from(
-      new Set(
-        normalized
-          .split(/[^a-z0-9]+/g)
-          .map((token) => token.trim())
-          .filter(
-            (token) => token.length >= 2 && !this.searchStopWords.has(token),
-          ),
-      ),
-    );
-  }
-
-  private normalizeSearchText(value: string): string {
-    return (value || '')
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .trim();
-  }
-
-  private scoreRecordForSearch(
-    source: Record<string, unknown>,
-    tokens: string[],
-    extraFields: string[] = [],
-  ): number {
-    const locationText = this.getStringField(source, [
-      'location',
-      'city',
-      'region',
-      'place',
-      'address',
-    ]);
-    const searchableText = this.normalizeSearchText(
-      [
-        this.getStringField(source, ['name', 'title']),
-        this.getStringField(source, [
-          'description',
-          'details',
-          'summary',
-          'about',
-          'text',
-        ]),
-        locationText,
-        ...this.getStringArrayField(source, [
-          'highlights',
-          'features',
-          'points',
-          'bullets',
-        ]),
-        ...extraFields,
-      ].join(' '),
-    );
-
-    if (!searchableText) {
-      return 0;
-    }
-
-    let score = 0;
-    for (const token of tokens) {
-      if (!searchableText.includes(token)) {
-        continue;
-      }
-      const inLocation = this.normalizeSearchText(locationText).includes(token);
-      score += inLocation ? 5 : token.length >= 5 ? 3 : 2;
-    }
-
-    return score;
-  }
-
-  private sortRecordsByRating(
-    records: Array<Record<string, unknown>>,
-  ): Array<Record<string, unknown>> {
-    return [...records].sort((left, right) => {
-      const rightRating = this.getNumberField(right, ['rating']) || 0;
-      const leftRating = this.getNumberField(left, ['rating']) || 0;
-      return rightRating - leftRating;
-    });
-  }
-
-  private getActivityTypeId(
-    activity: Record<string, unknown> | undefined,
-  ): string {
-    return this.getStringField(activity, [
-      'activityTypeId',
-      'IdTypeActivity',
-      'typeId',
-    ]);
   }
 
   /**
@@ -1194,7 +905,9 @@ export class IaAssistantService {
         plansForActivity.push({ planId, planName });
         planRefsByActivityId.set(activityId, plansForActivity);
 
-        const activityTypeId = this.getActivityTypeId(activity);
+        const activityTypeId = this.getStringField(activity, [
+          'activityTypeId',
+        ]);
 
         if (!activityTypeId) {
           activitiesWithoutType += 1;
@@ -1240,7 +953,8 @@ export class IaAssistantService {
       const activityId = this.getStringField(activity, ['id']) || 'sin-id';
       const activityName =
         this.getStringField(activity, ['name', 'title']) || 'Actividad sin nombre';
-      const activityTypeId = this.getActivityTypeId(activity) || 'sin-tipo';
+      const activityTypeId =
+        this.getStringField(activity, ['activityTypeId']) || 'sin-tipo';
       const activityType = activityTypesById.get(activityTypeId);
       const activityTypeName =
         this.getStringField(activityType, ['name']) ||
@@ -1487,7 +1201,6 @@ export class IaAssistantService {
    */
   private async enrichActivitiesWithLocation(
     activities: Array<Record<string, unknown>>,
-    maxLookups = this.maxReverseGeocodingLookups,
   ): Promise<Array<Record<string, unknown>>> {
     const mapsApiKey = environment.maps.apiKey?.trim();
     if (!mapsApiKey) {
@@ -1498,7 +1211,7 @@ export class IaAssistantService {
     let lookups = 0;
 
     for (const activity of enriched) {
-      if (lookups >= maxLookups) {
+      if (lookups >= this.maxReverseGeocodingLookups) {
         break;
       }
 
@@ -1614,7 +1327,7 @@ export class IaAssistantService {
    *
    * Nota: se usa `getDocs` (snapshot puntual) para componer contexto; no mantiene listener.
    */
-  private async getFirebaseData(question = ''): Promise<IaFirebaseData> {
+  private async getFirebaseData(): Promise<IaFirebaseData> {
     const [activityDocs, activityTypeDocs, plansDocs] = await Promise.all([
       getDocs(collection(this.firestore, 'activities')),
       getDocs(collection(this.firestore, 'activityTypes')),
@@ -1626,12 +1339,8 @@ export class IaAssistantService {
       ...docSnap.data(),
     }));
 
-    const locationTokens = this.extractSearchTokens(question);
     const enrichedActivities = await this.enrichActivitiesWithLocation(
       activities,
-      locationTokens.length > 0
-        ? Math.min(activities.length, 40)
-        : this.maxReverseGeocodingLookups,
     );
 
     return {
