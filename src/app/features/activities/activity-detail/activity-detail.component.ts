@@ -469,10 +469,13 @@ export class ActivityDetailComponent implements OnDestroy, AfterViewInit {
       this.mapInitialized = true;
       this.cdr.detectChanges();
 
-      // Ajustar el tamaño del mapa después de cargar
+      // Ajustar el tamaño del mapa tras el layout (bloque con altura fija)
       setTimeout(() => {
         this.map?.invalidateSize();
       }, 100);
+      setTimeout(() => {
+        this.map?.invalidateSize();
+      }, 400);
     }, 200);
   }
 

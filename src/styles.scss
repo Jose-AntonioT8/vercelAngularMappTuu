@@ -4,12 +4,6 @@
 
 @import 'leaflet/dist/leaflet.css';
 
-#activity-map {
-    min-height: 300px;
-    width: 100%;
-    z-index: 1;
-}
-
 @keyframes pageEnter {
     from {
         opacity: 0;
