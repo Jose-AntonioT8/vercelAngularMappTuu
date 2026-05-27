@@ -4,8 +4,8 @@ Proyecto Angular (standalone) con Firebase (Auth/Firestore/Storage), Leaflet, Ta
 
 La documentación de este repo se mantiene en dos capas:
 
-- **Manual (este README)**: arquitectura, reglas y cómo trabajar en el proyecto.
-- **Automática (Compodoc)**: documentación navegable de componentes/servicios/guards/pipes/etc, basada en comentarios JSDoc del código.
+- **Manual (este README)**: arquitectura, reglas y cómo trabajar en el proyecto
+- **Automática (Compodoc)**: documentación navegable de componentes/servicios/guards/pipes/etc, basada en comentarios JSDoc del código
 
 ## Requisitos
 
