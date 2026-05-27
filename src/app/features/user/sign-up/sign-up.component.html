@@ -1,7 +1,15 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-slate-200 flex flex-col">
-    <header class="p-4 flex items-center justify-between">
-        <a routerLink="/landingPage" class="p-2 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-200 text-gray-700 hover:text-brand-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+<div
+    class="min-h-screen w-full bg-cover bg-center text-white font-['Inter'] relative flex flex-col"
+    style="
+        background-image: url('/assets/icons/fondorealista.jpeg');
+        background-attachment: fixed;
+    "
+>
+    <div class="absolute inset-0 bg-black/10 z-0"></div>
+
+    <header class="relative z-50 p-4 flex items-center justify-between">
+        <a routerLink="/landingPage" aria-label="Volver a la landing" class="p-2 rounded-full bg-white shadow-lg hover:opacity-80 transition-opacity text-gray-900">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-gray-900">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h17.5"></path>
             </svg>
         </a>
@@ -10,7 +18,7 @@
         </div>
     </header>
 
-    <main class="flex-grow flex items-center justify-center px-4 py-6 motion-safe:animate-[pageSoft_.42s_ease-out]">
+    <main class="relative z-10 flex-grow flex items-center justify-center px-4 py-6 motion-safe:animate-[pageSoft_.42s_ease-out]">
         <div class="w-full max-w-md">
             <div class="bg-white rounded-3xl shadow-xl p-8 relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 rounded-bl-full"></div>
