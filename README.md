@@ -1,6 +1,6 @@
 # MapTuu (Angular)
 
-Proyecto Angular (standalone) con Firebase (Auth/Firestore/Storage), Leaflet, Tailwind y una API HTTP (`apiUrl`) para operaciones de dominio.
+Proyecto Angular (standalone) con Firebase (Auth/Firestore/Storage), Leaflet, Tailwind y una API HTTP (`apiUrl`) para operaciones de dominio
 
 La documentación de este repo se mantiene en dos capas:
 

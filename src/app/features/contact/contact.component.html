@@ -23,11 +23,17 @@
     <div class="max-w-6xl mx-auto px-4">
       <div class="grid md:grid-cols-2 gap-8">
         <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg p-7">
-          <div class="mb-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 h-56 flex flex-col items-center justify-center text-slate-500 dark:text-slate-300 text-sm">
-            <svg class="w-9 h-9 mb-2 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5V10a2 2 0 00-2-2h-3M9 20H4a2 2 0 01-2-2V10a2 2 0 012-2h3m6 12v-6a3 3 0 00-6 0v6m6 0H7" />
-            </svg>
-            {{ 'contact.founder1.photoPlaceholder' | translate }}
+          <div class="mb-5 flex justify-center">
+            <div class="w-36 h-36 sm:w-40 sm:h-40 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0">
+              <img
+                src="assets/images/contact/jose-antonio-dominguez-gonzalez.jpeg"
+                [attr.alt]="'contact.founder1.name' | translate"
+                class="h-full w-full object-cover object-[center_22%]"
+                width="160"
+                height="160"
+                loading="lazy"
+              />
+            </div>
           </div>
 
           <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100">{{ 'contact.founder1.name' | translate }}</h2>
@@ -36,18 +42,30 @@
             {{ 'contact.founder1.education' | translate }}
           </p>
 
-          <div class="mt-5 space-y-2 text-sm">
-            <p class="text-slate-700 dark:text-slate-200"><span class="font-semibold">{{ 'contact.emailLabel' | translate }}:</span> <a class="text-brand-primary hover:underline" href="mailto:joseantdominguezgonzalez@gmail.com">{{ 'contact.founder1.email' | translate }}</a></p>
-            <p class="text-slate-700 dark:text-slate-200"><span class="font-semibold">{{ 'contact.linkedinLabel' | translate }}:</span> <a class="text-brand-primary hover:underline" href="https://www.linkedin.com/in/jose-antonio-dominguez-gonzalez" target="_blank" rel="noopener noreferrer">{{ 'contact.founder1.linkedin' | translate }}</a></p>
+          <div class="mt-5 space-y-3 text-sm">
+            <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-slate-700 dark:text-slate-200">
+              <span class="font-semibold shrink-0">{{ 'contact.emailLabel' | translate }}:</span>
+              <a class="text-brand-primary hover:underline" href="mailto:joseantdominguezgonzalez@gmail.com">{{ 'contact.founder1.email' | translate }}</a>
+            </p>
+            <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-slate-700 dark:text-slate-200">
+              <span class="font-semibold shrink-0">{{ 'contact.linkedinLabel' | translate }}:</span>
+              <a class="text-brand-primary hover:underline" href="https://www.linkedin.com/in/jos%C3%A9-antonio-dom%C3%ADnguez-gonz%C3%A1lez-21b950349/" target="_blank" rel="noopener noreferrer">{{ 'contact.founder1.linkedin' | translate }}</a>
+            </p>
           </div>
         </article>
 
         <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-lg p-7">
-          <div class="mb-5 rounded-xl border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700 h-56 flex flex-col items-center justify-center text-slate-500 dark:text-slate-300 text-sm">
-            <svg class="w-9 h-9 mb-2 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5V10a2 2 0 00-2-2h-3M9 20H4a2 2 0 01-2-2V10a2 2 0 012-2h3m6 12v-6a3 3 0 00-6 0v6m6 0H7" />
-            </svg>
-            {{ 'contact.founder2.photoPlaceholder' | translate }}
+          <div class="mb-5 flex justify-center">
+            <div class="w-36 h-36 sm:w-40 sm:h-40 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0">
+              <img
+                src="assets/images/contact/ezequiel-vargas-berrocal.png"
+                [attr.alt]="'contact.founder2.name' | translate"
+                class="h-full w-full object-cover object-[center_18%]"
+                width="160"
+                height="160"
+                loading="lazy"
+              />
+            </div>
           </div>
 
           <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100">{{ 'contact.founder2.name' | translate }}</h2>
@@ -56,9 +74,15 @@
             {{ 'contact.founder2.education' | translate }}
           </p>
 
-          <div class="mt-5 space-y-2 text-sm">
-            <p class="text-slate-700 dark:text-slate-200"><span class="font-semibold">{{ 'contact.emailLabel' | translate }}:</span> <a class="text-brand-primary hover:underline" href="mailto:correoezequiel@gmail.com">{{ 'contact.founder2.email' | translate }}</a></p>
-            <p class="text-slate-700 dark:text-slate-200"><span class="font-semibold">{{ 'contact.linkedinLabel' | translate }}:</span> <a class="text-brand-primary hover:underline" href="https://www.linkedin.com/in/ezequiel-vargas-berrocal" target="_blank" rel="noopener noreferrer">{{ 'contact.founder2.linkedin' | translate }}</a></p>
+          <div class="mt-5 space-y-3 text-sm">
+            <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-slate-700 dark:text-slate-200">
+              <span class="font-semibold shrink-0">{{ 'contact.emailLabel' | translate }}:</span>
+              <a class="text-brand-primary hover:underline" href="mailto:ezequielvargasb11@gmail.com">{{ 'contact.founder2.email' | translate }}</a>
+            </p>
+            <p class="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-slate-700 dark:text-slate-200">
+              <span class="font-semibold shrink-0">{{ 'contact.linkedinLabel' | translate }}:</span>
+              <a class="text-brand-primary hover:underline" href="https://www.linkedin.com/in/ezequiel-vargas-berrocal-5124b1258/" target="_blank" rel="noopener noreferrer">{{ 'contact.founder2.linkedin' | translate }}</a>
+            </p>
           </div>
         </article>
       </div>
